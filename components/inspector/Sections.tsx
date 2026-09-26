@@ -165,7 +165,7 @@ export function PlaceSection({ m, a, b, pulse }: { m: Match; a: Project; b: Proj
         </p>
       )}
       <EvidenceList ids={evidence} toneOf={(e) => ROLE_TONE(e, a, b)} />
-      <Disclosure variant="inline" summary={<span className="text-caption">Coordinates &amp; provenance</span>} className="[&>div]:grid-cols-[minmax(0,1fr)]" contentClassName="space-y-3 pt-2">
+      <Disclosure variant="inline" summary={<span className="text-caption">Coordinates &amp; provenance</span>} contentClassName="space-y-3 pt-2">
         {[a, b].map((p) => (
           <div key={p.id} className="space-y-1">
             <p className="text-caption font-medium text-fg-2">
@@ -631,7 +631,6 @@ export function NotesSection({ a, b }: { a: Project; b: Project }) {
       <Disclosure
         summary={<span className="text-body font-semibold text-fg-1">Research notes</span>}
         meta={`${total} note${total === 1 ? "" : "s"}`}
-        className="[&>div]:grid-cols-[minmax(0,1fr)]"
         buttonClassName="min-h-10"
         contentClassName="space-y-3.5 pt-1 pb-4"
       >

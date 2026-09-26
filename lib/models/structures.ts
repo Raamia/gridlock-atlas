@@ -43,6 +43,19 @@ export function towerConductorHeights(height = 40): [number, number, number] {
   return [height * ARM_LEVELS[0] - ins, height * ARM_LEVELS[1] - ins, height * ARM_LEVELS[2] - ins];
 }
 
+/**
+ * Where wires attach to a lattice tower built with the same options (metres, model frame: x across the arms, y up,
+ * origin at the base centre). `conductors` are the three insulator-string clamps, low → high, each at x = ±reach;
+ * `earth` is the earth-wire horn tips at x = ±reach. The close-up strings its catenaries from these.
+ */
+export function towerAttachments(height = 40, armSpan = 14): { conductors: { y: number; reach: number }[]; earth: { y: number; reach: number } } {
+  const ys = towerConductorHeights(height);
+  return {
+    conductors: ys.map((y, i) => ({ y, reach: ARM_REACH[i] * armSpan })),
+    earth: { y: (PEAK - EARTH_DROP + EARTH_HORN) * height, reach: EARTH_REACH * armSpan },
+  };
+}
+
 /** Total model height of a lattice tower of the given `height` option (top of the earth-wire peak). */
 export function towerTotalHeight(height = 40): number {
   return height * PEAK;
@@ -288,11 +301,15 @@ function assemble(name: string, parts: Partial<Record<Part, Builder>>): THREE.Gr
 
 /** Cross-arm levels as fractions of the tower height (lower, middle, top). */
 const ARM_LEVELS = [0.64, 0.82, 1] as const;
-/** Half-length of each arm as a fraction of the arm span (middle arm is the widest). */
-const ARM_REACH = [0.43, 0.5, 0.41] as const;
 /** Arm-tip reach per conductor level (lower, middle, top) as fractions of `armSpan`: tip x = ±reach × armSpan. */
+export const ARM_REACH = [0.43, 0.5, 0.41] as const;
+/** Same as ARM_REACH (kept for existing importers). */
 export const TOWER_ARM_REACH = ARM_REACH;
 const PEAK = 1.13;
+/** Earth-wire horns: they leave the cage EARTH_DROP × height below the peak, rise EARTH_HORN × height, reach ±EARTH_REACH × span. */
+const EARTH_DROP = 0.035;
+const EARTH_HORN = 0.012;
+const EARTH_REACH = 0.17;
 const insulatorLength = (h: number) => 0.075 * h;
 
 /** A single-string disc insulator hanging from `top`. */
@@ -419,9 +436,9 @@ export function buildLatticeTower(opts: LatticeTowerOptions = {}): THREE.Group {
   });
 
   // earth-wire peak with two short horns
-  const yE = yPeak - 0.035 * H;
+  const yE = yPeak - EARTH_DROP * H;
   for (const sx of [-1, 1]) {
-    const tip: V3 = [sx * 0.17 * span, yE + 0.012 * H, 0];
+    const tip: V3 = [sx * EARTH_REACH * span, yE + EARTH_HORN * H, 0];
     steel.beam([sx * hw(yE), yE, hw(yE)], tip, braceW);
     steel.beam([sx * hw(yE), yE, -hw(yE)], tip, braceW);
     steel.beam([0, yPeak, 0], tip, braceW);

@@ -114,7 +114,16 @@ export interface CloseupModel {
   /** Tick spacing along the center-to-center ruler, miles. */
   tickMiles: number;
   /** The review-radius ring around A's center: the arcs that fall on the plinth, and where its label goes. */
-  ring: { center: V2; r: number; arcs: CuRingArc[]; labelAt: V2 | null; onPlinth: boolean } | null;
+  ring: {
+    center: V2;
+    r: number;
+    arcs: CuRingArc[];
+    /** The ring point toward B (or the shared site), when it lies on the plinth. */
+    labelAt: V2 | null;
+    /** Preferred label angle on the ring (radians in the x–z plane, toward B / the site); the label layer searches around it. */
+    labelAngle: number | null;
+    onPlinth: boolean;
+  } | null;
   /** "6.7 mi of 25 mi" etc. (null when the pair has no measurable center distance). */
   rulerText: string | null;
   rulerFill: number;
@@ -328,6 +337,7 @@ export function buildCloseupModel(m: Match, pa: Project, pb: Project, thresholdM
     }
     const toward = b.center ?? (siteKm ? toU(siteKm) : null);
     let labelAt: V2 | null = null;
+    const labelAngle = toward ? Math.atan2(toward.z - a.center.z, toward.x - a.center.x) : null;
     if (toward) {
       const dx = toward.x - a.center.x;
       const dz = toward.z - a.center.z;
@@ -335,7 +345,7 @@ export function buildCloseupModel(m: Match, pa: Project, pb: Project, thresholdM
       const p = { x: a.center.x + (dx / d) * r, z: a.center.z + (dz / d) * r };
       if (Math.hypot(p.x, p.z) <= lim) labelAt = p;
     }
-    ring = { center: a.center, r, arcs, labelAt, onPlinth: arcs.length > 0 };
+    ring = { center: a.center, r, arcs, labelAt, labelAngle, onPlinth: arcs.length > 0 };
   }
 
   // shared-site pairs beyond the radius name the facility, never a bare center distance (G1)

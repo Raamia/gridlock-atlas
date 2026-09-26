@@ -1,6 +1,7 @@
 import type mapboxgl from "mapbox-gl";
 import { getLayout } from "@/lib/layout";
 import { useAtlas } from "@/lib/store";
+import { demoCardRect } from "./camera";
 import { hasLayer } from "./layers";
 
 /**
@@ -68,6 +69,23 @@ export function siteDot() {
   return el;
 }
 
+/** Where Sperry's rule runs out: "25 mi from {A}" in amber, set just outside the ring (placed by layoutCallouts). */
+export function ringCallout(text: string) {
+  const el = root();
+  el.innerHTML = `<div data-callout data-role="ring" class="${BOX} w-max max-w-[208px] rounded-full px-2.5 py-1 text-[11px] font-medium leading-[1.35] text-overlap">${escapeHtml(text)}</div>`;
+  return el;
+}
+
+/** A line drawn terminal to terminal says so (3D: the ghosted chord), in the line's utility colour. */
+export function caveatCallout(color: string) {
+  const el = root();
+  el.innerHTML = `<div data-callout data-role="caveat" class="${BOX} w-max py-1 pl-2.5 pr-2.5 text-[11px] leading-[1.3] text-fg-2" style="box-shadow: inset 2px 0 0 ${color}, var(--elev-chip)">
+    <div class="font-medium" style="color:${color}">Route not published</div>
+    <div class="text-fg-3">drawn terminal to terminal</div>
+  </div>`;
+  return el;
+}
+
 /** "01" "02" "03": mono map chips on the top-ranked links after a run (click selects the pair). */
 /**
  * Returns `{ root, chip }`: the marker gets `root` (Mapbox owns a marker element's own opacity for terrain occlusion),
@@ -102,10 +120,16 @@ export interface Callout {
   spots: (w: number, h: number) => { x: number; y: number }[];
   /** hide instead of drawing over something */
   optional: boolean;
+  /** Keep exactly to the listed spots (no slid-into-view variants): a ring label must stay outside its ring. */
+  noSlide?: boolean;
 }
 
 type Box = { x: number; y: number; w: number; h: number };
-export type Dot = { at: [number, number]; weight: number; site?: boolean };
+/**
+ * Something on the map a callout should not cover: a dot (18px square on its point), or a 3D structure (`w`×`h` px
+ * standing on its point, `rise`).
+ */
+export type Dot = { at: [number, number]; weight: number; site?: boolean; w?: number; h?: number; rise?: boolean };
 
 function overlapArea(a: Box, b: Box) {
   const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
@@ -121,9 +145,9 @@ function usableView(host: DOMRect): Box {
   let bottom = l.vh - l.focal.b;
   const left = l.focal.l;
   const right = l.vw - l.focal.r;
-  if (st.demoStep !== null && !st.briefOpen) {
-    const card = document.querySelector('[data-demo-card], [role="region"][aria-label="Guided demo"]')?.getBoundingClientRect();
-    if (card && card.height > 0 && card.bottom < l.vh / 2) top = Math.max(top, card.bottom);
+  if (st.demoStep !== null) {
+    const card = demoCardRect();
+    if (card && card.bottom < l.vh / 2) top = Math.max(top, card.bottom);
   }
   if (l.tier === "phone" && st.inspectorOpen) {
     // the sheet's settled top (its slide-in transform would read too low mid-animation)
@@ -148,7 +172,8 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
   if (!items.length) return;
   const host = map.getContainer().getBoundingClientRect();
   const view = usableView(host);
-  const panels: Box[] = [...document.querySelectorAll<HTMLElement>("[data-map-ui]")]
+  // floating UI, plus Mapbox's own logo and attribution button (kept visible for attribution)
+  const panels: Box[] = [...document.querySelectorAll<HTMLElement>("[data-map-ui], .mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib")]
     .map((el) => el.getBoundingClientRect())
     .filter((r) => r.width > 0 && r.height > 0)
     .map((r) => ({
@@ -159,16 +184,19 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
     }));
   const dotBoxes = dots.map((d) => {
     const p = map.project(d.at);
+    const [w, h] = [d.w ?? 18, d.h ?? 18];
     return {
-      x: p.x - 9,
-      y: p.y - 9,
-      w: 18,
-      h: 18,
+      x: p.x - w / 2,
+      y: d.rise ? p.y - h : p.y - h / 2,
+      w,
+      h: d.rise ? h + 6 : h,
       weight: d.weight,
       site: !!d.site,
+      px: p.x,
+      py: p.y,
     };
   });
-  const sites = dotBoxes.filter((d) => d.site).map((d) => ({ x: d.x + 9, y: d.y + 9 }));
+  const sites = dotBoxes.filter((d) => d.site).map((d) => ({ x: d.px, y: d.py }));
   // the pair's place names (gl-point-labels: 11px, anchored top below the dot, wrapped at 10em); the one on the shared
   // site is left out, since the site callout already names that place
   const names: Box[] = [];
@@ -182,20 +210,21 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
     const h = Math.ceil((text.length * 6) / 116) * 13;
     names.push({ x: p.x - w / 2, y: p.y + 10, w, h });
   }
-  // map-3d's ground chips ("25 mi from …", "Beyond 25 mi · shared site"): centred on their point, ~11.5px text + chip padding
+  // map-3d's own rendered map text (the gl3d-labels layer: hotspot counts, 11.5px centred on their point)
   const chips: Box[] = [];
   const scene = hasLayer(map, "gl3d-labels") ? map.queryRenderedFeatures({ layers: ["gl3d-labels"] }) : [];
   for (const f of scene) {
-    if (f.geometry.type !== "Point" || f.properties?.k === "rank") continue;
+    if (f.geometry.type !== "Point") continue;
     const p = map.project(f.geometry.coordinates as [number, number]);
-    const w = String(f.properties?.t ?? "").length * 6.4 + 18;
-    chips.push({ x: p.x - w / 2, y: p.y - 11, w, h: 22 });
+    const w = String(f.properties?.t ?? "").length * 6.6 + 8;
+    chips.push({ x: p.x - w / 2, y: p.y - 9, w, h: 18 });
   }
   const clamp = (v: number, lo: number, hi: number) => Math.min(Math.max(v, lo), Math.max(lo, hi));
   const cands = items.map((c) => {
     const p = map.project(c.at);
     const [w, h] = [c.box.offsetWidth, c.box.offsetHeight];
     const base = c.spots(w, h).map((s) => ({ s, r: { x: p.x + s.x, y: p.y + s.y, w, h } }));
+    if (c.noSlide) return base;
     // each spot again, slid back inside the view by at most half the box so it stays attached to its point; the
     // originals keep indices 0..n-1, so a callout's remembered spot stays stable and ties go to the preferred spots
     const slid = base.map(({ s, r }) => {
@@ -223,6 +252,29 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
     chips.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0) +
     dotBoxes.reduce((sum, t) => sum + t.weight * overlapArea(r, t), 0) +
     placed.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0);
+  // an optional callout (distance, ring, caveat) shows only where it is fully in view and clear of every panel, chip,
+  // callout and the shared site; it may graze a place name or a structure (≤12% of its box), never more
+  const optionalFit = (r: Box, placed: Box[]) => {
+    const hard =
+      r.w * r.h - overlapArea(r, view) +
+      panels.reduce((sum, t) => sum + overlapArea(r, t), 0) +
+      chips.reduce((sum, t) => sum + overlapArea(r, t), 0) +
+      placed.reduce((sum, t) => sum + overlapArea(r, t), 0) +
+      dotBoxes.reduce((sum, t) => sum + (t.site || t.weight > 2 ? overlapArea(r, t) : 0), 0);
+    if (hard > 0) return Infinity;
+    const soft = names.reduce((sum, t) => sum + overlapArea(r, t), 0) + dotBoxes.reduce((sum, t) => sum + (t.site || t.weight > 2 ? 0 : overlapArea(r, t)), 0);
+    return soft <= 0.12 * r.w * r.h ? soft : Infinity;
+  };
+  const bestOptional = (list: { r: Box }[], placed: Box[], prefer = -1) => {
+    let [best, low] = [-1, Infinity];
+    const order = list.map((_, k) => k).sort((x, y) => Number(y === prefer) - Number(x === prefer));
+    for (const k of order) {
+      const v = optionalFit(list[k].r, placed);
+      if (v < low) [best, low] = [k, v];
+      if (v === 0) break;
+    }
+    return best;
+  };
 
   // -1 = hidden (optional callouts only)
   let pick: number[] = [];
@@ -230,6 +282,11 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
     const placed: Box[] = [];
     items.forEach((c, i) => {
       const prev = Number(c.box.dataset.spot ?? -1);
+      if (c.optional) {
+        pick[i] = bestOptional(cands[i], placed, prev);
+        if (pick[i] >= 0) placed.push(grow(cands[i][pick[i]].r));
+        return;
+      }
       const order = cands[i].map((_, k) => k).sort((x, y) => Number(y === prev) - Number(x === prev));
       let [best, low] = [order[0], Infinity];
       for (const k of order) {
@@ -237,8 +294,8 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
         if (v < low) [best, low] = [k, v];
         if (v === 0) break;
       }
-      pick[i] = low > 0 && c.optional ? -1 : best;
-      if (pick[i] >= 0) placed.push(grow(cands[i][best].r));
+      pick[i] = best;
+      placed.push(grow(cands[i][best].r));
     });
   } else {
     let bound = Infinity;
@@ -250,7 +307,7 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
         return;
       }
       if (items[i].optional) {
-        cur[i] = cands[i].findIndex((c) => cost(c.r, placed) === 0);
+        cur[i] = bestOptional(cands[i], placed);
         return walk(i + 1, cur[i] >= 0 ? [...placed, grow(cands[i][cur[i]].r)] : placed, total);
       }
       cands[i].forEach((c, k) => {
@@ -263,8 +320,18 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
   const drawn: Box[] = [];
   items.forEach((c, i) => {
     const k = pick[i];
-    const s = cands[i][Math.max(0, k)].s;
-    const r = cands[i][Math.max(0, k)].r;
+    let s = cands[i][Math.max(0, k)].s;
+    let r = cands[i][Math.max(0, k)].r;
+    // a shown callout lies wholly inside the view (the strip between a phone's demo card and sheet included): a spot
+    // that only partly fits slides the rest of the way in, even if that loosens it from its point a little
+    if (k >= 0 && !c.noSlide && r.w <= view.w && r.h <= view.h) {
+      const dx = clamp(r.x, view.x, view.x + view.w - r.w) - r.x;
+      const dy = clamp(r.y, view.y, view.y + view.h - r.h) - r.y;
+      if (dx || dy) {
+        s = { x: s.x + dx, y: s.y + dy };
+        r = { ...r, x: r.x + dx, y: r.y + dy };
+      }
+    }
     // a callout whose box would end up outside the focal hole altogether is hidden, never drawn under a panel; one that
     // would sit mostly on top of a higher-ranked callout (a cramped phone strip) steps aside instead of stacking
     const buried = drawn.some((t) => overlapArea(r, t) > r.w * r.h * 0.2);

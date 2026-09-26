@@ -88,6 +88,14 @@ function open(pick: (run: MatchRun | null) => Match | null, section: InspectorSe
   };
 }
 
+/** Scroll the inspector back to its summary (once it has rendered the pair), inside the inspector only. */
+function inspectorToTop() {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  requestAnimationFrame(() =>
+    document.querySelector<HTMLElement>('aside[aria-label="Evidence inspector"] [data-inspector-scroll]')?.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }),
+  );
+}
+
 /* ─────────────────────────────────────────────── key numbers ─────────────────────────────────────────────── */
 
 /**
@@ -259,7 +267,13 @@ const STEPS: Step[] = [
   {
     title: "The top coordination opportunity",
     body: "The top Savannah River lead; the reviewed sources are silent on coordination. See each terminal and its precision.",
-    run: open(topSoutheast, "place"),
+    // no section: the verdict, tiles and question (the summary) stay in view; back from step 4 scrolls up to them again
+    run: async () => {
+      const token = stepToken;
+      const out = await open(topSoutheast, null)();
+      if (out === "ok" && !stale(token)) inspectorToTop();
+      return out;
+    },
     pick: topSoutheast,
     action: "closeup",
   },
@@ -570,9 +584,9 @@ export function GuidedDemo() {
       ? { left: "var(--gutter)", right: "var(--gutter)", top: "var(--panel-top)" }
       : {
           width: cardW,
-          // centred in the focal hole (the map key waits bottom-left while the demo runs); below the lg/md rail pill
+          // centred in the focal hole (the map key waits bottom-left while the demo runs); --focal-t already clears the lg/md rail pill
           left: `calc(var(--focal-l) + (var(--focal-w) - ${cardW}) / 2)`,
-          top: layout.pillVisible ? "max(var(--focal-t), calc(var(--panel-top) + 44px))" : "var(--focal-t)",
+          top: "var(--focal-t)",
         };
 
   const failureText = engineDown
@@ -718,16 +732,31 @@ export function GuidedDemo() {
                 Retry
               </Button>
             ) : compact ? (
-              // phones with the sheet up: the sheet's own footer has "3D close-up"; the card keeps the rest of the text one tap away
-              <button
-                type="button"
-                onClick={() => setMore(!more)}
-                aria-expanded={more}
-                aria-controls="demo-body"
-                className="-ml-1 h-11 rounded-control px-1 text-caption text-fg-2 underline decoration-fg-4 underline-offset-2 hover:text-fg-1"
-              >
-                {more ? "Less" : "More"}
-              </button>
+              // phones with the sheet up: the step's "3D close-up" (tighter, so it fits beside the text toggle and the step
+              // buttons on a 375px line) and the rest of the body one tap away
+              <>
+                {STEPS[step].action === "closeup" && (
+                  <Button
+                    variant="ghost"
+                    size="lg"
+                    className="bg-fill-1 px-3!"
+                    icon={<Box size={14} strokeWidth={1.75} />}
+                    disabled={!selected || !pairOpen}
+                    onClick={() => useAtlas.getState().openCloseup()}
+                  >
+                    3D close-up
+                  </Button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setMore(!more)}
+                  aria-expanded={more}
+                  aria-controls="demo-body"
+                  className="-ml-1 h-11 rounded-control px-1 text-caption text-fg-2 underline decoration-fg-4 underline-offset-2 hover:text-fg-1"
+                >
+                  {more ? "Less" : "More"}
+                </button>
+              </>
             ) : STEPS[step].action === "closeup" ? (
               <Button
                 variant="ghost"

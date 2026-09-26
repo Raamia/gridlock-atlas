@@ -1,12 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import {
-  AlertTriangle,
-  CalendarRange,
-  ChevronDown,
-  MapPin,
-} from "lucide-react";
+import { AlertTriangle, ChevronDown } from "lucide-react";
 import {
   useLayoutEffect,
   useMemo,
@@ -21,7 +16,7 @@ import type { Match, Project } from "@/lib/domain/types";
 import { rankLabel } from "@/lib/rank";
 import { sponsorReplay } from "@/lib/sponsor";
 import { useAtlas, type InspectorSection } from "@/lib/store";
-import { Eyebrow, Tag, Tooltip } from "../ui";
+import { Eyebrow, SignalFact, Tag, Tooltip } from "../ui";
 import {
   beyondChip,
   conflictSplit,
@@ -182,60 +177,25 @@ function FactsLine({
 
 /* ───────────────────────────── tiles ───────────────────────────── */
 
-const SIGNAL_ICON = { place: MapPin, time: CalendarRange } as const;
-
 /**
- * A tile's signal fact: SignalFact's encoding (amber filled icon = confirmed · fg-3 outline = possible · no icon, fg-3 text
- * = none), but a word value (a facility name) may wrap to two lines instead of truncating in a narrow tile.
+ * A tile's signal fact: SignalFact's encoding, at heading size; a word value (a facility name) wraps to two lines
+ * instead of truncating in a narrow tile, and a long number ("≈25.9 mi") steps down one size.
  */
 function FactValue({ kind, fact }: { kind: "place" | "time"; fact: TileFact }) {
-  const Icon = SIGNAL_ICON[kind];
-  const word = kind === "place" ? "Place" : "Time";
-  const body = (
-    <span
-      className={clsx(
-        "flex min-w-0 items-start gap-1 font-medium",
-        // a long number ("≈25.9 mi") steps down one size rather than truncating in a narrow tile
-        fact.mono && fact.value.length > 7 ? "text-body" : "text-heading",
-        fact.mono ? "num" : "font-sans",
-        fact.state === "confirmed"
-          ? "text-fg-1"
-          : fact.state === "possible"
-            ? "text-fg-2"
-            : "text-fg-3",
-      )}
+  return (
+    <SignalFact
+      kind={kind}
+      state={fact.state}
+      mono={fact.mono}
+      wrap={!fact.mono}
+      size={fact.mono && fact.value.length > 7 ? "body" : "heading"}
+      tooltip={fact.tooltip}
       title={fact.tooltip ? undefined : fact.title}
+      className="font-medium"
     >
-      {fact.state === "confirmed" ? (
-        <Icon
-          role="img"
-          aria-label={`${word} confirmed`}
-          size={12}
-          strokeWidth={2}
-          className="mt-[5px] shrink-0 text-overlap"
-          fill="currentColor"
-          fillOpacity={0.3}
-        />
-      ) : fact.state === "possible" ? (
-        <Icon
-          role="img"
-          aria-label={`${word} possible`}
-          size={12}
-          strokeWidth={1.75}
-          className="mt-[5px] shrink-0 text-fg-3"
-        />
-      ) : null}
-      <span
-        className={clsx(
-          "min-w-0",
-          fact.mono ? "truncate" : "line-clamp-2 break-words",
-        )}
-      >
-        {fact.value}
-      </span>
-    </span>
+      {fact.value}
+    </SignalFact>
   );
-  return fact.tooltip ? <Tooltip content={fact.tooltip}>{body}</Tooltip> : body;
 }
 
 /** A static Stat tile (label · value · sub) whose value may wrap. */
@@ -255,16 +215,16 @@ function Tile({
     <div
       className={clsx(
         "flex min-w-0 flex-col rounded-control bg-fill-1 px-2 @max-[340px]:px-1.5 @min-[380px]:px-2.5",
-        compact ? "py-2" : "py-2.5",
+        compact ? "py-1.5" : "py-2.5",
       )}
     >
       <span
-        className={clsx("eyebrow block truncate", compact ? "mb-1.5" : "mb-2")}
+        className={clsx("eyebrow block truncate", compact ? "mb-1" : "mb-2")}
       >
         {label}
       </span>
       {children}
-      <span className="mt-1 block text-caption text-pretty text-fg-3">
+      <span className={clsx("block text-caption text-pretty text-fg-3", compact ? "mt-0.5" : "mt-1")}>
         {sub}
       </span>
     </div>
@@ -317,14 +277,6 @@ export function Tiles({ m, compact }: { m: Match; compact?: boolean }) {
 
 /* ───────────────────────────── chips ───────────────────────────── */
 
-function TipTag({ tip, children }: { tip: string; children: ReactNode }) {
-  return (
-    <Tooltip content={tip}>
-      <span className="inline-flex">{children}</span>
-    </Tooltip>
-  );
-}
-
 /** Sperry OVL_n (→ Method "Sperry's six rows today") · Sources disagree / Date revised (→ the section) · Date passed · Beyond 25 mi. */
 export function Chips({
   m,
@@ -346,8 +298,8 @@ export function Chips({
   return (
     <div className="flex flex-wrap items-center gap-1.5">
       {ovl && (
-        <TipTag
-          tip={`Row ${ovl.id} of Sperry's worked example: ${ovl.sponsorMiles} mi / ${ovl.sponsorDays} d in the starter file${
+        <Tooltip
+          content={`Row ${ovl.id} of Sperry's worked example: ${ovl.sponsorMiles} mi / ${ovl.sponsorDays} d in the starter file${
             ovl.miles !== undefined
               ? `; ${ovl.miles.toFixed(2)} mi / ${ovl.daysAtLeast ? "≥" : ""}${ovl.days ?? "—"} d on today's plans`
               : ""
@@ -361,11 +313,11 @@ export function Chips({
           >
             Sperry {ovl.id}
           </Tag>
-        </TipTag>
+        </Tooltip>
       )}
       {live > 0 ? (
-        <TipTag
-          tip={`${live} current source disagreement${live === 1 ? "" : "s"} about dates, all kept side by side`}
+        <Tooltip
+          content={`${live} current source disagreement${live === 1 ? "" : "s"} about dates, all kept side by side`}
         >
           <Tag
             tone="warn"
@@ -374,23 +326,27 @@ export function Chips({
           >
             Sources disagree
           </Tag>
-        </TipTag>
+        </Tooltip>
       ) : revised > 0 ? (
-        <TipTag tip="A newer edition of the plan moved this date; both are kept.">
+        <Tooltip content="A newer edition of the plan moved this date; both are kept.">
           <Tag tone="muted" onClick={() => onJump("conflicts")}>
             Date revised
           </Tag>
-        </TipTag>
+        </Tooltip>
       ) : null}
       {!!m.pastDue?.length && (
-        <TipTag tip="Planned date passed; completion not confirmed">
-          <Tag tone="neutral">Date passed</Tag>
-        </TipTag>
+        <Tooltip content="Planned date passed; completion not confirmed">
+          <Tag tone="neutral" tabIndex={0}>
+            Date passed
+          </Tag>
+        </Tooltip>
       )}
       {beyond && (
-        <TipTag tip={beyond.tooltip}>
-          <Tag tone="neutral">{beyond.text}</Tag>
-        </TipTag>
+        <Tooltip content={beyond.tooltip}>
+          <Tag tone="neutral" tabIndex={0}>
+            {beyond.text}
+          </Tag>
+        </Tooltip>
       )}
     </div>
   );
@@ -482,14 +438,14 @@ export function ReviewQuestion({
     <div
       className={clsx(
         "rounded-card bg-fill-1",
-        compact ? "px-3 pt-2.5 pb-3" : "px-3.5 pt-3 pb-3.5",
+        compact ? "px-3 pt-2 pb-2.5" : "px-3.5 pt-3 pb-3.5",
       )}
     >
       <Eyebrow>Question for the planners</Eyebrow>
       <p
         className={clsx(
           "text-pretty text-fg-1",
-          compact ? "mt-1.5 text-ui" : "mt-2 text-body",
+          compact ? "mt-1 text-ui" : "mt-2 text-body",
         )}
       >
         {q}

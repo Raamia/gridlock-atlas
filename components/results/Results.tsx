@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { ChevronUp, RotateCw } from "lucide-react";
+import { ChevronUp, Info, RotateCw } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
@@ -9,8 +9,9 @@ import type { Match, ReviewStatus, SignalLevel } from "@/lib/domain/types";
 import { firstNonEmptyTab, queueRank, regionMatches, REVIEW_TABS } from "@/lib/rank";
 import { useReview, type PairReview } from "@/lib/review";
 import { regionPairCounts } from "@/lib/selectors";
+import { useViewport } from "@/lib/layout";
 import { passesFilters, useAtlas, type SheetSnap } from "@/lib/store";
-import { Eyebrow, IconButton, Segmented } from "../ui";
+import { Eyebrow, IconButton, Segmented, Tooltip } from "../ui";
 import { EmptyTab } from "./EmptyTab";
 import { ExportMenu } from "./ExportMenu";
 import { Filters, FocusChip, type FilterCounts } from "./Filters";
@@ -23,6 +24,8 @@ import { Row } from "./Row";
 
 const TAB_LABEL: Record<ReviewStatus, string> = { "needs-review": "Needs review", "known-coordination": "Known", possible: "Possible" };
 export const LIST_ID = "opportunities-list";
+/** Below this viewport height (1280×800, 1024×768 laptops) the rail's top block tightens so more rows show at rest. */
+const COMPACT_BELOW_VH = 860;
 
 /**
  * State C (SPEC §4 C): header row, headline, proof, review radius, status tabs, filters, focus, the ranked list
@@ -45,6 +48,9 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
   const setVisibleOrder = useAtlas((s) => s.setVisibleOrder);
   const reviewer = useReview((s) => s.enabled);
   const labels = useReview((s) => s.labels);
+  // short laptop screens: the naive-rule line and the radius hint move into tooltips, the proof button takes one line
+  const { vh } = useViewport();
+  const compact = !phone && vh < COMPACT_BELOW_VH;
 
   // the retired "Conflicts" tab lives on as the "Dates revised or disputed" chip
   const tab: ReviewStatus = storeTab === "conflicts" ? firstNonEmptyTab(run, region) : storeTab;
@@ -152,10 +158,10 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
   const header = <HeaderRow radius={run.thresholdMiles} running={running} />;
   const body = (
     <>
-      <HeadlineBlock h={head} omitFlagged={phone} />
-      <ProofButton stacked className="mt-3" />
-      <div className="mt-4">
-        <RadiusControl />
+      <HeadlineBlock h={head} omitFlagged={phone} compact={compact} />
+      <ProofButton stacked={!compact} className={compact ? "mt-2.5" : "mt-3"} />
+      <div className={compact ? "mt-3" : "mt-4"}>
+        <RadiusControl compact={compact} />
       </div>
     </>
   );
@@ -247,8 +253,11 @@ function HeaderRow({ radius, running }: { radius: number; running: boolean }) {
   );
 }
 
-/** "111 within Sperry's 25 miles" · "of 7,830 pairs checked · 123 pairs flagged · 12 possible, …" · the naive-rule line. */
-function HeadlineBlock({ h, omitFlagged }: { h: Headline; omitFlagged?: boolean }) {
+/**
+ * "111 within Sperry's 25 miles" · "of 7,830 pairs checked · 123 pairs flagged · 12 possible, …" · the naive-rule line
+ * (`compact`: behind an (i) at the end of the sub-line).
+ */
+function HeadlineBlock({ h, omitFlagged, compact }: { h: Headline; omitFlagged?: boolean; compact?: boolean }) {
   return (
     <div className="pt-0.5">
       <p className="flex items-baseline gap-2.5">
@@ -280,8 +289,18 @@ function HeadlineBlock({ h, omitFlagged }: { h: Headline; omitFlagged?: boolean 
         {h.rest.map((r) => (
           <span key={r}> · {r}</span>
         ))}
+        {compact && h.naive && (
+          <>
+            {" "}
+            <Tooltip content={h.naive} side="bottom" align="start">
+              <button type="button" aria-label="Compared with a naive rule" className="-my-1 inline-grid size-5 translate-y-[3px] place-items-center rounded-full text-fg-3 transition-colors hover:text-fg-1 coarse:size-6">
+                <Info aria-hidden size={13} strokeWidth={1.75} />
+              </button>
+            </Tooltip>
+          </>
+        )}
       </p>
-      {h.naive && <p className="mt-1 text-caption text-fg-3">{h.naive}</p>}
+      {!compact && h.naive && <p className="mt-1 text-caption text-fg-3">{h.naive}</p>}
     </div>
   );
 }

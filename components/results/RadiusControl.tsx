@@ -1,9 +1,11 @@
 "use client";
 
+import clsx from "clsx";
+import { Info } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { SPONSOR_RADIUS_MILES } from "@/lib/sponsor";
 import { useAtlas } from "@/lib/store";
-import { Spinner } from "../ui";
+import { Spinner, Tooltip } from "../ui";
 
 const MIN = 5;
 const MAX = 100;
@@ -13,12 +15,14 @@ const DEBOUNCE_MS = 160;
 
 /** Where a value sits on the track, accounting for the 16px thumb (its centre never reaches the ends). */
 const at = (v: number) => `calc(8px + (100% - 16px) * ${(v - MIN) / (MAX - MIN)})`;
+const HINT = "Project centers within · a review heuristic, not a regulatory standard. Re-runs the engine.";
 
 /**
  * Review radius: one row — label · native range (Home/End, toHaveValue) · value — that quietly re-runs the engine.
- * A tick under the track marks Sperry's 25-mile rule (a button: back to the rule). The hint is the honesty line (G2).
+ * A tick under the track marks Sperry's 25-mile rule (a button: back to the rule). The hint is the honesty line (G2);
+ * `compact` (short laptop screens) moves it into the tooltip of an (i) beside the label.
  */
-export function RadiusControl() {
+export function RadiusControl({ compact }: { compact?: boolean }) {
   const threshold = useAtlas((s) => s.thresholdMiles);
   const runRadius = useAtlas((s) => s.run?.thresholdMiles);
   const compare = useAtlas((s) => s.compare);
@@ -41,11 +45,21 @@ export function RadiusControl() {
   const onRule = local === SPONSOR_RADIUS_MILES;
 
   return (
-    <div>
+    // compact: room under the track for the "Sperry rule" label, which the hint's margin gives otherwise
+    <div className={clsx(compact && "pb-4")}>
       <div className="flex items-center gap-3">
-        <label htmlFor="review-radius" className="shrink-0 text-ui font-medium text-fg-1">
-          Review radius
-        </label>
+        <span className="flex shrink-0 items-center gap-1">
+          <label htmlFor="review-radius" className="text-ui font-medium text-fg-1">
+            Review radius
+          </label>
+          {compact && (
+            <Tooltip content={HINT} side="bottom" align="start">
+              <button type="button" aria-label="About the review radius" className="-my-1 grid size-5 place-items-center rounded-full text-fg-3 transition-colors hover:text-fg-1 coarse:size-6">
+                <Info aria-hidden size={13} strokeWidth={1.75} />
+              </button>
+            </Tooltip>
+          )}
+        </span>
         <div className="relative min-w-0 flex-1">
           <input
             id="review-radius"
@@ -80,7 +94,7 @@ export function RadiusControl() {
           </output>
         </span>
       </div>
-      <p className="mt-5 text-caption text-fg-3">Project centers within · a review heuristic, not a regulatory standard. Re-runs the engine.</p>
+      {!compact && <p className="mt-5 text-caption text-fg-3">{HINT}</p>}
     </div>
   );
 }

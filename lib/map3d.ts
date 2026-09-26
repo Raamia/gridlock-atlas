@@ -114,13 +114,14 @@ export function metersBetween(a: LonLat, b: LonLat): number {
   return 2 * R_EARTH * Math.asin(Math.min(1, Math.sqrt(s)));
 }
 
-function bearingDeg(a: LonLat, b: LonLat): number {
+export function bearingDeg(a: LonLat, b: LonLat): number {
   const y = Math.sin(rad(b[0] - a[0])) * Math.cos(rad(b[1]));
   const x = Math.cos(rad(a[1])) * Math.sin(rad(b[1])) - Math.sin(rad(a[1])) * Math.cos(rad(b[1])) * Math.cos(rad(b[0] - a[0]));
   return (deg(Math.atan2(y, x)) + 360) % 360;
 }
 
-function destination(a: LonLat, meters: number, bearing: number): LonLat {
+/** The point `meters` from `a` along an initial `bearing` (degrees clockwise from north), great circle. */
+export function destination(a: LonLat, meters: number, bearing: number): LonLat {
   const d = meters / R_EARTH;
   const th = rad(bearing);
   const lat1 = rad(a[1]);
@@ -256,6 +257,8 @@ export interface Map3DArc {
   /** Place signal only possible (B1): drawn at 50% opacity. */
   possible: boolean;
   hovered: boolean;
+  /** Drawn at full weight: the region's first wave (rank ≤ OVERVIEW_BRIGHT), or inside a focus. The rest stay faint. */
+  bright: boolean;
   /** Opacity multiplier: 1, or dimmed while another pair is hovered / selected / out of focus. */
   dim: number;
 }
@@ -346,9 +349,35 @@ export function sharedSiteOf(m: Match): { label: string; lonlat: LonLat; stated:
   return { label: rel.siteLabel ?? place.label, lonlat: [place.lon, place.lat], stated: rel.basis !== "inferred" };
 }
 
-/** Overview arcs stay lower than the selected pair's (a fan of 100+ links) but visibly raised: 0.2 × chord, 200 m – 4 km. */
+/**
+ * Overview arcs stay low (a fan of 100+ links around one hub reads as a tangle when they tower): 0.1 × chord,
+ * 150 m – 2.5 km (SPEC §6.3 asks ≈0.08 × chord). The selected pair's arc is the tall one.
+ */
 export function overviewArcHeight(chordMeters: number): number {
-  return clamp(0.2 * chordMeters, 200, 4000);
+  return clamp(0.1 * chordMeters, 150, 2500);
+}
+
+/**
+ * Overview arcs drawn at full weight: the region's top pairs in engine order; the rest stay a faint hairline (still
+ * hoverable and clickable). Six, not the reveal's twelve: the top leads often share one hub, and twelve bright arcs
+ * out of one hub read as a tangle.
+ */
+export const OVERVIEW_BRIGHT = 6;
+/** The reveal draws ranks 1–12 in, 60 ms apart, then fades the rest in (SPEC §4 C). */
+const REVEAL_WAVE = 12;
+
+/**
+ * A line with no published route: the ghosted ground chord between its two center-defining terminals (null when the
+ * project has a route, is not a line, or its center does not come from exactly two places ≥300 m apart).
+ */
+export function lineChord(p: Project): [LonLat, LonLat] | null {
+  if (structureKind(p) !== "line" || p.route) return null;
+  const center = centerOf(p);
+  if (!center || center.places.length !== 2) return null;
+  const [x, y] = center.places;
+  const a: LonLat = [x.lon, x.lat];
+  const b: LonLat = [y.lon, y.lat];
+  return metersBetween(a, b) > 300 ? [a, b] : null;
 }
 
 function selectedArcHeight(chordMeters: number): number {
@@ -444,9 +473,7 @@ export function build3DState(input: Map3DInput): Map3DState {
     const hue = hueOf(p);
     const opacity = opacityOf(p);
     const cls = voltageClass(voltageOf(p));
-    const kind = structureKind(p);
     const isSel = !!pairIds?.includes(p.id);
-    const center = centerOf(p);
     const places = [...p.places].sort((x, y) => Number(y.role === "endpoint") - Number(x.role === "endpoint"));
     for (const pl of places) {
       const t = placeTreatment(pl);
@@ -475,9 +502,9 @@ export function build3DState(input: Map3DInput): Map3DState {
     }
     if (p.route?.precision === "official-gis" && p.route.coordinates.length > 1) {
       routes.push({ projectId: p.id, hue, cls: cls === "u" ? "v2" : cls, opacity, selected: isSel, towers: routeTowers(p.route.coordinates as LonLat[]) });
-    } else if (kind === "line" && !p.route && center && center.places.length === 2 && (isSel || hoverIds?.includes(p.id))) {
-      const [x, y] = center.places;
-      if (metersBetween([x.lon, x.lat], [y.lon, y.lat]) > 300) chords.push({ projectId: p.id, a: [x.lon, x.lat], b: [y.lon, y.lat], hue });
+    } else if (isSel || hoverIds?.includes(p.id)) {
+      const chord = lineChord(p);
+      if (chord) chords.push({ projectId: p.id, a: chord[0], b: chord[1], hue });
     }
   }
 
@@ -513,6 +540,7 @@ export function build3DState(input: Map3DInput): Map3DState {
       h: overviewArcHeight(Math.max(...legs)),
       possible: m.geo !== "confirmed",
       hovered: hoveredMatch?.id === m.id,
+      bright: arcs.length + 1 <= OVERVIEW_BRIGHT || (!!focus && (focus.has(m.projectAId) || focus.has(m.projectBId))),
       dim: selectedMatch
         ? 0.07
         : focus && !(focus.has(m.projectAId) || focus.has(m.projectBId))
@@ -585,7 +613,18 @@ export function build3DState(input: Map3DInput): Map3DState {
       .filter((m) => m.geoDetail.center)
       .map((m) => ({ id: m.id, mid: [(m.geoDetail.center!.a[0] + m.geoDetail.center!.b[0]) / 2, (m.geoDetail.center!.a[1] + m.geoDetail.center!.b[1]) / 2] as LonLat }));
     hotspots = hotspotsOf(mids);
-    for (const h of hotspots) labels.push({ lonlat: destination(h.center, h.radiusMeters, 180), text: `${h.count} pairs`, kind: "hotspot", z: 0 });
+    // the count sits just outside its ring, west first (the top pairs' rank chips ride above a hub and the city name is
+    // often below it), on a side that is not inside a neighbouring ring or on top of a count already placed
+    const counts: LonLat[] = [];
+    for (const h of hotspots) {
+      const sides = [270, 180, 90, 0].map((b) => destination(h.center, h.radiusMeters, b));
+      const at =
+        sides.find(
+          (p) => hotspots.every((o) => o === h || metersBetween(p, o.center) > o.radiusMeters + 1.5 * MI) && counts.every((q) => metersBetween(p, q) > 6 * MI),
+        ) ?? sides[0];
+      counts.push(at);
+      labels.push({ lonlat: at, text: `${h.count} pairs`, kind: "hotspot", z: 0 });
+    }
     const tab: ReviewStatus | undefined = REVIEW_TABS.find((t) => regionMatches.some((m) => m.reviewStatus === t));
     if (tab) {
       for (const m of regionMatches.filter((x) => x.reviewStatus === tab)) {
@@ -739,7 +778,7 @@ function arcFeatures(s: Map3DState) {
   return fc(
     s.arcs.flatMap((a) =>
       arcLegs(a).map(([x, y]) =>
-        ln(densify(x, y, 64), { id: a.id, rank: a.rank, h: overviewArcHeight(metersBetween(x, y)), op: a.possible ? 0.5 : 1, hov: a.hovered, dim: a.dim }),
+        ln(densify(x, y, 64), { id: a.id, rank: a.rank, h: overviewArcHeight(metersBetween(x, y)), op: a.possible ? 0.5 : 1, hov: a.hovered, top: a.bright, dim: a.dim }),
       ),
     ),
   );
@@ -774,19 +813,19 @@ function beaconFeatures(s: Map3DState) {
   return fc(s.selected?.site ? [pt(s.selected.site, {})] : []);
 }
 
-function labelFeatures(s: Map3DState, narrow = false) {
-  return fc(
-    s.labels.filter((l) => !(narrow && l.kind === "chord")).map((l) =>
-      pt(l.lonlat, {
-        t: l.text,
-        k: l.kind,
-        z: l.z,
-        si: l.stack ?? 0,
-        c: l.hue ?? HUE.overlap,
-        chip: l.kind === "rank" || l.kind === "beyond" ? "gl3d-chip" : l.kind === "chord" ? "gl3d-chip-quiet" : "",
-      }),
-    ),
-  );
+/**
+ * The scene draws only the hotspot counts as map text. The pair's labels (ring, "Beyond 25 mi", the chord caveat) are
+ * HTML callouts in MapStage, placed by the same layout as the project callouts (so they never overlap each other, a
+ * panel or the ring stroke), and the 01–03 rank chips are MapStage's clickable chips. They stay in the state (tests).
+ */
+function labelFeatures(s: Map3DState) {
+  const anchorOf = (l: Map3DLabel): string => {
+    const h = s.hotspots.find((x) => metersBetween(x.center, l.lonlat) <= x.radiusMeters * 1.02 + 50);
+    if (!h) return "center";
+    const b = bearingDeg(h.center, l.lonlat);
+    return b > 225 && b < 315 ? "right" : b >= 135 && b <= 225 ? "top" : b > 45 && b < 135 ? "left" : "bottom";
+  };
+  return fc(s.labels.filter((l) => l.kind === "hotspot").map((l) => pt(l.lonlat, { t: l.text, k: l.kind, c: l.hue ?? HUE.overlap, a: anchorOf(l) })));
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -942,8 +981,10 @@ function layerSpecs(standard: boolean): LayerDef[] {
         layout: { ...lineRound, "line-z-offset": Z_ARC, "line-elevation-reference": "ground" },
         paint: {
           "line-color": HUE.overlap,
-          "line-width": ["case", ["get", "hov"], 2.4, 1.25],
-          "line-opacity": ["*", ["get", "op"], ["get", "dim"], 0.85],
+          // the region's first wave at full weight, the rest a faint hairline (every one stays hoverable/clickable
+          // through map-core's hit layers)
+          "line-width": ["case", ["get", "hov"], 2.4, ["get", "top"], 1.15, 0.7],
+          "line-opacity": ARC_OPACITY(1),
           "line-emissive-strength": 1,
         },
       },
@@ -1040,35 +1081,21 @@ function layerSpecs(standard: boolean): LayerDef[] {
         layout: {
           "text-field": ["get", "t"],
           "text-font": FONT,
-          "text-size": ["match", ["get", "k"], "rank", 11, 11.5],
+          "text-size": 11.5,
           "text-max-width": 24,
-          "text-letter-spacing": ["match", ["get", "k"], "rank", 0.06, 0.01],
+          "text-letter-spacing": 0.01,
           "text-allow-overlap": true,
           "text-ignore-placement": true,
-          "icon-image": ["get", "chip"],
-          "icon-text-fit": "both",
-          "icon-text-fit-padding": [3, 7, 3, 7],
-          "icon-allow-overlap": true,
-          "icon-ignore-placement": true,
-          "text-anchor": ["match", ["get", "k"], "chord", "right", "center"],
-          "text-justify": ["match", ["get", "k"], "chord", "right", "center"],
-          "text-offset": [
-            "match",
-            ["get", "k"],
-            "chord",
-            ["literal", [-1.2, -0.6]],
-            ["match", ["get", "si"], 1, ["literal", [0, -2]], 2, ["literal", [0, -4]], ["literal", [0, 0]]],
-          ],
+          // each count stands outside its ring on the side it was given (west: right-aligned; south: below; …)
+          "text-anchor": ["get", "a"],
+          "text-offset": ["match", ["get", "a"], "right", ["literal", [-0.5, 0]], "left", ["literal", [0.5, 0]], "top", ["literal", [0, 0.4]], ["literal", [0, -0.4]]],
         },
         paint: {
-          "text-color": ["match", ["get", "k"], "rank", HUE.fg1, ["get", "c"]],
-          "text-opacity": ["match", ["get", "k"], "hotspot", 0.75, 1],
+          "text-color": ["get", "c"],
+          "text-opacity": 0.75,
           "text-halo-color": HUE.canvas,
-          "text-halo-width": ["match", ["get", "chip"], "", 1.4, 0],
-          "icon-opacity": 1,
-          "symbol-z-offset": ["get", "z"],
+          "text-halo-width": 1.4,
           "text-emissive-strength": 1,
-          "icon-emissive-strength": 1,
         },
       },
     },
@@ -1103,6 +1130,10 @@ interface Runtime {
   zoomRaf: number | null;
   listening: boolean;
   zoomVis: Map<string, boolean>;
+  /** The 3D close-up covers the map: no animation frames until it closes (SPEC §6.5). */
+  paused: boolean;
+  /** Style whose missing models were already reloaded once (see install3D). */
+  modelCheck: unknown;
 }
 
 const runtimes = new WeakMap<MapboxMap, Runtime>();
@@ -1129,6 +1160,8 @@ function runtime(map: MapboxMap): Runtime {
       zoomRaf: null,
       listening: false,
       zoomVis: new Map(),
+      paused: false,
+      modelCheck: null,
     };
     runtimes.set(map, rt);
   }
@@ -1180,47 +1213,6 @@ function allLayerIds(rt: Runtime): string[] {
   return layerSpecs(rt.standard).map((l) => l.spec.id as string);
 }
 
-/** Rounded glass chips (stretchable): amber rim for rank chips and "Beyond 25 mi", a quiet rim for caveats. */
-function addChipImages(map: MapboxMap): void {
-  addChipImage(map, "gl3d-chip", "rgba(245,184,61,0.7)");
-  addChipImage(map, "gl3d-chip-quiet", "rgba(255,255,255,0.12)");
-}
-
-function addChipImage(map: MapboxMap, id: string, rim: string): void {
-  if (safe(() => map.hasImage(id))) return;
-  if (typeof document === "undefined") return;
-  const pr = 2;
-  const w = 28 * pr;
-  const h = 22 * pr;
-  const canvas = document.createElement("canvas");
-  canvas.width = w;
-  canvas.height = h;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-  const r = 7 * pr;
-  ctx.beginPath();
-  ctx.moveTo(r + 1, 1);
-  ctx.arcTo(w - 1, 1, w - 1, h - 1, r);
-  ctx.arcTo(w - 1, h - 1, 1, h - 1, r);
-  ctx.arcTo(1, h - 1, 1, 1, r);
-  ctx.arcTo(1, 1, w - 1, 1, r);
-  ctx.closePath();
-  ctx.fillStyle = "rgba(11,16,25,0.9)";
-  ctx.fill();
-  ctx.lineWidth = 1.5 * pr * 0.75;
-  ctx.strokeStyle = rim;
-  ctx.stroke();
-  const img = ctx.getImageData(0, 0, w, h);
-  safe(() =>
-    map.addImage(id, { width: w, height: h, data: new Uint8Array(img.data.buffer) }, {
-      pixelRatio: pr,
-      stretchX: [[r + 2, w - r - 2]],
-      stretchY: [[r + 2, h - r - 2]],
-      content: [r, 4, w - r, h - 4],
-    } as never),
-  );
-}
-
 /** Idempotent; call on every style.load. `standard` = Mapbox Standard (slots, symbol labels). */
 export function install3D(map: MapboxMap, opts: { standard: boolean }): void {
   const rt = runtime(map);
@@ -1243,7 +1235,6 @@ export function install3D(map: MapboxMap, opts: { standard: boolean }): void {
     // (line-z-offset is evaluated per vertex, so a simplified arc would draw as a triangle)
     safe(() => map.addSource(id, { type: "geojson", data: empty, ...(LINE_METRICS.has(id) ? { lineMetrics: true, tolerance: 0 } : {}) } as never));
   }
-  if (opts.standard) addChipImages(map);
   // same slot as map-core's data layers (beforeId only works within a slot); labels always on top
   const before = GROUND_BEFORE.find((id) => safe(() => map.getLayer(id)));
   const dataSlot = (before && (safe(() => map.getLayer(before))?.slot as string | undefined)) || "top";
@@ -1276,6 +1267,20 @@ export function install3D(map: MapboxMap, opts: { standard: boolean }): void {
   }
   rt.installed = true;
   if (rt.input) apply(map, rt, rt.input, true);
+  // once the new style settles, any model that did not load (a request cut off by a quick style swap) is re-requested
+  // once for this style; guarded, and only while this style is still the live one
+  const style = rt.style;
+  safe(() =>
+    map.once("idle", () => {
+      if (!live(map, rt) || rt.style !== style || rt.modelCheck === style) return;
+      rt.modelCheck = style;
+      const missing = Object.keys(MODEL_URL).filter((id) => !safe(() => map.hasModel(id)));
+      if (!missing.length) return;
+      for (const id of missing) safe(() => map.addModel(id, MODEL_URL[id]));
+      safe(() => (map as unknown as { style?: { reloadModels?: () => void } }).style?.reloadModels?.());
+      safe(() => map.triggerRepaint());
+    }),
+  );
 }
 
 /** No-op until install3D ran for the current style; guarded with getLayer/getSource and try/catch. */
@@ -1341,10 +1346,7 @@ function apply(map: MapboxMap, rt: Runtime, input: Map3DInput, fresh: boolean): 
   setData(map, rt, SRC.discs, discFeatures(s));
   setData(map, rt, SRC.chords, chordFeatures(s));
   setData(map, rt, SRC.beacon, beaconFeatures(s));
-  // on a phone-width canvas a two-line caveat chip would run off the edge: the dashed chord alone carries it there,
-  // and the inspector's "Where they meet" says the route is not published
-  const narrow = (safe(() => map.getCanvas().clientWidth) ?? 1000) < 640;
-  setData(map, rt, SRC.labels, labelFeatures(s, narrow));
+  setData(map, rt, SRC.labels, labelFeatures(s));
 
   const now = performance.now();
   const reduced = input.reducedMotion;
@@ -1362,7 +1364,6 @@ function apply(map: MapboxMap, rt: Runtime, input: Map3DInput, fresh: boolean): 
     // hide the arcs now, not on the first animation frame, so the full fan never flashes before the draw-in
     setFilter(map, "gl3d-arcs", ["<=", ["get", "rank"], 0]);
     setPaint(map, "gl3d-labels", "text-opacity", LABEL_OPACITY(0));
-    setPaint(map, "gl3d-labels", "icon-opacity", LABEL_ICON_OPACITY(0));
   }
   // sweep: once, when a first comparison starts
   if (input.running && !rt.lastRunning && !input.run && s.sweep && !reduced) rt.anim.sweepStart = now;
@@ -1376,7 +1377,6 @@ function apply(map: MapboxMap, rt: Runtime, input: Map3DInput, fresh: boolean): 
     setFilter(map, "gl3d-arcs", null);
     setPaint(map, "gl3d-arcs", "line-opacity", ARC_OPACITY(1));
     setPaint(map, "gl3d-labels", "text-opacity", LABEL_OPACITY(1));
-    setPaint(map, "gl3d-labels", "icon-opacity", LABEL_ICON_OPACITY(1));
   }
   if (!rt.anim.trimStart) {
     setPaint(map, "gl3d-arc-sel", "line-trim-offset", [0, 0]);
@@ -1385,9 +1385,12 @@ function apply(map: MapboxMap, rt: Runtime, input: Map3DInput, fresh: boolean): 
   kick(map, rt);
 }
 
-const ARC_OPACITY = (rest: number): Expr => ["*", ["get", "op"], ["get", "dim"], 0.85, ["case", ["<=", ["get", "rank"], 12], 1, rest]];
-const LABEL_OPACITY = (rank: number): Expr => ["match", ["get", "k"], "rank", rank, "hotspot", 0.75, 1];
-const LABEL_ICON_OPACITY = (rank: number): Expr => ["match", ["get", "k"], "rank", rank, 1];
+/** Arc opacity: hovered 1, the top pairs .8, the rest a faint .18 (the ones past the first wave × `rest` during the reveal). */
+function ARC_OPACITY(rest: number): Expr {
+  return ["*", ["get", "op"], ["get", "dim"], ["case", ["get", "hov"], 1, ["get", "top"], 0.8, 0.18], ["case", ["<=", ["get", "rank"], REVEAL_WAVE], 1, rest]];
+}
+/** Hotspot counts fade in with the reveal (0.75 at rest). */
+const LABEL_OPACITY = (t: number): number => 0.75 * t;
 
 const ZOOM_LAYERS = [
   ...LAYER_CLASSES.map((c) => `gl3d-spires-${c}`),
@@ -1440,9 +1443,11 @@ const easeOut = (t: number) => 1 - Math.pow(1 - clamp(t, 0, 1), 3);
 /** The one rAF loop: runs while any animation is active; the selected ring's breathing is the single looping one. */
 function kick(map: MapboxMap, rt: Runtime): void {
   if (rt.raf !== null) return;
+  if (rt.paused) return;
   const frame = () => {
     rt.raf = null;
-    if (!live(map, rt) || !rt.input || rt.input.mapMode !== "3d") return;
+    // paused (close-up open): stop here; pause3D(map, false) kicks the loop again with the animation state intact
+    if (rt.paused || !live(map, rt) || !rt.input || rt.input.mapMode !== "3d") return;
     const canvas = safe(() => map.getCanvas());
     // the close-up hides the map (visibility:hidden on an ancestor): pause instead of drawing frames nobody sees
     const paused = (typeof document !== "undefined" && document.hidden) || (!!canvas && hiddenByCss(canvas));
@@ -1453,18 +1458,16 @@ function kick(map: MapboxMap, rt: Runtime): void {
     if (a.revealStart !== null) {
       const t = now - a.revealStart;
       const n = rt.state?.arcs.length ?? 0;
-      const k = Math.min(12, Math.floor(t / 60) + 1);
+      const k = Math.min(REVEAL_WAVE, Math.floor(t / 60) + 1);
       const rest = clamp((t - 720) / 420, 0, 1);
-      setFilter(map, "gl3d-arcs", ["<=", ["get", "rank"], k >= 12 && rest > 0 ? 1e6 : k]);
+      setFilter(map, "gl3d-arcs", ["<=", ["get", "rank"], k >= REVEAL_WAVE && rest > 0 ? 1e6 : k]);
       setPaint(map, "gl3d-arcs", "line-opacity", ARC_OPACITY(easeOut(rest)));
       setPaint(map, "gl3d-labels", "text-opacity", LABEL_OPACITY(clamp((t - 700) / 300, 0, 1)));
-      setPaint(map, "gl3d-labels", "icon-opacity", LABEL_ICON_OPACITY(clamp((t - 700) / 300, 0, 1)));
       if (t >= 1150 || n === 0) {
         a.revealStart = null;
         setFilter(map, "gl3d-arcs", null);
         setPaint(map, "gl3d-arcs", "line-opacity", ARC_OPACITY(1));
         setPaint(map, "gl3d-labels", "text-opacity", LABEL_OPACITY(1));
-        setPaint(map, "gl3d-labels", "icon-opacity", LABEL_ICON_OPACITY(1));
       } else active = true;
     }
 
@@ -1528,6 +1531,54 @@ function kick(map: MapboxMap, rt: Runtime): void {
     else rt.raf = requestAnimationFrame(frame);
   };
   rt.raf = requestAnimationFrame(frame);
+}
+
+/**
+ * Where the selected pair's 3D structures stand right now (3D only; empty in Flat map or before install): yards and
+ * pylons, the beacon, and the towers along its official-GIS routes as thinned for the current zoom. MapStage's callout
+ * layout keeps labels off them.
+ */
+export function sceneStructurePoints(map: MapboxMap): { at: LonLat; kind: "yard" | "tower" }[] {
+  const rt = runtimes.get(map);
+  if (!rt || !live(map, rt) || !rt.state || rt.input?.mapMode !== "3d" || !rt.state.selected) return [];
+  const out: { at: LonLat; kind: "yard" | "tower" }[] = [];
+  for (const st of rt.state.structures) if (st.selected) out.push({ at: st.lonlat, kind: "yard" });
+  const step = towerStep(safe(() => map.getZoom()) ?? 8);
+  for (const r of rt.state.routes) {
+    if (!r.selected) continue;
+    r.towers.forEach((t, i) => {
+      if (i % step === 0 || i === r.towers.length - 1) out.push({ at: t.lonlat, kind: "tower" });
+    });
+  }
+  return out;
+}
+
+/**
+ * Pause / resume every map-3d animation frame (the 3D close-up covers the map, SPEC §6.5). While paused nothing is
+ * drawn or scheduled; on resume the loop picks up where it was (a reveal that ran out meanwhile lands on its end state).
+ */
+export function pause3D(map: MapboxMap, paused: boolean): void {
+  const rt = runtime(map);
+  if (rt.paused === paused) return;
+  rt.paused = paused;
+  if (paused) {
+    if (rt.raf !== null) cancelAnimationFrame(rt.raf);
+    rt.raf = null;
+    return;
+  }
+  if (live(map, rt)) kick(map, rt);
+}
+
+/**
+ * Model loads still in flight on the current style. mapbox-gl 3.31 destroys a style's model manager on setStyle, and a
+ * load that resolves afterwards throws inside the old manager ("Could not load models: …"): callers wait for this to
+ * settle before swapping styles. Internal API, guarded; unknown → settled.
+ */
+export function modelsLoading(map: MapboxMap): boolean {
+  return !!safe(() => {
+    const mm = (map as unknown as { style?: { modelManager?: { isLoaded?: () => boolean } } }).style?.modelManager;
+    return mm?.isLoaded ? !mm.isLoaded() : false;
+  });
 }
 
 /** Model heights used by the map (native, metres) — exported for the close-up and the map key. */

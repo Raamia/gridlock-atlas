@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { Match } from "@/lib/domain/types";
 import { useReducedMotion } from "@/lib/hooks";
-import { install3D, update3D, type Map3DInput } from "@/lib/map3d";
+import { bearingDeg, destination, install3D, lineChord, modelsLoading, pause3D, sceneStructurePoints, update3D, type Map3DInput } from "@/lib/map3d";
 import {
   anchorOf,
   boundsOf,
@@ -18,7 +18,6 @@ import {
   projectCoords,
   projectCounties,
   ringFeature,
-  ringLabelPoint,
   routeFeatures,
   sharedBorder,
   borderLabel,
@@ -29,8 +28,19 @@ import {
 import { queueRank, rankLabel, regionMatches } from "@/lib/rank";
 import { ownerNames } from "@/lib/selectors";
 import { useAtlas, type Basemap } from "@/lib/store";
-import { CameraDirector, type CameraIntent } from "./map/camera";
-import { distanceLabel, layoutCallouts, projectLabel, rankChip, siteDot, siteMarker, type Callout, type Dot } from "./map/callouts";
+import { CameraDirector, DEMO_CARD, type CameraIntent } from "./map/camera";
+import {
+  caveatCallout,
+  distanceLabel,
+  layoutCallouts,
+  projectLabel,
+  rankChip,
+  ringCallout,
+  siteDot,
+  siteMarker,
+  type Callout,
+  type Dot,
+} from "./map/callouts";
 import { pairCardHtml, projectCardHtml, projectTapCard } from "./map/cards";
 import { canDrift, startDrift } from "./map/drift";
 import { addDataLayers, applyAnimated, FIRST_WAVE, hasLayer, PAIR_HIT_LAYERS, PROJECT_HIT_LAYERS, visibility, type Animated } from "./map/layers";
@@ -50,12 +60,15 @@ function setData(map: mapboxgl.Map, id: string, data: FC) {
   }
 }
 
+/** Set while the 3D close-up covers the map: running tweens land on their end state instead of drawing frames. */
+const paused = { current: false };
+
 /** requestAnimationFrame tween; returns a cancel function. */
 function tween(duration: number, frame: (t: number) => void, done?: () => void): () => void {
   let raf = 0;
   const start = performance.now();
   const step = (now: number) => {
-    const t = Math.min(1, (now - start) / duration);
+    const t = paused.current ? 1 : Math.min(1, (now - start) / duration);
     frame(t);
     if (t < 1) raf = requestAnimationFrame(step);
     else done?.();
@@ -82,7 +95,14 @@ const isTouchEvent = (oe: Event | undefined) =>
   !!(oe as (MouseEvent & { sourceCapabilities?: { firesTouchEvents?: boolean } }) | undefined)?.sourceCapabilities?.firesTouchEvents ||
   (typeof window !== "undefined" && !!window.matchMedia?.("(hover: none)").matches);
 
-const DEMO_CARD = '[data-demo-card], [role="region"][aria-label="Guided demo"]';
+/** The pair's utility hues for HTML callouts (mirrors the tokens; map paint uses the same values). */
+const UTIL_VAR = { a: "var(--util-a)", b: "var(--util-b)" } as const;
+const MI_M = 1609.344;
+
+/** The selected pair's 3D structures as callout obstacles (yards ≈24×18 px, towers ≈12×16 px, standing on their point). */
+function structureDots(map: mapboxgl.Map): Dot[] {
+  return sceneStructurePoints(map).map((s) => (s.kind === "yard" ? { at: s.at, weight: 2, w: 26, h: 18, rise: true } : { at: s.at, weight: 1, w: 12, h: 16, rise: true }));
+}
 
 /* ------------------------------------------------ component ------------------------------------------------ */
 
@@ -107,8 +127,9 @@ export default function MapStage() {
   });
   const revealing = useRef(false);
   /** What map-3d draws in the current mode (so the flat equivalents stay hidden instead of doubling up). */
-  const covers = useRef<Covers>({ arcs: false, ring: false, chips: false, labels: false });
+  const covers = useRef<Covers>({ arcs: false, ring: false });
   const [styleReady, setStyleReady] = useState(0);
+  const relayoutRef = useRef<(ev?: { type: string }) => void>(() => {});
   const [mapReady, setMapReady] = useState(false);
   const reduced = useReducedMotion();
 
@@ -357,9 +378,12 @@ export default function MapStage() {
     });
 
     const relayout = (ev?: { type: string }) => {
-      layoutCallouts(map, callouts.current.items, callouts.current.dots, ev?.type === "move");
+      if (useAtlas.getState().closeupOpen) return;
+      const items = callouts.current.items;
+      if (items.length) layoutCallouts(map, items, [...callouts.current.dots, ...structureDots(map)], ev?.type === "move");
       if (ev?.type !== "move") spreadChips(map, chips.current);
     };
+    relayoutRef.current = relayout;
     map.on("move", relayout);
     map.on("moveend", relayout);
     map.on("resize", relayout);
@@ -390,8 +414,21 @@ export default function MapStage() {
     }
     if (lastBasemap.current === basemap) return;
     lastBasemap.current = basemap;
-    // diff:false forces a full reload so "style.load" fires and our layers are re-added
-    map.setStyle(styleFor(basemap), { diff: false } as Parameters<typeof map.setStyle>[1]);
+    // mapbox-gl 3.31 throws "Could not load models" when a style is swapped while its model loads are in flight: let
+    // them settle first (they are small local files; at most ~2.5 s), then swap. A newer choice cancels this one.
+    const started = performance.now();
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const swap = () => {
+      if (mapRef.current !== map) return;
+      if (modelsLoading(map) && performance.now() - started < 2500) {
+        timer = setTimeout(swap, 80);
+        return;
+      }
+      // diff:false forces a full reload so "style.load" fires and our layers are re-added
+      map.setStyle(styleFor(basemap), { diff: false } as Parameters<typeof map.setStyle>[1]);
+    };
+    swap();
+    return () => clearTimeout(timer);
   }, [basemap]);
 
   /* ---------------------------------------------- 3D / Flat ---------------------------------------------- */
@@ -443,21 +480,8 @@ export default function MapStage() {
     let ring: FC = EMPTY;
     let ringLabel: FC = EMPTY;
     if (selected) {
-      const r = selected.geoDetail.thresholdMiles;
-      ring = ringFeature(selected, r);
-      const at = ringLabelPoint(selected, r);
-      const a = IDX.project(selected.projectAId);
-      if (at)
-        ringLabel = {
-          type: "FeatureCollection",
-          features: [
-            {
-              type: "Feature",
-              properties: { label: `${r} mi from ${a.shortTitle}` },
-              geometry: { type: "Point", coordinates: at },
-            },
-          ],
-        };
+      // its label is an HTML callout (placed outside the ring, clear of the pair's callouts and every panel)
+      ring = ringFeature(selected, selected.geoDetail.thresholdMiles);
     } else if (focus?.kind === "project" && run) {
       const c = projectCenter(focus.id, run.matches);
       if (c) {
@@ -537,9 +561,9 @@ export default function MapStage() {
     } catch {
       /* presentation-only */
     }
-    // in 3D, map-3d draws the raised links, the review ring and the rank chips: the flat versions step aside (no
+    // in 3D, map-3d draws the raised links and the review ring: the flat versions step aside (no
     // doubles); in Flat map (gl3d-* hidden) or without map-3d they are the map's own
-    covers.current = map3dCovers(map, mapMode, isStandard(basemap));
+    covers.current = map3dCovers(map, mapMode);
     anim.current = {
       ...anim.current,
       arcs2D: !covers.current.arcs,
@@ -547,7 +571,6 @@ export default function MapStage() {
     };
     applyAnimated(map, anim.current);
     for (const id of ["gl-ring-fill", "gl-ring-glow", "gl-ring", "gl-ring-label"]) visibility(map, id, !covers.current.ring);
-    setChipsHidden(chips.current, covers.current.chips);
   }, [styleReady, run, region, selectedMatchId, hoveredMatchId, focus, mapMode, basemap, reduced, revealNonce, running]);
 
   /* ---------------------------------------------- reveal choreography (2D) ---------------------------------------------- */
@@ -731,31 +754,101 @@ export default function MapStage() {
     if (conn) {
       const [[x1, y1], [x2, y2]] = conn.geometry.coordinates as [number, number][];
       const along = (t: number): [number, number] => [x1 + (x2 - x1) * t, y1 + (y2 - y1) * t];
-      // beyond the radius (flagged through a shared facility): say why, never a bare "37 mi apart" (in 3D map-3d's
-      // ring carries that chip, so the callout is not repeated)
+      // beyond the radius (flagged through a shared facility): say why, never a bare "37 mi apart"
       const text = conn.properties.beyond ? `Beyond ${thr} mi · shared site` : conn.properties.label;
       // slides along the connector (then flips above it) to stay clear of the site and the project labels
-      if (!(conn.properties.beyond && covers.current.labels))
+      add(
+        distanceLabel(text, conn.properties.beyond),
+        along(0.5),
+        1,
+        (w, h) => {
+          const p0 = map.project(along(0.5));
+          const spots = [0.5, 0.35, 0.65, 0.2, 0.8].flatMap((t) => {
+            const p = map.project(along(t));
+            const [x, y] = [p.x - p0.x - w / 2, p.y - p0.y];
+            return [
+              { x, y: y + 8 },
+              { x, y: y - 8 - h },
+            ];
+          });
+          // beyond the radius: also where the link leaves the review ring (the point the chip is about)
+          if (conn.properties.beyond && c) {
+            const q = map.project(destination(c.a, thr * MI_M, bearingDeg(c.a, c.b)));
+            const [x, y] = [q.x - p0.x, q.y - p0.y];
+            spots.push({ x: x + 10, y: y - h / 2 }, { x: x - 10 - w, y: y - h / 2 }, { x: x - w / 2, y: y - 10 - h }, { x: x - w / 2, y: y + 10 });
+          }
+          return spots;
+        },
+        true,
+      );
+    }
+    // Sperry's rule: "25 mi from {A}" just outside the ring, where it is clear — near B first (B sits inside it)
+    if (c) {
+      const rM = thr * MI_M;
+      const toB = bearingDeg(c.a, c.b);
+      const pref = c.miles <= thr ? toB : toB + (site && bearingDeg(c.a, [site.lon, site.lat]) - toB > 0 ? -40 : 40);
+      const bearings = [0, 12, -12, 24, -24, 36, -36, 50, -50, 65, -65, 80, -80, 100, -100, 125, -125, 150, -150, 180].map((d) => pref + d);
+      const at = destination(c.a, rM, pref);
+      add(
+        ringCallout(`${thr} mi from ${IDX.project(m.projectAId).shortTitle}`),
+        at,
+        1,
+        (w, h) => {
+          const p0 = map.project(at);
+          const out: { x: number; y: number }[] = [];
+          for (const b of bearings) {
+            const q = map.project(destination(c.a, rM, b));
+            // the ring's outward normal on screen (its tangent turned away from A's center): the box sits just past it
+            const t0 = map.project(destination(c.a, rM, b - 1));
+            const t1 = map.project(destination(c.a, rM, b + 1));
+            const ctr = map.project(c.a);
+            let [nx, ny] = [t1.y - t0.y, -(t1.x - t0.x)];
+            const len = Math.hypot(nx, ny) || 1;
+            [nx, ny] = [nx / len, ny / len];
+            if (nx * (q.x - ctr.x) + ny * (q.y - ctr.y) < 0) [nx, ny] = [-nx, -ny];
+            const reach = 7 + (w / 2) * Math.abs(nx) + (h / 2) * Math.abs(ny);
+            out.push({ x: q.x + nx * reach - w / 2 - p0.x, y: q.y + ny * reach - h / 2 - p0.y });
+          }
+          return out;
+        },
+        true,
+      );
+      items[items.length - 1].noSlide = true;
+    }
+    // 3D: a line without a published route is a ghosted chord terminal to terminal, and says so — on the chord, away
+    // from its middle (the project's own center and callout). Phones leave the caveat to the inspector ("Where they
+    // meet"): their strip of map is for the pair's own callouts
+    if (mapMode === "3d" && window.innerWidth >= 768)
+      for (const [id, role] of [
+        [m.projectAId, "a"],
+        [m.projectBId, "b"],
+      ] as const) {
+        const chord = lineChord(IDX.project(id));
+        if (!chord) continue;
+        const [[x1, y1], [x2, y2]] = chord;
+        const along = (t: number): [number, number] => [x1 + (x2 - x1) * t, y1 + (y2 - y1) * t];
         add(
-          distanceLabel(text, conn.properties.beyond),
-          along(0.5),
+          caveatCallout(UTIL_VAR[role]),
+          along(0.82),
           1,
           (w, h) => {
-            const p0 = map.project(along(0.5));
-            return [0.5, 0.35, 0.65, 0.2, 0.8].flatMap((t) => {
+            const p0 = map.project(along(0.82));
+            return [0.82, 0.18, 0.7, 0.3, 0.9, 0.1].flatMap((t) => {
               const p = map.project(along(t));
-              const [x, y] = [p.x - p0.x - w / 2, p.y - p0.y];
+              const [x, y] = [p.x - p0.x, p.y - p0.y];
               return [
-                { x, y: y + 8 },
-                { x, y: y - 8 - h },
+                { x: x + 10, y: y - h / 2 },
+                { x: x - 10 - w, y: y - h / 2 },
+                { x: x - w / 2, y: y + 10 },
+                { x: x - w / 2, y: y - 10 - h },
               ];
             });
           },
           true,
         );
-    }
+      }
     callouts.current = { items, dots };
-    layoutCallouts(map, items, dots);
+    layoutCallouts(map, items, [...dots, ...structureDots(map)]);
   }, [styleReady, selected, mapMode]);
 
   /* ---------------------------------------------- rank chips 01–03 (post-run overview) ---------------------------------------------- */
@@ -778,7 +871,11 @@ export default function MapStage() {
       const b = IDX.project(m.projectBId);
       const { root, chip } = rankChip(rankLabel(rank), `#${rankLabel(rank)} ${a.shortTitle} × ${b.shortTitle}`, () => useAtlas.getState().select(m.id));
       chip.style.opacity = revealing.current ? "0" : "1";
-      if (covers.current.chips) chip.style.display = "none";
+      // a chip names its pair: hovering it lights that pair's arc (and its list row)
+      chip.addEventListener("mouseenter", () => useAtlas.getState().set({ hoveredMatchId: m.id }));
+      chip.addEventListener("mouseleave", () => {
+        if (useAtlas.getState().hoveredMatchId === m.id) useAtlas.getState().set({ hoveredMatchId: null });
+      });
       const marker = new mapboxgl.Marker({
         element: root,
         anchor: "bottom",
@@ -789,6 +886,11 @@ export default function MapStage() {
       chips.current.push({ marker, at, el: chip });
     }
     spreadChips(map, chips.current);
+    const placed = chips.current;
+    return () => {
+      // a removed chip never leaves its pair lit
+      if (placed.length && placed.some((c) => c.el.matches(":hover"))) useAtlas.getState().set({ hoveredMatchId: null });
+    };
   }, [styleReady, run, region, regionRun, tab, selectedMatchId, focus]);
 
   /* ---------------------------------------------- camera ---------------------------------------------- */
@@ -858,6 +960,45 @@ export default function MapStage() {
     };
   }, [mapReady]);
 
+  /* ---------------------------------------------- 3D close-up covers the map ---------------------------------------------- */
+  // SPEC §6.5: while the close-up is open the map canvas is hidden (visibility on the wrapper below), map-3d's loop and
+  // the tweens here stop, and the shared-site beacon's CSS pulse pauses; everything resumes when it closes
+  useEffect(() => {
+    const map = mapRef.current;
+    paused.current = closeupOpen;
+    if (!map || !mapReady) return;
+    try {
+      pause3D(map, closeupOpen);
+    } catch {
+      /* presentation-only */
+    }
+    el.current?.querySelectorAll<HTMLElement>(".site-pulse").forEach((p) => (p.style.animationPlayState = closeupOpen ? "paused" : ""));
+    if (closeupOpen) return;
+    // back on the map: repaint once and settle the labels (the layout skipped work while hidden)
+    try {
+      map.resize();
+      map.triggerRepaint();
+    } catch {
+      /* a removed map */
+    }
+    relayoutRef.current();
+  }, [closeupOpen, mapReady]);
+
+  /* ---------------------------------------------- a project title clicked in the inspector ---------------------------------------------- */
+  useEffect(() => {
+    if (!mapReady) return;
+    const onFly = (e: Event) => {
+      const id = (e as CustomEvent<{ projectId?: string }>).detail?.projectId;
+      if (!id || !IDX.project(id)) return;
+      const st = useAtlas.getState();
+      // the close-up covers the map: back to it first, then fly
+      if (st.closeupOpen) st.set({ closeupOpen: false });
+      director.current?.move({ kind: "project", projectId: id });
+    };
+    window.addEventListener("atlas:fly-to-project", onFly);
+    return () => window.removeEventListener("atlas:fly-to-project", onFly);
+  }, [mapReady]);
+
   /* ---------------------------------------------- idle drift (desktop, pre-run) ---------------------------------------------- */
   useEffect(() => {
     const map = mapRef.current;
@@ -916,14 +1057,12 @@ export default function MapStage() {
 
 /* ------------------------------------------------ small map helpers ------------------------------------------------ */
 
-/** arcs / ring: map-3d's raised links and review ring · chips: its rank chips · labels: its text chips can render (glyphs). */
-type Covers = { arcs: boolean; ring: boolean; chips: boolean; labels: boolean };
+/** arcs / ring: map-3d's raised links and review ring (the rank chips and the pair's labels are always map-core's HTML). */
+type Covers = { arcs: boolean; ring: boolean };
 
 /** Which flat elements map-3d replaces right now: only in 3D, and only once its layers exist in the current style. */
-function map3dCovers(map: mapboxgl.Map, mode: "3d" | "flat", standard: boolean): Covers {
-  if (mode !== "3d") return { arcs: false, ring: false, chips: false, labels: false };
-  // the offline style has no glyphs: map-3d's text chips cannot draw there, so the HTML ones stay
-  const labels = standard && hasLayer(map, "gl3d-labels");
+function map3dCovers(map: mapboxgl.Map, mode: "3d" | "flat"): Covers {
+  if (mode !== "3d") return { arcs: false, ring: false };
   // what map-3d actually draws right now: read (never touch) its sources
   const features = (id: string): GeoJSON.Feature[] => {
     try {
@@ -933,28 +1072,47 @@ function map3dCovers(map: mapboxgl.Map, mode: "3d" | "flat", standard: boolean):
       return [];
     }
   };
-  const chips = labels && features("gl3d-src-labels").some((f) => f.properties?.k === "rank");
   // its ring is the selected pair's; a project focus keeps the flat ring when map-3d draws none
   const ring = hasLayer(map, "gl3d-ring") && features("gl3d-src-ring-line").length > 0;
-  return { arcs: hasLayer(map, "gl3d-arcs"), ring, chips, labels };
+  return { arcs: hasLayer(map, "gl3d-arcs"), ring };
 }
 
 function setChipsShown(list: { el: HTMLElement }[], shown: boolean) {
   for (const c of list) c.el.style.opacity = shown ? "1" : "0";
 }
 
-function setChipsHidden(list: { el: HTMLElement }[], hidden: boolean) {
-  for (const c of list) c.el.style.display = hidden ? "none" : "";
-}
+const CHIP_W = 34;
+const CHIP_H = 24;
+const CHIP_GAP = 4;
 
-/** Rank chips on nearby links would stack: nudge later ones up so each number stays readable. */
+/**
+ * Rank chips whose links meet (the top pairs often share a hub) would stack into one blur ("0103"): chips closer than a
+ * chip's width form a group and sit side by side in rank order ("01 02 03"), centred on the group; a group that would
+ * still touch an earlier one steps up a row.
+ */
 function spreadChips(map: mapboxgl.Map, list: { marker: mapboxgl.Marker; at: [number, number] }[]) {
+  if (!list.length) return;
+  const pts = list.map((c) => map.project(c.at));
+  // groups: transitive closeness (in rank order)
+  const group = list.map((_, i) => i);
+  const find = (i: number): number => (group[i] === i ? i : (group[i] = find(group[i])));
+  for (let i = 0; i < list.length; i++)
+    for (let j = 0; j < i; j++)
+      if (Math.abs(pts[i].x - pts[j].x) < CHIP_W + CHIP_GAP + 8 && Math.abs(pts[i].y - pts[j].y) < CHIP_H + 8) group[find(i)] = find(j);
+  const groups = new Map<number, number[]>();
+  list.forEach((_, i) => groups.set(find(i), [...(groups.get(find(i)) ?? []), i]));
   const placed: { x: number; y: number }[] = [];
-  for (const c of list) {
-    const p = map.project(c.at);
+  const clash = (x: number, y: number) => placed.some((q) => Math.abs(q.x - x) < CHIP_W + CHIP_GAP && Math.abs(q.y - y) < CHIP_H + 2);
+  for (const members of groups.values()) {
+    const cx = members.reduce((sum, i) => sum + pts[i].x, 0) / members.length;
+    const cy = Math.min(...members.map((i) => pts[i].y));
+    const n = members.length;
     let dy = -6;
-    while (placed.some((q) => Math.abs(q.x - p.x) < 34 && Math.abs(q.y - (p.y + dy)) < 26) && dy > -120) dy -= 28;
-    c.marker.setOffset([0, dy]);
-    placed.push({ x: p.x, y: p.y + dy });
+    const xs = members.map((_, k) => cx + (k - (n - 1) / 2) * (CHIP_W + CHIP_GAP));
+    while (xs.some((x) => clash(x, cy + dy)) && dy > -6 - 4 * (CHIP_H + 4)) dy -= CHIP_H + 4;
+    members.forEach((i, k) => {
+      list[i].marker.setOffset([Math.round(xs[k] - pts[i].x), Math.round(cy + dy - pts[i].y)]);
+      placed.push({ x: xs[k], y: cy + dy });
+    });
   }
 }

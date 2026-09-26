@@ -243,7 +243,8 @@ export function addDataLayers(map: mapboxgl.Map, standard: boolean) {
     paint: {
       "line-emissive-strength": 1,
       "line-color": C.overlap,
-      "line-width": ["case", ["get", "hover"], 2.75, 1.5],
+      // the region's first wave at full weight; the rest a faint hairline (a hub with 60 links is not a tangle)
+      "line-width": ["case", ["get", "hover"], 2.75, ["get", "top"], 1.5, 1],
       "line-opacity": 0.9,
       "line-dasharray": ["case", ["==", ["get", "geo"], "confirmed"], ["literal", [1, 0]], ["literal", [2, 2]]],
     },
@@ -488,6 +489,7 @@ export function applyAnimated(map: mapboxgl.Map, s: Animated) {
   paint(map, "gl-overlaps", "line-opacity", [
     "*",
     ["case", [">", ["get", "order"], FIRST_WAVE], s.restFade, 1],
+    ["case", ["get", "hover"], 1, ["get", "top"], 1, 0.3],
     ["case", ["get", "dim"], 0.07, ["get", "hover"], 1, ["==", ["get", "geo"], "confirmed"], 0.9, 0.5],
   ]);
   visibility(map, "gl-overlaps", s.arcs2D);

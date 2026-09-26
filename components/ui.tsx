@@ -805,7 +805,7 @@ const TAG_TONE: Record<TagTone, string> = {
   overlap: "bg-overlap-wash text-overlap ring-overlap/35",
 };
 
-export interface TagProps {
+export interface TagProps extends TriggerProps {
   children: ReactNode;
   tone?: TagTone;
   icon?: ReactNode;
@@ -816,11 +816,17 @@ export interface TagProps {
   /** Makes the tag a button (e.g. "Sperry OVL_3" → opens Method). */
   onClick?: (e: ReactMouseEvent<HTMLButtonElement>) => void;
   "aria-label"?: string;
+  /** A static tag that carries a Tooltip can join the Tab order (0) so the tooltip also opens on keyboard focus. */
+  tabIndex?: number;
   className?: string;
 }
 
-/** Small outline label (20px, chip radius) for the chips line: Sperry OVL_n, Sources disagree, Date passed, Beyond 25 mi. */
-export function Tag({ children, tone = "neutral", icon, mono, title, onClick, className, ...rest }: TagProps) {
+/**
+ * Small outline label (20px, chip radius) for the chips line: Sperry OVL_n, Sources disagree, Date passed, Beyond 25 mi.
+ * Forwards pointer/focus handlers and aria-describedby, so `<Tooltip><Tag …/></Tooltip>` works directly (hover and keyboard focus).
+ */
+export function Tag({ children, tone = "neutral", icon, mono, title, onClick, className, tabIndex, ...rest }: TagProps) {
+  const { "aria-label": ariaLabel, ...trigger } = rest;
   const cls = clsx(
     "inline-flex h-5 max-w-full shrink-0 items-center gap-1 whitespace-nowrap rounded-chip px-1.5 ring-1 ring-inset [&_svg]:shrink-0",
     mono ? "num text-[11px] font-medium tracking-[0.01em]" : "text-caption font-medium",
@@ -836,12 +842,12 @@ export function Tag({ children, tone = "neutral", icon, mono, title, onClick, cl
   );
   if (onClick)
     return (
-      <button type="button" onClick={onClick} title={title} aria-label={rest["aria-label"]} className={cls}>
+      <button type="button" onClick={onClick} title={title} aria-label={ariaLabel} tabIndex={tabIndex} className={cls} {...trigger}>
         {body}
       </button>
     );
   return (
-    <span title={title} aria-label={rest["aria-label"]} className={cls}>
+    <span title={title} aria-label={ariaLabel} tabIndex={tabIndex} className={cls} {...trigger}>
       {body}
     </span>
   );
@@ -918,32 +924,40 @@ export interface SignalFactProps {
   state: SignalState;
   /** The fact ("6.7 mi", "2028", a facility name, "timing unknown"). */
   children: ReactNode;
-  /** Text size: caption 12 (rows) · ui 13 · body 14. */
-  size?: "caption" | "ui" | "body";
+  /** Text size: caption 12 (rows) · ui 13 · body 14 · heading 16 (inspector tiles). */
+  size?: "caption" | "ui" | "body" | "heading";
   /** Mono text (default true: distances, years). Turn off for facility names. */
   mono?: boolean;
+  /** Let a word value (a facility name) wrap to two lines instead of truncating; the icon stays on the first line. */
+  wrap?: boolean;
   /** Reserve the 12px icon slot when state is "none" so stacked facts align. */
   alignIcon?: boolean;
   /** Hover tooltip (portal). */
   tooltip?: ReactNode;
+  /** Native title (e.g. the full value when a shortened one is shown). */
+  title?: string;
   className?: string;
 }
 
 const SIGNAL_ICON = { place: MapPin, time: CalendarRange } as const;
-const SIGNAL_SIZE = { caption: "text-caption", ui: "text-ui", body: "text-body" } as const;
+const SIGNAL_SIZE = { caption: "text-caption", ui: "text-ui", body: "text-body", heading: "text-heading" } as const;
 
 /**
  * One pair fact led by its signal icon. Confirmed = amber filled MapPin/CalendarRange + fg-1 text ·
  * possible = fg-3 outline icon + fg-2 text · none = no icon, fg-3 text. The icon carries an accessible name
  * ("Place confirmed"), so meaning never rests on colour alone.
  */
-export function SignalFact({ kind, state, children, size = "caption", mono = true, alignIcon, tooltip, className }: SignalFactProps) {
+export function SignalFact({ kind, state, children, size = "caption", mono = true, wrap, alignIcon, tooltip, title, className }: SignalFactProps) {
   const Icon = SIGNAL_ICON[kind];
   const word = kind === "place" ? "Place" : "Time";
+  // wrapping facts top-align; the icon is centred on the first line box (1lh = the fact's own line height)
+  const iconCls = wrap ? "shrink-0 mt-[calc((1lh_-_12px)/2)]" : "shrink-0";
   const fact = (
     <span
+      title={title}
       className={clsx(
-        "inline-flex min-w-0 max-w-full items-center gap-1.5",
+        "inline-flex min-w-0 max-w-full gap-1.5",
+        wrap ? "items-start" : "items-center",
         SIGNAL_SIZE[size],
         mono && "num",
         state === "confirmed" ? "text-fg-1" : state === "possible" ? "text-fg-2" : "text-fg-3",
@@ -951,13 +965,13 @@ export function SignalFact({ kind, state, children, size = "caption", mono = tru
       )}
     >
       {state === "confirmed" ? (
-        <Icon role="img" aria-label={`${word} confirmed`} size={12} strokeWidth={2} className="text-overlap" fill="currentColor" fillOpacity={0.3} />
+        <Icon role="img" aria-label={`${word} confirmed`} size={12} strokeWidth={2} className={clsx(iconCls, "text-overlap")} fill="currentColor" fillOpacity={0.3} />
       ) : state === "possible" ? (
-        <Icon role="img" aria-label={`${word} possible`} size={12} strokeWidth={1.75} className="text-fg-3" />
+        <Icon role="img" aria-label={`${word} possible`} size={12} strokeWidth={1.75} className={clsx(iconCls, "text-fg-3")} />
       ) : alignIcon ? (
         <span aria-hidden className="w-3 shrink-0" />
       ) : null}
-      <span className="min-w-0 truncate">{children}</span>
+      <span className={clsx("min-w-0", wrap ? "line-clamp-2 break-words" : "truncate")}>{children}</span>
     </span>
   );
   return tooltip ? <Tooltip content={tooltip}>{fact}</Tooltip> : fact;
@@ -1344,7 +1358,8 @@ export function Disclosure({
   return (
     <div className={className} data-open={isOpen || undefined}>
       {Heading ? <Heading>{button}</Heading> : button}
-      <div id={regionId} className="grid transition-[grid-template-rows] duration-300 ease-enter" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}>
+      {/* minmax(0,1fr): truncated children can't widen the column past the panel */}
+      <div id={regionId} className="grid grid-cols-[minmax(0,1fr)] transition-[grid-template-rows] duration-300 ease-enter" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}>
         <div className={clsx("min-h-0", !(isOpen && settled) && "overflow-hidden")} inert={!isOpen}>
           <div className={contentClassName}>{children}</div>
         </div>

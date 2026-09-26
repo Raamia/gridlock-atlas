@@ -1,6 +1,5 @@
 "use client";
 
-import clsx from "clsx";
 import { AlertTriangle, Crosshair, X } from "lucide-react";
 import { IDX } from "@/lib/data";
 import type { SignalLevel } from "@/lib/domain/types";
@@ -22,7 +21,8 @@ export interface FilterCounts {
 
 /**
  * Timing chips (independent toggles on `m.time`; none pressed = all; counts are tab-scoped), "Dates revised or disputed"
- * (store.conflictsOnly), the native Utility select (region-scoped options) and Clear.
+ * (store.conflictsOnly), the native Utility select (region-scoped options) and Clear. The timing chips wrap (two lines in
+ * a 336–392px rail) rather than scroll, so none is ever cut off at rest.
  */
 export function Filters({ counts, utilities }: { counts: FilterCounts; utilities: string[] }) {
   const timing = useAtlas((s) => s.timing);
@@ -33,31 +33,13 @@ export function Filters({ counts, utilities }: { counts: FilterCounts; utilities
   const toggle = (t: TimingFilter) => set({ timing: timing.includes(t) ? timing.filter((x) => x !== t) : [...timing, t] });
 
   return (
-    <div className="space-y-2">
-      <div className="flex min-w-0 items-center gap-1">
-        <div
-          role="group"
-          aria-label="Timing"
-          className={clsx(
-            "fade-x -ml-(--panel-pad) flex min-w-0 flex-1 gap-1.5 overflow-x-auto py-px pl-(--panel-pad) [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-            active ? "pr-3" : "-mr-(--panel-pad) pr-(--panel-pad)",
-          )}
-        >
-          {TIMING.map((t) => (
-            <Chip key={t.id} size="sm" pressed={timing.includes(t.id)} count={counts.timing[t.id]} tooltip={t.tooltip} onClick={() => toggle(t.id)}>
-              {t.label}
-            </Chip>
-          ))}
-        </div>
-        {active && (
-          <button
-            type="button"
-            onClick={() => set({ timing: [], conflictsOnly: false, utilityFilter: null })}
-            className="h-6 shrink-0 animate-fade-in rounded-full px-2 text-caption font-medium text-fg-2 transition-colors hover:bg-fill-2 hover:text-fg-1"
-          >
-            Clear
-          </button>
-        )}
+    <div className="space-y-1.5">
+      <div role="group" aria-label="Timing" className="flex min-w-0 flex-wrap gap-1.5">
+        {TIMING.map((t) => (
+          <Chip key={t.id} size="sm" pressed={timing.includes(t.id)} count={counts.timing[t.id]} tooltip={t.tooltip} onClick={() => toggle(t.id)}>
+            {t.label}
+          </Chip>
+        ))}
       </div>
       <div className="flex min-w-0 items-center gap-1.5">
         <Chip
@@ -86,6 +68,15 @@ export function Filters({ counts, utilities }: { counts: FilterCounts; utilities
             </option>
           ))}
         </Select>
+        {active && (
+          <button
+            type="button"
+            onClick={() => set({ timing: [], conflictsOnly: false, utilityFilter: null })}
+            className="h-6 shrink-0 animate-fade-in rounded-full px-2 text-caption font-medium text-fg-2 transition-colors hover:bg-fill-2 hover:text-fg-1"
+          >
+            Clear
+          </button>
+        )}
       </div>
     </div>
   );

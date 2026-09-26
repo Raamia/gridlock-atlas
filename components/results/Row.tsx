@@ -81,7 +81,7 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
         onFocus={() => set({ hoveredMatchId: m.id })}
         onBlur={() => useAtlas.getState().hoveredMatchId === m.id && set({ hoveredMatchId: null })}
         className={clsx(
-          "group relative grid w-full scroll-mt-(--sticky-h,8px) scroll-mb-2 grid-cols-[18px_minmax(0,1fr)_auto] gap-x-2 rounded-control py-2 pr-2 pl-2 text-left transition-colors duration-150 ease-enter",
+          "group relative grid w-full scroll-mt-(--sticky-h,8px) scroll-mb-2 grid-cols-[16px_minmax(0,1fr)_auto] gap-x-1.5 rounded-control py-2 pr-1.5 pl-2 text-left transition-colors duration-150 ease-enter",
           selected ? "bg-fill-3" : "hover:bg-fill-2 data-hovered:bg-fill-2",
         )}
       >
@@ -125,12 +125,13 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
             </span>
           )}
         </span>
-        {/* pair-level facts: the distance between centers over the timing signal (never per project) */}
-        <span className="flex w-[84px] min-w-0 flex-col justify-center gap-1 self-stretch border-l border-divider pl-2.5">
-          <SignalFact kind="place" state={place.state} mono={place.mono} tooltip={place.tooltip}>
+        {/* pair-level facts: the distance between centers over the timing signal (never per project); 76px holds "2025–26"
+            with its icon, the rest of the row goes to the titles */}
+        <span className="flex w-[76px] min-w-0 flex-col justify-center gap-1 self-stretch border-l border-divider pl-2">
+          <SignalFact kind="place" state={place.state} mono={place.mono} tooltip={place.tooltip} className="gap-1!">
             {place.text}
           </SignalFact>
-          <SignalFact kind="time" state={time.state} mono={time.mono} tooltip={time.tooltip}>
+          <SignalFact kind="time" state={time.state} mono={time.mono} tooltip={time.tooltip} className="gap-1!">
             {time.text}
           </SignalFact>
         </span>
@@ -141,13 +142,16 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
 
 const DOT: Record<UtilityKey, UtilityKey> = { a: "a", b: "b", other: "other" };
 
-/** Owner first (dot + mono short name, full names for screen readers), then the title, then "×18" when repeated. */
+/**
+ * Owner first (dot + mono short name, full names for screen readers), then the title, then "×18" when repeated. The
+ * "×18" gives way first: it shows only in a wide rail (≥1520px windows), where it no longer costs the title its words.
+ */
 function TitleLine({ p, role, times, className }: { p: Project; role?: "a" | "b"; times: number; className?: string }) {
   const owner = rowOwner(p);
   return (
-    <span className={clsx("flex h-[18px] min-w-0 items-center gap-1.5", className)}>
+    <span className={clsx("flex h-[18px] min-w-0 items-center gap-1", className)}>
       <UtilityDot utility={DOT[role ?? owner.hue]} />
-      <span aria-hidden title={owner.full} className="num max-w-[46%] shrink-0 truncate text-[11px] leading-none text-fg-3">
+      <span aria-hidden title={owner.full} className="num max-w-[42%] shrink-0 truncate text-[11px] leading-none text-fg-3">
         {owner.label}
       </span>
       <span className="sr-only">{owner.full}: </span>
@@ -155,7 +159,7 @@ function TitleLine({ p, role, times, className }: { p: Project; role?: "a" | "b"
         {p.shortTitle}
       </span>
       {times >= 3 && (
-        <span className="num hidden shrink-0 text-[11px] leading-none text-fg-3 @[340px]:inline" title={`In ${times} pairs of this tab`}>
+        <span className="num hidden shrink-0 pl-0.5 text-[11px] leading-none text-fg-3 @[372px]:inline" title={`In ${times} pairs of this tab`}>
           ×{times}
         </span>
       )}

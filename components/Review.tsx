@@ -1,12 +1,11 @@
 "use client";
 
 import clsx from "clsx";
-import { ClipboardCheck, Download, Timer } from "lucide-react";
+import { ClipboardCheck, Timer } from "lucide-react";
 import { useEffect, useState } from "react";
-import { IDX } from "@/lib/data";
 import type { Match } from "@/lib/domain/types";
-import { download, LABELS, labelsCsv, useReview } from "@/lib/review";
-import { Button, Eyebrow } from "./ui";
+import { LABELS, useReview } from "@/lib/review";
+import { Eyebrow } from "./ui";
 
 /**
  * Reviewer label block (reviewer mode only): four labels, a live timer and a note that is saved as it is typed.
@@ -76,60 +75,6 @@ export function ReviewPanel({ m }: { m: Match }) {
           Saved in this browser after <span className="num">{saved.seconds}s</span> · export from the Method drawer
         </p>
       )}
-    </div>
-  );
-}
-
-/** Reviewer exports (Method drawer): counts, the mode toggle, "Labels CSV", "review-log.json", Clear. */
-export function ReviewExports() {
-  const labels = useReview((s) => s.labels);
-  const checked = useReview((s) => s.checked);
-  const enabled = useReview((s) => s.enabled);
-  const toggle = useReview((s) => s.toggle);
-  const clear = useReview((s) => s.clear);
-  const n = Object.keys(labels).length;
-  const c = Object.keys(checked).length;
-  const meta = (id: string) => {
-    const [a, b] = id.split("__");
-    return { project_a: IDX.project(a)?.title ?? a, project_b: IDX.project(b)?.title ?? b };
-  };
-  return (
-    <div className="rounded-card bg-fill-1 p-3.5">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-ui text-fg-2">
-          <span className="num text-fg-1">{n}</span> {n === 1 ? "pair" : "pairs"} labeled · <span className="num text-fg-1">{c}</span> {c === 1 ? "excerpt" : "excerpts"}{" "}
-          human-checked
-        </p>
-        <Button size="sm" variant={enabled ? "subtle" : "secondary"} onClick={toggle} icon={<ClipboardCheck size={14} strokeWidth={1.75} />}>
-          {enabled ? "Reviewer mode on" : "Turn on reviewer mode"}
-        </Button>
-      </div>
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        <Button
-          size="sm"
-          variant="secondary"
-          disabled={!n}
-          onClick={() => download("gridlock-labels.csv", labelsCsv(labels, meta), "text/csv")}
-          icon={<Download size={14} strokeWidth={1.75} />}
-        >
-          Labels CSV
-        </Button>
-        <Button
-          size="sm"
-          variant="secondary"
-          disabled={!c}
-          onClick={() => download("review-log.json", JSON.stringify({ reviewedEvidenceIds: Object.keys(checked).sort(), exportedAt: new Date().toISOString() }, null, 1), "application/json")}
-          icon={<Download size={14} strokeWidth={1.75} />}
-        >
-          review-log.json
-        </Button>
-        <Button size="sm" variant="ghost" disabled={!n && !c} onClick={clear}>
-          Clear
-        </Button>
-      </div>
-      <p className="mt-2.5 text-caption text-fg-3">
-        Labels stay in this browser. Commit review-log.json to data/ and rebuild the snapshot to publish excerpts as human-checked.
-      </p>
     </div>
   );
 }

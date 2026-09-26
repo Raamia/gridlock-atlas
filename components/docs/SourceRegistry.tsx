@@ -36,6 +36,8 @@ function groupOf(s: SourceDocument): GroupId {
 
 const ICON: Record<GroupId, typeof Globe> = { utility: Globe, regulator: Landmark, rto: Network, public: Library };
 
+const PHONE_STAT = "max-sm:px-2.5 max-sm:[&>.num]:text-title max-sm:[&_.eyebrow]:whitespace-normal max-sm:[&_.eyebrow]:leading-[1.3]";
+
 export function SourceRegistry() {
   const open = useAtlas((s) => s.sourcesOpen);
   const set = useAtlas((s) => s.set);
@@ -85,12 +87,14 @@ export function SourceRegistry() {
       toc={toc}
       tocLabel="Source groups"
     >
+      {/* phones: three ~100px tiles, so the values step down to title size and the labels wrap instead of truncating */}
       <div className="grid grid-cols-3 gap-2">
-        <Stat size="lg" labelBelow value={cited.length} label="cited public documents" />
-        <Stat size="lg" labelBelow value={total.toLocaleString("en-US")} label="short excerpts" />
+        <Stat size="lg" labelBelow value={cited.length} label="cited public documents" className={PHONE_STAT} />
+        <Stat size="lg" labelBelow value={total.toLocaleString("en-US")} label="short excerpts" className={PHONE_STAT} />
         <Stat
           size="lg"
           labelBelow
+          className={PHONE_STAT}
           tone={pct === 100 ? "ok" : "default"}
           value={
             <>

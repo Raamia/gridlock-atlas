@@ -111,7 +111,7 @@ function ChannelRow({ c, coBuilt }: { c: ImpactChannel; coBuilt: boolean }) {
           ))}
         </ul>
       )}
-      <Disclosure variant="inline" summary={<span className="text-caption">How this is estimated</span>} className="mt-1.5 [&>div]:grid-cols-[minmax(0,1fr)]" contentClassName="space-y-1.5 pt-1.5">
+      <Disclosure variant="inline" summary={<span className="text-caption">How this is estimated</span>} className="mt-1.5" contentClassName="space-y-1.5 pt-1.5">
         <p className="text-caption text-pretty text-fg-2">{c.note}</p>
         {c.key !== "outage" && <p className="num text-[11px] text-fg-3">{c.formula}</p>}
         <div className="flex flex-wrap gap-x-3 gap-y-0.5">
@@ -283,7 +283,7 @@ export function ImpactEstimate({ m }: { m: Match }) {
             </span>
           </div>
           <p className="mt-1.5 text-caption text-pretty text-fg-3">{d.sharedMilesNote}</p>
-          <Disclosure variant="inline" summary={<span className="text-caption">Adjust corridor assumptions</span>} className="mt-1.5 [&>div]:grid-cols-[minmax(0,1fr)]" contentClassName="space-y-3.5 pt-2.5">
+          <Disclosure variant="inline" summary={<span className="text-caption">Adjust corridor assumptions</span>} className="mt-1.5" contentClassName="space-y-3.5 pt-2.5">
             <div className="grid grid-cols-2 gap-2">
               <div className="rounded-control bg-fill-1 px-3 py-2.5">
                 <div className="num text-title font-medium text-fg-1">{acresText}</div>

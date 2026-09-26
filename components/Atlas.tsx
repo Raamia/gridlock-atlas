@@ -13,6 +13,7 @@ import { regionMatches } from "@/lib/rank";
 import { useReview } from "@/lib/review";
 import { useAtlas, type SheetSnap } from "@/lib/store";
 import { BriefModal } from "./BriefModal";
+import { preloadCloseup } from "./closeup/preload";
 import { MethodDrawer, SourcesDrawer } from "./Drawers";
 import { GuidedDemo } from "./GuidedDemo";
 import { Inspector } from "./Inspector";
@@ -166,8 +167,6 @@ function CloseupFailed() {
 }
 const CloseupBoundary = catchError(() => <CloseupFailed />);
 
-let closeupPreloaded = false;
-
 /** Mounts the 3D close-up (next/dynamic, client only) while it is open for a selected pair; WebGL2 is checked first. */
 function Closeup() {
   const open = useAtlas((s) => s.closeupOpen);
@@ -175,13 +174,11 @@ function Closeup() {
   const demoStep = useAtlas((s) => s.demoStep);
   const active = open && selected !== null;
 
-  // warm the chunk on the first pair selection (or once the demo has compared), while the browser is idle
+  // warm the chunk + structure builders on the first pair selection (or once the demo has compared), while idle;
+  // preloadCloseup is idempotent and imports nothing heavy itself
   useEffect(() => {
-    if (closeupPreloaded || (selected === null && (demoStep ?? 0) < 1)) return;
-    closeupPreloaded = true;
-    const load = () => void import("./PairCloseup");
-    if (typeof window.requestIdleCallback === "function") window.requestIdleCallback(load, { timeout: 4000 });
-    else window.setTimeout(load, 1200);
+    if (selected === null && (demoStep ?? 0) < 1) return;
+    preloadCloseup();
   }, [selected, demoStep]);
 
   useEffect(() => {

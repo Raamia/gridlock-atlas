@@ -90,7 +90,8 @@ function Verdict({ m, phone, scrolled }: { m: Match; phone: boolean; scrolled: b
   return (
     <header
       className={clsx(
-        "shrink-0 px-(--panel-pad) transition-shadow duration-200",
+        // a size container: the 360px md inspector drops the Esc hint so a long status ("Known coordination") still fits
+        "@container shrink-0 px-(--panel-pad) transition-shadow duration-200",
         // phone: the sheet's grabber sits in the top 20px
         phone ? "pt-4 pb-2" : "pt-3 pb-3",
         scrolled && "shadow-[0_1px_0_var(--divider)]",
@@ -111,8 +112,8 @@ function Verdict({ m, phone, scrolled }: { m: Match; phone: boolean; scrolled: b
           <IconButton label="Pair below" shortcut="J" size={size} aria-disabled={atEnd || undefined} className="aria-disabled:opacity-40" onClick={() => !atEnd && selectNeighbor(1)}>
             <ChevronDown size={16} strokeWidth={1.75} />
           </IconButton>
-          <span aria-hidden className="mx-1 h-4 w-px bg-divider coarse:hidden" />
-          <Kbd size="sm" className="mr-0.5" aria-hidden>
+          <span aria-hidden className="mx-1 h-4 w-px bg-divider coarse:hidden @max-[340px]:hidden" />
+          <Kbd size="sm" className="mr-0.5 @max-[340px]:hidden" aria-hidden>
             Esc
           </Kbd>
           <IconButton label="Close inspector" size={size} onClick={() => select(null)}>
@@ -186,12 +187,13 @@ function InspectorBody({
   return (
     <div ref={scroller} data-inspector-scroll="" className="scroll-thin relative min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-(--panel-pad)">
       {/* 2 · titles */}
-      <div className={clsx(phone ? "space-y-2.5 pt-1" : "space-y-3.5 pt-0.5")}>
+      {/* phone: spacing tight enough that the question box clears the footer at the 64dvh opening height */}
+      <div className={clsx(phone ? "space-y-2 pt-0.5" : "space-y-3.5 pt-0.5")}>
         <ProjectHeading p={a} role="a" compact={phone} />
         <ProjectHeading p={b} role="b" compact={phone} />
       </div>
       {/* 3 · tiles + chips ("Why #01?" sits on the verdict line) */}
-      <div className={clsx(phone ? "mt-3" : "mt-3.5 space-y-2.5")}>
+      <div className={clsx(phone ? "mt-2.5" : "mt-3.5 space-y-2.5")}>
         <Tiles m={m} compact={phone} />
         {!phone && <Chips m={m} onJump={(id) => jump(id, { pulse: true })} />}
       </div>

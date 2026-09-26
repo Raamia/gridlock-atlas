@@ -7,7 +7,7 @@ import { PROOF_TEXT, sperryProof } from "./model";
 /**
  * "✓ Reproduces Sperry's worked example · 6/6 overlap rows · 10/10 project rows" → Method at "Proof at a glance".
  * Rendered only when the engine reproduces the starter file exactly (no run needed). `stacked` gives the counts their
- * own line (the roomier pre-run hero); the results panel uses one line.
+ * own line (the hero, and the results panel on tall screens); short laptop screens get one line.
  */
 export function ProofButton({ className, stacked }: { className?: string; stacked?: boolean }) {
   const openMethod = useAtlas((s) => s.openMethod);
@@ -39,8 +39,9 @@ export function ProofButton({ className, stacked }: { className?: string; stacke
           </span>
         </span>
       ) : (
+        // one line (short laptop screens): the ✓ says "reproduces"; the full sentence is the accessible name
         <span className="flex min-w-0 flex-1 items-baseline gap-2">
-          <span className="truncate text-caption font-medium text-fg-1">Reproduces Sperry’s worked example</span>
+          <span className="truncate text-caption font-medium text-fg-1">Sperry’s worked example</span>
           <span className="num ml-auto shrink-0 text-[11px] text-fg-3">
             {p.rows}/{p.rows} · {p.projects}/{p.projects}
           </span>

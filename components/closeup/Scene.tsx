@@ -8,7 +8,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, type ReactNod
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import type { Precision } from "@/lib/domain/types";
-import { buildLatticeTower, buildMarkerPylon, buildSubstation, towerConductorHeights } from "@/lib/models/structures";
+import { buildLatticeTower, buildMarkerPylon, buildSubstation, towerAttachments, towerTotalHeight } from "@/lib/models/structures";
 import { anchorBox, arcHeight, BEACON_H, PIN_H, type Anchor, type AnchorSpec, type Band, type HoverInfo, type LabelSpec } from "./Labels";
 import { alongPolyline, PLINTH_R, polyLength, type CloseupModel, type CuProject } from "./model";
 import { arcPoints, backdropTexture, Bag, beamTexture, catenary, circlePoints, COLOR, floorTexture, gridSegments, hash01, tint } from "./three-helpers";
@@ -57,8 +57,8 @@ const TOWER_SCALE = 0.02;
 const TOWER_SPACING = 1.15;
 const TOWER_H = 40;
 const TOWER_SPAN = 14;
-/** Arm reach per conductor level (fractions of the span), mirroring lib/models/structures.ts ARM_REACH. */
-const ARM_REACH = [0.43, 0.5, 0.41] as const;
+/** Where the tower model's conductors and earth wires attach (metres, model frame): the model's own geometry. */
+const TOWER_WIRES = towerAttachments(TOWER_H, TOWER_SPAN);
 const DEG = Math.PI / 180;
 /**
  * Heights of the flat overlays above the plinth top (y = 0). They sit BELOW the contact-shadow plane, so the shadow
@@ -146,13 +146,30 @@ export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, l
         minPolarAngle={0.15 * Math.PI}
         maxPolarAngle={0.42 * Math.PI}
         autoRotate={autoRotate}
-        autoRotateSpeed={0.45}
+        autoRotateSpeed={AUTO_ROTATE_SPEED}
         target={TARGET}
         onStart={onInteract}
       />
+      {autoRotate && <AutoRotatePace />}
       {post && <Effects />}
     </Canvas>
   );
+}
+
+/** OrbitControls' autoRotateSpeed at 60 fps (≈ one turn every 2.2 min). */
+const AUTO_ROTATE_SPEED = 0.45;
+
+/**
+ * OrbitControls (three-stdlib) turns a fixed angle per update, i.e. per rendered frame, so a 120 Hz display would spin
+ * the diorama twice as fast. Before the controls update (drei runs it at priority -1), scale the speed by this frame's
+ * duration so the turn rate is the same at any frame rate (a long stall is capped, never a jump).
+ */
+function AutoRotatePace() {
+  useFrame((state, delta) => {
+    const c = state.controls as unknown as OrbitControlsImpl | null;
+    if (c) c.autoRotateSpeed = AUTO_ROTATE_SPEED * Math.min(4, Math.max(0, delta * 60));
+  }, -2);
+  return null;
 }
 
 function Effects() {
@@ -302,6 +319,8 @@ function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<strin
   const latest = useRef(labels);
   const sizes = useRef(new WeakMap<Element, [number, number]>());
   const last = useRef(new Map<string, Anchor>());
+  /** Ring labels: the ring angle chosen last frame (kept while it stays clear, so the label does not hop). */
+  const lastRing = useRef(new Map<string, number>());
   const get = useThree((s) => s.get);
   useEffect(() => {
     latest.current = labels;
@@ -346,7 +365,8 @@ function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<strin
       const x = ((v.x + 1) / 2) * size.width;
       const y = ((1 - v.y) / 2) * size.height;
       // behind the camera, or outside the frame hole (zoomed in / under a panel): the label would point at nothing
-      if (v.z > 1 || v.z < -1 || x < minX || x > maxX || y < minY || y > maxY) {
+      // (a ring label picks its own point on the ring, below)
+      if (!s.ring && (v.z > 1 || v.z < -1 || x < minX || x > maxX || y < minY || y > maxY)) {
         el.style.visibility = "hidden";
         hideLeader(s.id);
         last.current.delete(s.id);
@@ -380,7 +400,22 @@ function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<strin
       }
       return area;
     };
+    const toScreen = (x: number, y: number, z: number): [number, number, boolean] => {
+      v.set(x, y, z).project(camera);
+      return [((v.x + 1) / 2) * size.width, ((1 - v.y) / 2) * size.height, v.z > -1 && v.z < 1];
+    };
     for (const it of items) {
+      if (it.s.ring) {
+        const box = placeOnRing(it, it.s.ring, toScreen, placed, overlap, lastRing.current, { minX, maxX, minY: f.t + 4, maxY: size.height - f.b - 4 });
+        if (!box) {
+          it.el.style.visibility = "hidden";
+          continue;
+        }
+        placed.push([box[0], box[1], it.w, it.h]);
+        it.el.style.transform = `translate3d(${box[0].toFixed(1)}px, ${box[1].toFixed(1)}px, 0)`;
+        it.el.style.visibility = "visible";
+        continue;
+      }
       const options = [it.s.anchor, ...(it.s.alts ?? [])].map((an) => resolve(an, it.s.side));
       const prev = last.current.get(it.s.id);
       const tries = [...new Set<Anchor>([...(prev && options.includes(prev) ? [prev] : []), ...options])];
@@ -433,6 +468,71 @@ function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<strin
       }
     }
   });
+  return null;
+}
+
+/** Ring-label candidates: every 10° around the ring, nearest the preferred angle first. */
+const RING_STEPS = Array.from({ length: 36 }, (_, i) => (i === 0 ? 0 : (i % 2 ? 1 : -1) * Math.ceil(i / 2) * ((10 * Math.PI) / 180)));
+
+/**
+ * Puts a ring label just outside its ring: for each candidate point on the ring (on the plinth, in the frame), the box
+ * sits past the ring's on-screen outward normal, so it never lies on the stroke. It must also clear the rest of the
+ * ring, every obstacle (structures, pins, towers, beacon) and every label placed before it. The last frame's point is
+ * kept while it stays clear. Returns the box's top-left, or null (hidden) when no point is clear.
+ */
+function placeOnRing(
+  it: Placing,
+  ring: NonNullable<LabelSpec["ring"]>,
+  toScreen: (x: number, y: number, z: number) => [number, number, boolean],
+  placed: [number, number, number, number][],
+  overlap: (l: number, t: number, w: number, h: number) => number,
+  lastRing: Map<string, number>,
+  view: { minX: number; maxX: number; minY: number; maxY: number },
+): [number, number] | null {
+  const { center: c, r, y } = ring;
+  const at = (a: number) => toScreen(c.x + Math.cos(a) * r, y, c.z + Math.sin(a) * r);
+  const onPlinth = (a: number) => Math.hypot(c.x + Math.cos(a) * r, c.z + Math.sin(a) * r) <= PLINTH_R - 0.1;
+  const [cx, cy] = toScreen(c.x, y, c.z);
+  // the ring itself (only where it is drawn: on the plinth) and the obstacles, as small screen boxes
+  const stroke: [number, number][] = [];
+  for (let i = 0; i < 72; i++) {
+    const a = (i / 72) * Math.PI * 2;
+    if (!onPlinth(a)) continue;
+    const [sx, sy, ok] = at(a);
+    if (ok) stroke.push([sx, sy]);
+  }
+  const things = ring.avoid.map(([x, yy, z]) => toScreen(x, yy, z)).filter(([, , ok]) => ok);
+  const clear = (l: number, t: number) => {
+    if (l < view.minX || t < view.minY || l + it.w > view.maxX || t + it.h > view.maxY) return false;
+    if (overlap(l, t, it.w, it.h) > 0) return false;
+    for (const [sx, sy] of stroke) if (sx > l - 3 && sx < l + it.w + 3 && sy > t - 3 && sy < t + it.h + 3) return false;
+    // a structure stands up from its point: keep ~22px either side and ~30px above it clear
+    for (const [sx, sy] of things) if (sx > l - 22 && sx < l + it.w + 22 && sy > t - 8 && sy < t + it.h + 30) return false;
+    return true;
+  };
+  const boxAt = (a: number): [number, number] | null => {
+    if (!onPlinth(a)) return null;
+    const [qx, qy, ok] = at(a);
+    if (!ok) return null;
+    const [ax, ay] = at(a - 0.02);
+    const [bx, by] = at(a + 0.02);
+    let [nx, ny] = [by - ay, -(bx - ax)];
+    const len = Math.hypot(nx, ny) || 1;
+    [nx, ny] = [nx / len, ny / len];
+    if (nx * (qx - cx) + ny * (qy - cy) < 0) [nx, ny] = [-nx, -ny];
+    const reach = 8 + (it.w / 2) * Math.abs(nx) + (it.h / 2) * Math.abs(ny);
+    return [qx + nx * reach - it.w / 2, qy + ny * reach - it.h / 2];
+  };
+  const prev = lastRing.get(it.s.id);
+  const tries = prev != null ? [prev, ...RING_STEPS.map((d) => ring.prefer + d)] : RING_STEPS.map((d) => ring.prefer + d);
+  for (const a of tries) {
+    const b = boxAt(a);
+    if (b && clear(b[0], b[1])) {
+      lastRing.set(it.s.id, a);
+      return b;
+    }
+  }
+  lastRing.delete(it.s.id);
   return null;
 }
 
@@ -578,8 +678,7 @@ function buildLayer(model: CloseupModel, bag: Bag): Built {
       const mats = tint(template, color, bag, { mix: 0.62, emissive: 0.25 });
       const s = TOWER_SCALE * mul;
       template.scale.setScalar(s);
-      const hover: HoverData = { text: `Symbolic line · ${p.title}`, sub: "towers along the official GIS route · spacing symbolic", y: TOWER_H * 1.13 * s, mats };
-      const levels = towerConductorHeights(TOWER_H);
+      const hover: HoverData = { text: `Symbolic line · ${p.title}`, sub: "towers along the official GIS route · spacing symbolic", y: towerTotalHeight(TOWER_H) * s, mats };
       const strands: THREE.Vector3[][] = [[], [], [], [], [], []];
       const earth: THREE.Vector3[][] = [[], []];
       for (const { p: q, t } of alongPolyline(p.route.pts, count)) {
@@ -591,13 +690,13 @@ function buildLayer(model: CloseupModel, bag: Bag): Built {
         // local +x (the arms) after the yaw: (t.z, 0, -t.x)
         const ax = t.z;
         const az = -t.x;
-        levels.forEach((y, li) => {
-          const reach = ARM_REACH[li] * TOWER_SPAN * s;
+        TOWER_WIRES.conductors.forEach(({ y, reach: r }, li) => {
+          const reach = r * s;
           strands[li * 2].push(new THREE.Vector3(q.x + ax * reach, y * s, q.z + az * reach));
           strands[li * 2 + 1].push(new THREE.Vector3(q.x - ax * reach, y * s, q.z - az * reach));
         });
-        const ey = TOWER_H * 1.107 * s;
-        const er = 0.17 * TOWER_SPAN * s;
+        const ey = TOWER_WIRES.earth.y * s;
+        const er = TOWER_WIRES.earth.reach * s;
         earth[0].push(new THREE.Vector3(q.x + ax * er, ey, q.z + az * er));
         earth[1].push(new THREE.Vector3(q.x - ax * er, ey, q.z - az * er));
       }

@@ -232,6 +232,8 @@ export interface OverlapProps {
   hover: boolean;
   /** A pair is selected and this is not it. */
   dim: boolean;
+  /** Drawn at full weight: the region's first 6 in engine order, or inside a focus (the rest are a faint hairline). */
+  top: boolean;
 }
 
 /** Every flagged pair as a link between centers — "where overlaps occur" at a glance. */
@@ -264,6 +266,8 @@ export function overlapFeatures(
       selected: m.id === o.selectedId,
       hover: !!o.hoverId && m.id === o.hoverId && m.id !== o.selectedId,
       dim: (!!o.selectedId && m.id !== o.selectedId) || (!o.selectedId && !!o.focusIds && !o.focusIds.has(m.id)),
+      // same six as the 3D scene's bright arcs (lib/map3d.ts OVERVIEW_BRIGHT)
+      top: i < 6 || (!!o.focusIds && o.focusIds.has(m.id)),
     };
     features.push({
       type: "Feature",

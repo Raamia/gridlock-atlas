@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import type { CSSProperties, ReactNode } from "react";
-import type { CloseupModel, CuPlace, CuProject, V2 } from "./model";
+import { alongPolyline, PLINTH_R, polyLength, type CloseupModel, type CuPlace, type CuProject, type V2 } from "./model";
 
 /*
  * Close-up labels: plain DOM in ONE overlay layer (rendered by PairCloseup in the app's React root), each tracking a
@@ -36,6 +36,13 @@ export interface LabelSpec {
   side?: "a" | "b" | "site";
   /** Leader-line colour when the label sits in a callout slot. */
   leader?: string;
+  /**
+   * A label that rides a ring on the plinth (the review radius): each frame the layer picks the clearest point of the
+   * ring (starting at `prefer`, radians in the x–z plane) and sets the label just OUTSIDE the ring there, clear of the
+   * ring stroke, of every `avoid` point (structures, pins, beacon) and of labels placed before it. `at`/`anchor` are
+   * unused for placement.
+   */
+  ring?: { center: V2; r: number; y: number; prefer: number; avoid: [number, number, number][] };
   content: ReactNode;
 }
 
@@ -118,12 +125,13 @@ export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}
       ),
     });
   }
-  if (ring?.labelAt) {
+  if (ring?.onPlinth && ring.labelAngle != null) {
+    const at = ring.labelAt ?? { x: ring.center.x + Math.cos(ring.labelAngle) * ring.r, z: ring.center.z + Math.sin(ring.labelAngle) * ring.r };
     out.push({
       id: "ring",
-      at: [ring.labelAt.x, 0.02, ring.labelAt.z],
+      at: [at.x, 0.02, at.z],
       anchor: "center",
-      alts: ["below", "above", "right", "left"],
+      ring: { center: ring.center, r: ring.r, y: 0.02, prefer: ring.labelAngle, avoid: sceneObstacles(model) },
       priority: 60,
       content: (
         <span className="whitespace-nowrap text-caption text-overlap" style={SHADOW}>
@@ -182,6 +190,23 @@ export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}
     });
   }
   return out;
+}
+
+/** Where the diorama has something standing (structures, markers, pins, the beacon, towers, chords): scene points. */
+function sceneObstacles(model: CloseupModel): [number, number, number][] {
+  const out: [number, number, number][] = [];
+  const add = (v: V2, y = 0.3) => out.push([v.x, y, v.z]);
+  for (const p of [model.a, model.b]) {
+    for (const pl of p.places) if (!pl.hidden) add(pl.pos);
+    if (p.center) add(p.center, PIN_H * 0.5);
+    if (p.route) {
+      const n = Math.max(2, Math.min(40, Math.round(polyLength(p.route.pts) / 0.6)));
+      for (const { p: q } of alongPolyline(p.route.pts, n)) add(q);
+    }
+    if (p.chord) for (const t of [0, 0.25, 0.5, 0.75, 1]) add({ x: p.chord[0].x + (p.chord[1].x - p.chord[0].x) * t, z: p.chord[0].z + (p.chord[1].z - p.chord[0].z) * t }, 0.02);
+  }
+  if (model.site) add(model.site.pos, BEACON_H * 0.5);
+  return out.filter(([x, , z]) => Math.hypot(x, z) <= PLINTH_R + 0.5);
 }
 
 function FacilityLabel({ pl }: { pl: CuPlace }) {

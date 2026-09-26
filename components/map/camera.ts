@@ -20,7 +20,9 @@ export type CameraIntent =
   /** Frame both projects' terminals + centers (+ shared site); maxZoom 10.5; pitch 52 in 3D. */
   | { kind: "pair"; matchId: string; crossRegion?: boolean }
   /** After an explicit Compare: ease 1400 ms to the flagged pair centers. */
-  | { kind: "reveal" };
+  | { kind: "reveal" }
+  /** One project (a title clicked in the inspector): its places and route; maxZoom 10; pitch 52 in 3D. */
+  | { kind: "project"; projectId: string };
 
 export const PAIR_PITCH = 52;
 export const PAIR_BEARING = -14;
@@ -58,13 +60,25 @@ function cubicBezier(x1: number, y1: number, x2: number, y2: number) {
 
 /* ------------------------------------------------ padding ------------------------------------------------ */
 
-/** The guided-demo card, when it floats over the map (not while the brief pins it bottom-left). */
-function demoCardRect(): RectLike | null {
+/** The guided-demo card: `[data-demo-card]`, falling back to the region's aria-label (both, when both exist). */
+export const DEMO_CARD = '[data-demo-card], [role="region"][aria-label="Guided demo"]';
+
+/**
+ * The guided-demo card's rect while it floats over the map (not while the brief pins it bottom-left): the union of every
+ * element that names it, so a wrapper and the card itself agree on how far down the card reaches.
+ */
+export function demoCardRect(): RectLike | null {
   const st = useAtlas.getState();
   if (st.demoStep === null || st.briefOpen || typeof document === "undefined") return null;
-  const el = document.querySelector<HTMLElement>('[data-demo-card], [role="region"][aria-label="Guided demo"]');
-  const r = el?.getBoundingClientRect();
-  return r && r.height > 0 && r.width > 0 ? r : null;
+  let u: { left: number; top: number; right: number; bottom: number } | null = null;
+  for (const el of document.querySelectorAll<HTMLElement>(DEMO_CARD)) {
+    const r = el.getBoundingClientRect();
+    if (!(r.width > 0 && r.height > 0)) continue;
+    u = u
+      ? { left: Math.min(u.left, r.left), top: Math.min(u.top, r.top), right: Math.max(u.right, r.right), bottom: Math.max(u.bottom, r.bottom) }
+      : { left: r.left, top: r.top, right: r.right, bottom: r.bottom };
+  }
+  return u;
 }
 
 /** Phone inspector sheet top, as the shell places it: max(36dvh, --demo-card-bottom + 120px). */
@@ -95,7 +109,7 @@ export function currentPadding(kind: "pair" | "overview" = "overview", layout: L
   if (kind === "overview" && layout.tier === "phone") pad.left = pad.right = layout.gutter + 4;
   // wide overviews (a region, the flagged pairs) keep their corners clear of the map-controls column at the bottom-right
   if (kind === "overview" && layout.tier !== "phone" && typeof document !== "undefined") {
-    const w = Math.min(240, document.querySelector<HTMLElement>("[data-map-controls]")?.offsetWidth ?? 0);
+    const w = Math.min(360, document.querySelector<HTMLElement>("[data-map-controls]")?.offsetWidth ?? 0);
     if (w > 0 && layout.focalW - w > 480) pad.right += w;
   }
   [pad.left, pad.right] = fitAxis(pad.left, pad.right, layout.vw);
@@ -190,7 +204,7 @@ export class CameraDirector {
   move(intent: CameraIntent, opts: { animate?: boolean; duration?: number } = {}) {
     const map = this.map;
     const animate = (opts.animate ?? true) && !this.reduced;
-    const padding = currentPadding(intent.kind === "pair" ? "pair" : "overview");
+    const padding = currentPadding(intent.kind === "pair" || intent.kind === "project" ? "pair" : "overview");
     this.last = intent;
     this.lastPadding = padding;
     this.userMoved = false;
@@ -200,6 +214,22 @@ export class CameraDirector {
       const w = window as unknown as { __camLog?: unknown[] };
       (w.__camLog ??= []).push({ t: Math.round(performance.now()), intent, animate, padding });
       if (w.__camLog.length > 40) w.__camLog.shift();
+    }
+
+    if (intent.kind === "project") {
+      const p = SNAPSHOT.projects.find((x) => x.id === intent.projectId);
+      const b = p ? padBounds(boundsOf(projectCoords(p)), 0.03) : null;
+      if (!b) return;
+      map.fitBounds(b as LngLatBoundsLike, {
+        padding,
+        ...this.pitchFor("pair"),
+        maxZoom: 10,
+        duration: animate ? (opts.duration ?? 1300) : 0,
+        curve: 1.3,
+        easing: easeCamera,
+        essential: true,
+      });
+      return;
     }
 
     if (intent.kind === "pair") {
@@ -239,7 +269,7 @@ export class CameraDirector {
   modeChanged() {
     const map = this.map;
     const st = useAtlas.getState();
-    const { pitch, bearing } = this.pitchFor(st.selectedMatchId ? "pair" : "overview");
+    const { pitch, bearing } = this.pitchFor(st.selectedMatchId || this.last?.kind === "project" ? "pair" : "overview");
     if (this.userMoved || !this.last) {
       map.easeTo({
         pitch,
@@ -266,7 +296,7 @@ export class CameraDirector {
 
   private sync() {
     const map = this.map;
-    const padding = currentPadding(this.last?.kind === "pair" ? "pair" : "overview");
+    const padding = currentPadding(this.last?.kind === "pair" || this.last?.kind === "project" ? "pair" : "overview");
     if (samePadding(this.lastPadding, padding)) return;
     if (map.isMoving()) {
       this.pendingSync = true;

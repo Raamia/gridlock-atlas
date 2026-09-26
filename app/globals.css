@@ -23,9 +23,9 @@
  *   variants    coarse: / fine: (pointer), e.g. `coarse:hidden` for keyboard hints
  *   z-layers    z-(--z-panel) etc. — see --z-* below
  *
- * Legacy names (--bg-*, --line*, --text-0..3, --a, --b, --amber, --review, --known, --conflict, --possible, --danger,
- * --glass, .glass, .glass-solid, .mono, …) are ALIASES onto this palette so not-yet-rewritten components keep
- * rendering. Integration removes them once nothing uses them. Do not use them in new code.
+ * Legacy names (--bg-0..2, --line, --line-2, --text-0..2, --a, --b, --amber, --review, --known, --conflict, --possible,
+ * --danger, --glass, .glass, .glass-solid, …) remain as plain CSS variables/classes aliased onto this palette (the dev
+ * styleguide still reads a few); their Tailwind colour classes are gone. Do not use them in new code.
  */
 
 @custom-variant coarse (@media (pointer: coarse));
@@ -128,21 +128,14 @@
   --bg-0: var(--canvas);
   --bg-1: var(--surface-solid);
   --bg-2: var(--surface-raised);
-  --bg-3: #19202b;
-  --bg-4: #222a36;
   --line: var(--edge);
   --line-2: var(--edge-strong);
-  --line-3: rgb(255 255 255 / 0.26);
   --text-0: var(--fg-1);
   --text-1: var(--fg-2);
   --text-2: var(--fg-3);
-  --text-3: #6d7586;
   --a: var(--util-a);
-  --a-deep: #2aa6cf;
   --b: var(--util-b);
-  --b-deep: #7f63e6;
   --amber: var(--overlap);
-  --amber-deep: #d99a1e;
   --review: var(--fg-2);
   --known: var(--ok);
   --conflict: var(--warn);
@@ -253,29 +246,8 @@
   --color-inverse: var(--inverse);
   --color-on-inverse: var(--on-inverse);
 
-  /* legacy colour classes (bg-bg-2, text-text-1, ring-line, text-a, bg-amber/12, text-known …) */
-  --color-bg-0: var(--canvas);
-  --color-bg-1: var(--surface-solid);
-  --color-bg-2: var(--surface-raised);
-  --color-bg-3: var(--bg-3);
-  --color-bg-4: var(--bg-4);
-  --color-line: var(--edge);
-  --color-line-2: var(--edge-strong);
-  --color-line-3: var(--line-3);
-  --color-text-0: var(--fg-1);
-  --color-text-1: var(--fg-2);
-  --color-text-2: var(--fg-3);
-  --color-text-3: var(--text-3);
-  --color-a: var(--util-a);
-  --color-a-deep: var(--a-deep);
-  --color-b: var(--util-b);
-  --color-b-deep: var(--b-deep);
-  --color-amber: var(--overlap);
-  --color-review: var(--fg-2);
-  --color-known: var(--ok);
-  --color-conflict: var(--warn);
-  --color-possible: var(--fg-3);
-  --color-danger: var(--warn);
+  /* (the legacy colour classes — bg-bg-2, text-text-1, ring-line, text-a, text-known … — are gone: nothing used them,
+     and a theme colour named "b" turned every bare `border-b` violet) */
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -547,12 +519,8 @@
   --text-0: #15181e;
   --text-1: #3a404b;
   --text-2: #5b626f;
-  --text-3: #6b7280;
   --line: rgb(0 0 0 / 0.1);
   --line-2: rgb(0 0 0 / 0.18);
-  --line-3: rgb(0 0 0 / 0.26);
-  --bg-3: rgb(0 0 0 / 0.05);
-  --bg-4: rgb(0 0 0 / 0.08);
   --a: #0e7490;
   --b: #6d28d9;
   --amber: #b45309;
