@@ -67,7 +67,7 @@ npm run audit        # every fact has evidence; every excerpt re-found in its so
 Rebuilding data (optional — the snapshot is committed):
 
 ```bash
-npm run sources:fetch -- --local-pdf "path/to/2025 IRP Volume 3 PUBLIC DISCLOSURE.pdf"
+npm run sources:fetch -- --local gpc-irp-2025-vol3="path/to/2025 IRP Volume 3 PUBLIC DISCLOSURE.pdf"
 python3 scripts/ingest/parse_region_b.py
 npm run snapshot:build
 GEMINI_API_KEY=... npm run extract:gemini -- desc-scrtp-2026-2030 --page 41   # optional structured-extraction run

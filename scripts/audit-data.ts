@@ -25,7 +25,11 @@ for (const e of Object.values(snap.evidence)) {
   if (!sources.has(e.sourceId)) fail.push(`evidence ${e.id}: unknown source ${e.sourceId}`);
   if (e.exactExcerpt.split(/\s+/).length > 60) warn.push(`evidence ${e.id}: excerpt longer than 60 words`);
   const loc = locate(e.sourceId, e.exactExcerpt);
-  if (loc.status === "no-cache") cacheMissing++;
+  if (loc.status === "no-cache") {
+    cacheMissing++;
+    // without the cache we can only trust the build-time check — and must not trust anything it did not pass
+    if (!e.verifiedInSource) fail.push(`evidence ${e.id}: not verified at build time and no cache to re-check`);
+  }
   else if (loc.status === "not-found") fail.push(`evidence ${e.id}: excerpt not in ${e.sourceId}: "${e.exactExcerpt.slice(0, 60)}…"`);
   else if (!e.verifiedInSource) warn.push(`evidence ${e.id}: located now but flagged unverified in snapshot (rebuild)`);
 }
@@ -48,6 +52,8 @@ for (const p of snap.projects) {
   if (p.route && p.route.precision !== "official-gis" && !/schematic|approximate|not survey/i.test(p.route.caveat)) {
     fail.push(`${p.id}: digitized route lacks an approximate/schematic caveat`);
   }
+  for (const f of p.facts) if (!has(f.evidenceIds)) fail.push(`${p.id}: fact "${f.label}" has no evidence`);
+  for (const c of p.counties) if (!has(c.evidenceIds)) fail.push(`${p.id}: county ${c.name} has no evidence`);
 }
 for (const r of snap.relations) if (!has(r.evidenceIds)) fail.push(`relation ${r.id}: no evidence`);
 
@@ -66,7 +72,8 @@ const verified = Object.values(snap.evidence).filter((e) => e.verifiedInSource).
 const total = Object.keys(snap.evidence).length;
 console.log(`snapshot ${snap.version}: ${snap.projects.length} projects, ${snap.sources.length} sources, ${total} excerpts (${verified} verbatim-verified)`);
 console.log(`engine: ${run.pairsEvaluated} pairs evaluated → ${run.matches.length} candidates`);
-if (cacheMissing) console.log(`note: ${cacheMissing} excerpts not re-checked (source cache absent — run npm run sources:fetch)`);
+if (cacheMissing)
+  console.log(`note: source cache absent for ${cacheMissing} excerpts — relied on build-time verification (run npm run sources:fetch for a full re-check)`);
 for (const w of warn.slice(0, 20)) console.log(`warn  ${w}`);
 for (const f of fail) console.log(`FAIL  ${f}`);
 console.log(fail.length ? `\n${fail.length} failures` : "\naudit passed");

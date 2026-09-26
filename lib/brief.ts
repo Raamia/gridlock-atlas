@@ -129,7 +129,7 @@ function placeEvidence(p: Project): string[] {
 
 function pdfAnchor(e: Evidence, url?: string, mime?: string) {
   if (!url) return "";
-  return mime === "application/pdf" && e.page ? `${url}#page=${e.page}` : url;
+  return mime === "application/pdf" && e.page && /\.pdf($|[?#])/i.test(url) ? `${url}#page=${e.page}` : url;
 }
 
 export function briefToMarkdown(b: Brief): string {

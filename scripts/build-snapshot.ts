@@ -101,6 +101,9 @@ function ev(list: R[] | undefined): string[] {
         reviewedByHuman: reviewed.has(id),
         verifiedInSource: verified,
       };
+    } else if (e.supports && !evidence[id].supports.split(" · ").includes(e.supports)) {
+      // one excerpt can support several claims; keep every label rather than only the first
+      evidence[id].supports = `${evidence[id].supports} · ${e.supports}`;
     }
     ids.push(id);
   }
@@ -265,8 +268,12 @@ for (const c of clusters) {
       owners: (p.owners ?? []).map((o: R) => ({ utilityId: UTILITY_ALIASES[o.utilityId] ?? o.utilityId, evidenceIds: ev(o.evidence) })),
       status: { value: p.status?.value ?? "unknown", label: p.status?.label || undefined, asOf: p.status?.asOf || undefined, evidenceIds: ev(p.status?.evidence) },
       states,
-      counties: (p.counties ?? []).map((co: R) => ({ name: co.name, state: abbr(co.state), evidenceIds: ev(co.evidence) })),
-      facts: (p.facts ?? []).map((f: R) => ({ key: f.key, label: f.label, value: f.value, evidenceIds: ev(f.evidence) })),
+      counties: (p.counties ?? [])
+        .map((co: R) => ({ name: co.name, state: abbr(co.state), evidenceIds: ev(co.evidence) }))
+        .filter((c: { evidenceIds: string[] }) => c.evidenceIds.length),
+      facts: (p.facts ?? [])
+        .map((f: R) => ({ key: f.key, label: f.label, value: f.value, evidenceIds: ev(f.evidence) }))
+        .filter((f: { evidenceIds: string[] }) => f.evidenceIds.length),
       places,
       route,
       constructionWindows: windows,

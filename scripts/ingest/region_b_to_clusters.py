@@ -29,6 +29,13 @@ CURRENT = "desc-scrtp-2026-2030"
 EARLIER = ["desc-scrtp-2025-2029", "desc-scrtp-2024-2028"]
 LIST_LABEL = {"desc-scrtp-2026-2030": "2026–2030 list", "desc-scrtp-2025-2029": "2025–2029 list", "desc-scrtp-2024-2028": "2024–2028 list"}
 SNAPSHOT = "2026-09-26"
+# document dates read from each PDF's metadata (pdfinfo CreationDate); the lists print no date themselves
+DOC_DATES = {
+    "desc-scrtp-2026-2030": ("2026-04-28", "PDF creation date (pdfinfo), 2026-04-28"),
+    "desc-scrtp-2025-2029": ("2025-03-03", "PDF creation date (pdfinfo), 2025-03-03"),
+    "desc-scrtp-2024-2028": ("2024-03-05", "PDF creation date (pdfinfo), 2024-03-05"),
+    "gpc-irp-2025-vol3": ("2025-01-18", "PDF creation date (pdfinfo), 2025-01-18; the plan is a snapshot as of December 2024"),
+}
 
 
 def slug(s):
@@ -72,17 +79,32 @@ def iso_fix(iso):
 
 
 def load_geo():
+    """Geocodes by key; a key repeated across batches (duplicate source IDs) keeps every candidate."""
     out = {}
     for f in sorted((RB / "geo").glob("*.json")):
         for p in json.load(open(f)).get("projects", []):
-            out[p["key"]] = p
+            out.setdefault(p["key"], []).append(p)
     return out
 
 
-def places_for(key, geo, title_ev):
-    g = geo.get(key)
+def norm_id(pid):
+    """Editions write the same ID differently ("06076 A" vs "06076A")."""
+    return re.sub(r"\s+", "", pid).upper()
+
+
+def words(s):
+    return set(re.findall(r"[a-z]{3,}", s.lower())) - {"rebuild", "line", "construct", "substation", "tie", "sub", "and", "the"}
+
+
+def places_for(key, geo, title_ev, title="", strict=False):
+    cands = geo.get(key) or []
+    # duplicate IDs return several geocodes under one key: take the one whose terminal names appear in THIS title
+    if strict or len(cands) > 1:
+        g = next((c for c in cands if any(words(e.get("name", "")) & words(title) for e in c.get("endpoints", []))), None)
+    else:
+        g = cands[0] if cands else None
     if not g:
-        return [], ["Endpoints not geocoded."]
+        return [], ["Endpoints not yet geocoded."]
     places, caveats = [], []
     for i, e in enumerate(g.get("endpoints", [])):
         if e.get("precision") == "unknown" or e.get("lat") is None:
@@ -113,7 +135,7 @@ def miles_ev(source_id, page, text):
 
 
 def desc_clusters(parsed, geo):
-    earlier = {sid: {r["projectId"]: r for r in parsed["desc"][sid]} for sid in EARLIER}
+    earlier = {sid: {norm_id(r["projectId"]): r for r in parsed["desc"][sid]} for sid in EARLIER}
     projects, unresolved = [], []
     seen = {}
     for r in parsed["desc"][CURRENT]:
@@ -131,7 +153,9 @@ def desc_clusters(parsed, geo):
         key = f"desc:{pid}"
         E = r["evidence"]
         title_ev = E["title"]
-        places, caveats = places_for(key, geo, title_ev)
+        places, caveats = places_for(key, geo, title_ev, r["title"], strict=pid in dup_ids)
+        if len(r.get("phaseDates") or []) > 1:
+            caveats.append(f"Phased in-service dates: {r['inServiceRaw']}. The last phase is used as the project's in-service date.")
 
         status_raw = r["status"]
         status_val = "construction" if status_raw.lower().startswith("in progress") else "proposed" if status_raw.lower().startswith("planned") else "unknown"
@@ -143,7 +167,7 @@ def desc_clusters(parsed, geo):
             if fixed:
                 caveats.append(f"The source gives an impossible date ({r['inServiceRaw']}); shown at month precision.")
         for sid in EARLIER:
-            old = earlier[sid].get(pid)
+            old = earlier[sid].get(norm_id(pid))
             if old and pid in dup_ids and not same_project(old["title"], r["title"]):
                 old = None
             if old and old["inService"] and old["inService"] != r["inService"]:
@@ -172,8 +196,8 @@ def desc_clusters(parsed, geo):
                 })
 
         facts = []
-        if r["costs"].get("Total"):
-            tot = [x for x in E["costs"] if x["exactExcerpt"].startswith("Total")]
+        tot = [x for x in E["costs"] if "total" in x["supports"]]
+        if r["costs"].get("Total") and tot:
             facts.append({"key": "costUsd", "label": "Estimated project cost", "value": f"${r['costs']['Total']:,}", "evidence": tot})
         me = miles_ev(CURRENT, r["page"], r["description"])
         if r["miles"] and me:
@@ -207,7 +231,7 @@ def gpc_clusters(parsed, geo):
             continue
         key = f"gpc:{r['teams']}"
         E = r["evidence"]
-        places, caveats = places_for(key, geo, E["title"])
+        places, caveats = places_for(key, geo, E["title"], r["title"])
         if r["sponsor"] == "SAV":
             caveats.append("Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table.")
         windows, claims = [], []
@@ -230,7 +254,8 @@ def gpc_clusters(parsed, geo):
         kv = re.findall(r"(\d{2,3})\s*-?\s*KV", r["title"], re.I)
         if kv:
             facts.append({"key": "voltageKv", "label": "Voltage", "value": f"{max(map(int, kv))} kV", "evidence": [E["title"]]})
-        facts.append({"key": "costUsd", "label": "Estimated cost", "value": "Redacted in the public disclosure", "evidence": []})
+        if E.get("costRedacted") and E["costRedacted"]["verifiedByScript"]:
+            facts.append({"key": "costUsd", "label": "Estimated cost", "value": "Redacted in the public disclosure", "evidence": [E["costRedacted"]]})
         title = title_case(r["title"])
         projects.append({
             "id": f"gpc-{r['teams']}", "title": title, "shortTitle": short_title(title), "titleEvidence": [E["title"]],
@@ -252,7 +277,8 @@ def main():
     src = []
     for sid in [CURRENT, *EARLIER, "gpc-irp-2025-vol3"]:
         m = json.load(open(ROOT / "data" / "sources" / ".cache" / "meta" / f"{sid}.json"))
-        src.append({"id": sid, "title": m["title"], "publisher": m["publisher"], "url": m["url"], "sourceType": m["sourceType"], "publishedAt": m.get("publishedAt"), "cached": True})
+        src.append({"id": sid, "title": m["title"], "publisher": m["publisher"], "url": m["url"], "sourceType": m["sourceType"],
+                    "publishedAt": DOC_DATES.get(sid, (None, None))[0] or m.get("publishedAt"), "documentDateEvidence": DOC_DATES.get(sid, (None, None))[1], "cached": True})
     d = desc_clusters(parsed, geo)
     g = gpc_clusters(parsed, geo)
     d["sources"] = [s for s in src if s["id"].startswith("desc")]

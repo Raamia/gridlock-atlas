@@ -13,16 +13,21 @@ export function assumption(key: string): ImpactAssumption | undefined {
 
 export function voltageOf(p: Project): number | null {
   const f = p.facts.find((x) => x.key === "voltageKv");
-  const fromFact = f ? Number.parseInt(f.value, 10) : NaN;
-  if (Number.isFinite(fromFact)) return fromFact;
+  const fromFact = f ? firstNumber(f.value) : null;
+  if (fromFact) return fromFact;
   const kv = [...p.title.matchAll(/(\d{2,3})\s*-?\s*kv/gi)].map((m) => Number(m[1]));
   return kv.length ? Math.max(...kv) : null;
 }
 
+/** First number in free text: "approximately 80 miles" → 80, "~190" → 190, "105-108 miles" → 105. */
+function firstNumber(text: string): number | null {
+  const m = text.replace(/,/g, "").match(/\d+(?:\.\d+)?/);
+  return m ? Number(m[0]) : null;
+}
+
 export function lengthOf(p: Project): number | null {
   const f = p.facts.find((x) => x.key === "lengthMiles");
-  const n = f ? Number.parseFloat(f.value) : NaN;
-  return Number.isFinite(n) ? n : null;
+  return f ? firstNumber(f.value) : null;
 }
 
 export function costOf(p: Project): number | null {

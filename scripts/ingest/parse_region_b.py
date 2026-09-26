@@ -93,7 +93,10 @@ def parse_desc(source_id: str):
         need = block("Project Need")
         status = block("Project Status")
         isd_raw = block("Planned In-Service Date")
-        isd = mdy(isd_raw)
+        # multi-phase projects list several dates ("10/1/2025 (phase 1) and 10/1/2026 (phase 2)"):
+        # the last one is when the whole project is planned in service
+        phase_dates = [mdy(d) for d in re.findall(r"\d{1,2}/\d{1,2}/\d{2,4}", isd_raw)]
+        isd = phase_dates[-1] if phase_dates else None
 
         # yearly budget from the layout rendering (header row + value row)
         lay = layout_text(source_id, page)
@@ -103,10 +106,13 @@ def parse_desc(source_id: str):
             if "Previous" in l and "Total" in l:
                 heads = l.split()
                 for vl in lay_lines[k + 1:k + 4]:
-                    vals = re.findall(r"\$[\d,]+", vl)
+                    # a cell may lack its "$" (e.g. " 25,000   $0 …"): accept bare numbers, keep column order
+                    vals = re.findall(r"\$?\d[\d,]*", vl)
                     if len(vals) == len(heads):
                         costs = {h.rstrip("*"): int(v.replace("$", "").replace(",", "")) for h, v in zip(heads, vals)}
                         break
+                if not costs:
+                    print(f"warn: {source_id} p.{page}: budget row not parsed", file=sys.stderr)
                 break
 
         cost_ev = []
@@ -116,14 +122,25 @@ def parse_desc(source_id: str):
                 if e["verifiedByScript"]:
                     cost_ev.append(e)
         if costs.get("Total"):
-            e = ev(source_id, page, f"Total ${costs['Total']:,}", "total estimated project cost")
-            if e["verifiedByScript"]:
-                cost_ev.append(e)
+            for txt in (f"Total ${costs['Total']:,}", f"Total* ${costs['Total']:,}", f"${costs['Total']:,}"):
+                e = ev(source_id, page, txt, "total estimated project cost")
+                if e["verifiedByScript"]:
+                    cost_ev.append(e)
+                    break
 
+        if not costs:
+            # some projects state cost in prose ("Estimated cost of $20,350,000 is to be financed by …")
+            m = re.search(r"Estimated cost of \$([\d,]+)[^.]*\.", " ".join(raw.split()))
+            if m:
+                costs = {"Total": int(m.group(1).replace(",", ""))}
+                e = ev(source_id, page, first_words(m.group(0), 30), "total estimated project cost (stated in prose)")
+                if e["verifiedByScript"]:
+                    cost_ev.append(e)
         miles = re.search(r"(?:approximately|approx\.?)\s+([\d.]+)\s*(?:-\s*)?miles?", desc, re.I) or re.search(r"([\d.]+)\s*(?:-\s*)?miles?", desc, re.I)
         out.append({
             "sourceId": source_id, "page": page, "projectId": pid, "title": title,
             "description": desc, "need": need, "status": status, "inService": isd, "inServiceRaw": isd_raw,
+            "phaseDates": phase_dates,
             "costs": costs, "miles": float(miles.group(1)) if miles else None,
             "evidence": {
                 "title": ev(source_id, page, title, "project name"),
@@ -199,6 +216,7 @@ def parse_gpc_details():
                 "teams": ev(GPC, page, f"Teams # {teams}", "TEAMS project number"),
                 "dates": ev(GPC, page, f"Need Date {need_raw} Start Date {start_raw}", "need (in-service) date and start date"),
                 "description": ev(GPC, page, first_words(desc), "project scope") if desc else None,
+                "costRedacted": ev(GPC, page, "Estimated Cost – GPC REDACTED", "cost is redacted in the public disclosure"),
             },
         }
     return out

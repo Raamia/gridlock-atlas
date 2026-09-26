@@ -11,6 +11,9 @@
     "status": "In Progress",
     "inService": "2026-04-31",
     "inServiceRaw": "04/31/26",
+    "phaseDates": [
+     "2026-04-31"
+    ],
     "costs": {
      "Previous": 13675885,
      "2026": 2100000,
@@ -78,6 +81,9 @@
     "status": "In Progress",
     "inService": "2026-05-31",
     "inServiceRaw": "05/31/26",
+    "phaseDates": [
+     "2026-05-31"
+    ],
     "costs": {
      "Previous": 150364,
      "2026": 1000000,
@@ -145,6 +151,9 @@
     "status": "In Progress",
     "inService": "2026-05-31",
     "inServiceRaw": "5/31/2026",
+    "phaseDates": [
+     "2026-05-31"
+    ],
     "costs": {
      "Previous": 17360044,
      "2026": 2057956,
@@ -219,6 +228,9 @@
     "status": "In Progress",
     "inService": "2026-05-31",
     "inServiceRaw": "5/31/2026",
+    "phaseDates": [
+     "2026-05-31"
+    ],
     "costs": {
      "Previous": 88443,
      "2026": 1150000,
@@ -293,6 +305,9 @@
     "status": "In Progress",
     "inService": "2026-06-31",
     "inServiceRaw": "06/31/2026",
+    "phaseDates": [
+     "2026-06-31"
+    ],
     "costs": {
      "Previous": 12223765,
      "2026": 817000,
@@ -360,6 +375,9 @@
     "status": "In Progress",
     "inService": "2026-07-31",
     "inServiceRaw": "07/31/26",
+    "phaseDates": [
+     "2026-07-31"
+    ],
     "costs": {
      "Previous": 8475000,
      "2026": 4000000,
@@ -406,7 +424,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 6,
+       "exactExcerpt": "$12,475,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -419,6 +445,9 @@
     "status": "In Progress",
     "inService": "2026-08-12",
     "inServiceRaw": "8/12/2026",
+    "phaseDates": [
+     "2026-08-12"
+    ],
     "costs": {
      "Previous": 8245538,
      "2026": 7703082,
@@ -484,8 +513,12 @@
     "description": "Construct Dawson 230kV substation. Fold in the existing Canadys \u2013 Church Creek and Canadys \u2013 Faber Place 230kV lines at the Dawson 230kV substation (phase 1). Rebuild Canadys \u2013 Dawson 230kV #1 and #2 with B1272 ACSR (phase 2).",
     "need": "Load growth.",
     "status": "In Progress",
-    "inService": "2025-10-01",
+    "inService": "2026-10-01",
     "inServiceRaw": "10/1/2025 (phase 1) and 10/1/2026 (phase 2)",
+    "phaseDates": [
+     "2025-10-01",
+     "2026-10-01"
+    ],
     "costs": {
      "Previous": 12978366,
      "2026": 40860000,
@@ -553,6 +586,9 @@
     "status": "In Progress",
     "inService": "2026-12-02",
     "inServiceRaw": "12/02/26",
+    "phaseDates": [
+     "2026-12-02"
+    ],
     "costs": {
      "Previous": 15658628,
      "2026": 25200000,
@@ -620,6 +656,9 @@
     "status": "In Progress",
     "inService": "2026-12-31",
     "inServiceRaw": "12/31/2026",
+    "phaseDates": [
+     "2026-12-31"
+    ],
     "costs": {
      "Previous": 5323202,
      "2026": 450000,
@@ -687,6 +726,9 @@
     "status": "In Progress",
     "inService": "2026-12-31",
     "inServiceRaw": "12/31/2026",
+    "phaseDates": [
+     "2026-12-31"
+    ],
     "costs": {
      "Previous": 7204010,
      "2026": 3401335,
@@ -761,6 +803,9 @@
     "status": "In Progress",
     "inService": "2026-12-01",
     "inServiceRaw": "12/01/2026",
+    "phaseDates": [
+     "2026-12-01"
+    ],
     "costs": {
      "Previous": 14303648,
      "2026": 4976826,
@@ -828,6 +873,9 @@
     "status": "In Progress",
     "inService": "2026-12-01",
     "inServiceRaw": "12/01/26",
+    "phaseDates": [
+     "2026-12-01"
+    ],
     "costs": {
      "Previous": 14773047,
      "2026": 26616000,
@@ -895,6 +943,9 @@
     "status": "In Progress",
     "inService": "2026-12-31",
     "inServiceRaw": "12/31/26",
+    "phaseDates": [
+     "2026-12-31"
+    ],
     "costs": {
      "Previous": 1743210,
      "2026": 2206790,
@@ -962,6 +1013,9 @@
     "status": "In Progress",
     "inService": "2026-12-31",
     "inServiceRaw": "12/31/2026",
+    "phaseDates": [
+     "2026-12-31"
+    ],
     "costs": {
      "Previous": 2865825,
      "2026": 15039175,
@@ -1036,6 +1090,9 @@
     "status": "In Progress",
     "inService": "2027-05-01",
     "inServiceRaw": "5/1/2027",
+    "phaseDates": [
+     "2027-05-01"
+    ],
     "costs": {
      "Previous": 9586174,
      "2026": 9867000,
@@ -1117,6 +1174,9 @@
     "status": "In Progress",
     "inService": "2027-06-01",
     "inServiceRaw": "6/1/2027",
+    "phaseDates": [
+     "2027-06-01"
+    ],
     "costs": {
      "Previous": 28424742,
      "2026": 8487000,
@@ -1191,7 +1251,12 @@
     "status": "Planned",
     "inService": "2027-09-07",
     "inServiceRaw": "9/7/2027",
-    "costs": {},
+    "phaseDates": [
+     "2027-09-07"
+    ],
+    "costs": {
+     "Total": 20350000
+    },
     "miles": null,
     "evidence": {
      "title": {
@@ -1229,7 +1294,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 18,
+       "exactExcerpt": "Estimated cost of $20,350,000 is to be financed by the interconnection customer.",
+       "supports": "total estimated project cost (stated in prose)",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -1242,7 +1315,18 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
-    "costs": {},
+    "phaseDates": [
+     "2027-12-31"
+    ],
+    "costs": {
+     "Previous": 219331,
+     "2026": 50000,
+     "2027": 4300000,
+     "2028": 0,
+     "2029": 0,
+     "2030": 0,
+     "Total": 4569331
+    },
     "miles": null,
     "evidence": {
      "title": {
@@ -1280,7 +1364,22 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 19,
+       "exactExcerpt": "2027 $4,300,000",
+       "supports": "budgeted spending in 2027",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 19,
+       "exactExcerpt": "Total $4,569,331",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -1293,6 +1392,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 234285,
      "2026": 100000,
@@ -1367,6 +1469,9 @@
     "status": "In Progress",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 3259932,
      "2026": 3800000,
@@ -1434,6 +1539,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 15000,
      "2026": 175000,
@@ -1508,6 +1616,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 125000,
      "2026": 100000,
@@ -1582,6 +1693,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 90000,
@@ -1656,6 +1770,9 @@
     "status": "In Progress",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 94609,
      "2026": 100000,
@@ -1730,6 +1847,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 0,
@@ -1811,6 +1931,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 800000,
      "2026": 100000,
@@ -1885,6 +2008,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 277791,
      "2026": 325000,
@@ -1959,6 +2085,9 @@
     "status": "Planned",
     "inService": "2027-12-01",
     "inServiceRaw": "12/01/2027",
+    "phaseDates": [
+     "2027-12-01"
+    ],
     "costs": {
      "Previous": 150000,
      "2026": 100000,
@@ -2033,7 +2162,12 @@
     "status": "In Progress",
     "inService": "2028-01-31",
     "inServiceRaw": "1/31/2028",
-    "costs": {},
+    "phaseDates": [
+     "2028-01-31"
+    ],
+    "costs": {
+     "Total": 23272000
+    },
     "miles": null,
     "evidence": {
      "title": {
@@ -2071,7 +2205,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 30,
+       "exactExcerpt": "Estimated cost of $23,272,000 is to be financed by the interconnection customer.",
+       "supports": "total estimated project cost (stated in prose)",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -2084,6 +2226,9 @@
     "status": "Planned",
     "inService": "2028-05-01",
     "inServiceRaw": "05/01/2028",
+    "phaseDates": [
+     "2028-05-01"
+    ],
     "costs": {
      "Previous": 10000,
      "2026": 175000,
@@ -2165,6 +2310,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 4412330,
      "2026": 12000,
@@ -2239,6 +2387,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 3760,
      "2026": 0,
@@ -2313,6 +2464,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 250000,
@@ -2387,6 +2541,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 25000,
      "2026": 0,
@@ -2468,6 +2625,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/28",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 463118,
      "2026": 0,
@@ -2549,6 +2709,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 30000,
@@ -2630,6 +2793,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 75000,
      "2026": 0,
@@ -2711,6 +2877,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/28",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 2098924,
      "2026": 650000,
@@ -2799,6 +2968,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 175000,
@@ -2880,6 +3052,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 0,
@@ -2961,6 +3136,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 125000,
@@ -3042,6 +3220,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 25000,
      "2026": 175000,
@@ -3123,6 +3304,9 @@
     "status": "In Progress",
     "inService": "2029-06-01",
     "inServiceRaw": "6/1/2029",
+    "phaseDates": [
+     "2029-06-01"
+    ],
     "costs": {
      "Previous": 1038795,
      "2026": 500000,
@@ -3204,6 +3388,9 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/29",
+    "phaseDates": [
+     "2029-12-31"
+    ],
     "costs": {
      "Previous": 174719,
      "2026": 150000,
@@ -3292,7 +3479,18 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/2029",
-    "costs": {},
+    "phaseDates": [
+     "2029-12-31"
+    ],
+    "costs": {
+     "Previous": 150000,
+     "2026": 0,
+     "2027": 175000,
+     "2028": 18550000,
+     "2029": 23500000,
+     "2030": 0,
+     "Total": 42375000
+    },
     "miles": 13.6,
     "evidence": {
      "title": {
@@ -3330,7 +3528,36 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "2027 $175,000",
+       "supports": "budgeted spending in 2027",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "2028 $18,550,000",
+       "supports": "budgeted spending in 2028",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "2029 $23,500,000",
+       "supports": "budgeted spending in 2029",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "Total $42,375,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -3343,6 +3570,9 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/2029",
+    "phaseDates": [
+     "2029-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 0,
@@ -3424,6 +3654,9 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/29",
+    "phaseDates": [
+     "2029-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 275000,
@@ -3512,6 +3745,9 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/29",
+    "phaseDates": [
+     "2029-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 100000,
@@ -3593,6 +3829,9 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/2029",
+    "phaseDates": [
+     "2029-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 0,
@@ -3681,6 +3920,9 @@
     "status": "Planned",
     "inService": "2030-12-31",
     "inServiceRaw": "12/31/30",
+    "phaseDates": [
+     "2030-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 0,
@@ -3741,6 +3983,13 @@
        "exactExcerpt": "2029 $6,350,000",
        "supports": "budgeted spending in 2029",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 51,
+       "exactExcerpt": "$22,400,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -3755,6 +4004,9 @@
     "status": "In Progress",
     "inService": "2030-12-31",
     "inServiceRaw": "12/31/30",
+    "phaseDates": [
+     "2030-12-31"
+    ],
     "costs": {
      "Previous": 1314478,
      "2026": 600000,
@@ -3843,6 +4095,9 @@
     "status": "Planned",
     "inService": "2031-12-31",
     "inServiceRaw": "12/31/2031",
+    "phaseDates": [
+     "2031-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2026": 0,
@@ -3924,7 +4179,18 @@
     "status": "Planned",
     "inService": "2032-12-31",
     "inServiceRaw": "12/31/32",
-    "costs": {},
+    "phaseDates": [
+     "2032-12-31"
+    ],
+    "costs": {
+     "Previous": 25000,
+     "2026": 0,
+     "2027": 0,
+     "2028": 0,
+     "2029": 850000,
+     "2030": 18000000,
+     "Total": 18875000
+    },
     "miles": 40.0,
     "evidence": {
      "title": {
@@ -3962,7 +4228,29 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 54,
+       "exactExcerpt": "2029 $850,000",
+       "supports": "budgeted spending in 2029",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 54,
+       "exactExcerpt": "2030 $18,000,000",
+       "supports": "budgeted spending in 2030",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 54,
+       "exactExcerpt": "Total $18,875,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    }
   ],
@@ -3977,6 +4265,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 0,
@@ -4030,6 +4321,13 @@
        "exactExcerpt": "2027 $5,300,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 1,
+       "exactExcerpt": "Total* $5,300,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4044,6 +4342,9 @@
     "status": "In Progress",
     "inService": "2026-05-31",
     "inServiceRaw": "5/31/2026",
+    "phaseDates": [
+     "2026-05-31"
+    ],
     "costs": {
      "Previous": 7204010,
      "2025": 3401335,
@@ -4097,6 +4398,13 @@
        "exactExcerpt": "2026 $1,024,912",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 2,
+       "exactExcerpt": "Total* $11,630,257",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4111,6 +4419,9 @@
     "status": "In Progress",
     "inService": "2026-12-02",
     "inServiceRaw": "12/02/26",
+    "phaseDates": [
+     "2026-12-02"
+    ],
     "costs": {
      "Previous": 16056490,
      "2025": 6959902,
@@ -4164,6 +4475,13 @@
        "exactExcerpt": "2026 $8,345,700",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 3,
+       "exactExcerpt": "Total* $31,362,092",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4178,6 +4496,9 @@
     "status": "In Progress",
     "inService": "2025-04-30",
     "inServiceRaw": "4/30/2025",
+    "phaseDates": [
+     "2025-04-30"
+    ],
     "costs": {
      "Previous": 11200001,
      "2025": 799999,
@@ -4224,7 +4545,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 4,
+       "exactExcerpt": "Total* $12,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -4237,6 +4566,9 @@
     "status": "In Progress",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 3400000,
      "2025": 3300000,
@@ -4297,6 +4629,13 @@
        "exactExcerpt": "2027 $8,851,331",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 5,
+       "exactExcerpt": "Total* $18,825,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4311,6 +4650,9 @@
     "status": "In Progress",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 567157,
      "2025": 0,
@@ -4371,6 +4713,13 @@
        "exactExcerpt": "2027 $8,000,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 6,
+       "exactExcerpt": "Total* $8,667,157",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4385,6 +4734,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/28",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 174719,
      "2025": 100000,
@@ -4452,6 +4804,13 @@
        "exactExcerpt": "2028 $22,500,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 7,
+       "exactExcerpt": "Total* $48,224,719",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4466,6 +4825,9 @@
     "status": "In Progress",
     "inService": "2025-06-01",
     "inServiceRaw": "6/1/2025",
+    "phaseDates": [
+     "2025-06-01"
+    ],
     "costs": {
      "Previous": 28774739,
      "2025": 11900000,
@@ -4512,7 +4874,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 8,
+       "exactExcerpt": "Total* $40,674,739",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -4525,6 +4895,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/25",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 2200000,
      "2025": 1300000,
@@ -4571,7 +4944,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 9,
+       "exactExcerpt": "Total* $3,500,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -4584,6 +4965,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/28",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 918768,
      "2025": 100000,
@@ -4644,6 +5028,13 @@
        "exactExcerpt": "2028 $6,000,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 10,
+       "exactExcerpt": "Total* $13,218,768",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4658,6 +5049,9 @@
     "status": "In Progress",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 150000,
      "2025": 0,
@@ -4739,6 +5133,9 @@
     "status": "In Progress",
     "inService": "2025-06-30",
     "inServiceRaw": "6/30/2025",
+    "phaseDates": [
+     "2025-06-30"
+    ],
     "costs": {
      "Previous": 9321256,
      "2025": 500000,
@@ -4785,7 +5182,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 12,
+       "exactExcerpt": "Total* $9,821,256",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -4798,6 +5203,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/28",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 2098924,
      "2025": 650000,
@@ -4865,6 +5273,13 @@
        "exactExcerpt": "2028 $2,600,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 13,
+       "exactExcerpt": "Total* $11,182,924",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4879,6 +5294,9 @@
     "status": "Planned",
     "inService": "2027-03-31",
     "inServiceRaw": "3/31/2027",
+    "phaseDates": [
+     "2027-03-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 250000,
@@ -4932,6 +5350,13 @@
        "exactExcerpt": "2027 $1,000,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 14,
+       "exactExcerpt": "Total* $2,750,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -4946,6 +5371,9 @@
     "status": "In Progress",
     "inService": "2028-06-01",
     "inServiceRaw": "6/1/2028",
+    "phaseDates": [
+     "2028-06-01"
+    ],
     "costs": {
      "Previous": 541268,
      "2025": 10500000,
@@ -5006,6 +5434,13 @@
        "exactExcerpt": "2028 $16,500,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 15,
+       "exactExcerpt": "Total* $38,041,268",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -5020,6 +5455,9 @@
     "status": "In Progress",
     "inService": "2027-06-01",
     "inServiceRaw": "6/1/2027",
+    "phaseDates": [
+     "2027-06-01"
+    ],
     "costs": {
      "Previous": 17609000,
      "2025": 10870000,
@@ -5073,6 +5511,13 @@
        "exactExcerpt": "2026 $16,553,777",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 16,
+       "exactExcerpt": "Total* $45,032,777",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -5087,6 +5532,9 @@
     "status": "In Progress",
     "inService": "2026-05-31",
     "inServiceRaw": "5/31/2026",
+    "phaseDates": [
+     "2026-05-31"
+    ],
     "costs": {
      "Previous": 11516256,
      "2025": 21836000,
@@ -5140,6 +5588,13 @@
        "exactExcerpt": "2026 $21,094,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 17,
+       "exactExcerpt": "Total* $54,446,256",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -5154,6 +5609,9 @@
     "status": "In Progress",
     "inService": "2026-05-31",
     "inServiceRaw": "5/31/2026",
+    "phaseDates": [
+     "2026-05-31"
+    ],
     "costs": {
      "Previous": 14451420,
      "2025": 11867669,
@@ -5207,6 +5665,13 @@
        "exactExcerpt": "2026 $2,259,645",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 18,
+       "exactExcerpt": "Total* $28,578,734",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -5221,6 +5686,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 5000,
      "2025": 0,
@@ -5281,6 +5749,13 @@
        "exactExcerpt": "2027 $3,200,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 19,
+       "exactExcerpt": "Total* $6,005,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -5295,6 +5770,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/2025",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 4401163,
      "2025": 7000000,
@@ -5362,6 +5840,9 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/29",
+    "phaseDates": [
+     "2029-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 25000,
@@ -5429,6 +5910,13 @@
        "exactExcerpt": "2029 $12,500,000",
        "supports": "budgeted spending in 2029",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 21,
+       "exactExcerpt": "Total* $38,275,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -5443,6 +5931,9 @@
     "status": "In Progress",
     "inService": "2025-10-31",
     "inServiceRaw": "10/31/2025",
+    "phaseDates": [
+     "2025-10-31"
+    ],
     "costs": {
      "Previous": 3378370,
      "2025": 6300000,
@@ -5489,7 +5980,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 22,
+       "exactExcerpt": "Total* $9,678,370",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -5502,6 +6001,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/25",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 8475000,
      "2025": 4000000,
@@ -5548,7 +6050,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 23,
+       "exactExcerpt": "Total* $12,475,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -5561,7 +6071,18 @@
     "status": "In Progress",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
-    "costs": {},
+    "phaseDates": [
+     "2027-12-31"
+    ],
+    "costs": {
+     "Previous": 150000,
+     "2025": 100000,
+     "2026": 50000,
+     "2027": 4700000,
+     "2028": 0,
+     "2029": 0,
+     "Total": 5000000
+    },
     "miles": null,
     "evidence": {
      "title": {
@@ -5599,7 +6120,22 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 24,
+       "exactExcerpt": "2026 $50,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 24,
+       "exactExcerpt": "Total* $5,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -5612,6 +6148,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/2025",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 5323202,
      "2025": 450000,
@@ -5658,7 +6197,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 25,
+       "exactExcerpt": "Total* $5,773,202",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -5671,6 +6218,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/2025",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 250000,
      "2025": 8500000,
@@ -5717,7 +6267,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 26,
+       "exactExcerpt": "Total* $8,750,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -5730,6 +6288,9 @@
     "status": "In Progress",
     "inService": "2026-03-31",
     "inServiceRaw": "3/31/2026",
+    "phaseDates": [
+     "2026-03-31"
+    ],
     "costs": {
      "Previous": 2754253,
      "2024": 23234892,
@@ -5790,6 +6351,13 @@
        "exactExcerpt": "2026 $285,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 27,
+       "exactExcerpt": "Total* $28,579,145",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -5802,8 +6370,12 @@
     "description": "Construct Dawson 230kV substation. Fold in the existing Canadys \u2013 Church Creek and Canadys \u2013 Faber Place 230kV lines at the Dawson 230kV substation (phase 1). Rebuild Canadys \u2013 Dawson 230kV #1 and #2 with B1272 ACSR (phase 2).",
     "need": "Load growth.",
     "status": "In Progress",
-    "inService": "2025-10-01",
+    "inService": "2026-10-01",
     "inServiceRaw": "10/1/2025 (phase 1) and 10/1/2026 (phase 2)",
+    "phaseDates": [
+     "2025-10-01",
+     "2026-10-01"
+    ],
     "costs": {
      "Previous": 12978366,
      "2025": 40860000,
@@ -5850,7 +6422,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 28,
+       "exactExcerpt": "Total* $93,603,207",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -5863,6 +6443,9 @@
     "status": "In Progress",
     "inService": "2026-08-12",
     "inServiceRaw": "8/12/2026",
+    "phaseDates": [
+     "2026-08-12"
+    ],
     "costs": {
      "Previous": 200000,
      "2025": 8600000,
@@ -5916,6 +6499,13 @@
        "exactExcerpt": "2026 $8,660,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 29,
+       "exactExcerpt": "Total* $17,520,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -5930,6 +6520,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 180352,
      "2025": 75000,
@@ -5997,6 +6590,13 @@
        "exactExcerpt": "2028 $7,169,648",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 30,
+       "exactExcerpt": "Total* $25,500,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6011,6 +6611,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 0,
@@ -6064,6 +6667,13 @@
        "exactExcerpt": "2027 $11,550,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 31,
+       "exactExcerpt": "Total* $21,800,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6078,6 +6688,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 0,
@@ -6138,6 +6751,13 @@
        "exactExcerpt": "2028 $8,500,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 32,
+       "exactExcerpt": "Total* $17,955,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6152,6 +6772,9 @@
     "status": "In Progress",
     "inService": "2027-05-01",
     "inServiceRaw": "5/1/2027",
+    "phaseDates": [
+     "2027-05-01"
+    ],
     "costs": {
      "Previous": 3556350,
      "2025": 7399577,
@@ -6212,6 +6835,13 @@
        "exactExcerpt": "2027 $5,617,468",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 33,
+       "exactExcerpt": "Total* $40,336,395",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6226,6 +6856,9 @@
     "status": "In Progress",
     "inService": "2026-05-31",
     "inServiceRaw": "5/31/2026",
+    "phaseDates": [
+     "2026-05-31"
+    ],
     "costs": {
      "Previous": 75000,
      "2025": 175000,
@@ -6279,6 +6912,13 @@
        "exactExcerpt": "2026 $850,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 34,
+       "exactExcerpt": "Total* $1,100,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6293,6 +6933,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 100000,
@@ -6353,6 +6996,13 @@
        "exactExcerpt": "2027 $6,415,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 35,
+       "exactExcerpt": "Total* $6,615,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6367,6 +7017,9 @@
     "status": "In Progress",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 100000,
      "2025": 0,
@@ -6427,6 +7080,13 @@
        "exactExcerpt": "2027 $8,000,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 36,
+       "exactExcerpt": "Total* $8,200,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6441,6 +7101,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 0,
@@ -6501,6 +7164,13 @@
        "exactExcerpt": "2027 $2,900,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 37,
+       "exactExcerpt": "Total* $3,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6515,6 +7185,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 0,
@@ -6582,6 +7255,13 @@
        "exactExcerpt": "2028 $8,350,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 38,
+       "exactExcerpt": "Total* $8,550,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6596,6 +7276,9 @@
     "status": "In Progress",
     "inService": "2026-12-31",
     "inServiceRaw": "12/31/2026",
+    "phaseDates": [
+     "2026-12-31"
+    ],
     "costs": {
      "Previous": 165825,
      "2025": 750000,
@@ -6656,6 +7339,13 @@
        "exactExcerpt": "2027 $25,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 39,
+       "exactExcerpt": "Total* $20,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6670,6 +7360,9 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/2029",
+    "phaseDates": [
+     "2029-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 0,
@@ -6737,6 +7430,13 @@
        "exactExcerpt": "2029 $11,000,000",
        "supports": "budgeted spending in 2029",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 40,
+       "exactExcerpt": "Total* $19,100,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6751,6 +7451,9 @@
     "status": "In Progress",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 150000,
      "2025": 0,
@@ -6804,6 +7507,13 @@
        "exactExcerpt": "2027 $4,600,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 41,
+       "exactExcerpt": "Total* $4,750,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -6818,6 +7528,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 0,
@@ -6899,7 +7612,18 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
-    "costs": {},
+    "phaseDates": [
+     "2028-12-31"
+    ],
+    "costs": {
+     "Previous": 0,
+     "2025": 50000,
+     "2026": 175000,
+     "2027": 15000000,
+     "2028": 18525000,
+     "2029": 0,
+     "Total": 33750000
+    },
     "miles": 8.5,
     "evidence": {
      "title": {
@@ -6937,7 +7661,36 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 43,
+       "exactExcerpt": "2026 $175,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 43,
+       "exactExcerpt": "2027 $15,000,000",
+       "supports": "budgeted spending in 2027",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 43,
+       "exactExcerpt": "2028 $18,525,000",
+       "supports": "budgeted spending in 2028",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 43,
+       "exactExcerpt": "Total* $33,750,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -6950,7 +7703,12 @@
     "status": "Planned",
     "inService": "2027-09-07",
     "inServiceRaw": "9/7/2027",
-    "costs": {},
+    "phaseDates": [
+     "2027-09-07"
+    ],
+    "costs": {
+     "Total": 20350000
+    },
     "miles": null,
     "evidence": {
      "title": {
@@ -6988,7 +7746,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 44,
+       "exactExcerpt": "Estimated cost of $20,350,000 is to be financed by the interconnection customer.",
+       "supports": "total estimated project cost (stated in prose)",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -7001,7 +7767,12 @@
     "status": "Planned",
     "inService": "2028-01-31",
     "inServiceRaw": "1/31/2028",
-    "costs": {},
+    "phaseDates": [
+     "2028-01-31"
+    ],
+    "costs": {
+     "Total": 23272000
+    },
     "miles": null,
     "evidence": {
      "title": {
@@ -7039,7 +7810,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 45,
+       "exactExcerpt": "Estimated cost of $23,272,000 is to be financed by the interconnection customer.",
+       "supports": "total estimated project cost (stated in prose)",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -7052,6 +7831,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 150000,
@@ -7112,6 +7894,13 @@
        "exactExcerpt": "2027 $4,975,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 46,
+       "exactExcerpt": "Total* $5,200,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7126,6 +7915,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2025": 0,
@@ -7193,6 +7985,13 @@
        "exactExcerpt": "2028 $3,200,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 47,
+       "exactExcerpt": "Total* $6,100,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7209,6 +8008,9 @@
     "status": "In Progress",
     "inService": "2023-12-31",
     "inServiceRaw": "12/31/23",
+    "phaseDates": [
+     "2023-12-31"
+    ],
     "costs": {
      "Previous": 4604301,
      "2024": 800000,
@@ -7255,7 +8057,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 1,
+       "exactExcerpt": "Total* $5,404,301",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -7268,6 +8078,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/27",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 0,
@@ -7335,6 +8148,13 @@
        "exactExcerpt": "2027 $5,100,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 2,
+       "exactExcerpt": "Total* $5,300,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7349,6 +8169,9 @@
     "status": "In Progress",
     "inService": "2024-12-31",
     "inServiceRaw": "12/31/2024",
+    "phaseDates": [
+     "2024-12-31"
+    ],
     "costs": {
      "Previous": 2717933,
      "2024": 6631000,
@@ -7402,6 +8225,13 @@
        "exactExcerpt": "2025 $1,181,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 3,
+       "exactExcerpt": "Total* $11,116,933",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7416,6 +8246,9 @@
     "status": "In Progress",
     "inService": "2025-12-01",
     "inServiceRaw": "12/01/25",
+    "phaseDates": [
+     "2025-12-01"
+    ],
     "costs": {
      "Previous": 1189020,
      "2024": 6601830,
@@ -7476,6 +8309,13 @@
        "exactExcerpt": "2026 $300,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 4,
+       "exactExcerpt": "Total* $19,890,850",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7490,6 +8330,9 @@
     "status": "In Progress",
     "inService": "2024-06-01",
     "inServiceRaw": "06/01/24",
+    "phaseDates": [
+     "2024-06-01"
+    ],
     "costs": {
      "Previous": 9900000,
      "2024": 1800000,
@@ -7536,7 +8379,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 5,
+       "exactExcerpt": "Total* $11,700,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -7549,6 +8400,9 @@
     "status": "In Progress",
     "inService": "2024-12-31",
     "inServiceRaw": "12/31/24",
+    "phaseDates": [
+     "2024-12-31"
+    ],
     "costs": {
      "Previous": 4330000,
      "2024": 4250000,
@@ -7595,7 +8449,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 6,
+       "exactExcerpt": "Total* $8,580,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -7608,6 +8470,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/25",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 50000,
      "2024": 50000,
@@ -7668,6 +8533,13 @@
        "exactExcerpt": "2025 $6,825,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 7,
+       "exactExcerpt": "Total* $6,925,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7682,6 +8554,9 @@
     "status": "In Progress",
     "inService": "2026-12-31",
     "inServiceRaw": "12/31/26",
+    "phaseDates": [
+     "2026-12-31"
+    ],
     "costs": {
      "Previous": 332096,
      "2024": 80000,
@@ -7742,6 +8617,13 @@
        "exactExcerpt": "2026 $4,400,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 8,
+       "exactExcerpt": "Total* $4,912,096",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7756,6 +8638,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/28",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 174719,
      "2024": 0,
@@ -7823,6 +8708,13 @@
        "exactExcerpt": "2028 $22,500,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 9,
+       "exactExcerpt": "Total* $48,224,719",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7837,6 +8729,9 @@
     "status": "In Progress",
     "inService": "2025-06-01",
     "inServiceRaw": "06/01/2025",
+    "phaseDates": [
+     "2025-06-01"
+    ],
     "costs": {
      "Previous": 6660000,
      "2024": 26800000,
@@ -7890,6 +8785,13 @@
        "exactExcerpt": "2025 $7,200,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 10,
+       "exactExcerpt": "Total* $40,660,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7904,6 +8806,9 @@
     "status": "Planned",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/25",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 1000000,
@@ -7957,6 +8862,13 @@
        "exactExcerpt": "2025 $1,600,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 11,
+       "exactExcerpt": "Total* $2,600,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -7971,6 +8883,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/28",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 0,
@@ -8038,6 +8953,13 @@
        "exactExcerpt": "2028 $5,000,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 12,
+       "exactExcerpt": "Total* $10,200,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -8052,6 +8974,9 @@
     "status": "In Progress",
     "inService": "2024-09-30",
     "inServiceRaw": "9/30/2024",
+    "phaseDates": [
+     "2024-09-30"
+    ],
     "costs": {
      "Previous": 1300000,
      "2024": 3000000,
@@ -8098,7 +9023,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 13,
+       "exactExcerpt": "Total* $4,300,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -8111,6 +9044,9 @@
     "status": "In Progress",
     "inService": "2024-12-31",
     "inServiceRaw": "12/31/24",
+    "phaseDates": [
+     "2024-12-31"
+    ],
     "costs": {
      "Previous": 8195543,
      "2024": 3550000,
@@ -8178,6 +9114,9 @@
     "status": "Planned",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/25",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 50000,
@@ -8259,6 +9198,9 @@
     "status": "In Progress",
     "inService": "2024-12-25",
     "inServiceRaw": "12/25/24",
+    "phaseDates": [
+     "2024-12-25"
+    ],
     "costs": {
      "Previous": 3300432,
      "2024": 7533030,
@@ -8305,7 +9247,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 16,
+       "exactExcerpt": "Total* $10,833,462",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -8318,6 +9268,9 @@
     "status": "In Progress",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/28",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 709124,
      "2024": 1689800,
@@ -8385,6 +9338,13 @@
        "exactExcerpt": "2028 $2,600,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 17,
+       "exactExcerpt": "Total* $9,898,924",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -8399,6 +9359,9 @@
     "status": "Planned",
     "inService": "2027-03-31",
     "inServiceRaw": "3/31/2027",
+    "phaseDates": [
+     "2027-03-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 0,
@@ -8466,6 +9429,13 @@
        "exactExcerpt": "2027 $1,000,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 18,
+       "exactExcerpt": "Total* $2,750,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -8480,6 +9450,9 @@
     "status": "In Progress",
     "inService": "2024-12-31",
     "inServiceRaw": "12/31/2024",
+    "phaseDates": [
+     "2024-12-31"
+    ],
     "costs": {
      "Previous": 782052,
      "2024": 3200000,
@@ -8526,7 +9499,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 19,
+       "exactExcerpt": "Total* $3,982,052",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -8539,6 +9520,9 @@
     "status": "In Progress",
     "inService": "2026-06-01",
     "inServiceRaw": "6/1/2026",
+    "phaseDates": [
+     "2026-06-01"
+    ],
     "costs": {
      "Previous": 100000,
      "2024": 400000,
@@ -8585,7 +9569,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 20,
+       "exactExcerpt": "Total* $40,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -8598,6 +9590,9 @@
     "status": "Planned",
     "inService": "2026-06-01",
     "inServiceRaw": "6/1/2026",
+    "phaseDates": [
+     "2026-06-01"
+    ],
     "costs": {
      "Previous": 100000,
      "2024": 1300000,
@@ -8658,6 +9653,13 @@
        "exactExcerpt": "2026 $20,511,419",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 21,
+       "exactExcerpt": "Total* $40,611,419",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -8672,6 +9674,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/25",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 4337401,
      "2024": 1900181,
@@ -8732,6 +9737,13 @@
        "exactExcerpt": "2026 $50,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 22,
+       "exactExcerpt": "Total* $34,877,427",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -8746,6 +9758,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/25",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 9591713,
      "2024": 5087710,
@@ -8799,6 +9814,13 @@
        "exactExcerpt": "2025 $9,108,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 23,
+       "exactExcerpt": "Total* $23,787,423",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -8813,6 +9835,9 @@
     "status": "Planned",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/25",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 5000,
      "2024": 2800000,
@@ -8866,6 +9891,13 @@
        "exactExcerpt": "2025 $3,200,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 24,
+       "exactExcerpt": "Total* $6,005,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -8880,6 +9912,9 @@
     "status": "In Progress",
     "inService": "2024-06-01",
     "inServiceRaw": "6/1/2024",
+    "phaseDates": [
+     "2024-06-01"
+    ],
     "costs": {
      "Previous": 3850000,
      "2024": 7000000,
@@ -8947,6 +9982,9 @@
     "status": "Planned",
     "inService": "2029-12-31",
     "inServiceRaw": "12/31/29",
+    "phaseDates": [
+     "2029-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 0,
@@ -9007,6 +10045,13 @@
        "exactExcerpt": "2027 $9,500,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 26,
+       "exactExcerpt": "$30,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9021,6 +10066,9 @@
     "status": "In Progress",
     "inService": "2024-12-31",
     "inServiceRaw": "12/31/24",
+    "phaseDates": [
+     "2024-12-31"
+    ],
     "costs": {
      "Previous": 255669,
      "2024": 9400000,
@@ -9067,7 +10115,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 27,
+       "exactExcerpt": "Total* $9,655,669",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -9080,6 +10136,9 @@
     "status": "In Progress",
     "inService": "2024-12-31",
     "inServiceRaw": "12/31/24",
+    "phaseDates": [
+     "2024-12-31"
+    ],
     "costs": {
      "Previous": 2475000,
      "2024": 6000000,
@@ -9133,6 +10192,13 @@
        "exactExcerpt": "2025 $4,000,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 28,
+       "exactExcerpt": "Total* $12,475,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9147,6 +10213,9 @@
     "status": "Planned",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/2025",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 300000,
@@ -9200,6 +10269,13 @@
        "exactExcerpt": "2025 $3,700,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 29,
+       "exactExcerpt": "Total* $4,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9214,6 +10290,9 @@
     "status": "In Progress",
     "inService": "2024-12-31",
     "inServiceRaw": "12/31/2024",
+    "phaseDates": [
+     "2024-12-31"
+    ],
     "costs": {
      "Previous": 330954,
      "2024": 2178648,
@@ -9260,7 +10339,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 30,
+       "exactExcerpt": "Total* $2,509,602",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -9273,6 +10360,9 @@
     "status": "In Progress",
     "inService": "2024-12-31",
     "inServiceRaw": "12/31/2024",
+    "phaseDates": [
+     "2024-12-31"
+    ],
     "costs": {
      "Previous": 50080,
      "2024": 2150000,
@@ -9319,7 +10409,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 31,
+       "exactExcerpt": "Total* $2,200,080",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -9332,6 +10430,9 @@
     "status": "In Progress",
     "inService": "2025-12-31",
     "inServiceRaw": "12/31/2025",
+    "phaseDates": [
+     "2025-12-31"
+    ],
     "costs": {
      "Previous": 50000,
      "2024": 200000,
@@ -9385,6 +10486,13 @@
        "exactExcerpt": "2025 $8,500,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 32,
+       "exactExcerpt": "Total* $8,750,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9399,6 +10507,9 @@
     "status": "In Progress",
     "inService": "2026-03-31",
     "inServiceRaw": "3/31/2026",
+    "phaseDates": [
+     "2026-03-31"
+    ],
     "costs": {
      "Previous": 65000,
      "2024": 360000,
@@ -9459,6 +10570,13 @@
        "exactExcerpt": "2026 $285,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 33,
+       "exactExcerpt": "Total* $23,685,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9471,8 +10589,12 @@
     "description": "Construct Dawson 230kV substation. Fold in the existing Canadys \u2013 Church Creek and Canadys \u2013 Faber Place 230kV lines at the Dawson 230kV substation (phase 1). Rebuild Canadys \u2013 Dawson 230kV #1 and #2 with B1272 ACSR (phase 2).",
     "need": "Load growth.",
     "status": "In Progress",
-    "inService": "2025-10-01",
+    "inService": "2026-10-01",
     "inServiceRaw": "10/1/2025 (phase 1) and 10/1/2026 (phase 2)",
+    "phaseDates": [
+     "2025-10-01",
+     "2026-10-01"
+    ],
     "costs": {
      "Previous": 284366,
      "2024": 8014000,
@@ -9519,7 +10641,15 @@
       "supports": "planned in-service date",
       "verifiedByScript": true
      },
-     "costs": []
+     "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 34,
+       "exactExcerpt": "Total* $93,538,207",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
+      }
+     ]
     }
    },
    {
@@ -9532,6 +10662,9 @@
     "status": "In Progress",
     "inService": "2026-08-12",
     "inServiceRaw": "8/12/2026",
+    "phaseDates": [
+     "2026-08-12"
+    ],
     "costs": {
      "Previous": 100000,
      "2024": 100000,
@@ -9599,6 +10732,13 @@
        "exactExcerpt": "2026 $8,660,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 35,
+       "exactExcerpt": "Total* $17,520,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9613,6 +10753,9 @@
     "status": "Planned",
     "inService": "2027-05-01",
     "inServiceRaw": "5/1/2027",
+    "phaseDates": [
+     "2027-05-01"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 50000,
@@ -9673,6 +10816,13 @@
        "exactExcerpt": "2026 $9,000,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 36,
+       "exactExcerpt": "Total* $19,300,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9687,6 +10837,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 50000,
@@ -9747,6 +10900,13 @@
        "exactExcerpt": "2026 $10,250,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 37,
+       "exactExcerpt": "Total* $21,850,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9761,6 +10921,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 50000,
@@ -9828,6 +10991,13 @@
        "exactExcerpt": "2027 $8,900,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 38,
+       "exactExcerpt": "Total* $18,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9842,6 +11012,9 @@
     "status": "In Progress",
     "inService": "2027-05-01",
     "inServiceRaw": "05/01/2027",
+    "phaseDates": [
+     "2027-05-01"
+    ],
     "costs": {
      "Previous": 1772338,
      "2024": 975000,
@@ -9909,6 +11082,13 @@
        "exactExcerpt": "2027 $6,114,006",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 39,
+       "exactExcerpt": "Total* $34,174,682",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9923,6 +11103,9 @@
     "status": "Planned",
     "inService": "2026-05-31",
     "inServiceRaw": "05/31/2026",
+    "phaseDates": [
+     "2026-05-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 75000,
@@ -9983,6 +11166,13 @@
        "exactExcerpt": "2026 $850,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 40,
+       "exactExcerpt": "Total* $1,100,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -9997,6 +11187,9 @@
     "status": "Planned",
     "inService": "2026-12-31",
     "inServiceRaw": "12/31/2026",
+    "phaseDates": [
+     "2026-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 0,
@@ -10057,6 +11250,13 @@
        "exactExcerpt": "2026 $4,300,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 41,
+       "exactExcerpt": "Total* $4,500,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -10071,6 +11271,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 0,
@@ -10124,6 +11327,13 @@
        "exactExcerpt": "2027 $4,500,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 42,
+       "exactExcerpt": "Total* $4,500,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -10138,6 +11348,9 @@
     "status": "Planned",
     "inService": "2027-12-31",
     "inServiceRaw": "12/31/2027",
+    "phaseDates": [
+     "2027-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 0,
@@ -10191,6 +11404,13 @@
        "exactExcerpt": "2027 $3,000,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 43,
+       "exactExcerpt": "Total* $3,000,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -10205,6 +11425,9 @@
     "status": "Planned",
     "inService": "2028-12-31",
     "inServiceRaw": "12/31/2028",
+    "phaseDates": [
+     "2028-12-31"
+    ],
     "costs": {
      "Previous": 0,
      "2024": 0,
@@ -10258,6 +11481,13 @@
        "exactExcerpt": "2028 $5,900,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 44,
+       "exactExcerpt": "Total* $5,900,000",
+       "supports": "total estimated project cost",
+       "verifiedByScript": true
       }
      ]
     }
@@ -10301,6 +11531,13 @@
      "page": 214,
      "exactExcerpt": "Relay protection modifications at GPC's Thalmann and Colerain substations to match relay scheme used at GTC's new Camden Industrial Park 230/115kV substation.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 214,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -10346,6 +11583,13 @@
      "exactExcerpt": "Install a + 150 / - 150 MVAR turnkey STATCOM system at Anthony Shoals 230kV substation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 215,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -10389,6 +11633,13 @@
      "page": 216,
      "exactExcerpt": "Relay modernization with conversion of the 230kV ring bus to BAAH topology and addition of BAAH rung for Big Ogeechee - Little Ogeechee (Red) 230kV Line. Rebuild 115kV straight bus to BAAH design.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 216,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -10434,6 +11685,13 @@
      "exactExcerpt": "Upgrade protection on 230kV buses, 115kV buses, and 230/115kV auto transformer at the East Point station. Add adequate monitoring on DC supply.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 217,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -10477,6 +11735,13 @@
      "page": 218,
      "exactExcerpt": "Upgrade protection on 230kV bus, all 115kV buses, and both 230/115kV auto transformers at Grady. Add adequate monitoring on DC supply. Install a 230kV breaker and associated switches on the high side of Grady 230/115kV auto transformer D.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 218,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -10522,6 +11787,13 @@
      "exactExcerpt": "Upgrade protection on 230kV buses at the Klondike station. Add adequate monitoring on DC supply.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 219,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -10565,6 +11837,13 @@
      "page": 220,
      "exactExcerpt": "Upgrade protection scheme on all three 115kV buses at Morrow.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 220,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -10610,6 +11889,13 @@
      "exactExcerpt": "Upgrade protection on 230kV bus and 230/115kV auto transformers at the Scottdale station. Add adequate monitoring on DC supply.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 221,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -10653,6 +11939,13 @@
      "page": 222,
      "exactExcerpt": "On the O'Hara - Wansley 500kV line, replace the protective relay panels associated with the 500kV line terminal facing Dresden, at both O'Hara and Wansley.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 222,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -10698,6 +11991,13 @@
      "exactExcerpt": "Complete modernization and replacement of obsolete equipment and relays for the 500kV, 230kV, and 115kV yards. Add a redundant relay scheme at Fortson.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 223,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "213",
@@ -10741,6 +12041,13 @@
      "page": 225,
      "exactExcerpt": "Replace Breaker on the Ohara - Tara 115kV Line at the Ohara Substation.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 225,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -10786,6 +12093,13 @@
      "exactExcerpt": "Install reactors on the McIntosh - Purrysburg (Black and White) 230kV tie lines at McIntosh. Rebuild 0.1 miles (GPC portion) for both lines to (2) 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 227,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "219",
@@ -10829,6 +12143,13 @@
      "page": 228,
      "exactExcerpt": "GTC: Replace the 1600A series reactors on the Hartwell Dam - Hartwell Energy 230kV line with 3000A.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 228,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -10874,6 +12195,13 @@
      "exactExcerpt": "Construct a new 230kV line, approx. 35 miles, from Hartwell Energy to Middle Fork with 200C (2) 1351 ACSS conductor. GTC: Expand Hartwell Energy 230kV and Middle Fork 230kV as necessary to install breakers to accept new line termination.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 229,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -10917,6 +12245,13 @@
      "page": 231,
      "exactExcerpt": "Construct a new Hyundai 230kV substation with an eight element 230kV ring bus and four 230/25kV banks.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 231,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -10962,6 +12297,13 @@
      "exactExcerpt": "GTC will build a new 115kV line from McClure Industrial to structure 21N on the Ridgeway Church Road Junction or tap point (approximately 3 miles).",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 232,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -11005,6 +12347,13 @@
      "page": 233,
      "exactExcerpt": "Rebuild 35.21 miles of the Mitchell - North Tifton 230kV line from 100C 795 ACSR to 100C 1351 ACSR.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 233,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11050,6 +12399,13 @@
      "exactExcerpt": "Rebuild the entire 6.1 mile Adamsville - Jack McDonough 230kV line with 160C 1351 ACSS.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 234,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -11093,6 +12449,13 @@
      "page": 235,
      "exactExcerpt": "Rebuild the South Warner Robins to Wellston section (1.2 miles) with 100C 1351.5 ACSR Martin conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 235,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11138,6 +12501,13 @@
      "exactExcerpt": "Rebuild from Bremen to Indian Creek Road, on the Bremen - Crooked Creek 115kV line (14 miles), using 795 ACSR conductor at 100C.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 236,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "211",
@@ -11181,6 +12551,13 @@
      "page": 237,
      "exactExcerpt": "Rebuild 2.3 miles of the Bonaire Primary - Echeconnee 115kV line with 100C ACSR 795 conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 237,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11226,6 +12603,13 @@
      "exactExcerpt": "GTC will construct a new 230/115kV substation with a three element 230kV ring bus, two element 115kV ring bus, and one new 230/115kV 400MVA transformer. A new 115kV line to Kinlaw substation will be built also.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 238,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "218",
@@ -11269,6 +12653,13 @@
      "page": 239,
      "exactExcerpt": "Replace a 1200A RLB line switch on the Eatonton - Lake Oconee 115kV line with a with motor operator and SCADA controls.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 239,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11314,6 +12705,13 @@
      "exactExcerpt": "Rebuild approximately 7.5 miles of the Jesup - North Jesup - Rayonier section of the Jesup - Ludowici Primary 115kV line from 100C 336.4 ACSR Linnet conductor to 100C 795 ACSR Drake conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 240,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "218",
@@ -11357,6 +12755,13 @@
      "page": 241,
      "exactExcerpt": "MEAG will reconductor approximately 0.53 miles of 100C 336 ACSR conductor with 100C 1033 ACSR conductor from Alcovy Road to Alcovy Road Jct. on the Alcovy Road - SKC 115kV line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 241,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11402,6 +12807,13 @@
      "exactExcerpt": "MEAG: Rebuild approximately 1.99 miles of Sleepy Hollow - Peach Blossom 115kV section of the Aultman Road - Bonaire Primary 115kV line from 100C 336 ACSR to 100C 795 ACSR. GTC: Replace the jumpers at Sleepy Hollow with 1590 AAC.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 242,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -11445,6 +12857,13 @@
      "page": 243,
      "exactExcerpt": "Install a bus tie breaker in series with existing bus tie breaker between 230kV Bus 1 and Bus 3 at Norcross.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 243,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11490,6 +12909,13 @@
      "exactExcerpt": "Install a Dual Stage 30MVAR capacitor bank at Pine Grove Primary.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 244,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "216",
@@ -11533,6 +12959,13 @@
      "page": 245,
      "exactExcerpt": "Reconductor the Deptford - Magnolia 115kV line (approximately 5 miles) using 973.1 C7 ACCS (Everglades) conductor and upgrade the Deptford main bus.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 245,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11578,6 +13011,13 @@
      "exactExcerpt": "Installation of Smart Valve devices inside the Eatonton Primary substation on the Branch - Oasis 230kV and Eatonton Primary - Oasis 230kV lines.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 246,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -11621,6 +13061,13 @@
      "page": 247,
      "exactExcerpt": "Replace a low side breaker at Villa Rica with a 4000A breaker.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 247,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11666,6 +13113,13 @@
      "exactExcerpt": "This project will loop in GPC's existing Colerain to Thalman 230kV line into GTC's new Camden Industrial Park station. GPC's Kingsland termination at GTC's Kinlaw sub will be relocated to a new 115kV bay position.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 248,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "218",
@@ -11709,6 +13163,13 @@
      "page": 249,
      "exactExcerpt": "GTC: Build a second Heard County - Tenaska 500kV line, 0.8 miles, with 100C (3) 1113 ACSR Bluejay conductors. Add a 500kV breaker at Heard County. GPC: Add a 500kV breaker at Tenaska.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 249,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11754,6 +13215,13 @@
      "exactExcerpt": "Rebuild the 115kV White line from Northwest to Jefferson Street #3 (1.2 miles) with 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 250,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -11797,6 +13265,13 @@
      "page": 251,
      "exactExcerpt": "Build a new 7.58 mile 200C 1351 ACSS conductor 230kV line between new Cass Pine and Hill View 230kV substations.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 251,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11842,6 +13317,13 @@
      "exactExcerpt": "GPC will build a 230/25kV station named Two Run Ranch and loop it into the Cartersville - Pinson 230kV line to serve SK Battery/Hyundai and new load in the area.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 252,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "211",
@@ -11885,6 +13367,13 @@
      "page": 253,
      "exactExcerpt": "Rebuild 21 miles of the Double Branches Junction - Washington 115kV line section with 100C 795 ACSR conductor or higher rated conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 253,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -11930,6 +13419,13 @@
      "exactExcerpt": "Construct two new 115kV stations, Lizard Lope and Westover, and build a new 19.8 miles of 115kV line from Lizard Lope to Gillionville",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 254,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "216",
@@ -11973,6 +13469,13 @@
      "page": 255,
      "exactExcerpt": "Build a new 500/230kV substation (Ashley Park) splitting the Ohara - Union City 500kV line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 255,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12018,6 +13521,13 @@
      "exactExcerpt": "Rebuild the line sections from Adamsville to Boat Rock Road (8.08 miles) on the Adamsville - Buzzard Roost 230kV line with 200C 1351 ACSS Martin conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 256,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -12061,6 +13571,13 @@
      "page": 257,
      "exactExcerpt": "Rebuild the entire Blankets Creek - Woodstock 115kV line, approximately 7.1 miles, with 200C 795 ACSS conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 257,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12106,6 +13623,13 @@
      "exactExcerpt": "Build the new Garrett Road 230kV switching station (three - element ring bus) splitting the Villa Rica West Marietta 230kV line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 258,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -12149,6 +13673,13 @@
      "page": 259,
      "exactExcerpt": "Build 230kV line segment, using 200C 1351 ACSS Martin conductor, to loop in the Stonewall Tell Road (TA Realty) customer station into the East Point - Union City 230kV Black line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 259,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12194,6 +13725,13 @@
      "exactExcerpt": "DU: Rebuild the portion of East Dalton - Oostanaula and Dalton - East Dalton 115kV double circuit lines between East Dalton substation and the Dalton substation frame with 200C 795 ACSS.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 260,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "211",
@@ -12237,6 +13775,13 @@
      "page": 261,
      "exactExcerpt": "Reconductor approximately 2.72 miles of transmission line from Fenwick St to East Augusta Jct. with 100C 1351 ACSR conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 261,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12282,6 +13827,13 @@
      "exactExcerpt": "Replace the 230kV 1200A switch with 3000A, 90C 1351.5 ACSR Martin jumper with (2) AAC 1590, and 1600A line trap with 3000A (part of the Goat Rock - North Opelika 230kV line at Goat Rock substation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 262,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "213",
@@ -12325,6 +13877,13 @@
      "page": 263,
      "exactExcerpt": "Rebuild the Gordon - Engelhard McIntyre J of the Gordon - North Dublin 115kV line from 100C 336.4 ACSR (2.81 miles) Linnet and 75C 4/0 F Copper/CW (3.18 miles) to 200C ACSS 795 conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 263,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12370,6 +13929,13 @@
      "exactExcerpt": "Replace 0.72 miles of conductor from Moreland Way to Morrow including the bus and jumper at Moreland Way with 1351.5 Martin/ACSS 54/19 conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 264,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -12413,6 +13979,13 @@
      "page": 265,
      "exactExcerpt": "GPC: Replace the two 230/115kV auto transformers (Bank C and D) at Gainesville #2 with 400MVA. Project was originally maintenance driven but now compliance driven.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 265,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12458,6 +14031,13 @@
      "exactExcerpt": "Upgrade 750 jumpers at North Conyers and raise the temperature rating of the 636 ACSR conductor on the Conyers - Cornish MTN 115kV line from 100C to 125C.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 266,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -12501,6 +14081,13 @@
      "page": 267,
      "exactExcerpt": "Build a new Lagrange - North Opelika (APC) 230kV line, 29.4 miles, with 100C ACSR 1351.5 Martin Conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 267,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12546,6 +14133,13 @@
      "exactExcerpt": "GTC to add a second 230/115kV auto transformer at Morning Hornet substation. Also, build an additional 115kV line from Morning Hornet to Thumbs Up, approximately 2.4 miles, using at least 100C 1351 ACSR conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 268,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -12589,6 +14183,13 @@
      "page": 269,
      "exactExcerpt": "GTC: Replace the main 115kV bus 90C ACSR 336.4 Linnet conductor with higher rating.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 269,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12634,6 +14235,13 @@
      "exactExcerpt": "Install a 115kV 2 - stage 22.5MVAR (45MVAR total) capacitor bank at Robins Spring",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 270,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -12677,6 +14285,13 @@
      "page": 271,
      "exactExcerpt": "Rebuild 11.2 miles of Hammond - Weiss Dam 115kV from Hammond to the APC border with 200C 795 ACSS.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 271,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12722,6 +14337,13 @@
      "exactExcerpt": "Rebuild the Kathleen - Big Grocery Creek 230kV line (approximately 1.5 miles). Rebuild the Bonaire Primary - Kathleen 230kV line (approximately 6 miles). Upgrade limiting elements at Kathleen substation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 272,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -12765,6 +14387,13 @@
      "page": 273,
      "exactExcerpt": "MEAG will re-sag the Dresden - LaGrange Primary 230kV line to 125C. Replace the jumpers at Dresden and LaGrange with (2) 1590 AAC jumpers.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 273,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12810,6 +14439,13 @@
      "exactExcerpt": "Rebuild the Ray Place Rd - Washington 115kV line with 100C 795 ACSR conductor (total 17.4 Miles) between Ray Place Rd and Washington 2. Replace Jumpers and bus at Washington 2.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 274,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "215",
@@ -12853,6 +14489,13 @@
      "page": 275,
      "exactExcerpt": "MEAG will rebuild the Ray Place Rd - Washington 115kV line with 100C 1351 ACSR conductor (total 1.2 Miles) between Washington and Washington 3. Replace jumpers at Washington.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 275,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12898,6 +14541,13 @@
      "exactExcerpt": "Remove the 6% reactor at the Palmyra Substation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 276,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "216",
@@ -12941,6 +14591,13 @@
      "page": 277,
      "exactExcerpt": "Reconductor the Boulevard - Deptford 115kV line (approximately 8 miles) using 973.1 C7 ACCS (Everglades) conductor. Upgrade main bus and jumpers at Bolton substation from 90C 1590 AAC Coreopsis to 90C (2)1590 AAC Coreopsis or higher rated equipment.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 277,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -12986,6 +14643,13 @@
      "exactExcerpt": "Construct a new substation near Little Ogeechee, adjacent to the 500kV and 230kV shared right of way for McCall Road - Thalmann 500kV and the Little Ogeechee - Meldrim 230kV Black and White lines.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 278,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "219",
@@ -13029,6 +14693,13 @@
      "page": 279,
      "exactExcerpt": "Rebuild 23.4 miles of the Union City - Yates 230kV White line with bundled 1351 ACSS Martin conductor at 200C.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 279,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13074,6 +14745,13 @@
      "exactExcerpt": "Replace the limiting elements at Union City and Yates substations along the Union City - Yates 230kV (White) line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 280,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -13117,6 +14795,13 @@
      "page": 281,
      "exactExcerpt": "Split Farley - South Bainbridge 230kV line with a 230kV station (Dothan Road) and bring an 8.5 mile 200C 1351 ACSS 230kV line from Dothan Rd to new customer sub Downrange.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 281,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13162,6 +14847,13 @@
      "exactExcerpt": "Rebuild approximately 4.53 miles of the Barnesville Primary - Barnesville #1 segment on the Barnesville Primary - Lamar County Industrial 115kV line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 282,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "213",
@@ -13205,6 +14897,13 @@
      "page": 283,
      "exactExcerpt": "GTC will expand the Dresden 500kV bus into a 5 - element ring bus configuration. Loop the O'Hara Wansley 500kV line into the Dresden 500kV substation and allow for future Dresden - Talbot 500kV line termination.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 283,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13250,6 +14949,13 @@
      "exactExcerpt": "Rebuild the 1.87 miles of Sandersville #1 - Sandersville #6 line section of the Gordon - Sandersville #1 115kV line from 100C ACSR 336 conductor to 100C ACSR 795 conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 284,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -13293,6 +14999,13 @@
      "page": 285,
      "exactExcerpt": "Build a new 230/25kV 8 element ring bus networked substation named Cass Pine that will interconnect between new Great Valley and Hill View 230kV substations.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 285,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13338,6 +15051,13 @@
      "exactExcerpt": "Reconductor the Grady - West End 115kV line (2.6 miles) using 200C 1351 ACSS Martin.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 286,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -13381,6 +15101,13 @@
      "page": 287,
      "exactExcerpt": "Rebuild the Mountain View - Barnett Road section of the Morrow - Mountain View 115kV line with 200C 1351 ACSS Martin conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 287,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13426,6 +15153,13 @@
      "exactExcerpt": "A new customer substation, Emblem Riverside, is being built along the Buzzard Roost - Douglasville 230kV line. Moreover, a Fiber ICON ring is being built in the area to help with communications and protection for all customers in the area.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 288,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -13469,6 +15203,13 @@
      "page": 289,
      "exactExcerpt": "GTC will reconductor from 100C 1351 ACSR to 160C 1351 ACSS on 8.6 miles of 230kV line. A 2000A line trap at Villa Rica will also be replaced with a 3000A line trap.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 289,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13514,6 +15255,13 @@
      "exactExcerpt": "On the Fife - Fairburn SW - Owens Corning Tap sections of the Morrow - Yates Common 115kV line, rebuild approximately 5.8 miles of 50C 477 ACSR with 210C 1334 T13 ACCR Martin or 200C 1351.0 ACSS Martin.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 290,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -13557,6 +15305,13 @@
      "page": 291,
      "exactExcerpt": "Rebuild 11.2 miles of 100C 477 ACSR with 200C 1334 T13 ACCR Martin or 200C 1351.0 ACSS between Yates Common to Oak Mountain. Replace limiting elements along the line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 291,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13602,6 +15357,13 @@
      "exactExcerpt": "Upstream Transmission improvements to serve a new customer station being built along the Morrow - Yates Common 115kV and Line Creek - Fairburn #2 115kV lines.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 292,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -13645,6 +15407,13 @@
      "page": 293,
      "exactExcerpt": "GPC will rebuild the Line Creek 230kV substation as breaker and a half configuration and connect the Morrow - Yates 230kV line and the Union City - Yates 230kV White line into Line Creek.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 293,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13690,6 +15459,13 @@
      "exactExcerpt": "Rebuild the 2.5 mile section from Villa Rica to the new East Villa Rica Switching station on the Summer Lake - Villa Rica 230kV line with bundled 200C 1351 ACSS Martin.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 294,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -13733,6 +15509,13 @@
      "page": 295,
      "exactExcerpt": "Rebuild the ~14.9mi Austin Drive - Morrow 115kV with 200C 1351.5 ACSS Martin. At Austin Drive 115kV, replace the 115/230kV auto transformer along with upgrades other limiting elements at the station.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 295,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13778,6 +15561,13 @@
      "exactExcerpt": "Loop in and out the new Jack's Creek 230kV switching station into the Doyle - LG&E Monroe 230kV line. This is coordinated with the East Walton Project (TEAMS #09662).",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 296,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -13821,6 +15611,13 @@
      "page": 297,
      "exactExcerpt": "GTC plans to rebuild 5 miles of line from Buzzard Roost to Boat Rock Road with 200C 1351 ACSS Martin.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 297,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13866,6 +15663,13 @@
      "exactExcerpt": "Rebuild the 2.5 mile section from Villa to the new East Villa Rica Switching station on the Douglasville - Villa Rica 230kV line with bundled 200C 1351 ACSS Martin.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 298,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -13909,6 +15713,13 @@
      "page": 299,
      "exactExcerpt": "Replace the limiting AAC 1033 jumper with AAC 1590 at Doyle on the Doyle - Winder Primary 230kV line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 299,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -13954,6 +15765,13 @@
      "exactExcerpt": "Build a new 27 miles of 230kV line between HWY 112 and East Moultrie substations with 100C 1351 ACSR conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 300,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "216",
@@ -13997,6 +15815,13 @@
      "page": 301,
      "exactExcerpt": "GTC: - Construct the East Walton 500/230kV substation.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 301,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14042,6 +15867,13 @@
      "exactExcerpt": "GTC will reconductor the section from East Villa Rica Switching station to Garrett Rd with 160C 1351 ACSS on 11.5 miles of the Garrett Road - Villa Rica 230kV line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 303,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -14085,6 +15917,13 @@
      "page": 304,
      "exactExcerpt": "GTC will replace the main 115kV bus at Riddleville substation with higher rating.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 304,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14130,6 +15969,13 @@
      "exactExcerpt": "Replace the 115kV bus and jumpers at SKC substation with higher rated bus and jumpers with rating higher than 255MVA.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 305,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -14173,6 +16019,13 @@
      "page": 306,
      "exactExcerpt": "GTC will build a new 230kV transmission line between South Hazlehurst (bus 2) and New Lacy substation (approximately 25 miles) with 100C ACSR 1351 Martin conductor. Do all the necessary upgrade work to accommodate the additional line in both facilities.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 306,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14218,6 +16071,13 @@
      "exactExcerpt": "GTC will rebuild the 1.3 mile Switchway - Thornton Rd 230kV line with 200C 1351 ACSS.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 307,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -14261,6 +16121,13 @@
      "page": 308,
      "exactExcerpt": "Rebuild 20 miles of 100C 4/0 ACSR Penguin conductor along the Jesup - Offerman 115kV line, with 100C 795 ACSR Drake conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 308,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14306,6 +16173,13 @@
      "exactExcerpt": "Rebuild approximately 1.2 miles of 100C 636 ACSR conductor from Johns Manville to Winder Primary with 200C 795 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 309,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "202",
@@ -14349,6 +16223,13 @@
      "page": 310,
      "exactExcerpt": "Rebuild the entire Lawrenceville - Winder Primary 230kV line, approximately 15.4 miles, using 200C 1351 ACSS \"Martin\" conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 310,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14394,6 +16275,13 @@
      "exactExcerpt": "Rebuild 10 miles of Ray Place - Warrenton Primary 115kV line with 100C 2 - 1351 ACSR conductor and replace 1590 AAC Coreopsis jumpers at Warrenton.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 311,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "215",
@@ -14437,6 +16325,13 @@
      "page": 312,
      "exactExcerpt": "Rebuild approximately 24.3 miles of the Sandersville #1 - Wadley Primary 115kV line from 100C 336 ACSR Linnet conductor to 100C 1351 ACSR Drake conductor. Replace limiting elements in substations along the line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 312,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14482,6 +16377,13 @@
      "exactExcerpt": "Rebuild 9.3 miles of Goshen - Kraft 115kV line from Kraft - Godley J - Rice Hope from 100C 795 ACSR Drake to 200C 1351 ACSS Martin.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 313,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "219",
@@ -14525,6 +16427,13 @@
      "page": 314,
      "exactExcerpt": "Rebuild the Goshen (Savannah) - Georgia Pacific (Rincon) section, approximately 6.7 miles, of the Goshen (Sav) - McIntosh 115kV line using 100C 795 ACSR Drake conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 314,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14570,6 +16479,13 @@
      "exactExcerpt": "Build the new Tomochichi 500/230kV switching station (four element ring bus 500kV high side, four element breaker and a half 230kV low side) splitting the Ohara - Schere 500kV line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 315,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -14613,6 +16529,13 @@
      "page": 316,
      "exactExcerpt": "Rebuild the Arkwright - Lloyd Shoals 115kV line with 100C 795 ACSR Drake.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 316,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14658,6 +16581,13 @@
      "exactExcerpt": "Rebuild approximately 7.5 miles Eatonton Primary - Lick Creek 115kV line section with 100C 795 ACSR conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 317,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -14701,6 +16631,13 @@
      "page": 318,
      "exactExcerpt": "Rebuild 8.47 miles of the University of Georgia - East Watkinsville line sections on the Athena - East Watkinsville 115kV line with 100C ACSR 1033 conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 318,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14746,6 +16683,13 @@
      "exactExcerpt": "Build two 230kV switching stations (Hill View and Grassy Hollow) looping into the Cartersville McGrau Ford 230kV line (8.5 miles apart).",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 319,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "211",
@@ -14789,6 +16733,13 @@
      "page": 320,
      "exactExcerpt": "Rebuild 20.7 miles of 75C 397.5 ACSR conductor with advanced conductor from Dyer Road to Wansley tap on the Dyer Road - East Roanoke (APC) 115kV line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 320,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14834,6 +16785,13 @@
      "exactExcerpt": "Rebuild the PPG J2 - Langston Road line section of the Aultman Road - Perry 115kV line from 100C 336 ACSR Linnet conductor to 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 321,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -14877,6 +16835,13 @@
      "page": 322,
      "exactExcerpt": "Build a 7 rung breaker and a half switching station along the right of way of the (3) 230kV lines about 2.5 miles East of Villa Rica to service recently signed customers in the area.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 322,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -14922,6 +16887,13 @@
      "exactExcerpt": "Loop in the Bowen - Union City line into Villa Rica 500kV bus and add a second 2016 MVA 500/230kV auto transformer. Convert the 230kV side to a 10 element breaker and a half scheme.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 323,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "211",
@@ -14965,6 +16937,13 @@
      "page": 324,
      "exactExcerpt": "Rebuild approximately 26.14 miles of the Fitzgerald - Pitts 115kV line with 200C 1351 ACSS.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 324,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15010,6 +16989,13 @@
      "exactExcerpt": "Construct 19 miles of 230kV circuit, on existing ROW, using200C 1351 ACSS conductor from South Griffin 230/115kV substation to the Barnesville 230/69kV substation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 325,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "213",
@@ -15053,6 +17039,13 @@
      "page": 326,
      "exactExcerpt": "Build a new 20 miles of 115kV line with 200C 1351 ACSS from Barneyville to East Moultrie. Add 115kV breakers to Barneyville and East Moultrie substations.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 326,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15098,6 +17091,13 @@
      "exactExcerpt": "Replace 500/230kV, auto transformer C with a new 448 MVA transformer. Replace obsolete relay panels.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 327,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -15141,6 +17141,13 @@
      "page": 328,
      "exactExcerpt": "Reconductor 10.8 miles of the East Social Circle - East Watkinsville 230kV line (up to future Bostwick location) from 1033 ACSR Curlew conductor to 1033 ACCR 200C conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 328,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15186,6 +17193,13 @@
      "exactExcerpt": "Rebuild the Jack McDonough - Northwest (Black) 230kV line (4.59 miles) using 200C 1351 Elbrus/TW.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 329,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -15229,6 +17243,13 @@
      "page": 330,
      "exactExcerpt": "Rebuild 2.1 miles segment from line tap into Roddenbery Station on the South Bainbridge Thomasville 115kV line from 50C ACSR TW 762.8 to 200C 1351 ACSS conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 330,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15274,6 +17295,13 @@
      "exactExcerpt": "Replace the 140MVA 230/115kV auto transformer #4 at Thomasville substation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 331,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "216",
@@ -15317,6 +17345,13 @@
      "page": 332,
      "exactExcerpt": "Rebuild 3 miles from the Pittman Road 115kV station to the West Point Dam (USA) 115kV station with 100C 1351 ACSS Martin conductor. Replace AAC 750 jumper at Pittman Road 115kV with (2) 1590 AAC.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 332,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15362,6 +17397,13 @@
      "exactExcerpt": "Rebuild the Yates 6 & 7 substation to a Breaker and a Half configuration.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 333,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -15405,6 +17447,13 @@
      "page": 334,
      "exactExcerpt": "Rebuild entire line from Coleman to Dean Forest. 6.67 miles of 100C 477 Hawk Conductor with 200C 1351 ACSS Martin conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 334,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15450,6 +17499,13 @@
      "exactExcerpt": "Rebuild 3 miles of the Magnolia - Truman Parkway 115kV from 75C 927 ACAR to 200C 1351 ACSS Martin conductor or higher rated conductor. Upgrade 1200A switches at Magnolia substation to 2000A switches and jumpers at Truman Parkway.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 335,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "219",
@@ -15493,6 +17549,13 @@
      "page": 336,
      "exactExcerpt": "Installation of Power Flow Controllers at the new East Villa Rica Switching Station on the Douglasville - Villa Rica 230kV and Summer Lake - Villa Rica 230kV lines.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 336,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15538,6 +17601,13 @@
      "exactExcerpt": "Replace the 115kV buses 1 and 2 at South Macon with (2) 1590 AAC.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 337,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -15581,6 +17651,13 @@
      "page": 338,
      "exactExcerpt": "Rebuild the Union City - Yates 230kV Black line with bundled 200C 1351 ACSS Martin conductor. Replace limiting elements at Union City, Fairburn #1 and Line Creek substations.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 338,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15626,6 +17703,13 @@
      "exactExcerpt": "Rebuild the 0.9 miles North Columbus - First Avenue 115kV line (currently 75C 657 ACAR) with 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 339,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "213",
@@ -15669,6 +17753,13 @@
      "page": 340,
      "exactExcerpt": "Replace 230/115kV auto transformers A & B with (2) new 230/115kV, 400 MVA auto transformers. Replace 230kV bus tie breaker with a new 2000A breaker. Replace 115kV bus tie breaker with a new 2000A breaker.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 340,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15714,6 +17805,13 @@
      "exactExcerpt": "Construct a 500kV line from Ashley Park to Wansley, approximately 35 miles long.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 341,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -15757,6 +17855,13 @@
      "page": 342,
      "exactExcerpt": "Rebuild the Blakley Primary - Huckleberry 115kV line from 75C 477 ACSR to 200C 1351 ACSS. (13.5 miles) GPC: Replace jumpers at Blakely Primary GTC: Replace jumpers at Blakely and Huckleberry",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 342,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15802,6 +17907,13 @@
      "exactExcerpt": "Rebuild the Griffin Rd \u2013 Echeconnee line section of Broadway - Echeconnee line with 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 343,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -15845,6 +17957,13 @@
      "page": 344,
      "exactExcerpt": "Rebuild the radial Thomaston - Butler 115kV line to 230kV network operation. Make all necessary upgrades and accommodations at Butler and Thomaston. Convert the Wesley substation from 115kV to 230kV.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 344,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15890,6 +18009,13 @@
      "exactExcerpt": "A new 2 mile 230kV line is being built from Buzzard Roost to Factory Shoals with 200C 1351 ACSS Martin conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 345,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -15933,6 +18059,13 @@
      "page": 346,
      "exactExcerpt": "Build a new 6.56 mile line from Conyers to Klondike with 200C (2) 1351 ACSS Martin conductor. Build one new 230kV breaker terminal at Conyers and one new 230kV terminal at Klondike.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 346,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -15978,6 +18111,13 @@
      "exactExcerpt": "Replace the 600A line switch at Porterdale Primary on the Glenwood Springs - Porterdale Primary 230kV Line with 1200A switch.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 347,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -16021,6 +18161,13 @@
      "page": 348,
      "exactExcerpt": "Rebuild Barnesville Primary - Thomaston 230kV line (13.24 miles) with 100C 1351 ACSS; Replace 1200A switches at Barnesville Primary & Thomaston with 3000A switch; replace associated jumper at both stations.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 348,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16066,6 +18213,13 @@
      "exactExcerpt": "Install a second 230/115kV, 400 MVA auto transformer at the Bay Creek substation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 349,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "202",
@@ -16109,6 +18263,13 @@
      "page": 350,
      "exactExcerpt": "Rebuild 41.08 miles of the Bonaire Primary - Eastman Primary 115kV Line using 200C 1351ACSS Martin and upgrade the bus at Roddy substation.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 350,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16154,6 +18315,13 @@
      "exactExcerpt": "An 11.6 mile 230kV line is being built form Cliftondale to Line Creek with 200C 1351 ACSS Martin.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 351,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -16197,6 +18365,13 @@
      "page": 352,
      "exactExcerpt": "GTC will build a new 500kV line from Talbot to Dresden (75 miles).",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 352,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16242,6 +18417,13 @@
      "exactExcerpt": "Replace the Hopewell 230/115kV auto transformer with a 400 MVA auto transformer.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 353,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "202",
@@ -16285,6 +18467,13 @@
      "page": 354,
      "exactExcerpt": "Construct a 5 mile long 500kV line between Tenaska and Wansley. Make all necessary accommodations at the substations for the line termination.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 354,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16330,6 +18519,13 @@
      "exactExcerpt": "Rebuild 15.8 miles of 50C 397.5 ACSR Ibis with 200C 1351 ACSS Martin from Jackson Lake to Lloyd Shoals and Jackson Lake to South. Covington Junction.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 355,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "206",
@@ -16373,6 +18569,13 @@
      "page": 356,
      "exactExcerpt": "Reconductor 0.97 miles of 100C 636 Grosbeak Lower River - Webb 115kV line with 200C 795 ACSS Drake conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 356,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16418,6 +18621,13 @@
      "exactExcerpt": "Rebuild the 636 ACSR (1 mile) of the McEver Road - College Square section, and 2 - 4/0 copper part (2.05 miles) of the College Square to Lakeside WTP B line section, part of the McEver Road - Shoal Creek",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 357,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -16461,6 +18671,13 @@
      "page": 358,
      "exactExcerpt": "Rebuild the McManus - West Brunswick 115kV line, approximately 5.7 miles, with 200C 1351 ACSS Martin conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 358,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16506,6 +18723,13 @@
      "exactExcerpt": "Rebuild approximately 8 miles of the Aultman Road - Fort Valley #1 115kV line with 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 359,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -16549,6 +18773,13 @@
      "page": 360,
      "exactExcerpt": "Rebuild 2.92 miles of 100C sagged 477 ACSR Hawk conductor from Slappey Drive to Albany #9 with 1351 ACSR.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 360,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16594,6 +18825,13 @@
      "exactExcerpt": "Rebuild the Norcross - Norcross Junction (674) segment, approximately 3.9 miles, from 100C 477 ACSR Hawk conductor to 200C 1351 ACSS \"Martin\" conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 361,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "202",
@@ -16637,6 +18875,13 @@
      "page": 362,
      "exactExcerpt": "Rebuild the entire line from Boulevard to Magnolia (4.56 miles) from 100C 795 ACSR Drake to 200C 1351 ACSS Martin",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 362,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16682,6 +18927,13 @@
      "exactExcerpt": "Rebuild the entire line from Little Ogeechee - Salt Creek and Salt Creek - Dean Forest, approximately 8 miles, using 200C 1351 ACSS/Martin. Upgrade jumpers at the Little Ogeechee terminal.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 363,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "219",
@@ -16725,6 +18977,13 @@
      "page": 364,
      "exactExcerpt": "Install a new 230/115kV 400MVA auto transformer at Rice Hope and loop in the Crossgate McIntosh 230kV line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 364,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16770,6 +19029,13 @@
      "exactExcerpt": "Rebuild the Four Mile tap - Recovery - Sinai (FPL) segment of the Sinai (FPL) - South Bainbridge 115kV line from 100C 336.4 ACSR to 200C 1351 ACSS.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 365,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "216",
@@ -16813,6 +19079,13 @@
      "page": 366,
      "exactExcerpt": "GPC will rebuild the Bay Creek - Conyers 230kV line, approximately 15.29 miles, using 200C 1351 ACSS \"Martin\" conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 366,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16858,6 +19131,13 @@
      "exactExcerpt": "Rebuild the 28.12 miles section between Hammond and the Goshen tap with 200C 1351 ACSS Martin conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 367,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "211",
@@ -16901,6 +19181,13 @@
      "page": 368,
      "exactExcerpt": "Rebuild a portion of the Atkinson - Northside 115kV line, approximately 3.2 miles from Atkinson to Chattahoochee with 200C 1351 ACSS Martin.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 368,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -16946,6 +19233,13 @@
      "exactExcerpt": "Rebuild the 1.2 mile Atkinson - Tilford Yards section of the Atkinson - Northwest 115kV with 200C 1351 ACSS Martin.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 369,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -16989,6 +19283,13 @@
      "page": 370,
      "exactExcerpt": "Construct approximately 7 miles of 115kV line with minimum 170C 1351 ACSS conductor from Gillsville Tap Junction to Midway.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 370,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17034,6 +19335,13 @@
      "exactExcerpt": "Rebuild approximately 9.7 miles of the Cornelia - Chase Road - Clarksville - Hollywood segments of the Cornelia - Tallulah Lodge 115kV line with 200C 795 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 371,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -17077,6 +19385,13 @@
      "page": 372,
      "exactExcerpt": "Rebuild approximately 15.7 miles of the Dawson Crossing - Etowah - Reavis Mountain - Nelson sections of the Dawson Crossing - Nelson (White) 115kV line with 1351 ACSS conductor. GPC will make any necessary relaying changes at Dawson Crossing.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 372,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17122,6 +19437,13 @@
      "exactExcerpt": "Rebuild the 2.9 mile section from Cavender Drive to Marietta 25 with 200C 1351 ACSS conductor on the East Point - Tributary 230kV line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 373,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -17165,6 +19487,13 @@
      "page": 374,
      "exactExcerpt": "Reconductor the 1.5 mile section from Flat Shoals Road station to the Stonewall Tell loop - in point on the East Point - Union City 230kV Black line with 200C 1351 ACSS Martin conductor. Replace limiting elements at Union City",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 374,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17210,6 +19539,13 @@
      "exactExcerpt": "Rebuild approximately 11.8 miles of the Echeconnee - Wellston 115kV line with 200C 1351 ACSS conductor and the limiting elements along the line with higher ratings. Replace the Bus at North Warner Robins with 1590 AAC.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 375,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -17253,6 +19589,13 @@
      "page": 376,
      "exactExcerpt": "Construct a new 500kV line from Farley (APC) to Tazewell substation, approximately 120 miles long.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 376,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17298,6 +19641,13 @@
      "exactExcerpt": "Rebuild approximately 5.3 miles of the Gainesville #2 - McEver Rd 115kV line with 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 377,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -17341,6 +19691,13 @@
      "page": 378,
      "exactExcerpt": "Rebuild the North Eatonton Junction - Putnam Sawmill Junction line with 200C 1351 ACSS conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 378,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17386,6 +19743,13 @@
      "exactExcerpt": "Install 1% series reactors on the Fortson - Goat Rock (Black) 230kV and Fortson - Goat Rock (White) 230kV.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 379,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "213",
@@ -17429,6 +19793,13 @@
      "page": 380,
      "exactExcerpt": "Rebuild approximately 0.34 miles of the Goldens Creek - Warrenton Primary 230kV line from 100C 1 - 1351.5 ACSR Martin conductor to 200C 1351 ACCR Martin conductor or equivalent.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 380,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17474,6 +19845,13 @@
      "exactExcerpt": "Rebuild the Deepstep - Robins Spring (7.6 miles) Robins Spring - Kaolin J (2.23mi), and Kaolin J Sandersville #6 (0.66 miles) line sections of the Gordon - Sandersville #1 115kV line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 381,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -17517,6 +19895,13 @@
      "page": 382,
      "exactExcerpt": "Construct a 230kV switching station on the Waynesboro - Wilson 230kV line and a new 230kV line between the switching station and Goshen, approximately 12.3 miles.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 382,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17562,6 +19947,13 @@
      "exactExcerpt": "Construct a 500kV line from Big Smarr to Tomochichi, approximately 36 miles long. Make the necessary modifications at Big Smarr and Tomochichi to add breakers and terminate the line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 383,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -17605,6 +19997,13 @@
      "page": 384,
      "exactExcerpt": "GTC is building a new 7 mile 230kV line from Cavender Drive to Buzzard Roost with 200C 1351 ACSS Martin.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 384,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17650,6 +20049,13 @@
      "exactExcerpt": "GTC will turn Cavender Drive into a 500/230kV station looping in the Villa Rica - Union City 500kV line, installing a 2016 MVA auto transformer.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 385,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -17693,6 +20099,13 @@
      "page": 386,
      "exactExcerpt": "Replace the 1600A reactors at East Watkinsville on the Russell Dam 230kV line with larger size.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 386,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17738,6 +20151,13 @@
      "exactExcerpt": "GTC: Construct approximately 6 miles of 115kV line with minimum 170C 1351 ACSS conductor from Gillsville Tap Junction to Pond Fork, utilizing the existing GTC owned portion of the North Jackson Lawrence Smith 46kV ROW.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 387,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -17781,6 +20201,13 @@
      "page": 388,
      "exactExcerpt": "Build the new 500kV line from Rockville to Tiger Creek and Tiger Creek to Warthen, approximately 20 miles and 9 miles long respectively.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 388,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17826,6 +20253,13 @@
      "exactExcerpt": "Build a new 500kV line from Tazewell to Talbot #2, approximately 20 miles. Make all necessary accommodations at Tazewell and Talbot #2 for the new 500kV breakers and line termination.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 389,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "216",
@@ -17869,6 +20303,13 @@
      "page": 390,
      "exactExcerpt": "Build a new 4 - breaker 230kV ring bus at Rockville substation (no auto transformer to be added at this time).",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 390,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -17914,6 +20355,13 @@
      "exactExcerpt": "Rebuild approximately 11 miles of the Jefferson Road - Russell - Richardson Street Junction segments of the Jefferson Road - Winder Primary 115kV line with 200C 1351 ACSS Martin conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 391,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -17957,6 +20405,13 @@
      "page": 392,
      "exactExcerpt": "Rebuild approximately 38.04 miles of 50C 4/0 ACSR conductor from the Pine Grove to the Pearson tap using 200C 1351 ACSS conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 392,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18002,6 +20457,13 @@
      "exactExcerpt": "Reconductor/rebuild and convert the 115kV lines from Athena - Union Point - Ray Place Road Warrenton Primary to 230kV operation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 393,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "215",
@@ -18045,6 +20507,13 @@
      "page": 394,
      "exactExcerpt": "Build a new 4 mile 230kV line from Cavender Drive to Tributary with 200C 1351 ACSS Martin.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 394,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18090,6 +20559,13 @@
      "exactExcerpt": "This project includes the following scope of work: Build a new 230kV switching station north of Oasis in a ring bus configuration with 4 - breakers.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 395,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -18133,6 +20609,13 @@
      "page": 396,
      "exactExcerpt": "Rebuild the Tallulah Lodge - Toccoa 115kV Line with 100C 795 ACSR conductor (total of 10.3 miles). Replace limiting elements at Tallulah Lodge and Toccoa.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 396,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18178,6 +20661,13 @@
      "exactExcerpt": "Rebuild the 2.8 mile Tributary - Thornton Road 230kV line with 200C 1351 ACSS Martin.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 397,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "201",
@@ -18221,6 +20711,13 @@
      "page": 398,
      "exactExcerpt": "Replace Thomaston 230/115kV 285MVA auto transformers C and D with 400MVA auto transformers. Install high side breakers to meet the 230kV bus differential standards and redesign 230kV bus to a breaker and a half configuration.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 398,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18266,6 +20763,13 @@
      "exactExcerpt": "This project will construct a new 115kV breaker and a half substation a mile north of the East Bainbridge substation.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 399,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "216",
@@ -18309,6 +20813,13 @@
      "page": 400,
      "exactExcerpt": "Install a 115kV two stage 30MVAR capacitor bank at Glenwood Springs substation.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 400,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18354,6 +20865,13 @@
      "exactExcerpt": "Rebuild 5.49 miles of 100C 1590.0 ACSR Lapwing with 200C 1351.5 ACSS Martin 230kV line from Welcome All to Union City on the East Point - Union City 230kV line.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 401,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "208",
@@ -18397,6 +20915,13 @@
      "page": 402,
      "exactExcerpt": "Reconductor the Hopewell to Birmingham line section (approximately 3.3 miles) on the Avery Hopewell 115kV line with 100C 1033 ACSR conductor. Replace jumper at Birmingham with 1590 AAC jumper.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 402,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18442,6 +20967,13 @@
      "exactExcerpt": "Replace the existing Bowen #10 1350 MVA 500/230kV auto transformer with a 2016 MVA 500/230kV auto transformer.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 403,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "211",
@@ -18485,6 +21017,13 @@
      "page": 404,
      "exactExcerpt": "Construct a new 500kV line from Hatch - Wadley Primary.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 404,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18530,6 +21069,13 @@
      "exactExcerpt": "Build a 4 - breaker 230kV ring bus to terminate lines from Dorsett, South Griffin, and Big Grocery.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 405,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "214",
@@ -18573,6 +21119,13 @@
      "page": 406,
      "exactExcerpt": "Replace 230/115kV 285MVA auto transformer #5 with 230/115kV 400MVA auto transformer at South Griffin.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 406,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18618,6 +21171,13 @@
      "exactExcerpt": "Rebuild 3 miles of the Coleman - Meldrim 115kV line from Four Lakes to Meldrim with 200C 1351 ACSS.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 407,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "219",
@@ -18661,6 +21221,13 @@
      "page": 408,
      "exactExcerpt": "Replace the 115kV bus at Arkwright with higher rating and replace the jumper on the Arkwright Forrest Rd (Macon) 115kV line with at least 1590AAC.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 408,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18706,6 +21273,13 @@
      "exactExcerpt": "Replace equipment such as jumpers, switches, and traps at the Bay Creek, Rockdale, and Conyers substations with equipment capable of carrying 3000A.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 409,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "202",
@@ -18749,6 +21323,13 @@
      "page": 410,
      "exactExcerpt": "Rebuild approximately 5.45 miles of Euchee Creek - Thurmond Dam segment of the Evans Primary Thurmond Dam (USA) #5 115kV line with 200C 1351 ACSS Martin conductor. Replace the main bus with a larger element at Thurmond Dam (USA).",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 410,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18794,6 +21375,13 @@
      "exactExcerpt": "Rebuild approximately 8.9 miles of the Evans Primary - Thurmond Dam (USA) #6 115kV line with 200C 1351 ACSS Martin conductor. Replace the main bus with a larger element at Thurmond Dam (USA).",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 411,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "215",
@@ -18837,6 +21425,13 @@
      "page": 412,
      "exactExcerpt": "GTC to rebuild the Center Primary \u2013 Clarksboro Primary 230kV line (approx. 8.3 miles) with 200C 1351 ACSS conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 412,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18882,6 +21477,13 @@
      "exactExcerpt": "Rebuild approximately 14 miles of the Clarksboro - Winder 230kV line with 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 413,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -18925,6 +21527,13 @@
      "page": 414,
      "exactExcerpt": "Replace the 1200A switches at Snellville Primary with 3000A. Also, replace the 1200A line trap and switches at East Social Circle with 3000A on the East Social Circle - Snellville 230kV line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 414,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -18970,6 +21579,13 @@
      "exactExcerpt": "Construct a new 500kV line from East Walton to Middle Fork, approximately 45 miles long. Make all necessary accommodations for new 500kV breakers at East Walton and Middle Fork substations.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 415,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -19013,6 +21629,13 @@
      "page": 416,
      "exactExcerpt": "Rebuild approximately 7.9 miles of South Hall - Chestnut Mountain - Spout Springs Road segments of the Shoal Creek - South Hall 230kV line with 200C 1351 ACSS conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 416,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -19058,6 +21681,13 @@
      "exactExcerpt": "Rebuild the 2 - 4/0 copper part (approximately 2.9 miles) of the Gainesville Ferry - Lakeside WTP A line section, part of the McEver Road - Shoal Creek 115kV line, using 200C 1351 ACSS conductor.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 417,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -19101,6 +21731,13 @@
      "page": 418,
      "exactExcerpt": "Construct a new approximately 64 mile 500kV line from McGrau Ford to Middle Fork.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 418,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -19146,6 +21783,13 @@
      "exactExcerpt": "Replace 300 MVA 230/115kV Bank D with 400 MVA Bank.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 419,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "219",
@@ -19189,6 +21833,13 @@
      "page": 420,
      "exactExcerpt": "Install a second 400 MVA, 230/115kV auto transformer at Thomson Primary substation.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 420,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -19234,6 +21885,13 @@
      "exactExcerpt": "Install a 2nd 230kV bus - tie breaker at the Winder Primary Station.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 421,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "202",
@@ -19277,6 +21935,13 @@
      "page": 422,
      "exactExcerpt": "Rebuild 3.7 miles of 100C 4/0 ACSR conductor with 200C 795 ACSS Drake on the Bemis - Pine Grove Primary section of the Pine Grove Primary - West Valdosta 115kV line.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 422,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },
@@ -19322,6 +21987,13 @@
      "exactExcerpt": "Replace the 500CU main bus at Gainesville #1 115kV with 3\" Sch 40 AL Tube.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 423,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "212",
@@ -19366,6 +22038,13 @@
      "exactExcerpt": "Replace SATX 280MVA auto transformer with 400MVA auto transformer.",
      "supports": "project scope",
      "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 424,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
+     "verifiedByScript": true
     }
    },
    "zone": "219",
@@ -19409,6 +22088,13 @@
      "page": 425,
      "exactExcerpt": "Rebuild the existing 100C 336 ACSR conductor for the Thomson Primary to Pumpkin Center 115kV line section (approximately 5.28 miles), part of the Evans Primary - Thomson Primary 115kV line with 200C 1351 ACSS Martin conductor.",
      "supports": "project scope",
+     "verifiedByScript": true
+    },
+    "costRedacted": {
+     "sourceId": "gpc-irp-2025-vol3",
+     "page": 425,
+     "exactExcerpt": "Estimated Cost \u2013 GPC REDACTED",
+     "supports": "cost is redacted in the public disclosure",
      "verifiedByScript": true
     }
    },

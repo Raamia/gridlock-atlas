@@ -30,7 +30,8 @@ export function ownerNames(p: Project, idx: SnapshotIndex, short = false): strin
 /** Deep link to the cited page of a PDF, or the page itself for HTML. */
 export function evidenceHref(e: Evidence, src?: SourceDocument): string | undefined {
   if (!src) return undefined;
-  if (src.mimeType === "application/pdf" && e.page) return `${src.url}#page=${e.page}`;
+  // only direct PDF links take a #page anchor; a docket landing page (e.g. Georgia PSC) does not
+  if (src.mimeType === "application/pdf" && e.page && /\.pdf($|[?#])/i.test(src.url)) return `${src.url}#page=${e.page}`;
   return src.url;
 }
 
