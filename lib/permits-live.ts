@@ -1,4 +1,4 @@
-import { looksLikeUtility, type CarolinaBoundary, type GeorgiaFiling, type LiveCheck } from "@/lib/permits";
+import { looksLikeUtility, type CarolinaBoundary, type GeorgiaFiling, type LiveCheck, type PermitSearch } from "@/lib/permits";
 
 /**
  * Server-side live permit check: the same two public sources as `scripts/ingest/permit_search.py`, narrowed to what was
@@ -45,7 +45,7 @@ function formState(html: string): Record<string, string> {
   return d;
 }
 
-function rows(html: string, county: string): GeorgiaFiling[] {
+function rows(html: string, county: string | undefined): GeorgiaFiling[] {
   const out: GeorgiaFiling[] = [];
   for (const tr of html.split(/<tr\b/i).slice(1)) {
     if (!tr.includes("btnEditRecord")) continue;
@@ -83,21 +83,14 @@ class Session {
 
 const mdy = (iso: string) => `${iso.slice(5, 7)}/${iso.slice(8, 10)}/${iso.slice(0, 4)}`;
 
-/** Every NPDES filing in one county submitted between two dates (all result pages). */
-async function georgiaCounty(code: string, from: string, to: string): Promise<GeorgiaFiling[]> {
+/** One GEOS NPDES search, newest first, over up to `pages` result pages. */
+async function geosSearch(fields: Record<string, string>, county: string | undefined, pages: number): Promise<GeorgiaFiling[]> {
   const s = new Session();
   let html = await s.request(GEOS);
-  html = await s.request(GEOS, {
-    ...formState(html),
-    [FIELD + "ddlSiteCounty"]: code,
-    [FIELD + "txtStartDate"]: mdy(from),
-    [FIELD + "txtEndDate"]: mdy(to),
-    [FIELD + "ddlProgram"]: "1",
-    [FIELD + "btnSearch"]: "Search",
-  });
+  html = await s.request(GEOS, { ...formState(html), ...fields, [FIELD + "ddlProgram"]: "1", [FIELD + "btnSearch"]: "Search" });
   const found = new Map<string, GeorgiaFiling>();
-  for (let page = 1; page <= MAX_PAGES; page++) {
-    for (const r of rows(html, COUNTIES[code])) if (!found.has(r.submissionId)) found.set(r.submissionId, r);
+  for (let page = 1; page <= pages; page++) {
+    for (const r of rows(html, county)) if (!found.has(r.submissionId)) found.set(r.submissionId, r);
     const next = decode(html).match(new RegExp(`__doPostBack\\('([^']+)','Page\\$${page + 1}'\\)`));
     if (!next) break;
     html = await s.request(GEOS, { ...formState(html), __EVENTTARGET: next[1], __EVENTARGUMENT: `Page$${page + 1}` });
@@ -105,9 +98,15 @@ async function georgiaCounty(code: string, from: string, to: string): Promise<Ge
   return [...found.values()];
 }
 
-async function carolina(since: string): Promise<{ total: number; utility: CarolinaBoundary[] }> {
+/** Every NPDES filing in one county submitted between two dates (all result pages). */
+function georgiaCounty(code: string, from: string, to: string): Promise<GeorgiaFiling[]> {
+  return geosSearch({ [FIELD + "ddlSiteCounty"]: code, [FIELD + "txtStartDate"]: mdy(from), [FIELD + "txtEndDate"]: mdy(to) }, COUNTIES[code], MAX_PAGES);
+}
+
+/** SC DES boundaries in the Savannah River box matching `where`, newest first. */
+async function carolinaBoundaries(where: string): Promise<CarolinaBoundary[]> {
   const q = new URLSearchParams({
-    where: `DB_DATE >= DATE '${since}'`,
+    where,
     geometry: SC_BBOX,
     geometryType: "esriGeometryEnvelope",
     inSR: "4326",
@@ -120,25 +119,36 @@ async function carolina(since: string): Promise<{ total: number; utility: Caroli
   if (!res.ok) throw new Error(`gis.des.sc.gov answered ${res.status}`);
   const j = (await res.json()) as { error?: { message: string }; features?: { attributes: { OBJECTID: number; DB_PROJECT: string | null; DB_DATE: number | null; POLY_AREA: number | null } }[] };
   if (j.error) throw new Error(`SC DES: ${j.error.message}`);
-  const feats = j.features ?? [];
-  const utility = feats
+  return (j.features ?? [])
     .map(({ attributes: a }) => ({
       objectId: a.OBJECTID,
       project: (a.DB_PROJECT ?? "").trim(),
       boundaryFiled: a.DB_DATE ? new Date(a.DB_DATE).toISOString().slice(0, 10) : null,
       acres: Math.round((a.POLY_AREA ?? 0) * 10) / 10,
     }))
-    .filter((b) => looksLikeUtility(b.project));
-  return { total: feats.length, utility };
+    .sort((x, y) => (y.boundaryFiled ?? "").localeCompare(x.boundaryFiled ?? ""));
+}
+
+const NAME_PAGES = 3; // the newest 45 Georgia filings for a name
+const NAME_ROWS = 40;
+
+/** Filings of any kind whose facility (GA, statewide) or project (SC, Savannah River box) name contains `query`. */
+export async function searchByName(query: string): Promise<PermitSearch> {
+  const [georgia, southCarolina] = await Promise.all([
+    geosSearch({ [FIELD + "txtFacilityName"]: query }, undefined, NAME_PAGES),
+    carolinaBoundaries(`UPPER(DB_PROJECT) LIKE '%${query.toUpperCase().replace(/'/g, "''")}%'`),
+  ]);
+  return { query, checkedAt: new Date().toISOString(), georgia: georgia.slice(0, NAME_ROWS), southCarolina: southCarolina.slice(0, NAME_ROWS) };
 }
 
 /** Filings since `since` (YYYY-MM-DD, inclusive) that look like utility work. */
 export async function checkSince(since: string): Promise<LiveCheck> {
   const today = new Date().toISOString().slice(0, 10);
-  const [ga, sc] = await Promise.all([
+  const [ga, scAll] = await Promise.all([
     Promise.all(Object.keys(COUNTIES).map(async (code) => ({ county: COUNTIES[code], rows: await georgiaCounty(code, since, today) }))),
-    carolina(since),
+    carolinaBoundaries(`DB_DATE >= DATE '${since}'`),
   ]);
+  const sc = { total: scAll.length, utility: scAll.filter((b) => looksLikeUtility(b.project)) };
   return {
     checkedAt: new Date().toISOString(),
     since,
