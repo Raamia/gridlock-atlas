@@ -1,0 +1,232 @@
+#!/usr/bin/env python3
+"""Deterministically parse the Region B planning documents into project records.
+
+Inputs (cached by fetch_source.py):
+  desc-scrtp-2026-2030 / -2025-2029 / -2024-2028   DESC "Planned Transmission Projects $2M and above"
+  gpc-irp-2025-vol3                                 Georgia Power 2025 IRP Vol. 3 (2024 GA ITS Ten-Year Plan)
+
+Output: data/region-b/parsed.json — one record per project per document version, each field
+with a short verbatim excerpt and its PDF page, ready for geocoding and review.
+"""
+import json
+import pathlib
+import re
+import subprocess
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent))
+from textnorm import normalize  # noqa: E402
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+CACHE = ROOT / "data" / "sources" / ".cache"
+OUT = ROOT / "data" / "region-b"
+
+
+def page_text(source_id: str, page: int) -> str:
+    return (CACHE / "text" / source_id / f"p{page:04d}.txt").read_text(errors="replace")
+
+
+def layout_text(source_id: str, page: int) -> str:
+    pdf = CACHE / "raw" / f"{source_id}.pdf"
+    return subprocess.run(["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
+                          capture_output=True, text=True).stdout
+
+
+def verified(source_id: str, page: int, excerpt: str) -> bool:
+    return normalize(excerpt) in normalize(page_text(source_id, page))
+
+
+def ev(source_id, page, excerpt, supports):
+    excerpt = " ".join(excerpt.split())
+    return {"sourceId": source_id, "page": page, "exactExcerpt": excerpt, "supports": supports,
+            "verifiedByScript": verified(source_id, page, excerpt)}
+
+
+def first_words(text: str, n: int = 40) -> str:
+    words = " ".join(text.split()).split(" ")
+    if len(words) <= n:
+        return " ".join(words)
+    cut = " ".join(words[:n])
+    # prefer ending on a sentence boundary
+    m = re.match(r"(.+?\.)\s", cut + " ")
+    return m.group(1) if m and len(m.group(1).split()) >= 8 else cut
+
+
+def mdy(s: str):
+    m = re.match(r"(\d{1,2})/(\d{1,2})/(\d{2,4})", s.strip())
+    if not m:
+        return None
+    mo, d, y = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    if y < 100:
+        y += 2000
+    return f"{y:04d}-{mo:02d}-{d:02d}"
+
+
+# ------------------------------------ DESC ------------------------------------
+
+DESC_LISTS = ["desc-scrtp-2026-2030", "desc-scrtp-2025-2029", "desc-scrtp-2024-2028"]
+SECTION = ["Project ID", "Project Description", "Project Need", "Project Status", "Planned In-Service Date", "Estimated Project Cost"]
+
+
+def parse_desc(source_id: str):
+    meta = json.loads((CACHE / "meta" / f"{source_id}.json").read_text())
+    out = []
+    for page in range(1, meta["pageCount"] + 1):
+        raw = page_text(source_id, page)
+        lines = [l.strip() for l in raw.splitlines()]
+        if "Project ID" not in lines:
+            continue
+        try:
+            i_budget = next(i for i, l in enumerate(lines) if l.startswith("5 Year Budget"))
+        except StopIteration:
+            continue
+        i_id = lines.index("Project ID")
+        title = " ".join(l for l in lines[i_budget + 1:i_id] if l)
+
+        def block(name):
+            i = lines.index(name)
+            j = next((k for k in range(i + 1, len(lines)) if lines[k] in SECTION), len(lines))
+            return " ".join(l for l in lines[i + 1:j] if l)
+
+        pid = block("Project ID")
+        desc = block("Project Description")
+        need = block("Project Need")
+        status = block("Project Status")
+        isd_raw = block("Planned In-Service Date")
+        isd = mdy(isd_raw)
+
+        # yearly budget from the layout rendering (header row + value row)
+        lay = layout_text(source_id, page)
+        costs = {}
+        lay_lines = lay.splitlines()
+        for k, l in enumerate(lay_lines):
+            if "Previous" in l and "Total" in l:
+                heads = l.split()
+                for vl in lay_lines[k + 1:k + 4]:
+                    vals = re.findall(r"\$[\d,]+", vl)
+                    if len(vals) == len(heads):
+                        costs = {h.rstrip("*"): int(v.replace("$", "").replace(",", "")) for h, v in zip(heads, vals)}
+                        break
+                break
+
+        cost_ev = []
+        for y, v in costs.items():
+            if y.isdigit() and v > 0:
+                e = ev(source_id, page, f"{y} ${v:,}", f"budgeted spending in {y}")
+                if e["verifiedByScript"]:
+                    cost_ev.append(e)
+        if costs.get("Total"):
+            e = ev(source_id, page, f"Total ${costs['Total']:,}", "total estimated project cost")
+            if e["verifiedByScript"]:
+                cost_ev.append(e)
+
+        miles = re.search(r"(?:approximately|approx\.?)\s+([\d.]+)\s*(?:-\s*)?miles?", desc, re.I) or re.search(r"([\d.]+)\s*(?:-\s*)?miles?", desc, re.I)
+        out.append({
+            "sourceId": source_id, "page": page, "projectId": pid, "title": title,
+            "description": desc, "need": need, "status": status, "inService": isd, "inServiceRaw": isd_raw,
+            "costs": costs, "miles": float(miles.group(1)) if miles else None,
+            "evidence": {
+                "title": ev(source_id, page, title, "project name"),
+                "projectId": ev(source_id, page, f"Project ID {pid}", "DESC project ID"),
+                "description": ev(source_id, page, first_words(desc), "project scope"),
+                "status": ev(source_id, page, f"Project Status {status}", "project status"),
+                "inService": ev(source_id, page, f"Planned In-Service Date {isd_raw}", "planned in-service date"),
+                "costs": cost_ev,
+            },
+        })
+    return out
+
+
+# ------------------------------------ GPC ------------------------------------
+
+GPC = "gpc-irp-2025-vol3"
+ROW_RE = re.compile(r"^\s*(\d{3})\s+(20\d{2})\s+(\d{5})\s+(.*?)\s{2,}(\d{1,2}/\d{1,2}/\d{4})\s+([A-Z]{2,5})\s")
+
+
+def parse_gpc_summary():
+    """Zone / year / TEAMS / name / need date / sponsor from the summary table pages."""
+    rows = {}
+    for page in range(170, 200):
+        lay = layout_text(GPC, page)
+        if "TEAMS" not in lay:
+            continue
+        lines = lay.splitlines()
+        cur = None
+        for l in lines:
+            m = ROW_RE.match(l)
+            if m:
+                zone, year, teams, name, need, sponsor = m.groups()
+                cur = {"zone": zone, "year": int(year), "teams": teams, "name": name.strip(), "need": mdy(need),
+                       "sponsor": sponsor, "summaryPage": page}
+                rows[teams] = cur
+            elif cur and l.strip() and not re.search(r"Page \d+ of|Ten-Year Plan|CRITICAL|contents|policy|PUBLIC", l):
+                # continuation of a wrapped project name sits in the name column
+                frag = l.strip()
+                if len(frag) < 60 and not frag.startswith("$"):
+                    cur["name"] = (cur["name"] + " " + frag).strip()
+            elif not l.strip():
+                pass
+    return rows
+
+
+def parse_gpc_details():
+    meta = json.loads((CACHE / "meta" / f"{GPC}.json").read_text())
+    out = {}
+    for page in range(1, meta["pageCount"] + 1):
+        raw = page_text(GPC, page)
+        m_t = re.search(r"Teams #\s*(\d+)", raw)
+        m_d = re.search(r"Need Date\s+(\d{2}/\d{2}/\d{4})\s+Start Date\s+(\d{2}/\d{2}/\d{4})", raw)
+        if not m_t or not m_d:
+            continue
+        lines = [l.strip() for l in raw.splitlines()]
+        i_t = next(i for i, l in enumerate(lines) if l.startswith("Teams #"))
+        title_lines = []
+        for l in reversed(lines[:i_t]):
+            if not l or l.endswith("employees.") or "CEII" in l:
+                break
+            title_lines.insert(0, l)
+        title = " ".join(title_lines)
+        desc_m = re.search(r"Description\s*\n(.*?)\n\s*Supporting Statement", raw, re.S)
+        desc = " ".join(desc_m.group(1).split()) if desc_m else ""
+        teams = m_t.group(1)
+        miles = re.search(r"(?:approximately|approx\.?)\s+([\d.]+)\s*miles?", desc, re.I) or re.search(r"([\d.]+)\s*(?:-\s*)?miles?", desc, re.I)
+        need_raw, start_raw = m_d.group(1), m_d.group(2)
+        out[teams] = {
+            "sourceId": GPC, "page": page, "teams": teams, "title": title, "description": desc,
+            "need": mdy(need_raw), "start": mdy(start_raw), "miles": float(miles.group(1)) if miles else None,
+            "evidence": {
+                "title": ev(GPC, page, title, "project name"),
+                "teams": ev(GPC, page, f"Teams # {teams}", "TEAMS project number"),
+                "dates": ev(GPC, page, f"Need Date {need_raw} Start Date {start_raw}", "need (in-service) date and start date"),
+                "description": ev(GPC, page, first_words(desc), "project scope") if desc else None,
+            },
+        }
+    return out
+
+
+def main():
+    OUT.mkdir(parents=True, exist_ok=True)
+    desc = {sid: parse_desc(sid) for sid in DESC_LISTS}
+    summary = parse_gpc_summary()
+    details = parse_gpc_details()
+    gpc = []
+    for teams, d in details.items():
+        s = summary.get(teams, {})
+        gpc.append({**d, "zone": s.get("zone"), "sponsor": s.get("sponsor"), "summaryPage": s.get("summaryPage"),
+                    "summaryName": s.get("name")})
+    missing = sorted(set(summary) - set(details))
+    json.dump({"desc": desc, "gpc": gpc, "gpcSummaryOnly": [summary[t] for t in missing]},
+              open(OUT / "parsed.json", "w"), indent=1)
+    for sid, rows in desc.items():
+        bad = sum(1 for r in rows for k, e in r["evidence"].items() if k != "costs" and e and not e["verifiedByScript"])
+        print(f"{sid}: {len(rows)} projects, {bad} unverified field excerpts")
+    bad = sum(1 for r in gpc for k, e in r["evidence"].items() if e and not e["verifiedByScript"])
+    sponsors = {}
+    for r in gpc:
+        sponsors[r["sponsor"]] = sponsors.get(r["sponsor"], 0) + 1
+    print(f"gpc: {len(gpc)} detail records ({bad} unverified excerpts), {len(summary)} summary rows, "
+          f"{len(missing)} summary-only; sponsors {sponsors}")
+
+
+if __name__ == "__main__":
+    main()

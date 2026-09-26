@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/*
+ * GridLock Atlas — editorial command center.
+ * Midnight navy canvas; cyan = project A, violet = project B, amber = only for
+ * source-supported overlap (places or periods). Status colors never reuse those three.
+ */
+:root {
+  --bg-0: #040914;
+  --bg-1: #080f1f;
+  --bg-2: #0c1528;
+  --bg-3: #121d35;
+  --bg-4: #1a2744;
+  --line: rgba(138, 160, 206, 0.11);
+  --line-2: rgba(138, 160, 206, 0.2);
+  --line-3: rgba(138, 160, 206, 0.32);
+  --text-0: #eef3fc;
+  --text-1: #c1cbe0;
+  --text-2: #8b98b5;
+  --text-3: #5d6a87;
+
+  --a: #2fd6f2;
+  --a-deep: #0ea5c6;
+  --b: #a78bfa;
+  --b-deep: #7c5cf0;
+  --amber: #fbbf24;
+  --amber-deep: #d99a0b;
+
+  --review: #f472b6;
+  --known: #34d399;
+  --conflict: #fb923c;
+  --possible: #94a3b8;
+  --danger: #f87171;
+
+  --glass: rgba(8, 15, 31, 0.8);
+  --shadow-panel: 0 24px 60px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px var(--line);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-bg-0: var(--bg-0);
+  --color-bg-1: var(--bg-1);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-bg-4: var(--bg-4);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-line-3: var(--line-3);
+  --color-text-0: var(--text-0);
+  --color-text-1: var(--text-1);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-a: var(--a);
+  --color-a-deep: var(--a-deep);
+  --color-b: var(--b);
+  --color-b-deep: var(--b-deep);
+  --color-amber: var(--amber);
+  --color-review: var(--review);
+  --color-known: var(--known);
+  --color-conflict: var(--conflict);
+  --color-possible: var(--possible);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --ease-out-quint: var(--ease-out);
+}
+
+html,
+body {
+  background: var(--bg-0);
+  color: var(--text-0);
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+  overflow: hidden;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--a) 35%, transparent);
+  color: var(--text-0);
+}
+
+:focus-visible {
+  outline: 2px solid var(--a);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.num,
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: var(--shadow-panel);
+}
+
+.hairline {
+  border-color: var(--line);
+}
+
+/* scrollbars */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+}
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* subtle grain + vignette over the map stage */
+.stage-vignette {
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(4, 9, 20, 0.55) 100%),
+    linear-gradient(to bottom, rgba(4, 9, 20, 0.35), transparent 14%, transparent 86%, rgba(4, 9, 20, 0.5));
+}
+
+/* Mapbox chrome, re-skinned */
+.mapboxgl-ctrl-attrib {
+  background: rgba(4, 9, 20, 0.6) !important;
+  font-size: 10px !important;
+}
+.mapboxgl-ctrl-attrib a {
+  color: var(--text-2) !important;
+}
+.mapboxgl-ctrl-logo {
+  opacity: 0.55;
+}
+.mapboxgl-popup-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.mapboxgl-popup-tip {
+  display: none !important;
+}
+
+/* amber pulse for the stated shared site */
+@keyframes site-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+.site-pulse {
+  animation: site-pulse 2.4s var(--ease-out) infinite;
+}
+
+@keyframes scan {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+.scan-bar {
+  animation: scan 1.1s var(--ease-out) infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media print {
+  body {
+    overflow: visible;
+    background: #fff;
+    color: #000;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

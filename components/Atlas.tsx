@@ -1,0 +1,97 @@
+"use client";
+
+import dynamic from "next/dynamic";
+import { useEffect } from "react";
+import { useAtlas } from "@/lib/store";
+import { BriefModal } from "./BriefModal";
+import { MethodDrawer, SourcesDrawer } from "./Drawers";
+import { GuidedDemo } from "./GuidedDemo";
+import { Inspector } from "./Inspector";
+import { MapOverlays } from "./MapOverlays";
+import { Queue } from "./Queue";
+import { Timeline } from "./Timeline";
+import { TopBar } from "./TopBar";
+
+const MapStage = dynamic(() => import("./MapStage"), {
+  ssr: false,
+  loading: () => <div className="shimmer absolute inset-0 bg-bg-0" aria-label="Loading map" />,
+});
+
+export function Atlas() {
+  useKeyboard();
+  useUrlSync();
+  return (
+    <div className="grid h-dvh grid-rows-[56px_minmax(0,1fr)] bg-bg-0">
+      <TopBar />
+      <div className="grid min-h-0 grid-cols-[340px_minmax(0,1fr)]">
+        <Queue />
+        <main className="flex min-h-0 min-w-0 flex-col">
+          <div className="relative min-h-0 flex-1 overflow-hidden bg-bg-0">
+            <MapStage />
+            <MapOverlays />
+            <Inspector />
+            <GuidedDemo />
+          </div>
+          <Timeline />
+        </main>
+      </div>
+      <BriefModal />
+      <SourcesDrawer />
+      <MethodDrawer />
+    </div>
+  );
+}
+
+function useKeyboard() {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "SELECT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const st = useAtlas.getState();
+      if (e.key === "Escape") {
+        if (st.briefOpen) return st.set({ briefOpen: false });
+        if (st.sourcesOpen || st.methodOpen) return st.set({ sourcesOpen: false, methodOpen: false });
+        if (st.inspectorOpen) return st.select(null);
+        if (st.demoStep !== null) return st.set({ demoStep: null });
+      }
+      if ((e.key === "c" || e.key === "C") && !st.running) {
+        e.preventDefault();
+        void st.compare();
+      }
+      if ((e.key === "j" || e.key === "k" || e.key === "ArrowDown" || e.key === "ArrowUp") && st.run && st.demoStep === null) {
+        const cards = [...document.querySelectorAll<HTMLElement>("[data-match-id]")];
+        if (!cards.length) return;
+        const ids = cards.map((c) => c.dataset.matchId!);
+        const i = st.selectedMatchId ? ids.indexOf(st.selectedMatchId) : -1;
+        const next = e.key === "j" || e.key === "ArrowDown" ? Math.min(ids.length - 1, i + 1) : Math.max(0, i - 1);
+        e.preventDefault();
+        st.select(ids[next]);
+        cards[next]?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+}
+
+/** ?pair=<id> deep links: run the engine quietly, then open that pair. */
+function useUrlSync() {
+  const selected = useAtlas((s) => s.selectedMatchId);
+  useEffect(() => {
+    const pair = new URLSearchParams(window.location.search).get("pair");
+    if (!pair) return;
+    void useAtlas
+      .getState()
+      .compare({ quiet: true })
+      .then((run) => {
+        if (run?.matches.some((m) => m.id === pair)) useAtlas.getState().select(pair);
+      });
+  }, []);
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (selected) url.searchParams.set("pair", selected);
+    else url.searchParams.delete("pair");
+    window.history.replaceState(null, "", url.toString());
+  }, [selected]);
+}

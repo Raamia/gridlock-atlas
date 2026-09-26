@@ -1,0 +1,1372 @@
+{
+ "cluster": "dairyland-alma-blair",
+ "sources": [
+  {
+   "id": "dpc-alma-blair-page",
+   "title": "Alma-Blair Transmission Project",
+   "publisher": "Dairyland Power Cooperative",
+   "url": "https://dairylandpower.com/alma-blair-transmission-project",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "The page has no publication or update date. Its text mentions the PSCW Written Order issued March 11, 2026. Retrieved 2026-09-26T05:25:15Z."
+  },
+  {
+   "id": "psc-1515-ce-103-final",
+   "title": "Final Decision, docket 1515-CE-103 (Dairyland CPCN, Wisconsin portion of LRTP Tranche 1 Project 4, Alma to Blair Transmission Line Project)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/1515-CE-103%20Final%20Decision.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-03-10",
+   "documentDateEvidence": "PDF p.50 reads 'Dated at Madison, Wisconsin, the 10th day of March, 2026.' Page 1 shows PSC REF#:582638. This copy is hosted on dairylandpower.com, not on PSC ERF. 56 pages."
+  },
+  {
+   "id": "dpc-alma-blair-cpcn-2024",
+   "title": "Application for Certificate of Public Convenience and Necessity, Alma-Blair Transmission Line Project, PSCW Docket No. 1515-CE-103 (joint PSCW/WDNR application, July 2024 version)",
+   "publisher": "Dairyland Power Cooperative",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/Dairyland%20Alma-Blair%20CPCN%20Application_2024-07-01.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2024-07-01",
+   "documentDateEvidence": "The cover and running headers say 'July 2024'. The day comes only from the file name '_2024-07-01'. This is the 268-page narrative of Dairyland's joint CPCN/WDNR application; the appendices, including the Appendix A route figures, are not in this PDF. Printed page = viewer page minus 20 from viewer p.21 on."
+  },
+  {
+   "id": "dpc-alma-blair-map-2024",
+   "title": "Alma-Blair Transmission Project map handout (route options)",
+   "publisher": "Dairyland Power Cooperative",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/Maps/DPC_Alma_Blair_MapHandout_04.08.2024.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No date is printed on the map. The file name '04.08.2024' suggests April 8, 2024. It shows both the Northern and Southern route options from before the decision."
+  }
+ ],
+ "projects": [
+  {
+   "id": "dpc-alma-blair",
+   "title": "Alma-Blair Transmission Line Project (Alma to Blair 345 kV)",
+   "shortTitle": "Alma-Blair 345 kV",
+   "titleEvidence": [
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "construct the Alma to Blair Transmission Line Project (project), which includes construction and operation of a new 345 kilovolt (kV) transmission line",
+     "supports": "project title and new 345 kV line",
+     "page": 1,
+     "section": "Final Decision (introduction)",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "dpc-alma-blair-page",
+     "exactExcerpt": "Dairyland's Alma-Blair Transmission Project is part of a long-range transmission project that will improve reliability while delivering low-cost energy across the Upper Midwest.",
+     "supports": "utility's project name and owner",
+     "section": "About",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "dpc-alma-blair-cpcn-2024",
+     "exactExcerpt": "The Project, known as the Alma-Blair Transmission Line Project, will start at Dairyland's existing LQ-34 transmission line structure 3 (LQ-34-3)",
+     "supports": "application's project name and western start structure",
+     "page": 21,
+     "printedPage": "1",
+     "section": "Executive Summary - Introduction",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "Dairyland Power Cooperative will build a new 345 kV line, about 34-35 miles long, in Buffalo and Trempealeau counties, Wisconsin, from the existing line near the Alma Substation to the new Tremval North Substation near Blair; the PSC of Wisconsin granted its CPCN for the South Route in docket 1515-CE-103 (final decision dated 2026-03-10) at an estimated cost of $188,796,752.",
+   "docketId": "1515-CE-103",
+   "parentInitiative": "MISO LRTP Tranche 1 Project 4 (Wilmarth-North Rochester-Tremval), Wisconsin portion",
+   "owners": [
+    {
+     "utilityId": "dairyland",
+     "name": "Dairyland Power Cooperative",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "on the application of Dairyland Power Cooperative (applicant) for a Certificate of Public Convenience and Necessity (CPCN) to construct the Alma to Blair Transmission Line Project",
+       "supports": "Dairyland is the applicant",
+       "page": 1,
+       "section": "Final Decision (introduction)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The Project would be 100 percent owned by Dairyland Power Cooperative (Dairyland or Applicant).",
+       "supports": "100 percent Dairyland ownership",
+       "page": 26,
+       "printedPage": "6",
+       "section": "1.1 Owners and investors",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "approved",
+    "asOf": "2026-09-26",
+    "evidence": [
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "The CPCN application is APPROVED subject to conditions and as modified by this Final Decision.",
+      "supports": "CPCN approved",
+      "page": 1,
+      "section": "Final Decision (introduction)",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "Dated at Madison, Wisconsin, the 10th day of March, 2026.",
+      "supports": "final decision date 2026-03-10",
+      "page": 50,
+      "section": "Order",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dpc-alma-blair-page",
+      "exactExcerpt": "In June 2024, Dairyland applied for a Certificate of Public Convenience and Necessity (CPCN), which was approved by the PSCW in February 2026. The PSCW's Written Order was issued on March 11, 2026.",
+      "supports": "approval Feb 2026; written order March 11, 2026 (utility account)",
+      "section": "Current Project Status",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dpc-alma-blair-page",
+      "exactExcerpt": "Alma-Blair Transmission Project Project Status: PLANNING Strategic Priority: Reliability",
+      "supports": "utility page status label PLANNING at retrieval 2026-09-26 (not yet under construction)",
+      "section": "Project header",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with an anticipated in-service date of September 2028.",
+      "supports": "construction start Q4 2026 and in-service September 2028",
+      "page": 41,
+      "section": "Project Cost and Construction Schedule",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "counties": [
+    {
+     "name": "Buffalo",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "connecting the existing LQ-43 transmission line near the Alma Substation to the new Tremval North Substation, in Buffalo and Trempealeau Counties, Wisconsin.",
+       "supports": "endpoints and counties per final decision",
+       "page": 1,
+       "section": "Final Decision (introduction)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "County where facilities may be placed Trempealeau, Wis. Buffalo, Wis.",
+       "supports": "counties per utility page",
+       "section": "Project At A Glance",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The proposed Project involves the construction of facilities located in Buffalo and Trempealeau Counties, Wisconsin.",
+       "supports": "counties per application",
+       "page": 27,
+       "printedPage": "7",
+       "section": "1.4 Cities, villages and townships",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Trempealeau",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "connecting the existing LQ-43 transmission line near the Alma Substation to the new Tremval North Substation, in Buffalo and Trempealeau Counties, Wisconsin.",
+       "supports": "endpoints and counties per final decision",
+       "page": 1,
+       "section": "Final Decision (introduction)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "County where facilities may be placed Trempealeau, Wis. Buffalo, Wis.",
+       "supports": "counties per utility page",
+       "section": "Project At A Glance",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The proposed Project involves the construction of facilities located in Buffalo and Trempealeau Counties, Wisconsin.",
+       "supports": "counties per application",
+       "page": 27,
+       "printedPage": "7",
+       "section": "1.4 Cities, villages and townships",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "New line voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The applicant is proposing to construct and operate a new 345 kV transmission line, connecting the existing LQ-43 transmission line near the Alma Substation to the new Tremval North Substation",
+       "supports": "345 kV voltage and endpoints",
+       "page": 5,
+       "section": "Finding of Fact 2",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Configuration",
+     "value": "345 kV double-circuited with existing 161 kV LQ-18 along most of the route; single-circuit 345 kV in Segments 1A and 6 (utility page: double circuit 161/345 kV)",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "the Proposed Southern Route Segment 2A would run east and be double circuited 345 kV/161 kV along the applicant's existing LQ-18 corridor traveling east for 21.7 miles",
+       "supports": "South Route unique segment follows LQ-18 for 21.7 miles",
+       "page": 28,
+       "section": "Routing - Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "Segment 1A would travel north from this structure for 1.1 miles as single circuit 345 kV along the east side of State Road 35 as expanded ROW.",
+       "supports": "Segment 1A along State Road 35",
+       "page": 28,
+       "section": "Routing - Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The final segment, Segment 6, would be approximately 0.7 miles of single circuit 345 kV transmission line with a new 150-foot ROW to route the transmission line north",
+       "supports": "Segment 6: 0.7 mile north to the switching station",
+       "page": 29,
+       "section": "Routing - Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "End points Wisconsin: Tremval substation to Alma substation. A new double circuit 161/345 kV transmission line from Alma to the Tremval substation just outside of Blair, Wis.",
+       "supports": "utility-stated endpoints and double-circuit 161/345 kV configuration",
+       "section": "Project At A Glance",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Authorized South Route length (PSC final decision)",
+     "value": "35",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The Proposed Southern Route would be approximately 35 miles total in length, including a total of approximately 653 acres of ROW",
+       "supports": "South Route length 35 miles (PSC)",
+       "page": 28,
+       "section": "Routing - Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The total length of the proposed (Southern) route is 35 miles, while the alternate (Northern) route is 45 miles long.",
+       "supports": "route lengths per PSC",
+       "page": 14,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Line length (Dairyland project page)",
+     "value": "34",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "Dairyland proposed two route options and the Public Utilities Commission of Wisconsin (PSCW) selected the southern route, spanning approximately 34 miles.",
+       "supports": "southern route selected; 34 miles (utility page)",
+       "section": "Project Details",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Southern Route length (July 2024 application)",
+     "value": "34",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Southern Route - approximately 34 miles long. The Southern Route is Dairyland's preferred route.",
+       "supports": "Southern Route 34 miles in 2024 application",
+       "page": 23,
+       "printedPage": "3",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Estimated total gross project cost, authorized South Route (excludes AFUDC)",
+     "value": "188796752",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The estimated project cost based upon the authorized South Route is $188,796,752.",
+       "supports": "cost of authorized South Route",
+       "page": 5,
+       "section": "Finding of Fact 3",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The applicant estimates the total gross project cost of the proposed project, as modified by this Final Decision, to be $188,796,752. The estimated project costs do not include AFUDC.",
+       "supports": "gross cost excludes AFUDC",
+       "page": 40,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Southern Route total project cost estimate (July 2024 application, superseded)",
+     "value": "177383646",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "subtotal other costs 7,749,093 5,748,764 total project costs 255,674,401 177,383,646",
+       "supports": "2024 application totals: Northern $255,674,401; Southern $177,383,646 (Table 4.1-1 columns Northern, Southern)",
+       "page": 80,
+       "printedPage": "60",
+       "section": "4.1 Table 4.1-1 Estimated Project Costs",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Docket",
+     "value": "PSC of Wisconsin docket 1515-CE-103",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Application for Certificate of Public Convenience and Necessity Alma-Blair Transmission Line Project PSCW Docket No. 1515-CE-103 Submitted to the Public Service Commission of Wisconsin and the Wisconsin Department of Natural Resources July 2024",
+       "supports": "document identity: July 2024 CPCN application, docket 1515-CE-103",
+       "page": 1,
+       "section": "Cover",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "CPCN decision",
+     "value": "Approved subject to conditions. Final Decision dated 2026-03-10 after the 2026-02-05 open meeting. Dairyland page: approved February 2026, Written Order issued 2026-03-11.",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The CPCN application is APPROVED subject to conditions and as modified by this Final Decision.",
+       "supports": "CPCN approved",
+       "page": 1,
+       "section": "Final Decision (introduction)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The Commission discussed the record in this matter at its February 5, 2026, open meeting.",
+       "supports": "Commission deliberation date",
+       "page": 4,
+       "section": "Procedural Background",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "Dated at Madison, Wisconsin, the 10th day of March, 2026.",
+       "supports": "final decision date 2026-03-10",
+       "page": 50,
+       "section": "Order",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "In June 2024, Dairyland applied for a Certificate of Public Convenience and Necessity (CPCN), which was approved by the PSCW in February 2026. The PSCW's Written Order was issued on March 11, 2026.",
+       "supports": "approval Feb 2026; written order March 11, 2026 (utility account)",
+       "section": "Current Project Status",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The Commission must take final action on or before March 12, 2026 or the application is approved by operation of law.",
+       "supports": "statutory decision deadline",
+       "page": 2,
+       "section": "Procedural Background",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Application procedural history",
+     "value": "Application cover dated July 2024 (Dairyland page also says June 2024 and July 2024). PSC record: filed 2025-02-14, found complete 2025-03-17, Notice of Proceeding 2025-04-10, revised version filed 2025-11-10.",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Application for Certificate of Public Convenience and Necessity Alma-Blair Transmission Line Project PSCW Docket No. 1515-CE-103 Submitted to the Public Service Commission of Wisconsin and the Wisconsin Department of Natural Resources July 2024",
+       "supports": "document identity: July 2024 CPCN application, docket 1515-CE-103",
+       "page": 1,
+       "section": "Cover",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "Preliminary engineering CPCN application submitted in July 2024 Land surveying and design",
+       "supports": "utility page says application submitted July 2024",
+       "section": "Anticipated Schedule",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "On February 14, 2025, pursuant to Wis. Stat. \u00a7 196.491 and Wis. Admin. Code chs. PSC 4 and 111.53, the applicant filed with the Commission an application for a CPCN to construct the project.",
+       "supports": "PSC-recorded filing date 2025-02-14",
+       "page": 1,
+       "section": "Procedural Background",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "complete on March 17, 2025. (PSC REF#: 536931.) A Notice of Proceeding was issued on April 10, 2025.",
+       "supports": "completeness 2025-03-17; notice of proceeding 2025-04-10",
+       "page": 2,
+       "section": "Procedural Background",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "The applicant subsequently filed a revised version of its application on November 10, 2025.",
+       "supports": "revised application 2025-11-10 (footnote 1)",
+       "page": 1,
+       "section": "Procedural Background (footnote 1)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Construction start (PSC final decision)",
+     "value": "Expected to begin Q4 2026; the decision gives no construction end date (in-service September 2028)",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with an anticipated in-service date of September 2028.",
+       "supports": "construction start Q4 2026 and in-service September 2028",
+       "page": 41,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Vegetation clearing timing (PSC decision, citing DNR witness)",
+     "value": "Applicant intends to begin in Q4 2026 and finish by the start of Q2 (April 1st); the year of completion is not stated",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "the applicant's intent to have vegetation clearing begin in the 4th quarter of 2026 and completed by the start of the 2nd quarter (April 1st)",
+       "supports": "vegetation clearing timing",
+       "page": 34,
+       "section": "Threatened and Endangered Species Review",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "CPCN validity condition",
+     "value": "The certificate becomes void if on-site physical construction has not begun within one year of the Final Decision's effective date, unless an extension is granted",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "If the applicant has not begun on-site physical construction of the authorized project within one year of the effective date of this Final Decision, the Certificate authorizing the applicant's project for which construction has not commenced shall become void",
+       "supports": "CPCN lapses without construction start within one year",
+       "page": 50,
+       "section": "Order 18",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Terminating facility",
+     "value": "New 345 kV Tremval North Substation / switching station approved in docket 5-CE-158; NSPW to build, own and operate it",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "connect to the new 345 kV Tremval Nouth Substation that was approved in docket 5-CE-158. The terminating substation would be constructed, owned, and operated by Northern States Power Company-Wisconsin.",
+       "supports": "terminates at NSPW station approved in WWTC docket 5-CE-158",
+       "page": 13,
+       "section": "Project Description",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "route the transmission line north terminating at the 345 kV switching station approved in the Western Wisconsin Transmission connection project (docket 5-CE-158).",
+       "supports": "Segment 6 terminates at WWTC-approved switching station",
+       "page": 29,
+       "section": "Routing - Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Parent initiative",
+     "value": "MISO LRTP Tranche 1 Project 4 (Wilmarth-North Rochester-Tremval), Wisconsin portion; approved as an MTEP21 addendum in July 2022",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "Certificate of Public Convenience and Necessity to Construct and Operate the Wisconsin Portion of Long Range Transmission Project Tranche 1 Project 4",
+       "supports": "Wisconsin portion of LRTP Tranche 1 Project 4",
+       "page": 1,
+       "section": "Caption",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "This Project is part of the larger Midcontinent Independent System Operator, Inc. (MISO) Tranche 1 Long-Range Transmission Planning (LRTP) Project 4, Wilmarth-North Rochester-Tremval Project, located across both Minnesota and Wisconsin.",
+       "supports": "parent initiative MISO LRTP Tranche 1 Project 4",
+       "page": 21,
+       "printedPage": "1",
+       "section": "Executive Summary - Introduction",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "was ultimately approved as an addendum to the MISO Transmission Expansion Plan for 2021 (MTEP21) in July 2022.",
+       "supports": "MISO approval July 2022 (MTEP21 addendum)",
+       "page": 15,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Third-party contracts (July 2024)",
+     "value": "Dairyland reported no contracts with any developer to construct, finance, lease, use or own the facilities",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Dairyland has not entered into any contracts with any developer to construct, finance, lease, use, or own the proposed transmission facilities.",
+       "supports": "no third-party construction/ownership contracts (as of July 2024)",
+       "page": 26,
+       "printedPage": "6",
+       "section": "1.2 Contractual agreements",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "alma-west-endpoint",
+     "label": "Western endpoint near Alma Substation (existing LQ-34 line, structure LQ-34-3; the PSC text calls it the 'LQ-43' line)",
+     "kind": "route-endpoint",
+     "precision": "official-gis",
+     "lat": 44.30290505,
+     "lon": -91.90754943,
+     "uncertaintyMeters": 2000,
+     "coordinateSource": "Dairyland CPCN application (July 2024) Table 3.3-1 (PDF p.78, printed p.58): Southern Route Segment 1A (Common), lon -91.90754943, lat 44.30290505. This is one official point per segment, not the coordinate of structure LQ-34-3; Segment 1A runs about 0.7-1.1 mi north from that structure. Alma Substation is not named in OSM. Unnamed OSM power=substation way 160511826 (161/69 kV) at 44.30956,-91.91088 is a probable match.",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "connecting the existing LQ-43 transmission line near the Alma Substation to the new Tremval North Substation, in Buffalo and Trempealeau Counties, Wisconsin.",
+       "supports": "endpoints and counties per final decision",
+       "page": 1,
+       "section": "Final Decision (introduction)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "Both routes would begin at a common point at existing transmission structure LQ-34-3 on the east side of the Mississippi River and just south of the existing Alma Substation.",
+       "supports": "western start point location",
+       "page": 28,
+       "section": "Routing - Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "A summary of the estimated background magnetic field data in each segment can be found in Table 3.3-1 below.",
+       "supports": "Table 3.3-1 gives one point per route segment",
+       "page": 78,
+       "printedPage": "58",
+       "section": "3.3.5 Estimated background magnetic field",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "-91.25579071 44.29772893 839.8 54207.1 542.1 -91.90754943 44.30290505 782.9 54215.1 542.2 NCEI Geomagnetic Calculators (noaa.gov)",
+       "supports": "official lon/lat for Southern Route Segment 1A (last table row on p.58, per visual reading)",
+       "page": 78,
+       "printedPage": "58",
+       "section": "3.3.5 Table 3.3-1 Estimated Background Magnetic Field",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "tremval-north-substation",
+     "label": "Tremval North Substation / 345 kV switching station (new; approved in PSC docket 5-CE-158; NSPW to build, own and operate)",
+     "kind": "switching-station",
+     "precision": "locality",
+     "lat": 44.2946235,
+     "lon": -91.2338433,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Blair, Trempealeau County, WI (relation 251764) town centroid. The new station is not in OSM (Overpass bbox 44.26,-91.32,44.33,-91.18 checked 2026-09-26). For context: the 2024 application's northern option is about 0.5 mi NW of the existing Tremval Substation (OSM way 258582476, 44.29334,-91.25504), and its Table 3.3-1 Segment 6 point is 44.29772893,-91.25579071.",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "connecting the existing LQ-43 transmission line near the Alma Substation to the new Tremval North Substation, in Buffalo and Trempealeau Counties, Wisconsin.",
+       "supports": "endpoints and counties per final decision",
+       "page": 1,
+       "section": "Final Decision (introduction)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "connect to the new 345 kV Tremval Nouth Substation that was approved in docket 5-CE-158. The terminating substation would be constructed, owned, and operated by Northern States Power Company-Wisconsin.",
+       "supports": "terminates at NSPW station approved in WWTC docket 5-CE-158",
+       "page": 13,
+       "section": "Project Description",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "route the transmission line north terminating at the 345 kV switching station approved in the Western Wisconsin Transmission connection project (docket 5-CE-158).",
+       "supports": "Segment 6 terminates at WWTC-approved switching station",
+       "page": 29,
+       "section": "Routing - Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The first potential end point is adjacent to Xcel Energy's existing Tremval Substation. The second potential end point is located approximately 0.5-miles northwest of the existing Tremval Substation on the north side of the Trempealeau River.",
+       "supports": "two candidate switching-station locations relative to existing Tremval Substation",
+       "page": 24,
+       "printedPage": "4",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "tremval-substation-existing",
+     "label": "Tremval Substation (existing, Xcel Energy; near Blair)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.2933362,
+     "lon": -91.2550361,
+     "uncertaintyMeters": 150,
+     "coordinateSource": "OSM way 258582476 power=substation name='Tremval Substation' voltage=161000;69000 (Overpass, center)",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "between the Alma Substation near the Mississippi River and the Tremval Substation near Blair, Wis.",
+       "supports": "utility-named endpoints Alma Substation and Tremval Substation near Blair",
+       "section": "Project Details",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The first potential end point is adjacent to Xcel Energy's existing Tremval Substation. The second potential end point is located approximately 0.5-miles northwest of the existing Tremval Substation on the north side of the Trempealeau River.",
+       "supports": "two candidate switching-station locations relative to existing Tremval Substation",
+       "page": 24,
+       "printedPage": "4",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Dairyland's existing LQ-18 161-kV line currently connects to the existing Tremval Substation.",
+       "supports": "LQ-18 terminates at existing Tremval Substation",
+       "page": 24,
+       "printedPage": "4",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "The authorized South Route per the PSC final decision: Segment 1A runs 1.1 mi north from structure LQ-34-3 along the east side of State Road 35. Segment 1B runs 0.5 mi east, triple-circuited with LN-10/LQ-18. The line then follows the existing LQ-18 161 kV corridor east, double-circuited 345/161 kV, for 21.7 mi to a reconvergence point just NE of County Road A and State Road 93. Segment 5 continues 10.9 mi along LQ-18. Segment 6 runs 0.7 mi north, single-circuit, to the 345 kV switching station approved in 5-CE-158.",
+    "caveat": "Schematic, not survey accurate. The trace combines the PSC decision's segment text, five official segment points from Dairyland's July 2024 application Table 3.3-1, and vertices of an unnamed OSM 161 kV Alma-Tremval line used as a stand-in for the LQ-18 corridor. The OSM line has no ref tag, so identifying it as LQ-18 is an inference; the application's Segment 2B and 5 points lie within 1 m of it. The April 2024 handout map is a general graphic of the route options only. The official route GIS shapefiles (filed on PSC ERF) were not retrieved.",
+    "evidence": [
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "The Commission grants the applicant a CPCN for construction of the Alma to Blair Transmission Line Project using the Proposed South Route",
+      "supports": "CPCN granted for the South Route",
+      "page": 44,
+      "section": "Certificate",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "The Commission authorizes the Southern Route as it is superior for a variety of reasons, including that the route generally minimizes impacts, follows existing corridors for the vast majority of its length",
+      "supports": "Southern Route authorized",
+      "page": 30,
+      "section": "Authorized Project Route",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "Segment 1A would travel north from this structure for 1.1 miles as single circuit 345 kV along the east side of State Road 35 as expanded ROW.",
+      "supports": "Segment 1A along State Road 35",
+      "page": 28,
+      "section": "Routing - Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "Segment 1B would turn east to be triple circuited with the applicant's existing LN-10 69 kV and LQ-18 161 kV transmission lines along expanded ROW for 0.5 miles.",
+      "supports": "Segment 1B east along LN-10/LQ-18",
+      "page": 28,
+      "section": "Routing - Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "the Proposed Southern Route Segment 2A would run east and be double circuited 345 kV/161 kV along the applicant's existing LQ-18 corridor traveling east for 21.7 miles",
+      "supports": "South Route unique segment follows LQ-18 for 21.7 miles",
+      "page": 28,
+      "section": "Routing - Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dpc-alma-blair-cpcn-2024",
+      "exactExcerpt": "This 21.7-mile segment follows Dairyland's existing LQ-18 161-kV line, which generally has an existing ROW width of 80 feet.",
+      "supports": "Segment 2B follows existing LQ-18",
+      "page": 40,
+      "printedPage": "20",
+      "section": "1.6 Project ROW - Southern Route Segment 2B",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "converging with the Proposed Southern Route that is following the applicant's existing LQ-18 161 kV line just northeast of the intersection of County Road A with State Road 93.",
+      "supports": "reconvergence point location (CTH A / WI 93)",
+      "page": 29,
+      "section": "Routing - Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "reconnect with the proposed (Southern) route just north of the North Creek Substation near the Town of Arcadia",
+      "supports": "reconvergence just north of North Creek Substation near Town of Arcadia",
+      "page": 14,
+      "section": "Project Description",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "Along the Common Route Segment 5, the proposed project would follow the applicant's existing LQ-18 161 kV transmission corridor double circuited 345 kV/161 kV for 10.9 miles",
+      "supports": "Segment 5 follows LQ-18 for 10.9 miles",
+      "page": 29,
+      "section": "Routing - Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "The final segment, Segment 6, would be approximately 0.7 miles of single circuit 345 kV transmission line with a new 150-foot ROW to route the transmission line north",
+      "supports": "Segment 6: 0.7 mile north to the switching station",
+      "page": 29,
+      "section": "Routing - Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "route the transmission line north terminating at the 345 kV switching station approved in the Western Wisconsin Transmission connection project (docket 5-CE-158).",
+      "supports": "Segment 6 terminates at WWTC-approved switching station",
+      "page": 29,
+      "section": "Routing - Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-1515-ce-103-final",
+      "exactExcerpt": "the Alma-Blair 345 kV line (including the portion in the state of Minnesota) is constructed, while the existing Alma-Tremval 161 kV line is also rebuilt",
+      "supports": "existing Alma-Tremval 161 kV line (used to identify LQ-18 corridor)",
+      "page": 24,
+      "section": "Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dpc-alma-blair-cpcn-2024",
+      "exactExcerpt": "Segment 2B -91.68068368 44.28903137 919.3 54206.4 542.1 Segment 5 -91.36402877 44.29119825 1083.2 54203.3 542.0 (Common) Segment -91.25579071 44.29772893 839.8 54207.1 542.1 6(Common)",
+      "supports": "official lon/lat for Southern Route Segments 2B, 5 and 6 (Table 3.3-1)",
+      "page": 79,
+      "printedPage": "59",
+      "section": "3.3.5 Table 3.3-1 Estimated Background Magnetic Field",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dpc-alma-blair-cpcn-2024",
+      "exactExcerpt": "Segment 1B -91.90440771 44.30647121 1231.6 54212.8 542.1 (Common)",
+      "supports": "official lon/lat for Southern Route Segment 1B (Table 3.3-1)",
+      "page": 79,
+      "printedPage": "59",
+      "section": "3.3.5 Table 3.3-1 Estimated Background Magnetic Field",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dpc-alma-blair-cpcn-2024",
+      "exactExcerpt": "-91.25579071 44.29772893 839.8 54207.1 542.1 -91.90754943 44.30290505 782.9 54215.1 542.2 NCEI Geomagnetic Calculators (noaa.gov)",
+      "supports": "official lon/lat for Southern Route Segment 1A (last table row on p.58, per visual reading)",
+      "page": 78,
+      "printedPage": "58",
+      "section": "3.3.5 Table 3.3-1 Estimated Background Magnetic Field",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dpc-alma-blair-map-2024",
+      "exactExcerpt": "This map demonstrates current route options being considered.",
+      "supports": "map shows pre-decision route options (Northern and Southern)",
+      "page": 1,
+      "section": "Map handout",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dpc-alma-blair-map-2024",
+      "exactExcerpt": "This map is a general graphic and may not show exact locations.",
+      "supports": "map is schematic only",
+      "page": 1,
+      "section": "Map handout",
+      "verifiedByScript": true
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "Segment 1A (common) near Alma Substation / State Road 35; line starts at structure LQ-34-3 just south of the substation",
+      "lat": 44.30290505,
+      "lon": -91.90754943,
+      "coordinateSource": "Dairyland CPCN application Table 3.3-1 (PDF p.78) Southern Route Segment 1A official lon/lat"
+     },
+     {
+      "name": "Segment 1B (common), triple-circuit with LN-10/LQ-18 heading east from Alma",
+      "lat": 44.30647121,
+      "lon": -91.90440771,
+      "coordinateSource": "Dairyland CPCN application Table 3.3-1 (PDF p.79) Segment 1B official lon/lat"
+     },
+     {
+      "name": "LQ-18 161 kV corridor, about 4.4 mi east of Alma (South Route unique segment)",
+      "lat": 44.2961918,
+      "lon": -91.8344452,
+      "coordinateSource": "OSM way 258551045 power=line voltage=161000. This unnamed 161 kV line runs from Alma to Tremval Substation and stands in for the existing LQ-18 corridor that the PSC says the South Route follows. Application Table 3.3-1 points for Segments 2B and 5 lie within 1 m of it. Vertex index 24."
+     },
+     {
+      "name": "LQ-18 corridor, about 7.7 mi east of Alma",
+      "lat": 44.2926473,
+      "lon": -91.7684019,
+      "coordinateSource": "OSM way 258551045 power=line voltage=161000. This unnamed 161 kV line runs from Alma to Tremval Substation and stands in for the existing LQ-18 corridor that the PSC says the South Route follows. Application Table 3.3-1 points for Segments 2B and 5 lie within 1 m of it. Vertex index 42."
+     },
+     {
+      "name": "Segment 2B official point (South Route unique segment along LQ-18)",
+      "lat": 44.28903137,
+      "lon": -91.68068368,
+      "coordinateSource": "Dairyland CPCN application Table 3.3-1 (PDF p.79) Segment 2B official lon/lat"
+     },
+     {
+      "name": "LQ-18 corridor, about 17.9 mi east of Alma",
+      "lat": 44.283507,
+      "lon": -91.5648279,
+      "coordinateSource": "OSM way 258551045 power=line voltage=161000. This unnamed 161 kV line runs from Alma to Tremval Substation and stands in for the existing LQ-18 corridor that the PSC says the South Route follows. Application Table 3.3-1 points for Segments 2B and 5 lie within 1 m of it. Vertex index 90."
+     },
+     {
+      "name": "Reconvergence with the Northern alternative, just NE of County Road A / State Road 93 and north of North Creek Substation (Town of Arcadia)",
+      "lat": 44.2767546,
+      "lon": -91.4707652,
+      "coordinateSource": "OSM way 258551045 power=line voltage=161000. This unnamed 161 kV line runs from Alma to Tremval Substation and stands in for the existing LQ-18 corridor that the PSC says the South Route follows. Application Table 3.3-1 points for Segments 2B and 5 lie within 1 m of it. Vertex index 112, about 0.6 km NE of the CTH A / WI 93 intersection (OSM CTH A way 21627740 meets WI 93 at 44.2740,-91.477463)."
+     },
+     {
+      "name": "LQ-18 corridor, common Segment 5",
+      "lat": 44.2823801,
+      "lon": -91.4111491,
+      "coordinateSource": "OSM way 258551045 power=line voltage=161000. This unnamed 161 kV line runs from Alma to Tremval Substation and stands in for the existing LQ-18 corridor that the PSC says the South Route follows. Application Table 3.3-1 points for Segments 2B and 5 lie within 1 m of it. Vertex index 126."
+     },
+     {
+      "name": "Segment 5 official point (common segment along LQ-18)",
+      "lat": 44.29119825,
+      "lon": -91.36402877,
+      "coordinateSource": "Dairyland CPCN application Table 3.3-1 (PDF p.79) Segment 5 official lon/lat"
+     },
+     {
+      "name": "LQ-18 corridor approaching Tremval",
+      "lat": 44.2962463,
+      "lon": -91.2917177,
+      "coordinateSource": "OSM way 258551045 power=line voltage=161000. This unnamed 161 kV line runs from Alma to Tremval Substation and stands in for the existing LQ-18 corridor that the PSC says the South Route follows. Application Table 3.3-1 points for Segments 2B and 5 lie within 1 m of it. Vertex index 162."
+     },
+     {
+      "name": "Near the existing Tremval Substation, where the LQ-18 corridor (Segment 5) ends; Segment 6 turns north",
+      "lat": 44.2933362,
+      "lon": -91.2550361,
+      "coordinateSource": "OSM way 258582476 power=substation name='Tremval Substation' (center)"
+     },
+     {
+      "name": "Segment 6 (0.7-mi single-circuit segment north to the Tremval North 345 kV switching station)",
+      "lat": 44.29772893,
+      "lon": -91.25579071,
+      "coordinateSource": "Dairyland CPCN application Table 3.3-1 (PDF p.79) Segment 6 (Common) official lon/lat"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "dpc-alma-blair-page",
+     "phase": "general-construction",
+     "continuous": true,
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "note": "Dairyland project page 'Anticipated Schedule': Construction 2026-2027, then 2028 in-service and project area restoration. The schedule is marked subject to change.",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "2026 \u2013 2027 Construction 2028 In-service Project area restoration *The schedule is subject to change.",
+       "supports": "construction 2026-2027; in-service 2028 (utility page)",
+       "section": "Anticipated Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "dpc-alma-blair-cpcn-2024",
+     "phase": "general-construction",
+     "continuous": true,
+     "start": {
+      "earliest": "2026-10-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2028-01-01",
+      "latest": "2028-03-31",
+      "precision": "quarter"
+     },
+     "note": "From the superseded July 2024 application's Southern Route Table 1.8-2. ROW staking and vegetation clearing start in Q4 2026; the last construction activity (wire stringing and removal of existing structures) ends in Q1 2028. Restoration and mat removal run Q4 2027 to Q4 2028. This schedule assumed CPCN approval in Q3 2025. The same application's narrative says construction begins in Q2 2026, which conflicts with this table.",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "TABLE 1.8-2 Anticipated Construction Schedule \u2013 Southern Route Project/Construction Activity Preliminary Date",
+       "supports": "table applies to the Southern Route",
+       "page": 53,
+       "printedPage": "33",
+       "section": "1.8 Construction Schedule - Table 1.8-2",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Right-of-Way Staking 4th Quarter 2026 4th Quarter 2026 \u2013 1st Quarter Vegetation Clearing 2027",
+       "supports": "2024 Southern Route table: first field activities start Q4 2026",
+       "page": 53,
+       "printedPage": "33",
+       "section": "1.8 Construction Schedule - Table 1.8-2",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Wire Stringing and Clipping and Removal of Existing Pole 2nd Quarter 2027 \u2013 1st Quarter Structures 2028",
+       "supports": "2024 Southern Route table: last construction activity ends Q1 2028",
+       "page": 53,
+       "printedPage": "33",
+       "section": "1.8 Construction Schedule - Table 1.8-2",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "4th Quarter 2027 \u2013 4th Quarter Restoration Activities and Removal of Construction Mats 2028 Project In-Service 2nd Quarter 2028",
+       "supports": "2024 table: restoration to Q4 2028; in-service Q2 2028",
+       "page": 53,
+       "printedPage": "33",
+       "section": "1.8 Construction Schedule - Table 1.8-2",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "PSCW CPCN Approval - Anticipated 3rd Quarter 2025",
+       "supports": "2024 schedule assumed approval Q3 2025 (superseded)",
+       "page": 53,
+       "printedPage": "33",
+       "section": "1.8 Construction Schedule - Table 1.8-2",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Construction is expected to begin in the 2nd Quarter of 2026 and be in-service by the 2nd Quarter of 2028, pending agency permits and authorizations.",
+       "supports": "2024 narrative: start Q2 2026, in-service Q2 2028",
+       "page": 51,
+       "printedPage": "31",
+       "section": "1.8 Construction Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "dpc-alma-blair-page",
+     "label": "in-service",
+     "date": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-page",
+       "exactExcerpt": "2026 \u2013 2027 Construction 2028 In-service Project area restoration *The schedule is subject to change.",
+       "supports": "construction 2026-2027; in-service 2028 (utility page)",
+       "section": "Anticipated Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-1515-ce-103-final",
+     "label": "anticipated in-service",
+     "date": {
+      "earliest": "2028-09-01",
+      "latest": "2028-09-30",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with an anticipated in-service date of September 2028.",
+       "supports": "construction start Q4 2026 and in-service September 2028",
+       "page": 41,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "dpc-alma-blair-cpcn-2024",
+     "label": "in-service (July 2024 application, superseded)",
+     "date": {
+      "earliest": "2028-04-01",
+      "latest": "2028-06-30",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "4th Quarter 2027 \u2013 4th Quarter Restoration Activities and Removal of Construction Mats 2028 Project In-Service 2nd Quarter 2028",
+       "supports": "2024 table: restoration to Q4 2028; in-service Q2 2028",
+       "page": 53,
+       "printedPage": "33",
+       "section": "1.8 Construction Schedule - Table 1.8-2",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Construction is expected to begin in the 2nd Quarter of 2026 and be in-service by the 2nd Quarter of 2028, pending agency permits and authorizations.",
+       "supports": "2024 narrative: start Q2 2026, in-service Q2 2028",
+       "page": 51,
+       "printedPage": "31",
+       "section": "1.8 Construction Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "xcel-wwtc",
+     "status": "reported-coordination",
+     "scope": "shared-facility",
+     "description": "The PSC final decision (dated 2026-03-10) says the approved line connects to the new 345 kV Tremval North Substation (switching station) approved in docket 5-CE-158, the Western Wisconsin Transmission Connection. That station would be built, owned and operated by Northern States Power Company-Wisconsin. This is a shared interconnection facility, not joint ownership of the line.",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "connect to the new 345 kV Tremval Nouth Substation that was approved in docket 5-CE-158. The terminating substation would be constructed, owned, and operated by Northern States Power Company-Wisconsin.",
+       "supports": "terminates at NSPW station approved in WWTC docket 5-CE-158",
+       "page": 13,
+       "section": "Project Description",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "route the transmission line north terminating at the 345 kV switching station approved in the Western Wisconsin Transmission connection project (docket 5-CE-158).",
+       "supports": "Segment 6 terminates at WWTC-approved switching station",
+       "page": 29,
+       "section": "Routing - Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "both routes follow a common segment east for approximately 13 miles following the LQ-18 corridor terminating at the new Tremval switching station approved in docket 5-CE-158.",
+       "supports": "common segment along LQ-18 ends at Tremval switching station from 5-CE-158",
+       "page": 14,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "xcel-wwtc",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "Dairyland's July 2024 application says the line would connect to a new 345 kV switching station that also connects to Xcel's Tremval-Eau Claire-Jump River (WWTC) project, and that the station location would be set in the WWTC docket. Dairyland routed to both of Xcel's preferred station sites. The final connection configuration was to be 'determined in coordination with Xcel Energy'. The application also says the station must be completed by the end of 2028 for Dairyland's connection. This documents interface design coordination only.",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The Project would connect to a new 345-kV switching station that would also connect to Xcel Energy's Tremval-Eau Claire-Jump River project, which Xcel Energy has named the Western Wisconsin Transmission Connection Project (PSCW Docket No. 4220-CE-188).",
+       "supports": "shared switching station with Xcel WWTC",
+       "page": 24,
+       "printedPage": "4",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "In order for those decisions to align, Dairyland is currently proposing routes to both of Xcel Energy's preferred switching station locations.",
+       "supports": "Dairyland routed to both Xcel-preferred station sites",
+       "page": 24,
+       "printedPage": "4",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The final configuration of Dairyland's new 345-kV connection is expected to be determined in coordination with Xcel Energy upon selection of the final destination by the Commission.",
+       "supports": "interface configuration to be coordinated with Xcel",
+       "page": 24,
+       "printedPage": "4",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The transmission line configuration of the 345-kV transmission line into a new switching station near the existing Tremval Substation or to the north would be determined in coordination with Xcel Energy.",
+       "supports": "interface configuration coordination with Xcel",
+       "page": 108,
+       "printedPage": "88",
+       "section": "5.3.2.6 Existing transmission lines affected",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "switching station (regardless of location) would need to be completed by the end of 2028 to allow for Dairyland's new 345-kV connection.",
+       "supports": "schedule dependency on the switching station",
+       "page": 25,
+       "printedPage": "5",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The location of this switching station will be determined by the Commission's decision on Xcel Energy's Western Wisconsin Transmission Connection Project (PSCW Docket No. 4220-CE-188).",
+       "supports": "station location set in the WWTC docket",
+       "page": 26,
+       "printedPage": "6",
+       "section": "1.3 Location and end points",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "xcel-wwtc",
+     "status": "not-found-in-sources",
+     "scope": "resource-sharing",
+     "description": "No cached source documents shared crews, equipment, construction scheduling, outage coordination or other resource sharing between the Dairyland Alma-Blair and Xcel/NSPW WWTC work packages. Absence here does not show a lack of coordination.",
+     "evidence": []
+    },
+    {
+     "partner": "atc-nspw-grid-forward",
+     "status": "not-found-in-sources",
+     "scope": "unknown",
+     "description": "The PSC decision mentions Grid Forward Central Wisconsin (5-CE-157) only in benefit modeling (with and without it in service) and in a footnote describing it as a new 345 kV line connecting the Tremval-Arpin-Columbia substations. No coordination, shared facility or shared resources between Dairyland and ATC/NSPW for Grid Forward is stated. ATC intervened in 1515-CE-103 but offered no evidence.",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "review of the project without the inclusion of the 5-CE-158 Western Wisconsin Transmission Connection Project or the 5-CE-157 Grid Forward Central Wisconsin Transmission Project assumed to be in service",
+       "supports": "Grid Forward and WWTC appear in benefit modeling",
+       "page": 19,
+       "section": "Project Need",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "Long Range Transmission Planning Tranche 1 Project 6, a New 345 kV Transmission Line Connecting the Tremval-Arpin-Columbia Substations in the Counties of Trempealeau, Wood, and Columbia, Wisconsin",
+       "supports": "Grid Forward (5-CE-157) described as touching Tremval",
+       "page": 21,
+       "section": "Footnote 8",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "At the party hearing session expert witnesses offered testimony and exhibits on behalf of the applicant, MISO, and staff from the Commission, DATCP and DNR. ATC and the CEOs did not offer evidence.",
+       "supports": "ATC was a party but offered no evidence",
+       "page": 3,
+       "section": "Procedural Background",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "The route is a schematic trace (see route.caveat). Only the South Route authorized by the PSC is traced; the Northern alternative was not authorized.",
+    "The PSC final decision gives only a construction start (Q4 2026) and an in-service date (September 2028), not a construction end. Its start is recorded as a fact, not a construction window. The only windows with both ends come from the Dairyland page (2026-2027) and the superseded July 2024 application table (Q4 2026-Q1 2028).",
+    "The documented Xcel/NSPW interface is an interconnection at a shared switching station plus interface design coordination described in the 2024 application. No source shows shared crews, equipment or other resource sharing.",
+    "The Tremval North Substation marker is a Blair town centroid (locality, +/-5 km) because the new station is not in OSM and no cached source gives its coordinates.",
+    "'not-found-in-sources' coordination entries mean the cached sources are silent. They do not mean the projects are uncoordinated."
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "projectA": "dpc-alma-blair",
+   "projectB": "xcel-wwtc",
+   "kind": "shared-site",
+   "siteLabel": "Tremval North 345 kV Substation / switching station (approved in PSC docket 5-CE-158)",
+   "description": "The PSC final decision in 1515-CE-103 says the Alma-Blair South Route ends at the 345 kV switching station approved in the WWTC docket 5-CE-158. The decision names it the Tremval North Substation, to be built, owned and operated by NSPW. Dairyland's July 2024 application said the same new station would also connect to Xcel's Tremval-Eau Claire-Jump River (WWTC) project.",
+   "evidence": [
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "connect to the new 345 kV Tremval Nouth Substation that was approved in docket 5-CE-158. The terminating substation would be constructed, owned, and operated by Northern States Power Company-Wisconsin.",
+     "supports": "terminates at NSPW station approved in WWTC docket 5-CE-158",
+     "page": 13,
+     "section": "Project Description",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "route the transmission line north terminating at the 345 kV switching station approved in the Western Wisconsin Transmission connection project (docket 5-CE-158).",
+     "supports": "Segment 6 terminates at WWTC-approved switching station",
+     "page": 29,
+     "section": "Routing - Transmission Line Route Alternatives",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "dpc-alma-blair-cpcn-2024",
+     "exactExcerpt": "The Project would connect to a new 345-kV switching station that would also connect to Xcel Energy's Tremval-Eau Claire-Jump River project, which Xcel Energy has named the Western Wisconsin Transmission Connection Project (PSCW Docket No. 4220-CE-188).",
+     "supports": "shared switching station with Xcel WWTC",
+     "page": 24,
+     "printedPage": "4",
+     "section": "Executive Summary - Proposed Routes",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "dpc-alma-blair",
+   "projectB": "xcel-wwtc",
+   "kind": "other",
+   "description": "These are separately numbered MISO LRTP Tranche 1 projects: Alma-Blair is the Wisconsin portion of Project 4 and WWTC is Project 5. The PSC decision cites WWTC as a joint NSPW/ATC CPCN application (docket 5-CE-158, decided 2025-12-11). They are distinct work packages, not duplicates.",
+   "evidence": [
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "Certificate of Public Convenience and Necessity to Construct and Operate the Wisconsin Portion of Long Range Transmission Project Tranche 1 Project 4",
+     "supports": "Wisconsin portion of LRTP Tranche 1 Project 4",
+     "page": 1,
+     "section": "Caption",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "Long Range Transmission Planning Tranche 1 Project 5, which consists of Expanding the Tremval and Eau Claire Substations, a New Jump River Substation, and a New 345 kV Transmission Line connecting the Tremval-Eau Claire-Jump River Substations",
+     "supports": "WWTC is LRTP Tranche 1 Project 5",
+     "page": 21,
+     "section": "Footnote 9",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "Joint Application of Northern States Power Company-Wisconsin and American Transmission Company LLC, as Electric Public Utilities, for a Certificate of Public Convenience and Necessity",
+     "supports": "WWTC is a joint NSPW/ATC application",
+     "page": 21,
+     "section": "Footnote 9",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "to be known as the Western Wisconsin Transmission Connection Project, docket 5-CE-158 (Wis. PSC Dec. 11, 2025)",
+     "supports": "WWTC docket and decision date",
+     "page": 21,
+     "section": "Footnote 9",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "dpc-alma-blair",
+   "projectB": "atc-nspw-grid-forward",
+   "kind": "other",
+   "description": "The PSC decision models Alma-Blair's benefits with and without Grid Forward (5-CE-157) in service. A footnote describes Grid Forward (LRTP Tranche 1 Project 6) as a new 345 kV line connecting the Tremval-Arpin-Columbia substations, so it also touches the Tremval area. The decision does not say that Grid Forward uses the same new switching station or that construction is coordinated.",
+   "evidence": [
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "review of the project without the inclusion of the 5-CE-158 Western Wisconsin Transmission Connection Project or the 5-CE-157 Grid Forward Central Wisconsin Transmission Project assumed to be in service",
+     "supports": "Grid Forward and WWTC appear in benefit modeling",
+     "page": 19,
+     "section": "Project Need",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "The net economic benefits increase with the presence of both the Grid Forward and Western Wisconsin projects.",
+     "supports": "benefits interplay in modeling",
+     "page": 19,
+     "section": "Analysis of Total Net Economic Benefits",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "Long Range Transmission Planning Tranche 1 Project 6, a New 345 kV Transmission Line Connecting the Tremval-Arpin-Columbia Substations in the Counties of Trempealeau, Wood, and Columbia, Wisconsin",
+     "supports": "Grid Forward (5-CE-157) described as touching Tremval",
+     "page": 21,
+     "section": "Footnote 8",
+     "verifiedByScript": true
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "Application filing date conflict. The Dairyland page says 'In June 2024, Dairyland applied' and also 'CPCN application submitted in July 2024', and the cached application cover is dated July 2024. The PSC decision instead records the application as filed 2025-02-14, found complete 2025-03-17, with a revised version filed 2025-11-10. The cached sources do not explain how the July 2024 submission relates to the 2025-02-14 filing. The decision cites the application as PSC REF# 567118 ('page 21 of 270'), which does not match the 268-page July 2024 PDF; it is probably a later version that was not retrieved.",
+  "Decision date: the Final Decision is signed 'the 10th day of March, 2026', while the Dairyland page says the Written Order was issued March 11, 2026. The service date is not shown in the cached text, and the decision takes effect one day after service. The Commission deliberated at its 2026-02-05 open meeting; the page says the approval came in February 2026.",
+  "Western endpoint line ID is inconsistent. Decision pp.1, 5 and 13 say 'existing LQ-43 transmission line'; decision p.14 says 'LQ-34-4 transmission structure'; decision p.28 and the application say structure 'LQ-34-3' on Dairyland's LQ-34 line. 'LQ-43' looks like a transposition but this is not confirmed.",
+  "Decision p.13 spells the terminating station 'Tremval Nouth Substation' (typo), while pp.1 and 5 say 'Tremval North Substation'.",
+  "Decision segment labels are swapped. p.27 says the Southern Route's unique segment is 2B (Northern: 2A, 3, 4), but p.28 calls the Southern segment '2A' and the Northern one '2B'. The application uses 2B for the Southern Route.",
+  "Length and segment differences: the PSC says the South Route is about 35 miles; the Dairyland page and the July 2024 application say 34 miles. Segment 1A is 1.1 miles in the decision but 0.7 mile in the July 2024 application.",
+  "Exact location of the new Tremval North switching station is not in the cached sources or OSM. The decision's 0.7-mile Segment 6 running north and the name 'Tremval North' fit the application's northern option (about 0.5 mi NW of existing Tremval, north of the Trempealeau River). This should be confirmed in the WWTC final decision (5-CE-158).",
+  "WWTC docket numbers differ: the July 2024 application cites 'PSCW Docket No. 4220-CE-188' (Xcel), while the PSC decision cites joint NSPW/ATC docket 5-CE-158 (decided 2025-12-11). The xcel-wwtc researcher should confirm the mapping and whether ATC co-owns parts of WWTC.",
+  "Construction end is not stated by the PSC decision, which gives start Q4 2026 and in-service September 2028. Its vegetation-clearing window ends 'by the start of the 2nd quarter (April 1st)' without a year (probably 2027, but not stated).",
+  "The July 2024 application's schedule conflicts internally: its narrative says construction begins Q2 2026, but Southern Route Table 1.8-2 starts ROW staking and clearing in Q4 2026. It also assumed CPCN approval in Q3 2025, so the schedule is superseded.",
+  "Alma Substation is not named in OSM. Unnamed OSM power=substation way 160511826 (161/69 kV, 44.30956,-91.91088), where the 161 kV line to Tremval begins, is a probable but unconfirmed match. The western endpoint uses the application's Segment 1A coordinate instead.",
+  "Intermediate route vertices come from OSM way 258551045, an unnamed 161 kV Alma-Tremval line with no ref tag. The official Southern Route GIS shapefiles filed on PSC ERF (application section 1.10) and the Appendix A figures were not retrieved; either would allow an official-gis route.",
+  "Grid Forward: the cached sources do not say whether Grid Forward (5-CE-157) ends at the same new Tremval North switching station or at another Tremval facility, and they document no Dairyland-ATC coordination. ATC intervened in 1515-CE-103 but offered no evidence and filed no briefs.",
+  "Related Minnesota work under LRTP Project 4 is not modeled here: the Mankato-Mississippi River 345 kV project (MPUC E002/CN-22-532 and TL-23-157, filed 2024-04-02 by Xcel Energy, Dairyland, Rochester Public Utilities and SMMPA) and Dairyland's Wabasha Relocation Project (MPUC ET3/CN-23-504 and TL-23-388).",
+  "Dairyland page issues: the link text 'The Certificate of Public Convenience and Necessity is available for viewing here' points to the July 2024 CPCN application PDF, not a certificate (the 'Written Order' link is the final decision). The page also calls the regulator the 'Public Utilities Commission of Wisconsin'.",
+  "The PSC final decision copy used here is hosted on dairylandpower.com. The regulator-hosted ERF copy (PSC REF#:582638) was not fetched, so the hashes cannot be cross-checked.",
+  "Status 'approved' rests on the CPCN approval and the page's 'PLANNING' label. No cached source confirms whether on-site construction or vegetation clearing had begun by 2026-09-26; the PSC expected construction to start in Q4 2026.",
+  "Cost claims differ by version: $188,796,752 (PSC, authorized South Route, excluding AFUDC) versus $177,383,646 (July 2024 application, Southern Route)."
+ ]
+}

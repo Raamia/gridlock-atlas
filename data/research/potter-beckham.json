@@ -1,0 +1,1231 @@
+{
+ "cluster": "potter-beckham",
+ "sources": [
+  {
+   "id": "xcel-potter-beckham-page",
+   "title": "Potter-Beckham 345 kV Transmission Line Project",
+   "publisher": "Xcel Energy (Southwestern Public Service Company)",
+   "url": "https://xcelenergytransmission.com/projects/potter-beckham-345-kv/",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2026-05-05",
+   "updatedAt": "2026-08-06",
+   "documentDateEvidence": "No date printed on page; WordPress REST API record wp-json/wp/v2/projects/7250 reports date 2026-05-05T18:45:08 and modified 2026-08-06T15:54:04 (checked 2026-09-26). Retrieved 2026-09-26."
+  },
+  {
+   "id": "transource-potter-beckham-page",
+   "title": "Potter - Beckham 345-KV Transmission Line Project",
+   "publisher": "Transource Energy",
+   "url": "https://www.transourceenergyprojects.com/potter-beckham/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No date on page; mentions a Thursday, June 11 open house and SPS open houses June 9-10, 2026. Retrieved 2026-09-26."
+  },
+  {
+   "id": "transource-potter-beckham-factsheet",
+   "title": "Potter - Beckham Transmission Line Project, Oklahoma (Fact Sheet V4)",
+   "publisher": "Transource Energy",
+   "url": "https://www.transourceenergyprojects.com/potter-beckham/docs/Potter-Beckham_FactSheet-V4.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2026-05-15",
+   "documentDateEvidence": "Not printed; PDF metadata CreationDate/ModDate 2026-05-15. Linked from the Transource project page. Retrieved 2026-09-26."
+  },
+  {
+   "id": "xcel-potter-beckham-infosheet",
+   "title": "Potter-Beckham 345-kV Transmission Line Project Overview (Information Sheet)",
+   "publisher": "Xcel Energy (Southwestern Public Service Company)",
+   "url": "https://cdn.xcelenergytransmission.com/blobvizxe609304b0a5/wp-content/uploads/2026/05/Potter-Beckham-Information-Sheet-1.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2026-05-19",
+   "updatedAt": "2026-05-22",
+   "documentDateEvidence": "Footer prints '\u00a9 2025 Xcel Energy Inc.'; PDF metadata CreationDate 2026-05-19, ModDate 2026-05-22; upload path /2026/05/. Retrieved 2026-09-26."
+  },
+  {
+   "id": "xcel-potter-beckham-siting",
+   "title": "Potter-Beckham 345-kV Transmission Line: Siting and Permitting",
+   "publisher": "Xcel Energy (Southwestern Public Service Company)",
+   "url": "https://cdn.xcelenergytransmission.com/blobvizxe609304b0a5/wp-content/uploads/2026/05/Potter-Beckham-Siting-and-Permitting.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Footer prints '\u00a9 2026 Xcel Energy Inc.'; upload path /2026/05/. Retrieved 2026-09-26."
+  },
+  {
+   "id": "xcel-beckham-potter-award-news",
+   "title": "Xcel Energy Texas and Transource to expand transmission with Beckham County - Potter 345 kV project",
+   "publisher": "Xcel Energy Newsroom",
+   "url": "https://newsroom.xcelenergy.com/news/xcel-energy-texas-and-transource-to-expand-transmission-with-beckham-county-potter-345-kv-project",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2025-11-21",
+   "documentDateEvidence": "Dateline 'AMARILLO, Texas (Nov. 21, 2025)'."
+  },
+  {
+   "id": "transource-beckham-potter-corp-page",
+   "title": "Beckham County - Potter 345 kV",
+   "publisher": "Transource Energy",
+   "url": "https://www.transourceenergy.com/projects/BeckhamCounty-Potter/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No date on page; cites AEP media coverage dated Nov. 21, 2025. Retrieved 2026-09-26."
+  },
+  {
+   "id": "spp-beckham-potter-iep-report",
+   "title": "Industry Expert Panel Transmission Provider Internal Report - Public Version, RFP-000009 Beckham County-Potter 345 kV",
+   "publisher": "Southwest Power Pool",
+   "url": "https://www.spp.org/documents/75024/beckham%20county-potter%20345kv%20%20rfp_iep%20recommendation%20report%20-%20public%20version.pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2025-10-14",
+   "updatedAt": "2025-10-27",
+   "documentDateEvidence": "Cover (PDF p.5) dated October 14, 2025; PDF ModDate 2025-10-27."
+  },
+  {
+   "id": "spp-board-minutes-2025-11-04",
+   "title": "SPP Board of Directors & Members Committee Meeting Minutes, November 4, 2025",
+   "publisher": "Southwest Power Pool (copy posted by Oklahoma Corporation Commission)",
+   "url": "https://oklahoma.gov/content/dam/ok/en/occ/documents/pu/spp/board/2025/2025-11-04-spp-board-minutes.pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2025-11-04",
+   "documentDateEvidence": "Header 'November 4, 2025 8:00 a.m. \u2013 3:00 p.m. | Little Rock, Arkansas' (meeting date); PDF created 2025-11-12."
+  },
+  {
+   "id": "spp-ntc-220936-sps",
+   "title": "SPP Notification to Construct SPP-NTC-220936 (Southwestern Public Service Company)",
+   "publisher": "Southwest Power Pool",
+   "url": "https://www.spp.org/documents/75127/ntc%20220936%20sps.pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2025-10-17",
+   "documentDateEvidence": "Letter dated October 17, 2025 (PDF p.1). Cached for context only; covers the Potter-Crossroads-Phantom 765 kV project, not Beckham County-Potter."
+  }
+ ],
+ "projects": [
+  {
+   "id": "sps-potter-beckham-tx",
+   "title": "Potter\u2013Beckham 345 kV Transmission Line Project \u2014 Texas segment (SPS)",
+   "shortTitle": "Potter\u2013Beckham TX (SPS)",
+   "titleEvidence": [
+    {
+     "sourceId": "xcel-potter-beckham-page",
+     "exactExcerpt": "Potter-Beckham 345 kV Transmission Line Project EXPLORE INTERACTIVE MAP Home Transmission Projects",
+     "supports": "project page title",
+     "verifiedByScript": true,
+     "section": "page header"
+    },
+    {
+     "sourceId": "xcel-potter-beckham-page",
+     "exactExcerpt": "Southwestern Public Service Company (SPS), a subsidiary of Xcel Energy Inc., is proposing to construct and operate the Potter-Beckham 345-kilovolt (kV) Transmission Line Project (Project) to enhance electric reliability across the region.",
+     "supports": "title, owner (SPS), 345 kV voltage, and proposed status",
+     "verifiedByScript": true,
+     "section": "Project Overview"
+    }
+   ],
+   "summary": "Southwestern Public Service Company (Xcel Energy) proposes the ~110-mile Texas portion of a new 345-kV line that starts at the existing Potter Substation in Potter County, TX, and continues through Carson, Collingsworth, Gray, Potter and Wheeler counties to the Oklahoma portion owned by Transource. Construction is planned for Q3 2028-Q4 2029, with in-service in Q4 2029, and still needs PUCT approval.",
+   "owners": [
+    {
+     "utilityId": "xcel-sps",
+     "name": "Southwestern Public Service Company (Xcel Energy subsidiary)",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "SPS will own and operate the Texas portion of the project (approximately 110 miles), while Transource will own and operate the Oklahoma portion (approximately 15 miles).",
+       "supports": "owner-specific segments: SPS Texas ~110 mi, Transource Oklahoma ~15 mi",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "Southwestern Public Service Company (SPS), a subsidiary of Xcel Energy Inc., is proposing to construct and operate the Potter-Beckham 345-kilovolt (kV) Transmission Line Project (Project) to enhance electric reliability across the region.",
+       "supports": "SPS is the proposing utility",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    }
+   ],
+   "parentInitiative": "SPP 2024 ITP competitive upgrade: Beckham County\u2013Potter 345 kV (SPP RFP-000009), awarded jointly to SPS and Transource",
+   "status": {
+    "value": "proposed",
+    "asOf": "2026-09-26",
+    "evidence": [
+     {
+      "sourceId": "xcel-potter-beckham-page",
+      "exactExcerpt": "Southwestern Public Service Company (SPS), a subsidiary of Xcel Energy Inc., is proposing to construct and operate the Potter-Beckham 345-kilovolt (kV) Transmission Line Project (Project) to enhance electric reliability across the region.",
+      "supports": "'is proposing' - proposed status",
+      "verifiedByScript": true,
+      "section": "Project Overview"
+     },
+     {
+      "sourceId": "xcel-potter-beckham-page",
+      "exactExcerpt": "This Project will require approval from the Public Utility Commission of Texas (PUCT).",
+      "supports": "PUCT approval still required (not yet approved)",
+      "verifiedByScript": true,
+      "section": "Project Need"
+     },
+     {
+      "sourceId": "xcel-potter-beckham-siting",
+      "exactExcerpt": "State Public Utility Commission of Texas Certificate of Convenience and Necessity (CCN)",
+      "supports": "SPS Texas segment needs a PUCT CCN",
+      "verifiedByScript": true,
+      "page": 2,
+      "section": "permits table"
+     },
+     {
+      "sourceId": "xcel-potter-beckham-page",
+      "exactExcerpt": "Routing & Siting Studies: Q1 2026 - Q4 2026 Public and Agency Outreach: Q1 2026 - Q3 2026",
+      "supports": "routing and siting studies still under way through Q4 2026",
+      "verifiedByScript": true,
+      "section": "Project Timeline"
+     },
+     {
+      "sourceId": "spp-board-minutes-2025-11-04",
+      "exactExcerpt": "First, the board approved construction of the Beckham County-Potter 345 kV line.",
+      "supports": "SPP Board approved construction (RTO approval, not a state certificate)",
+      "verifiedByScript": true,
+      "page": 6
+     }
+    ]
+   },
+   "states": [
+    "TX"
+   ],
+   "counties": [
+    {
+     "name": "Carson",
+     "state": "TX",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "The 110\u2011mile Texas segment will span Carson, Collingsworth, Gray, Potter, and Wheeler counties.",
+       "supports": "Texas segment counties",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    },
+    {
+     "name": "Collingsworth",
+     "state": "TX",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "The 110\u2011mile Texas segment will span Carson, Collingsworth, Gray, Potter, and Wheeler counties.",
+       "supports": "Texas segment counties",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    },
+    {
+     "name": "Gray",
+     "state": "TX",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "The 110\u2011mile Texas segment will span Carson, Collingsworth, Gray, Potter, and Wheeler counties.",
+       "supports": "Texas segment counties",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    },
+    {
+     "name": "Potter",
+     "state": "TX",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "The 110\u2011mile Texas segment will span Carson, Collingsworth, Gray, Potter, and Wheeler counties.",
+       "supports": "Texas segment counties",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    },
+    {
+     "name": "Wheeler",
+     "state": "TX",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "The 110\u2011mile Texas segment will span Carson, Collingsworth, Gray, Potter, and Wheeler counties.",
+       "supports": "Texas segment counties",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "Southwestern Public Service Company (SPS), a subsidiary of Xcel Energy Inc., is proposing to construct and operate the Potter-Beckham 345-kilovolt (kV) Transmission Line Project (Project) to enhance electric reliability across the region.",
+       "supports": "345 kV",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Texas segment length (approx.)",
+     "value": "110",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "SPS will own and operate the Texas portion of the project (approximately 110 miles), while Transource will own and operate the Oklahoma portion (approximately 15 miles).",
+       "supports": "Texas portion ~110 miles",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-infosheet",
+       "exactExcerpt": "Approximate length (full project area): 125 miles Approximate length (SPS Texas study area only): 110 miles",
+       "supports": "SPS Texas 110 mi",
+       "verifiedByScript": true,
+       "page": 1,
+       "section": "Project Details"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Whole-initiative length per Xcel info sheet (approx.)",
+     "value": "125 miles",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-infosheet",
+       "exactExcerpt": "Approximate length (full project area): 125 miles Approximate length (SPS Texas study area only): 110 miles",
+       "supports": "full project 125 mi",
+       "verifiedByScript": true,
+       "page": 1,
+       "section": "Project Details"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Whole-line length per Nov 2025 award release (approx.)",
+     "value": "128 miles",
+     "evidence": [
+      {
+       "sourceId": "xcel-beckham-potter-award-news",
+       "exactExcerpt": "The new transmission line will span approximately 128 miles, connecting Xcel Energy\u2019s Potter County substation near Amarillo to Oklahoma Gas & Electric Company\u2019s Beckham County substation in western Oklahoma.",
+       "supports": "whole line ~128 mi",
+       "verifiedByScript": true,
+       "section": "press release body"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Whole-line length per SPP IEP report, Oct 2025 (approx.)",
+     "value": "150 miles",
+     "evidence": [
+      {
+       "sourceId": "spp-beckham-potter-iep-report",
+       "exactExcerpt": "The new Beckham County - Potter 345 kV line spans approximately 150 miles and was approved by SPP as a necessary companion project to supply energy to the new Potter - Crossroads - Phantom 765 kV line.",
+       "supports": "SPP length ~150 mi (conflicts with 125/128 mi)",
+       "verifiedByScript": true,
+       "page": 9,
+       "printedPage": "5",
+       "section": "Executive Summary"
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Estimated cost, whole Beckham County\u2013Potter project (both segments)",
+     "value": "222000000",
+     "evidence": [
+      {
+       "sourceId": "xcel-beckham-potter-award-news",
+       "exactExcerpt": "Major Investment: Estimated cost of $222 million to expand extra-high voltage infrastructure in the region.",
+       "supports": "estimated cost $222 million (whole project)",
+       "verifiedByScript": true,
+       "section": "Project Highlights"
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "potter-substation",
+     "label": "Potter (Potter County) Substation, Potter County, TX",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 35.31028,
+     "lon": -101.92291,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 164420609 power=substation name='Potter County Interchange' operator='Xcel Energy' voltage=345000;230000 (Overpass bbox query, 2026-09-26). Name matches sources' 'Potter Substation' / 'Potter County substation'; it is the only 345 kV Xcel substation in the Amarillo-area query. Cross-check against the SH 335/US 87 intersection was not completed (Overpass timeouts).",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "existing Potter Substation in Potter County, Texas, located approximately six miles northwest of the intersection of State Highway (SH) 335 and United States Highway 87",
+       "supports": "location of the Potter Substation endpoint",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      },
+      {
+       "sourceId": "xcel-beckham-potter-award-news",
+       "exactExcerpt": "The new transmission line will span approximately 128 miles, connecting Xcel Energy\u2019s Potter County substation near Amarillo to Oklahoma Gas & Electric Company\u2019s Beckham County substation in western Oklahoma.",
+       "supports": "Potter County substation near Amarillo",
+       "verifiedByScript": true,
+       "section": "press release body"
+      }
+     ]
+    },
+    {
+     "id": "tx-ok-state-line",
+     "label": "Texas\u2013Oklahoma state line (segment handoff; crossing point not determined)",
+     "kind": "state-line",
+     "precision": "county",
+     "lat": 35.2692,
+     "lon": -100.00045,
+     "uncertaintyMeters": 27000,
+     "coordinateSource": "Midpoint of the western edge of Beckham County, OK (the TX-OK state line, lon -100.00045) from the Nominatim bounding box of OSM relation 1822191 (lat 35.0296-35.5088). No source identifies the crossing point; Transource's map shows only preliminary alternative links.",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+       "supports": "Oklahoma segment starts at the Oklahoma state line",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "SPS will own and operate the Texas portion of the project (approximately 110 miles), while Transource will own and operate the Oklahoma portion (approximately 15 miles).",
+       "supports": "ownership split at the state border",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "No route selected. Xcel shows only a Texas study area (routing and siting studies Q1-Q4 2026) and lists the line's endpoints.",
+    "caveat": "The Xcel information sheet map shows study-area polygons, not a route. Do not draw a line.",
+    "evidence": [
+     {
+      "sourceId": "xcel-potter-beckham-page",
+      "exactExcerpt": "Routing & Siting Studies: Q1 2026 - Q4 2026 Public and Agency Outreach: Q1 2026 - Q3 2026",
+      "supports": "routing and siting studies still under way through Q4 2026 (no route selected)",
+      "verifiedByScript": true,
+      "section": "Project Timeline"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "xcel-potter-beckham-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2028-07-01",
+      "latest": "2028-09-30",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2029-10-01",
+      "latest": "2029-12-31",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "Land Acquisition: Q2 2027 - Q2 2028 Construction: Q3 2028 - Q4 2029 In Service: Q4 2029",
+       "supports": "construction Q3 2028-Q4 2029",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ],
+     "note": "Xcel project-page timeline 'Construction: Q3 2028 - Q4 2029'. The same schedule appears in the Xcel information sheet (PDF p.1), but icon glyphs in the extracted text keep that copy from being script-verified."
+    },
+    {
+     "claimSourceId": "xcel-potter-beckham-page",
+     "phase": "preconstruction",
+     "start": {
+      "earliest": "2027-04-01",
+      "latest": "2027-06-30",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2028-04-01",
+      "latest": "2028-06-30",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "Land Acquisition: Q2 2027 - Q2 2028 Construction: Q3 2028 - Q4 2029 In Service: Q4 2029",
+       "supports": "land acquisition Q2 2027-Q2 2028",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ],
+     "note": "Land acquisition, Q2 2027 - Q2 2028 (pre-construction activity, not field construction)."
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "xcel-potter-beckham-page",
+     "label": "in-service (Texas segment timeline)",
+     "date": {
+      "earliest": "2029-10-01",
+      "latest": "2029-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "Land Acquisition: Q2 2027 - Q2 2028 Construction: Q3 2028 - Q4 2029 In Service: Q4 2029",
+       "supports": "in service Q4 2029",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-beckham-potter-award-news",
+     "label": "expected in-service (whole Beckham County\u2013Potter project)",
+     "date": {
+      "earliest": "2029-11-01",
+      "latest": "2029-11-30",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-beckham-potter-award-news",
+       "exactExcerpt": "Approximately 128 miles of 345 kV line linking Texas and Oklahoma. \u00b7 Timeline: Expected in-service date of November 2029.",
+       "supports": "expected in-service November 2029 (whole project)",
+       "verifiedByScript": true,
+       "section": "Project Highlights"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "spp-beckham-potter-iep-report",
+     "label": "in-service schedule guarantee offered by both respondents of SPP RFP Proposal B",
+     "date": {
+      "earliest": "2029-11-01",
+      "latest": "2029-11-30",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "spp-beckham-potter-iep-report",
+       "exactExcerpt": "15-Year Schedule Guarantee - November 2029: Proposal B-1 confirms that it can meet an in-service date of",
+       "supports": "B-1 schedule guarantee November 2029",
+       "verifiedByScript": true,
+       "page": 50,
+       "printedPage": "46",
+       "section": "Cost cap / guarantee comparison table"
+      },
+      {
+       "sourceId": "spp-beckham-potter-iep-report",
+       "exactExcerpt": "15-Year Schedule Guarantee - November 2029: Proposal B-2 confirms that it can meet an in-service date",
+       "supports": "B-2 schedule guarantee November 2029",
+       "verifiedByScript": true,
+       "page": 50,
+       "printedPage": "46",
+       "section": "Cost cap / guarantee comparison table"
+      },
+      {
+       "sourceId": "spp-board-minutes-2025-11-04",
+       "exactExcerpt": "Tom Bozeman announced that proposal B was submitted by Transource Oklahoma, LLC and Southwestern Public Service Company, and Proposal A was submitted by NextEra Energy Transmission Southwest, LLC.",
+       "supports": "Proposal B = Transource Oklahoma, LLC + SPS",
+       "verifiedByScript": true,
+       "page": 5,
+       "section": "Oversight Committee report"
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "transource-potter-beckham-ok",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "Xcel/SPS calls the Project a joint initiative between SPS and Transource Energy LLC. SPS will own and operate the ~110-mile Texas portion and Transource the ~15-mile Oklahoma portion. SPP awarded the project to Transource and SPS. The Xcel page says Transource runs a separate Oklahoma open house. SPP's IEP report says each of the two respondents in the winning Proposal B will construct, own and operate a portion, and SPP minutes identify Proposal B as Transource Oklahoma, LLC plus SPS. Xcel's Nov 2025 release quotes an Xcel director saying the partnership combines 'expertise' and 'resources'; no source specifies shared crews, equipment or construction scheduling.",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "The Project is a joint initiative between SPS and Transource Energy LLC (Transource), that will connect the new 345-kV line from the existing Potter Substation in Potter County, Texas,",
+       "supports": "joint initiative between SPS and Transource",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "SPS will own and operate the Texas portion of the project (approximately 110 miles), while Transource will own and operate the Oklahoma portion (approximately 15 miles).",
+       "supports": "Xcel describes the Transource Oklahoma segment",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "After facilitating a competitive transmission request for proposal process for this project, SPP awarded this project to Transource and SPS.",
+       "supports": "joint SPP award",
+       "verifiedByScript": true,
+       "section": "Project Need"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "For the Oklahoma portion of the project, Transource will host a separate in person open house within its study area.",
+       "supports": "separate Transource-run Oklahoma outreach",
+       "verifiedByScript": true,
+       "section": "Open House Meetings"
+      },
+      {
+       "sourceId": "spp-beckham-potter-iep-report",
+       "exactExcerpt": "Proposal B involves two Respondents (B-1 and B-2) that will each construct, own, and operate a portion of the Project. Proposal B-1 reflects 89% of the total Project and Proposal B-2 reflects 11% of the total Project.",
+       "supports": "each respondent constructs/owns/operates its own portion",
+       "verifiedByScript": true,
+       "page": 10,
+       "printedPage": "6",
+       "section": "Executive Summary"
+      },
+      {
+       "sourceId": "spp-board-minutes-2025-11-04",
+       "exactExcerpt": "Tom Bozeman announced that proposal B was submitted by Transource Oklahoma, LLC and Southwestern Public Service Company, and Proposal A was submitted by NextEra Energy Transmission Southwest, LLC.",
+       "supports": "Proposal B = Transource Oklahoma, LLC + SPS",
+       "verifiedByScript": true,
+       "page": 5,
+       "section": "Oversight Committee report"
+      },
+      {
+       "sourceId": "xcel-beckham-potter-award-news",
+       "exactExcerpt": "Partnering with Transource allows us to combine not only expertise, but also resources to strengthen the grid for decades to come.",
+       "supports": "general partnership statement (no specific crews/equipment named)",
+       "verifiedByScript": true,
+       "section": "press release body"
+      }
+     ]
+    },
+    {
+     "partner": "transource-potter-beckham-ok",
+     "status": "known-joint",
+     "scope": "interconnection-design",
+     "description": "The Texas and Oklahoma segments together form one 345-kV line from Potter Substation to the OG&E Beckham substation. Transource's segment runs from the Oklahoma state line, so the two segments meet there. The crossing point has not been determined.",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-infosheet",
+       "exactExcerpt": "Description: New 345-kilovolt (kV) line from existing Potter Substation to the existing OGE Beckham substation.",
+       "supports": "one line from Potter to OGE Beckham substation",
+       "verifiedByScript": true,
+       "page": 1,
+       "section": "Project Details"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "SPS will own and operate the Texas portion of the project (approximately 110 miles), while Transource will own and operate the Oklahoma portion (approximately 15 miles).",
+       "supports": "segments split by state",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      },
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+       "supports": "Oklahoma segment begins at the state line",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "Schedule items are Xcel planning targets. The status is 'proposed' because PUCT approval (a CCN) is still required and routing studies continue through Q4 2026.",
+    "The SPP Board approved construction of the Beckham County\u2013Potter 345 kV line on Nov 4, 2025. That is an RTO approval, not a state certificate.",
+    "Length claims differ: 110 mi for the Texas segment, 125 mi for the whole line (Xcel page and info sheet), 128 mi (Nov 2025 releases) and ~150 mi (SPP IEP, Oct 2025).",
+    "The $222 million estimate covers the whole two-segment project, not only the Texas segment."
+   ]
+  },
+  {
+   "id": "transource-potter-beckham-ok",
+   "title": "Potter\u2013Beckham 345 kV Transmission Line Project \u2014 Oklahoma segment (Transource)",
+   "shortTitle": "Potter\u2013Beckham OK (Transource)",
+   "titleEvidence": [
+    {
+     "sourceId": "transource-potter-beckham-page",
+     "exactExcerpt": "Potter - Beckham 345-KV Transmission Line Project Potter - Beckham 345-KV Transmission Line Project Project Description",
+     "supports": "project page title",
+     "verifiedByScript": true,
+     "section": "page header"
+    },
+    {
+     "sourceId": "transource-potter-beckham-page",
+     "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+     "supports": "Oklahoma segment description",
+     "verifiedByScript": true,
+     "section": "Project Description"
+    }
+   ],
+   "summary": "Transource proposes a 15-mile, 345-kV line from the Oklahoma state line to the Beckham Substation in Beckham County, OK. It is the Oklahoma portion of a ~125-mile joint initiative with SPS. Its fact sheet shows construction from Spring 2028 to Late 2028 and in-service in Late 2029, and the OCC Certificate of Authority application is expected in summer 2027.",
+   "owners": [
+    {
+     "utilityId": "transource-ok",
+     "name": "Transource Oklahoma, LLC (Transource Energy)",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project is a joint initiative between Southwestern Public Service Company (SPS) and Transource, with Transource owning and operating the Oklahoma portion and SPS owning and operating the Texas portion.",
+       "supports": "Transource owns and operates the Oklahoma portion",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      },
+      {
+       "sourceId": "spp-board-minutes-2025-11-04",
+       "exactExcerpt": "Tom Bozeman announced that proposal B was submitted by Transource Oklahoma, LLC and Southwestern Public Service Company, and Proposal A was submitted by NextEra Energy Transmission Southwest, LLC.",
+       "supports": "Transource entity is Transource Oklahoma, LLC",
+       "verifiedByScript": true,
+       "page": 5,
+       "section": "Oversight Committee report"
+      }
+     ]
+    }
+   ],
+   "parentInitiative": "SPP 2024 ITP competitive upgrade: Beckham County\u2013Potter 345 kV (SPP RFP-000009), awarded jointly to SPS and Transource",
+   "status": {
+    "value": "proposed",
+    "asOf": "2026-09-26",
+    "evidence": [
+     {
+      "sourceId": "transource-potter-beckham-page",
+      "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+      "supports": "'proposed' line",
+      "verifiedByScript": true,
+      "section": "Project Description"
+     },
+     {
+      "sourceId": "transource-potter-beckham-page",
+      "exactExcerpt": "Transource representatives anticipate submitting a COA application for the project in summer 2027 and receiving the OCC\u2019s decision in late 2027.",
+      "supports": "OCC Certificate of Authority not yet applied for; application expected summer 2027, decision late 2027",
+      "verifiedByScript": true,
+      "section": "OKLAHOMA CORPORATION COMMISSION CERTIFICATION PROCESS"
+     },
+     {
+      "sourceId": "transource-potter-beckham-factsheet",
+      "exactExcerpt": "Transource will file a Certificate of Authority (COA) with the Oklahoma Corporation Commission (OCC) for review and approval.",
+      "supports": "OCC approval still pending (future filing)",
+      "verifiedByScript": true,
+      "page": 1,
+      "section": "Working With the Community"
+     },
+     {
+      "sourceId": "transource-beckham-potter-corp-page",
+      "exactExcerpt": "Clendenin - Walton Area Iatan - Nashua Sibley - Nebraska City Sooner-Wekiwa Project In Development Beckham County - Potter",
+      "supports": "Transource lists Beckham County - Potter under 'In Development'",
+      "verifiedByScript": true,
+      "section": "Projects navigation"
+     }
+    ]
+   },
+   "states": [
+    "OK"
+   ],
+   "counties": [
+    {
+     "name": "Beckham",
+     "state": "OK",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+       "supports": "Beckham County, Oklahoma",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+       "supports": "345 kV",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Oklahoma segment length",
+     "value": "15",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+       "supports": "15 miles",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "SPS will own and operate the Texas portion of the project (approximately 110 miles), while Transource will own and operate the Oklahoma portion (approximately 15 miles).",
+       "supports": "Oklahoma portion ~15 miles (Xcel agrees)",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Broader initiative length (approx.)",
+     "value": "125 miles",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "It is part of a broader 345\u2011kV initiative spanning approximately 125 miles from the central and eastern Texas Panhandle to western Oklahoma.",
+       "supports": "parent initiative ~125 miles",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Whole-line length per Transource corporate page (approx.)",
+     "value": "128 miles",
+     "evidence": [
+      {
+       "sourceId": "transource-beckham-potter-corp-page",
+       "exactExcerpt": "The new transmission line will span approximately 128 miles, connecting Xcel Energy\u2019s Potter County substation near Amarillo to Oklahoma Gas & Electric Company\u2019s Beckham County substation in western Oklahoma.",
+       "supports": "whole line ~128 mi",
+       "verifiedByScript": true,
+       "section": "Beckham County - Potter 345 kV"
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Estimated cost, whole Beckham County\u2013Potter project (both segments)",
+     "value": "222000000",
+     "evidence": [
+      {
+       "sourceId": "transource-beckham-potter-corp-page",
+       "exactExcerpt": "Major Investment: Estimated cost of $222 million to expand extra-high voltage infrastructure in the region.",
+       "supports": "estimated cost $222 million (whole project)",
+       "verifiedByScript": true,
+       "section": "Project Highlights"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Right-of-way width",
+     "value": "130 ft",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-factsheet",
+       "exactExcerpt": "The project will be built on a 130-foot-wide right-of-way corridor to support the safe construction, operation and maintenance of the facilities.",
+       "supports": "130-ft right-of-way",
+       "verifiedByScript": true,
+       "page": 2,
+       "section": "Typical Structures and Rights-of-Way"
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "tx-ok-state-line",
+     "label": "Texas\u2013Oklahoma state line (segment handoff; crossing point not determined)",
+     "kind": "state-line",
+     "precision": "county",
+     "lat": 35.2692,
+     "lon": -100.00045,
+     "uncertaintyMeters": 27000,
+     "coordinateSource": "Midpoint of the western edge of Beckham County, OK (the TX-OK state line, lon -100.00045) from the Nominatim bounding box of OSM relation 1822191 (lat 35.0296-35.5088). No source identifies the crossing point; Transource's map shows only preliminary alternative links.",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+       "supports": "Oklahoma segment starts at the Oklahoma state line",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      },
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "SPS will own and operate the Texas portion of the project (approximately 110 miles), while Transource will own and operate the Oklahoma portion (approximately 15 miles).",
+       "supports": "ownership split at the state border",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      }
+     ]
+    },
+    {
+     "id": "beckham-substation",
+     "label": "Beckham (Beckham County) Substation, OG&E, Beckham County, OK",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 35.37276,
+     "lon": -99.75446,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 1471949202 power=substation name='Beckham County' operator='Oklahoma Gas and Electric Company' voltage=345000 (Overpass bbox query, 2026-09-26). Cross-check: it lies 5.9 mi at bearing 125 deg (SE) from the OSM junction of OK SH 152 and SH 6 (node 144676902, 35.42214,-99.84098), matching Xcel's 'approximately six miles southeast of the intersection of SH 152 and SH 6'.",
+     "evidence": [
+      {
+       "sourceId": "xcel-potter-beckham-page",
+       "exactExcerpt": "to an existing Oklahoma Gas & Electric (OGE) Substation in Beckham County, Oklahoma, located approximately six miles southeast of the intersection of SH 152 and SH 6.",
+       "supports": "location of the Beckham County (OG&E) substation",
+       "verifiedByScript": true,
+       "section": "Project Overview"
+      },
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+       "supports": "Oklahoma segment terminates at Beckham Substation",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      },
+      {
+       "sourceId": "transource-beckham-potter-corp-page",
+       "exactExcerpt": "The new transmission line will span approximately 128 miles, connecting Xcel Energy\u2019s Potter County substation near Amarillo to Oklahoma Gas & Electric Company\u2019s Beckham County substation in western Oklahoma.",
+       "supports": "OG&E-owned Beckham County substation",
+       "verifiedByScript": true,
+       "section": "Beckham County - Potter 345 kV"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "No final route. Transource's fact-sheet map shows 'OK Preliminary Alternative Links' within a study area in western Beckham County, between the state line and the Beckham Substation.",
+    "caveat": "The preliminary alternative links are not a route, and Transource calls its map informational only. Do not draw a line.",
+    "evidence": [
+     {
+      "sourceId": "transource-potter-beckham-factsheet",
+      "exactExcerpt": "upon the OCC's route review and approval, one route is built based on public feedback and feasibility. NO FINAL LINE ROUTE HAS BEEN DETERMINED.",
+      "supports": "no final route",
+      "verifiedByScript": true,
+      "page": 2,
+      "section": "Project Map"
+     },
+     {
+      "sourceId": "transource-potter-beckham-factsheet",
+      "exactExcerpt": "Potential alternative links are multiple route alternatives presented to determine a line route.",
+      "supports": "map shows alternative links, not a route",
+      "verifiedByScript": true,
+      "page": 2,
+      "section": "Project Map"
+     },
+     {
+      "sourceId": "transource-potter-beckham-page",
+      "exactExcerpt": "the map contained on this site is for information purposes only. Transource reserves the right to alter, change, or amend the map at any time without notice",
+      "supports": "Transource map is informational only",
+      "verifiedByScript": true,
+      "section": "Timeline"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "transource-potter-beckham-factsheet",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2028-03-01",
+      "latest": "2028-06-20",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2028-09-01",
+      "latest": "2028-12-31",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-factsheet",
+       "exactExcerpt": "Construction OCC Approval 2027 SPRING 2026 SUMMER 2026 FALL - WINTER 2027 SPRING 2028LATE 2028",
+       "supports": "Project Timeline graphic: 'SPRING 2028- LATE 2028 Construction' (text extraction scrambles the graphic; label-to-date pairing confirmed visually on PDF p.1)",
+       "verifiedByScript": true,
+       "page": 1,
+       "section": "Project Timeline"
+      }
+     ],
+     "note": "Timeline graphic: 'SPRING 2028- LATE 2028 Construction' (visually confirmed on PDF p.1; the Transource web page's timeline SVG shows the same but has no machine-readable text). Season conversion convention: Spring = Mar 1-Jun 20; Late = Sep 1-Dec 31. Season-level precision is stored as 'quarter'."
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "transource-potter-beckham-factsheet",
+     "label": "project placed in service (Oklahoma fact sheet timeline)",
+     "date": {
+      "earliest": "2029-09-01",
+      "latest": "2029-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-factsheet",
+       "exactExcerpt": "To learn more about this project visit: transourceenergyprojects.com/potter-beckham LATE 2029 Project Placed In Service",
+       "supports": "Oklahoma segment in service late 2029",
+       "verifiedByScript": true,
+       "page": 1,
+       "section": "Project Timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "transource-beckham-potter-corp-page",
+     "label": "expected in-service (whole Beckham County\u2013Potter project)",
+     "date": {
+      "earliest": "2029-11-01",
+      "latest": "2029-11-30",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "transource-beckham-potter-corp-page",
+       "exactExcerpt": "New Transmission Line: Approximately 128 miles of 345 kV line linking Texas and Oklahoma. Timeline: Expected in-service date of November 2029.",
+       "supports": "expected in-service November 2029 (whole project)",
+       "verifiedByScript": true,
+       "section": "Project Highlights"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "spp-beckham-potter-iep-report",
+     "label": "in-service schedule guarantee offered by both respondents of SPP RFP Proposal B",
+     "date": {
+      "earliest": "2029-11-01",
+      "latest": "2029-11-30",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "spp-beckham-potter-iep-report",
+       "exactExcerpt": "15-Year Schedule Guarantee - November 2029: Proposal B-1 confirms that it can meet an in-service date of",
+       "supports": "B-1 schedule guarantee November 2029",
+       "verifiedByScript": true,
+       "page": 50,
+       "printedPage": "46",
+       "section": "Cost cap / guarantee comparison table"
+      },
+      {
+       "sourceId": "spp-beckham-potter-iep-report",
+       "exactExcerpt": "15-Year Schedule Guarantee - November 2029: Proposal B-2 confirms that it can meet an in-service date",
+       "supports": "B-2 schedule guarantee November 2029",
+       "verifiedByScript": true,
+       "page": 50,
+       "printedPage": "46",
+       "section": "Cost cap / guarantee comparison table"
+      },
+      {
+       "sourceId": "spp-board-minutes-2025-11-04",
+       "exactExcerpt": "Tom Bozeman announced that proposal B was submitted by Transource Oklahoma, LLC and Southwestern Public Service Company, and Proposal A was submitted by NextEra Energy Transmission Southwest, LLC.",
+       "supports": "Proposal B = Transource Oklahoma, LLC + SPS",
+       "verifiedByScript": true,
+       "page": 5,
+       "section": "Oversight Committee report"
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "sps-potter-beckham-tx",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "Transource calls the Project a joint initiative between SPS and Transource: Transource owns and operates the Oklahoma portion and SPS the Texas portion. SPP awarded the project to Transource and SPS. Transource's page points to separate SPS open houses for the Texas portion. SPP minutes identify the winning Proposal B as Transource Oklahoma, LLC plus Southwestern Public Service Company, and SPP's IEP report says each respondent will construct, own and operate a portion. No source documents shared crews, equipment or construction scheduling.",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project is a joint initiative between Southwestern Public Service Company (SPS) and Transource, with Transource owning and operating the Oklahoma portion and SPS owning and operating the Texas portion.",
+       "supports": "joint initiative; Transource describes the SPS Texas segment",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      },
+      {
+       "sourceId": "transource-potter-beckham-factsheet",
+       "exactExcerpt": "The project is a joint initiative between SPS and Transource, with Transource owning and operating the Oklahoma portion and SPS owning and operating the Texas portion.",
+       "supports": "joint initiative (fact sheet)",
+       "verifiedByScript": true,
+       "page": 1
+      },
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "After facilitating a competitive transmission request for proposal process for this project, SPP awarded this project to Transource and SPS.",
+       "supports": "joint SPP award",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      },
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "For the Texas portion of the project, SPS will host separate open houses June 9-10, 2026, within its study area.",
+       "supports": "separate SPS-run Texas outreach",
+       "verifiedByScript": true,
+       "section": "Additional Project Details"
+      },
+      {
+       "sourceId": "transource-beckham-potter-corp-page",
+       "exactExcerpt": "Transource Energy, LLC, together with Xcel Energy and its subsidiary Southwestern Public Service Company, have been awarded the Beckham County\u2013Potter 345 kilovolt (kV) transmission project by the Southwest Power Pool (SPP) Board of Directors.",
+       "supports": "joint award to Transource and SPS",
+       "verifiedByScript": true,
+       "section": "Beckham County - Potter 345 kV"
+      },
+      {
+       "sourceId": "spp-board-minutes-2025-11-04",
+       "exactExcerpt": "Tom Bozeman announced that proposal B was submitted by Transource Oklahoma, LLC and Southwestern Public Service Company, and Proposal A was submitted by NextEra Energy Transmission Southwest, LLC.",
+       "supports": "joint bid by Transource Oklahoma, LLC and SPS",
+       "verifiedByScript": true,
+       "page": 5,
+       "section": "Oversight Committee report"
+      },
+      {
+       "sourceId": "spp-beckham-potter-iep-report",
+       "exactExcerpt": "Proposal B involves two Respondents (B-1 and B-2) that will each construct, own, and operate a portion of the Project. Proposal B-1 reflects 89% of the total Project and Proposal B-2 reflects 11% of the total Project.",
+       "supports": "each respondent constructs/owns/operates its own portion",
+       "verifiedByScript": true,
+       "page": 10,
+       "printedPage": "6",
+       "section": "Executive Summary"
+      }
+     ]
+    },
+    {
+     "partner": "sps-potter-beckham-tx",
+     "status": "known-joint",
+     "scope": "interconnection-design",
+     "description": "The Oklahoma segment starts at the Oklahoma state line and is part of a broader 345-kV initiative from the Texas Panhandle. SPS owns the Texas portion, so the two segments meet at the state line. The crossing point has not been determined.",
+     "evidence": [
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+       "supports": "segment begins at the Oklahoma state line",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      },
+      {
+       "sourceId": "transource-potter-beckham-page",
+       "exactExcerpt": "It is part of a broader 345\u2011kV initiative spanning approximately 125 miles from the central and eastern Texas Panhandle to western Oklahoma.",
+       "supports": "continues into the Texas Panhandle as the broader initiative",
+       "verifiedByScript": true,
+       "section": "Project Description"
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "Utility pages name the owner 'Transource' or 'Transource Energy LLC'; SPP board minutes name the bidder 'Transource Oklahoma, LLC'. This record maps the owner to transource-ok.",
+    "The construction dates come from a timeline graphic. The cached PDF text scrambles the graphic's layout, so the excerpt is verbatim but the label-to-date pairing was confirmed visually.",
+    "OCC approval is expected in late 2027 (page text) or Fall-Winter 2027 (fact sheet graphic); the COA application has not yet been filed.",
+    "The Transource fact sheet shows construction ending in late 2028 but in-service in late 2029, a gap of about one year. The sources give no reason."
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "projectA": "sps-potter-beckham-tx",
+   "projectB": "transource-potter-beckham-ok",
+   "kind": "same-initiative",
+   "description": "Two owner-specific segments of one SPP-awarded Beckham County\u2013Potter 345 kV line (SPP 2024 ITP, RFP-000009). Both utilities describe it as a joint initiative between SPS and Transource. Classify as Known coordination, not a new discovery.",
+   "evidence": [
+    {
+     "sourceId": "xcel-potter-beckham-page",
+     "exactExcerpt": "The Project is a joint initiative between SPS and Transource Energy LLC (Transource), that will connect the new 345-kV line from the existing Potter Substation in Potter County, Texas,",
+     "supports": "Xcel: joint initiative",
+     "verifiedByScript": true,
+     "section": "Project Overview"
+    },
+    {
+     "sourceId": "transource-potter-beckham-page",
+     "exactExcerpt": "The Project is a joint initiative between Southwestern Public Service Company (SPS) and Transource, with Transource owning and operating the Oklahoma portion and SPS owning and operating the Texas portion.",
+     "supports": "Transource: joint initiative",
+     "verifiedByScript": true,
+     "section": "Project Description"
+    },
+    {
+     "sourceId": "transource-potter-beckham-page",
+     "exactExcerpt": "It is part of a broader 345\u2011kV initiative spanning approximately 125 miles from the central and eastern Texas Panhandle to western Oklahoma.",
+     "supports": "broader initiative",
+     "verifiedByScript": true,
+     "section": "Project Description"
+    },
+    {
+     "sourceId": "spp-board-minutes-2025-11-04",
+     "exactExcerpt": "Tom Bozeman announced that proposal B was submitted by Transource Oklahoma, LLC and Southwestern Public Service Company, and Proposal A was submitted by NextEra Energy Transmission Southwest, LLC.",
+     "supports": "joint winning bid",
+     "verifiedByScript": true,
+     "page": 5,
+     "section": "Oversight Committee report"
+    },
+    {
+     "sourceId": "spp-beckham-potter-iep-report",
+     "exactExcerpt": "The Beckham County-Potter 345 kV Transmission Line Project (Project) was part of the 2024 ITP and is the subject of this report.",
+     "supports": "parent initiative: SPP 2024 ITP",
+     "verifiedByScript": true,
+     "page": 9,
+     "printedPage": "5",
+     "section": "Executive Summary"
+    }
+   ]
+  },
+  {
+   "projectA": "sps-potter-beckham-tx",
+   "projectB": "transource-potter-beckham-ok",
+   "kind": "interconnects",
+   "siteLabel": "Texas\u2013Oklahoma state line (crossing point not yet determined)",
+   "description": "SPS owns the Texas portion and Transource the Oklahoma portion, which runs from the Oklahoma state line to the Beckham Substation, so the two segments connect at the TX-OK border. Neither route is final, so the exact handoff point is unknown.",
+   "evidence": [
+    {
+     "sourceId": "xcel-potter-beckham-page",
+     "exactExcerpt": "SPS will own and operate the Texas portion of the project (approximately 110 miles), while Transource will own and operate the Oklahoma portion (approximately 15 miles).",
+     "supports": "ownership split at the state border",
+     "verifiedByScript": true,
+     "section": "Project Overview"
+    },
+    {
+     "sourceId": "transource-potter-beckham-page",
+     "exactExcerpt": "The Project involves a proposed 15\u2011mile, 345\u2011kilovolt (kV) electric transmission line extending from the Oklahoma state line to the Beckham Substation in Beckham County, Oklahoma.",
+     "supports": "Oklahoma segment begins at the state line",
+     "verifiedByScript": true,
+     "section": "Project Description"
+    },
+    {
+     "sourceId": "transource-potter-beckham-factsheet",
+     "exactExcerpt": "upon the OCC's route review and approval, one route is built based on public feedback and feasibility. NO FINAL LINE ROUTE HAS BEEN DETERMINED.",
+     "supports": "crossing point not fixed (no final route)",
+     "verifiedByScript": true,
+     "page": 2,
+     "section": "Project Map"
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "No PUCT docket was found for the SPS Texas segment as of 2026-09-26. Xcel lists a PUCT Certificate of Convenience and Necessity as required (xcel-potter-beckham-siting p.2), and routing and siting studies run through Q4 2026, so a CCN application is probably not yet filed. This was not confirmed on the PUCT Interchange.",
+  "No OCC cause number exists yet for the Oklahoma segment. Transource expects to file its Certificate of Authority application in summer 2027, with a decision in late 2027 (fact sheet graphic: 'FALL - WINTER 2027 OCC Approval').",
+  "No SPP Notification to Construct naming SPS or Transource Oklahoma for Beckham County-Potter was found. The Nov 4, 2025 minutes direct SPP staff to issue an NTC to the DTO. SPP-NTC-220936 (SPS, Oct 17, 2025, cached) covers Potter-Crossroads-Phantom 765 kV. It includes a 'Potter County 345 kV Substation Expansion' 'for the addition of three new 345 kV lines' (p.10), which are listed as Tecovas-Potter County circuits. Whether any Beckham line terminal work at Potter is included is not stated.",
+  "Whole-line length conflicts across sources: 125 mi (Xcel page and info sheet, Transource page, and 110 + 15 segment sums), ~128 mi (Nov 21, 2025 Xcel and Transource releases) and ~150 mi (SPP IEP report, Oct 14, 2025, PDF p.9). The segment lengths (110 mi TX, 15 mi OK) are consistent between utilities.",
+  "The SPP IEP report splits winning Proposal B into B-1 (89% of the project) and B-2 (11%) without naming them. The 89/11 split is consistent with SPS 110 mi / Transource 15 mi, but no source states the mapping.",
+  "The Texas-Oklahoma crossing point is undetermined: no final route in either state, and Transource's map shows several preliminary crossing links. The 'tx-ok-state-line' place is a county-edge placeholder (Beckham County's western boundary midpoint, +/-27 km), not a sourced point.",
+  "Season-to-date conversion for the Transource construction window is a convention, not a sourced fact: Spring 2028 = 2028-03-01..2028-06-20 and Late 2028 = 2028-09-01..2028-12-31. Under these bounds the construction windows overlap only as 'possible' (SPS starts Q3 2028; Transource ends late 2028). The overlap becomes 'confirmed' only if 'Late 2028' is read as starting after 2028-09-30.",
+  "Schedule gap: the Transource timeline shows Oklahoma construction ending late 2028 but in-service in late 2029. Xcel shows Texas construction running Q3 2028-Q4 2029 with in-service in Q4 2029. The sources do not explain the Oklahoma gap, and whole-line energization timing should not be inferred.",
+  "Not modeled as construction windows: Transource's 'EARLY 2028 Right-of-Way Acquisition' (a milestone with no end date), 'SPRING 2027 Final Line Route Determined', and 'FALL - WINTER 2027 OCC Approval'.",
+  "In-service claims agree in substance: Q4 2029 (Xcel TX), Late 2029 (Transource OK), November 2029 (both Nov 2025 releases) and a November 2029 schedule guarantee from both Proposal B respondents in the SPP IEP report. The IEP table also mentions 'November 12th, 2029', but that sits in Proposal A's column (NextEra), so it is not attributed to these packages.",
+  "The Beckham County substation is an existing OG&E facility, and OG&E is a third utility. No source documents OG&E terminal work or an OG&E package for this line. SPP-NTC-220965 (OG&E, Dec 19, 2025, cached) does not mention Beckham.",
+  "Resource sharing is unknown. Xcel's Nov 2025 release quotes an Xcel director saying the partnership combines 'expertise' and 'resources', but no source documents shared crews, equipment, procurement or joint construction scheduling. Coordination is recorded as known-joint / joint-initiative, not resource-sharing.",
+  "SPP's IEP report calls this line a 'necessary companion project' to SPS's Potter-Crossroads-Phantom 765 kV line, and both use the Potter County substation. That pairing has the same owner (SPS) and belongs in a separate cluster if the 765 kV project is added; it is not a cross-utility lead.",
+  "The Potter substation coordinate is the OSM facility 'Potter County Interchange' (345/230 kV, Xcel). A cross-check against Xcel's location ('approximately six miles northwest of the intersection of SH 335 and US 87') could not be finished because Overpass timed out. The Beckham County coordinate was cross-checked and matches (5.9 mi SE of the SH 152/SH 6 junction).",
+  "Transource's project web page shows its timeline as an SVG image with outlined text, which cannot be verified by script. It was viewed and matches the fact sheet PDF, so all Transource schedule excerpts cite the fact sheet.",
+  "The Xcel information sheet graphic says '(Schedule is subject to change.)', but that text is not in the cached text extraction, so it is not cited."
+ ]
+}
