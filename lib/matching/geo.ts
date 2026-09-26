@@ -1,7 +1,7 @@
 import distance from "@turf/distance";
 import { point } from "@turf/helpers";
 import type { GeoDetail, Place, Project, Relation, SignalLevel } from "@/lib/domain/types";
-import { displayTitle, formatMiles, formatMilesNear } from "@/lib/format";
+import { displayTitle, formatMilesNear } from "@/lib/format";
 
 const METERS_PER_MILE = 1609.344;
 
@@ -44,6 +44,8 @@ export interface Center {
   lowConfidence: boolean;
   /** Every point behind this center is a town-level geocode (plan §8.4: at most a "possible" match). */
   localityOnly: boolean;
+  /** Some point behind this center is a town-level geocode. */
+  anyLocality: boolean;
   places: Place[];
 }
 
@@ -63,6 +65,7 @@ export function centerOf(p: Project): Center | null {
     errorMiles: pts.reduce((s, x) => s + errMiles(x), 0) / pts.length,
     lowConfidence: pts.some((x) => x.confidence === "lower-confidence" || x.precision === "locality"),
     localityOnly: pts.every((x) => x.precision === "locality"),
+    anyLocality: pts.some((x) => x.precision === "locality"),
     places: pts,
   };
 }
@@ -112,6 +115,7 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
       b: cb.lonlat,
       lowConfidence: ca.lowConfidence || cb.lowConfidence,
       localityOnly: ca.localityOnly || cb.localityOnly,
+      anyLocality: ca.anyLocality || cb.anyLocality,
     };
   }
   const shared = sharedEndpoint(a, b);
@@ -124,7 +128,7 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
     const verb = stated ? "Sources state both projects connect at" : "Taken together, the sources imply both projects meet at";
     return {
       level: "confirmed",
-      reason: `${verb} ${site}${stated ? "" : " (no single document names the handoff point)"}${center ? `; project centers are ≈${formatMiles(center.miles)} apart` : ""}.`,
+      reason: `${verb} ${site}${stated ? "" : " (no single document names the handoff point)"}${center ? `; project centers are ≈${formatMilesNear(center.miles, thresholdMiles)} apart` : ""}.`,
       detail: { ...base, method: "shared-site" },
       approxMiles: center?.miles ?? 0,
     };
@@ -134,7 +138,7 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
     const same = shared.labelA === shared.labelB ? shared.labelA : `${shared.labelA} / ${shared.labelB}`;
     return {
       level: "confirmed",
-      reason: `Both projects have a terminal at ${same} (geocoded to the same facility)${center ? `; centers ≈${formatMiles(center.miles)} apart` : ""}.`,
+      reason: `Both projects have a terminal at ${same} (geocoded to the same facility)${center ? `; centers ≈${formatMilesNear(center.miles, thresholdMiles)} apart` : ""}.`,
       detail: { ...base, method: "shared-endpoint" },
       approxMiles: center?.miles ?? 0,
     };

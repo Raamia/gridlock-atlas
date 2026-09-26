@@ -7,9 +7,9 @@ import { useMemo, useRef, useState, type ReactNode } from "react";
 import { useDialogFocus } from "@/lib/focus";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { SourceDocument } from "@/lib/domain/types";
-import { formatDate, publicNote } from "@/lib/format";
+import { formatDate } from "@/lib/format";
 import { ENGINE_VERSION, IN_SERVICE_HORIZON_DAYS } from "@/lib/matching/engine";
-import { regionPairCounts } from "@/lib/selectors";
+import { readableNote, regionPairCounts } from "@/lib/selectors";
 import { sponsorCheck } from "@/lib/sponsor";
 import { useAtlas } from "@/lib/store";
 import { SourceRow } from "./Evidence";
@@ -141,7 +141,7 @@ export function MethodDrawer() {
   const inRegion = (id: string) => region === "all" || IDX.project(id)?.region === region;
   const excludedProjects = run?.excludedProjects.filter((x) => inRegion(x.projectId)) ?? [];
   const sharedOwner = run?.excludedPairs.filter((p) => p.reason === "shared-owner" && inRegion(p.projectAId)) ?? [];
-  const openQs = useMemo(() => SNAPSHOT.unresolved.map((u) => ({ ...u, note: publicNote(u.note) })).filter((u) => u.note), []);
+  const openQs = useMemo(() => SNAPSHOT.unresolved.map((u) => ({ ...u, note: readableNote(u.note, IDX) })).filter((u) => u.note), []);
   return (
     <Drawer open={open} onClose={() => set({ methodOpen: false })} eyebrow="How it works" title="Method & audit" width={600}>
       <Pipeline />
@@ -296,7 +296,7 @@ function CorpusChecks() {
       out.push({
         label: "Xcel vs PSC completion dates",
         expect: "conflict shown, TIME unaffected",
-        ok: m ? m.conflicts.some((c) => c.field === "completion" && !c.affectsMatch) : null,
+        ok: m ? m.conflicts.some((c) => c.projectId === "xcel-wwtc" && c.field === "completion" && !c.affectsMatch) : null,
         got: m ? `${m.conflicts.length} conflict(s) · TIME ${m.time}` : "—",
       });
     }

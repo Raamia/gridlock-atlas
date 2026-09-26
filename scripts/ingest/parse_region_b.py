@@ -101,6 +101,7 @@ def parse_desc(source_id: str):
         # yearly budget from the layout rendering (header row + value row)
         lay = layout_text(source_id, page)
         costs = {}
+        cost_tokens = {}  # cells as printed: "$14,303648" keeps the PDF's own typo, so it can be found verbatim
         lay_lines = lay.splitlines()
         for k, l in enumerate(lay_lines):
             if "Previous" in l and "Total" in l:
@@ -110,6 +111,7 @@ def parse_desc(source_id: str):
                     vals = re.findall(r"\$?\d[\d,]*", vl)
                     if len(vals) == len(heads):
                         costs = {h.rstrip("*"): int(v.replace("$", "").replace(",", "")) for h, v in zip(heads, vals)}
+                        cost_tokens = {h.rstrip("*"): v for h, v in zip(heads, vals)}
                         break
                 if not costs:
                     print(f"warn: {source_id} p.{page}: budget row not parsed", file=sys.stderr)
@@ -121,6 +123,30 @@ def parse_desc(source_id: str):
                 e = ev(source_id, page, f"{y} ${v:,}", f"budgeted spending in {y}")
                 if e["verifiedByScript"]:
                     cost_ev.append(e)
+        # the text layer stacks the leading columns ("Previous\n2026\n$A\n$B"), so "2026 $B" alone is never found:
+        # cite them together, as printed, whenever they carry the 'Previous' amount or an uncited year's amount
+        cols = [h for h in cost_tokens if h == "Previous" or h.isdigit()]
+        cited = {e["supports"] for e in cost_ev}
+        for k in (2, 3):  # "Previous 2026 $A $B" or "Previous 2026 2027 $A $B $C"
+            hs = cols[:k]
+            yrs = [h for h in hs if h.isdigit()]
+            if len(hs) < k or not yrs:
+                break
+            if not costs.get("Previous") and all(f"budgeted spending in {y}" in cited or not costs.get(y) for y in yrs):
+                continue
+            parts = ([f"spending before {yrs[0]} ('Previous' column)"] if costs.get("Previous") else []) + [f"budgeted spending in {y}" for y in yrs if costs.get(y)]
+            e = ev(source_id, page, " ".join(hs) + " " + " ".join(cost_tokens[h] for h in hs), " and ".join(parts))
+            if e["verifiedByScript"]:
+                cost_ev.insert(0, e)  # the leading columns hold the window's start: cite them first
+                break
+        if costs.get("Previous") and not any("'Previous' column" in e["supports"] for e in cost_ev):
+            # a scrambled text layer ("Previous 2026 … Total $A $0 … $total $B"): cite the whole table as printed
+            n = len(cost_tokens)
+            m = re.search(r"Previous(?: (?:\d{4}|Total\*?))+" + r"(?: \$?\d[\d,]*)" * n + r"(?!\S)", " ".join(raw.split()))
+            if m:
+                e = ev(source_id, page, m.group(0), f"the budget table: spending before {cols[1] if len(cols) > 1 else 'the first year'} ('Previous' column) and by year")
+                if e["verifiedByScript"]:
+                    cost_ev.insert(0, e)
         if costs.get("Total"):
             for txt in (f"Total ${costs['Total']:,}", f"Total* ${costs['Total']:,}", f"${costs['Total']:,}"):
                 e = ev(source_id, page, txt, "total estimated project cost")

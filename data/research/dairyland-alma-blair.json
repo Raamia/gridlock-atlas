@@ -1361,20 +1361,20 @@
      "evidence": [
       {
        "sourceId": "dpc-alma-blair-cpcn-2024",
-       "exactExcerpt": "4th Quarter 2027 \u2013 4th Quarter Restoration Activities and Removal of Construction Mats 2028 Project In-Service 2nd Quarter 2028",
-       "supports": "2024 table: restoration to Q4 2028; in-service Q2 2028",
-       "page": 53,
-       "printedPage": "33",
-       "section": "1.8 Construction Schedule - Table 1.8-2",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "dpc-alma-blair-cpcn-2024",
        "exactExcerpt": "Construction is expected to begin in the 2nd Quarter of 2026 and be in-service by the 2nd Quarter of 2028, pending agency permits and authorizations.",
        "supports": "2024 narrative: start Q2 2026, in-service Q2 2028",
        "page": 51,
        "printedPage": "31",
        "section": "1.8 Construction Schedule",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "4th Quarter 2027 \u2013 4th Quarter Restoration Activities and Removal of Construction Mats 2028 Project In-Service 2nd Quarter 2028",
+       "supports": "2024 table: restoration to Q4 2028; in-service Q2 2028",
+       "page": 53,
+       "printedPage": "33",
+       "section": "1.8 Construction Schedule - Table 1.8-2",
        "verifiedByScript": true
       }
      ],
@@ -1426,7 +1426,7 @@
      "partner": "xcel-wwtc",
      "status": "reported-coordination",
      "scope": "interconnection-design",
-     "description": "Dairyland's July 2024 application says the line would connect to a new 345 kV switching station that also connects to Xcel's Tremval-Eau Claire-Jump River (WWTC) project, and that the station location would be set in the WWTC docket. Dairyland routed to both of Xcel's preferred station sites. The final connection configuration was to be 'determined in coordination with Xcel Energy'. The application also says the station must be completed by the end of 2028 for Dairyland's connection. This documents interface design coordination only. Separately, the WWTC Final Decision lists Dairyland among the parties granted intervention in 5-CE-158; that is procedural participation, not evidence of shared resources.",
+     "description": "Dairyland's July 2024 application says the line would connect to a new 345 kV switching station that also connects to Xcel's Tremval-Eau Claire-Jump River (WWTC) project. It says the station location would be set in the WWTC docket, and Dairyland routed to both of Xcel's preferred station sites. The final connection configuration was to be 'determined in coordination with Xcel Energy'. The application also says the station must be completed by the end of 2028 for Dairyland's connection. This documents interface design coordination only. Separately, the WWTC Final Decision lists Dairyland among the parties granted intervention in 5-CE-158; that is procedural participation, not evidence of shared resources.",
      "evidence": [
       {
        "sourceId": "dpc-alma-blair-cpcn-2024",

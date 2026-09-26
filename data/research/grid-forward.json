@@ -1454,6 +1454,7 @@
    "places": [
     {
      "id": "gf-pco",
+     "role": "endpoint",
      "label": "Point of Change of Ownership (PCO) between NSPW and ATC segments, ~1,400 ft west of Sherwood Rd & River Ave, Clark County (application, Primary Route)",
      "kind": "route-endpoint",
      "precision": "locality",
@@ -1510,6 +1511,7 @@
     },
     {
      "id": "gf-columbia",
+     "role": "endpoint",
      "label": "Columbia Substation (Town of Pacific, Columbia County)",
      "kind": "substation",
      "precision": "named-facility",

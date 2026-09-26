@@ -277,8 +277,10 @@ def desc_clusters(parsed, geo):
             """Years that set the window first; skipped (preconstruction) years last, labelled as such."""
             ok = [x for x in costs if x["verifiedByScript"]]
             pre = {f"budgeted spending in {y}" for y in skipped_years}
-            return [x for x in ok if x["supports"] not in pre] + [
-                {**x, "supports": x["supports"] + " (under 5% of the total: treated as preconstruction)"} for x in ok if x["supports"] in pre]
+            # a combined "Previous 2026 $A $B" excerpt ends with its last year's label
+            is_pre = lambda x: any(x["supports"].endswith(p) for p in pre)  # noqa: E731
+            return [x for x in ok if not is_pre(x)] + [
+                {**x, "supports": x["supports"] + " (under 5% of the total: treated as preconstruction)"} for x in ok if is_pre(x)]
 
         total = r["costs"].get("Total") or 0
 

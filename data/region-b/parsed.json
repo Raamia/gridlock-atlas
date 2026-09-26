@@ -64,6 +64,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 1,
+       "exactExcerpt": "Previous 2026 $13,675,885 $2,100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 1,
        "exactExcerpt": "Total $15,775,885",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -134,6 +141,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 2,
+       "exactExcerpt": "Previous 2026 $150,364 $1,000,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 2,
        "exactExcerpt": "Total $1,150,364",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -201,6 +215,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 3,
+       "exactExcerpt": "Previous 2026 $17,360,044 $2,057,956",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 3,
@@ -281,6 +302,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 4,
+       "exactExcerpt": "Previous 2026 $88,443 $1,150,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 4,
        "exactExcerpt": "2027 $850,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -358,6 +386,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 5,
+       "exactExcerpt": "Previous 2026 $12,223,765 $817,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 5,
        "exactExcerpt": "Total $13,040,765",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -428,6 +463,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 6,
+       "exactExcerpt": "Previous 2026 2027 2028 2029 2030 Total $8,475,000 $0 $0 $0 $0 $12,475,000 $4,000,000",
+       "supports": "the budget table: spending before 2026 ('Previous' column) and by year",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 6,
        "exactExcerpt": "$12,475,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -495,6 +537,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 7,
+       "exactExcerpt": "Previous 2026 $8,245,538 $7,703,082",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 7,
@@ -569,6 +618,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 8,
+       "exactExcerpt": "Previous 2026 $12,978,366 $40,860,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 8,
        "exactExcerpt": "Total $93,603,207",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -636,6 +692,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 9,
+       "exactExcerpt": "Previous 2026 $15,658,628 $25,200,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 9,
@@ -709,6 +772,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 10,
+       "exactExcerpt": "Previous 2026 $5,323,202 $450,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 10,
        "exactExcerpt": "Total $5,773,202",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -776,6 +846,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 11,
+       "exactExcerpt": "Previous 2026 $7,204,010 $3,401,335",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 11,
@@ -856,6 +933,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 12,
+       "exactExcerpt": "Previous 2026 $14,303648 $4,976,826",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 12,
        "exactExcerpt": "Total $19,280,474",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -923,6 +1007,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 13,
+       "exactExcerpt": "Previous 2026 $14,773,047 $26,616,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 13,
@@ -996,6 +1087,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 14,
+       "exactExcerpt": "Previous 2026 $1,743,210 $2,206,790",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 14,
        "exactExcerpt": "Total $3,950,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -1063,6 +1161,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 15,
+       "exactExcerpt": "Previous 2026 $2,865,825 $15,039,175",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 15,
@@ -1140,6 +1245,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 16,
+       "exactExcerpt": "Previous 2026 $9,586,174 $9,867,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 16,
@@ -1224,6 +1336,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 17,
+       "exactExcerpt": "Previous 2026 $28,424,742 $8,487,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 17,
@@ -1368,6 +1487,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 19,
+       "exactExcerpt": "Previous 2026 $219,331 $50,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 19,
        "exactExcerpt": "2027 $4,300,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -1442,6 +1568,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 20,
+       "exactExcerpt": "Previous 2026 $234,285 $100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 20,
@@ -1522,6 +1655,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 21,
+       "exactExcerpt": "Previous 2026 $3,259,932 $3,800,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 21,
        "exactExcerpt": "Total $18,129,932",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -1589,6 +1729,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 22,
+       "exactExcerpt": "Previous 2026 $15,000 $175,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 22,
@@ -1669,6 +1816,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 23,
+       "exactExcerpt": "Previous 2026 $125,000 $100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 23,
        "exactExcerpt": "2027 $7,850,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -1746,6 +1900,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 24,
+       "exactExcerpt": "Previous 2026 $0 $90,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 24,
        "exactExcerpt": "2028 $3,556,027",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -1820,6 +1981,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 25,
+       "exactExcerpt": "Previous 2026 $94,609 $100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 25,
@@ -1984,6 +2152,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 27,
+       "exactExcerpt": "Previous 2026 $800,000 $100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 27,
        "exactExcerpt": "2027 $21,500,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -2061,6 +2236,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 28,
+       "exactExcerpt": "Previous 2026 $277,791 $325,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 28,
        "exactExcerpt": "2027 $10,397,209",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -2135,6 +2317,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 29,
+       "exactExcerpt": "Previous 2026 $150,000 $100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 29,
@@ -2279,6 +2468,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 31,
+       "exactExcerpt": "Previous 2026 $10,000 $175,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 31,
        "exactExcerpt": "2027 $22,734,648",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -2363,6 +2559,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 32,
+       "exactExcerpt": "Previous 2026 $4,412,330 $12,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 32,
        "exactExcerpt": "2028 $7,000,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -2437,6 +2640,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 33,
+       "exactExcerpt": "Previous 2026 $3,760 $0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 33,
@@ -2517,6 +2727,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 34,
+       "exactExcerpt": "Previous 2026 2027 $0 $250,000 $1,500,000",
+       "supports": "budgeted spending in 2026 and budgeted spending in 2027",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 34,
        "exactExcerpt": "2028 $1,000,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -2591,6 +2808,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 35,
+       "exactExcerpt": "Previous 2026 $25,000 $0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 35,
@@ -2678,6 +2902,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 36,
+       "exactExcerpt": "Previous 2026 $463,118 $0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 36,
        "exactExcerpt": "2027 $100,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -2759,6 +2990,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 37,
+       "exactExcerpt": "Previous 2026 $0 $30,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 37,
@@ -2846,6 +3084,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 38,
+       "exactExcerpt": "Previous 2026 $75,000 $0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 38,
        "exactExcerpt": "2027 $50,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -2927,6 +3172,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 39,
+       "exactExcerpt": "Previous 2026 $2,098,924 $650,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 39,
@@ -3018,6 +3270,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 40,
+       "exactExcerpt": "Previous 2026 $0 $175,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 40,
@@ -3189,6 +3448,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 42,
+       "exactExcerpt": "Previous 2026 $0 $125,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 42,
        "exactExcerpt": "2027 $1,700,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -3270,6 +3536,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 43,
+       "exactExcerpt": "Previous 2026 $25,000 $175,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 43,
@@ -3357,6 +3630,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 44,
+       "exactExcerpt": "Previous 2026 $1,038,795 $500,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 44,
        "exactExcerpt": "2028 $11,875,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -3438,6 +3718,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 45,
+       "exactExcerpt": "Previous 2026 $174,719 $150,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 45,
@@ -3529,6 +3816,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "Previous 2026 $150,000 0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 46,
@@ -3707,6 +4001,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 48,
+       "exactExcerpt": "Previous 2026 $0 $275,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 48,
        "exactExcerpt": "2027 $125,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -3795,6 +4096,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 49,
+       "exactExcerpt": "Previous 2026 $0 $100,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 49,
@@ -4057,6 +4365,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 52,
+       "exactExcerpt": "Previous 2026 $1,314,478 $600,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 52,
        "exactExcerpt": "2028 $200,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -4232,6 +4547,13 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 54,
+       "exactExcerpt": "Previous 2026 2027 25,000 $0 $0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 54,
        "exactExcerpt": "2029 $850,000",
        "supports": "budgeted spending in 2029",
        "verifiedByScript": true
@@ -4395,6 +4717,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 2,
+       "exactExcerpt": "Previous 2025 $7,204,010 $3,401,335",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 2,
        "exactExcerpt": "2026 $1,024,912",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -4469,6 +4798,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 3,
+       "exactExcerpt": "Previous 2025 $16,056,490 $6,959,902",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 3,
@@ -4549,6 +4885,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 4,
+       "exactExcerpt": "Previous 2025 $11,200,001 $799,999",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 4,
        "exactExcerpt": "Total* $12,000,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -4616,6 +4959,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 5,
+       "exactExcerpt": "Previous 2025 $3,400,000 $3,300,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 5,
@@ -4703,6 +5053,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 6,
+       "exactExcerpt": "Previous 2025 $567,157 $0",
+       "supports": "spending before 2025 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 6,
        "exactExcerpt": "2026 $100,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -4784,6 +5141,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 7,
+       "exactExcerpt": "Previous 2025 $174,719 $100,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 7,
@@ -4878,6 +5242,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 8,
+       "exactExcerpt": "Previous 2025 $28,774,739 $11,900,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 8,
        "exactExcerpt": "Total* $40,674,739",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -4948,6 +5319,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 9,
+       "exactExcerpt": "Previous 2025 $2,200,000 $1,300,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 9,
        "exactExcerpt": "Total* $3,500,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -5015,6 +5393,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 10,
+       "exactExcerpt": "Previous 2025 2026 $918,768 $100,000 $200,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025 and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 10,
@@ -5102,6 +5487,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 11,
+       "exactExcerpt": "Previous 2025 $150,000 $0",
+       "supports": "spending before 2025 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 11,
        "exactExcerpt": "2026 $100,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -5186,6 +5578,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 12,
+       "exactExcerpt": "Previous 2025 $9,321,256 $500,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 12,
        "exactExcerpt": "Total* $9,821,256",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -5253,6 +5652,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 13,
+       "exactExcerpt": "Previous 2025 $2,098,924 $650,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 13,
@@ -5347,6 +5753,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 14,
+       "exactExcerpt": "Previous 2025 2026 $0 $250,000 $1,500,000",
+       "supports": "budgeted spending in 2025 and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 14,
        "exactExcerpt": "2027 $1,000,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -5421,6 +5834,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 15,
+       "exactExcerpt": "Previous 2025 $541,268 $10,500,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 15,
@@ -5508,6 +5928,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 16,
+       "exactExcerpt": "Previous 2025 $17,609,000 $10,870,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 16,
        "exactExcerpt": "2026 $16,553,777",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -5582,6 +6009,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 17,
+       "exactExcerpt": "Previous 2025 $11,516,256 $21,836,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 17,
@@ -5662,6 +6096,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 18,
+       "exactExcerpt": "Previous 2025 $14,451,420 $11,867,669",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 18,
        "exactExcerpt": "2026 $2,259,645",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -5736,6 +6177,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 19,
+       "exactExcerpt": "Previous 2025 $5,000 $0",
+       "supports": "spending before 2025 ('Previous' column)",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 19,
@@ -5823,6 +6271,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 20,
+       "exactExcerpt": "Previous 2025 $4,401,163 $7,000,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 20,
        "exactExcerpt": "Total $11,401,163",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -5890,6 +6345,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 21,
+       "exactExcerpt": "Previous 2025 2026 $0 $25,000 $250,000",
+       "supports": "budgeted spending in 2025 and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 21,
@@ -5984,6 +6446,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 22,
+       "exactExcerpt": "Previous 2025 $3,378,370 $6,300,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 22,
        "exactExcerpt": "Total* $9,678,370",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -6054,6 +6523,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 23,
+       "exactExcerpt": "Previous 2025 $8,475,000 $4,000,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 23,
        "exactExcerpt": "Total* $12,475,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -6121,6 +6597,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 24,
+       "exactExcerpt": "Previous 2025 $150,000 $100,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 24,
@@ -6201,6 +6684,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 25,
+       "exactExcerpt": "Previous 2025 $5,323,202 $450,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 25,
        "exactExcerpt": "Total* $5,773,202",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -6271,6 +6761,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 26,
+       "exactExcerpt": "Previous 2025 $250,000 $8,500,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 26,
        "exactExcerpt": "Total* $8,750,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -6338,6 +6835,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 27,
+       "exactExcerpt": "Previous 2024 $2,754,253 $23,234,892",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 27,
@@ -6426,6 +6930,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 28,
+       "exactExcerpt": "Previous 2025 $12,978,366 $40,860,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 28,
        "exactExcerpt": "Total* $93,603,207",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -6493,6 +7004,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 29,
+       "exactExcerpt": "Previous 2025 $200,000 $8,600,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 29,
@@ -6570,6 +7088,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 30,
+       "exactExcerpt": "Previous 2025 $180,352 $75,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 30,
@@ -6825,6 +7350,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 33,
+       "exactExcerpt": "Previous 2025 $3,556,350 $7,399,577",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 33,
        "exactExcerpt": "2026 $23,763,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -6909,6 +7441,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 34,
+       "exactExcerpt": "Previous 2025 $75,000 $175,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 34,
        "exactExcerpt": "2026 $850,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -6983,6 +7522,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 35,
+       "exactExcerpt": "Previous 2025 $0 $100,000",
+       "supports": "budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 35,
@@ -7067,6 +7613,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 36,
+       "exactExcerpt": "Previous 2025 $100,000 $0",
+       "supports": "spending before 2025 ('Previous' column)",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 36,
@@ -7329,6 +7882,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 39,
+       "exactExcerpt": "Previous 2025 $165,825 $750,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 39,
        "exactExcerpt": "2026 $19,059,175",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -7504,6 +8064,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 41,
+       "exactExcerpt": "Previous 2025 $150,000 $0",
+       "supports": "spending before 2025 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 41,
        "exactExcerpt": "2027 $4,600,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -7662,6 +8229,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 43,
+       "exactExcerpt": "Previous 2025 $0 50,000",
+       "supports": "budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 43,
@@ -7884,6 +8458,13 @@
       {
        "sourceId": "desc-scrtp-2025-2029",
        "page": 46,
+       "exactExcerpt": "Previous 2025 $0 $150,000",
+       "supports": "budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 46,
        "exactExcerpt": "2026 $75,000",
        "supports": "budgeted spending in 2026",
        "verifiedByScript": true
@@ -8061,6 +8642,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 1,
+       "exactExcerpt": "Previous 2024 $4,604,301 $800,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 1,
        "exactExcerpt": "Total* $5,404,301",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -8222,6 +8810,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 3,
+       "exactExcerpt": "Previous 2024 $2,717,933 $6,631,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 3,
        "exactExcerpt": "2025 $1,181,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -8296,6 +8891,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 4,
+       "exactExcerpt": "Previous 2024 $1,189,020 $6,601,830",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 4,
@@ -8383,6 +8985,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 5,
+       "exactExcerpt": "Previous 2024 $9,900,000 $1,800,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 5,
        "exactExcerpt": "Total* $11,700,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -8453,6 +9062,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 6,
+       "exactExcerpt": "Previous 2024 $4,330,000 $4,250,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 6,
        "exactExcerpt": "Total* $8,580,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -8520,6 +9136,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 7,
+       "exactExcerpt": "Previous 2024 $50,000 $50,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 7,
@@ -8607,6 +9230,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 8,
+       "exactExcerpt": "Previous 2024 $332,096 $80,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 8,
        "exactExcerpt": "2025 $100,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -8688,6 +9318,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 9,
+       "exactExcerpt": "Previous 2024 2025 $174,719 $0 $100,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 9,
@@ -8782,6 +9419,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 10,
+       "exactExcerpt": "Previous 2024 $6,660,000 $26,800,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 10,
        "exactExcerpt": "2025 $7,200,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -8856,6 +9500,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 11,
+       "exactExcerpt": "Previous 2024 $0 $1,000,000",
+       "supports": "budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 11,
@@ -9027,6 +9678,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 13,
+       "exactExcerpt": "Previous 2024 $1,300,000 $3,000,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 13,
        "exactExcerpt": "Total* $4,300,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -9097,6 +9755,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 14,
+       "exactExcerpt": "Previous 2024 $8,195,543 $3,550,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 14,
        "exactExcerpt": "Total $11,745,543",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -9164,6 +9829,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 15,
+       "exactExcerpt": "Previous 2024 $0 $50,000",
+       "supports": "budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 15,
@@ -9251,6 +9923,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 16,
+       "exactExcerpt": "Previous 2024 $3,300,432 $7,533,030",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 16,
        "exactExcerpt": "Total* $10,833,462",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -9318,6 +9997,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 17,
+       "exactExcerpt": "Previous 2024 2025 $709,124 $1,689,800 $1,200,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024 and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 17,
@@ -9503,6 +10189,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 19,
+       "exactExcerpt": "Previous 2024 $782,052 $3,200,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 19,
        "exactExcerpt": "Total* $3,982,052",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -9573,6 +10266,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 20,
+       "exactExcerpt": "Previous 2024 $100,000 $400,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 20,
        "exactExcerpt": "Total* $40,000,000",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -9640,6 +10340,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 21,
+       "exactExcerpt": "Previous 2024 $100,000 $1,300,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 21,
@@ -9727,6 +10434,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 22,
+       "exactExcerpt": "Previous 2024 $4,337,401 $19,00,181",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 22,
        "exactExcerpt": "2025 $11,489,845",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -9811,6 +10525,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 23,
+       "exactExcerpt": "Previous 2024 $9,591,713 $5,087,710",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 23,
        "exactExcerpt": "2025 $9,108,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -9888,6 +10609,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 24,
+       "exactExcerpt": "Previous 2024 $5,000 $2,800,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 24,
        "exactExcerpt": "2025 $3,200,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -9962,6 +10690,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 25,
+       "exactExcerpt": "Previous 2024 $3,850,000 $7,000,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 25,
@@ -10119,6 +10854,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 27,
+       "exactExcerpt": "Previous 2024 $255,669 $9,400,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 27,
        "exactExcerpt": "Total* $9,655,669",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -10186,6 +10928,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 28,
+       "exactExcerpt": "Previous 2024 $2,475,000 $6,000,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 28,
@@ -10266,6 +11015,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 29,
+       "exactExcerpt": "Previous 2024 $0 $300,000",
+       "supports": "budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 29,
        "exactExcerpt": "2025 $3,700,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -10343,6 +11099,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 30,
+       "exactExcerpt": "Previous 2024 $330,954 $2,178,648",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 30,
        "exactExcerpt": "Total* $2,509,602",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -10413,6 +11176,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 31,
+       "exactExcerpt": "Previous 2024 $50,080 $2,150,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 31,
        "exactExcerpt": "Total* $2,200,080",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -10480,6 +11250,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 32,
+       "exactExcerpt": "Previous 2024 $50,000 $200,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 32,
@@ -10557,6 +11334,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 33,
+       "exactExcerpt": "Previous 2024 $65,000 $360,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 33,
@@ -10645,6 +11429,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 34,
+       "exactExcerpt": "Previous 2024 $284,366 $8,014,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 34,
        "exactExcerpt": "Total* $93,538,207",
        "supports": "total estimated project cost",
        "verifiedByScript": true
@@ -10712,6 +11503,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 35,
+       "exactExcerpt": "Previous 2024 $100,000 $100,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 35,
@@ -10806,6 +11604,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 36,
+       "exactExcerpt": "Previous 2024 $0 $50,000",
+       "supports": "budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 36,
        "exactExcerpt": "2025 $250,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -10890,6 +11695,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 37,
+       "exactExcerpt": "Previous 2024 $0 $50,000",
+       "supports": "budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 37,
        "exactExcerpt": "2025 $900,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -10971,6 +11783,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 38,
+       "exactExcerpt": "Previous 2024 $0 $50,000",
+       "supports": "budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 38,
@@ -11065,6 +11884,13 @@
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 39,
+       "exactExcerpt": "Previous 2024 $1,772,338 $975,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 39,
        "exactExcerpt": "2025 $4,250,000",
        "supports": "budgeted spending in 2025",
        "verifiedByScript": true
@@ -11153,6 +11979,13 @@
       "verifiedByScript": true
      },
      "costs": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 40,
+       "exactExcerpt": "Previous 2024 $0 $75,000",
+       "supports": "budgeted spending in 2024",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2024-2028",
        "page": 40,

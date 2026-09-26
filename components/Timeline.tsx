@@ -7,10 +7,10 @@ import { useMemo, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { CompletionClaim, ConstructionWindow, Match, Project } from "@/lib/domain/types";
-import { formatBound, formatPoint, formatSpan, formatWindow, year } from "@/lib/format";
+import { formatBound, formatSpan, formatWindow, precisionLabel } from "@/lib/format";
 import { usePreviewPair, useWidth } from "@/lib/hooks";
 import { activeWindows, coarsest, displayWindowGroups } from "@/lib/matching/time";
-import { conflictMatches, ownerNames } from "@/lib/selectors";
+import { conflictMatches, ownerNames, windowGroupText } from "@/lib/selectors";
 import { useAtlas } from "@/lib/store";
 
 const LABEL_W = 208;
@@ -193,7 +193,7 @@ function PairTimeline({ m, a, b, y0, y1 }: { m: Match; a: Project; b: Project; y
           >
             <span className="mono whitespace-nowrap rounded-t-md bg-bg-1 px-1.5 pt-0.5 text-[10px] text-amber">
               {confirmed ? `Overlap guaranteed in ${formatSpan(core ?? o, m.timeDetail.precision)} · possible ${formatSpan(o, m.timeDetail.precision)}` : `Possible overlap ${formatSpan(o, m.timeDetail.precision)}`} ·{" "}
-              {m.timeDetail.precision} precision
+              {precisionLabel(m.timeDetail.precision)} precision
             </span>
           </div>
         </div>
@@ -279,7 +279,16 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
         ))}
         {conflict && <ConflictLink p={p} claimIds={conflict.claimIds} y0={y0} y1={y1} emphasize={emphasize} label={labels.get("conflict")} />}
         {claims.map((c) => (
-          <CompletionMark key={c.id} c={c} y0={y0} y1={y1} conflicted={!!conflict?.claimIds.includes(c.id)} emphasize={emphasize} label={labels.get(c.id)} />
+          <CompletionMark
+            key={c.id}
+            c={c}
+            y0={y0}
+            y1={y1}
+            conflicted={!!conflict?.claimIds.includes(c.id)}
+            boundsWindow={!!conflict?.affectsMatch && c.current !== false && conflict.claimIds.includes(c.id)}
+            emphasize={emphasize}
+            label={labels.get(c.id)}
+          />
         ))}
       </div>
     </div>
@@ -290,10 +299,8 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
   const [anchor, setAnchor] = useState<DOMRect | null>(null);
   const first = ws.reduce((x, y) => (y.start.earliest < x.start.earliest ? y : x));
   const last = ws.reduce((x, y) => (y.end.latest > x.end.latest ? y : x));
-  const startE = first.start.earliest;
-  const endL = last.end.latest;
-  const s0 = pct(startE, y0, y1);
-  const e1 = pct(endL, y0, y1);
+  const s0 = pct(first.start.earliest, y0, y1);
+  const e1 = pct(last.end.latest, y0, y1);
   const width = Math.max(e1 - s0, 0.4);
   const src = IDX.source(ws[0].claimSourceId);
   const coarse = ws.some((w) => !w.continuous || w.boundsOnly);
@@ -302,18 +309,8 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
   const open = ws.some((w) => w.openEnded);
   // the earliest start is only a floor ("spending before 2026"): no start year is shown
   const openStart = !!first.openStart;
-  const startText = openStart ? `pre-${year(first.start.latest)}` : formatPoint(startE, first.start.precision);
-  // a year-precision window inside one calendar year reads as that year; the tooltip keeps the full bounds
-  const oneYear = ws.length === 1 && !openStart && w0.start.precision === "year" && startE.slice(0, 4) === endL.slice(0, 4) && endL.endsWith("-12-31");
-  const label = open
-    ? openStart
-      ? `from before ${year(first.start.latest)} →`
-      : `from ${startText} →`
-    : oneYear
-      ? startE.slice(0, 4)
-      : ws.length === 1 && !w0.boundsOnly
-        ? formatWindow(w0.start, w0.end, false, w0.openStart)
-        : `${startText}–${formatPoint(endL, last.end.precision)}`;
+  // same text as the inspector row ("2028", "before 2026 → 2026"); an open end trails an arrow
+  const label = `${windowGroupText(ws)}${open ? " →" : ""}`;
   const note = [ws.length > 1 && `${ws.length} components`, coarse && !open && (bounds ? "bounds only" : "coarse"), open && "end not published", openStart && "start not published"]
     .filter(Boolean)
     .map((x) => ` · ${x}`)
@@ -378,7 +375,7 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
                 <span className="num text-text-0">{formatWindow(w.start, w.end, w.openEnded, w.openStart)}</span>
                 <span className="text-text-3">
                   {" "}
-                  · {coarsest([w])} precision{w.openStart ? " · start not published" : ""}
+                  · {precisionLabel(coarsest([w]))} precision{w.openStart ? " · start not published" : ""}
                 </span>
                 {w.note && <div className="text-[10.5px] leading-snug text-text-3">{w.note}</div>}
               </li>
@@ -395,6 +392,7 @@ function CompletionMark({
   y0,
   y1,
   conflicted,
+  boundsWindow,
   emphasize,
   label,
 }: {
@@ -402,6 +400,8 @@ function CompletionMark({
   y0: number;
   y1: number;
   conflicted: boolean;
+  /** the newer disputed date is also the outer bound of the current schedule window (Conflict.affectsMatch) */
+  boundsWindow: boolean;
   emphasize: boolean;
   /** side the date label fits on; hidden (hover only) when it would collide */
   label?: "l" | "r";
@@ -443,7 +443,9 @@ function CompletionMark({
           </div>
           {c.current === false && <div className="text-[10.5px] text-conflict">Superseded by a newer source</div>}
           <div className="text-text-2">{src?.publisher}</div>
-          <div className="mt-1 text-text-3">Completion dates never drive the construction-window match.</div>
+          <div className="mt-1 text-text-3">
+            {boundsWindow ? "This in-service date also bounds the current schedule window used for the TIME match." : "Completion dates never drive the construction-window match."}
+          </div>
         </FloatingTip>
       )}
     </div>

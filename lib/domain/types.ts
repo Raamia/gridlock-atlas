@@ -88,7 +88,8 @@ export interface DateBound {
   /** ISO date YYYY-MM-DD */
   earliest: string;
   latest: string;
-  precision: "day" | "month" | "quarter" | "year";
+  /** "half": a source's "Early/Late YYYY" (Jan–Jun / Jul–Dec). */
+  precision: "day" | "month" | "quarter" | "half" | "year";
 }
 
 export interface ConstructionWindow {
@@ -279,6 +280,8 @@ export interface GeoDetail {
     lowConfidence: boolean;
     /** A center rests only on town/road-level geocodes (at most a "possible" match, never a precise mileage claim). */
     localityOnly: boolean;
+    /** Some point behind a center is town-level (locality). */
+    anyLocality: boolean;
   };
   sharedEndpoint?: { labelA: string; labelB: string; milesApart: number };
   thresholdMiles: number;
@@ -317,7 +320,8 @@ export interface Conflict {
   description: string;
   sides: ConflictSide[];
   claimIds: string[];
-  /** Whether this disagreement changes the construction-window match. */
+  /** Whether this disagreement changes the construction-window match: always for window conflicts; for completion conflicts,
+   *  only when the newer in-service date is the outer bound of a current window that replaced an older one (GPC Start → SERTP year). */
   affectsMatch: boolean;
 }
 

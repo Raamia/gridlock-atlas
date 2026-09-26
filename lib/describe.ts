@@ -33,12 +33,13 @@ export function whyFlagged(m: Match): string {
   const parts: string[] = [];
   const d = m.geoDetail.center?.miles;
   const rels = SNAPSHOT.relations.filter((r) => m.geoDetail.relationIds.includes(r.id));
-  // measured between named facilities: "possible" only because the location uncertainty straddles the radius
-  const named = m.geoDetail.method === "measured" && !m.geoDetail.center?.localityOnly;
+  // measured (not town-only): "possible" only because the location uncertainty straddles the radius; named = no town-level point at all
+  const edge = m.geoDetail.method === "measured" && !m.geoDetail.center?.localityOnly;
+  const named = edge && !m.geoDetail.center?.anyLocality;
   if (m.geoDetail.method === "shared-site") parts.push(rels.some((r) => r.basis !== "inferred") ? "a source-stated shared facility" : "a shared facility implied by the sources");
   else if (m.geoDetail.method === "shared-endpoint") parts.push(`terminals at the same facility (${m.geoDetail.sharedEndpoint?.labelA})`);
   else if (m.geo === "confirmed") parts.push(`centers ${d !== undefined ? formatMilesNear(d, m.geoDetail.thresholdMiles) : ""} apart, inside the ${m.geoDetail.thresholdMiles} mi radius`);
-  else if (named && d !== undefined) parts.push(`centers ≈${d.toFixed(1)} mi apart, at the edge of the ${m.geoDetail.thresholdMiles} mi radius`);
+  else if (edge && d !== undefined) parts.push(`centers ≈${d.toFixed(1)} mi apart, at the edge of the ${m.geoDetail.thresholdMiles} mi radius`);
   else parts.push("possible proximity");
   if (m.time === "confirmed") parts.push("overlapping published construction windows");
   else if (m.time === "possible") parts.push("possibly overlapping construction windows");
@@ -51,7 +52,9 @@ export function whyFlagged(m: Match): string {
         ? "No resource-coordination plan was found in the reviewed sources — status unknown, not “uncoordinated.”"
         : named
           ? "Located at named facilities, but the distance is within location uncertainty of the radius; treat as a lead to verify."
-          : "Evidence is coarse; treat as a lead to verify.";
+          : edge
+            ? "A location is approximate (town-level), and the distance is within its uncertainty of the radius; treat as a lead to verify."
+            : "Evidence is coarse; treat as a lead to verify.";
   return `Flagged for ${signals}. ${tail}`;
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { ChevronDown, CloudOff, Layers, Mountain, Square } from "lucide-react";
+import { ChevronDown, CloudOff, Layers, Link2Off, Mountain, Square, X } from "lucide-react";
 import { useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import { FOCAL_UTILITIES } from "@/lib/mapdata";
@@ -16,6 +16,7 @@ export function MapOverlays() {
       <MapControls />
       <Legend />
       <BasemapNotice />
+      <LinkNotice />
     </>
   );
 }
@@ -117,7 +118,7 @@ function Legend() {
   const focal = FOCAL_UTILITIES[region];
   if (demo !== null) return null;
   return (
-    <div data-map-ui className="absolute bottom-4 left-4 z-10 hidden w-[252px] sm:block">
+    <div data-map-ui data-map-legend className="absolute bottom-4 left-4 z-10 hidden w-[252px] sm:block">
       <div className="glass glass-solid overflow-hidden rounded-xl">
         <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between px-3 py-2" aria-expanded={open}>
           <span className="eyebrow">Map truth rules</span>
@@ -194,6 +195,24 @@ function BasemapNotice() {
       <div className="glass flex items-center gap-2 rounded-full px-3 py-1.5 text-[11.5px] text-text-1">
         <CloudOff size={13} className="text-conflict" />
         Basemap unavailable — showing bundled Census boundaries. All plan data is local.
+      </div>
+    </div>
+  );
+}
+
+/** A ?pair= link that opened nothing says why, below the chip and map controls, until dismissed or the view changes. */
+function LinkNotice() {
+  const notice = useAtlas((s) => s.linkNotice);
+  const set = useAtlas((s) => s.set);
+  if (!notice) return null;
+  return (
+    <div data-map-ui role="status" className="absolute left-1/2 top-[92px] z-20 max-w-[calc(100%-24px)] -translate-x-1/2">
+      <div className="glass glass-solid flex items-center gap-2 rounded-full py-1 pl-3 pr-1 text-[11.5px] text-text-1">
+        <Link2Off size={13} className="shrink-0 text-text-2" />
+        <span className="truncate">{notice}</span>
+        <button onClick={() => set({ linkNotice: null })} aria-label="Dismiss notice" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-text-3 hover:bg-bg-3 hover:text-text-0">
+          <X size={12} />
+        </button>
       </div>
     </div>
   );

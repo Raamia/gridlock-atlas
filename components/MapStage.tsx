@@ -4,6 +4,7 @@ import mapboxgl, { type GeoJSONSource, type LngLatBoundsLike, type StyleSpecific
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import { inServicePhrase } from "@/lib/describe";
+import { formatMilesNear } from "@/lib/format";
 import { usePreviewPair, useReducedMotion, useSelectedPair } from "@/lib/hooks";
 import {
   anchorOf,
@@ -320,7 +321,7 @@ export default function MapStage() {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
-  const callouts = useRef<{ items: Callout[]; dots: [number, number][] }>({ items: [], dots: [] });
+  const callouts = useRef<{ items: Callout[]; dots: Dot[] }>({ items: [], dots: [] });
   const popup = useRef<mapboxgl.Popup | null>(null);
   const [styleReady, setStyleReady] = useState(0);
   const [mapReady, setMapReady] = useState(false);
@@ -412,9 +413,15 @@ export default function MapStage() {
       const layers = ["gl-overlap-dots", "gl-overlaps"].filter((l) => map.getLayer(l));
       const f = map.queryRenderedFeatures(ev.point, { layers })[0];
       const id = f?.properties?.id as string | undefined;
-      if (id) useAtlas.getState().select(id);
+      if (!id) return;
+      // a tap also fires an emulated mousemove that opened the hover card; it would ride along with the camera
+      popup.current?.remove();
+      useAtlas.getState().select(id);
     });
     const onMove = (ev: mapboxgl.MapMouseEvent) => {
+      // touch: no hover, and no mouseout to ever close a hover card
+      const oe = ev.originalEvent as MouseEvent & { sourceCapabilities?: { firesTouchEvents?: boolean } };
+      if (oe.sourceCapabilities?.firesTouchEvents || window.matchMedia?.("(hover: none)").matches) return;
       const layers = hoverLayers.filter((l) => map.getLayer(l));
       const all = map.queryRenderedFeatures(ev.point, { layers });
       const ov = all.find((x) => x.layer?.id === "gl-overlap-dots" || x.layer?.id === "gl-overlaps");
@@ -429,7 +436,7 @@ export default function MapStage() {
             <div class="mono text-[10px] uppercase tracking-[0.08em]" style="color:#fbbf24">Flagged pair · P${m.priority}</div>
             <div class="mt-0.5 font-medium" style="color:#2fd6f2">${escapeHtml(pa.shortTitle)}</div>
             <div class="font-medium" style="color:#a78bfa">${escapeHtml(pb.shortTitle)}</div>
-            <div class="mono mt-1 text-[10.5px] text-text-2">${c ? `${c.miles < 10 ? c.miles.toFixed(1) : Math.round(c.miles)} mi apart` : "shared site"}${m.timeDetail.inService ? ` · ${escapeHtml(inServicePhrase(m))}` : ""}</div>
+            <div class="mono mt-1 text-[10.5px] text-text-2">${c ? `${escapeHtml(formatMilesNear(c.miles, m.geoDetail.thresholdMiles))} apart` : "shared site"}${m.timeDetail.inService ? ` · ${escapeHtml(inServicePhrase(m))}` : ""}</div>
             <div class="mt-1 text-[10.5px] text-text-3">Click to inspect</div>
           </div>`;
           if (!popup.current) popup.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 14, maxWidth: "300px" });
@@ -460,6 +467,7 @@ export default function MapStage() {
     };
     map.on("mousemove", onMove);
     map.on("mouseout", () => popup.current?.remove());
+    map.on("touchstart", () => popup.current?.remove());
 
     const relayout = (ev?: { type: string }) => layoutCallouts(map, callouts.current.items, callouts.current.dots, ev?.type === "move");
     map.on("move", relayout);
@@ -547,7 +555,7 @@ export default function MapStage() {
     const m = previewId ? useAtlas.getState().run?.matches.find((x) => x.id === previewId) : undefined;
     if (!map || !styleReady || !m) return;
     const items: Callout[] = [];
-    const dots: [number, number][] = [];
+    const dots: Dot[] = [];
     const add = (root: HTMLElement, at: [number, number], rank: number, spots: Callout["spots"], optional = false) => {
       root.style.zIndex = String(rank);
       markers.current.push(new mapboxgl.Marker({ element: root, anchor: "center" }).setLngLat(at).addTo(map));
@@ -559,6 +567,10 @@ export default function MapStage() {
       const caption = site.stated ? "Shared site stated in source" : site.implied ? "Shared site implied by sources" : "Both projects end here";
       // first choice: the side facing away from the pair, where the project labels are not
       const left = !!c && site.lon < (c.a[0] + c.b[0]) / 2;
+      // the dot sits below the project labels (2): a label that has to touch the site hides the dot, never its own text
+      const dot = siteDot();
+      dot.style.zIndex = "1";
+      markers.current.push(new mapboxgl.Marker({ element: dot, anchor: "center" }).setLngLat([site.lon, site.lat]).addTo(map));
       add(siteMarker(site.label, caption), [site.lon, site.lat], 3, (w, h) => {
         const [r, l] = [16, -16 - w];
         const spots = [
@@ -571,7 +583,8 @@ export default function MapStage() {
         ];
         return left ? [spots[1], spots[0], spots[2], spots[4], spots[3], spots[5]] : spots;
       });
-      dots.push([site.lon, site.lat]);
+      // the shared-site dot costs extra to cover: it is the pair's one amber landmark
+      dots.push({ at: [site.lon, site.lat], weight: 3 });
     }
     const aAbove = !c || c.a[1] >= c.b[1];
     for (const [id, role] of [
@@ -582,7 +595,7 @@ export default function MapStage() {
       const p = IDX.project(id);
       const at = c ? (role === "a" ? c.a : c.b) : anchorOf(p);
       if (!at) continue;
-      if (c) dots.push(at);
+      if (c) dots.push({ at, weight: 1 });
       const above = role === "a" ? aAbove : !aAbove;
       add(projectLabel(p.shortTitle, ownerNames(p, IDX, true), role), at, 2, (w, h) => {
         const up = [
@@ -680,9 +693,13 @@ export default function MapStage() {
             [r.bbox[2], r.bbox[3]],
           ] as LngLatBoundsLike)
         : (boundsOf(SNAPSHOT.projects.flatMap(projectCoords)) as LngLatBoundsLike | null);
+      const ovPad = { ...pad, right: mobile ? pad.right : Math.min(right, 64) };
+      // the expanded legend fills the bottom-left corner: frame the overview to its right (collapsed, it is a ~34px header)
+      const legend = mobile ? undefined : document.querySelector("[data-map-legend]")?.getBoundingClientRect();
+      if (legend && legend.height > 60) [ovPad.left, ovPad.right] = fit(Math.max(ovPad.left, Math.round(legend.right - rect.left + 16)), ovPad.right, cw);
       if (target)
         map.fitBounds(target, {
-          padding: { ...pad, right: mobile ? pad.right : Math.min(right, 64) },
+          padding: ovPad,
           pitch: st.mapMode === "3d" ? OVERVIEW_PITCH : 0,
           bearing: 0,
           duration,
@@ -695,6 +712,33 @@ export default function MapStage() {
     firstCamera.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cameraNonce, selected?.match.id, inspectorOpen, demoOn, mapReady]);
+
+  // phones: the demo card sits over the top of the map and changes height from step to step (steps 3-5 keep
+  // the same pair, so nothing else refits); refit when it grows or shrinks, and the callouts relayout after the move
+  useEffect(() => {
+    const map = mapRef.current;
+    const card = document.querySelector<HTMLElement>('[aria-label="Guided demo"]');
+    if (!map || !mapReady || !demoOn || !card) return;
+    let last = card.offsetHeight;
+    const ro = new ResizeObserver(() => {
+      const h = card.offsetHeight;
+      if (h === last) return;
+      last = h;
+      const st = useAtlas.getState();
+      if (st.briefOpen || map.getContainer().clientWidth >= 640) return;
+      set({ cameraNonce: st.cameraNonce + 1 });
+    });
+    ro.observe(card);
+    return () => ro.disconnect();
+  }, [demoOn, mapReady, set]);
+
+  // the guided demo owns ← / → while it runs; Mapbox's keyboard pan would also shift the framed pair on every step
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !mapReady) return;
+    if (demoOn) map.keyboard.disable();
+    else map.keyboard.enable();
+  }, [demoOn, mapReady]);
 
   // mapbox-gl.css is unlayered and sets .mapboxgl-map{position:relative}, so size the map through a wrapper
   return (
@@ -722,12 +766,19 @@ function precisionText(p: string) {
   )[p] ?? p;
 }
 
-function siteMarker(label: string, caption: string) {
+function siteDot() {
   const root = document.createElement("div");
   root.className = "pointer-events-none relative";
   root.innerHTML = `
     <span class="site-pulse absolute left-1/2 top-1/2 block h-10 w-10 rounded-full" style="border:1.5px solid #fbbf24"></span>
-    <span class="absolute left-1/2 top-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.25),0 0 18px #fbbf24"></span>
+    <span class="absolute left-1/2 top-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.25),0 0 18px #fbbf24"></span>`;
+  return root;
+}
+
+function siteMarker(label: string, caption: string) {
+  const root = document.createElement("div");
+  root.className = "pointer-events-none relative";
+  root.innerHTML = `
     <div data-callout class="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.94);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
       <div class="mono text-[9.5px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${escapeHtml(caption)}</div>
       ${escapeHtml(label)}
@@ -767,6 +818,7 @@ interface Callout {
 }
 
 type Box = { x: number; y: number; w: number; h: number };
+type Dot = { at: [number, number]; weight: number };
 
 function overlapArea(a: Box, b: Box) {
   const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
@@ -781,7 +833,7 @@ function overlapArea(a: Box, b: Box) {
  * hidden. While the camera moves, a callout keeps its spot as long as that spot stays clear, so labels do not hop
  * between equally good spots mid-flight.
  */
-function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: [number, number][], moving = false) {
+function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[], moving = false) {
   if (!items.length) return;
   const host = map.getContainer().getBoundingClientRect();
   const view: Box = { x: 4, y: 4, w: host.width - 8, h: host.height - 8 };
@@ -789,10 +841,10 @@ function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: [number, numb
     .map((el) => el.getBoundingClientRect())
     .filter((r) => r.width > 0 && r.height > 0)
     .map((r) => ({ x: r.left - host.left, y: r.top - host.top, w: r.width, h: r.height }));
-  for (const d of dots) {
-    const p = map.project(d);
-    fixed.push({ x: p.x - 9, y: p.y - 9, w: 18, h: 18 });
-  }
+  const dotBoxes = dots.map((d) => {
+    const p = map.project(d.at);
+    return { x: p.x - 9, y: p.y - 9, w: 18, h: 18, weight: d.weight };
+  });
   // the pair's place names (gl-point-labels: 11px, anchored top 1.1em below the dot, wrapped at 10em)
   const labels = map.getLayer("gl-point-labels") ? map.queryRenderedFeatures({ layers: ["gl-point-labels"] }) : [];
   for (const f of labels) {
@@ -809,9 +861,12 @@ function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: [number, numb
     return c.spots(w, h).map((s) => ({ s, r: { x: p.x + s.x, y: p.y + s.y, w, h } }));
   });
   const grow = (r: Box): Box => ({ x: r.x - 4, y: r.y - 4, w: r.w + 8, h: r.h + 8 });
-  // covering another callout costs more than covering a panel or running off screen
+  // covering another callout (or the shared site) costs more than covering a panel or running off screen
   const cost = (r: Box, placed: Box[]) =>
-    (r.w * r.h - overlapArea(r, view)) * 2 + fixed.reduce((sum, t) => sum + overlapArea(r, t), 0) + placed.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0);
+    (r.w * r.h - overlapArea(r, view)) * 2 +
+    fixed.reduce((sum, t) => sum + overlapArea(r, t), 0) +
+    dotBoxes.reduce((sum, t) => sum + t.weight * overlapArea(r, t), 0) +
+    placed.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0);
 
   // -1 = hidden (optional callouts only)
   let pick: number[] = [];

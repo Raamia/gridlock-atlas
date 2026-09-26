@@ -7,7 +7,8 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
  * Regression tests for app defects found on 2026-09-26 (they assert the intended behavior and fail until fixed):
  * radius reply race, demo Finish under the brief, demo radius, overview chip count, filtered empty state,
  * engine failure message, 3D overview tilt, reviewer note on Escape, sources "no match" state, brief print,
- * demo card vs inspector, demo step 1 reset and tabs, demo keys behind a drawer.
+ * demo card vs inspector, demo step 1 reset and tabs, demo keys behind a drawer, demo focus on start,
+ * demo exit during a pending step, deep links at a non-default radius.
  */
 
 const SE_PAIR = "desc-6888__gpc-20065"; // top Savannah River lead: DESC Deerfield × Georgia Power Goshen–McIntosh rebuild
@@ -426,6 +427,71 @@ test.describe("interactions", () => {
     await page.keyboard.press("ArrowRight");
     await expect(demo).toContainText("3/8");
     await expect(page.getByRole("dialog", { name: "Review brief" })).toHaveCount(0);
+  });
+
+  test("guided demo: Space right after starting advances the demo instead of exiting it", async ({ page }) => {
+    await page.goto("/");
+    await mapReady(page);
+    await page.getByRole("button", { name: "Start guided demo" }).click();
+    const demo = page.getByRole("region", { name: "Guided demo" });
+    await expect(demo).toContainText("1/8");
+    await expect(demo.getByRole("button", { name: /^Next/ })).toBeFocused();
+    await page.keyboard.press("Space");
+    await expect(demo).toContainText("2/8");
+    // the demo owns ← / →: the map's keyboard pan is off while it runs
+    expect(await page.evaluate(() => (window as unknown as { __map: { keyboard: { isEnabled: () => boolean } } }).__map.keyboard.isEnabled())).toBe(false);
+  });
+
+  test("guided demo: leaving while a step waits for the engine drops that step", async ({ page }) => {
+    await page.route(/\/api\/matches/, async (route) => {
+      await new Promise((r) => setTimeout(r, 1200));
+      await route.continue();
+    });
+    await page.goto("/");
+    const demo = page.getByRole("region", { name: "Guided demo" });
+    const inspector = page.getByRole("complementary", { name: "Evidence inspector" });
+
+    // card X during step 8 (which would open the brief)
+    await page.getByRole("button", { name: "Start guided demo" }).click();
+    await demo.getByRole("button", { name: "Go to step 8" }).click();
+    await demo.getByRole("button", { name: "Exit demo" }).click();
+    await expect(demo).toBeHidden();
+    await expect(page.getByRole("button", { name: "Start guided demo" })).toBeFocused();
+    await page.waitForTimeout(2600);
+    await expect(page.getByRole("dialog", { name: "Review brief" })).toHaveCount(0);
+    await expect(inspector).toBeHidden();
+
+    // top-bar Exit during step 3 (which would open the inspector)
+    await page.getByRole("button", { name: "Start guided demo" }).click();
+    await demo.getByRole("button", { name: "Go to step 3" }).click();
+    await page.getByRole("button", { name: "Exit guided demo" }).click();
+    await expect(demo).toBeHidden();
+    await page.waitForTimeout(2600);
+    await expect(inspector).toBeHidden();
+    await expect(page).not.toHaveURL(/pair=/);
+  });
+
+  test("a deep link with &r= opens a pair flagged only at that radius; without it, the link says why", async ({ page, request }) => {
+    const ids = async (r: number) => ((await (await request.get(`/api/matches?threshold=${r}`)).json()) as { matches: { id: string }[] }).matches.map((m) => m.id);
+    const at25 = new Set(await ids(25));
+    const pair = (await ids(40)).find((id) => !at25.has(id));
+    expect(pair, "a pair flagged at 40 mi but not at 25 mi").toBeTruthy();
+
+    const inspector = await openPair(page, `${pair}&r=40`);
+    await expect(page.locator(`[data-match-id="${pair}"]`)).toHaveAttribute("aria-pressed", "true");
+    await expect(page.getByRole("complementary", { name: "Coordination queue" })).toContainText("· 40 mi");
+    await expect(inspector).toBeVisible();
+    await expect.poll(() => new URL(page.url()).searchParams.get("r")).toBe("40");
+    expect(new URL(page.url()).searchParams.get("pair")).toBe(pair);
+
+    // the same pair at the default radius: nothing opens, and a notice says why instead of failing silently
+    await page.goto(`/?pair=${pair}`);
+    const notice = page.getByRole("status").filter({ hasText: "not flagged at 25 mi" });
+    await expect(notice).toBeVisible({ timeout: 20_000 });
+    await expect(page.getByRole("complementary", { name: "Evidence inspector" })).toBeHidden();
+    await expect.poll(() => new URL(page.url()).searchParams.has("pair")).toBe(false);
+    await notice.getByRole("button", { name: "Dismiss notice" }).click();
+    await expect(notice).toBeHidden();
   });
 
   test("overview chip counts the candidate pairs of the region on screen", async ({ page }) => {

@@ -111,6 +111,12 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
         .sort((g1, g2) => Number(!g1.every((x) => x.earlier)) - Number(!g2.every((x) => x.earlier)) || names(g1)[0].localeCompare(names(g2)[0]))
         .map((g) => `${names(g).join(", ")}: ${formatBound(g[0].start)}`)
         .join(" → ");
+    // the newer date also feeds TIME when it is the outer bound of a current window that replaced an older one (GPC Start Date → SERTP year)
+    const boundsWindow = activeWindows(p).some(
+      (w) =>
+        p.constructionWindows.some((o) => o.supersededBy === w.id) &&
+        [...perSource.values()].some((c) => !c.earlier && c.sourceId === w.claimSourceId && c.end.latest === w.end.latest),
+    );
     out.push({
       id: `${p.id}:completion`,
       projectId: p.id,
@@ -120,7 +126,7 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
         : "Sources give different completion / in-service dates — " + describe(cGroups, (d) => formatBound(d.start)),
       sides: cGroups.map((g) => ({ value: formatBound(g[0].start), sourceIds: g.map((x) => x.sourceId), claimIds: g.map((x) => x.id), earlier: g.every((x) => x.earlier) })),
       claimIds: cGroups.flat().map((x) => x.id),
-      affectsMatch: false,
+      affectsMatch: boundsWindow,
     });
   }
 
@@ -138,7 +144,7 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
   });
   const wGroups = cluster(envs).map(lead);
   if (wGroups.length > 1) {
-    const fmt = (d: Dated) => `${d.openStart ? `pre-${d.start.latest.slice(0, 4)}` : formatBound(d.start).split("–")[0]}–${formatBound(d.end).split("–").at(-1)}`;
+    const fmt = (d: Dated) => `${d.openStart ? `before ${d.start.latest.slice(0, 4)} → ` : `${formatBound(d.start).split("–")[0]}–`}${formatBound(d.end).split("–").at(-1)}`;
     const bySource = windowsBySource(p);
     out.push({
       id: `${p.id}:window`,

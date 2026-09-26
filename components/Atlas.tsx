@@ -3,7 +3,8 @@
 import { MotionConfig } from "motion/react";
 import dynamic from "next/dynamic";
 import { useReview } from "@/lib/review";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { SNAPSHOT } from "@/lib/data";
 import { useAtlas } from "@/lib/store";
 import { BriefModal } from "./BriefModal";
 import { MethodDrawer, SourcesDrawer } from "./Drawers";
@@ -27,8 +28,8 @@ export function Atlas() {
     <MotionConfig reducedMotion="user">
     <div className="atlas-shell grid h-dvh w-full max-w-[100vw] grid-cols-[minmax(0,1fr)] grid-rows-[56px_minmax(0,1fr)] overflow-hidden bg-bg-0">
       <TopBar />
-      {/* desktop: queue | map+timeline. narrow: map on top, queue below as a scrollable sheet */}
-      <div className="grid min-h-0 grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,55fr)_minmax(0,45fr)] lg:grid-cols-[340px_minmax(0,1fr)] lg:grid-rows-1">
+      {/* desktop: queue | map+timeline. narrow: map on top, queue below as a scrollable sheet (phones give the sheet more, so a whole card shows) */}
+      <div className="grid min-h-0 grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,55fr)_minmax(0,45fr)] max-sm:grid-rows-[minmax(0,45fr)_minmax(0,55fr)] lg:grid-cols-[340px_minmax(0,1fr)] lg:grid-rows-1">
         <div className="order-2 min-h-0 lg:order-1 [&>aside]:h-full">
           <Queue />
         </div>
@@ -88,23 +89,43 @@ function useKeyboard() {
   }, []);
 }
 
-/** ?pair=<id> deep links: run the engine quietly, then open that pair. */
+/** ?pair=<id>[&r=<mi>] deep links: run the engine quietly at the link's radius, then open that pair. */
 function useUrlSync() {
   const selected = useAtlas((s) => s.selectedMatchId);
+  const radius = useAtlas((s) => s.run?.thresholdMiles);
+  // the link stays in the address bar until its own comparison has resolved
+  const linking = useRef(false);
   useEffect(() => {
-    const pair = new URLSearchParams(window.location.search).get("pair");
+    const params = new URLSearchParams(window.location.search);
+    const pair = params.get("pair");
     if (!pair) return;
+    // the slider's grid: 5–100 mi in 5 mi steps
+    const r = Math.round(Number(params.get("r")) / 5) * 5;
+    linking.current = true;
     void useAtlas
       .getState()
-      .compare({ quiet: true })
+      .compare({ quiet: true, thresholdMiles: r >= 5 && r <= 100 ? r : undefined })
       .then((run) => {
-        if (run?.matches.some((m) => m.id === pair)) useAtlas.getState().select(pair);
+        linking.current = false;
+        const st = useAtlas.getState();
+        // engine unavailable (the queue reports it): keep the link, so a reload retries it
+        if (!run) return;
+        if (run.matches.some((m) => m.id === pair)) return st.select(pair);
+        const known = pair.split("__").every((id) => SNAPSHOT.projects.some((p) => p.id === id));
+        st.set({ linkNotice: known ? `The linked pair is not flagged at ${run.thresholdMiles} mi` : "The linked pair is not in this snapshot" });
+        writeUrl(st.selectedMatchId, st.run?.thresholdMiles);
       });
   }, []);
   useEffect(() => {
-    const url = new URL(window.location.href);
-    if (selected) url.searchParams.set("pair", selected);
-    else url.searchParams.delete("pair");
-    window.history.replaceState(null, "", url.toString());
-  }, [selected]);
+    if (!linking.current) writeUrl(selected, radius);
+  }, [selected, radius]);
+}
+
+function writeUrl(pair: string | null, radius: number | undefined) {
+  const url = new URL(window.location.href);
+  if (pair) url.searchParams.set("pair", pair);
+  else url.searchParams.delete("pair");
+  if (pair && radius !== undefined && radius !== 25) url.searchParams.set("r", String(radius));
+  else url.searchParams.delete("r");
+  window.history.replaceState(null, "", url.toString());
 }

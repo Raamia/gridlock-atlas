@@ -1,5 +1,6 @@
 import { IDX } from "@/lib/data";
 import type { DateBound, Match } from "@/lib/domain/types";
+import { precisionLabel } from "@/lib/format";
 
 const cell = (v: string | number | undefined | null) => {
   const s = v === undefined || v === null ? "" : String(v);
@@ -7,15 +8,16 @@ const cell = (v: string | number | undefined | null) => {
 };
 
 /** A date bound as the source stated it: the day, or "earliest..latest (precision)" for coarser claims. */
-const bound = (b: DateBound) => (b.precision === "day" && b.earliest === b.latest ? b.earliest : `${b.earliest}..${b.latest} (${b.precision})`);
+const bound = (b: DateBound) => (b.precision === "day" && b.earliest === b.latest ? b.earliest : `${b.earliest}..${b.latest} (${precisionLabel(b.precision)})`);
 
 /**
  * The flagged pairs as the sponsor's overlap table (Projects_Overlaps.xlsx → "overlaps" sheet columns),
  * followed by GridLock's own columns. Rows are in global priority order (priority_rank); queue_rank is the
  * card number within the pair's review_status tab when no queue filters are active. project_id_* are the
- * app's unique ids (pair_id opens the pair at /?pair=…); docket_* keep the plan's own labels.
- * time_gap (day) is exact only when time_gap_basis is "exact": "at-least" is the gap between the nearest
- * edges of coarse (year/quarter/month) dates, and "ranges-overlap" means the stated ranges overlap (0).
+ * app's unique ids; pair_id opens the pair at /?pair=… (plus &r=<review_radius_mi> when the radius is not 25);
+ * docket_* keep the plan's own labels. review_radius_mi is the radius the row was flagged at, so geo_signal
+ * reads against it. time_gap (day) is exact only when time_gap_basis is "exact": "at-least" is the gap between
+ * the nearest edges of coarse (year/half-year/quarter/month) dates, and "ranges-overlap" means the stated ranges overlap (0).
  */
 export function overlapTableCsv(matches: Match[]): string {
   const head = [
@@ -33,6 +35,7 @@ export function overlapTableCsv(matches: Match[]): string {
     "priority",
     "geo_signal",
     "geo_method",
+    "review_radius_mi",
     "time_signal",
     "review_status",
     "source_conflicts",
@@ -65,6 +68,7 @@ export function overlapTableCsv(matches: Match[]): string {
       m.priority,
       m.geo,
       m.geoDetail.method,
+      m.geoDetail.thresholdMiles,
       m.time,
       m.reviewStatus,
       m.conflicts.length,

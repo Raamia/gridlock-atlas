@@ -13,6 +13,8 @@ export function formatPoint(iso: string, precision: DateBound["precision"]): str
   switch (precision) {
     case "year":
       return y;
+    case "half":
+      return `${m <= 6 ? "Early" : "Late"} ${y}`;
     case "quarter":
       return `Q${Math.ceil(m / 3)} ${y}`;
     case "month":
@@ -20,6 +22,11 @@ export function formatPoint(iso: string, precision: DateBound["precision"]): str
     default:
       return `${MONTHS[m - 1]} ${Number(iso.slice(8, 10))}, ${y}`;
   }
+}
+
+/** A precision for captions: "half" reads "half-year". */
+export function precisionLabel(p: DateBound["precision"]): string {
+  return p === "half" ? "half-year" : p;
 }
 
 /** A DateBound as the source stated it: "2026", "Q3 2029", "2027–2028". */
@@ -35,13 +42,20 @@ export function formatSpan(span: { start: string; end: string }, precision: Date
   return a === z ? a : `${a}–${z}`;
 }
 
-/** openStart: the source only says work began before its first itemized year, so no start year is shown. */
+/** Where a window starts: "before 2026" when the source only itemizes spending before its first year (openStart), else the start point. */
+export function windowStartText(w: { start: DateBound; openStart?: boolean }): string {
+  return w.openStart ? `before ${year(w.start.latest)}` : formatPoint(w.start.earliest, w.start.precision);
+}
+
+/** A window as published: "2027–2028", "2028" (a year-precision start inside the calendar year that ends it), "before 2026 → 2026" (openStart), "from Fall 2027" (openEnded). */
 export function formatWindow(start: DateBound, end: DateBound, openEnded?: boolean, openStart?: boolean): string {
   const open = openEnded || end.latest >= "2090";
-  if (openStart) return open ? `from before ${year(start.latest)}` : `pre-${year(start.latest)}–${formatPoint(end.latest, end.precision)}`;
-  if (open) return `from ${formatPoint(start.earliest, start.precision)}`;
-  const a = formatPoint(start.earliest, start.precision);
   const z = formatPoint(end.latest, end.precision);
+  if (openStart) return open ? `from before ${year(start.latest)}` : `${windowStartText({ start, openStart })} → ${z}`;
+  if (open) return `from ${formatPoint(start.earliest, start.precision)}`;
+  // the in-service row and tooltips keep the exact end date
+  if (start.precision === "year" && start.earliest.slice(0, 4) === end.latest.slice(0, 4) && end.latest.endsWith("-12-31")) return start.earliest.slice(0, 4);
+  const a = formatPoint(start.earliest, start.precision);
   return a === z ? a : `${a}–${z}`;
 }
 
@@ -77,16 +91,36 @@ export function displayTitle(p: { title: string }): string {
   return t || base;
 }
 
-// researcher-to-developer sentences (schema, ids, placeholders, UI hints) that are not findings about a project
-const INTERNAL_NOTE = /plan\.md|test-matrix|is a placeholder shared|placeholders? and must be matched|id mismatch|\bids? (used|introduced)\b|id normalization|the UI (should|may)\b|This schema/i;
+// researcher-to-developer sentences (schema, ids, placeholders, cache paths, UI hints) that are not findings about a project
+const INTERNAL_NOTE =
+  /plan\.md|test-matrix|is a placeholder shared|placeholders? and must be matched|id mismatch|\bids? (used|introduced)\b|id normalization|the UI (should|may)\b|This schema|\.cache\/|find_excerpt|This record maps|Duplicate key|Match this entry only|\benum\b|Reconcile before|KEY COLLISION|key-based merge/i;
+const ORDINAL = ["first", "second", "third", "fourth", "fifth"];
 
-/** A research note or caveat as shown to readers: internal dev sentences and cross-references dropped, findings kept. */
+/**
+ * A research note or caveat as shown to readers: internal dev sentences and cross-references dropped, schema notation
+ * ("A = Okatie, B = McIntosh", "endpoints[2]") put in words, findings kept.
+ */
 export function publicNote(t: string): string {
   return t
     .replace(/\s*\(see route\.caveat\)/g, "")
     .replace(/\u0007/g, "")
+    .replace(/\s*\(centerOf\)/g, "")
+    .replace(/\bA = (.+?), B = /g, "Terminals: $1 and ")
+    .replace(/\s*\((?:A, B|endpoints\[\d+\.\.\d+\])\)/g, "")
+    .replace(/\bendpoints\[0\.\.1\] (?:=|are)/g, "The first two mapped points are")
+    .replace(/\bendpoints\[(\d)\] (=|is|marks)/g, (_, i: string, v: string) => `The ${ORDINAL[+i] ?? `no. ${+i + 1}`} mapped point ${v === "marks" ? "marks" : "is"}`)
+    .replace(/ and The /g, " and the ")
+    .replace(/\bA–B midpoint/g, "terminal midpoint")
+    .replace(/,\s*desc-\d+\)/g, ")")
+    .replace(/'not-found-in-sources' coordination entries mean the cached sources are silent\. They do not/g, "Coordination marked “not found” means the cached sources are silent; it does not")
     .split(/(?<=\.)\s+(?=[A-Z'(“"])/)
     .filter((s) => !INTERNAL_NOTE.test(s))
     .join(" ")
     .trim();
+}
+
+/** Replace record ids in a note ("gpc-irp-2025-vol3", "desc-saluda-bushriver-page") with readable names; ids nameOf does not
+ *  resolve, and ordinary hyphenated words ("breaker-and-a-half"), stay as they are. */
+export function nameRecordIds(t: string, nameOf: (id: string) => string | undefined): string {
+  return t.replace(/\b[a-z0-9]+(?:-[a-z0-9]+){2,}\b/g, (id) => nameOf(id) ?? id);
 }

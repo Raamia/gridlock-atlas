@@ -964,6 +964,7 @@
    "places": [
     {
      "id": "abo-alexandria",
+     "role": "endpoint",
      "label": "Alexandria Substation (WMMPA 345 kV, Alexandria)",
      "kind": "substation",
      "precision": "named-facility",
@@ -1027,6 +1028,7 @@
     },
     {
      "id": "abo-big-oaks",
+     "role": "endpoint",
      "label": "Big Oaks Substation (new, Becker)",
      "kind": "substation",
      "precision": "locality",

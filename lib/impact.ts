@@ -38,13 +38,20 @@ export function costOf(p: Project): number | null {
   return f.value.includes("$") && Number.isFinite(n) && n > 0 ? n : null;
 }
 
-const NO_NEW_CORRIDOR = /\b(rebuild|rebuilding|rebuilt|reconductor(ing)?|reactors?|(auto ?)?transformers?|autobank|relay|breakers?|capacitors?)\b/i;
+const NO_NEW_CORRIDOR =
+  /\b(rebuild|rebuilding|rebuilt|reconductor(ing)?|restring(ing)?|reactors?|(auto ?)?transformers?|(auto ?)?banks?|relay|breakers?|capacitors?|modif(y|ied|ication))\b|\bupgrade\b[^.]{0,40}\b(ACSR|ACSS|conductor)\b/i;
 const NEW_LINE = /\b(new|construct(ing)?|build)\b[^.]{0,60}\b(line|tap)\b/i;
+// a substation or switching station named in the title, with no line or tap in it, is site work (a bare "substation" in the
+// summary is not: new lines often run between substations)
+const SITE_TITLE = /\b(substation|sub|switching station)\b/i;
+const LINE_WORD = /\b(lines?|tap)\b/i;
 
-/** Equipment at an existing site, or a rebuild/reconductor on existing right-of-way: no new corridor to share. */
+/** Equipment or a substation at a site, or a rebuild/reconductor on existing right-of-way: no new corridor to share. */
 export function needsNewCorridor(p: Project): boolean {
   const scope = `${p.title}. ${p.summary}`;
-  return NEW_LINE.test(scope) || !NO_NEW_CORRIDOR.test(scope);
+  if (NEW_LINE.test(scope)) return true;
+  if (SITE_TITLE.test(p.title) && !LINE_WORD.test(p.title)) return false;
+  return !NO_NEW_CORRIDOR.test(scope);
 }
 
 export type VoltageClass = "115" | "230" | "345" | "500" | "765";
@@ -111,9 +118,9 @@ export function impactDefaults(m: Match): ImpactDefaults {
     noCorridor.length === 2
       ? "Neither project needs a new corridor — set a length to explore."
       : noCorridor.length === 1
-        ? `${displayTitle(noCorridor[0])} needs no new corridor (equipment or a rebuild on existing right-of-way) — set a length to explore.`
+        ? `${displayTitle(noCorridor[0])} needs no new corridor (substation or equipment work, or a rebuild or reconductor on existing right-of-way) — set a length to explore.`
         : endToEnd
-          ? `The lines meet at ${meetAt}; no source describes a shared parallel corridor — set a length to explore.`
+          ? `The projects meet at ${meetAt}; no source describes a shared parallel corridor — set a length to explore.`
           : known.length === 2
             ? "Default: the shorter of the two published line lengths."
             : known.length === 1

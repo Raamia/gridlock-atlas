@@ -40,6 +40,13 @@ for (const p of snap.projects) {
   if (!p.owners.every((o) => has(o.evidenceIds))) fail.push(`${p.id}: an owner has no evidence`);
   if (!has(p.status.evidenceIds)) fail.push(`${p.id}: status has no evidence`);
   for (const w of p.constructionWindows) if (!has(w.evidenceIds)) fail.push(`${p.id}: window ${w.id} has no evidence`);
+  // a DESC budget-year window cites the budget cells it is built from: its start year and, for openStart, the 'Previous' column
+  for (const w of p.constructionWindows.filter((w) => w.claimSourceId.startsWith("desc-scrtp") && w.phase === "unknown")) {
+    const y = w.start.latest.slice(0, 4);
+    const ex = w.evidenceIds.map((id) => snap.evidence[id]?.exactExcerpt ?? "");
+    if (!ex.some((x) => new RegExp(`(^|\\s)${y}(\\s|$)`).test(x))) fail.push(`${p.id}: budget window ${w.id} cites no ${y} amount`);
+    if (w.openStart && !ex.some((x) => x.includes("Previous"))) fail.push(`${p.id}: budget window ${w.id} cites no 'Previous' amount`);
+  }
   for (const c of p.completionClaims) if (!has(c.evidenceIds)) fail.push(`${p.id}: completion ${c.id} has no evidence`);
   // absence claims ("not found in sources") are notes, not facts; documented coordination needs a quote
   for (const c of p.knownCoordination) {

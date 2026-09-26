@@ -708,15 +708,15 @@
      "start": {
       "earliest": "2029-07-01",
       "latest": "2029-12-31",
-      "precision": "quarter"
+      "precision": "half"
      },
      "end": {
       "earliest": "2033-07-01",
       "latest": "2033-12-31",
-      "precision": "quarter"
+      "precision": "half"
      },
      "continuous": true,
-     "note": "'Tree Clearing, Construction, and Restoration Late 2029 - Late 2033' (MGS fact sheet 09/22/2026; identical row on the undated open-house schedule board p.10). 'Late YYYY' encoded as July-December of that year (interpretation; the schedule graphic bar starts near the end of 2029). Precision 'quarter' is the closest enum value, not source precision. Timeframes are approximate and subject to change and pre-date any PSCW decision. MISO's report says Transource proposed rolling crews building the three lines sequentially, so work at any single site (e.g., Columbia) will not span the whole window.",
+     "note": "'Tree Clearing, Construction, and Restoration Late 2029 - Late 2033' (MGS fact sheet 09/22/2026; identical row on the undated open-house schedule board p.10). 'Late YYYY' encoded as July-December of that year and shown at half-year precision ('Late 2029'), as the source states it; the schedule graphic bar starts near the end of 2029. Timeframes are approximate and subject to change and pre-date any PSCW decision. MISO's report says Transource proposed rolling crews building the three lines sequentially, so work at any single site (e.g., Columbia) will not span the whole window.",
      "evidence": [
       {
        "sourceId": "mgs-beci-factsheet",

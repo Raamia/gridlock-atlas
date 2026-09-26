@@ -7,10 +7,10 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { IDX } from "@/lib/data";
 import { displayTitle, firstSentence, SCOPE_LABEL, whyFlagged } from "@/lib/describe";
 import type { Conflict, ConflictSide, Evidence, Match, Project, SignalLevel } from "@/lib/domain/types";
-import { formatBound, formatDate, formatMilesNear, formatPoint, formatWindow, publicNote, year } from "@/lib/format";
+import { formatBound, formatDate, formatMilesNear, precisionLabel } from "@/lib/format";
 import { useSelectedPair } from "@/lib/hooks";
 import { activeWindows, coarsest, displayWindowGroups } from "@/lib/matching/time";
-import { conflictMatches, evidenceHref, matchSourceIds, ownerNames, pageLabel } from "@/lib/selectors";
+import { conflictMatches, evidenceHref, matchSourceIds, ownerNames, pageLabel, readableNote, windowGroupText } from "@/lib/selectors";
 import { useAtlas, type InspectorSection } from "@/lib/store";
 import { EvidenceCard, SourceRow, type EvidenceTone } from "./Evidence";
 import { ImpactEstimate } from "./Impact";
@@ -55,6 +55,10 @@ function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
   const copyLink = async () => {
     const url = new URL(window.location.href);
     url.searchParams.set("pair", m.id);
+    // a pair flagged only at a non-default radius opens at that radius (Atlas useUrlSync reads r)
+    const r = m.geoDetail.thresholdMiles;
+    if (r !== 25) url.searchParams.set("r", String(r));
+    else url.searchParams.delete("r");
     await navigator.clipboard.writeText(url.toString());
     setCopied(true);
     setTimeout(() => setCopied(false), 1400);
@@ -344,19 +348,13 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
                 <div className="truncate text-[11.5px] text-text-2">{p.shortTitle}</div>
                 {groups.length ? (
                   groups.map(({ ws, sourceIds }) => {
-                    const first = ws.reduce((x, y) => (y.start.earliest < x.start.earliest ? y : x));
-                    const last = ws.reduce((x, y) => (y.end.latest > x.end.latest ? y : x));
                     const coarse = ws.some((w) => !w.continuous);
                     const src = IDX.source(ws[0].claimSourceId)?.publisher;
-                    const meta = `${sourceIds.length > 1 ? `${sourceIds.length} documents · ` : ""}${ws.length > 1 ? `${ws.length} components` : `${coarsest(ws)} precision`}${coarse ? " · coarse" : ""}`;
+                    const meta = `${sourceIds.length > 1 ? `${sourceIds.length} documents · ` : ""}${ws.length > 1 ? `${ws.length} components` : `${precisionLabel(coarsest(ws))} precision`}${coarse ? " · coarse" : ""}`;
                     const docs = sourceIds.map((id) => IDX.source(id)?.title).filter(Boolean);
                     return (
                       <div key={ws[0].id} className="mt-1.5">
-                        <div className="num whitespace-nowrap text-[13px] leading-tight text-text-0">
-                          {ws.length === 1
-                            ? formatWindow(ws[0].start, ws[0].end, ws[0].openEnded, ws[0].openStart)
-                            : `${first.openStart ? `pre-${year(first.start.latest)}` : formatPoint(first.start.earliest, first.start.precision)}–${formatPoint(last.end.latest, last.end.precision)}`}
-                        </div>
+                        <div className="num whitespace-nowrap text-[13px] leading-tight text-text-0">{windowGroupText(ws)}</div>
                         <div className="truncate text-[10.5px] text-text-3" title={[...docs, `${src} · ${meta}`, ...ws.map((w) => w.note).filter(Boolean)].join("\n")}>
                           {src} · {meta}
                         </div>
@@ -513,9 +511,11 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
               ))}
             </div>
             <p className="mt-2 text-[11px] leading-snug text-text-3">
-              {c.affectsMatch
+              {c.field === "constructionWindow"
                 ? "Windows differ by source; the engine evaluated every source combination before calling the TIME signal."
-                : "All claims are kept. Completion dates never drive the construction-window match, so the TIME signal is unaffected."}
+                : c.affectsMatch
+                  ? "All claims are kept. The newer in-service date also sets the end of this project's current schedule window (it replaces the earlier date as the window's outer bound), so it does feed the TIME signal; the earlier date is kept as version history."
+                  : "All claims are kept. Completion dates never drive the construction-window match, so the TIME signal is unaffected."}
             </p>
           </div>
         );
@@ -527,8 +527,11 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
 function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: Conflict["field"] }) {
   // in the side's own claim order, so the excerpt and link come from the claim whose value is shown
   const claims: { id: string; evidenceIds: string[] }[] = field === "completion" ? p.completionClaims : p.constructionWindows;
-  const claimEvidence = side.claimIds.flatMap((id) => claims.find((c) => c.id === id)?.evidenceIds ?? []);
-  const e = claimEvidence.map((id) => IDX.evidence(id)).find(Boolean);
+  const evs = IDX.evidenceList(side.claimIds.flatMap((id) => claims.find((c) => c.id === id)?.evidenceIds ?? []));
+  // the quote shown is one that states the value: it names the side's year (and, for a completion, says in-service/complete)
+  const yr = side.value.match(/\b(?:19|20)\d\d\b/g)?.at(-1);
+  const states = (x: Evidence) => !!yr && (x.exactExcerpt.includes(yr) || new RegExp(`\\d/${yr.slice(2)}(?![\\d/])`).test(x.exactExcerpt));
+  const e = evs.find((x) => states(x) && (field !== "completion" || /in[- ]?service|complet/i.test(x.exactExcerpt))) ?? evs.find(states) ?? evs[0];
   const srcs = side.sourceIds.map((id) => IDX.source(id)).filter(Boolean);
   const first = e ? IDX.source(e.sourceId) : srcs[0];
   return (
@@ -546,7 +549,7 @@ function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: C
           );
         })}
       </div>
-      {e && <div className="mt-2 line-clamp-4 text-[11.5px] italic leading-snug text-text-1">“{e.exactExcerpt}”</div>}
+      {e && <div className="mt-2 text-[11.5px] italic leading-snug text-text-1">“{e.exactExcerpt}”</div>}
       {first && e && (
         <a href={evidenceHref(e, first)} target="_blank" rel="noreferrer" className="mt-auto pt-2 text-[10.5px] text-text-2 hover:text-a">
           Open source{pageLabel(e) ? ` · ${pageLabel(e)}` : ""} ↗
@@ -564,7 +567,7 @@ function NotesSection({ a, b }: { a: Project; b: Project }) {
       [b, "var(--b)"],
     ] as const
   )
-    .map(([p, color]) => ({ p, color, notes: p.caveats.map(publicNote).filter(Boolean) }))
+    .map(([p, color]) => ({ p, color, notes: p.caveats.map((c) => readableNote(c, IDX)).filter(Boolean) }))
     .filter((r) => r.notes.length);
   if (!rows.length) return null;
   const total = rows.reduce((n, r) => n + r.notes.length, 0);

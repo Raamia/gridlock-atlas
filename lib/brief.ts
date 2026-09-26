@@ -1,7 +1,7 @@
 import { IDX, SNAPSHOT } from "@/lib/data";
 import { displayTitle, firstSentence, SCOPE_LABEL } from "@/lib/describe";
 import type { Evidence, Match, Project } from "@/lib/domain/types";
-import { formatDate, formatSpan } from "@/lib/format";
+import { formatDate, formatSpan, precisionLabel } from "@/lib/format";
 import { activeWindows, currentInService } from "@/lib/matching/time";
 import { ownerNames, pageLabel } from "@/lib/selectors";
 
@@ -96,8 +96,8 @@ export function buildBrief(m: Match): Brief {
   }
   if (m.conflicts.length) unresolved.push("Confirm the current phase dates with both planners before discussing shared resources.");
   if (m.time === "unknown") unresolved.push("At least one construction window is not published; schedule overlap cannot be assessed.");
-  if (m.timeDetail.precision === "year" || m.timeDetail.precision === "quarter")
-    unresolved.push(`Published schedules are ${m.timeDetail.precision}-precision; the exact months of field work are not stated.`);
+  if (m.timeDetail.precision === "year" || m.timeDetail.precision === "half" || m.timeDetail.precision === "quarter")
+    unresolved.push(`Published schedules are ${precisionLabel(m.timeDetail.precision)}-precision; the exact months of field work are not stated.`);
   if (m.geoDetail.method === "coarse") unresolved.push("Only county-level locations are published; site proximity is unverified.");
   if ([a, b].some((p) => p.route?.precision === "official-map-digitized"))
     unresolved.push("Route lines on the map are schematic traces of official route-options graphics, not survey-accurate alignments.");

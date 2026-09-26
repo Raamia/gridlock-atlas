@@ -41,6 +41,8 @@ interface AtlasState {
   sourcesOpen: boolean;
   methodOpen: boolean;
   demoStep: number | null;
+  /** Why a ?pair= deep link opened nothing (e.g. the pair is not flagged at the link's radius); dismissible. */
+  linkNotice: string | null;
 
   mapMode: "3d" | "flat";
   basemap: Basemap;
@@ -81,6 +83,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   sourcesOpen: false,
   methodOpen: false,
   demoStep: null,
+  linkNotice: null,
 
   mapMode: "3d",
   basemap: "night",
@@ -93,7 +96,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
     inflight?.abort();
     const ctrl = (inflight = new AbortController());
     const thresholdMiles = opts?.thresholdMiles ?? get().thresholdMiles;
-    set({ running: !opts?.quiet, runError: null });
+    set({ running: !opts?.quiet, runError: null, linkNotice: null });
     const started = performance.now();
     latest = (async () => {
       try {
@@ -134,7 +137,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
     inflight = null;
     latest = Promise.resolve(null);
     // running must be cleared here: the aborted request sees a newer seq and never clears it
-    set({ run: null, running: false, runError: null, thresholdMiles: 25, tab: "needs-review", selectedMatchId: null, inspectorOpen: false, inspectorSection: null, highlightConflict: false, focusConflict: null });
+    set({ run: null, running: false, runError: null, linkNotice: null, thresholdMiles: 25, tab: "needs-review", selectedMatchId: null, inspectorOpen: false, inspectorSection: null, highlightConflict: false, focusConflict: null });
   },
 
   select(id, opts) {
@@ -149,6 +152,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
       region,
       selectedMatchId: id,
       inspectorOpen: true,
+      linkNotice: null,
       inspectorSection: opts?.section ?? null,
       focusConflict: opts?.focusConflict ?? null,
       focusProjectId: null,

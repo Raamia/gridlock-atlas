@@ -30,9 +30,9 @@ function topSoutheast(run: MatchRun | null) {
   return run?.matches.find((m) => inSE(m.projectAId) && m.geo === "confirmed" && m.reviewStatus === "needs-review") ?? run?.matches.find((m) => inSE(m.projectAId)) ?? null;
 }
 
-/** Each step run gets a token; work that resolves after the user moved on is dropped. */
+/** Each step run gets a token; work that resolves after the user moved on (or left the demo) is dropped. */
 let stepToken = 0;
-const stale = (token: number) => token !== stepToken;
+const stale = (token: number) => token !== stepToken || useAtlas.getState().demoStep === null;
 
 async function ensureRun() {
   const st = useAtlas.getState();
@@ -135,8 +135,11 @@ export function GuidedDemo() {
   const step = useAtlas((s) => s.demoStep);
   const briefOpen = useAtlas((s) => s.briefOpen);
   const inspectorOpen = useAtlas((s) => s.inspectorOpen && s.selectedMatchId !== null);
+  const drawerOpen = useAtlas((s) => s.sourcesOpen || s.methodOpen);
   const set = useAtlas((s) => s.set);
   const card = useRef<HTMLDivElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
+  const wasActive = useRef(false);
   const active = step !== null;
   // the demo opened the brief on its last beat, so leaving the demo closes it too
   const end = () => set({ demoStep: null, briefOpen: false, highlightConflict: false, focusConflict: null });
@@ -152,12 +155,21 @@ export function GuidedDemo() {
   );
 
   useEffect(() => {
-    if (step === 0) {
-      stepToken++;
-      void STEPS[0].run();
+    // entering or leaving the demo (card X, Finish, top-bar Exit, Escape) drops any step still waiting on the engine
+    stepToken++;
+    const was = wasActive.current;
+    wasActive.current = active;
+    if (active) {
+      if (step === 0) void STEPS[0].run();
+      // off the top-bar toggle (now "Exit demo"), so Space / Enter advance the demo instead of ending it
+      const id = requestAnimationFrame(() => nextRef.current?.focus({ preventScroll: true }));
+      return () => cancelAnimationFrame(id);
     }
+    // the card's buttons leave with it: hand focus back to the toggle rather than dropping it to <body>
+    const el = document.activeElement;
+    if (was && (!el || el === document.body || card.current?.contains(el))) document.getElementById("demo-toggle")?.focus({ preventScroll: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step === null]);
+  }, [active]);
 
   useEffect(() => {
     if (step === null) return;
@@ -199,7 +211,8 @@ export function GuidedDemo() {
           className={clsx(
             "fixed left-3 right-3 sm:right-auto sm:w-[440px]",
             // with the brief open the card rides above its backdrop, pinned to the viewport corner, so Finish stays reachable
-            briefOpen ? "bottom-3 z-[60] sm:bottom-4 sm:left-4" : "top-[60px] z-50 sm:absolute sm:bottom-4 sm:left-4 sm:top-auto sm:z-30",
+            // phones: above the inspector sheet (z-40), but behind an open drawer (z-40) as on desktop
+            briefOpen ? "bottom-3 z-[60] sm:bottom-4 sm:left-4" : clsx("top-[60px] sm:absolute sm:bottom-4 sm:left-4 sm:top-auto sm:z-30", drawerOpen ? "z-30" : "z-50"),
             // stay left of the evidence inspector (right-3 + 360/408px) with a 12px gap, so Next is never under it
             !briefOpen && inspectorOpen && "sm:max-w-[calc(100%-400px)] xl:max-w-[calc(100%-448px)]",
           )}
@@ -246,7 +259,7 @@ export function GuidedDemo() {
                     <ArrowLeft size={13} />
                   </Button>
                   {step < STEPS.length - 1 ? (
-                    <Button variant="primary" size="sm" onClick={() => go(step + 1)}>
+                    <Button ref={nextRef} variant="primary" size="sm" onClick={() => go(step + 1)}>
                       Next <ArrowRight size={13} />
                     </Button>
                   ) : (

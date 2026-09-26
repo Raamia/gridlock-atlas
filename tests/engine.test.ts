@@ -2,9 +2,10 @@ import { describe, expect, it } from "vitest";
 import type { ConstructionWindow, DateBound, Place, Project, Relation, Snapshot } from "@/lib/domain/types";
 import { SNAPSHOT } from "@/lib/data";
 import { buildBrief } from "@/lib/brief";
+import { whyFlagged } from "@/lib/describe";
 import { overlapTableCsv } from "@/lib/export";
-import { formatBound, formatMilesNear, formatWindow, publicNote, year } from "@/lib/format";
-import { impactDefaults } from "@/lib/impact";
+import { formatBound, formatMilesNear, formatPoint, formatSpan, formatWindow, nameRecordIds, precisionLabel, publicNote, windowStartText, year } from "@/lib/format";
+import { impactDefaults, needsNewCorridor } from "@/lib/impact";
 import { evaluatePair, projectConflicts, runMatching } from "@/lib/matching/engine";
 import { evaluateGeo } from "@/lib/matching/geo";
 import { coarsest, currentInService, displayWindowGroups, evaluateTime } from "@/lib/matching/time";
@@ -545,7 +546,9 @@ describe("snapshot data regressions", () => {
     expect(c.date).toMatchObject({ earliest: "2029-07-01", latest: "2029-09-30" });
     const m = pair("dpc-alma-blair", "xcel-wwtc")!;
     expect(m.reviewStatus).toBe("known-coordination");
-    expect(m.timeDetail.inService!.gapDays).toBe(182);
+    // Alma-Blair's current forecasts agree ("2028" page, "Sep 2028" PSC): the precise one is used, as on the conflict card
+    expect(currentInService(proj("dpc-alma-blair")).claimSourceId).toBe("psc-1515-ce-103-final");
+    expect(m.timeDetail.inService!.gapDays).toBe(274);
     const wwtc = m.conflicts.find((x) => x.projectId === "xcel-wwtc" && x.field === "completion")!;
     expect(wwtc.sides.some((side) => side.sourceIds.includes("xcel-wwtc-page") && !side.earlier)).toBe(true);
   });
@@ -657,7 +660,25 @@ describe("snapshot data regressions", () => {
       expect(w.note).toMatch(/start year is not published/);
     }
     const w = proj("desc-0139-m-n").constructionWindows[0];
-    expect(formatWindow(w.start, w.end, w.openEnded, w.openStart)).toBe("pre-2026–2027");
+    expect(formatWindow(w.start, w.end, w.openEnded, w.openStart)).toBe("before 2026 → 2027");
+    expect(windowStartText(w)).toBe("before 2026");
+    // a year-precision start inside the calendar year that ends it reads as that year
+    const d = proj("desc-6888").constructionWindows[0];
+    expect(formatWindow(d.start, d.end, d.openEnded, d.openStart)).toBe("2028");
+    expect(formatWindow(yr(2027), yr(2028))).toBe("2027–2028");
+    // every budget window cites the cells it is built from: the start year's amount and, for openStart, the 'Previous' column
+    const ex = (ws: typeof open) => ws.flatMap((x) => x.evidenceIds.map((id) => SNAPSHOT.evidence[id].exactExcerpt));
+    expect(ex(proj("desc-6367-d").constructionWindows)).toContain("Previous 2026 $14,773,047 $26,616,000");
+    expect(ex(proj("desc-06367-d-g").constructionWindows)).toContain("Previous 2026 $14,303648 $4,976,826");
+    for (const x of open) expect(ex([x]).some((e) => e.includes("Previous"))).toBe(true);
+    // a window conflict words an open start the same way
+    const os = project("os", "u1", {
+      constructionWindows: [
+        win(2026, 2026, { claimSourceId: "s1", openStart: true, start: { earliest: "2023-01-01", latest: "2026-12-31", precision: "year" } }),
+        win(2029, 2030, { claimSourceId: "s2" }),
+      ],
+    });
+    expect(projectConflicts(os, (id) => id).find((c) => c.field === "constructionWindow")!.sides.map((x) => x.value)).toEqual(["before 2026 → 2026", "2029–2030"]);
   });
 
   it("utility quarterly reports are attributed to the utility that filed them", () => {
@@ -673,6 +694,14 @@ describe("snapshot data regressions", () => {
     const a = near2("a", "u1", { constructionWindows: [win(2020, 2021)] });
     const b = near2("b", "u2", { constructionWindows: [win(2024, 2025)] });
     expect(evaluateTime(a, b).reason).toMatch(/^Published construction windows do not overlap/);
+    expect(t.reason).toMatch(/no construction dates are published/);
+    // Dominion's page dates the Jasper–Okatie construction start, Georgia Power's the Effingham one: never "no construction dates"
+    for (const [x, y] of [["desc-06367-d-g", "gpc-20784"], ["desc-06367-d-g", "gpc-effingham-500"], ["desc-6367-d", "gpc-effingham-500"]]) {
+      const r = evaluateTime(proj(x), proj(y));
+      expect(r.level).toBe("no-match");
+      expect(r.reason).toMatch(/^Schedule bounds do not overlap \(construction dates are only partly published/);
+      expect(r.reason).not.toMatch(/no construction dates are published/);
+    }
   });
 
   it("Goshen–Kraft rebuild (GPC 20785) is centered on its rebuilt section, Kraft – Rice Hope", () => {
@@ -698,6 +727,7 @@ describe("snapshot data regressions", () => {
     expect(ids.size).toBe(rows.length);
     const top = parsed.find((r) => r[at("pair_id")] === "desc-6888__gpc-20065")!;
     expect([top[at("time_gap (day)")], top[at("time_gap_basis")]]).toEqual(["0", "ranges-overlap"]);
+    expect(parsed.every((r) => r[at("review_radius_mi")] === "25")).toBe(true);
     const coarse = parsed.find((r) => r[at("pair_id")] === "desc-06367-d-g__gpc-20065")!;
     expect([coarse[at("time_gap (day)")], coarse[at("time_gap_basis")]]).toEqual(["396", "at-least"]);
     // queue_rank restarts at 1 in each review-status tab
@@ -720,11 +750,61 @@ describe("snapshot data regressions", () => {
     const g = proj("gpc-20065").constructionWindows.filter((w) => !w.supersededBy);
     expect(coarsest(g)).toBe("year");
     expect(publicNote("It may be adjusted after approval (see route.caveat). The UI should strip these. Kept.")).toBe("It may be adjusted after approval. Kept.");
+    // schema notation is put in words; cache paths and record-mapping sentences are dropped
+    expect(publicNote(proj("desc-6888").caveats[0])).toMatch(/^Terminals: Okatie \(DESC\) and McIntosh \(Georgia Power\);.* The third mapped point is the new Deerfield/);
+    for (const p of SNAPSHOT.projects) for (const c of p.caveats) expect(publicNote(c)).not.toMatch(/\bA = |endpoints\[|\.cache\/|This record maps/);
+    expect(nameRecordIds("(gpc-irp-2025-vol3: no hits) breaker-and-a-half", (id) => (id === "gpc-irp-2025-vol3" ? "Ten-Year Plan" : undefined))).toBe("(Ten-Year Plan: no hits) breaker-and-a-half");
     for (const u of SNAPSHOT.unresolved) expect(u.note).not.toMatch(/atc-nspw-grid-forward|placeholder shared|U\+0007/);
     // shared-owner exclusions name utilities, not internal ids
     const short = SNAPSHOT.utilities.map((u) => u.shortName);
     const shared = run.excludedPairs.filter((e) => e.reason === "shared-owner");
     expect(shared.length).toBeGreaterThan(0);
     for (const x of shared) for (const n of x.detail.match(/^Shared owner \((.*)\):/)![1].split(", ")) expect(short).toContain(n);
+  });
+  it("a newer in-service date that bounds a current window is reported as feeding TIME", () => {
+    const g = pair("desc-6888", "gpc-20065")!.conflicts.find((c) => c.id === "gpc-20065:completion")!;
+    expect(g.affectsMatch).toBe(true);
+    const ab = pair("dpc-alma-blair", "xcel-wwtc")!;
+    expect(ab.conflicts.find((c) => c.id === "dpc-alma-blair:completion")!.affectsMatch).toBe(true);
+    // Xcel's page vs the PSC reports: two current claims, no window re-bounded by either
+    expect(ab.conflicts.find((c) => c.id === "xcel-wwtc:completion")!.affectsMatch).toBe(false);
+  });
+
+  it("the impact note never treats substation, bank or reconductor work as a new line", () => {
+    for (const id of ["gpc-20796", "desc-6854-c", "desc-6238-h", "atc-columbia-beci-work", "gpc-19523"]) expect(needsNewCorridor(proj(id))).toBe(false);
+    for (const id of ["xcel-wwtc", "gpc-effingham-500", "dpc-alma-blair", "transource-beci"]) expect(needsNewCorridor(proj(id))).toBe(true);
+    expect(impactDefaults(pair("desc-6888", "gpc-20796")!).sharedMilesNote).toMatch(/Neither project needs a new corridor/);
+  });
+
+  it("'Late 2029' is shown at half-year precision, never as a quarter", () => {
+    expect(formatPoint("2029-07-01", "half")).toBe("Late 2029");
+    expect(formatPoint("2029-01-01", "half")).toBe("Early 2029");
+    expect(precisionLabel("half")).toBe("half-year");
+    const w = proj("transource-beci").constructionWindows[0];
+    expect(formatWindow(w.start, w.end)).toBe("Late 2029–Late 2033");
+    expect(coarsest([w, win(2026, 2030)])).toBe("year");
+    const m = pair("grid-forward-atc", "transource-beci")!;
+    expect(m.timeDetail.precision).toBe("half");
+    expect(m.timeReason).toContain("(Late 2029–Late 2030)");
+    expect(formatSpan(m.timeDetail.possibleOverlap!, m.timeDetail.precision)).toBe("Late 2029–Late 2030");
+    const b = buildBrief(m);
+    expect(b.question).toContain("Late 2029–Late 2030");
+    expect(b.unresolved).toContain("Published schedules are half-year-precision; the exact months of field work are not stated.");
+    expect(overlapTableCsv([m])).not.toContain("(half)");
+  });
+
+  it("Grid Forward ATC runs from the change-of-ownership point to Columbia; ABO from Alexandria to Big Oaks", () => {
+    expect(proj("grid-forward-atc").places.filter((pl) => pl.role === "endpoint").map((pl) => pl.id)).toEqual(["gf-pco", "gf-columbia"]);
+    expect(proj("abo-alexandria-big-oaks").places.filter((pl) => pl.role === "endpoint").map((pl) => pl.id)).toEqual(["abo-alexandria", "abo-big-oaks"]);
+    expect(pair("grid-forward-atc", "grid-forward-nspw")!.geoDetail.center!.miles).toBeCloseTo(53, 0);
+    expect(pair("grid-forward-atc", "transource-beci")!.geoDetail.center!.miles).toBeCloseTo(80, 0);
+  });
+
+  it("near-edge wording: one decimal beside the radius, and 'named facilities' only when no point is town-level", () => {
+    expect(pair("atc-wwtc-jump-river", "xcel-wwtc")!.geoReason).toContain("≈26.1 mi apart");
+    const at10 = runMatching(SNAPSHOT, { now: "t", thresholdMiles: 10 }).matches.find((m) => m.id === "desc-6367-d__gpc-20785")!;
+    expect(at10.geoDetail.center!.anyLocality).toBe(true);
+    expect(whyFlagged(at10)).toMatch(/centers ≈9\.7 mi apart, at the edge of the 10 mi radius.*A location is approximate \(town-level\)/);
+    expect(whyFlagged(pair("desc-6888", "gpc-20787")!)).toMatch(/Located at named facilities/);
   });
 });

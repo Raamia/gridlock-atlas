@@ -1,4 +1,5 @@
-import type { Conflict, Evidence, Match, MatchRun, Project, SourceDocument, Snapshot, Utility } from "@/lib/domain/types";
+import type { Conflict, ConstructionWindow, Evidence, Match, MatchRun, Project, SourceDocument, Snapshot, Utility } from "@/lib/domain/types";
+import { formatWindow, publicNote } from "@/lib/format";
 
 export function indexSnapshot(s: Snapshot) {
   const projects = new Map(s.projects.map((p) => [p.id, p]));
@@ -48,6 +49,28 @@ export function matchSourceIds(m: Match, idx: SnapshotIndex): string[] {
     if (e) ids.add(e.sourceId);
   }
   return [...ids];
+}
+
+/** One display group of windows (a timeline bar, an inspector row): one window as published, several as first start to last end. */
+export function windowGroupText(ws: ConstructionWindow[]): string {
+  if (ws.length === 1) return formatWindow(ws[0].start, ws[0].end, ws[0].openEnded, ws[0].openStart);
+  const first = ws.reduce((x, y) => (y.start.earliest < x.start.earliest ? y : x));
+  const last = ws.reduce((x, y) => (y.end.latest > x.end.latest ? y : x));
+  return formatWindow(first.start, last.end, ws.some((w) => w.openEnded), first.openStart);
+}
+
+const SLUG = "[a-z][a-z0-9]*(?:-[a-z0-9]+){2,}";
+/**
+ * A research note for readers (publicNote), with record ids put in words: a snapshot source or project id reads as its title,
+ * and a cached page the snapshot does not cite drops out of its parenthetical ("(cached as desc-wagener-connection-page)").
+ */
+export function readableNote(t: string, idx: SnapshotIndex): string {
+  const name = (id: string) => idx.source(id)?.title ?? idx.project(id)?.shortTitle;
+  return publicNote(t)
+    .replace(new RegExp(`\\s*\\((?:cached(?: as)? )?(${SLUG})\\)`, "g"), (_, id: string) => (name(id) ? ` (${name(id)})` : ""))
+    .replace(new RegExp(`\\((?:cached(?: as)? )?(${SLUG})(?:,\\s*|\\s+(?=p\\.))`, "g"), (_, id: string) => (name(id) ? `(${name(id)}, ` : "("))
+    .replace(new RegExp(`,\\s*cached(?: as)? (${SLUG})`, "g"), (_, id: string) => (name(id) ? `, ${name(id)}` : ""))
+    .replace(/\b[a-z][a-z0-9]*(?:-[a-z0-9]+)+\b/g, (id) => name(id) ?? id);
 }
 
 /** A conflict picked out by id, by its project, or by a source on any side (see `focusConflict` in the store). */

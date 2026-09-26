@@ -107,6 +107,7 @@ export function TopBar() {
         </IconButton>
         <div className="mx-1 h-5 w-px bg-line-2 max-sm:hidden" />
         <Button
+          id="demo-toggle"
           variant={demoStep === null ? "outline" : "subtle"}
           size="sm"
           onClick={() => set(demoStep === null ? { demoStep: 0 } : { demoStep: null, briefOpen: false, highlightConflict: false, focusConflict: null })}

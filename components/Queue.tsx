@@ -42,7 +42,7 @@ export function Queue() {
 
   return (
     <aside className="relative flex min-h-0 flex-col border-r border-line bg-bg-1" aria-label="Coordination queue">
-      <div className="px-4 pb-3 pt-4">
+      <div className="px-4 pb-2 pt-3 sm:pb-3 sm:pt-4">
         <div className="flex items-baseline justify-between">
           <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-text-0">Coordination queue</h2>
           {run && counts && (
@@ -51,7 +51,7 @@ export function Queue() {
             </span>
           )}
         </div>
-        <p className="mt-0.5 text-[12px] text-text-2">
+        <p className="mt-0.5 hidden text-[12px] text-text-2 sm:block">
           Cross-utility project pairs within the review radius or sharing a facility, ranked by place first, then timing.
         </p>
       </div>
@@ -217,8 +217,14 @@ function RunResults() {
   const threshold = useAtlas((s) => s.thresholdMiles);
   const set = useAtlas((s) => s.set);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const regional = useMemo(() => run.matches.filter((m) => region === "all" || IDX.project(m.projectAId).region === region), [run, region]);
+  const badgeCounts = useMemo(() => {
+    const n: Partial<Record<FlagFilter, number>> = {};
+    for (const m of regional) n[m.badge] = (n[m.badge] ?? 0) + 1;
+    return n;
+  }, [regional]);
   const filtered = useMemo(
     () =>
       regional.filter((m) => {
@@ -235,7 +241,9 @@ function RunResults() {
   );
   const inCurrent = filtered.filter((m) => inTab(m, tab));
   const hidden = regional.filter((m) => inTab(m, tab)).length - inCurrent.length;
-  const active = (utilityFilter ? 1 : 0) + ALL_FLAGS.filter((f) => !flags.includes(f)).length;
+  // a signal switched off counts as a filter only when this run has pairs with it
+  const flagsHiding = ALL_FLAGS.filter((f) => !flags.includes(f) && (badgeCounts[f] ?? 0) > 0).length;
+  const active = (utilityFilter ? 1 : 0) + flagsHiding;
   const clearFilters = () => set({ utilityFilter: null, flags: ALL_FLAGS });
 
   return (
@@ -266,7 +274,11 @@ function RunResults() {
         </LayoutGroup>
 
         <button
-          onClick={() => setFiltersOpen((o) => !o)}
+          onClick={() => {
+            setFiltersOpen(!filtersOpen);
+            // the panel opens at the top of the list: bring it into view from anywhere down the queue
+            if (!filtersOpen) scrollRef.current?.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+          }}
           className="mt-2 flex w-full items-center gap-1.5 rounded-md px-1 py-1 text-[11.5px] text-text-2 hover:text-text-1"
           aria-expanded={filtersOpen}
         >
@@ -275,7 +287,7 @@ function RunResults() {
           {active > 0 && (
             <span
               className="rounded-full bg-bg-4 px-1.5 text-[10px] font-medium leading-[16px] text-text-0 ring-1 ring-line-3"
-              title={[utilityFilter && `Utility: ${IDX.utility(utilityFilter)?.name ?? utilityFilter}`, flags.length < ALL_FLAGS.length && "Some signals hidden"].filter(Boolean).join(" · ")}
+              title={[utilityFilter && `Utility: ${IDX.utility(utilityFilter)?.name ?? utilityFilter}`, flagsHiding > 0 && "Some signals hidden"].filter(Boolean).join(" · ")}
             >
               {active} active
             </span>
@@ -287,8 +299,8 @@ function RunResults() {
 
       {/* keyed by view: a tab or region switch swaps the list at once (no exiting cards to shift the scroll).
           Filters scroll with the cards, so on a short phone sheet they never squeeze the list or push the footer off screen. */}
-      <div key={`${region}|${tab}`} data-queue-scroll className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto px-3 pb-3">
-        <AnimatePresence initial={false}>{filtersOpen && <Filters />}</AnimatePresence>
+      <div key={`${region}|${tab}`} ref={scrollRef} data-queue-scroll className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto px-3 pb-3 [overflow-anchor:none]">
+        <AnimatePresence initial={false}>{filtersOpen && <Filters badgeCounts={badgeCounts} />}</AnimatePresence>
         <div role="list">
           {inCurrent.length === 0 && <EmptyTab tab={tab} hidden={hidden} onClear={clearFilters} />}
           <AnimatePresence initial>
@@ -304,7 +316,7 @@ function RunResults() {
   );
 }
 
-function Filters() {
+function Filters({ badgeCounts }: { badgeCounts: Partial<Record<FlagFilter, number>> }) {
   const flags = useAtlas((s) => s.flags);
   const utilityFilter = useAtlas((s) => s.utilityFilter);
   const threshold = useAtlas((s) => s.thresholdMiles);
@@ -337,19 +349,37 @@ function Filters() {
         <div>
           <div className="eyebrow mb-1.5">Signal</div>
           <div className="flex flex-wrap gap-1">
-            {(["BOTH", "GEO", "POSSIBLE"] as FlagFilter[]).map((f) => (
-              <button
-                key={f}
-                onClick={() => toggle(f)}
-                aria-pressed={flags.includes(f)}
-                className={clsx(
-                  "mono h-6 rounded-md px-2 text-[10.5px] ring-1 transition-colors",
-                  flags.includes(f) ? "bg-bg-4 text-text-0 ring-line-3" : "text-text-3 ring-line hover:text-text-2",
-                )}
-              >
-                {f === "POSSIBLE" ? "PLACE POSSIBLE" : f === "GEO" ? "PLACE CONFIRMED" : "PLACE + TIME"}
-              </button>
-            ))}
+            {(["BOTH", "GEO", "POSSIBLE"] as FlagFilter[]).map((f) => {
+              const n = badgeCounts[f] ?? 0;
+              // a signal no pair in this run carries hides nothing, so it cannot be switched off (only back on)
+              const inert = n === 0 && flags.includes(f);
+              return (
+                <button
+                  key={f}
+                  onClick={() => toggle(f)}
+                  disabled={inert}
+                  aria-pressed={flags.includes(f)}
+                  title={
+                    n === 0
+                      ? f === "BOTH"
+                        ? "No pair in this run has both a confirmed shared place and a confirmed construction-window overlap"
+                        : "No pairs with this signal in this run"
+                      : undefined
+                  }
+                  className={clsx(
+                    "mono inline-flex h-6 items-center gap-1.5 rounded-md px-2 text-[10.5px] transition-colors",
+                    inert
+                      ? "cursor-not-allowed border border-dashed border-line-2 text-text-3"
+                      : flags.includes(f)
+                        ? "bg-bg-4 text-text-0 ring-1 ring-line-3"
+                        : "text-text-3 ring-1 ring-line hover:text-text-2",
+                  )}
+                >
+                  {f === "POSSIBLE" ? "PLACE POSSIBLE" : f === "GEO" ? "PLACE CONFIRMED" : "PLACE + TIME"}
+                  <span className={clsx("num", flags.includes(f) && !inert ? "text-text-2" : "text-text-3")}>{n}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
         <div>
@@ -433,7 +463,7 @@ function ExcludedFooter() {
   const counts = useRegionCounts()!;
   const exportCsv = () => {
     const inRegion = run.matches.filter((m) => region === "all" || IDX.project(m.projectAId).region === region);
-    download(`gridlock-overlaps-${region}.csv`, overlapTableCsv(inRegion), "text/csv");
+    download(`gridlock-overlaps-${region}${run.thresholdMiles !== 25 ? `-${run.thresholdMiles}mi` : ""}.csv`, overlapTableCsv(inRegion), "text/csv");
   };
   const archived = run.excludedProjects.filter((x) => region === "all" || IDX.project(x.projectId)?.region === region).length;
   const { beyond, unlocated, viaFacility } = counts;
