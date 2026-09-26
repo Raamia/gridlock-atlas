@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
-import { AlertTriangle, Calculator, CalendarRange, Check, FileOutput, Handshake, Link2, Library, MapPin, X } from "lucide-react";
+import { AlertTriangle, Calculator, CalendarRange, Check, FileOutput, FileSearch, Handshake, Link2, Library, MapPin, X } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { IDX } from "@/lib/data";
 import { displayTitle, firstSentence, SCOPE_LABEL, whyFlagged } from "@/lib/describe";
@@ -103,6 +103,7 @@ function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
           <ImpactEstimate m={m} />
         </Section>
         {m.conflicts.length > 0 && <ConflictSection m={m} active={section === "conflicts"} />}
+        <NotesSection a={a} b={b} />
         <SourcesSection m={m} a={a} b={b} active={section === "sources"} />
         <p className="px-1 pb-2 text-[10.5px] leading-snug text-text-3">
           A match is a review lead, not a finding that crews or equipment can be shared. Engine {m.engineVersion}; ordering P{m.priority} is explainable priority, not a
@@ -503,6 +504,47 @@ function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: C
         </a>
       )}
     </div>
+  );
+}
+
+function NotesSection({ a, b }: { a: Project; b: Project }) {
+  const [open, setOpen] = useState(false);
+  const rows = ([
+    [a, "var(--a)"],
+    [b, "var(--b)"],
+  ] as const).filter(([p]) => p.caveats.length);
+  if (!rows.length) return null;
+  const total = rows.reduce((n, [p]) => n + p.caveats.length, 0);
+  return (
+    <section className="rounded-xl border border-line bg-bg-1/70 p-3.5">
+      <button onClick={() => setOpen((o) => !o)} className="flex w-full items-center justify-between gap-2 text-left" aria-expanded={open}>
+        <span className="flex items-center gap-2 text-[12.5px] font-semibold text-text-0">
+          <FileSearch size={14} className="text-text-2" /> Research notes
+        </span>
+        <span className="text-[10.5px] text-text-3">
+          {total} note{total === 1 ? "" : "s"} · {open ? "hide" : "show"}
+        </span>
+      </button>
+      {open && (
+        <div className="mt-2.5 space-y-2.5">
+          {rows.map(([p, color]) => (
+            <div key={p.id}>
+              <div className="flex items-center gap-1.5 text-[11px] text-text-2">
+                <Dot color={color} size={5} /> {p.shortTitle}
+              </div>
+              <ul className="mt-1 space-y-1">
+                {p.caveats.map((c, i) => (
+                  <li key={i} className="text-[11.5px] leading-snug text-text-2">
+                    — {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <p className="text-[10.5px] text-text-3">Qualifications recorded while reading and geocoding the sources.</p>
+        </div>
+      )}
+    </section>
   );
 }
 
