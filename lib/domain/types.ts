@@ -103,6 +103,8 @@ export interface ConstructionWindow {
   note?: string;
   /** Claim id that explicitly supersedes this one (kept for history, not matched). */
   supersededBy?: string;
+  /** Only a start milestone is published ("construction begins Fall 2027"); the end is unknown. */
+  openEnded?: boolean;
 }
 
 export interface CompletionClaim {
@@ -291,11 +293,21 @@ export interface TimeDetail {
   inService?: { a: string; b: string; gapDays: number; labelA: string; labelB: string };
 }
 
+export interface ConflictSide {
+  /** The date or window this group of sources agrees on, formatted at source precision. */
+  value: string;
+  sourceIds: string[];
+  claimIds: string[];
+  /** Earlier plan edition (version history) rather than a competing current claim. */
+  earlier?: boolean;
+}
+
 export interface Conflict {
   id: string;
   projectId: string;
   field: "completion" | "constructionWindow";
   description: string;
+  sides: ConflictSide[];
   claimIds: string[];
   /** Whether this disagreement changes the construction-window match. */
   affectsMatch: boolean;

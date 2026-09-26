@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "audit": "tsx scripts/audit-data.ts",
+    "snapshot:build": "python3 scripts/ingest/region_b_to_clusters.py && tsx scripts/build-snapshot.ts",
+    "sources:fetch": "python3 scripts/ingest/fetch_all.py",
+    "extract:gemini": "python3 scripts/ingest/extract_gemini.py",
+    "check": "tsc --noEmit && eslint . && vitest run && tsx scripts/audit-data.ts"
   },
   "dependencies": {
     "@turf/along": "^7.4.0",

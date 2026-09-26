@@ -27,4 +27,14 @@ export const UTILITIES: Utility[] = [
   { id: "mge", name: "Madison Gas and Electric", shortName: "MGE", kind: "investor-owned" },
   { id: "smmpa", name: "Southern Minnesota Municipal Power Agency", shortName: "SMMPA", kind: "municipal-agency" },
   { id: "wppi", name: "WPPI Energy", shortName: "WPPI", kind: "municipal-agency" },
+  { id: "gridliance-heartland", name: "GridLiance Heartland", shortName: "GridLiance", kind: "transmission-company" },
+  { id: "rpu", name: "Rochester Public Utilities", shortName: "RPU", kind: "municipal-agency" },
 ];
+
+/** Researcher-coined ids that refer to a canonical utility above. */
+export const UTILITY_ALIASES: Record<string, string> = {
+  "smmpa-wisconsin": "smmpa",
+  "wppi-energy": "wppi",
+  "georgia-power": "gpc",
+  dominion: "desc",
+};

@@ -35,7 +35,8 @@ export function formatSpan(span: { start: string; end: string }, precision: Date
   return a === z ? a : `${a}–${z}`;
 }
 
-export function formatWindow(start: DateBound, end: DateBound): string {
+export function formatWindow(start: DateBound, end: DateBound, openEnded?: boolean): string {
+  if (openEnded || end.latest >= "2090") return `from ${formatPoint(start.earliest, start.precision)}`;
   const a = formatPoint(start.earliest, start.precision);
   const z = formatPoint(end.latest, end.precision);
   return a === z ? a : `${a}–${z}`;

@@ -52,3 +52,20 @@ export const SCOPE_LABEL: Record<string, string> = {
   "resource-sharing": "Resource sharing",
   unknown: "Scope unknown",
 };
+
+/** Headline title: long titles drop their parenthetical detail (the full title stays in tooltips/brief sources). */
+export function displayTitle(p: { title: string }): string {
+  if (p.title.length <= 48) return p.title;
+  const t = p.title.replace(/\s*\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
+  return t || p.title;
+}
+
+/** First sentence of a researcher description, capped at ~`words` words. */
+export function firstSentence(text: string, words = 30): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  const m = clean.match(/^(.+?[.;])(\s|$)/);
+  let out = m ? m[1] : clean;
+  const w = out.split(" ");
+  if (w.length > words) out = w.slice(0, words).join(" ") + "…";
+  return out;
+}

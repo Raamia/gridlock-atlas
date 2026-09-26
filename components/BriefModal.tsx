@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Check, Copy, Download, Printer, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { buildBrief, briefToMarkdown } from "@/lib/brief";
+import { displayTitle } from "@/lib/describe";
 import { useSelectedPair } from "@/lib/hooks";
 import { useAtlas } from "@/lib/store";
 import { Button, IconButton, MatchBadges, StatusChip } from "./ui";
@@ -79,7 +80,7 @@ export function BriefModal() {
                 <StatusChip status={pair.match.reviewStatus} />
               </div>
               <h2 className="mt-3 font-serif text-[30px] leading-[1.08] tracking-[-0.01em] text-text-0 print:text-black">
-                {pair.a.title} <span className="text-text-3">×</span> {pair.b.title}
+                {displayTitle(pair.a)} <span className="text-text-3">×</span> {displayTitle(pair.b)}
               </h2>
               <dl className="mt-6 space-y-4">
                 {brief.rows.slice(1).map((r) => (

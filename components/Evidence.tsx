@@ -5,6 +5,7 @@ import { BadgeCheck, ExternalLink, FileText, Globe, Landmark, Network, ShieldQue
 import { IDX } from "@/lib/data";
 import type { Evidence, SourceDocument } from "@/lib/domain/types";
 import { formatDate } from "@/lib/format";
+import { useReview } from "@/lib/review";
 import { evidenceHref, pageLabel } from "@/lib/selectors";
 
 export type EvidenceTone = "a" | "b" | "amber" | "neutral" | "known" | "conflict";
@@ -52,12 +53,30 @@ export function EvidenceCard({ e, tone = "neutral", compact }: { e: Evidence; to
           Supports: <span className="text-text-2">{e.supports}</span>
         </span>
         <ProvenanceTag e={e} />
+        <CheckToggle id={e.id} />
       </div>
     </figure>
   );
 }
 
+function CheckToggle({ id }: { id: string }) {
+  const enabled = useReview((s) => s.enabled);
+  const checked = useReview((s) => !!s.checked[id]);
+  const toggle = useReview((s) => s.toggleCheck);
+  if (!enabled) return null;
+  return (
+    <button
+      onClick={() => toggle(id)}
+      aria-pressed={checked}
+      className={clsx("rounded px-1.5 py-0.5 ring-1", checked ? "bg-known/15 text-known ring-known/40" : "text-text-2 ring-line hover:text-text-0")}
+    >
+      {checked ? "✓ checked" : "Mark checked"}
+    </button>
+  );
+}
+
 export function ProvenanceTag({ e }: { e: Evidence }) {
+  const mine = useReview((s) => !!s.checked[e.id]);
   const method = e.extractionMethod === "gemini" ? "Gemini extraction" : e.extractionMethod === "manual" ? "Manual entry" : "Agent-assisted";
   return (
     <span className="ml-auto inline-flex items-center gap-1 whitespace-nowrap">
@@ -71,7 +90,7 @@ export function ProvenanceTag({ e }: { e: Evidence }) {
         </span>
       )}
       <span className="text-text-3">· {method}</span>
-      <span className={e.reviewedByHuman ? "text-known" : "text-text-3"}>· {e.reviewedByHuman ? "human-checked" : "awaiting human check"}</span>
+      <span className={e.reviewedByHuman || mine ? "text-known" : "text-text-3"}>· {e.reviewedByHuman ? "human-checked" : mine ? "checked by you" : "awaiting human check"}</span>
     </span>
   );
 }

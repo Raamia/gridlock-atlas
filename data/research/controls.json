@@ -1,0 +1,2446 @@
+{
+ "cluster": "controls",
+ "sources": [
+  {
+   "id": "itc-chc-page",
+   "title": "Cardinal-Hickory Creek Transmission Line Project",
+   "publisher": "ITC Holdings Corp.",
+   "url": "https://www.itc-holdings.com/projects/cardinal-hickory-creek-transmission-line-project/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No document date visible on the page; retrieved 2026-09-26"
+  },
+  {
+   "id": "dairyland-chc-energized",
+   "title": "Renewable Energy Flowing: Cardinal-Hickory Creek Line Energized",
+   "publisher": "Dairyland Power Cooperative",
+   "url": "https://dairylandpower.com/renewable-energy-flowing-cardinal-hickory-creek-line-energized",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2024-09-27",
+   "documentDateEvidence": "Page dateline 'Friday | September 27, 2024' under the headline"
+  },
+  {
+   "id": "psc-5-ce-142-final",
+   "title": "Final Decision, docket 5-CE-142 (Badger-Coulee 345 kV)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=235295",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2015-04-23",
+   "documentDateEvidence": "PDF p.62 reads 'Dated at Madison, Wisconsin, this 23rd day of April, 2015.'; PSC receipt stamp on PDF p.1 'RECEIVED: 04/23/15, 10:38:01 AM' (PSC REF#: 235295). Viewer page = printed page."
+  },
+  {
+   "id": "atc-10yr-2018-major-projects",
+   "title": "ATC 10-Year Transmission System Assessment 2018: Major projects update",
+   "publisher": "American Transmission Co.",
+   "url": "https://www.atc10yearplan.com/2018/summary-report/emerging-projects-update/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "2018 Assessment; the ATC 2019 page states the 2018 Assessment was issued in October 2018 (no date on the page itself)"
+  },
+  {
+   "id": "atc-10yr-2019-completed",
+   "title": "ATC 10-Year Transmission System Assessment 2019: Projects completed since last report",
+   "publisher": "American Transmission Co.",
+   "url": "https://www.atc10yearplan.com/2019/projects/projects-completed-since-last-report/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "2019 Assessment edition; exact issue date not visible on the page"
+  },
+  {
+   "id": "g2b-home",
+   "title": "Gopher to Badger Link - Home",
+   "publisher": "Xcel Energy and Dairyland Power Cooperative (Gopher to Badger Link project site)",
+   "url": "https://www.gophertobadgerlink.com/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No date on page; live page retrieved 2026-09-26"
+  },
+  {
+   "id": "g2b-library",
+   "title": "Gopher to Badger Link - Library",
+   "publisher": "Xcel Energy and Dairyland Power Cooperative (Gopher to Badger Link project site)",
+   "url": "https://www.gophertobadgerlink.com/library.html",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No date on page; linked segment maps are dated 20260508 in their filenames"
+  },
+  {
+   "id": "g2b-overview-factsheet-2026",
+   "title": "Gopher to Badger Link Overview Factsheet 2026",
+   "publisher": "Xcel Energy and Dairyland Power Cooperative (Gopher to Badger Link project site)",
+   "url": "https://www.gophertobadgerlink.com/assets/documents/factsheets/GTBL_Overview_Factsheet_2026.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Filename says 2026; page 2 map caption 'The map above reflects the Route Options as of May 2026.'"
+  },
+  {
+   "id": "maribell-home",
+   "title": "MariBell Transmission Project - Home",
+   "publisher": "Dairyland Power Cooperative and GridLiance Heartland (MariBell project site)",
+   "url": "https://www.maribelltransmission.com/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Footer '\u00a92026'; no document date; retrieved 2026-09-26"
+  },
+  {
+   "id": "maribell-project-details",
+   "title": "MariBell Transmission Project - Project Details",
+   "publisher": "Dairyland Power Cooperative and GridLiance Heartland (MariBell project site)",
+   "url": "https://www.maribelltransmission.com/project-details",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Footer '\u00a92026'; no document date; retrieved 2026-09-26"
+  },
+  {
+   "id": "maribell-wisconsin-regulatory-process",
+   "title": "MariBell Transmission Project - Wisconsin Regulatory Process",
+   "publisher": "Dairyland Power Cooperative and GridLiance Heartland (MariBell project site)",
+   "url": "https://www.maribelltransmission.com/wisconsin-regulatory-process",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Footer '\u00a92025'; no document date; retrieved 2026-09-26"
+  },
+  {
+   "id": "mn-biennial-2025-pdf",
+   "title": "2025 Minnesota Biennial Transmission Projects Report (as filed 10/31/2025)",
+   "publisher": "Minnesota Transmission Owners",
+   "url": "https://www.minnelectrans.com/documents/2025_Biennial_Report/AS_FILED_Biennial_Transmission_Projects_Report_10.31.25.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2025-10-31",
+   "documentDateEvidence": "Filename 'AS_FILED_..._10.31.25'; cached by another researcher (shared source)"
+  },
+  {
+   "id": "mn-biennial-2025-ch10",
+   "title": "2025 Minnesota Biennial Transmission Projects Report, Chapter 10: MISO Long Range Transmission Planning",
+   "publisher": "Minnesota Transmission Owners",
+   "url": "https://www.minnelectrans.com/documents/2025_Biennial_Report/html/Ch_10_MISO-LRTP.htm",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Chapter text says 'At the publication of this report, in November 2025'; cached by another researcher (shared source)"
+  },
+  {
+   "id": "psc-1515-ce-103-final",
+   "title": "Final Decision, docket 1515-CE-103 (Alma to Blair Transmission Line Project) - cited here only for its footnote identifying the Cardinal-Hickory Creek Wisconsin docket",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/1515-CE-103%20Final%20Decision.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-03-10",
+   "documentDateEvidence": "PDF p.50 reads 'Dated at Madison, Wisconsin, the 10th day of March, 2026.' Shared source cached by another researcher; copy hosted on dairylandpower.com."
+  }
+ ],
+ "projects": [
+  {
+   "id": "chc-cardinal-hickory-creek",
+   "title": "Cardinal-Hickory Creek Transmission Line Project",
+   "shortTitle": "Cardinal\u2013Hickory Creek",
+   "docketId": "PSC 5-CE-146 (Wisconsin)",
+   "titleEvidence": [
+    {
+     "sourceId": "itc-chc-page",
+     "section": "Cardinal-Hickory Creek Transmission Line Project",
+     "exactExcerpt": "On May 27, 2020, ITC Midwest and Dairyland Power Cooperative received approval for the Cardinal-Hickory Creek Transmission Line Project from the Iowa Utilities Board (IUB).",
+     "supports": "project title",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "section": "Footnote 7 (economic-benefits methodology discussion)",
+     "exactExcerpt": "to the Existing Cardinal Substation in Dane County, Wisconsin, to be Known as the Cardinal-Hickory Creek, docket 5-CE-146 (Wis. PSC Sept. 26, 2019)",
+     "supports": "Wisconsin PSC docket 5-CE-146, decision dated Sept. 26, 2019",
+     "verifiedByScript": true,
+     "page": 21
+    }
+   ],
+   "summary": "A 345 kV line co-owned by ITC Midwest, ATC and Dairyland running from ITC Midwest's Hickory Creek Substation near New Vienna, Iowa, across the Mississippi River near Cassville to ATC's Hill Valley Substation near Montfort and on to the Cardinal Substation near Middleton, Wisconsin; the whole 102-mile line went into service on Sept. 26, 2024.",
+   "parentInitiative": "MISO Multi-Value Project (MVP) portfolio approved in 2011",
+   "owners": [
+    {
+     "utilityId": "itc-midwest",
+     "name": "ITC Midwest LLC",
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "co-owners ITC Midwest, ATC and Dairyland Power Cooperative have completed the western half of the Cardinal-Hickory Creek Transmission Line Project, allowing the entire 102-mile line to be placed in service on Sept. 26, 2024.",
+       "supports": "ITC Midwest is a co-owner",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "atc",
+     "name": "American Transmission Co.",
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "co-owners ITC Midwest, ATC and Dairyland Power Cooperative have completed the western half of the Cardinal-Hickory Creek Transmission Line Project, allowing the entire 102-mile line to be placed in service on Sept. 26, 2024.",
+       "supports": "ATC is a co-owner",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "dairyland",
+     "name": "Dairyland Power Cooperative",
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "co-owners ITC Midwest, ATC and Dairyland Power Cooperative have completed the western half of the Cardinal-Hickory Creek Transmission Line Project, allowing the entire 102-mile line to be placed in service on Sept. 26, 2024.",
+       "supports": "Dairyland is a co-owner",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "complete",
+    "asOf": "2024-09-26",
+    "evidence": [
+     {
+      "sourceId": "dairyland-chc-energized",
+      "section": "Cardinal-Hickory Creek Transmission Line Energized",
+      "exactExcerpt": "co-owners ITC Midwest, ATC and Dairyland Power Cooperative have completed the western half of the Cardinal-Hickory Creek Transmission Line Project, allowing the entire 102-mile line to be placed in service on Sept. 26, 2024.",
+      "supports": "status complete: entire line in service Sept. 26, 2024",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "itc-chc-page",
+      "section": "Cardinal-Hickory Creek Transmission Line Project",
+      "exactExcerpt": "Construction began in 2021 and the entire line was placed in service in September 2024.",
+      "supports": "status complete: entire line in service September 2024",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "IA",
+    "WI"
+   ],
+   "counties": [
+    {
+     "name": "Dubuque County",
+     "state": "IA",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "will be constructed from the Hickory Creek substation near New Vienna in Dubuque County northward to Clayton County, and then cross the Mississippi River near Cassville, Wisconsin.",
+       "supports": "Iowa segment starts in Dubuque County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Clayton County",
+     "state": "IA",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "will be constructed from the Hickory Creek substation near New Vienna in Dubuque County northward to Clayton County, and then cross the Mississippi River near Cassville, Wisconsin.",
+       "supports": "Iowa segment runs through Clayton County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Dane County",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "The entire project is approximately 100-miles of 345-kilovolt transmission line designed to electrically connect the Dubuque County, Iowa, region to the Dane County, Wisconsin, region.",
+       "supports": "line reaches the Dane County region",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "chc-hickory-creek-sub",
+     "label": "Hickory Creek Substation (near New Vienna, IA)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 42.5456323,
+     "lon": -91.0189946,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 888014295 power=substation name='Hickory Creek Substation' operator=ITC voltage=345000;161000 (Overpass around New Vienna, IA)",
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "The western segment of the line, built and operated by ITC Midwest, runs from ITC Midwest\u2019s Hickory Creek Substation near New Vienna, Iowa, to ATC\u2019s new Hill Valley Substation near Montfort, Wisconsin.",
+       "supports": "western endpoint Hickory Creek Substation near New Vienna",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "chc-cassville-crossing",
+     "label": "Mississippi River crossing near Cassville, WI",
+     "kind": "river-crossing",
+     "precision": "locality",
+     "lat": 42.7144408,
+     "lon": -90.9907697,
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim: Cassville, Grant County, Wisconsin (OSM relation 251505) village centroid; exact crossing point not in sources",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "will be constructed from the Hickory Creek substation near New Vienna in Dubuque County northward to Clayton County, and then cross the Mississippi River near Cassville, Wisconsin.",
+       "supports": "river crossing near Cassville",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "chc-hill-valley-sub",
+     "label": "Hill Valley Substation (near Montfort, WI)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 42.956524,
+     "lon": -90.433566,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 1368026318 power=substation name='Hill Valley Substation' operator='American Transmission Company' voltage=345000;138000 (Overpass around Montfort, WI)",
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "The eastern segment, built and operated by ATC, connects the Hill Valley Substation to the Cardinal Substation near Middleton, Wisconsin, and became operational in December 2023.",
+       "supports": "Hill Valley Substation is the segment junction",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "chc-cardinal-sub",
+     "label": "Cardinal Substation (near Middleton, WI)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 43.0921976,
+     "lon": -89.5681981,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 686507722 power=substation name='Cardinal Substation' operator='American Transmission Company' voltage=345000;138000 (Overpass around Middleton, WI)",
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "The eastern segment, built and operated by ATC, connects the Hill Valley Substation to the Cardinal Substation near Middleton, Wisconsin, and became operational in December 2023.",
+       "supports": "eastern endpoint Cardinal Substation near Middleton",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "Textual route only: Hickory Creek Substation near New Vienna, Iowa, north through Clayton County, across the Mississippi River near Cassville, to ATC's new Hill Valley Substation near Montfort, then on to the Cardinal Substation near Middleton in Dane County. No official map was digitized.",
+    "caveat": "schematic / not survey accurate; waypoints taken from the text, not from a map; straight lines between waypoints do not show the actual alignment",
+    "waypoints": [
+     {
+      "name": "Hickory Creek Substation",
+      "lat": 42.5456323,
+      "lon": -91.0189946,
+      "coordinateSource": "OSM way 888014295 name='Hickory Creek Substation'"
+     },
+     {
+      "name": "Mississippi River crossing near Cassville",
+      "lat": 42.7144408,
+      "lon": -90.9907697,
+      "coordinateSource": "Nominatim: Cassville, WI village centroid (OSM relation 251505)"
+     },
+     {
+      "name": "Hill Valley Substation",
+      "lat": 42.956524,
+      "lon": -90.433566,
+      "coordinateSource": "OSM way 1368026318 name='Hill Valley Substation'"
+     },
+     {
+      "name": "Cardinal Substation",
+      "lat": 43.0921976,
+      "lon": -89.5681981,
+      "coordinateSource": "OSM way 686507722 name='Cardinal Substation'"
+     }
+    ],
+    "evidence": [
+     {
+      "sourceId": "itc-chc-page",
+      "section": "Cardinal-Hickory Creek Transmission Line Project",
+      "exactExcerpt": "will be constructed from the Hickory Creek substation near New Vienna in Dubuque County northward to Clayton County, and then cross the Mississippi River near Cassville, Wisconsin.",
+      "supports": "route order in Iowa and the river crossing",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "itc-chc-page",
+      "section": "Cardinal-Hickory Creek Transmission Line Project",
+      "exactExcerpt": "In Wisconsin, ITC Midwest will be responsible for the segment of line from the Mississippi River to a new substation near Montfort, Wisconsin, to be built by American Transmission Co. (ATC)",
+      "supports": "route from the river to the substation near Montfort",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "dairyland-chc-energized",
+      "section": "Cardinal-Hickory Creek Transmission Line Energized",
+      "exactExcerpt": "The eastern segment, built and operated by ATC, connects the Hill Valley Substation to the Cardinal Substation near Middleton, Wisconsin, and became operational in December 2023.",
+      "supports": "route from Hill Valley to Cardinal",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "itc-chc-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2021-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2024-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "note": "Start year (2021) is stated. The end bound is NOT a separately stated construction end: it comes from the same sentence's 'entire line was placed in service in September 2024' (start is explicit, so the window is not built from an in-service date alone). Dairyland's Sept. 2024 release says two retired lines in the Refuge 'are being removed', so removal/restoration continued after energization and may extend past 2024. Project is complete and excluded from the candidate queue.",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "Construction began in 2021 and the entire line was placed in service in September 2024.",
+       "supports": "construction start 2021; line complete by September 2024",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "dairyland-chc-energized",
+     "label": "in-service (entire line)",
+     "date": {
+      "earliest": "2024-09-26",
+      "latest": "2024-09-26",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "co-owners ITC Midwest, ATC and Dairyland Power Cooperative have completed the western half of the Cardinal-Hickory Creek Transmission Line Project, allowing the entire 102-mile line to be placed in service on Sept. 26, 2024.",
+       "supports": "entire line in service Sept. 26, 2024",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "itc-chc-page",
+     "label": "in-service (entire line)",
+     "date": {
+      "earliest": "2024-09-01",
+      "latest": "2024-09-30",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "Construction began in 2021 and the entire line was placed in service in September 2024.",
+       "supports": "entire line in service September 2024",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "dairyland-chc-energized",
+     "label": "in-service (eastern segment, Hill Valley\u2013Cardinal, ATC)",
+     "date": {
+      "earliest": "2023-12-01",
+      "latest": "2023-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "The eastern segment, built and operated by ATC, connects the Hill Valley Substation to the Cardinal Substation near Middleton, Wisconsin, and became operational in December 2023.",
+       "supports": "eastern segment operational December 2023",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "atc",
+     "status": "known-joint",
+     "scope": "joint-ownership",
+     "description": "The sources call ITC Midwest, ATC and Dairyland co-owners of the project, and the Wisconsin PSC application (docket 5-CE-146) was a joint application by the three. ITC Midwest built and operates the western segment (Hickory Creek to Hill Valley); ATC built and operates the eastern segment (Hill Valley to Cardinal) and the new substation near Montfort. Ownership shares are not stated. This is joint ownership of one package, not documented sharing of crews or equipment.",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "section": "Footnote 7 (economic-benefits methodology discussion)",
+       "exactExcerpt": "Joint Application of ATC ITC Midwest LLC, and Dairyland Power Cooperative, for Authority to Construct and Operate a New 345 kV Transmission Line from the Existing Hickory Creek Substation in Dubuque County, Iowa,",
+       "supports": "PSC footnote: joint Wisconsin application by ATC, ITC Midwest and Dairyland",
+       "verifiedByScript": true,
+       "page": 21
+      },
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "The western segment of the line, built and operated by ITC Midwest, runs from ITC Midwest\u2019s Hickory Creek Substation near New Vienna, Iowa, to ATC\u2019s new Hill Valley Substation near Montfort, Wisconsin.",
+       "supports": "segment split between co-owners",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "ATC will also be responsible for the remainder of the line to Dane County.",
+       "supports": "ATC responsible for the eastern remainder",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "In Wisconsin, ITC Midwest will be responsible for the segment of line from the Mississippi River to a new substation near Montfort, Wisconsin, to be built by American Transmission Co. (ATC)",
+       "supports": "ATC to build the new substation near Montfort",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "The new 345,000-volt (345-kV) Cardinal-Hickory Creek transmission line is now providing a vital pathway",
+       "supports": "345 kV",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Line length (Dairyland 2024)",
+     "value": "102",
+     "evidence": [
+      {
+       "sourceId": "dairyland-chc-energized",
+       "section": "Cardinal-Hickory Creek Transmission Line Energized",
+       "exactExcerpt": "co-owners ITC Midwest, ATC and Dairyland Power Cooperative have completed the western half of the Cardinal-Hickory Creek Transmission Line Project, allowing the entire 102-mile line to be placed in service on Sept. 26, 2024.",
+       "supports": "102-mile line",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Line length (ITC page)",
+     "value": "approximately 100",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "The entire project is approximately 100-miles of 345-kilovolt transmission line designed to electrically connect the Dubuque County, Iowa, region to the Dane County, Wisconsin, region.",
+       "supports": "approximately 100 miles",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Iowa segment length",
+     "value": "14 miles",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "unanimously approved the franchise for the 14-mile Iowa transmission line segment",
+       "supports": "14-mile Iowa segment",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Wisconsin approval",
+     "value": "PSC Wisconsin CPCN, September 2019",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "In September 2019, the Public Service Commission of Wisconsin issued a Certificate of Public Convenience and Necessity and selected the route for the Wisconsin portion of the project.",
+       "supports": "Wisconsin CPCN September 2019",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "MISO designation",
+     "value": "Multi-Value Project (approved 2011)",
+     "evidence": [
+      {
+       "sourceId": "itc-chc-page",
+       "section": "Cardinal-Hickory Creek Transmission Line Project",
+       "exactExcerpt": "As a portion of one of 17 Multi-Value Projects approved by the region\u2019s Midcontinent Independent System Operator in 2011",
+       "supports": "MISO MVP 2011",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Wisconsin PSC docket",
+     "value": "5-CE-146 (decision Sept. 26, 2019)",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "section": "Footnote 7 (economic-benefits methodology discussion)",
+       "exactExcerpt": "to the Existing Cardinal Substation in Dane County, Wisconsin, to be Known as the Cardinal-Hickory Creek, docket 5-CE-146 (Wis. PSC Sept. 26, 2019)",
+       "supports": "Wisconsin PSC docket 5-CE-146, decision dated Sept. 26, 2019",
+       "verifiedByScript": true,
+       "page": 21
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "NEGATIVE CONTROL: complete (entire line in service 2024-09-26), so it must be excluded from the new-candidate queue by status.",
+    "Modeled as one co-owned project (Dairyland calls all three utilities co-owners; the Wisconsin PSC application was joint). ITC Midwest and ATC each built and operate their own segment, so it could instead be split into two owner-specific packages (east operational Dec 2023, west Sept 2024). Ownership shares are not in the sources.",
+    "The two sources give different lengths (102 miles vs approximately 100 miles).",
+    "Dairyland's release says two retired lines crossing the Refuge 'are being removed', so some removal and restoration work was still going on after energization; no end date for that work is sourced.",
+    "Route is text-only (four waypoints). The Cassville waypoint is the village centroid, not the actual river crossing."
+   ]
+  },
+  {
+   "id": "badger-coulee-345kv",
+   "title": "Badger-Coulee 345 kV Transmission Line",
+   "shortTitle": "Badger Coulee",
+   "docketId": "PSC 5-CE-142",
+   "titleEvidence": [
+    {
+     "sourceId": "psc-5-ce-142-final",
+     "page": 1,
+     "section": "Final Decision caption",
+     "exactExcerpt": "for Authority to Construct and Operate a New Badger-Coulee 345 kV Transmission Line from the La Crosse Area, in La Crosse County, to the Greater Madison Area in Dane County, Wisconsin",
+     "supports": "project title",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "A 345 kV line approved by the Wisconsin PSC in docket 5-CE-142 (Final Decision dated April 23, 2015) from the Briggs Road Substation in the town of Onalaska north through Holmen and the city of Blair, then southeast along I-94 and I-90/94 to the North Madison Substation and on to the Cardinal Substation in the town of Middleton; ATC and NSPW (Xcel Energy) were the applicants, with DPC, SMMPA Wisconsin and WPPI as tenants-in-common on the Briggs Road-North Madison segment. ATC reports the Cardinal-North Madison portion in service in fall 2017 and lists the North Madison-Briggs Road line as completed after October 2018.",
+   "parentInitiative": "MISO Multi-Value Project (one of 17 MVPs)",
+   "owners": [
+    {
+     "utilityId": "atc",
+     "name": "American Transmission Company LLC",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "American Transmission Company LLC and Northern States Power Company-Wisconsin (ATC, NSPW, and together as applicants) filed with the Commission an application for a Certificate of Public Convenience and Necessity (CPCN)",
+       "supports": "ATC is an applicant/owner",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "xcel-nspw",
+     "name": "Northern States Power Company-Wisconsin (Xcel Energy)",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "American Transmission Company LLC and Northern States Power Company-Wisconsin (ATC, NSPW, and together as applicants) filed with the Commission an application for a Certificate of Public Convenience and Necessity (CPCN)",
+       "supports": "NSPW is an applicant/owner",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "atc-10yr-2018-major-projects",
+       "section": "Major projects update > Badger Coulee",
+       "exactExcerpt": "A portion of the project from the Cardinal Substation to the North Madison Substation was placed in service in fall 2017. Developed jointly with Xcel Energy, the line will:",
+       "supports": "developed jointly with Xcel Energy",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "dairyland",
+     "name": "Dairyland Power Cooperative (tenant-in-common, Briggs Road\u2013North Madison segment)",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "Dairyland Power Cooperative (DPC), SMMPA Wisconsin, LLC (SMMPA Wisconsin), and WPPI Energy (WPPI) became co-applicants as tenants-in-common for the 345 kV transmission line segment from the Briggs Road Substation to the North Madison Substation",
+       "supports": "DPC tenant-in-common on Briggs Road\u2013North Madison segment",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "smmpa-wisconsin",
+     "name": "SMMPA Wisconsin, LLC (tenant-in-common, Briggs Road\u2013North Madison segment)",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "Dairyland Power Cooperative (DPC), SMMPA Wisconsin, LLC (SMMPA Wisconsin), and WPPI Energy (WPPI) became co-applicants as tenants-in-common for the 345 kV transmission line segment from the Briggs Road Substation to the North Madison Substation",
+       "supports": "SMMPA Wisconsin tenant-in-common",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "wppi-energy",
+     "name": "WPPI Energy (tenant-in-common, Briggs Road\u2013North Madison segment)",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "Dairyland Power Cooperative (DPC), SMMPA Wisconsin, LLC (SMMPA Wisconsin), and WPPI Energy (WPPI) became co-applicants as tenants-in-common for the 345 kV transmission line segment from the Briggs Road Substation to the North Madison Substation",
+       "supports": "WPPI tenant-in-common",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "complete",
+    "evidence": [
+     {
+      "sourceId": "atc-10yr-2019-completed",
+      "section": "Projects completed since last report",
+      "exactExcerpt": "Transmission projects significantly affecting the system performance that have been completed since the 2018 Assessment was issued in October 2018, include:",
+      "supports": "list header: projects completed since October 2018",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "atc-10yr-2019-completed",
+      "section": "Projects completed since last report",
+      "exactExcerpt": "North Madison - Briggs Road 345-kV line 1, 3",
+      "supports": "North Madison\u2013Briggs Road 345 kV line listed as completed (planning zones 1, 3)",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "atc-10yr-2018-major-projects",
+      "section": "Major projects update > Badger Coulee",
+      "exactExcerpt": "A portion of the project from the Cardinal Substation to the North Madison Substation was placed in service in fall 2017. Developed jointly with Xcel Energy, the line will:",
+      "supports": "Cardinal\u2013North Madison portion in service fall 2017",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "counties": [
+    {
+     "name": "La Crosse County",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision caption",
+       "exactExcerpt": "for Authority to Construct and Operate a New Badger-Coulee 345 kV Transmission Line from the La Crosse Area, in La Crosse County, to the Greater Madison Area in Dane County, Wisconsin",
+       "supports": "La Crosse County endpoint area",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Dane County",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision caption",
+       "exactExcerpt": "for Authority to Construct and Operate a New Badger-Coulee 345 kV Transmission Line from the La Crosse Area, in La Crosse County, to the Greater Madison Area in Dane County, Wisconsin",
+       "supports": "Dane County endpoint area",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Trempealeau County",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Project Description > Briggs Road Substation to Lyndon Station",
+       "exactExcerpt": "Segment N extends north into Trempealeau County to the city of Blair, then east toward the city of Black River Falls.",
+       "supports": "approved Segment N runs into Trempealeau County",
+       "verifiedByScript": true,
+       "page": 20
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "bc-briggs-road-sub",
+     "label": "Briggs Road Substation (town of Onalaska, WI)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 43.953262,
+     "lon": -91.2826922,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 541739865 power=substation name='Briggs Road Substation' operator='Xcel Energy' voltage=345000;161000 (re-checked by Overpass way id)",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "The project, known as the Badger-Coulee project, includes construction of a new 345 kV transmission line and related facilities from the Briggs Road Substation in the town of Onalaska, Wisconsin to the North Madison Substation,",
+       "supports": "western endpoint Briggs Road Substation, town of Onalaska",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "bc-blair-wi",
+     "label": "City of Blair, WI (approved Segment N passes through)",
+     "kind": "locality",
+     "precision": "locality",
+     "lat": 44.2946235,
+     "lon": -91.2338433,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Blair, Trempealeau County, Wisconsin (OSM relation 251764) city centroid; the source says Segment N extends 'to the city of Blair' - exact alignment through/around the city not mapped",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Project Description > Briggs Road Substation to Lyndon Station",
+       "exactExcerpt": "Segment N extends north into Trempealeau County to the city of Blair, then east toward the city of Black River Falls.",
+       "supports": "approved route (Segment N) reaches the city of Blair",
+       "verifiedByScript": true,
+       "page": 20
+      },
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Certificate",
+       "exactExcerpt": "The Commission grants the applicants a CPCN for construction of the Badger-Coulee transmission project using route Segments P with P-east, N, M, K, H with H6-north, G, E, D, and A,",
+       "supports": "Segment N is part of the certificated route",
+       "verifiedByScript": true,
+       "page": 56
+      }
+     ]
+    },
+    {
+     "id": "bc-north-madison-sub",
+     "label": "North Madison Substation (northeast of Waunakee, WI)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 43.2565427,
+     "lon": -89.4163921,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 120735391 power=substation name='North Madison Substation' operator='American Transmission Company' voltage=345000;138000 (re-checked by Overpass way id)",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "northeast of Waunakee, Wisconsin, then extending further south and west to the Cardinal Substation, in the town of Middleton, Wisconsin.",
+       "supports": "North Madison Substation northeast of Waunakee; continues to Cardinal",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Project Description > North Madison Substation to the Town of Springfield",
+       "exactExcerpt": "Segments C and D exit the North Madison Substation located in the town of Vienna and travel about 15.5 miles to a point where the segments cross in the town of Springfield.",
+       "supports": "North Madison Substation is in the town of Vienna",
+       "verifiedByScript": true,
+       "page": 22
+      }
+     ]
+    },
+    {
+     "id": "bc-cardinal-sub",
+     "label": "Cardinal Substation (town of Middleton, WI)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 43.0921976,
+     "lon": -89.5681981,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 686507722 power=substation name='Cardinal Substation' operator='American Transmission Company' voltage=345000;138000 (re-checked by Overpass way id)",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "northeast of Waunakee, Wisconsin, then extending further south and west to the Cardinal Substation, in the town of Middleton, Wisconsin.",
+       "supports": "eastern endpoint Cardinal Substation, town of Middleton",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "Text-described approved route (no map digitized): the PSC certificated Segments P (P-east), N, M, K, H (H6-north), G, E, D and A. Per the decision's segment descriptions, the line runs north from Briggs Road Substation (town of Onalaska) through Holmen along USH 53, across the Black River, north into Trempealeau County to the city of Blair, east toward Black River Falls, then southeast along I-94 past the Camp Douglas vicinity to just north of Lyndon Station, along I-90/94 past Wisconsin Dells toward the I-90/94 / I-39 intersection (town of Caledonia area), across the Wisconsin River, from the town of Dekorra to the town of Vienna and the North Madison Substation, then to the town of Springfield and the Cardinal Substation.",
+    "caveat": "schematic / not survey accurate; waypoints are towns/facilities named in the PSC decision's descriptions of the approved segments, geocoded to locality centroids or OSM substations; straight lines between them do not show the actual alignment; the as-built alignment was not checked against the 2015 decision",
+    "waypoints": [
+     {
+      "name": "Briggs Road Substation",
+      "lat": 43.953262,
+      "lon": -91.2826922,
+      "coordinateSource": "OSM way 541739865 power=substation name='Briggs Road Substation' (Overpass by id, re-checked)"
+     },
+     {
+      "name": "Holmen (village)",
+      "lat": 43.9632211,
+      "lon": -91.2563658,
+      "coordinateSource": "Nominatim: Holmen, La Crosse County, WI (OSM relation 251413) village centroid"
+     },
+     {
+      "name": "Blair (city)",
+      "lat": 44.2946235,
+      "lon": -91.2338433,
+      "coordinateSource": "Nominatim: Blair, Trempealeau County, WI (OSM relation 251764) city centroid"
+     },
+     {
+      "name": "Black River Falls (city; segment heads 'toward' it and joins I-94)",
+      "lat": 44.2952152,
+      "lon": -90.8484137,
+      "coordinateSource": "Nominatim: Black River Falls, Jackson County, WI (OSM relation 251883) city centroid"
+     },
+     {
+      "name": "Camp Douglas (village vicinity)",
+      "lat": 43.9193145,
+      "lon": -90.2681006,
+      "coordinateSource": "Nominatim: Camp Douglas, Juneau County, WI (OSM relation 251529) village centroid"
+     },
+     {
+      "name": "Lyndon Station (village; area boundary 'just north of')",
+      "lat": 43.7117126,
+      "lon": -89.9004665,
+      "coordinateSource": "Nominatim: Lyndon Station, Juneau County, WI (OSM relation 251526) village centroid"
+     },
+     {
+      "name": "Wisconsin Dells (city)",
+      "lat": 43.6256168,
+      "lon": -89.7715646,
+      "coordinateSource": "Nominatim: Wisconsin Dells, WI (OSM relation 251800) city centroid"
+     },
+     {
+      "name": "Town of Caledonia (Columbia County)",
+      "lat": 43.4705425,
+      "lon": -89.5228682,
+      "coordinateSource": "Nominatim: Town of Caledonia, Columbia County, WI (OSM relation 9233817) town centroid"
+     },
+     {
+      "name": "Town of Dekorra (Columbia County)",
+      "lat": 43.457484,
+      "lon": -89.4676199,
+      "coordinateSource": "Nominatim: Town of Dekorra, Columbia County, WI (OSM relation 9233829) town centroid"
+     },
+     {
+      "name": "North Madison Substation (town of Vienna)",
+      "lat": 43.2565427,
+      "lon": -89.4163921,
+      "coordinateSource": "OSM way 120735391 power=substation name='North Madison Substation' (Overpass by id, re-checked)"
+     },
+     {
+      "name": "Town of Springfield (Dane County)",
+      "lat": 43.1715386,
+      "lon": -89.5426165,
+      "coordinateSource": "Nominatim: Town of Springfield, Dane County, WI (OSM relation 4014903) town centroid"
+     },
+     {
+      "name": "Cardinal Substation",
+      "lat": 43.0921976,
+      "lon": -89.5681981,
+      "coordinateSource": "OSM way 686507722 power=substation name='Cardinal Substation' (Overpass by id, re-checked)"
+     }
+    ],
+    "evidence": [
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Certificate",
+      "exactExcerpt": "The Commission grants the applicants a CPCN for construction of the Badger-Coulee transmission project using route Segments P with P-east, N, M, K, H with H6-north, G, E, D, and A,",
+      "supports": "approved segment set",
+      "verifiedByScript": true,
+      "page": 56
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Briggs Road Substation to Lyndon Station",
+      "exactExcerpt": "Segments P and N total approximately 113 miles in length, and extend north from the Briggs Road Substation through the town of Holland and the village of Holmen, along either alternative Segments P-west or P-east.",
+      "supports": "Briggs Road north through Holmen",
+      "verifiedByScript": true,
+      "page": 20
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Briggs Road Substation to Lyndon Station",
+      "exactExcerpt": "Segment N extends north into Trempealeau County to the city of Blair, then east toward the city of Black River Falls.",
+      "supports": "Segment N to Blair then east toward Black River Falls",
+      "verifiedByScript": true,
+      "page": 20
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Briggs Road Substation to Lyndon Station",
+      "exactExcerpt": "At its intersection with U.S. Interstate Highway 94 (I-94), Segment N becomes single-circuited, sharing WisDOT right-of-way (ROW) to the southeast for most of the remainder of the segment.",
+      "supports": "Segment N follows I-94 southeast",
+      "verifiedByScript": true,
+      "page": 20
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Briggs Road Substation to Lyndon Station",
+      "exactExcerpt": "It briefly departs from the interstate corridor in the vicinity of the village of Camp Douglas in order to comply with Department of Defense airspace restrictions for Volk Field.",
+      "supports": "Segment N passes the vicinity of Camp Douglas",
+      "verifiedByScript": true,
+      "page": 20
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Briggs Road Substation to Lyndon Station",
+      "exactExcerpt": "Starting at the Briggs Road Substation in the town of Onalaska and ending just north of Lyndon Station, the route alternatives include Segments P and N or Segment O.",
+      "supports": "first area ends just north of Lyndon Station",
+      "verifiedByScript": true,
+      "page": 20
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Lyndon Station to Wisconsin Dells",
+      "exactExcerpt": "Segment M continues along I-90/94 and would be underbuilt with a lower-voltage electric line (Y-101). (Id.) Segment K runs along the west side of I-90/94;",
+      "supports": "Segments M and K along I-90/94 toward Wisconsin Dells",
+      "verifiedByScript": true,
+      "page": 21
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Wisconsin Dells to the town of Caledonia",
+      "exactExcerpt": "Segment H parallels I-90/94 for a distance of 22 miles to the intersection of I-90/94 and I-39.",
+      "supports": "Segment H toward the I-90/94 / I-39 intersection",
+      "verifiedByScript": true,
+      "page": 21
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Town of Caledonia to the North Madison Substation",
+      "exactExcerpt": "Segment G runs along the east side of I-90/94/39 and across the Wisconsin River.",
+      "supports": "Segment G crosses the Wisconsin River",
+      "verifiedByScript": true,
+      "page": 22
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Town of Caledonia to the North Madison Substation",
+      "exactExcerpt": "Segment E continues along the interstate corridor from the town of Dekorra to the town of Vienna.",
+      "supports": "Segment E Dekorra to Vienna",
+      "verifiedByScript": true,
+      "page": 22
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > North Madison Substation to the Town of Springfield",
+      "exactExcerpt": "Segments C and D exit the North Madison Substation located in the town of Vienna and travel about 15.5 miles to a point where the segments cross in the town of Springfield.",
+      "supports": "Segment D North Madison to town of Springfield",
+      "verifiedByScript": true,
+      "page": 22
+     },
+     {
+      "sourceId": "psc-5-ce-142-final",
+      "section": "Project Description > Town of Springfield to Cardinal Substation",
+      "exactExcerpt": "Segments A and B begin north of Middleton, southeast of the intersection of Riles and Ripp Roads, and end at the Cardinal Substation.",
+      "supports": "Segment A to Cardinal Substation",
+      "verifiedByScript": true,
+      "page": 23
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "psc-5-ce-142-final",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2016-07-01",
+      "latest": "2016-07-31",
+      "precision": "month"
+     },
+     "end": {
+      "earliest": "2018-01-01",
+      "latest": "2018-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "note": "PLANNED (2015) schedule from the Final Decision, not an as-built record. Start (July 2016) is stated explicitly. The end bound is the planned in-service target ('in service by December 2018'; 2018 is 'the projected in-service year'), not a separately stated construction end. Actual construction dates were not found in cached sources; ATC reports a partial in-service in fall 2017. Project is complete and excluded from the candidate queue.",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Project Cost and Construction Schedule",
+       "exactExcerpt": "The applicants intend to begin construction of the proposed project in July 2016, and place the facilities in service by December 2018.",
+       "supports": "planned construction start July 2016; planned in-service by Dec 2018",
+       "verifiedByScript": true,
+       "page": 56
+      },
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Project Description, Purpose, and Cost",
+       "exactExcerpt": "The estimated costs are based on 2018 dollars, the projected in-service year for the proposed project,",
+       "supports": "2018 is the projected in-service year",
+       "verifiedByScript": true,
+       "page": 10
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "psc-5-ce-142-final",
+     "label": "planned in-service (2015 PSC decision; planning target, not a completion record)",
+     "date": {
+      "earliest": "2018-01-01",
+      "latest": "2018-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Project Cost and Construction Schedule",
+       "exactExcerpt": "The applicants intend to begin construction of the proposed project in July 2016, and place the facilities in service by December 2018.",
+       "supports": "planned in-service by December 2018",
+       "verifiedByScript": true,
+       "page": 56
+      }
+     ]
+    },
+    {
+     "claimSourceId": "atc-10yr-2018-major-projects",
+     "label": "partial in-service (Cardinal-North Madison portion), fall 2017",
+     "date": {
+      "earliest": "2017-09-01",
+      "latest": "2017-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "atc-10yr-2018-major-projects",
+       "section": "Major projects update > Badger Coulee",
+       "exactExcerpt": "A portion of the project from the Cardinal Substation to the North Madison Substation was placed in service in fall 2017. Developed jointly with Xcel Energy, the line will:",
+       "supports": "Cardinal\u2013North Madison portion in service fall 2017",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "atc-10yr-2018-major-projects",
+     "label": "expected energization of full line (2018 planning statement, not a completion record)",
+     "date": {
+      "earliest": "2018-09-01",
+      "latest": "2018-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "atc-10yr-2018-major-projects",
+       "section": "Major projects update > Badger Coulee",
+       "exactExcerpt": "This fall, we expect to energize the 180\u2011mile, 345\u2011kV Badger Coulee transmission line, one of MISO\u2019s 17 Multi-Value Projects",
+       "supports": "expected energization fall 2018",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "atc-10yr-2019-completed",
+     "label": "completion (North Madison-Briggs Road 345 kV line listed as completed since the Oct 2018 Assessment; upper bound set conservatively because the 2019 Assessment issue date is not on the page)",
+     "date": {
+      "earliest": "2018-10-01",
+      "latest": "2019-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "atc-10yr-2019-completed",
+       "section": "Projects completed since last report",
+       "exactExcerpt": "Transmission projects significantly affecting the system performance that have been completed since the 2018 Assessment was issued in October 2018, include:",
+       "supports": "completed after October 2018",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "atc-10yr-2019-completed",
+       "section": "Projects completed since last report",
+       "exactExcerpt": "North Madison - Briggs Road 345-kV line 1, 3",
+       "supports": "the completed item is the North Madison\u2013Briggs Road 345 kV line",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "xcel-nspw",
+     "status": "known-joint",
+     "scope": "joint-ownership",
+     "description": "ATC and NSPW (Xcel Energy) were the joint CPCN applicants, and ATC says the line was developed jointly with Xcel Energy. DPC, SMMPA Wisconsin and WPPI became co-applicants as tenants-in-common on the Briggs Road-North Madison segment, with interests derived from NSPW's ownership share. This is joint ownership of one package; no sharing of crews or equipment with other projects is documented.",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "American Transmission Company LLC and Northern States Power Company-Wisconsin (ATC, NSPW, and together as applicants) filed with the Commission an application for a Certificate of Public Convenience and Necessity (CPCN)",
+       "supports": "joint applicants",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "Dairyland Power Cooperative (DPC), SMMPA Wisconsin, LLC (SMMPA Wisconsin), and WPPI Energy (WPPI) became co-applicants as tenants-in-common for the 345 kV transmission line segment from the Briggs Road Substation to the North Madison Substation with their respective ownership interests derived from NSPW\u2019s ownership share.",
+       "supports": "tenants-in-common with interests derived from NSPW's share",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "atc-10yr-2018-major-projects",
+       "section": "Major projects update > Badger Coulee",
+       "exactExcerpt": "A portion of the project from the Cardinal Substation to the North Madison Substation was placed in service in fall 2017. Developed jointly with Xcel Energy, the line will:",
+       "supports": "ATC: developed jointly with Xcel Energy",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 9,
+       "section": "Project Description, Purpose, and Cost",
+       "exactExcerpt": "The applicants propose to construct a new 345 kV transmission line from the Briggs Road Substation to the existing North Madison Substation, and, from there, to the existing Cardinal Substation.",
+       "supports": "345 kV",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Line length (ATC 2018)",
+     "value": "180",
+     "evidence": [
+      {
+       "sourceId": "atc-10yr-2018-major-projects",
+       "section": "Major projects update > Badger Coulee",
+       "exactExcerpt": "This fall, we expect to energize the 180\u2011mile, 345\u2011kV Badger Coulee transmission line, one of MISO\u2019s 17 Multi-Value Projects",
+       "supports": "180-mile line",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Applicants' pre-decision estimate (range depending on route)",
+     "value": "$540 million to $580 million, depending on route",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 5,
+       "section": "Findings of Fact",
+       "exactExcerpt": "the applicants\u2019 estimated cost of the proposed project is between $540 million and $580 million, depending on the route chosen.",
+       "supports": "estimated cost range",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Authorized estimated cost (as modified by the Final Decision)",
+     "value": "$581,433,000",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Certificate",
+       "exactExcerpt": "as described in the final EIS and Ex.-Applicants-Henn-1, and as modified by this Final Decision, at an estimated cost of $581,433,000.",
+       "supports": "authorized estimated cost",
+       "verifiedByScript": true,
+       "page": 56
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "PSC decision",
+     "value": "CPCN approved subject to conditions; Final Decision dated April 23, 2015",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "page": 1,
+       "section": "Final Decision",
+       "exactExcerpt": "The CPCN application is APPROVED subject to conditions and as modified by this Final Decision.",
+       "supports": "CPCN approved",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Order (signature block)",
+       "exactExcerpt": "Dated at Madison, Wisconsin, this 23rd day of April, 2015.",
+       "supports": "decision date",
+       "verifiedByScript": true,
+       "page": 62
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Approved route segments",
+     "value": "P (with P-east), N, M, K, H (with H6-north), G, E, D, A",
+     "evidence": [
+      {
+       "sourceId": "psc-5-ce-142-final",
+       "section": "Certificate",
+       "exactExcerpt": "The Commission grants the applicants a CPCN for construction of the Badger-Coulee transmission project using route Segments P with P-east, N, M, K, H with H6-north, G, E, D, and A,",
+       "supports": "approved segments",
+       "verifiedByScript": true,
+       "page": 56
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "NEGATIVE CONTROL: complete, so it must be excluded from the new-candidate queue by status.",
+    "GEOGRAPHY: the PSC-approved route (Segment N) runs north 'to the city of Blair' before turning east, i.e., through the Blair area where, per other clusters' sources, Dairyland Alma-Blair and Xcel's Western Wisconsin project terminate near the Tremval substation. It is a geographically near but status-excluded control. (The earlier caveat measured only from Briggs Road Substation, about 24 mi / 38 km straight-line from Blair, which understated this.) Whether any newer project connects to the Badger Coulee line is not stated in this cluster's sources.",
+    "The only construction window is the PLANNED 2015 schedule (start July 2016; in service by December 2018). Actual construction start and end dates were not found in cached sources.",
+    "The completion record (ATC 2019) calls it the 'North Madison - Briggs Road 345-kV line', not 'Badger Coulee'. The PSC decision's description of the Briggs Road-North Madison segment is what links the two names.",
+    "The owner set includes dairyland (tenant-in-common on Briggs Road-North Madison, per the 2015 decision), so pairs with other Dairyland projects are shared-owner context. Post-construction ownership was not verified.",
+    "Route is text-derived from the 2015 approved segment descriptions (locality centroids); not an as-built alignment."
+   ]
+  },
+  {
+   "id": "xcel-g2b-north-rochester-marion",
+   "title": "Gopher to Badger Link \u2014 North Rochester to Marion Segment",
+   "shortTitle": "G2B N. Rochester\u2013Marion",
+   "docketId": "MN PUC CN-25-121",
+   "titleEvidence": [
+    {
+     "sourceId": "g2b-home",
+     "section": "North Rochester to Marion Segment",
+     "exactExcerpt": "North Rochester to Marion Segment Xcel Energy is developing approximately 35 miles",
+     "supports": "segment title and developer",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "Xcel Energy is developing this proposed segment of the Gopher to Badger Link (MISO LRTP Tranche 2.1 #26): about 35 miles of new single-circuit 765 kV line from the North Rochester Substation near Pine Island to Marion, Minn. The project website puts pre-construction, construction and restoration in 2030\u20132034, the 2026 factsheet says 2031\u20132034, and in-service is anticipated in 2034.",
+   "parentInitiative": "MISO LRTP Tranche 2.1 Project #26 (Gopher to Badger Link)",
+   "owners": [
+    {
+     "utilityId": "xcel-nspm",
+     "name": "Xcel Energy (operating company not named in sources)",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "North Rochester to Marion Segment",
+       "exactExcerpt": "Xcel Energy is developing approximately 35 miles of a new single-circuit 765 kV transmission line that will run from the North Rochester Substation near Pine Island to Marion, Minn.",
+       "supports": "Xcel Energy develops this segment",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "page": 216,
+       "printedPage": "212",
+       "section": "6.8.1 Needed Projects \u2014 Gopher to Badger Link (LRTP Project #26)",
+       "exactExcerpt": "Gopher to Badger Link LRTP Project #26 MPUC Tracking Number: 2025-SE-N14 Utility: Xcel Energy (XEL) and Dairyland Power Cooperative (DPC)",
+       "supports": "utilities for G2B: Xcel and Dairyland",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "proposed",
+    "asOf": "2026-09-26",
+    "evidence": [
+     {
+      "sourceId": "maribell-project-details",
+      "section": "A Proven Need for Regional Reliability",
+      "exactExcerpt": "Dairyland Power Cooperative with Xcel Energy have submitted an application for a Certificate of Need (CN Docket No. 25-121) to the Minnesota Public Utilities Commission (MPUC) for the Gopher to Badger Link",
+      "supports": "CON application (CN 25-121) submitted; no MPUC decision found in cached sources, so status proposed",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "g2b-overview-factsheet-2026",
+      "page": 2,
+      "section": "Route Options",
+      "exactExcerpt": "we plan to develop a Route Permit application and submit it to the Minnesota Public Utilities Commission this fall.",
+      "supports": "Route Permit application was planned for 'this fall' as of the factsheet (map dated May 2026); filing not confirmed in cached sources",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "g2b-home",
+      "section": "Overview",
+      "exactExcerpt": "The Gopher to Badger Link transmission line project is being proposed to deliver reliable power to homes, farms and businesses across the region",
+      "supports": "project described as proposed",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "MN"
+   ],
+   "counties": [],
+   "places": [
+    {
+     "id": "g2b-north-rochester-sub",
+     "label": "North Rochester Substation (near Pine Island, MN)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.2230622,
+     "lon": -92.6589151,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 352702251 power=substation name='North Rochester Substation' voltage=345000 (no operator tag; re-checked by Overpass way id)",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "North Rochester to Marion Segment",
+       "exactExcerpt": "Xcel Energy is developing approximately 35 miles of a new single-circuit 765 kV transmission line that will run from the North Rochester Substation near Pine Island to Marion, Minn.",
+       "supports": "western endpoint North Rochester Substation near Pine Island",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "page": 217,
+       "printedPage": "213",
+       "section": "6.8.1 Needed Projects \u2014 Gopher to Badger Link (LRTP Project #26)",
+       "exactExcerpt": "The Project consists of a (1) single-circuit 765 kV high voltage transmission line between the existing North Rochester Substation and a point near Marion, Minnesota;",
+       "supports": "existing North Rochester Substation endpoint",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "g2b-marion-mn",
+     "label": "Marion, Minn. (segment end / junction with MariBell)",
+     "kind": "locality",
+     "precision": "locality",
+     "lat": 43.943575,
+     "lon": -92.3482255,
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim: Marion, Marion Township, Olmsted County, Minnesota (OSM node 151384179, place=village); the source only says 'a point near Marion'",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "page": 217,
+       "printedPage": "213",
+       "section": "6.8.1 Needed Projects \u2014 Gopher to Badger Link (LRTP Project #26)",
+       "exactExcerpt": "The Project consists of a (1) single-circuit 765 kV high voltage transmission line between the existing North Rochester Substation and a point near Marion, Minnesota;",
+       "supports": "eastern end is a point near Marion",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "No final route. The 2026 factsheet map (Route Options as of May 2026) shows only 'Preliminary Route Options' and 'Previously Considered Options' for this segment, and the Route Permit application was still planned for fall. Not digitized.",
+    "evidence": [
+     {
+      "sourceId": "g2b-overview-factsheet-2026",
+      "page": 2,
+      "section": "Route Options",
+      "exactExcerpt": "The map above reflects the Route Options as of May 2026.",
+      "supports": "only preliminary route options mapped",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "g2b-overview-factsheet-2026",
+      "page": 2,
+      "section": "Route Options",
+      "exactExcerpt": "we plan to develop a Route Permit application and submit it to the Minnesota Public Utilities Commission this fall.",
+      "supports": "route permit not yet filed",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "g2b-overview-factsheet-2026",
+      "section": "Route Options",
+      "exactExcerpt": "For the North Rochester to Marion segment, the project team reviewed comments we\u2019ve received and refined the preliminary route options that were shared in January.",
+      "supports": "segment still at preliminary route options",
+      "verifiedByScript": true,
+      "page": 2
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "g2b-home",
+     "phase": "unknown",
+     "start": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "Project-wide Gopher to Badger Link schedule row '2030-2034: Pre-construction activities / Construction / Restoration'. The row mixes pre-construction, construction and restoration, so phase is 'unknown' and continuous=false: construction proper lies somewhere inside 2030-2034 but its own start/end are not stated. Planning-level estimate; the page says the schedule will be updated.",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "Anticipated Schedule",
+       "exactExcerpt": "2030-2034 4 Pre-construction activities Construction Restoration 2034 5 Anticipated in-service",
+       "supports": "G2B schedule row 2030\u20132034 mixing pre-construction, construction and restoration",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "g2b-overview-factsheet-2026",
+     "phase": "unknown",
+     "start": {
+      "earliest": "2031-01-01",
+      "latest": "2031-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "2026 factsheet row '2031-2034: Pre-construction activities / Construction / Restoration' (same mixed bucket, phase 'unknown', continuous=false). Conflicts with the website's 2030 start; both kept.",
+     "evidence": [
+      {
+       "sourceId": "g2b-overview-factsheet-2026",
+       "page": 1,
+       "section": "Anticipated Schedule",
+       "exactExcerpt": "2031-2034 \u2022 Pre-construction activities \u2022 Construction \u2022 Restoration 2034 \u2022 Anticipated in-service",
+       "supports": "G2B schedule row 2031\u20132034 mixing pre-construction, construction and restoration",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "g2b-home",
+     "label": "anticipated in-service",
+     "date": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "Anticipated Schedule",
+       "exactExcerpt": "2030-2034 4 Pre-construction activities Construction Restoration 2034 5 Anticipated in-service",
+       "supports": "in-service 2034",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "g2b-overview-factsheet-2026",
+     "label": "anticipated in-service",
+     "date": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "g2b-overview-factsheet-2026",
+       "page": 1,
+       "section": "Anticipated Schedule",
+       "exactExcerpt": "2031-2034 \u2022 Pre-construction activities \u2022 Construction \u2022 Restoration 2034 \u2022 Anticipated in-service",
+       "supports": "in-service 2034",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "mn-biennial-2025-pdf",
+     "label": "planned in-service",
+     "date": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "page": 217,
+       "printedPage": "213",
+       "section": "6.8.1 Needed Projects \u2014 Gopher to Badger Link (LRTP Project #26)",
+       "exactExcerpt": "Schedule: The Project planned to be in-service in 2034.",
+       "supports": "in-service 2034",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "dpc-glh-maribell",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "Xcel and Dairyland are developing separate segments of the one Gopher to Badger Link 765 kV line and filed the Minnesota Certificate of Need application (CN 25-121) together. The two segments meet near Marion. The sources do not describe any sharing of construction crews or resources.",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "Overview",
+       "exactExcerpt": "Dairyland Power Cooperative and Xcel Energy will develop separate segments of this new 765 kilovolt (kV) transmission line, which will run from eastern Minnesota to the Mississippi River.",
+       "supports": "separate segments of one initiative",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "maribell-project-details",
+       "section": "A Proven Need for Regional Reliability",
+       "exactExcerpt": "Dairyland Power Cooperative with Xcel Energy have submitted an application for a Certificate of Need (CN Docket No. 25-121) to the Minnesota Public Utilities Commission (MPUC) for the Gopher to Badger Link",
+       "supports": "joint CON application",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "765",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "North Rochester to Marion Segment",
+       "exactExcerpt": "Xcel Energy is developing approximately 35 miles of a new single-circuit 765 kV transmission line that will run from the North Rochester Substation near Pine Island to Marion, Minn.",
+       "supports": "765 kV single circuit",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Segment length",
+     "value": "approximately 35",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "North Rochester to Marion Segment",
+       "exactExcerpt": "Xcel Energy is developing approximately 35 miles of a new single-circuit 765 kV transmission line that will run from the North Rochester Substation near Pine Island to Marion, Minn.",
+       "supports": "approximately 35 miles",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "MISO planning basis",
+     "value": "MISO LRTP Tranche 2.1",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "page": 217,
+       "printedPage": "213",
+       "section": "6.8.1 Needed Projects \u2014 Gopher to Badger Link (LRTP Project #26)",
+       "exactExcerpt": "The Project was studied, reviewed, and approved as part of the MISO LRTP Tranche 2.1 Portfolio.",
+       "supports": "LRTP Tranche 2.1",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mn-biennial-2025-ch10",
+       "section": "10.3 Tranche 2.1",
+       "exactExcerpt": "Gopher to Badger Link Project (LRTP#26): Commission Docket Number CN-25- 121",
+       "supports": "LRTP #26 and MN docket CN-25-121",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Other project at North Rochester Substation",
+     "value": "Xcel's Mankato-Mississippi River project adds new 161 kV lines from North Rochester Substation (not modeled in this cluster)",
+     "evidence": [
+      {
+       "sourceId": "g2b-library",
+       "section": "Other Area Projects > Mankato-Mississippi River Transmission Project",
+       "exactExcerpt": "includes building about 20 miles of new 161 kV transmission lines between the existing North Rochester Substation near Pine Island and an existing transmission line northeast of Rochester,",
+       "supports": "MMRT work at North Rochester Substation",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "Intended as the 'same region, non-overlapping construction years' (GEO-only) control, but it does NOT meet that case at the default 25-mi threshold: straight-line distance is about 37 mi (60 km) from Alma to North Rochester Substation and about 34 mi (54 km) from Alma to Marion (computed here from OSM/Nominatim points). GEO would be no-match at 25 mi; it only becomes a GEO candidate at a threshold of roughly 40 mi or more.",
+    "Both published schedule buckets (2030-2034 and 2031-2034) fall entirely after 2026-2027, so TIME against a 2026-27 project should be no-match.",
+    "The schedule buckets are Gopher to Badger Link-wide and mix pre-construction, construction and restoration; they are recorded with phase 'unknown' and continuous=false.",
+    "The owner id xcel-nspm is a normalization: the sources say only 'Xcel Energy'.",
+    "Xcel's Mankato-Mississippi River project also has work at North Rochester Substation (per g2b-library); it is not modeled in this cluster and shares the Xcel owner."
+   ]
+  },
+  {
+   "id": "dpc-glh-maribell",
+   "title": "MariBell Transmission Project",
+   "shortTitle": "MariBell 765/161 kV",
+   "docketId": "MN PUC CN-25-121 (Minnesota portion, filed as Gopher to Badger Link); Wisconsin CPCN not yet filed",
+   "titleEvidence": [
+    {
+     "sourceId": "maribell-home",
+     "section": "Introducing the MariBell Transmission Project",
+     "exactExcerpt": "The proposed MariBell Transmission Project is an approximately 140-mile, 765 kilovolt (kV)/161 kV double circuit transmission line developed by American-owned companies, Dairyland Power Cooperative and GridLiance Heartland.",
+     "supports": "project title",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "A proposed double-circuit 765/161 kV line of about 140 miles, developed by Dairyland Power Cooperative and GridLiance Heartland, from Marion, Minn., to Bell Center, Wis. It crosses Olmsted, Mower, Fillmore and Houston counties in Minnesota and Vernon and Crawford counties in Wisconsin, with construction estimated for 2031\u20132034 and in-service by 2034.",
+   "parentInitiative": "Gopher to Badger Link (MISO LRTP Tranche 2.1 Project #26) for the Minnesota segment; the cached sources do not say which MISO project the ~32-mile Wisconsin segment belongs to",
+   "owners": [
+    {
+     "utilityId": "dairyland",
+     "name": "Dairyland Power Cooperative",
+     "evidence": [
+      {
+       "sourceId": "maribell-project-details",
+       "section": "The Power of Partnership",
+       "exactExcerpt": "The MariBell Transmission Project is a joint development by American-owned companies, Dairyland Power Cooperative and GridLiance Heartland.",
+       "supports": "Dairyland is joint developer",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "gridliance-heartland",
+     "name": "GridLiance Heartland LLC (NextEra Energy Transmission subsidiary)",
+     "evidence": [
+      {
+       "sourceId": "maribell-project-details",
+       "section": "The Power of Partnership",
+       "exactExcerpt": "The MariBell Transmission Project is a joint development by American-owned companies, Dairyland Power Cooperative and GridLiance Heartland.",
+       "supports": "GridLiance Heartland is joint developer",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "g2b-library",
+       "section": "Other Area Projects > MariBell Transmission Line Project",
+       "exactExcerpt": "Dairyland Power Cooperative and its development partner Gridliance Heartland are developing the MariBell segment of the project, which will extend from Marion to the Mississippi River.",
+       "supports": "GridLiance Heartland is Dairyland's development partner",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "maribell-project-details",
+       "section": "The Power of Partnership",
+       "exactExcerpt": "A subsidiary of NextEra Energy Transmission, GridLiance Heartland and affiliated companies have over 3,100 miles of transmission lines in development and operation across North America.",
+       "supports": "GridLiance Heartland is a NextEra Energy Transmission subsidiary",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "proposed",
+    "asOf": "2026-09-26",
+    "evidence": [
+     {
+      "sourceId": "maribell-home",
+      "section": "Introducing the MariBell Transmission Project",
+      "exactExcerpt": "The proposed MariBell Transmission Project is an approximately 140-mile, 765 kilovolt (kV)/161 kV double circuit transmission line developed by American-owned companies, Dairyland Power Cooperative and GridLiance Heartland.",
+      "supports": "described as proposed",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "maribell-wisconsin-regulatory-process",
+      "section": "File Certificate of Public Convenience and Necessity Application",
+      "exactExcerpt": "We anticipate filing in the 4th quarter of 2026.",
+      "supports": "Wisconsin CPCN filing anticipated Q4 2026 (page footer (c)2025); not yet filed per cached sources",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "maribell-project-details",
+      "section": "A Proven Need for Regional Reliability",
+      "exactExcerpt": "The companies plan to submit a Route Permit application to the MPUC in the fall that will determine the transmission line\u2019s location.",
+      "supports": "Minnesota Route Permit application planned for 'the fall'; filing not confirmed in cached sources",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "maribell-project-details",
+      "section": "A Proven Need for Regional Reliability",
+      "exactExcerpt": "for the Gopher to Badger Link, which includes the Minnesota segment of the Maribell transmission line.",
+      "supports": "MN segment is inside the pending G2B Certificate of Need application",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "MN",
+    "WI"
+   ],
+   "counties": [
+    {
+     "name": "Olmsted County",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "crosses Olmsted County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Mower County",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "crosses Mower County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Fillmore County",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "crosses Fillmore County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Houston County",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "crosses Houston County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Vernon County",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "maribell-wisconsin-regulatory-process",
+       "section": "Wisconsin",
+       "exactExcerpt": "The Wisconsin segment of the proposed MariBell Transmission Project would span approximately 32 miles across portions of Vernon and Crawford counties following an existing transmission corridor.",
+       "supports": "Wisconsin segment in Vernon County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Crawford County",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "maribell-wisconsin-regulatory-process",
+       "section": "Wisconsin",
+       "exactExcerpt": "The Wisconsin segment of the proposed MariBell Transmission Project would span approximately 32 miles across portions of Vernon and Crawford counties following an existing transmission corridor.",
+       "supports": "Wisconsin segment in Crawford County",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "mb-marion-mn",
+     "label": "Marion, Minn. (western end / junction with Xcel segment)",
+     "kind": "locality",
+     "precision": "locality",
+     "lat": 43.943575,
+     "lon": -92.3482255,
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim: Marion, Marion Township, Olmsted County, Minnesota (OSM node 151384179, place=village)",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "western end Marion, Minn.",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "mb-bell-center-wi",
+     "label": "Bell Center, Wis. (eastern end)",
+     "kind": "locality",
+     "precision": "locality",
+     "lat": 43.29157,
+     "lon": -90.8272997,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Bell Center, Crawford County, Wisconsin (OSM relation 242237) village centroid",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "eastern end Bell Center, Wis.",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "mb-houston-county-switching-station",
+     "label": "New 161 kV switching station, Houston County, MN (site not identified)",
+     "kind": "switching-station",
+     "precision": "county",
+     "lat": 43.6624222,
+     "lon": -91.4685617,
+     "uncertaintyMeters": 30000,
+     "coordinateSource": "Nominatim: Houston County, Minnesota (OSM relation 1792815) county centroid; the source says the specific location has not been identified; uncertainty = max distance from the Nominatim point to the county bounding-box corners",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "page": 217,
+       "printedPage": "213",
+       "section": "6.8.1 Needed Projects \u2014 Gopher to Badger Link (LRTP Project #26)",
+       "exactExcerpt": "a new three-circuit breaker 161 kV switching station in Houston County, Minnesota; a specific location has not yet been identified.",
+       "supports": "county-only location of new switching station",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "mb-olmsted-county",
+     "label": "Olmsted County, MN (corridor county)",
+     "kind": "county",
+     "precision": "county",
+     "lat": 43.9997437,
+     "lon": -92.3767816,
+     "uncertaintyMeters": 34000,
+     "coordinateSource": "Nominatim: Olmsted County, Minnesota (OSM relation 1797828) county centroid; uncertainty = max distance from the Nominatim point to the county bounding-box corners",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "Olmsted County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "mb-mower-county",
+     "label": "Mower County, MN (corridor county)",
+     "kind": "county",
+     "precision": "county",
+     "lat": 43.6832277,
+     "lon": -92.753704,
+     "uncertaintyMeters": 32000,
+     "coordinateSource": "Nominatim: Mower County, Minnesota (OSM relation 1792988) county centroid; uncertainty = max distance from the Nominatim point to the county bounding-box corners",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "Mower County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "mb-fillmore-county",
+     "label": "Fillmore County, MN (corridor county)",
+     "kind": "county",
+     "precision": "county",
+     "lat": 43.6466588,
+     "lon": -92.0636359,
+     "uncertaintyMeters": 38000,
+     "coordinateSource": "Nominatim: Fillmore County, Minnesota (OSM relation 1792813) county centroid; uncertainty = max distance from the Nominatim point to the county bounding-box corners",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "Fillmore County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "mb-houston-county",
+     "label": "Houston County, MN (corridor county)",
+     "kind": "county",
+     "precision": "county",
+     "lat": 43.6624222,
+     "lon": -91.4685617,
+     "uncertaintyMeters": 30000,
+     "coordinateSource": "Nominatim: Houston County, Minnesota (OSM relation 1792815) county centroid; uncertainty = max distance from the Nominatim point to the county bounding-box corners",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "It will stretch from Marion, Minn., to Bell Center, Wis., crossing through Olmsted, Mower, Fillmore and Houston counties in Minnesota, and Vernon and Crawford counties in Wisconsin.",
+       "supports": "Houston County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "mb-vernon-county",
+     "label": "Vernon County, WI (Wisconsin segment county)",
+     "kind": "county",
+     "precision": "county",
+     "lat": 43.5811229,
+     "lon": -90.8231247,
+     "uncertaintyMeters": 45000,
+     "coordinateSource": "Nominatim: Vernon County, Wisconsin (OSM relation 1792817) county centroid; uncertainty = max distance from the Nominatim point to the county bounding-box corners",
+     "evidence": [
+      {
+       "sourceId": "maribell-wisconsin-regulatory-process",
+       "section": "Wisconsin",
+       "exactExcerpt": "The Wisconsin segment of the proposed MariBell Transmission Project would span approximately 32 miles across portions of Vernon and Crawford counties following an existing transmission corridor.",
+       "supports": "Vernon County",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "mb-crawford-county",
+     "label": "Crawford County, WI (Wisconsin segment county)",
+     "kind": "county",
+     "precision": "county",
+     "lat": 43.2271639,
+     "lon": -90.8938474,
+     "uncertaintyMeters": 37000,
+     "coordinateSource": "Nominatim: Crawford County, Wisconsin (OSM relation 1792812) county centroid; uncertainty = max distance from the Nominatim point to the county bounding-box corners",
+     "evidence": [
+      {
+       "sourceId": "maribell-wisconsin-regulatory-process",
+       "section": "Wisconsin",
+       "exactExcerpt": "The Wisconsin segment of the proposed MariBell Transmission Project would span approximately 32 miles across portions of Vernon and Crawford counties following an existing transmission corridor.",
+       "supports": "Crawford County",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "Not digitized. Text gives only counties, the endpoints (Marion, Bell Center), and that the route generally follows the existing 161 kV corridor. The May 2026 G2B factsheet map shows a small-scale green 'Proposed Route' for the Minnesota segment that, read visually, runs south-west from the end of Xcel's options in Olmsted County toward the Minnesota-Iowa border and then east close to that border to the Mississippi River; the map names no towns, so no waypoints could be geocoded. The Wisconsin segment (about 32 miles, Vernon and Crawford counties, existing corridor) is not mapped in cached sources, and the Mississippi River crossing point is not stated in text. MN Route Permit and WI CPCN applications had not been filed as of the cached pages.",
+    "evidence": [
+     {
+      "sourceId": "g2b-overview-factsheet-2026",
+      "page": 2,
+      "section": "Route Options",
+      "exactExcerpt": "For the MariBell Segment (Marion to Mississippi River), we still anticipate proposing a route option that generally follows the existing 161 kV corridor.",
+      "supports": "route described only as following an existing corridor",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "g2b-overview-factsheet-2026",
+      "page": 2,
+      "section": "Route Options",
+      "exactExcerpt": "The map above reflects the Route Options as of May 2026.",
+      "supports": "map shows pre-application options only",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "maribell-project-details",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2031-01-01",
+      "latest": "2031-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "note": "'2031 - 2034 Project Construction'. The page says the timeline is an estimate and subject to change.",
+     "evidence": [
+      {
+       "sourceId": "maribell-project-details",
+       "section": "Project Timeline",
+       "exactExcerpt": "The timeline is an estimate and is subject to change as the project develops. 2025 - 2031 Public / Landowner Outreach & Permitting 2031 - 2034 Project Construction 2034 Project In Service",
+       "supports": "construction 2031\u20132034",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "g2b-home",
+     "phase": "unknown",
+     "start": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "Gopher to Badger Link-wide row '2030-2034: Pre-construction activities / Construction / Restoration' (phase 'unknown', continuous=false). The G2B site says Wisconsin follows a separate regulatory process; whether this row also covers MariBell's Wisconsin segment is not stated. Conflicts with MariBell's own 2031 construction start; both kept.",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "Anticipated Schedule",
+       "exactExcerpt": "2030-2034 4 Pre-construction activities Construction Restoration 2034 5 Anticipated in-service",
+       "supports": "G2B schedule row 2030\u20132034 mixing pre-construction, construction and restoration",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "g2b-home",
+       "section": "Anticipated Schedule",
+       "exactExcerpt": "*Wisconsin will follow a separate regulatory process. For the proposed timeline for that process, please visit the MariBell Transmission Project website.",
+       "supports": "G2B schedule defers Wisconsin timeline to MariBell site",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "g2b-overview-factsheet-2026",
+     "phase": "unknown",
+     "start": {
+      "earliest": "2031-01-01",
+      "latest": "2031-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "Gopher to Badger Link 2026 factsheet row '2031-2034: Pre-construction activities / Construction / Restoration' (phase 'unknown', continuous=false); same Wisconsin-coverage caveat.",
+     "evidence": [
+      {
+       "sourceId": "g2b-overview-factsheet-2026",
+       "page": 1,
+       "section": "Anticipated Schedule",
+       "exactExcerpt": "2031-2034 \u2022 Pre-construction activities \u2022 Construction \u2022 Restoration 2034 \u2022 Anticipated in-service",
+       "supports": "G2B schedule row 2031\u20132034 mixing pre-construction, construction and restoration",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "maribell-home",
+     "label": "expected in-service",
+     "date": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "MariBell is expected to be in service by 2034.",
+       "supports": "in service by 2034",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "maribell-project-details",
+     "label": "project in service",
+     "date": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "maribell-project-details",
+       "section": "Project Timeline",
+       "exactExcerpt": "The timeline is an estimate and is subject to change as the project develops. 2025 - 2031 Public / Landowner Outreach & Permitting 2031 - 2034 Project Construction 2034 Project In Service",
+       "supports": "in service 2034",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "mn-biennial-2025-pdf",
+     "label": "planned in-service (Gopher to Badger Link)",
+     "date": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "page": 217,
+       "printedPage": "213",
+       "section": "6.8.1 Needed Projects \u2014 Gopher to Badger Link (LRTP Project #26)",
+       "exactExcerpt": "Schedule: The Project planned to be in-service in 2034.",
+       "supports": "in-service 2034",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "xcel-g2b-north-rochester-marion",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "Dairyland (MariBell, Marion to Mississippi River) and Xcel (North Rochester to Marion) are developing separate segments of the Gopher to Badger Link and filed the Minnesota CON (CN 25-121) together. The segments meet near Marion. No resource sharing is documented.",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "MariBell Segment (Marion to Mississippi River)",
+       "exactExcerpt": "Dairyland Power Cooperative is developing the MariBell segment of the project, which will extend from Marion to the Mississippi River.",
+       "supports": "Dairyland segment of G2B",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "maribell-project-details",
+       "section": "A Proven Need for Regional Reliability",
+       "exactExcerpt": "Dairyland Power Cooperative with Xcel Energy have submitted an application for a Certificate of Need (CN Docket No. 25-121) to the Minnesota Public Utilities Commission (MPUC) for the Gopher to Badger Link",
+       "supports": "joint CON application",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "765/161 (double circuit)",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "The proposed MariBell Transmission Project is an approximately 140-mile, 765 kilovolt (kV)/161 kV double circuit transmission line developed by American-owned companies, Dairyland Power Cooperative and GridLiance Heartland.",
+       "supports": "765/161 kV double circuit",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Total length",
+     "value": "approximately 140",
+     "evidence": [
+      {
+       "sourceId": "maribell-home",
+       "section": "Introducing the MariBell Transmission Project",
+       "exactExcerpt": "The proposed MariBell Transmission Project is an approximately 140-mile, 765 kilovolt (kV)/161 kV double circuit transmission line developed by American-owned companies, Dairyland Power Cooperative and GridLiance Heartland.",
+       "supports": "approximately 140 miles",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Wisconsin segment length",
+     "value": "approximately 32 miles",
+     "evidence": [
+      {
+       "sourceId": "maribell-wisconsin-regulatory-process",
+       "section": "Wisconsin",
+       "exactExcerpt": "The Wisconsin segment of the proposed MariBell Transmission Project would span approximately 32 miles across portions of Vernon and Crawford counties following an existing transmission corridor.",
+       "supports": "32-mile Wisconsin segment",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Wisconsin CPCN filing (planned)",
+     "value": "Q4 2026, by Dairyland",
+     "evidence": [
+      {
+       "sourceId": "maribell-wisconsin-regulatory-process",
+       "section": "File Certificate of Public Convenience and Necessity Application",
+       "exactExcerpt": "The regulatory review process will begin when Dairyland submits its application for a Certificate of Public Convenience and Necessity (CPCN).",
+       "supports": "Dairyland is the WI CPCN applicant",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "maribell-wisconsin-regulatory-process",
+       "section": "File Certificate of Public Convenience and Necessity Application",
+       "exactExcerpt": "We anticipate filing in the 4th quarter of 2026.",
+       "supports": "filing Q4 2026",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Minnesota segment scope",
+     "value": "Replaces an existing 161 kV line with a 765/161 kV double-circuit line from near Marion to the Wisconsin border",
+     "evidence": [
+      {
+       "sourceId": "g2b-home",
+       "section": "MariBell Segment (Marion to Mississippi River)",
+       "exactExcerpt": "This segment consists of replacing an existing 161 kV transmission line with a new 765/161 kV double-circuit transmission line.",
+       "supports": "replacement of an existing 161 kV line",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "section": "6.8.1 Needed Projects \u2014 Gopher to Badger Link (LRTP Project #26)",
+       "exactExcerpt": "(2) a 765 kV/161 kV double-circuit high voltage transmission line from near Marion, Minnesota, to the Wisconsin border;",
+       "supports": "G2B component from near Marion to the Wisconsin border",
+       "verifiedByScript": true,
+       "page": 217,
+       "printedPage": "213"
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "COARSE-GEOGRAPHY case: the published text places the line only by six counties plus two endpoint towns (Marion, Bell Center). The new Houston County 161 kV switching station is truly county-only (site 'not yet identified'). Engines should produce at most 'possible GEO' and no precise mileage.",
+    "County-centroid geometry can create a spurious 'possible GEO' toward the Blair area: the Houston County, MN centroid is about 45 mi (73 km) from Blair, and after subtracting the 30-km county uncertainty and the other project's uncertainty the lower-bound distance can drop under 25 mi, while the factsheet schematic places the Minnesota route along the Minnesota-Iowa border, much farther south. Treat any such flag as coarse-geography only.",
+    "All published construction windows (2030/2031-2034) fall after 2026-2027, so this is also a no-TIME control against 2026-27 projects.",
+    "The biennial report attributes the Houston County switching station to the Gopher to Badger Link as a whole. Assigning it to the MariBell segment is inferred from geography (Xcel's segment ends near Marion in Olmsted County; Houston County is on MariBell's county list).",
+    "The sources say 'developed by' and 'joint development'. They do not describe ownership shares or final ownership.",
+    "Includes Dairyland, so pairs with Dairyland Alma-Blair are shared-owner context, not a cross-utility lead.",
+    "POSSIBLE DUPLICATE across clusters: the beci-columbia cluster models 'dpc-genoa-bell-center-765-beci-related' (MISO facility 50948: DPC replaces existing 161 kV structures from the MN/WI state line at the existing Genoa river crossing to near Bell Center with 161/765 kV double-circuit structures). That scope looks like MariBell's ~32-mile Wisconsin segment, but no cached source says they are the same package. Reconcile before pair generation."
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "projectA": "chc-cardinal-hickory-creek",
+   "projectB": "badger-coulee-345kv",
+   "kind": "shared-site",
+   "siteLabel": "Cardinal Substation (town of Middleton, WI)",
+   "description": "Both completed 345 kV lines end at the Cardinal Substation near Middleton, Wisconsin. Both are complete (archive, not candidate queue), and their owner sets overlap (ATC and Dairyland are owners of both), so this is shared-owner context as well.",
+   "evidence": [
+    {
+     "sourceId": "psc-5-ce-142-final",
+     "page": 1,
+     "section": "Final Decision",
+     "exactExcerpt": "northeast of Waunakee, Wisconsin, then extending further south and west to the Cardinal Substation, in the town of Middleton, Wisconsin.",
+     "supports": "Badger-Coulee terminates at Cardinal Substation",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "dairyland-chc-energized",
+     "section": "Cardinal-Hickory Creek Transmission Line Energized",
+     "exactExcerpt": "The eastern segment, built and operated by ATC, connects the Hill Valley Substation to the Cardinal Substation near Middleton, Wisconsin, and became operational in December 2023.",
+     "supports": "Cardinal-Hickory Creek terminates at Cardinal Substation",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "xcel-g2b-north-rochester-marion",
+   "projectB": "dpc-glh-maribell",
+   "kind": "same-initiative",
+   "siteLabel": "Marion, Minn. (segment junction)",
+   "description": "Two owner-specific segments of the Gopher to Badger Link (MISO LRTP Tranche 2.1 #26): Xcel is developing North Rochester to Marion; Dairyland (with development partner GridLiance Heartland) is developing MariBell from Marion to the Mississippi River and on to Bell Center, Wis. Dairyland and Xcel submitted the Minnesota Certificate of Need application together (CN 25-121), and the segments meet near Marion. Known joint initiative; no sharing of crews or equipment is documented.",
+   "evidence": [
+    {
+     "sourceId": "g2b-home",
+     "section": "Overview",
+     "exactExcerpt": "Dairyland Power Cooperative and Xcel Energy will develop separate segments of this new 765 kilovolt (kV) transmission line, which will run from eastern Minnesota to the Mississippi River.",
+     "supports": "separate segments of one initiative",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "g2b-home",
+     "section": "North Rochester to Marion Segment",
+     "exactExcerpt": "Xcel Energy is developing approximately 35 miles of a new single-circuit 765 kV transmission line that will run from the North Rochester Substation near Pine Island to Marion, Minn.",
+     "supports": "Xcel segment ends at Marion",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "g2b-home",
+     "section": "MariBell Segment (Marion to Mississippi River)",
+     "exactExcerpt": "Dairyland Power Cooperative is developing the MariBell segment of the project, which will extend from Marion to the Mississippi River.",
+     "supports": "MariBell starts at Marion",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "maribell-project-details",
+     "section": "A Proven Need for Regional Reliability",
+     "exactExcerpt": "Dairyland Power Cooperative with Xcel Energy have submitted an application for a Certificate of Need (CN Docket No. 25-121) to the Minnesota Public Utilities Commission (MPUC) for the Gopher to Badger Link",
+     "supports": "joint Certificate of Need application",
+     "verifiedByScript": true
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "plan.md \u00a78 test-matrix row 'Same region, nonoverlapping construction years -> GEO only' is NOT supported by this cluster at the default 25-mi threshold. The best non-Dairyland candidate, Xcel's Gopher to Badger Link North Rochester-Marion segment (schedule buckets 2030-2034 / 2031-2034), is about 34-37 mi straight-line from Alma (computed from OSM/Nominatim points). No non-Dairyland project within 25 mi of Alma/Blair/La Crosse/Eau Claire with a published post-2027 construction window was found.",
+  "Candidates reviewed and rejected for that row. Verified in cached mn-biennial-2025-pdf p.214 (printed 210): Xcel Rebuild Wabasha Substation (2025-SE-N11) gives only 'planned to be in service by December of 2028' (no construction window); Xcel 0774 Goodview-Str 444 rebuild (2025-SE-N10) 'expected to be completed by December of 2025'. NOT verifiable (ATC pages viewed by the researcher but not cached): Grant County Distribution Interconnection and Pittsville Area DIC schedules - treat those statements as unverified.",
+  "Xcel's Mankato-Mississippi River (MMRT) project is not modeled in this cluster. It is cached by another researcher (xcel-mmrt-* sources); g2b-library says MMRT adds ~20 miles of new 161 kV lines from North Rochester Substation, so it shares a site (and the Xcel owner) with the G2B Xcel segment.",
+  "plan.md \u00a78 row 'County-only geography -> possible GEO' is only partly represented by MariBell: the text names endpoint towns (Marion, Bell Center), and the May 2026 G2B factsheet map shows a schematic green 'Proposed Route' for the Minnesota segment (read visually: south-west from Olmsted County toward the MN-Iowa border, then east near the border to the Mississippi). The map names no towns, so it was not digitized. Only the Houston County 161 kV switching station is truly county-only ('a specific location has not yet been identified').",
+  "Schedule conflict inside Gopher to Badger Link: the website says '2030-2034 Pre-construction activities / Construction / Restoration'; the 2026 factsheet says 2031-2034; MariBell's own page says '2031 - 2034 Project Construction'. All claims kept; the mixed G2B buckets are recorded as phase 'unknown', continuous=false. All sources agree on 2034 in-service.",
+  "Gopher to Badger Link status as of 2026-09-26: the Certificate of Need (CN 25-121) was submitted; no MPUC decision was found in cached sources. The Minnesota Route Permit application was planned for 'this fall' (factsheet, map dated May 2026) and MariBell's Wisconsin CPCN for Q4 2026; neither filing is confirmed in cached sources.",
+  "The Gopher to Badger Link website says it 'will be coordinated with another project in Wisconsin'. That project is not named in the cached sources.",
+  "POSSIBLE CROSS-CLUSTER DUPLICATE: the beci-columbia cluster's 'dpc-genoa-bell-center-765-beci-related' (MISO BECI scope 2025 p.27, facility 50948: DPC replaces existing single-circuit 161 kV structures from the MN/WI state line at the existing Genoa river crossing to near Bell Center with 161/765 kV double-circuit structures; facility 50953 Bell Center Substation) looks like MariBell's ~32-mile Wisconsin segment (Vernon and Crawford counties, existing corridor, ends at Bell Center). No cached source states they are the same work package. Reconcile before pair generation so the same Dairyland work is not counted twice.",
+  "MariBell's MISO affiliation is only sourced for the Minnesota segment (inside the G2B / LRTP #26 Certificate of Need). Which MISO project the Wisconsin segment belongs to is not stated in this cluster's sources (the BECI cluster ties facilities 50948/50953 to the BECI facility set).",
+  "Owner id normalization: the G2B sources say only 'Xcel Energy'; mapped to xcel-nspm based on the Minnesota location (needs confirmation). New ids introduced: gridliance-heartland, smmpa-wisconsin, wppi-energy.",
+  "MariBell: the sources say 'joint development' / 'developed by' Dairyland and GridLiance Heartland; ownership shares and final owner structure are not stated. Dairyland alone is named as the Wisconsin CPCN applicant. No Wisconsin PSC docket exists in cached sources.",
+  "G2B North Rochester-Marion segment: no county is named for this segment in cached text (Marion is in Olmsted County per the geocoder only), so counties is left empty.",
+  "Cardinal-Hickory Creek: Wisconsin docket 5-CE-146 (decision Sept. 26, 2019) is now sourced from a footnote in the cached Alma-Blair Final Decision (psc-1515-ce-103-final p.21), but the 5-CE-146 decision itself and the joint project site (cardinal-hickorycreek.com returned HTTP 401) are not cached. Route is four text waypoints only; no official map digitized.",
+  "Cardinal-Hickory Creek is modeled as one co-owned project (Dairyland: 'co-owners'; PSC: joint application of ATC, ITC Midwest and Dairyland), although ITC Midwest built/operates the western segment and ATC the eastern one. If the pipeline requires owner-specific packages, split into west (ITC Midwest, Hickory Creek-Hill Valley, in service Sept 2024) and east (ATC, Hill Valley-Cardinal, operational Dec 2023). Ownership shares are not in the sources.",
+  "Cardinal-Hickory Creek construction window: the 2021 start is stated; the end bound comes from the same sentence's in-service date (Sept 2024). Removal of two retired Refuge lines was ongoing at energization with no sourced end date.",
+  "Badger Coulee schedule: the only construction window is the PLANNED one in the 2015 PSC decision (begin July 2016; in service by December 2018). Actual construction start/end dates were not found. The Xcel project page (transmission.xcelenergy.com/Projects/Wisconsin/La-Crosse-Madison) is JavaScript-rendered and returned no text; ATC's archived 'placed in service' release now redirects. Actual full in-service is bounded only by ATC's lists: partial fall 2017; North Madison-Briggs Road listed as completed after Oct 2018 (upper bound 2019-12-31 set conservatively).",
+  "Badger Coulee geography (corrected): the PSC-approved route goes north through Holmen to the city of Blair, east toward Black River Falls, then along I-94 / I-90/94 to North Madison and Cardinal. The researcher's original waypoints (straight from Briggs Road to Lyndon Station) omitted this. The Alma-Blair CPCN application (dpc-alma-blair-cpcn-2024 p.67) mentions a 'Briggs Road-Blair 345-kV' line, consistent with this, but it does not name Badger Coulee. Whether Tremval / Tremval North / Larkin Valley (Alma-Blair, WWTC, Grid Forward endpoints near Blair) connect to the Badger Coulee line is not established in this cluster's sources. The as-built alignment was not checked against the 2015 approved segments.",
+  "Badger Coulee ownership: DPC, SMMPA Wisconsin and WPPI were approved in 2015 as tenants-in-common on the Briggs Road-North Madison segment (interests derived from NSPW's share). Post-construction ownership was not verified.",
+  "County-centroid places for MariBell use uncertainty equal to the farthest Nominatim bounding-box corner (30-45 km). That is coarse by design; any mileage computed from them must not be shown as a precise distance.",
+  "Coordinates re-checked on 2026-09-26: all six OSM substation ways (Hickory Creek, Hill Valley, Cardinal, Briggs Road, North Madison, North Rochester) were fetched by way id from Overpass and match; every locality/county point was re-geocoded with Nominatim and matches the recorded coordinates. North Rochester Substation's OSM way has no operator tag (name match only)."
+ ],
+ "issuesFixed": [
+  "Re-ran find_excerpt.py on every evidence object, including the ones I added: all FOUND on the stated page, so every verifiedByScript=true reflects a fresh script run (152 evidence objects, 0 failures).",
+  "Badger Coulee: the researcher said the cached sources had no construction start or end. PSC 5-CE-142 Final Decision p.56 says 'begin construction ... in July 2016, and place the facilities in service by December 2018', and p.10 names 2018 as the projected in-service year. Added a PLANNED construction window (start 2016-07, month precision; end 2018, year precision, flagged as taken from the in-service date) plus a planned in-service completion claim.",
+  "Badger Coulee route was wrong. Its waypoints went straight from Briggs Road to Lyndon Station, but the approved segments (P-east, N, M, K, H, G, E, D, A; PSC pp.20-23 and p.56) run north through Holmen to the city of Blair, east toward Black River Falls, then along I-94 past Camp Douglas. Rebuilt 12 ordered waypoints from the approved-segment text, all geocoded with Nominatim or Overpass, and backed by 12 page-anchored excerpts.",
+  "Badger Coulee: added a City of Blair locality place and Trempealeau County (Segment N). Rewrote the misleading caveat that the project was only 'about 24 mi from Blair': that distance is from Briggs Road Substation, and the line itself reaches Blair.",
+  "Badger Coulee: added the authorized estimated cost of $581,433,000 (Certificate, p.56) and an approved-segments fact. The $540-580M range was labeled as the cost 'at approval'; relabeled it as the applicants' pre-decision estimate.",
+  "Badger Coulee: the decision date now comes from the p.62 signature line ('this 23rd day of April, 2015'), not only the receipt stamp. Summary updated.",
+  "Badger Coulee: extended the tenants-in-common excerpt to include 'with their respective ownership interests derived from NSPW's ownership share', so the coordination description ('derived from NSPW's share') is now actually supported.",
+  "Cardinal-Hickory Creek: the researcher said the Wisconsin docket was not cached. Footnote 7 of the cached Alma-Blair Final Decision (psc-1515-ce-103-final p.21) names docket 5-CE-146 (Wis. PSC Sept. 26, 2019) as a joint application of ATC, ITC Midwest and Dairyland. Set docketId, added the fact and coordination evidence, and added that source to sources.",
+  "Cardinal-Hickory Creek: tightened the construction-window note. The end bound comes from the in-service sentence, and removal of the Refuge lines continued after energization with no sourced end date. The coordination description now says joint ownership, not shared crews.",
+  "The Gopher to Badger Link schedule rows ('Pre-construction activities / Construction / Restoration', 2030-2034 and 2031-2034) were labeled general-construction with continuous=true. They mix pre-construction, construction and restoration, so both the Xcel segment and MariBell now record them as phase 'unknown' with continuous=false. MariBell's own '2031 - 2034 Project Construction' window stays general-construction.",
+  "G2B and MariBell status evidence: toned down the 'supports' text. The cached pages only say the route permit and WI CPCN filings are 'planned'; they do not confirm the filings as made or not made as of 2026-09-26. The Certificate of Need application was submitted, and no decision was found.",
+  "MariBell: parentInitiative no longer says the Wisconsin segment is part of LRTP #26, because the sources tie only the Minnesota segment to the G2B Certificate of Need. Added evidence for that. The owner name called GridLiance Heartland a NextEra Energy Transmission subsidiary without evidence; added an excerpt that supports it.",
+  "MariBell: the county-centroid uncertainties were smaller than the counties themselves (e.g., Vernon 35 km vs 45 km to the bounding-box corner). Reset them from Nominatim bounding boxes: Olmsted 34 km, Mower 32 km, Fillmore 38 km, Vernon 45 km, Crawford 37 km.",
+  "MariBell: the route description now records what the May 2026 factsheet schematic shows: the Minnesota 'Proposed Route' runs toward and then along the MN-Iowa border to the Mississippi. available stays false because the map names no waypoints that can be geocoded. Added a Minnesota-segment scope fact: it replaces an existing 161 kV line from near Marion to the Wisconsin border.",
+  "MariBell: flagged a possible cross-cluster duplicate with beci-columbia's 'dpc-genoa-bell-center-765-beci-related' (MISO facility 50948, Genoa river crossing to near Bell Center). Also flagged that county centroids could produce a false GEO match.",
+  "Corrected section labels: the maribell-wisconsin-regulatory-process heading is 'Wisconsin', and the PSC route excerpts now carry their segment subheadings.",
+  "Relation G2B-MariBell: changed 'building' to 'developing' and 'meet at Marion' to 'near Marion' (the source says 'a point near Marion'), and added the joint Certificate of Need evidence. Relation CHC-Badger Coulee: noted that the two projects share owners (ATC, Dairyland), so this is shared-owner context.",
+  "G2B Xcel caveat now says plainly that it does NOT satisfy the plan.md 'same region, nonoverlapping years -> GEO only' case at the default 25-mi threshold. Recomputed distances: 37.4 mi to North Rochester Substation and 33.8 mi to Marion.",
+  "Coordinates: re-fetched all six named-facility substations by OSM way id from Overpass and re-geocoded every locality and county point with Nominatim. None was more than 3 km off, so no precision changes were needed.",
+  "Rewrote the unresolved list. Removed two gaps that are now resolved (CHC docket, Badger Coulee schedule). Marked the uncached ATC DIC claims as unverified and noted that MMRT is cached in another cluster. Added the cross-cluster duplicate, the open question of whether anything connects to Badger Coulee near Blair, and the G2B status and county gaps. Also stated plainly which plan.md test-matrix rows this cluster does and does not support."
+ ]
+}

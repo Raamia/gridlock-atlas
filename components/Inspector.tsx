@@ -5,15 +5,16 @@ import { AnimatePresence, motion } from "motion/react";
 import { AlertTriangle, Calculator, CalendarRange, Check, FileOutput, Handshake, Link2, Library, MapPin, X } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { IDX } from "@/lib/data";
-import { SCOPE_LABEL, whyFlagged } from "@/lib/describe";
-import type { Evidence, Match, Project, SignalLevel } from "@/lib/domain/types";
-import { formatBound, formatDate, formatMiles, formatWindow } from "@/lib/format";
+import { displayTitle, firstSentence, SCOPE_LABEL, whyFlagged } from "@/lib/describe";
+import type { Conflict, ConflictSide, Evidence, Match, Project, SignalLevel } from "@/lib/domain/types";
+import { formatDate, formatMiles, formatPoint, formatWindow } from "@/lib/format";
 import { useSelectedPair } from "@/lib/hooks";
-import { activeWindows } from "@/lib/matching/time";
-import { matchSourceIds, ownerNames } from "@/lib/selectors";
+import { activeWindows, windowsBySource } from "@/lib/matching/time";
+import { evidenceHref, matchSourceIds, ownerNames, pageLabel } from "@/lib/selectors";
 import { useAtlas, type InspectorSection } from "@/lib/store";
 import { EvidenceCard, SourceRow, type EvidenceTone } from "./Evidence";
 import { ImpactEstimate } from "./Impact";
+import { ReviewPanel } from "./Review";
 import { Button, ConflictChip, Dot, IconButton, Kbd, MatchBadges, PrecisionTag, StatusChip } from "./ui";
 
 export function Inspector() {
@@ -89,6 +90,7 @@ function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
       </header>
 
       <div ref={scroller} className="scroll-thin min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4">
+        <ReviewPanel m={m} />
         <PlaceSection m={m} a={a} b={b} active={section === "place"} />
         <ScheduleSection m={m} a={a} b={b} active={section === "schedule"} />
         <CoordinationSection m={m} active={section === "coordination"} />
@@ -124,7 +126,9 @@ function PairTitle({ p, color }: { p: Project; color: string }) {
         <Dot color={color} size={8} ring />
       </span>
       <div className="min-w-0">
-        <h3 className="font-serif text-[21px] leading-[1.12] tracking-[-0.005em] text-text-0">{p.title}</h3>
+        <h3 className="font-serif text-[21px] leading-[1.12] tracking-[-0.005em] text-text-0" title={p.title}>
+          {displayTitle(p)}
+        </h3>
         <div className="mt-1 flex flex-wrap items-center gap-x-1.5 text-[11.5px] text-text-2">
           <span>{ownerNames(p, IDX)}</span>
           <span className="text-text-3">·</span>
@@ -310,7 +314,7 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
       <p className="text-[12.5px] leading-[1.5] text-text-1">{m.timeReason}</p>
       <div className="overflow-hidden rounded-lg ring-1 ring-line">
         {rows.map(([p, color]) => {
-          const ws = activeWindows(p);
+          const groups = windowsBySource(p);
           return (
             <div key={p.id} className="flex items-start gap-2.5 border-b border-line bg-bg-2/60 px-3 py-2 last:border-b-0">
               <span className="mt-[5px]">
@@ -318,15 +322,24 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
               </span>
               <div className="min-w-0 flex-1">
                 <div className="truncate text-[11.5px] text-text-2">{p.shortTitle}</div>
-                {ws.length ? (
-                  ws.map((w) => (
-                    <div key={w.id} className="flex items-baseline justify-between gap-2">
-                      <span className="num text-[13px] text-text-0">{formatWindow(w.start, w.end)}</span>
-                      <span className="truncate text-[10.5px] text-text-3">
-                        {IDX.source(w.claimSourceId)?.publisher} · {w.start.precision} precision
-                      </span>
-                    </div>
-                  ))
+                {groups.length ? (
+                  groups.map((ws) => {
+                    const start = ws.map((w) => w.start.earliest).sort()[0];
+                    const end = ws.map((w) => w.end.latest).sort().at(-1)!;
+                    const coarse = ws.some((w) => !w.continuous);
+                    return (
+                      <div key={ws[0].id} className="flex items-baseline justify-between gap-2">
+                        <span className="num text-[13px] text-text-0">
+                          {ws.length === 1 ? formatWindow(ws[0].start, ws[0].end) : `${formatPoint(start, ws[0].start.precision)}–${formatPoint(end, ws.at(-1)!.end.precision)}`}
+                        </span>
+                        <span className="truncate text-[10.5px] text-text-3" title={ws.map((w) => w.note).filter(Boolean).join(" ")}>
+                          {IDX.source(ws[0].claimSourceId)?.publisher}
+                          {ws.length > 1 ? ` · ${ws.length} components` : ` · ${ws[0].start.precision} precision`}
+                          {coarse && " · coarse"}
+                        </span>
+                      </div>
+                    );
+                  })
                 ) : (
                   <div className="text-[12px] text-text-3">No published construction window</div>
                 )}
@@ -374,10 +387,7 @@ function CoordinationSection({ m, active }: { m: Match; active: boolean }) {
             </div>
             <ul className="mt-2 space-y-1.5">
               {m.coordination.map((c, i) => (
-                <li key={i} className="text-[12px] leading-snug text-text-1">
-                  <span className="mono mr-1.5 rounded bg-bg-3 px-1 py-0.5 text-[10px] uppercase tracking-wide text-text-2">{SCOPE_LABEL[c.scope]}</span>
-                  {c.description}
-                </li>
+                <CoordinationItem key={i} scope={SCOPE_LABEL[c.scope]} text={c.description} />
               ))}
             </ul>
           </div>
@@ -403,6 +413,22 @@ function CoordinationSection({ m, active }: { m: Match; active: boolean }) {
   );
 }
 
+function CoordinationItem({ scope, text }: { scope: string; text: string }) {
+  const [more, setMore] = useState(false);
+  const short = firstSentence(text, 28);
+  return (
+    <li className="text-[12px] leading-snug text-text-1">
+      <span className="mono mr-1.5 rounded bg-bg-3 px-1 py-0.5 text-[10px] uppercase tracking-wide text-text-2">{scope}</span>
+      {more ? text : short}
+      {short !== text && (
+        <button onClick={() => setMore((x) => !x)} className="ml-1 text-[11px] text-text-3 hover:text-text-1">
+          {more ? "less" : "more"}
+        </button>
+      )}
+    </li>
+  );
+}
+
 function ConflictSection({ m, active }: { m: Match; active: boolean }) {
   const set = useAtlas((s) => s.set);
   return (
@@ -415,25 +441,20 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
     >
       {m.conflicts.map((c) => {
         const p = IDX.project(c.projectId);
-        const claims = c.field === "completion" ? p.completionClaims.filter((x) => c.claimIds.includes(x.id)) : [];
-        const windows = c.field === "constructionWindow" ? p.constructionWindows.filter((x) => c.claimIds.includes(x.id)) : [];
         return (
           <div key={c.id} onMouseEnter={() => set({ highlightConflict: true })} onMouseLeave={() => set({ highlightConflict: false })}>
             <div className="text-[11.5px] text-text-2">
               {p.shortTitle} · <span className="text-text-1">{c.field === "completion" ? "completion / in-service date" : "construction window"}</span>
             </div>
-            <div className="mt-1.5 grid grid-cols-2 gap-2">
-              {claims.map((cl) => (
-                <ClaimCard key={cl.id} sourceId={cl.claimSourceId} label={cl.label} value={formatBound(cl.date)} evidenceIds={cl.evidenceIds} />
-              ))}
-              {windows.map((w) => (
-                <ClaimCard key={w.id} sourceId={w.claimSourceId} label="construction" value={formatWindow(w.start, w.end)} evidenceIds={w.evidenceIds} />
+            <div className={clsx("mt-1.5 grid gap-2", c.sides.length === 2 ? "grid-cols-2" : "grid-cols-1")}>
+              {c.sides.map((side) => (
+                <SideCard key={side.value + side.sourceIds.join()} p={p} side={side} field={c.field} />
               ))}
             </div>
             <p className="mt-2 text-[11px] leading-snug text-text-3">
               {c.affectsMatch
-                ? "This disagreement changes whether the windows overlap; the engine evaluated every combination."
-                : "Both claims are kept. Completion dates never drive the construction-window match, so the TIME signal is unaffected."}
+                ? "Windows differ by source; the engine evaluated every source combination before calling the TIME signal."
+                : "All claims are kept. Completion dates never drive the construction-window match, so the TIME signal is unaffected."}
             </p>
           </div>
         );
@@ -442,18 +463,29 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
   );
 }
 
-function ClaimCard({ sourceId, label, value, evidenceIds }: { sourceId: string; label: string; value: string; evidenceIds: string[] }) {
-  const src = IDX.source(sourceId);
-  const e = evidenceIds.map((id) => IDX.evidence(id)).find(Boolean);
+function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: Conflict["field"] }) {
+  const claimEvidence =
+    field === "completion"
+      ? p.completionClaims.filter((c) => side.claimIds.includes(c.id)).flatMap((c) => c.evidenceIds)
+      : p.constructionWindows.filter((w) => side.claimIds.includes(w.id)).flatMap((w) => w.evidenceIds);
+  const e = claimEvidence.map((id) => IDX.evidence(id)).find(Boolean);
+  const srcs = side.sourceIds.map((id) => IDX.source(id)).filter(Boolean);
+  const first = e ? IDX.source(e.sourceId) : srcs[0];
   return (
     <div className="flex flex-col rounded-lg bg-bg-2 p-2.5 ring-1 ring-conflict/30">
-      <div className="mono truncate text-[9.5px] uppercase tracking-[0.06em] text-text-3">{src?.publisher}</div>
-      <div className="num mt-1 text-[17px] leading-none text-text-0">{value}</div>
-      <div className="mt-1 text-[10.5px] capitalize text-text-2">{label}</div>
+      <div className="num text-[17px] leading-none text-text-0">{side.value}</div>
+      <div className="mt-1.5 space-y-0.5">
+        {srcs.map((s) => (
+          <div key={s!.id} className="mono truncate text-[9.5px] uppercase tracking-[0.05em] text-text-3" title={s!.title}>
+            {s!.publisher}
+            {side.earlier && " · earlier edition"}
+          </div>
+        ))}
+      </div>
       {e && <div className="mt-2 line-clamp-4 font-serif text-[12.5px] leading-snug text-text-1">“{e.exactExcerpt}”</div>}
-      {src && (
-        <a href={e?.page && src.mimeType === "application/pdf" ? `${src.url}#page=${e.page}` : src.url} target="_blank" rel="noreferrer" className="mt-auto pt-2 text-[10.5px] text-text-2 hover:text-a">
-          Open source ↗
+      {first && e && (
+        <a href={evidenceHref(e, first)} target="_blank" rel="noreferrer" className="mt-auto pt-2 text-[10.5px] text-text-2 hover:text-a">
+          Open source{pageLabel(e) ? ` · ${pageLabel(e)}` : ""} ↗
         </a>
       )}
     </div>

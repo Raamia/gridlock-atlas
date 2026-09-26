@@ -536,32 +536,40 @@ export default function MapStage() {
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    const st = useAtlas.getState();
-    const right = st.inspectorOpen ? 440 : 64;
-    const duration = reduced ? 0 : 1600;
-    if (selected) {
-      const b = boundsOf([...projectCoords(selected.a), ...projectCoords(selected.b)]);
-      if (b) {
-        const threeD = st.mapMode === "3d";
-        map.fitBounds(b as LngLatBoundsLike, {
-          padding: { top: 90, bottom: 70, left: 70, right },
-          pitch: threeD ? 52 : 0,
-          bearing: threeD ? -14 : 0,
-          maxZoom: 10.5,
-          duration,
-          essential: true,
-        });
+    const apply = (animate: boolean) => {
+      const st = useAtlas.getState();
+      const right = st.inspectorOpen ? 440 : 64;
+      const duration = animate && !reduced ? 1600 : 0;
+      if (selected) {
+        const b = boundsOf([...projectCoords(selected.a), ...projectCoords(selected.b)]);
+        if (b) {
+          const threeD = st.mapMode === "3d";
+          map.fitBounds(b as LngLatBoundsLike, {
+            padding: { top: 90, bottom: 70, left: 70, right },
+            pitch: threeD ? 52 : 0,
+            bearing: threeD ? -14 : 0,
+            maxZoom: 10.5,
+            duration,
+            essential: true,
+          });
+        }
+        return;
       }
-      return;
-    }
-    const r = SNAPSHOT.regions.find((x) => x.id === st.region);
-    const target = r
-      ? ([
-          [r.bbox[0], r.bbox[1]],
-          [r.bbox[2], r.bbox[3]],
-        ] as LngLatBoundsLike)
-      : (boundsOf(SNAPSHOT.projects.flatMap(projectCoords)) as LngLatBoundsLike | null);
-    if (target) map.fitBounds(target, { padding: { top: 80, bottom: 60, left: 60, right }, pitch: 0, bearing: 0, duration, essential: true });
+      const r = SNAPSHOT.regions.find((x) => x.id === st.region);
+      const target = r
+        ? ([
+            [r.bbox[0], r.bbox[1]],
+            [r.bbox[2], r.bbox[3]],
+          ] as LngLatBoundsLike)
+        : (boundsOf(SNAPSHOT.projects.flatMap(projectCoords)) as LngLatBoundsLike | null);
+      if (target) map.fitBounds(target, { padding: { top: 80, bottom: 60, left: 60, right }, pitch: 0, bearing: 0, duration, essential: true });
+    };
+    const once = () => apply(false);
+    if (!map.loaded()) map.once("load", once);
+    else apply(true);
+    return () => {
+      map.off("load", once);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cameraNonce, selected?.match.id, inspectorOpen]);
 

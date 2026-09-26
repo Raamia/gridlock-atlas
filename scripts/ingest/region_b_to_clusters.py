@@ -51,7 +51,7 @@ def title_case(s):
             out.append(w.lower())
         else:
             out.append(w[:1].upper() + w[1:].lower())
-    return " ".join(out).replace(" kV", " kV")
+    return re.sub(r"\bKv\b", "kV", " ".join(out))
 
 
 def short_title(t):

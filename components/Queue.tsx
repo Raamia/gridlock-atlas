@@ -2,15 +2,15 @@
 
 import clsx from "clsx";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { Archive, ChevronDown, FileSearch, Play, RotateCw, SlidersHorizontal } from "lucide-react";
+import { AlertTriangle, Archive, ChevronDown, FileSearch, Play, RotateCw, SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
-import { geoShort, timeShort } from "@/lib/describe";
+import { displayTitle, geoShort, timeShort } from "@/lib/describe";
 import type { Match, Project } from "@/lib/domain/types";
 import { pluralize } from "@/lib/format";
 import { ownerNames } from "@/lib/selectors";
 import { inTab, useAtlas, type FlagFilter, type QueueTab } from "@/lib/store";
-import { Button, ConflictChip, Dot, Kbd, MatchBadges, StatusChip } from "./ui";
+import { Button, Dot, Kbd, MatchBadges, StatusChip } from "./ui";
 
 const TABS: { id: QueueTab; label: string; hint: string }[] = [
   { id: "needs-review", label: "Needs review", hint: "Cross-utility pairs whose resource coordination is not established in the reviewed sources" },
@@ -436,7 +436,6 @@ function MatchCard({ m, index, rank, dim }: { m: Match; index: number; rank: num
           </span>
           <MatchBadges m={m} compact />
           <StatusChip status={m.reviewStatus} />
-          <ConflictChip count={m.conflicts.length} label="Conflict" />
         </div>
         <div className="mt-2.5 space-y-2">
           <ProjectLine p={a} color="var(--a)" />
@@ -446,6 +445,12 @@ function MatchCard({ m, index, rank, dim }: { m: Match; index: number; rank: num
           <span className="truncate">{geoShort(m)}</span>
           <span className="text-text-3">·</span>
           <span className="shrink-0">{timeShort(m)}</span>
+          {m.conflicts.length > 0 && (
+            <span className="flex shrink-0 items-center gap-0.5 text-conflict" title={`${m.conflicts.length} preserved source disagreement${m.conflicts.length > 1 ? "s" : ""}`}>
+              <AlertTriangle size={10} />
+              {m.conflicts.length}
+            </span>
+          )}
           <span className="ml-auto shrink-0 text-text-3" title="Explainable review priority (ordering, not a probability)">
             P{m.priority}
           </span>
@@ -462,7 +467,9 @@ function ProjectLine({ p, color }: { p: Project; color: string }) {
         <Dot color={color} size={7} />
       </span>
       <div className="min-w-0">
-        <div className="truncate text-[12.5px] font-medium leading-tight text-text-0">{p.title}</div>
+        <div className="truncate text-[12.5px] font-medium leading-tight text-text-0" title={p.title}>
+          {displayTitle(p)}
+        </div>
         <div className="truncate text-[11px] text-text-2">{ownerNames(p, IDX)}</div>
       </div>
     </div>

@@ -43,21 +43,32 @@ export interface TimeResult {
   detail: TimeDetail;
 }
 
+/** Windows grouped by source: within one source they are components/phases of the work (a union);
+ *  across sources they are alternative claims that must all be satisfied for a confirmed overlap. */
+export function windowsBySource(p: Project): ConstructionWindow[][] {
+  const groups = new Map<string, ConstructionWindow[]>();
+  for (const w of activeWindows(p)) groups.set(w.claimSourceId, [...(groups.get(w.claimSourceId) ?? []), w]);
+  return [...groups.values()];
+}
+
 /**
  * Reported-window overlap test from plan.md §8.
  *
  * Each window is start ∈ [S_earliest, S_latest], end ∈ [E_earliest, E_latest].
- *   confirmed: max(S_latest_A, S_latest_B) ≤ min(E_earliest_A, E_earliest_B)
+ *   confirmed: max(S_latest_A, S_latest_B) ≤ min(E_earliest_A, E_earliest_B)  (and both phases continuous)
  *   possible:  max(S_earliest_A, S_earliest_B) ≤ min(E_latest_A, E_latest_B)
- * With several current claims per project we evaluate every combination:
- * confirmed only if all combinations confirm, possible if any overlap, no-match if none.
+ * A source may publish several component windows (e.g. substation vs line work): a source-pair
+ * overlaps if any of its components do. Different sources are alternative claims: the result is
+ * confirmed only if every source combination confirms, possible if any overlaps, no-match if none.
  * Missing windows yield "unknown", never "no overlap".
  */
 export function evaluateTime(a: Project, b: Project): TimeResult {
-  const wa = activeWindows(a);
-  const wb = activeWindows(b);
+  const ga = windowsBySource(a);
+  const gb = windowsBySource(b);
+  const wa = ga.flat();
+  const wb = gb.flat();
   const base: TimeDetail = {
-    combinations: wa.length * wb.length,
+    combinations: ga.length * gb.length,
     confirmedCombinations: 0,
     possibleCombinations: 0,
     windowIdsA: wa.map((w) => w.id),
@@ -79,36 +90,52 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
 
   let possibleStart: string | undefined;
   let possibleEnd: string | undefined;
-  for (const x of wa) {
-    for (const y of wb) {
-      const hardOverlap = max(x.start.latest, y.start.latest) <= min(x.end.earliest, y.end.earliest);
-      const softOverlap = max(x.start.earliest, y.start.earliest) <= min(x.end.latest, y.end.latest);
-      if (hardOverlap && x.continuous && y.continuous) base.confirmedCombinations++;
-      else if (hardOverlap || softOverlap) {
-        base.possibleCombinations++;
-        if (hardOverlap) base.continuityCaveat = true;
+  let coreStart: string | undefined;
+  let coreEnd: string | undefined;
+  for (const xs of ga) {
+    for (const ys of gb) {
+      let level: "confirmed" | "possible" | "none" = "none";
+      let comboCoreStart: string | undefined;
+      let comboCoreEnd: string | undefined;
+      for (const x of xs) {
+        for (const y of ys) {
+          const hs = max(x.start.latest, y.start.latest);
+          const he = min(x.end.earliest, y.end.earliest);
+          const hard = hs <= he;
+          const soft = max(x.start.earliest, y.start.earliest) <= min(x.end.latest, y.end.latest);
+          if (hard && x.continuous && y.continuous) {
+            level = "confirmed";
+            comboCoreStart = comboCoreStart ? min(comboCoreStart, hs) : hs;
+            comboCoreEnd = comboCoreEnd ? max(comboCoreEnd, he) : he;
+          } else if (hard || soft) {
+            if (level === "none") level = "possible";
+            if (hard) base.continuityCaveat = true;
+          }
+          if (soft) {
+            const s0 = max(x.start.earliest, y.start.earliest);
+            const e0 = min(x.end.latest, y.end.latest);
+            possibleStart = possibleStart ? min(possibleStart, s0) : s0;
+            possibleEnd = possibleEnd ? max(possibleEnd, e0) : e0;
+          }
+        }
       }
-      if (softOverlap) {
-        const s = max(x.start.earliest, y.start.earliest);
-        const e = min(x.end.latest, y.end.latest);
-        possibleStart = possibleStart ? min(possibleStart, s) : s;
-        possibleEnd = possibleEnd ? max(possibleEnd, e) : e;
-      }
+      if (level === "confirmed") {
+        base.confirmedCombinations++;
+        coreStart = coreStart ? max(coreStart, comboCoreStart!) : comboCoreStart;
+        coreEnd = coreEnd ? min(coreEnd, comboCoreEnd!) : comboCoreEnd;
+      } else if (level === "possible") base.possibleCombinations++;
     }
   }
   if (possibleStart && possibleEnd) base.possibleOverlap = { start: possibleStart, end: possibleEnd };
 
-  const all = [...wa, ...wb];
   const n = base.combinations;
-  const combos = n === 1 ? "" : ` under all ${n} published claim combinations`;
+  const combos = n === 1 ? "" : ` under all ${n} source combinations`;
 
   if (base.confirmedCombinations === n) {
-    const coreStart = all.map((w) => w.start.latest).reduce(max);
-    const coreEnd = all.map((w) => w.end.earliest).reduce(min);
-    if (coreStart <= coreEnd) base.confirmedOverlap = { start: coreStart, end: coreEnd };
+    if (coreStart && coreEnd && coreStart <= coreEnd) base.confirmedOverlap = { start: coreStart, end: coreEnd };
     return {
       level: "confirmed",
-      reason: `Both reported construction windows cover ${formatSpan(base.possibleOverlap!, base.precision)}${combos}.${gapNote}`,
+      reason: `Reported construction windows overlap within ${formatSpan(base.possibleOverlap!, base.precision)}${combos}.${gapNote}`,
       detail: base,
     };
   }
@@ -117,7 +144,7 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
     const why = base.continuityCaveat
       ? "a source does not describe one continuous construction phase"
       : base.confirmedCombinations > 0
-        ? `${base.confirmedCombinations} of ${n} claim combinations overlap for certain`
+        ? `${base.confirmedCombinations} of ${n} source combinations overlap for certain`
         : `overlap depends on where ${base.precision}-precision dates fall`;
     return {
       level: "possible",

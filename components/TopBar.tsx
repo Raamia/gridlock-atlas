@@ -1,9 +1,10 @@
 "use client";
 
 import clsx from "clsx";
-import { BookOpenText, Database, PlayCircle, RotateCcw } from "lucide-react";
+import { BookOpenText, ClipboardCheck, Database, PlayCircle, RotateCcw } from "lucide-react";
 import { SNAPSHOT } from "@/lib/data";
 import { formatDate } from "@/lib/format";
+import { useReview } from "@/lib/review";
 import { useAtlas } from "@/lib/store";
 import { Button, IconButton } from "./ui";
 
@@ -78,6 +79,7 @@ export function TopBar() {
           <BookOpenText size={13} />
           Method
         </Button>
+        <ReviewToggle />
         <IconButton label="Reset view" onClick={resetView}>
           <RotateCcw size={14} />
         </IconButton>
@@ -88,5 +90,15 @@ export function TopBar() {
         </Button>
       </div>
     </header>
+  );
+}
+
+function ReviewToggle() {
+  const enabled = useReview((s) => s.enabled);
+  const toggle = useReview((s) => s.toggle);
+  return (
+    <IconButton label={enabled ? "Reviewer mode on" : "Reviewer mode"} onClick={toggle} aria-pressed={enabled} className={enabled ? "bg-a/15 text-a hover:text-a" : ""}>
+      <ClipboardCheck size={14} />
+    </IconButton>
   );
 }

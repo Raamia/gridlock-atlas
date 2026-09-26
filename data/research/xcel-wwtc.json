@@ -1,0 +1,1595 @@
+{
+ "cluster": "xcel-wwtc",
+ "sources": [
+  {
+   "id": "xcel-wwtc-page",
+   "title": "Western Wisconsin Transmission Connection project page",
+   "publisher": "Xcel Energy",
+   "url": "https://xcelenergytransmission.com/projects/western-wisconsin-transmission-connection/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Undated web page; retrieved 2026-09-26"
+  },
+  {
+   "id": "psc-wwtc-case",
+   "title": "Western Wisconsin Transmission Connection case page",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://psc.wi.gov/Pages/CommissionActions/CasePages/WesternWisconsin.aspx",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Undated web page; retrieved 2026-09-26. Its 'Docket Reports: 5-CE-185' link text points to ERF search SEQ=158."
+  },
+  {
+   "id": "psc-wwtc-final",
+   "title": "Final Decision, docket 5-CE-158 (Western Wisconsin Transmission Connection)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=570292",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2025-12-11",
+   "documentDateEvidence": "PSC RECEIVED stamp 12/11/2025 on p.1; signed 'the 10th day of December, 2025' on p.63"
+  },
+  {
+   "id": "xcel-wwtc-infosheet-2026-01",
+   "title": "Western Wisconsin Transmission Connection Project Information Sheet - January 2026",
+   "publisher": "Xcel Energy",
+   "url": "https://cdn.xcelenergytransmission.com/blobvizxe609304b0a5/wp-content/uploads/2026/01/26-01-406_WWTC_IS_P03.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Linked on Xcel page as 'Project Information Sheet - January 2026'; file 26-01-406; month only, no day"
+  },
+  {
+   "id": "psc-wwtc-q2-2026-nspw",
+   "title": "Q2 2026 Quarterly Progress Report, docket 5-CE-158 (NSPW, filed 2026-07-27)",
+   "publisher": "Public Service Commission of Wisconsin (ERF filing)",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=600338",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-07-27",
+   "documentDateEvidence": "Letter dated July 27, 2026; PSC RECEIVED 7/27/2026"
+  },
+  {
+   "id": "psc-wwtc-q2-2026-atc",
+   "title": "Q2 2026 Progress Report, docket 5-CE-158 (ATC, filed 2026-07-31)",
+   "publisher": "Public Service Commission of Wisconsin (ERF filing)",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=601113",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-07-30",
+   "documentDateEvidence": "Letter dated July 30, 2026; PSC RECEIVED 7/31/2026. Cost table on p.3 is image-only (no text layer)."
+  },
+  {
+   "id": "psc-wwtc-gis-substations",
+   "title": "Western Wisconsin 5-CE-158 map service, Project Facilities: Substation layer (36), WGS84 query",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://maps.psc.wi.gov/server/rest/services/Electric/WesternWisconsin_5CE158/MapServer/36/query?where=1%3D1&outFields=*&outSR=4326&f=pjson",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Live ArcGIS map-service query; retrieved 2026-09-26"
+  },
+  {
+   "id": "psc-wwtc-gis-route",
+   "title": "Western Wisconsin 5-CE-158 map service, Project Facilities: Transmission Route layer (39), Route 2 segments 2A/2B, WGS84 query",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://maps.psc.wi.gov/server/rest/services/Electric/WesternWisconsin_5CE158/MapServer/39/query?where=Label%20IN%20(%272A%27,%272B%27)&outFields=*&outSR=4326&f=pjson",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Live ArcGIS map-service query; retrieved 2026-09-26"
+  },
+  {
+   "id": "psc-wwtc-map",
+   "title": "Western Wisconsin Transmission Line Project map",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://psc.wi.gov/Documents/HighlightedCases/WesternWisconsinMap.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Undated image-only PDF map linked from PSC case page"
+  },
+  {
+   "id": "psc-1515-ce-103-final",
+   "title": "Final Decision, docket 1515-CE-103",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/1515-CE-103%20Final%20Decision.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Shared source cached by the Dairyland cluster; date is recorded there"
+  },
+  {
+   "id": "psc-grid-forward-final",
+   "title": "Final Decision, docket 5-CE-157 (Grid Forward Central Wisconsin)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=570269",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Shared source cached by the Grid Forward cluster; date is recorded there"
+  },
+  {
+   "id": "dpc-alma-blair-cpcn-2024",
+   "title": "Alma-Blair Transmission Line Project CPCN Application (July 2024), docket 1515-CE-103",
+   "publisher": "Dairyland Power Cooperative",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/Dairyland%20Alma-Blair%20CPCN%20Application_2024-07-01.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Running header reads 'July 2024 Application'; file name dated 2024-07-01. Shared source cached by the Dairyland cluster."
+  }
+ ],
+ "projects": [
+  {
+   "id": "xcel-wwtc",
+   "title": "Western Wisconsin Transmission Connection (NSPW 345 kV line, Larkin Valley and Elk Farm substations)",
+   "shortTitle": "Western Wisconsin (WWTC)",
+   "titleEvidence": [
+    {
+     "sourceId": "psc-wwtc-final",
+     "exactExcerpt": "on the application of Northern States Power Company-Wisconsin (NSPW) and American Transmission Company LLC (ATC) (together, applicants) for a Certificate of Public Convenience and Necessity (CPCN) to construct the Western Wisconsin Transmission Connection Project (project)",
+     "supports": "joint applicants NSPW and ATC; project title",
+     "page": 1,
+     "section": "FINAL DECISION",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "NSPW (Xcel Energy) will construct, own and operate the PSC-approved, approximately 80-mile 345 kV Western Wisconsin Transmission Connection (docket 5-CE-158, Route 2) from the new Larkin Valley (Tremval Substation Expansion North) substation near Blair through the new Elk Farm Substation to ATC's new Jump River Substation South in Clark County.",
+   "docketId": "5-CE-158",
+   "parentInitiative": "MISO LRTP Tranche 1 Project 5",
+   "owners": [
+    {
+     "utilityId": "xcel-nspw",
+     "name": "Northern States Power Company-Wisconsin (Xcel Energy)",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "As noted in the proceeding, NSPW will construct, own and operate all parts of the project except the Jump River Substation.",
+       "supports": "NSPW owns/builds everything except Jump River Substation (ATC)",
+       "page": 1,
+       "section": "Cover letter",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "Xcel Energy has been approved by the Public Service Commission of Wisconsin (PSCW) to build a new 345 kilovolt (kV) transmission line to serve communities throughout western Wisconsin.",
+       "supports": "Xcel (NSPW) builds the approved 345 kV line; voltage",
+       "section": "Project Overview",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "approved",
+    "asOf": "2026-07-27",
+    "evidence": [
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "The CPCN application is APPROVED, subject to conditions and as modified by this Final Decision.",
+      "supports": "CPCN approved",
+      "page": 1,
+      "section": "FINAL DECISION",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-q2-2026-nspw",
+      "exactExcerpt": "At this time construction of the Project is anticipated to start in the fourth quarter 2026 with an in-service date of third quarter 2029.",
+      "supports": "NSPW Q2 2026: construction not yet started; start anticipated Q4 2026; in-service Q3 2029",
+      "page": 2,
+      "section": "Project Schedule",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "counties": [
+    {
+     "name": "Trempealeau",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "constructing a new 345 kV transmission line that would connect the expanded Tremval Substation in Trempealeau County, to a newly constructed intermediate Elk Farm Substation in Eau Claire County, and then to another newly constructed Jump River South Substation in Clark County.",
+       "supports": "345 kV; Tremval (Trempealeau Co.) -> Elk Farm (Eau Claire Co.) -> Jump River South (Clark Co.)",
+       "page": 14,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Eau Claire",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "constructing a new 345 kV transmission line that would connect the expanded Tremval Substation in Trempealeau County, to a newly constructed intermediate Elk Farm Substation in Eau Claire County, and then to another newly constructed Jump River South Substation in Clark County.",
+       "supports": "345 kV; Tremval (Trempealeau Co.) -> Elk Farm (Eau Claire Co.) -> Jump River South (Clark Co.)",
+       "page": 14,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Chippewa",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "into Eau Claire County to connect with the new Elk Farm Substation, east and north into Chippewa County generally following State Highway 29, before connecting to the new Jump River Substation (owned by ATC) near Owen in Clark County.",
+       "supports": "route description Elk Farm -> STH 29 -> Jump River; Jump River Substation owned by ATC",
+       "section": "Project Route",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Clark",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "2B would terminate at the proposed Jump River Substation South in the Town of Longwood in Clark County.",
+       "supports": "Jump River Substation South in Town of Longwood, Clark County",
+       "page": 33,
+       "section": "Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345 kV",
+     "evidence": [
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "Xcel Energy has been approved by the Public Service Commission of Wisconsin (PSCW) to build a new 345 kilovolt (kV) transmission line to serve communities throughout western Wisconsin.",
+       "supports": "Xcel (NSPW) builds the approved 345 kV line; voltage",
+       "section": "Project Overview",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Approved Route 2 length (total)",
+     "value": "approximately 80 miles",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "The total length of Route 2, minus the common route, is approximately 41 miles. The total length of the proposed project is approximately 80 miles.",
+       "supports": "length ~80 miles; Segment 2B ~41 miles",
+       "page": 15,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Common segment 2A (Tremval North to Elk Farm)",
+     "value": "approximately 39 miles",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "Segment 1A and Segment 2A are the same for approximately 39 miles, generally travelling north through expanded ROW",
+       "supports": "common segment ~39 miles running north",
+       "page": 30,
+       "section": "Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Segment 2B (Elk Farm to Jump River South)",
+     "value": "approximately 41 miles",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "The total length of Route 2, minus the common route, is approximately 41 miles. The total length of the proposed project is approximately 80 miles.",
+       "supports": "length ~80 miles; Segment 2B ~41 miles",
+       "page": 15,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Estimated total project cost (joint NSPW + ATC, as approved)",
+     "value": "$483.3 million",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "The project has an estimated total cost of $483.3 million.",
+       "supports": "total joint project cost",
+       "page": 1,
+       "section": "FINAL DECISION",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "NSPW portion of PSC-approved cost (per NSPW Q2 2026 report)",
+     "value": "$438,800,000",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "TOTAL NSPW PROJECT COSTS $438,800,000 $18,766,514 The PSCW\u2019s December 11, 2025 Order supports that NSPW is constructing the line, as proposed.",
+       "supports": "NSPW portion of PSC-approved cost ($438.8M; $18.8M actual to date) and NSPW constructs the line",
+       "page": 4,
+       "section": "Project Costs",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Tremval expansion (Larkin Valley) configuration",
+     "value": "six-position breaker-and-a-half; five line positions and one reactor",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "The Tremval expansion will add a six-position breaker and a half configuration with five transmission lines positions and one reactor.",
+       "supports": "Tremval expansion configuration",
+       "page": 15,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Final decision date",
+     "value": "Dated December 10, 2025; issued/served December 11, 2025",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "Dated at Madison, Wisconsin, the 10th day of December, 2025.",
+       "supports": "final decision signature date",
+       "page": 63,
+       "section": "Order",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-wwtc-infosheet-2026-01",
+       "exactExcerpt": "The PSCW approved the Western Wisconsin Transmission Connection project on October 30, 2025 and issued its final written order on December 10, 2025.",
+       "supports": "Xcel info sheet gives a December 10, 2025 order date (the Xcel web page says December 11)",
+       "page": 1,
+       "section": "Project route",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-q2-2026-atc",
+       "exactExcerpt": "In accordance with Condition 21 of the Public Service Commission of Wisconsin\u2019s Final Decision and Order in this docket served December 11, 2025",
+       "supports": "final decision served December 11, 2025",
+       "page": 1,
+       "section": "Cover letter",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "larkin-valley-substation",
+     "label": "Larkin Valley Substation (Tremval Substation Expansion North; new 345 kV switching station)",
+     "kind": "switching-station",
+     "precision": "official-gis",
+     "lat": 44.3015764977413,
+     "lon": -91.25419971043041,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "PSC map service WesternWisconsin_5CE158 MapServer layer 36 'Substation', Sub_Name='Tremval Expansion North' (application/proceeding-era siting point; outSR=4326). Cross-checks 2026-09-26: 918 m (0.57 mi) north of OSM way 258582476 'Tremval Substation', matching 'approximately 0.5 miles to the north'; Nominatim reverse = Town of Preston, Trempealeau County. No Larkin Valley substation in OSM yet.",
+     "evidence": [
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "The PSCW approved route (referred in application as Route 2) will travel from the new Larkin Valley Substation (previously referred to as Tremval Substation Expansion), located approximately 0.5miles to the north of the existing Tremval Substation near Blair",
+       "supports": "Larkin Valley = Tremval Substation Expansion, ~0.5 mi north of existing Tremval Substation near Blair; southern route endpoint",
+       "section": "Project Route",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-gis-substations",
+       "exactExcerpt": "\"Sub_Name\": \"Tremval Expansion North\", \"Route_Opti\": 2 }, \"geometry\": { \"x\": -91.254199710430413, \"y\": 44.301576497741301",
+       "supports": "official PSC GIS point for Tremval Expansion North (Larkin Valley)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "SUBSTATIONS Larkin Valley Substation Expansion North (NSPW) Elk Farm Substation (NSPW)",
+       "supports": "NSPW's cost table names the site 'Larkin Valley Substation Expansion North' and lists it as NSPW's",
+       "page": 4,
+       "section": "Project Costs",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "tremval-substation-existing",
+     "label": "Existing Tremval Substation near Blair (reference point about 0.5 mi south of the Larkin Valley site)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.29334,
+     "lon": -91.25504,
+     "uncertaintyMeters": 150,
+     "coordinateSource": "Overpass (re-queried 2026-09-26): OSM way 258582476 power=substation name='Tremval Substation' voltage=161000;69000 (center 44.29334,-91.25504)",
+     "evidence": [
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "The PSCW approved route (referred in application as Route 2) will travel from the new Larkin Valley Substation (previously referred to as Tremval Substation Expansion), located approximately 0.5miles to the north of the existing Tremval Substation near Blair",
+       "supports": "Larkin Valley = Tremval Substation Expansion, ~0.5 mi north of existing Tremval Substation near Blair; southern route endpoint",
+       "section": "Project Route",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-case",
+       "exactExcerpt": "The project would start at an expansion of the existing Tremval Substation near the Town of Blair in Trempealeau County and run north to the east of Eau Claire where the two proposed routes diverge.",
+       "supports": "southern endpoint: Tremval Substation expansion near Blair, Trempealeau County",
+       "section": "Application Summary - Overview",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "elk-farm-substation",
+     "label": "Elk Farm Substation (new, NSPW), Town of Seymour, Eau Claire County",
+     "kind": "substation",
+     "precision": "official-gis",
+     "lat": 44.841760717957946,
+     "lon": -91.39541663924138,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "PSC map service WesternWisconsin_5CE158 MapServer layer 36 'Substation', Sub_Name='Elk Farm' (outSR=4326). Cross-checks: Mapbox v6 'North 65th Avenue and Olson Drive' = 44.836473,-91.398463, 635 m (~0.4 mi) SSW of the point, consistent with the decision text; Nominatim reverse = Town of Seymour, Eau Claire County. No OSM substation of this name.",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "Segment 1A ends about 0.3 mile northeast of the intersection of North 65th Avenue and Olson Drive in the Town of Seymour. At this point, Segment 2A would continue northeast for approximately 850 feet and end after interconnecting to the proposed Elk Farm Substation.",
+       "supports": "Elk Farm location relative to N 65th Ave & Olson Dr, Town of Seymour",
+       "page": 33,
+       "section": "Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-gis-substations",
+       "exactExcerpt": "\"Sub_Name\": \"Elk Farm\", \"Route_Opti\": 2 }, \"geometry\": { \"x\": -91.395416639241375, \"y\": 44.841760717957946",
+       "supports": "official PSC GIS point for Elk Farm Substation",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "SUBSTATIONS Larkin Valley Substation Expansion North (NSPW) Elk Farm Substation (NSPW)",
+       "supports": "NSPW's cost table lists Elk Farm Substation as NSPW's",
+       "page": 4,
+       "section": "Project Costs",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "jump-river-south-endpoint",
+     "label": "Jump River Substation South (northern/eastern terminus of the NSPW line; substation owned by ATC)",
+     "kind": "route-endpoint",
+     "precision": "official-gis",
+     "lat": 44.92018840531236,
+     "lon": -90.66403524456352,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "PSC map service WesternWisconsin_5CE158 MapServer layer 36 'Substation', Sub_Name='Jump River South' (outSR=4326); Nominatim reverse = Town of Longwood, Clark County; 8.5 km WSW of Owen. No OSM substation of this name.",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "2B would terminate at the proposed Jump River Substation South in the Town of Longwood in Clark County.",
+       "supports": "Jump River Substation South in Town of Longwood, Clark County",
+       "page": 33,
+       "section": "Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-gis-substations",
+       "exactExcerpt": "\"Sub_Name\": \"Jump River South\", \"Route_Opti\": 2 }, \"geometry\": { \"x\": -90.664035244563522, \"y\": 44.920188405312359",
+       "supports": "official PSC GIS point for Jump River South Substation",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-gis",
+    "description": "Approved Route 2 has two segments. Segment 2A runs ~39 miles generally north from the Tremval Substation Expansion North (Larkin Valley) site near Blair to the new Elk Farm Substation in the Town of Seymour. Segment 2B runs ~41 miles: east, then north along North 90th Avenue toward STH 29, then east along the STH 29 corridor beside an existing line to Jump River Substation South in the Town of Longwood, Clark County.",
+    "caveat": "schematic / not survey accurate. Waypoints are vertices of the Route 2 polylines (layer 39 'Transmission Route') in the PSC's docket 5-CE-158 map service, simplified with a 150 m tolerance (max deviation checked: 136 m on 2A, 122 m on 2B). This is application/proceeding-era GIS for the route the Commission authorized 'as presented'. The local alternatives in the map-service layers 'Route Adjustment 11.5' (near 190th/195th/199th Street, within about 1.5 km of the plotted line) and 'Route Adjustment 11.7' (PSCW-KF-11.7) were not merged. NSPW's Q2 2026 report says pole spotting between Elk Farm and Larkin Valley was completed in June 2026, but the 30% design package was still in progress and pole spotting for Elk Farm to Jump River was preliminary, so the final alignment may shift.",
+    "evidence": [
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "The Commission grants the applicants a CPCN for construction of the project using route Segments 2A and 2B with the Tremval Substation Expansion North site",
+      "supports": "certificate: Segments 2A/2B with Tremval Substation Expansion North",
+      "page": 56,
+      "section": "Certificate",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "Segment 1A and Segment 2A are the same for approximately 39 miles, generally travelling north through expanded ROW",
+      "supports": "common segment ~39 miles running north",
+      "page": 30,
+      "section": "Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "Just north of the intersection of CTH Q and North 90th Avenue, Segment 2B would begin to travel due north in parallel with North 90th Avenue and connected roadways for about 4.5 miles toward STH 29 and the Town of Lafayette.",
+      "supports": "2B waypoint CTH Q & N 90th Ave, north toward STH 29",
+      "page": 33,
+      "section": "Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "just past the Hallie Marsh Wildlife Area, Segment 2B would turn east and parallel the south side of the highway for about 3.0 miles. East of 190th Street, Segment 2B would cross over STH 29",
+      "supports": "2B turns east near Hallie Marsh WA; crosses STH 29 east of 190th Street",
+      "page": 33,
+      "section": "Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "where the lines would cross 250th Street in the Town of Sigel and where the lines would cross 370th Street on the border between the Towns of Edson and Worden.",
+      "supports": "2B crossings in Towns of Sigel, Edson/Worden",
+      "page": 33,
+      "section": "Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "2B would terminate at the proposed Jump River Substation South in the Town of Longwood in Clark County.",
+      "supports": "Jump River Substation South in Town of Longwood, Clark County",
+      "page": 33,
+      "section": "Transmission Line Route Alternatives",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-gis-route",
+      "exactExcerpt": "\"FID\": 0, \"Line_Name\": \"WWTC Route 2 Segment A\", \"Route_Opti\": \"Common\", \"Label\": \"2A\"",
+      "supports": "official PSC GIS polyline for Route 2 Segment 2A",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-gis-route",
+      "exactExcerpt": "\"FID\": 1, \"Line_Name\": \"WWTC Route 2 Segment B\", \"Route_Opti\": \"2\", \"Label\": \"2B\"",
+      "supports": "official PSC GIS polyline for Route 2 Segment 2B",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "The Jump River Substation will have a four-position ring bus with three transmission line positions and one reactor position. The Commission authorizes construction of the proposed project along Route 2.",
+      "supports": "Commission authorizes construction along Route 2",
+      "page": 15,
+      "section": "Project Description",
+      "verifiedByScript": true
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "Tremval Expansion North / Larkin Valley Substation site (Segment 2A start)",
+      "lat": 44.301805,
+      "lon": -91.254331,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 239 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 237)",
+      "lat": 44.301811,
+      "lon": -91.258047,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 237 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 224)",
+      "lat": 44.320017,
+      "lon": -91.280495,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 224 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 216)",
+      "lat": 44.338372,
+      "lon": -91.280521,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 216 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 200)",
+      "lat": 44.369937,
+      "lon": -91.306702,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 200 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 192)",
+      "lat": 44.389804,
+      "lon": -91.308508,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 192 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 182)",
+      "lat": 44.417007,
+      "lon": -91.320657,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 182 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 179)",
+      "lat": 44.423978,
+      "lon": -91.326167,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 179 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 166)",
+      "lat": 44.446185,
+      "lon": -91.356571,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 166 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 106)",
+      "lat": 44.596273,
+      "lon": -91.359118,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 106 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 68)",
+      "lat": 44.699218,
+      "lon": -91.354606,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 68 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 60)",
+      "lat": 44.720746,
+      "lon": -91.356589,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 60 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 56)",
+      "lat": 44.72963,
+      "lon": -91.366668,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 56 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 30)",
+      "lat": 44.791478,
+      "lon": -91.367761,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 30 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 26)",
+      "lat": 44.799514,
+      "lon": -91.372413,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 26 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2A vertex (GIS path index 22)",
+      "lat": 44.808081,
+      "lon": -91.372568,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 22 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "End of common portion, ~0.3 mi NE of N 65th Ave & Olson Dr, Town of Seymour",
+      "lat": 44.840028,
+      "lon": -91.395565,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 2 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Elk Farm Substation (Segment 2A end / Segment 2B start)",
+      "lat": 44.84207,
+      "lon": -91.394597,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment A' vertex 0 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2B vertex (GIS path index 3)",
+      "lat": 44.841004,
+      "lon": -91.393883,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment B' vertex 3 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Near CTH Q & North 90th Ave (Segment 2B turns north)",
+      "lat": 44.841106,
+      "lon": -91.34724,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment B' vertex 7 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2B turns east toward STH 29 corridor (text: just past Hallie Marsh Wildlife Area)",
+      "lat": 44.90621,
+      "lon": -91.347149,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment B' vertex 25 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2B vertex (GIS path index 26)",
+      "lat": 44.911457,
+      "lon": -91.335563,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment B' vertex 26 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2B near 190th Street / STH 29 crossing",
+      "lat": 44.911465,
+      "lon": -91.284309,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment B' vertex 34 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Segment 2B east of STH 29 crossing; start of long run parallel to existing line",
+      "lat": 44.918877,
+      "lon": -91.275126,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment B' vertex 37 (WGS84; 150 m simplification)"
+     },
+     {
+      "name": "Jump River Substation South (Segment 2B end), Town of Longwood, Clark County",
+      "lat": 44.91955,
+      "lon": -90.664674,
+      "coordinateSource": "PSC MapServer WesternWisconsin_5CE158 layer 39, 'WWTC Route 2 Segment B' vertex 117 (WGS84; 150 m simplification)"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "xcel-wwtc-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "Landowner negotiations and easement procurement : 2025 - 2026 Construction : 2026 -2027 Project complete: 2027 - 2028",
+       "supports": "Xcel timeline: construction 2026-2027; project complete 2027-2028",
+       "section": "Project Timeline",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Xcel project page timeline row 'Construction : 2026 -2027'."
+    },
+    {
+     "claimSourceId": "xcel-wwtc-infosheet-2026-01",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "xcel-wwtc-infosheet-2026-01",
+       "exactExcerpt": "2026-2027: \u2022 \u0007Construction 2027-2028: \u2022 \u0007Project complete and line placed in service",
+       "supports": "Xcel Jan 2026 info sheet: construction 2026-2027; project complete and in service 2027-2028",
+       "page": 1,
+       "section": "PROJECT SCHEDULE",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Xcel January 2026 information sheet schedule. The excerpt keeps the U+0007 control characters from the PDF text layer."
+    },
+    {
+     "claimSourceId": "psc-wwtc-final",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-07-01",
+      "latest": "2026-09-30",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "Construction is expected to begin in the third quarter of 2026 with completion by the third quarter of 2029.",
+       "supports": "final decision schedule: construction Q3 2026 start, completion by Q3 2029",
+       "page": 52,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Final decision (signed 2025-12-10, served 2025-12-11). The end bound is the source's 'completion by the third quarter of 2029', from the same sentence as the construction start. 'By' sets 2029-09-30 as the latest date and does not rule out an earlier finish."
+    },
+    {
+     "claimSourceId": "psc-wwtc-case",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-07-01",
+      "latest": "2026-09-30",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-case",
+       "exactExcerpt": "On December 11, 2025, the Commission issued a final decision for this project. At the time of final decision, construction was scheduled to begin in the third quarter of 2026 with completion by the third quarter of 2029.",
+       "supports": "PSC case page: final decision issued; construction start Q3 2026; completion by Q3 2029",
+       "section": "Final Decision Issued",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "PSC case page restating the schedule 'at the time of final decision'. The end bound is the stated completion quarter."
+    },
+    {
+     "claimSourceId": "psc-wwtc-q2-2026-nspw",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-10-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "At this time construction of the Project is anticipated to start in the fourth quarter 2026 with an in-service date of third quarter 2029.",
+       "supports": "NSPW Q2 2026: construction start Q4 2026; in-service Q3 2029",
+       "page": 2,
+       "section": "Project Schedule",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Latest owner filing (NSPW Q2 2026 progress report, filed 2026-07-27). The start is explicit. No construction end date is given, so the end bound is the in-service quarter from the same sentence. Construction could finish earlier."
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "xcel-wwtc-page",
+     "label": "completion",
+     "date": {
+      "earliest": "2027-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "Landowner negotiations and easement procurement : 2025 - 2026 Construction : 2026 -2027 Project complete: 2027 - 2028",
+       "supports": "Xcel timeline: construction 2026-2027; project complete 2027-2028",
+       "section": "Project Timeline",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-wwtc-infosheet-2026-01",
+     "label": "completion / in-service",
+     "date": {
+      "earliest": "2027-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-wwtc-infosheet-2026-01",
+       "exactExcerpt": "2026-2027: \u2022 \u0007Construction 2027-2028: \u2022 \u0007Project complete and line placed in service",
+       "supports": "Xcel Jan 2026 info sheet: construction 2026-2027; project complete and in service 2027-2028",
+       "page": 1,
+       "section": "PROJECT SCHEDULE",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-wwtc-case",
+     "label": "completion (as of final decision)",
+     "date": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-case",
+       "exactExcerpt": "On December 11, 2025, the Commission issued a final decision for this project. At the time of final decision, construction was scheduled to begin in the third quarter of 2026 with completion by the third quarter of 2029.",
+       "supports": "PSC case page: final decision issued; construction start Q3 2026; completion by Q3 2029",
+       "section": "Final Decision Issued",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-wwtc-final",
+     "label": "completion",
+     "date": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "Construction is expected to begin in the third quarter of 2026 with completion by the third quarter of 2029.",
+       "supports": "final decision schedule: construction Q3 2026 start, completion by Q3 2029",
+       "page": 52,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-wwtc-final",
+     "label": "projected in-service year",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "The estimated costs are based on 2029 dollars, the projected in-service year for the proposed project",
+       "supports": "projected in-service year 2029",
+       "page": 51,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-wwtc-q2-2026-nspw",
+     "label": "in-service (NSPW Q2 2026 report)",
+     "date": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "At this time construction of the Project is anticipated to start in the fourth quarter 2026 with an in-service date of third quarter 2029.",
+       "supports": "NSPW Q2 2026: construction start Q4 2026; in-service Q3 2029",
+       "page": 2,
+       "section": "Project Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-wwtc-case",
+     "label": "in-service (application-era)",
+     "date": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-case",
+       "exactExcerpt": "If approved, the applicant anticipates construction for this project to begin in the third quarter of 2025 and be in-service in the third quarter of 2029.",
+       "supports": "application-era schedule: construction start Q3 2025, in-service Q3 2029",
+       "section": "Proposed schedule",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "atc-wwtc-jump-river",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "NSPW and ATC jointly applied for, and received, one CPCN in docket 5-CE-158. NSPW says it will construct, own and operate all parts except the Jump River Substation. ATC files its own quarterly reports. The NSPW line terminates at the Jump River Substation. ATC's image-only Q2 2026 cost table also lists ATC line work and items at other substations, which the NSPW statement does not reflect (see unresolved).",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "on the application of Northern States Power Company-Wisconsin (NSPW) and American Transmission Company LLC (ATC) (together, applicants) for a Certificate of Public Convenience and Necessity (CPCN) to construct the Western Wisconsin Transmission Connection Project (project)",
+       "supports": "joint applicants NSPW and ATC; project title",
+       "page": 1,
+       "section": "FINAL DECISION",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "As noted in the proceeding, NSPW will construct, own and operate all parts of the project except the Jump River Substation.",
+       "supports": "NSPW owns/builds everything except Jump River Substation (ATC)",
+       "page": 1,
+       "section": "Cover letter",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "ATC is submitting a separate quarterly report for the Jump River Substation",
+       "supports": "ATC separately reports on its Jump River Substation package",
+       "page": 2,
+       "section": "Quarterly Progress Report ending June 30, 2026",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "dpc-alma-blair",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "Dairyland's Alma-Blair 345 kV line terminates at the new Tremval North switching station approved in 5-CE-158. The 1515-CE-103 decision says NSPW constructs, owns and operates that station. Dairyland's July 2024 application said the final connection configuration would be 'determined in coordination with Xcel Energy', and that the station must be completed by the end of 2028 for Dairyland's connection. Dairyland was a granted intervenor in 5-CE-158 but offered no evidence. This is interconnection-level coordination only; no source documents shared crews, equipment or construction sequencing.",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "From the reconnection point, both routes follow a common segment east for approximately 13 miles following the LQ-18 corridor terminating at the new Tremval switching station approved in docket 5-CE-158.",
+       "supports": "Alma-Blair terminates at the new Tremval switching station approved in 5-CE-158",
+       "page": 14,
+       "section": "Project Description",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "connect to the new 345 kV Tremval Nouth Substation that was approved in docket 5-CE-158. The terminating substation would be constructed, owned, and operated by Northern States Power Company-Wisconsin.",
+       "supports": "terminating substation approved in 5-CE-158 is NSPW-built/owned/operated",
+       "page": 13,
+       "section": "Project Description",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "The final configuration of Dairyland\u2019s new 345-kV connection is expected to be determined in coordination with Xcel Energy upon selection of the final destination by the Commission.",
+       "supports": "Dairyland (2024) says it will determine its connection configuration in coordination with Xcel Energy",
+       "page": 24,
+       "printedPage": "4",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "switching station (regardless of location) would need to be completed by the end of 2028 to allow for Dairyland\u2019s new 345-kV connection.",
+       "supports": "Dairyland (2024) needs the switching station completed by end of 2028",
+       "page": 25,
+       "printedPage": "5",
+       "section": "Executive Summary - Proposed Routes",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "requests to intervene were granted to Chippewa Valley Preservation Alliance (CVPA), Citizens Utility Board of Wisconsin (CUB), City of Altoona, Clean Grid Organizations, Clean Wisconsin, Dairyland Power Cooperative (DPC)",
+       "supports": "Dairyland was granted intervention in 5-CE-158",
+       "page": 2,
+       "section": "Procedural Background",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "City of Altoona, DPC, and WIEG did not offer evidence.",
+       "supports": "Dairyland offered no evidence in 5-CE-158",
+       "page": 3,
+       "section": "Procedural Background",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "dpc-alma-blair",
+     "status": "not-found-in-sources",
+     "scope": "resource-sharing",
+     "description": "No reviewed source documents shared crews, equipment, laydown yards, outage or construction sequencing between NSPW's WWTC work and Dairyland's Alma-Blair line. Not found in sources does not mean uncoordinated.",
+     "evidence": []
+    },
+    {
+     "partner": "atc-nspw-grid-forward",
+     "status": "reported-coordination",
+     "scope": "shared-facility",
+     "description": "Both PSC final decisions name the Tremval Substation Expansion North: WWTC is certificated with that site, and the Grid Forward (5-CE-157) construction sequence is described as beginning there, with its route exiting it. NSPW and ATC applied for both projects; Grid Forward also lists SMMPA Wisconsin and WPPI Energy as applicants. The applicants stated that each project provides benefits individually and in conjunction with the other. No reviewed source says how Tremval-site work is split between the two dockets or documents shared construction resources. Because the owners overlap, this pair is shared-owner context, not a cross-utility lead.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "In the application, the construction sequence is described as beginning at the Tremval Substation Expansion North. As a Common Route, both the Proposed and Alternative Routes would exit the Tremval Substation Expansion North",
+       "supports": "Grid Forward route exits Tremval Substation Expansion North",
+       "page": 31,
+       "section": "Routing",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "The applicants stated that the facts in the record paint a clear picture that the project, both individually and in conjunction with the Grid Forward Project being approved in docket 5-CE-157",
+       "supports": "applicants' statement that WWTC provides benefits individually and with Grid Forward",
+       "page": 18,
+       "section": "Project Need",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "on the application of American Transmission Company LLC (ATC), Northern States Power Company-Wisconsin (NSPW), SMMPA Wisconsin, LLC (SMMPA), and WPPI Energy (WPPI) (together, applicants)",
+       "supports": "Grid Forward applicants include ATC and NSPW (plus SMMPA and WPPI)",
+       "page": 1,
+       "section": "FINAL DECISION",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "atc-nspw-grid-forward",
+     "status": "not-found-in-sources",
+     "scope": "resource-sharing",
+     "description": "No reviewed source documents shared crews, equipment or construction sequencing between WWTC and Grid Forward at the Tremval North / Larkin Valley site or elsewhere. Not found in sources does not mean uncoordinated.",
+     "evidence": []
+    }
+   ],
+   "caveats": [
+    "Status 'approved' at the 2026-09-26 snapshot rests on NSPW's Q2 2026 report (filed 2026-07-27), which anticipates a Q4 2026 construction start. No later filing or news was found. The Q3 2026 report is not due until after the snapshot.",
+    "Completion claims conflict: the Xcel web page and Jan 2026 info sheet say 2027-2028, while the PSC final decision, the PSC case page and NSPW's own Q2 2026 filing say Q3 2029. Not reconciled.",
+    "Only Xcel's web page and info sheet give an explicit construction period (2026-2027). For the PSC and NSPW claims, the window's end bound is the completion or in-service quarter stated in the same sentence as the construction start, not a stated construction end.",
+    "The application-era PSC case-page schedule (construction from Q3 2025) is superseded and is not listed as a construction window; see unresolved.",
+    "The PSC final decision's cost table labels the Route 2 line costs 'ATC'. NSPW's Q2 2026 report says this is wrong and that NSPW constructs the line. Ownership here follows NSPW's filing and Xcel's page.",
+    "Larkin Valley Substation (Xcel), Larkin Valley Substation Expansion North (NSPW cost table), Tremval Substation Expansion North (PSC 5-CE-158) and 'Tremval North Substation' / 'Tremval switching station' (PSC 1515-CE-103, which also misspells it 'Tremval Nouth') are treated as the same facility, based on how the sources describe them."
+   ]
+  },
+  {
+   "id": "atc-wwtc-jump-river",
+   "title": "Western Wisconsin Transmission Connection - ATC portion (Jump River Substation South)",
+   "shortTitle": "WWTC Jump River Sub",
+   "titleEvidence": [
+    {
+     "sourceId": "psc-wwtc-q2-2026-atc",
+     "exactExcerpt": "Western Wisconsin Transmission Connection Project Docket No. 5-CE-158 Quarterly Progress Report",
+     "supports": "ATC report title for its WWTC portion",
+     "page": 1,
+     "section": "Cover",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-wwtc-q2-2026-nspw",
+     "exactExcerpt": "ATC is submitting a separate quarterly report for the Jump River Substation",
+     "supports": "ATC separately reports on its Jump River Substation package",
+     "page": 2,
+     "section": "Quarterly Progress Report ending June 30, 2026",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "ATC will build the new Jump River Substation South in the Town of Longwood, Clark County, the eastern terminus of the Western Wisconsin Transmission Connection approved in docket 5-CE-158, and anticipates beginning substation construction in Q3 2027.",
+   "docketId": "5-CE-158",
+   "parentInitiative": "MISO LRTP Tranche 1 Project 5",
+   "owners": [
+    {
+     "utilityId": "atc",
+     "name": "American Transmission Company LLC",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "As noted in the proceeding, NSPW will construct, own and operate all parts of the project except the Jump River Substation.",
+       "supports": "NSPW owns/builds everything except Jump River Substation (ATC)",
+       "page": 1,
+       "section": "Cover letter",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "into Eau Claire County to connect with the new Elk Farm Substation, east and north into Chippewa County generally following State Highway 29, before connecting to the new Jump River Substation (owned by ATC) near Owen in Clark County.",
+       "supports": "route description Elk Farm -> STH 29 -> Jump River; Jump River Substation owned by ATC",
+       "section": "Project Route",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "approved",
+    "asOf": "2026-07-30",
+    "evidence": [
+     {
+      "sourceId": "psc-wwtc-final",
+      "exactExcerpt": "The CPCN application is APPROVED, subject to conditions and as modified by this Final Decision.",
+      "supports": "CPCN approved",
+      "page": 1,
+      "section": "FINAL DECISION",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-wwtc-q2-2026-atc",
+      "exactExcerpt": "The planned Project in-service date is Q3 2029. ATC anticipates beginning substation construction in Q3 2027.",
+      "supports": "ATC: substation construction start Q3 2027; project in-service Q3 2029",
+      "page": 1,
+      "section": "Project Schedule",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "counties": [
+    {
+     "name": "Clark",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "2B would terminate at the proposed Jump River Substation South in the Town of Longwood in Clark County.",
+       "supports": "Jump River Substation South in Town of Longwood, Clark County",
+       "page": 33,
+       "section": "Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage (substation on the new line)",
+     "value": "345 kV",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "constructing a new 345 kV transmission line that would connect the expanded Tremval Substation in Trempealeau County, to a newly constructed intermediate Elk Farm Substation in Eau Claire County, and then to another newly constructed Jump River South Substation in Clark County.",
+       "supports": "345 kV; Tremval (Trempealeau Co.) -> Elk Farm (Eau Claire Co.) -> Jump River South (Clark Co.)",
+       "page": 14,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Configuration",
+     "value": "four-position ring bus; three line positions and one reactor position",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "The Jump River Substation will have a four-position ring bus with three transmission line positions and one reactor position.",
+       "supports": "Jump River Substation configuration",
+       "page": 15,
+       "section": "Project Description",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "PSC final decision cost table: ATC subtotal under the heading 'ATC Jump River Substation South Costs'",
+     "value": "$41,900,000",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "NSPW Subtotal Substations Costs ATC Jump River Substation South Costs Materials Labor Other ATC Subtotal Substation Costs",
+       "supports": "cost table lists Jump River Substation South under ATC",
+       "page": 52,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "$7,100,000 $65,600,000 $14,800,000 $26,000,000 $1,100,000 $41,900,000 $1,600,000 $15,500,000",
+       "supports": "cost column: NSPW substations subtotal $65.6M, then ATC Jump River materials/labor/other and $41.9M ATC subtotal",
+       "page": 52,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Equipment delivery",
+     "value": "Major substation equipment to begin arriving on site in early 2028",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-atc",
+       "exactExcerpt": "Major substation equipment for the Jump River Substation will begin arriving on site in early 2028.",
+       "supports": "Jump River equipment delivery early 2028",
+       "page": 1,
+       "section": "Project Status",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "jump-river-south-substation",
+     "label": "Jump River Substation South (new, ATC-owned), Town of Longwood, Clark County",
+     "kind": "substation",
+     "precision": "official-gis",
+     "lat": 44.92018840531236,
+     "lon": -90.66403524456352,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "PSC map service WesternWisconsin_5CE158 MapServer layer 36 'Substation', Sub_Name='Jump River South' (outSR=4326); Nominatim reverse (2026-09-26) = Town of Longwood, Clark County; no OSM substation of this name",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "2B would terminate at the proposed Jump River Substation South in the Town of Longwood in Clark County.",
+       "supports": "Jump River Substation South in Town of Longwood, Clark County",
+       "page": 33,
+       "section": "Transmission Line Route Alternatives",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-gis-substations",
+       "exactExcerpt": "\"Sub_Name\": \"Jump River South\", \"Route_Opti\": 2 }, \"geometry\": { \"x\": -90.664035244563522, \"y\": 44.920188405312359",
+       "supports": "official PSC GIS point for Jump River South Substation",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "evidence": [],
+    "description": "Substation work package; no line route."
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "psc-wwtc-q2-2026-atc",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2027-07-01",
+      "latest": "2027-09-30",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "continuous": false,
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-atc",
+       "exactExcerpt": "The planned Project in-service date is Q3 2029. ATC anticipates beginning substation construction in Q3 2027.",
+       "supports": "ATC: substation construction start Q3 2027; project in-service Q3 2029",
+       "page": 1,
+       "section": "Project Schedule",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "ATC Q2 2026 report: substation construction begins Q3 2027. No construction end date is stated. The end bound is the overall Project in-service quarter (Q3 2029), which is the latest the work could end. Marked non-continuous."
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "psc-wwtc-q2-2026-atc",
+     "label": "project in-service",
+     "date": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-atc",
+       "exactExcerpt": "The planned Project in-service date is Q3 2029. ATC anticipates beginning substation construction in Q3 2027.",
+       "supports": "ATC: substation construction start Q3 2027; project in-service Q3 2029",
+       "page": 1,
+       "section": "Project Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "xcel-wwtc",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "NSPW and ATC applied jointly and received one CPCN in docket 5-CE-158. They file separate quarterly progress reports, and NSPW's line terminates at ATC's Jump River Substation South.",
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "on the application of Northern States Power Company-Wisconsin (NSPW) and American Transmission Company LLC (ATC) (together, applicants) for a Certificate of Public Convenience and Necessity (CPCN) to construct the Western Wisconsin Transmission Connection Project (project)",
+       "supports": "joint applicants NSPW and ATC; project title",
+       "page": 1,
+       "section": "FINAL DECISION",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-q2-2026-atc",
+       "exactExcerpt": "submits this quarterly progress report for the period April 1, through June 30, 2025. The Applicants are filing separate quarterly progress reports.",
+       "supports": "ATC files separately; period stated as 2025 (apparent typo)",
+       "page": 1,
+       "section": "Cover",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "As noted in the proceeding, NSPW will construct, own and operate all parts of the project except the Jump River Substation.",
+       "supports": "NSPW owns/builds everything except Jump River Substation (ATC)",
+       "page": 1,
+       "section": "Cover letter",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "ATC's Q2 2026 report gives its reporting period as 'April 1, through June 30, 2025', though it is dated July 30, 2026, was received July 31, 2026, and reports costs 'as of June 30, 2026'. Treated as a typo for 2026.",
+    "ATC's report states 'The Project is approximately 4% complete' without saying whether this means ATC's portion or the whole project.",
+    "ATC's scope appears broader than the Jump River Substation. Its report says 'The scopes for overhead transmission line and substation construction remain unchanged'. Its image-only cost table (p.3, read visually, not script-verifiable) totals $44,511,000: Jump River - South (Route 2) $32,041,000, items at Gardner Park ($2,707,000) and Stone Lake ($1,359,000), and 'Transmission Lines - South (Route 2)' $5,745,000. The locations of the non-Jump-River work are not mapped here.",
+    "The PSC's $41.9 million 'ATC Jump River Substation South' subtotal (final decision p. 52) matches ATC's substation-plus-line total ($36,107,000 + $5,745,000), so it is not the cost of the Jump River Substation alone.",
+    "The project-wide final-decision schedule (Q3 2026 start) is not applied to this package because ATC's own filing gives a package-specific start of Q3 2027."
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "projectA": "xcel-wwtc",
+   "projectB": "dpc-alma-blair",
+   "kind": "shared-site",
+   "siteLabel": "Tremval North / Larkin Valley 345 kV switching station (near Blair, Trempealeau County)",
+   "description": "PSC 1515-CE-103 final decision: Dairyland's Alma-Blair 345 kV line terminates at the new Tremval North Substation (345 kV switching station) approved in 5-CE-158 (WWTC), which NSPW constructs, owns and operates. This is an interconnection at a shared site; it is not evidence of shared construction resources.",
+   "evidence": [
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "connecting the existing LQ-43 transmission line near the Alma Substation to the new Tremval North Substation, in Buffalo and Trempealeau Counties, Wisconsin.",
+     "supports": "Alma-Blair connects to the new Tremval North Substation",
+     "page": 1,
+     "section": "FINAL DECISION",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "From the reconnection point, both routes follow a common segment east for approximately 13 miles following the LQ-18 corridor terminating at the new Tremval switching station approved in docket 5-CE-158.",
+     "supports": "Alma-Blair terminates at the new Tremval switching station approved in 5-CE-158",
+     "page": 14,
+     "section": "Project Description",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "route the transmission line north terminating at the 345 kV switching station approved in the Western Wisconsin Transmission connection project (docket 5-CE-158).",
+     "supports": "Alma-Blair Segment 6 terminates at WWTC-approved 345 kV switching station",
+     "page": 29,
+     "section": "Routing",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "xcel-wwtc",
+   "projectB": "atc-nspw-grid-forward",
+   "kind": "shared-site",
+   "siteLabel": "Tremval Substation Expansion North (Larkin Valley)",
+   "description": "WWTC is certificated with the Tremval Substation Expansion North site, and the Grid Forward (5-CE-157) construction sequence is described as beginning at, and exiting from, that same site. NSPW and ATC are applicants in both dockets, so the owner sets overlap.",
+   "evidence": [
+    {
+     "sourceId": "psc-wwtc-final",
+     "exactExcerpt": "The Commission grants the applicants a CPCN for construction of the project using route Segments 2A and 2B with the Tremval Substation Expansion North site",
+     "supports": "certificate: Segments 2A/2B with Tremval Substation Expansion North",
+     "page": 56,
+     "section": "Certificate",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-final",
+     "exactExcerpt": "In the application, the construction sequence is described as beginning at the Tremval Substation Expansion North. As a Common Route, both the Proposed and Alternative Routes would exit the Tremval Substation Expansion North",
+     "supports": "Grid Forward route exits Tremval Substation Expansion North",
+     "page": 31,
+     "section": "Routing",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "xcel-wwtc",
+   "projectB": "atc-nspw-grid-forward",
+   "kind": "other",
+   "description": "In each PSC final decision, the applicants stated that their project provides reliability, economic and public policy benefits both individually and in conjunction with the other docket (WWTC 5-CE-158, Grid Forward 5-CE-157). This is planning and economic analysis, not construction coordination.",
+   "evidence": [
+    {
+     "sourceId": "psc-wwtc-final",
+     "exactExcerpt": "The applicants stated that the facts in the record paint a clear picture that the project, both individually and in conjunction with the Grid Forward Project being approved in docket 5-CE-157",
+     "supports": "applicants' statement that WWTC provides benefits individually and with Grid Forward",
+     "page": 18,
+     "section": "Project Need",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-final",
+     "exactExcerpt": "both individually and in conjunction with the Western Wisconsin Transmission Project being approved in docket 5-CE-158, produces reliability, economic, and public policy benefits in all",
+     "supports": "Grid Forward decision references joint evaluation with WWTC",
+     "page": 19,
+     "section": "Project Need",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "xcel-wwtc",
+   "projectB": "atc-wwtc-jump-river",
+   "kind": "same-initiative",
+   "description": "Both are owner-specific work packages under the single joint CPCN in docket 5-CE-158 (MISO LRTP Tranche 1 Project 5).",
+   "evidence": [
+    {
+     "sourceId": "psc-wwtc-final",
+     "exactExcerpt": "Construct and Operate Long Range Transmission Planning Tranche 1 Project 5, which consists of Expanding the Tremval and Eau Claire Substations, a New Jump River Substation",
+     "supports": "LRTP Tranche 1 Project 5; docket title lists Tremval and Eau Claire expansions and new Jump River Substation",
+     "page": 1,
+     "section": "Caption",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-wwtc-q2-2026-nspw",
+     "exactExcerpt": "As noted in the proceeding, NSPW will construct, own and operate all parts of the project except the Jump River Substation.",
+     "supports": "NSPW owns/builds everything except Jump River Substation (ATC)",
+     "page": 1,
+     "section": "Cover letter",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "xcel-wwtc",
+   "projectB": "atc-wwtc-jump-river",
+   "kind": "interconnects",
+   "siteLabel": "Jump River Substation South (Town of Longwood, Clark County)",
+   "description": "The NSPW 345 kV line (Segment 2B) terminates at ATC's new Jump River Substation South.",
+   "evidence": [
+    {
+     "sourceId": "psc-wwtc-final",
+     "exactExcerpt": "2B would terminate at the proposed Jump River Substation South in the Town of Longwood in Clark County.",
+     "supports": "Jump River Substation South in Town of Longwood, Clark County",
+     "page": 33,
+     "section": "Transmission Line Route Alternatives",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "xcel-wwtc-page",
+     "exactExcerpt": "into Eau Claire County to connect with the new Elk Farm Substation, east and north into Chippewa County generally following State Highway 29, before connecting to the new Jump River Substation (owned by ATC) near Owen in Clark County.",
+     "supports": "route description Elk Farm -> STH 29 -> Jump River; Jump River Substation owned by ATC",
+     "section": "Project Route",
+     "verifiedByScript": true
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "plan.md hypothesis check: 'Planned construction in 2026-27' is supported only by Xcel's web page ('Construction : 2026 -2027') and its Jan 2026 info sheet. The PSC final decision (start Q3 2026, completion by Q3 2029) and NSPW's Q2 2026 filing (start Q4 2026, in-service Q3 2029) imply construction running into 2029. 'Near the Dairyland project around Blair' is supported: the Alma-Blair line terminates at WWTC's Tremval North / Larkin Valley station.",
+  "Minnesota / Mississippi River end: no WWTC source describes one. WWTC runs entirely inside Wisconsin (Trempealeau, Eau Claire, Chippewa and Clark counties), from Larkin Valley/Tremval North near Blair to Jump River South. Xcel only mentions other projects 'proposed in Minnesota and to the west'. Any Mississippi crossing toward Alma belongs to other projects (e.g., Dairyland Alma-Blair).",
+  "Eau Claire Substation expansion: the docket caption still lists 'Expanding the Tremval and Eau Claire Substations', but the Eau Claire expansion was part of Route 1. The authorized Route 2 uses the new Elk Farm Substation instead, and NSPW's Q2 2026 cost table lists only Larkin Valley and Elk Farm substations. No source confirms any remaining Eau Claire Substation work under 5-CE-158.",
+  "Completion conflict (not reconciled): the Xcel web page ('Project complete: 2027 - 2028') and the Jan 2026 info sheet ('Project complete and line placed in service', 2027-2028) disagree with the PSC final decision and case page ('completion by the third quarter of 2029') and with NSPW's own Q2 2026 filing ('in-service date of third quarter 2029').",
+  "Construction start moved across claims: Q3 2025 (application era, PSC case page), then Q3 2026 (final decision), then Q4 2026 (NSPW Q2 2026 report). ATC's Jump River Substation is set for Q3 2027. The Xcel web page and info sheet show construction in 2026-2027, which conflicts with a Q3 2029 in-service date.",
+  "Removed as superseded: the PSC case page's application-era schedule ('If approved, the applicant anticipates construction for this project to begin in the third quarter of 2025 and be in-service in the third quarter of 2029') is not listed as a construction window. The same page gives the later final-decision schedule, and NSPW's Q2 2026 report shows construction had not started by mid-2026. The output schema has no supersededBy field. Its in-service claim (Q3 2029) is kept in completionClaims.",
+  "Removed from the ATC package: the final decision's project-wide schedule (construction from Q3 2026, completion by Q3 2029) is not specific to the Jump River Substation. ATC's own Q2 2026 report gives a package-specific start of Q3 2027.",
+  "Window end bounds: no source gives an explicit construction end date for NSPW's or ATC's work. The PSC and NSPW windows end at the stated completion or in-service quarter. ATC's window ends at the overall Project in-service quarter and is marked non-continuous. 'Completion by the third quarter of 2029' is encoded as Q3 2029, though 'by' permits an earlier finish.",
+  "Whether construction had actually started by 2026-09-26 is not confirmed. The latest filings are the Q2 2026 progress reports (filed July 27 and July 31, 2026), and a web search found no later construction-start notice. Q3 2026 reports are due after the quarter ends.",
+  "PSC final decision cost table (p. 52): the Route 2 transmission line and 'Other T-Line Removal/Installation' costs are labeled 'ATC'. NSPW's Q2 2026 report says this is wrong and that NSPW constructs the line. No corrected PSC table was found. The NSPW table ($438.8M) and ATC's table ($44.511M) together make up the $483.3M total.",
+  "ATC scope vs NSPW's statement: NSPW says it will 'construct, own and operate all parts of the project except the Jump River Substation'. ATC's image-only cost table (Q2 2026 report p.3, read visually, not script-verifiable) lists ATC 'Transmission Lines - South (Route 2)' ($5,745,000) and items at Gardner Park and Stone Lake substations. What that line and remote-substation work is, and where, was not determined; those sites are not mapped.",
+  "Final order date: the Xcel web page says December 11, 2025 and the Jan 2026 info sheet says December 10, 2025. The decision is signed December 10, 2025 and was PSC-received/served December 11, 2025. Xcel says verbal approval came October 30, 2025.",
+  "Docket numbering: Dairyland's July 2024 application calls WWTC 'PSCW Docket No. 4220-CE-188', while the PSC decision, the case page and the progress reports use joint docket 5-CE-158. No cached source states the renumbering; the mapping rests on the identical project name.",
+  "The PSC case page link text reads 'Docket Reports: 5-CE-185', but the link points to the ERF search for docket 5-CE-158 (SEQ=158). Treated as a typo.",
+  "ATC's Q2 2026 report says its period is 'April 1, through June 30, 2025'. Treated as a typo for 2026.",
+  "Internal text conflict in the final decision: p.15 says that after leaving W3305, Route 2 travels 'north in a single-circuit configuration for 27 miles'. p.33 says Segment 2B 'would generally parallel the existing transmission line' for about 27 miles. The PSC GIS polyline runs almost due east (about lat 44.92) from the STH 29 crossing to Jump River South, and Xcel says it generally follows State Highway 29. The GIS geometry is used.",
+  "Route geometry comes from the PSC docket map service (layer 39 'Transmission Route', application/proceeding-era GIS). The Commission approved Route 2 'as presented', but the adjustment layers 'Route Adjustment 11.5' (190th/195th/199th Street alternatives near the STH 29 crossing) and 'Route Adjustment 11.7' (PSCW-KF-11.7), the 'Structure N1-120 Option' layer, and final engineering could shift the alignment. No post-decision as-designed GIS was found. The layer list came from a live query and is not cached.",
+  "The crossing points at 250th Street (Town of Sigel) and 370th Street (Edson/Worden border) were not geocoded separately; the GIS polyline, which passes through those towns, is used instead.",
+  "Schedule dependency (not reconciled): Dairyland's July 2024 application says the new switching station must be completed by the end of 2028 for Dairyland's connection, and the 1515-CE-103 decision gives Alma-Blair a September 2028 in-service date. WWTC sources give only whole-project completion/in-service dates (Q3 2029, or 2027-2028 per Xcel) and no separate completion date for the Larkin Valley / Tremval North station.",
+  "No reviewed source documents resource sharing (crews, equipment, laydown yards, outage or construction sequencing) between NSPW and Dairyland, or between WWTC and Grid Forward. Resource-sharing status is 'not found in sources', which is not the same as 'uncoordinated'.",
+  "Owner overlap with Grid Forward: NSPW and ATC are applicants for both WWTC and Grid Forward (5-CE-157, with SMMPA and WPPI). Under plan.md section 8, a WWTC vs Grid Forward pair is shared-owner context, not a cross-utility review lead. Grid Forward also describes 'expanding the Tremval Substation', and how Tremval North / Larkin Valley work is split between 5-CE-157 and 5-CE-158 was not determined.",
+  "Cross-cluster coordinate mismatch: the Dairyland cluster places the same Tremval North switching station at the Blair locality centroid (44.2946, -91.2338, precision locality). The PSC GIS point 'Tremval Expansion North' (44.30158, -91.25420) is about 1.8 km away and should be preferred when the clusters are merged.",
+  "The Xcel Jan 2026 info-sheet schedule excerpt contains U+0007 (BEL) control characters from the PDF text layer. They are kept verbatim so the excerpt checker can match it; the UI may need to strip them for display.",
+  "psc-wwtc-map (the PSC project map PDF) is image-only with no text layer. It was used only to check the GIS route visually and cannot anchor excerpts.",
+  "Only NSPW's Q2 2026 report assigns 'Other T-Line Removal/Installation' (rebuilds of existing lines, $29.2M PSC-approved) to NSPW. Which existing lines are rebuilt (the final decision names W3305 and 3418 near the STH 29 crossing, and W3203 on the common segment), and who owns them, was not fully extracted.",
+  "The MISO LRTP Tranche 1 Project 5 documents themselves were not consulted. The parent-initiative label rests on the PSC final decision caption and text and on the PSC case page."
+ ],
+ "issuesFixed": [
+  "Checked all 57 unique excerpts with find_excerpt.py: every one prints FOUND on its stated page, and all are 8-45 words. No excerpt text had to be repaired.",
+  "Removed from xcel-wwtc.constructionWindows the application-era window (psc-wwtc-case, construction starting Q3 2025). The same page and NSPW's Q2 2026 filing supersede it. Left in, it would have widened the matchable window back into 2025. Its Q3 2029 in-service completion claim is kept, and the removal is recorded in unresolved.",
+  "Removed the atc-wwtc-jump-river construction window taken from the final decision's project-wide schedule (Q3 2026 start). It is not specific to the substation, and ATC's own filing gives a Q3 2027 start. Left in, it would create false 2026-2027 'possible' overlaps.",
+  "Viewed the image-only cost table in ATC's Q2 2026 report (p.3). It totals $44,511,000: Jump River South $32,041,000, Gardner Park and Stone Lake items, and $5,745,000 of ATC line work. So the PSC's $41.9M 'ATC Jump River Substation South' subtotal is not the cost of the substation alone. Relabeled that fact, replaced the 'not cross-checked' caveat, retitled the ATC package 'ATC portion (Jump River Substation South)', and flagged the conflict with NSPW's 'all parts except the Jump River Substation' statement.",
+  "Corrected the route caveat. NSPW reports that pole spotting from Elk Farm to Larkin Valley was completed in June 2026; only the 30% design and the preliminary Elk Farm-Jump River pole spotting were still in progress. Replaced the unverifiable layer name 'PSCW-KF-11.5' with the actual map-service layer names ('Route Adjustment 11.5', 'Route Adjustment 11.7'/PSCW-KF-11.7). Stated the verified simplification error: 136 m on 2A and 122 m on 2B.",
+  "Checked every route waypoint against the cached PSC GIS polyline; each matches its stated vertex within 0.1 m, and the GIS segment lengths (39.7 and 40.8 miles) match the decision text. Re-checked all official-gis and named-facility places with Overpass, Nominatim and Mapbox. Existing Tremval matches OSM way 258582476. Tremval North is 918 m north of it. Elk Farm reverse-geocodes to Town of Seymour and Jump River South to Town of Longwood. The Hallie Marsh, CTH Q/N 90th Ave and 190th Street waypoints are consistent. No coordinate was more than 3 km off, so none were changed. Updated the coordinateSource texts with these checks and replaced an unverified 'Mapbox reverse' claim with the Nominatim result.",
+  "Grid Forward coordination: the description implied NSPW and ATC are the only Grid Forward applicants. SMMPA and WPPI are also applicants, so I added the Grid Forward p.1 excerpt. Reworded 'evaluated' to what the source says (the applicants 'stated'), using the fuller p.18 excerpt. Flagged the NSPW/ATC owner overlap as shared-owner context, not a cross-utility lead.",
+  "Dairyland coordination: the claim that Dairyland was a 'granted intervenor' had no evidence, so I added the p.2 intervention excerpt. Added Dairyland's July 2024 application excerpts (connection configuration 'determined in coordination with Xcel Energy'; station needed by end of 2028) to support the interconnection-design scope, and added dpc-alma-blair-cpcn-2024 to sources.",
+  "Added explicit not-found-in-sources / resource-sharing coordination entries (empty evidence) for Dairyland and for Grid Forward, so interconnection or shared-site evidence cannot be read as shared resources.",
+  "Added the 1515-CE-103 p.1 excerpt naming the 'Tremval North Substation' to the xcel-wwtc/dpc-alma-blair shared-site relation, and NSPW's cost-table excerpt ('Larkin Valley Substation Expansion North (NSPW) ... Elk Farm Substation (NSPW)') to the Larkin Valley and Elk Farm places.",
+  "The 'Final decision date' fact had no evidence for 'served December 11, 2025'. Added ATC's 'Final Decision and Order in this docket served December 11, 2025' excerpt.",
+  "Rewrote the xcel-wwtc summary as one sentence. Relabeled the existing Tremval Substation as a reference point about 0.5 mi south of the Larkin Valley site. Added the p.15 'The Commission authorizes construction of the proposed project along Route 2' excerpt to the route evidence.",
+  "Construction-window notes now say that the PSC, NSPW and ATC end bounds are completion or in-service quarters, not stated construction ends, and that 'completion by' only sets a latest date.",
+  "Expanded unresolved: the plan.md 2026-27 construction hypothesis holds only on Xcel's sources; final decision p.15 says the line runs 'north' where the GIS shows east; Dairyland's application uses docket 4220-CE-188 vs 5-CE-158; Dairyland needs the station by end of 2028 while WWTC's in-service is Q3 2029; the Dairyland cluster's Tremval North point is about 1.8 km from the PSC GIS point; ATC's scope conflicts with NSPW's statement; plus the two removed windows."
+ ]
+}

@@ -1,0 +1,209 @@
+{
+ "source": "Sperry Tech ShellHacks 2026 GridLock starter file (Projects_Overlaps.xlsx)",
+ "projects": [
+  {
+   "id": "DESC_1",
+   "utility": "Dominion Energy South Carolina",
+   "name": "Stevens Creek - Hooks 115 kV / LR Plumb Branch 46 kV Rebuilds",
+   "a": {
+    "name": "Stevens Creek Sub",
+    "lat": 33.562599,
+    "lon": -82.051362
+   },
+   "b": {
+    "name": "Hooks Sub",
+    "lat": null,
+    "lon": null
+   },
+   "inService": "2024-12-31"
+  },
+  {
+   "id": "DESC_2",
+   "utility": "Dominion Energy South Carolina",
+   "name": "Hooks - Thurmond 115 kV Tie: Rebuild",
+   "a": {
+    "name": "Hooks Sub",
+    "lat": null,
+    "lon": null
+   },
+   "b": {
+    "name": "Thurmond Sub",
+    "lat": 33.660127,
+    "lon": -82.195931
+   },
+   "inService": "2024-12-31"
+  },
+  {
+   "id": "DESC_3",
+   "utility": "Dominion Energy South Carolina",
+   "name": "Jasper - Okatie 230 kV #2: Construct",
+   "a": {
+    "name": "Jasper Sub",
+    "lat": 32.35912,
+    "lon": -81.1246
+   },
+   "b": {
+    "name": "Okatie Sub",
+    "lat": 32.333758,
+    "lon": -81.032495
+   },
+   "inService": "2025-12-31"
+  },
+  {
+   "id": "DESC_4",
+   "utility": "Dominion Energy South Carolina",
+   "name": "Queensboro - Ft Johnson 115 kV & Queensboro-Bayfront 115 kV (Queensboro-James Island Sect)",
+   "a": {
+    "name": "Queensboro Sub",
+    "lat": 32.722793,
+    "lon": -79.967332
+   },
+   "b": {
+    "name": "Ft Johnson Sub",
+    "lat": null,
+    "lon": null
+   },
+   "inService": "2023-12-31"
+  },
+  {
+   "id": "DESC_5",
+   "utility": "Dominion Energy South Carolina",
+   "name": "Okatie-Bluffton 115 kV: Rebuild",
+   "a": {
+    "name": "Okatie Sub",
+    "lat": 32.333758,
+    "lon": -81.032495
+   },
+   "b": {
+    "name": "Bluffton Sub",
+    "lat": 32.235027,
+    "lon": -80.853384
+   },
+   "inService": "2025-06-01"
+  },
+  {
+   "id": "GPC_1",
+   "utility": "Georgia Power",
+   "name": "EVANS PRIMARY - THURMOND DAM (USA) #5 115KV REBUILD",
+   "a": {
+    "name": "EVANS PRIMARY",
+    "lat": 33.543994,
+    "lon": -82.168648
+   },
+   "b": {
+    "name": "THURMOND DAM #5",
+    "lat": 33.660127,
+    "lon": -82.195931
+   },
+   "inService": "2033-06-01"
+  },
+  {
+   "id": "GPC_2",
+   "utility": "Georgia Power",
+   "name": "SAV: MCINTOSH - PURRYSBURG 230KV REACTORS",
+   "a": {
+    "name": "MCINTOSH",
+    "lat": 32.352116,
+    "lon": -81.175112
+   },
+   "b": {
+    "name": "PURRYSBURG",
+    "lat": null,
+    "lon": null
+   },
+   "inService": "2026-06-01"
+  },
+  {
+   "id": "GPC_3",
+   "utility": "Georgia Power",
+   "name": "SAV: GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD",
+   "a": {
+    "name": "GOSHEN",
+    "lat": 32.248701,
+    "lon": -81.209472
+   },
+   "b": {
+    "name": "MCINTOSH",
+    "lat": 32.352116,
+    "lon": -81.182105
+   },
+   "inService": "2027-06-01"
+  },
+  {
+   "id": "GPC_4",
+   "utility": "Georgia Power",
+   "name": "MITCHELL - NORTH TIFTON 230KV RECONDUCTOR",
+   "a": {
+    "name": "Mitchell Substation",
+    "lat": 31.447121,
+    "lon": -84.133843
+   },
+   "b": {
+    "name": "North Tifton Substation",
+    "lat": 31.478089,
+    "lon": -83.54913
+   },
+   "inService": "2025-05-01"
+  },
+  {
+   "id": "GPC_5",
+   "utility": "Georgia Power",
+   "name": "JESUP - LUDOWICI PRIMARY 115KV REBUILD",
+   "a": {
+    "name": "JESUP",
+    "lat": 31.603106,
+    "lon": -81.924947
+   },
+   "b": {
+    "name": "LUDOWICI PRIMARY",
+    "lat": 31.721597,
+    "lon": -81.743703
+   },
+   "inService": "2025-06-01"
+  }
+ ],
+ "overlaps": [
+  {
+   "id": "OVL_1",
+   "distanceMi": 4.09,
+   "gapDays": 3074,
+   "a": "DESC_2",
+   "b": "GPC_1"
+  },
+  {
+   "id": "OVL_2",
+   "distanceMi": 5.65,
+   "gapDays": 152,
+   "a": "DESC_3",
+   "b": "GPC_2"
+  },
+  {
+   "id": "OVL_3",
+   "distanceMi": 7.55,
+   "gapDays": 517,
+   "a": "DESC_3",
+   "b": "GPC_3"
+  },
+  {
+   "id": "OVL_4",
+   "distanceMi": 8.01,
+   "gapDays": 3074,
+   "a": "DESC_1",
+   "b": "GPC_1"
+  },
+  {
+   "id": "OVL_5",
+   "distanceMi": 14.34,
+   "gapDays": 365,
+   "a": "DESC_5",
+   "b": "GPC_2"
+  },
+  {
+   "id": "OVL_6",
+   "distanceMi": 14.81,
+   "gapDays": 730,
+   "a": "DESC_5",
+   "b": "GPC_3"
+  }
+ ]
+}

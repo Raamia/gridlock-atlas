@@ -1,5 +1,5 @@
 import { IDX, SNAPSHOT } from "@/lib/data";
-import { SCOPE_LABEL } from "@/lib/describe";
+import { displayTitle, firstSentence, SCOPE_LABEL } from "@/lib/describe";
 import type { Evidence, Match } from "@/lib/domain/types";
 import { formatDate, formatSpan } from "@/lib/format";
 import { activeWindows } from "@/lib/matching/time";
@@ -63,8 +63,10 @@ export function buildBrief(m: Match): Brief {
       : `GEO (${m.geo}) — ${m.geoReason}`;
   const timeLine = `TIME (${m.time}) — ${m.timeReason}${cite([...activeWindows(a), ...activeWindows(b)].flatMap((w) => w.evidenceIds), 3)}`;
 
+  const byScope = new Map<string, (typeof m.coordination)[number]>();
+  for (const c of m.coordination) if (!byScope.has(c.scope)) byScope.set(c.scope, c);
   const statusText = m.coordination.length
-    ? m.coordination.map((c) => `${SCOPE_LABEL[c.scope]}: ${c.description}${cite(c.evidenceIds)}`).join(" ") +
+    ? [...byScope.values()].map((c) => `${SCOPE_LABEL[c.scope]}: ${firstSentence(c.description, 32)}${cite(c.evidenceIds, 1)}`).join(" ") +
       (m.coordination.some((c) => c.scope === "resource-sharing") ? "" : " Resource sharing (crews, equipment) is not established in the reviewed sources.")
     : "No coordination between these projects was found in the reviewed sources. That is an unknown status, not evidence of a lack of coordination.";
 
@@ -72,8 +74,9 @@ export function buildBrief(m: Match): Brief {
   for (const c of m.conflicts) {
     const p = IDX.project(c.projectId);
     const claims = p.completionClaims.filter((x) => c.claimIds.includes(x.id));
-    unresolved.push(`${p.shortTitle}: ${c.description}${cite(claims.flatMap((x) => x.evidenceIds))} Confirm current phase dates before discussing shared resources.`);
+    unresolved.push(`${p.shortTitle}: ${c.description}${cite(claims.flatMap((x) => x.evidenceIds))}`);
   }
+  if (m.conflicts.length) unresolved.push("Confirm the current phase dates with both planners before discussing shared resources.");
   if (m.time === "unknown") unresolved.push("At least one construction window is not published; schedule overlap cannot be assessed.");
   if (m.timeDetail.precision === "year" || m.timeDetail.precision === "quarter")
     unresolved.push(`Published schedules are ${m.timeDetail.precision}-precision; the exact months of field work are not stated.`);
@@ -92,9 +95,9 @@ export function buildBrief(m: Match): Brief {
         : `Can more precise location or schedule evidence confirm or rule out this pair before any outreach?`;
 
   return {
-    title: `${a.title} × ${b.title}`,
+    title: `${displayTitle(a)} × ${displayTitle(b)}`,
     rows: [
-      { label: "Pair", text: `${a.title} (${ua}) × ${b.title} (${ub})` },
+      { label: "Pair", text: `${displayTitle(a)} (${ua}) × ${displayTitle(b)} (${ub})` },
       { label: "Why flagged", text: `${geoLine}\n${timeLine}` },
       { label: "Coordination status", text: statusText },
     ],

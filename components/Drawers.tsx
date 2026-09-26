@@ -8,8 +8,10 @@ import { IDX, SNAPSHOT } from "@/lib/data";
 import type { SourceDocument } from "@/lib/domain/types";
 import { formatDate } from "@/lib/format";
 import { ENGINE_VERSION, IN_SERVICE_HORIZON_DAYS } from "@/lib/matching/engine";
+import { sponsorCheck } from "@/lib/sponsor";
 import { useAtlas } from "@/lib/store";
 import { SourceRow } from "./Evidence";
+import { ReviewExports } from "./Review";
 import { IconButton } from "./ui";
 
 function Drawer({ open, onClose, title, eyebrow, children, width = 540 }: { open: boolean; onClose: () => void; title: string; eyebrow: string; children: ReactNode; width?: number }) {
@@ -155,6 +157,9 @@ export function MethodDrawer() {
         </Rule>
       </ul>
 
+      <H>Sponsor worked example (live)</H>
+      <SponsorExample />
+
       <H>Corpus checks (live)</H>
       <CorpusChecks />
 
@@ -187,6 +192,9 @@ export function MethodDrawer() {
           </div>
         </>
       )}
+
+      <H>Reviewer mode</H>
+      <ReviewExports />
 
       <H>AI extraction</H>
       <ExtractionRuns />
@@ -318,6 +326,42 @@ function ExtractionRuns() {
           )}
         </div>
       ))}
+    </div>
+  );
+}
+
+function SponsorExample() {
+  const r = useMemo(() => sponsorCheck(), []);
+  return (
+    <div>
+      <p className="mb-2 text-[12px] leading-snug text-text-2">
+        The engine re-runs on the ten projects in Sperry&apos;s starter file (their coordinates and in-service dates) and must reproduce the sponsor&apos;s overlap table.
+      </p>
+      <div className="overflow-hidden rounded-xl ring-1 ring-line">
+        <div className="mono grid grid-cols-[52px_1fr_78px_78px_18px] gap-2 border-b border-line bg-bg-3/60 px-3 py-1.5 text-[10px] uppercase tracking-wide text-text-3">
+          <span>Row</span>
+          <span>Pair</span>
+          <span className="text-right">Miles</span>
+          <span className="text-right">Days</span>
+          <span />
+        </div>
+        {r.rows.map((row) => (
+          <div key={row.id} className="grid grid-cols-[52px_1fr_78px_78px_18px] items-center gap-2 border-b border-line bg-bg-2/60 px-3 py-1.5 text-[11.5px] last:border-b-0">
+            <span className="mono text-text-3">{row.id}</span>
+            <span className="text-text-1">{row.pair}</span>
+            <span className="num text-right text-text-0" title={`sponsor ${row.sponsorMiles}`}>
+              {row.ourMiles?.toFixed(2) ?? "—"}
+            </span>
+            <span className="num text-right text-text-0" title={`sponsor ${row.sponsorDays}`}>
+              {row.ourDays?.toLocaleString("en-US") ?? "—"}
+            </span>
+            {row.ok ? <CheckCircle2 size={13} className="text-known" /> : <XCircle size={13} className="text-danger" />}
+          </div>
+        ))}
+      </div>
+      <p className="mt-2 text-[11px] text-text-3">
+        {r.allOk ? "All rows match the sponsor's table (±0.01 mi, exact days) and no extra pairs are flagged." : `Mismatch: ${r.extra.length} extra pair(s).`}
+      </p>
     </div>
   );
 }

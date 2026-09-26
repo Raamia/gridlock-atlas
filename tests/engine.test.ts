@@ -135,13 +135,22 @@ describe("temporal signal", () => {
     expect(t.detail.continuityCaveat).toBe(true);
   });
 
-  it("confirms only if every current claim combination overlaps", () => {
-    const a = project("a", "u1", { constructionWindows: [win(2026, 2027), win(2028, 2029)] });
+  it("confirms only if every source's claim overlaps", () => {
+    const a = project("a", "u1", { constructionWindows: [win(2026, 2027), win(2028, 2029, { claimSourceId: "psc" })] });
     const b = project("b", "u2", { constructionWindows: [win(2026, 2027)] });
     const t = evaluateTime(a, b);
     expect(t.level).toBe("possible");
     expect(t.detail.combinations).toBe(2);
     expect(t.detail.confirmedCombinations).toBe(1);
+  });
+
+  it("treats several windows from one source as components of the work", () => {
+    // e.g. a utility page listing substation work 2026–2027 and line work 2028–2029
+    const a = project("a", "u1", { constructionWindows: [win(2026, 2027), win(2028, 2029)] });
+    const b = project("b", "u2", { constructionWindows: [win(2026, 2027)] });
+    const t = evaluateTime(a, b);
+    expect(t.level).toBe("confirmed");
+    expect(t.detail.combinations).toBe(1);
   });
 
   it("ignores superseded and preconstruction claims", () => {
@@ -307,7 +316,7 @@ describe("pair engine", () => {
       constructionWindows: [win(2026, 2027)],
       completionClaims: [
         { id: "utility", claimSourceId: "src", label: "completion", date: { earliest: "2027-01-01", latest: "2028-12-31", precision: "year" }, evidenceIds: [] },
-        { id: "psc", claimSourceId: "src", label: "in-service", date: { earliest: "2029-07-01", latest: "2029-09-30", precision: "quarter" }, evidenceIds: [] },
+        { id: "psc", claimSourceId: "psc", label: "in-service", date: { earliest: "2029-07-01", latest: "2029-09-30", precision: "quarter" }, evidenceIds: [] },
       ],
     });
     const m = evaluatePair(a, b, snapshot([a, b]))!;
@@ -315,6 +324,18 @@ describe("pair engine", () => {
     expect(m.conflicts).toHaveLength(1);
     expect(m.conflicts[0]).toMatchObject({ field: "completion", affectsMatch: false });
     expect(m.conflicts[0].description).toContain("Q3 2029");
+  });
+
+  it("does not report component dates from one source as a conflict", () => {
+    const a = near("a", "u1", { constructionWindows: [win(2026, 2027)] });
+    const b = near("b", "u2", {
+      constructionWindows: [win(2026, 2027), win(2029, 2030)],
+      completionClaims: [
+        { id: "seg", claimSourceId: "src", label: "in-service (Texas segment)", date: { earliest: "2029-10-01", latest: "2029-10-31", precision: "month" }, evidenceIds: [] },
+        { id: "all", claimSourceId: "src", label: "in-service (whole project)", date: { earliest: "2029-11-01", latest: "2029-11-30", precision: "month" }, evidenceIds: [] },
+      ],
+    });
+    expect(evaluatePair(a, b, snapshot([a, b]))!.conflicts).toHaveLength(0);
   });
 
   it("drops pairs with no signal at all", () => {
@@ -371,5 +392,14 @@ describe("sponsor overlap table", () => {
     const ids = run.matches.map((m) => m.id);
     expect(ids).toContain("desc-2__gpc-1");
     expect(ids.indexOf("desc-3__gpc-2")).toBeLessThan(ids.indexOf("desc-2__gpc-1"));
+  });
+});
+
+describe("sponsor starter file", () => {
+  it("reproduces every row of the sponsor's overlap table and nothing else", async () => {
+    const { sponsorCheck } = await import("@/lib/sponsor");
+    const r = sponsorCheck();
+    for (const row of r.rows) expect(row, row.id).toMatchObject({ ok: true });
+    expect(r.extra).toEqual([]);
   });
 });

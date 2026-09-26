@@ -26,7 +26,7 @@ import type {
   Snapshot,
   SourceDocument,
 } from "../lib/domain/types";
-import { UTILITIES } from "../lib/data/utilities";
+import { UTILITIES, UTILITY_ALIASES } from "../lib/data/utilities";
 import { locate, readMeta, ROOT } from "./source-cache";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -193,17 +193,22 @@ for (const c of clusters) {
       ...(pl.role ? { role: pl.role } : {}),
       ...(pl.confidence ? { confidence: pl.confidence } : {}),
     }));
-    const windows: ConstructionWindow[] = (p.constructionWindows ?? []).map((w: R, i: number) => ({
+    const windows: ConstructionWindow[] = (p.constructionWindows ?? []).map((w: R, i: number) => {
+      // a start milestone with no published end ("construction begins Fall 2027") arrives as a far-future end
+      const openEnded = String(w.end?.latest ?? "") >= "2090";
+      return {
       id: `${id}:w${i + 1}`,
       claimSourceId: w.claimSourceId,
       phase: w.phase,
       start: w.start,
-      end: w.end,
-      continuous: w.continuous !== false,
+      end: openEnded ? { earliest: w.start.earliest, latest: "2099-12-31", precision: "year" } : w.end,
+      continuous: openEnded ? false : w.continuous !== false,
+      ...(openEnded ? { openEnded: true } : {}),
       evidenceIds: ev(w.evidence),
       note: w.note || undefined,
       ...(overrides.windowPatches?.[`${id}:w${i + 1}`] ?? {}),
-    }));
+      };
+    });
     const completion: CompletionClaim[] = (p.completionClaims ?? [])
       .map((cc: R, i: number) => ({
         id: `${id}:c${i + 1}`,
@@ -238,7 +243,7 @@ for (const c of clusters) {
       parentInitiative: p.parentInitiative || undefined,
       docketId: p.docketId || undefined,
       summary: p.summary ?? "",
-      owners: (p.owners ?? []).map((o: R) => ({ utilityId: o.utilityId, evidenceIds: ev(o.evidence) })),
+      owners: (p.owners ?? []).map((o: R) => ({ utilityId: UTILITY_ALIASES[o.utilityId] ?? o.utilityId, evidenceIds: ev(o.evidence) })),
       status: { value: p.status?.value ?? "unknown", label: p.status?.label || undefined, asOf: p.status?.asOf || undefined, evidenceIds: ev(p.status?.evidence) },
       states,
       counties: (p.counties ?? []).map((co: R) => ({ name: co.name, state: abbr(co.state), evidenceIds: ev(co.evidence) })),
@@ -297,7 +302,10 @@ for (const c of clusters) {
     let best = 0;
     for (const pl of both.flatMap((p) => p.places)) {
       const score = [...words(pl.detail ?? pl.label)].filter((w) => want.has(w)).length;
-      if (score > best) (best = score), (sitePlace = pl);
+      if (score > best) {
+        best = score;
+        sitePlace = pl;
+      }
     }
     relations.push({
       id: `rel-${relations.length + 1}`,
@@ -414,7 +422,16 @@ fs.writeFileSync(path.join(ROOT, "data", "snapshot.json"), JSON.stringify(snapsh
 fs.writeFileSync(
   path.join(ROOT, "data", "manifest.json"),
   JSON.stringify(
-    snapshot.sources.map((s) => ({ id: s.id, url: s.url, publisher: s.publisher, title: s.title, sourceType: s.sourceType, retrievedAt: s.retrievedAt, sha256: s.sha256 })),
+    snapshot.sources.map((s) => ({
+      id: s.id,
+      url: s.url,
+      publisher: s.publisher,
+      title: s.title,
+      sourceType: s.sourceType,
+      retrievedAt: s.retrievedAt,
+      sha256: s.sha256,
+      ...(readMeta(s.id) && (readMeta(s.id) as unknown as { localCopy?: boolean }).localCopy ? { localCopy: true } : {}),
+    })),
     null,
     1,
   ),

@@ -1,0 +1,3060 @@
+{
+ "cluster": "mn-lrtp",
+ "sources": [
+  {
+   "id": "mn-biennial-2025",
+   "title": "2025 Minnesota Biennial Transmission Projects Report",
+   "publisher": "Minnesota Transmission Owners",
+   "url": "https://www.minnelectrans.com/report-2025.html",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "landing page, undated; links the as-filed 10/31/2025 report"
+  },
+  {
+   "id": "mn-biennial-2025-pdf",
+   "title": "2025 Minnesota Biennial Transmission Projects Report (as filed 10/31/2025)",
+   "publisher": "Minnesota Transmission Owners",
+   "url": "https://www.minnelectrans.com/documents/2025_Biennial_Report/AS_FILED_Biennial_Transmission_Projects_Report_10.31.25.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2025-10-31",
+   "documentDateEvidence": "file name 'AS_FILED ... 10.31.25'; text 'At the publication of this report, in November 2025'"
+  },
+  {
+   "id": "gre-northland-page",
+   "title": "Northland Reliability Project",
+   "publisher": "Great River Energy",
+   "url": "https://greatriverenergy.com/transmission_project/northland-reliability-project/",
+   "sourceType": "utility",
+   "cached": true,
+   "updatedAt": "2024-01-04",
+   "documentDateEvidence": "HTML meta article:modified_time 2024-01-04"
+  },
+  {
+   "id": "gre-northland-groundbreaking-news",
+   "title": "Minnesota Power, Great River Energy break ground on transformative transmission line for a reliable, resilient grid",
+   "publisher": "Great River Energy",
+   "url": "https://greatriverenergy.com/company-news/minnesota-power-great-river-energy-break-ground-on-transformative-transmission-line-for-a-reliable-resilient-grid/",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2025-10-08",
+   "documentDateEvidence": "HTML meta article:published_time 2025-10-08"
+  },
+  {
+   "id": "gre-northland-first-structures-news",
+   "title": "First structures set for Northland Reliability Project",
+   "publisher": "Great River Energy",
+   "url": "https://greatriverenergy.com/company-news/first-structures-set-for-northland-reliability-project/",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2026-08-13",
+   "documentDateEvidence": "HTML meta article:published_time 2026-08-13"
+  },
+  {
+   "id": "gre-northland-construction-news",
+   "title": "Northland Reliability Project construction well underway",
+   "publisher": "Great River Energy",
+   "url": "https://greatriverenergy.com/transmission/northland-reliability-project-construction-well-underway/",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2026-01-14",
+   "documentDateEvidence": "HTML meta article:published_time 2026-01-14"
+  },
+  {
+   "id": "xcel-bssa-abo-page",
+   "title": "Big Stone South to Alexandria to Big Oaks - Xcel Energy Transmission Projects",
+   "publisher": "Xcel Energy",
+   "url": "https://xcelenergytransmission.com/projects/big-stone-south-alexandria-big-oaks/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated; footer copyright 2026"
+  },
+  {
+   "id": "abo-project-page",
+   "title": "Alexandria to Big Oaks Transmission Line Project",
+   "publisher": "Alexandria to Big Oaks project (Xcel Energy on behalf of co-owners)",
+   "url": "https://www.alexandriatobigoaks.com/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated; describes 2025 and 2026 construction activities"
+  },
+  {
+   "id": "xcel-abo-route-permit-app-2023",
+   "title": "Route Permit Application, Alexandria to Big Oaks 345 kV Transmission Project (MPUC Docket TL-23-159)",
+   "publisher": "Northern States Power Company d/b/a Xcel Energy",
+   "url": "https://www.alexandriatobigoaks.com/PUBLIC%20Route%20Permit%20Application-Alexandria%20to%20Big%20Oaks%20345kV%20Transmission%20Project.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2023-09-29",
+   "documentDateEvidence": "page footer 'September 29, 2023'"
+  },
+  {
+   "id": "mres-bssa-approval-news",
+   "title": "New transmission line approved in Minnesota; will boost reliability, increase access to renewable energy for customers",
+   "publisher": "Missouri River Energy Services",
+   "url": "https://www.mrenergy.com/news/minnesota-public-utilities-commission-approves-transmission-line",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2024-10-03",
+   "documentDateEvidence": "JSON-LD datePublished 2024-10-03"
+  },
+  {
+   "id": "otp-bssa-route-permit-news",
+   "title": "We filed a transmission line Route Permit application in Minnesota",
+   "publisher": "Otter Tail Power Company",
+   "url": "https://www.otpco.com/newsroom/posts/we-filed-a-transmission-line-route-permit-application-in-minnesota/",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2024-10-23",
+   "documentDateEvidence": "page date text 'October 23, 2024'"
+  },
+  {
+   "id": "bssa-project-page",
+   "title": "Big Stone South to Alexandria Transmission Line",
+   "publisher": "Otter Tail Power Company and Missouri River Energy Services",
+   "url": "https://bigstonesouthtoalexandria.com/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated; references MN PUC route permit approval"
+  },
+  {
+   "id": "bssa-regulatory-page",
+   "title": "Big Stone South to Alexandria - Regulatory Process",
+   "publisher": "Otter Tail Power Company and Missouri River Energy Services",
+   "url": "https://bigstonesouthtoalexandria.com/regulatory-process/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated; references June 25, 2026 written approval"
+  },
+  {
+   "id": "bssa-library-page",
+   "title": "Big Stone South to Alexandria - Library",
+   "publisher": "Otter Tail Power Company and Missouri River Energy Services",
+   "url": "https://bigstonesouthtoalexandria.com/library/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated; references June 25, 2026 written approval"
+  },
+  {
+   "id": "bssa-landowners-page",
+   "title": "Big Stone South to Alexandria - Landowners",
+   "publisher": "Otter Tail Power Company and Missouri River Energy Services",
+   "url": "https://bigstonesouthtoalexandria.com/landowners/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated; references approved route and field surveys in second half of 2026"
+  },
+  {
+   "id": "mnpuc-bssa-route-permit-2026-06",
+   "title": "Route Permit, Big Stone South to Alexandria 345 kV Transmission Line (MPUC Docket E017,ET10/TL-23-160)",
+   "publisher": "Minnesota Public Utilities Commission",
+   "url": "https://bigstonesouthtoalexandria.com/documents/BSSA_Final_Route_Permit_June_25_2026.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-06-25",
+   "documentDateEvidence": "'Approved and adopted this 25th day of June, 2026'; PUC document hosted on the project website"
+  },
+  {
+   "id": "mnpuc-bssa-order-2026-06",
+   "title": "Order Issuing Route Permit, Big Stone South to Alexandria 345 kV (Docket TL-23-160)",
+   "publisher": "Minnesota Public Utilities Commission",
+   "url": "https://bigstonesouthtoalexandria.com/documents/BSSA_Order_June_25_2026.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-06-25",
+   "documentDateEvidence": "'SERVICE DATE: June 25, 2026'; PUC document hosted on the project website"
+  },
+  {
+   "id": "xcel-mmrt-page",
+   "title": "Mankato-Mississippi River Transmission Project",
+   "publisher": "Xcel Energy",
+   "url": "https://mmrtproject.com/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated; references Feb. 5, 2026 approval"
+  },
+  {
+   "id": "xcel-mmrt-library-page",
+   "title": "Mankato-Mississippi River Transmission Project - Library & FAQs",
+   "publisher": "Xcel Energy",
+   "url": "https://mmrtproject.com/library",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated FAQ; anticipates MPUC decision in early 2026 (pre-decision text)"
+  },
+  {
+   "id": "xcel-mmrt-segments-page",
+   "title": "Mankato-Mississippi River Transmission Project - Project Segments",
+   "publisher": "Xcel Energy",
+   "url": "https://mmrtproject.com/segments/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "undated; footer copyright 2024"
+  },
+  {
+   "id": "xcel-mmrt-approval-news",
+   "title": "Xcel Energy receives approval for Mankato\u2013Mississippi River Transmission Line Project",
+   "publisher": "Xcel Energy",
+   "url": "https://newsroom.xcelenergy.com/news/xcel-energy-receives-approval-for-mankatomississippi-river-transmission-line-project",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2026-02-06",
+   "documentDateEvidence": "dateline 'MINNEAPOLIS (Feb. 6, 2026)'"
+  },
+  {
+   "id": "xcel-mmrt-summary-2024",
+   "title": "Mankato-Mississippi River 345 kV Transmission Project: Summary of Certificate of Need and Route Permit Application",
+   "publisher": "Northern States Power Company d/b/a Xcel Energy",
+   "url": "https://mmrtproject.com/documents/filing/MMRT_SummaryCONRP_Apr2024.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2024-04-02",
+   "documentDateEvidence": "text 'On April 2, 2024 ... filed'"
+  },
+  {
+   "id": "xcel-mmrt-application-2024",
+   "title": "Mankato-Mississippi River Transmission Project: Certificate of Need and Route Permit Application (MPUC E002/CN-22-532, E002/TL-23-157)",
+   "publisher": "Northern States Power Company d/b/a Xcel Energy",
+   "url": "https://mmrtproject.com/documents/filing/MMRT_CombinedApplication_Apr2024.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2024-04-02",
+   "documentDateEvidence": "page footer 'April 2, 2024'"
+  },
+  {
+   "id": "dpc-alma-blair-cpcn-2024",
+   "title": "Alma-Blair CPCN Application (2024-07-01 file)",
+   "publisher": "Dairyland Power Cooperative",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/Dairyland%20Alma-Blair%20CPCN%20Application_2024-07-01.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2024-07-01",
+   "documentDateEvidence": "header 'July 2024'; file name 2024-07-01"
+  },
+  {
+   "id": "psc-1515-ce-103-final",
+   "title": "Final Decision, docket 1515-CE-103",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/1515-CE-103%20Final%20Decision.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "shared corpus source (2026 PSC final decision)"
+  },
+  {
+   "id": "psc-wwtc-final",
+   "title": "Final Decision, docket 5-CE-158 (Western Wisconsin Transmission Connection)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=570292",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "shared corpus source; cited only in unresolved note (WWTC = LRTP Tranche 1 Project 5)"
+  }
+ ],
+ "projects": [
+  {
+   "id": "mp-gre-northland",
+   "title": "Northland Reliability Project",
+   "shortTitle": "Northland 345 kV",
+   "titleEvidence": [
+    {
+     "sourceId": "mn-biennial-2025-pdf",
+     "exactExcerpt": "Northland Reliability Project MPUC Tracking Number: 2023-NE-N1 Utility: Minnesota Power (MP) & Great River Energy (GRE)",
+     "supports": "project name and utilities",
+     "verifiedByScript": true,
+     "page": 85,
+     "printedPage": "81",
+     "section": "Chapter 6: Needs - Northland Reliability Project"
+    }
+   ],
+   "summary": "Minnesota Power and Great River Energy jointly own the Northland Reliability Project, an approximately 180-mile double-circuit 345 kV line from the Iron Range Substation near Grand Rapids via a new Cuyuna series compensation station and the Benton County Substation to the new Big Oaks Substation near Becker; construction on the first segment began in Q3 2025 and in-service is planned by June 1, 2030.",
+   "owners": [
+    {
+     "utilityId": "minnesota-power",
+     "name": "Minnesota Power",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "Jointly owned by Minnesota Power and Great River Energy, the Northland Reliability Project is the first major transmission initiative from MISO\u2019s Tranche 1 to break ground.",
+       "supports": "joint ownership by Minnesota Power and Great River Energy",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    },
+    {
+     "utilityId": "gre",
+     "name": "Great River Energy",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "Jointly owned by Minnesota Power and Great River Energy, the Northland Reliability Project is the first major transmission initiative from MISO\u2019s Tranche 1 to break ground.",
+       "supports": "joint ownership by Minnesota Power and Great River Energy",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "construction",
+    "asOf": "2026-08-13",
+    "evidence": [
+     {
+      "sourceId": "gre-northland-first-structures-news",
+      "exactExcerpt": "A major milestone was reached when the first transmission structure was successfully set on July 17 near St. Cloud.",
+      "supports": "construction under way (first structure set; article published 2026-08-13)",
+      "verifiedByScript": true,
+      "section": "First structures set for Northland Reliability Project"
+     },
+     {
+      "sourceId": "mn-biennial-2025-pdf",
+      "exactExcerpt": "Following the Commission\u2019s February 2025 decision to grant a Certificate of Need and Route Permit for the Project, construction on the first segment of the Project began in the third quarter of 2025.",
+      "supports": "CN/RP granted Feb 2025; construction began Q3 2025",
+      "verifiedByScript": true,
+      "page": 87,
+      "printedPage": "83",
+      "section": "Northland Reliability Project - Schedule"
+     }
+    ]
+   },
+   "states": [
+    "MN"
+   ],
+   "docketId": "MPUC CN-22-416; TL-22-415",
+   "parentInitiative": "MISO LRTP Tranche 1 (approved July 2022)",
+   "places": [
+    {
+     "id": "nrp-iron-range",
+     "label": "Iron Range Substation (near Grand Rapids)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 47.23033,
+     "lon": -93.30337,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 911204354 power=substation name='Iron Range Substation' operator='Minnesota Power' voltage=500000;230000;46000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Expansion of the existing Iron Range Substation 500-230 kV Substation, located near Grand Rapids, Minnesota, to include new 500-345 kV transformers",
+       "supports": "Iron Range Substation near Grand Rapids is a project terminal",
+       "verifiedByScript": true,
+       "page": 86,
+       "printedPage": "82",
+       "section": "Northland Reliability Project"
+      }
+     ]
+    },
+    {
+     "id": "nrp-cuyuna",
+     "label": "Cuyuna 345 kV Series Compensation Station (new, near Riverton)",
+     "kind": "other",
+     "precision": "locality",
+     "lat": 46.4621002,
+     "lon": -94.0467397,
+     "uncertaintyMeters": 6000,
+     "coordinateSource": "Nominatim: Riverton, Crow Wing County, MN (OSM relation 137570) town centroid; Cuyuna station not in OSM",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Construction of a new Cuyuna 345 kV Series Compensation Station located near Riverton, Minnesota, approximately at the midpoint of Segment 1",
+       "supports": "new Cuyuna series compensation station near Riverton",
+       "verifiedByScript": true,
+       "page": 86,
+       "printedPage": "82",
+       "section": "Northland Reliability Project"
+      }
+     ]
+    },
+    {
+     "id": "nrp-benton-county",
+     "label": "Benton County Substation (near St. Cloud)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 45.56907,
+     "lon": -94.03876,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 180464807 power=substation name='Benton County Substation' voltage=345000;230000;115000;69000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Expansion of the existing Benton County 345 kV Substation, located near St. Cloud, Minnesota, to include new 345 kV bus and breakers",
+       "supports": "Benton County Substation near St. Cloud",
+       "verifiedByScript": true,
+       "page": 86,
+       "printedPage": "82",
+       "section": "Northland Reliability Project"
+      }
+     ]
+    },
+    {
+     "id": "nrp-big-oaks",
+     "label": "Big Oaks Substation (new; Xcel Energy separate project)",
+     "kind": "substation",
+     "precision": "locality",
+     "lat": 45.3931821,
+     "lon": -93.8768904,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Becker, Sherburne County, MN (OSM relation 137501) city centroid; Big Oaks Substation not found in OSM (Overpass name search 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "The proposed Big Oaks 345 kV Substation on the south end of Segment 2 is being permitted, engineered, and constructed by Xcel Energy as part of a separate project, and is not included in this scope of work.",
+       "supports": "Big Oaks is at the south end of Segment 2 and is Xcel's separate project",
+       "verifiedByScript": true,
+       "page": 86,
+       "printedPage": "82",
+       "section": "Northland Reliability Project"
+      }
+     ]
+    },
+    {
+     "id": "nrp-sherco",
+     "label": "Sherco Substation",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 45.37492,
+     "lon": -93.8976,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way 106952850 power=substation name='Sherburne County Substation' operator='Xcel Energy' voltage=345000;115000 (Sherco = Sherburne County) (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Replace an approximately 20-mile 345 kV line from the Benton County Substation to the existing Sherco Substation along existing transmission corridors using double-circuit capable 345 kV structures.",
+       "supports": "Sherco Substation is a Segment 2 terminal",
+       "verifiedByScript": true,
+       "page": 86,
+       "printedPage": "82",
+       "section": "Northland Reliability Project"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "Segment 1 follows the existing 230 kV line from the Iron Range Substation through the new Cuyuna series compensation station (near Riverton) to the Benton County Substation; Segment 2 continues on existing corridors from Benton County to the new Big Oaks Substation (plus a rebuilt Benton County-Sherco 345 kV line).",
+    "caveat": "schematic / not survey accurate; waypoints are the named facilities in source order, not a digitized alignment",
+    "evidence": [
+     {
+      "sourceId": "mn-biennial-2025-pdf",
+      "exactExcerpt": "The project will be constructed along the existing 230 kV transmission line from the Iron Range substation to the Benton County substation",
+      "supports": "route follows existing 230 kV line Iron Range to Benton County",
+      "verifiedByScript": true,
+      "page": 87,
+      "printedPage": "83",
+      "section": "Northland Reliability Project - General Impacts"
+     },
+     {
+      "sourceId": "mn-biennial-2025-pdf",
+      "exactExcerpt": "with additional construction along the existing 230 kV transmission line from the Benton County substation to the Monticello substation, terminating at the new Big Oaks substation",
+      "supports": "route terminates at new Big Oaks substation",
+      "verifiedByScript": true,
+      "page": 87,
+      "printedPage": "83",
+      "section": "Northland Reliability Project - General Impacts"
+     },
+     {
+      "sourceId": "mn-biennial-2025-pdf",
+      "exactExcerpt": "Segment 1: construction of a new, approximately 140-mile long, double-circuit 345 kV transmission line connecting the existing Iron Range 500-230 kV Substation, a new Cuyuna 345 kV Series Compensation Station, and the existing Benton County 345 kV Substation",
+      "supports": "Segment 1 facility sequence",
+      "verifiedByScript": true,
+      "page": 86,
+      "printedPage": "82",
+      "section": "Northland Reliability Project"
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "Iron Range Substation",
+      "lat": 47.23033,
+      "lon": -93.30337,
+      "coordinateSource": "OSM way 911204354 (Iron Range Substation)"
+     },
+     {
+      "name": "Cuyuna Series Compensation Station (Riverton locality)",
+      "lat": 46.4621002,
+      "lon": -94.0467397,
+      "coordinateSource": "Nominatim: Riverton, MN (OSM relation 137570) town centroid"
+     },
+     {
+      "name": "Benton County Substation",
+      "lat": 45.56907,
+      "lon": -94.03876,
+      "coordinateSource": "OSM way 180464807 (Benton County Substation)"
+     },
+     {
+      "name": "Big Oaks Substation (Becker locality)",
+      "lat": 45.3931821,
+      "lon": -93.8768904,
+      "coordinateSource": "Nominatim: Becker, MN (OSM relation 137501) city centroid"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "mn-biennial-2025-pdf",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2025-07-01",
+      "latest": "2025-09-30",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "note": "Start is stated (Q3 2025, first segment). End is DERIVED from the same section's statement that construction is expected to be completed over 3 years (Q3 2025 + ~3 years); not derived from the June 1, 2030 in-service date. Flag end bound for human review.",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Following the Commission\u2019s February 2025 decision to grant a Certificate of Need and Route Permit for the Project, construction on the first segment of the Project began in the third quarter of 2025.",
+       "supports": "construction start Q3 2025",
+       "verifiedByScript": true,
+       "page": 87,
+       "printedPage": "83",
+       "section": "Northland Reliability Project - Schedule"
+      },
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Construction is expected to be completed over 3 years.",
+       "supports": "construction duration about 3 years (basis for derived end bound)",
+       "verifiedByScript": true,
+       "page": 87,
+       "printedPage": "83",
+       "section": "Northland Reliability Project - General Impacts"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "gre-northland-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "note": "GRE project-page schedule table (page metadata modified 2024-01-04); predates the reported 2025 construction start; kept as a disagreeing published claim.",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-page",
+       "exactExcerpt": "Permitting, engineering, environmental surveys, real estate and public engagement 2027-2030 Construction 2030 Anticipated in-service",
+       "supports": "construction 2027-2030; in-service 2030",
+       "verifiedByScript": true,
+       "section": "Quick facts - Schedule"
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "mn-biennial-2025-pdf",
+     "label": "planned in-service (by June 1, 2030)",
+     "date": {
+      "earliest": "2030-06-01",
+      "latest": "2030-06-01",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Schedule: The project is planned to be in service by June 1, 2030.",
+       "supports": "planned in-service by June 1, 2030",
+       "verifiedByScript": true,
+       "page": 87,
+       "printedPage": "83",
+       "section": "Northland Reliability Project - Schedule"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "gre-northland-groundbreaking-news",
+     "label": "expected in-service (by 2030)",
+     "date": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "The transmission line is expected to be in service by 2030 and is estimated to cost more than $1 billion.",
+       "supports": "in-service by 2030",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "gre-northland-first-structures-news",
+     "label": "expected in-service (by 2030)",
+     "date": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "gre-northland-first-structures-news",
+       "exactExcerpt": "The project is expected to be in service by 2030.",
+       "supports": "in-service by 2030 (Aug 2026 article)",
+       "verifiedByScript": true,
+       "section": "First structures set for Northland Reliability Project"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "gre-northland-page",
+     "label": "anticipated in-service",
+     "date": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "gre-northland-page",
+       "exactExcerpt": "Permitting, engineering, environmental surveys, real estate and public engagement 2027-2030 Construction 2030 Anticipated in-service",
+       "supports": "anticipated in-service 2030",
+       "verifiedByScript": true,
+       "section": "Quick facts - Schedule"
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "xcel-nspm",
+     "status": "reported-coordination",
+     "scope": "shared-facility",
+     "description": "The Northland line terminates at the new Big Oaks Substation, which the 2025 Biennial Report says is being permitted, engineered and constructed by Xcel Energy as a separate project outside Northland's scope. Documents an interface at a shared facility only.",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "The proposed Big Oaks 345 kV Substation on the south end of Segment 2 is being permitted, engineered, and constructed by Xcel Energy as part of a separate project, and is not included in this scope of work.",
+       "supports": "Big Oaks built by Xcel as separate project",
+       "verifiedByScript": true,
+       "page": 86,
+       "printedPage": "82",
+       "section": "Northland Reliability Project"
+      },
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "with additional construction along the existing 230 kV transmission line from the Benton County substation to the Monticello substation, terminating at the new Big Oaks substation",
+       "supports": "Northland terminates at Big Oaks",
+       "verifiedByScript": true,
+       "page": 87,
+       "printedPage": "83",
+       "section": "Northland Reliability Project - General Impacts"
+      }
+     ]
+    },
+    {
+     "partner": "abo-alexandria-big-oaks",
+     "status": "not-found-in-sources",
+     "scope": "resource-sharing",
+     "description": "No reviewed source documents shared crews, equipment, materials or outage coordination between Northland and the Alexandria-Big Oaks work at Big Oaks Substation.",
+     "evidence": []
+    }
+   ],
+   "counties": [
+    {
+     "name": "Itasca",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "Construction began this fall in Benton and Sherburne counties and will begin on the northern segment in 2026 with the route running through Itasca, Aitkin, Crow Wing and Morrison counties.",
+       "supports": "counties crossed",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    },
+    {
+     "name": "Aitkin",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "Construction began this fall in Benton and Sherburne counties and will begin on the northern segment in 2026 with the route running through Itasca, Aitkin, Crow Wing and Morrison counties.",
+       "supports": "counties crossed",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    },
+    {
+     "name": "Crow Wing",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "Construction began this fall in Benton and Sherburne counties and will begin on the northern segment in 2026 with the route running through Itasca, Aitkin, Crow Wing and Morrison counties.",
+       "supports": "counties crossed",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    },
+    {
+     "name": "Morrison",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "Construction began this fall in Benton and Sherburne counties and will begin on the northern segment in 2026 with the route running through Itasca, Aitkin, Crow Wing and Morrison counties.",
+       "supports": "counties crossed",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    },
+    {
+     "name": "Benton",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "Construction began this fall in Benton and Sherburne counties and will begin on the northern segment in 2026 with the route running through Itasca, Aitkin, Crow Wing and Morrison counties.",
+       "supports": "counties crossed; construction began fall 2025",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    },
+    {
+     "name": "Sherburne",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "Construction began this fall in Benton and Sherburne counties and will begin on the northern segment in 2026 with the route running through Itasca, Aitkin, Crow Wing and Morrison counties.",
+       "supports": "counties crossed; construction began fall 2025",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-page",
+       "exactExcerpt": "Minnesota Power and Great River Energy plan to build the Northland Reliability Project, an approximately 180-mile, double-circuit 345-kV transmission line from northern Minnesota to central Minnesota near Becker",
+       "supports": "345 kV double-circuit",
+       "verifiedByScript": true,
+       "section": "Northland Reliability Project"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Approximate length",
+     "value": "180",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-page",
+       "exactExcerpt": "Minnesota Power and Great River Energy plan to build the Northland Reliability Project, an approximately 180-mile, double-circuit 345-kV transmission line from northern Minnesota to central Minnesota near Becker",
+       "supports": "approximately 180 miles",
+       "verifiedByScript": true,
+       "section": "Northland Reliability Project"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Segment 1 (Iron Range-Cuyuna-Benton County)",
+     "value": "approximately 140 miles, double-circuit 345 kV",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Segment 1: construction of a new, approximately 140-mile long, double-circuit 345 kV transmission line connecting the existing Iron Range 500-230 kV Substation, a new Cuyuna 345 kV Series Compensation Station, and the existing Benton County 345 kV Substation",
+       "supports": "Segment 1 length",
+       "verifiedByScript": true,
+       "page": 86,
+       "printedPage": "82",
+       "section": "Northland Reliability Project"
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Estimated cost",
+     "value": "more than $1 billion (estimate)",
+     "evidence": [
+      {
+       "sourceId": "gre-northland-groundbreaking-news",
+       "exactExcerpt": "The transmission line is expected to be in service by 2030 and is estimated to cost more than $1 billion.",
+       "supports": "cost estimate",
+       "verifiedByScript": true,
+       "section": "Minnesota Power, Great River Energy break ground on transformative transmission line"
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "End of the Biennial Report construction window (2028) is derived from a '3 years' duration statement, not a stated end date.",
+    "The GRE project page's '2027-2030 Construction' schedule predates the Q3/fall 2025 construction start reported by the Biennial Report and GRE news; both kept side by side.",
+    "A January 2026 phased-construction map on northlandreliabilityproject.com (image only, not text-verifiable) shows work into 2029 on the Cuyuna-Iron Range portion; not used as evidence.",
+    "Big Oaks Substation and the Cuyuna station are not in OSM; plotted at Becker and Riverton town centroids.",
+    "Big Oaks Substation itself is Xcel Energy scope (separate project), not Northland scope."
+   ]
+  },
+  {
+   "id": "abo-alexandria-big-oaks",
+   "title": "Alexandria to Big Oaks 345 kV Transmission Project (eastern segment of Big Stone South-Alexandria-Big Oaks)",
+   "shortTitle": "Alexandria-Big Oaks 345 kV",
+   "titleEvidence": [
+    {
+     "sourceId": "xcel-abo-route-permit-app-2023",
+     "exactExcerpt": "approval to construct the Alexandria to Big Oaks 345 kilovolt (kV) Transmission Project (Project or Alexandria to Big Oaks Project) in Douglas, Todd, Stearns, Sherburne, and Wright counties in Minnesota.",
+     "supports": "project name",
+     "verifiedByScript": true,
+     "page": 16,
+     "printedPage": "1",
+     "section": "1 Introduction"
+    },
+    {
+     "sourceId": "mn-biennial-2025-pdf",
+     "exactExcerpt": "Eastern Segment: Adding a second circuit to existing 345 kV structures originally built as part of the CapX2020 Fargo \u2013 St. Cloud and St. Cloud \u2013 Monticello projects between Alexandria and a new substation near the Sherco power plant in Becker.",
+     "supports": "eastern segment scope",
+     "verifiedByScript": true,
+     "page": 128,
+     "printedPage": "124",
+     "section": "Big Stone South \u2013 Alexandria \u2013 Big Oaks 345 kV"
+    }
+   ],
+   "summary": "Xcel Energy, on behalf of co-owners Great River Energy, Minnesota Power, Otter Tail Power and Missouri River Energy Services (for WMMPA), is adding a second 345 kV circuit on existing CapX2020 structures for about 105-108 miles from the Alexandria Substation to a new Big Oaks Substation in Becker, with construction begun in 2025 and completion claims from late 2026 (line) to late 2027 (Big Oaks Substation).",
+   "owners": [
+    {
+     "utilityId": "xcel-nspm",
+     "name": "Northern States Power Co.-Minnesota (Xcel Energy)",
+     "evidence": [
+      {
+       "sourceId": "otp-bssa-route-permit-news",
+       "exactExcerpt": "The eastern segment, known as the Alexandria to Big Oaks transmission line, is being developed by Xcel Energy on behalf of the co-owners, which include our company, MRES, Great River Energy, Minnesota Power, and Xcel Energy.",
+       "supports": "ABO co-owners; Xcel develops on their behalf",
+       "verifiedByScript": true,
+       "section": "We filed a transmission line Route Permit application in Minnesota"
+      }
+     ]
+    },
+    {
+     "utilityId": "gre",
+     "name": "Great River Energy",
+     "evidence": [
+      {
+       "sourceId": "otp-bssa-route-permit-news",
+       "exactExcerpt": "The eastern segment, known as the Alexandria to Big Oaks transmission line, is being developed by Xcel Energy on behalf of the co-owners, which include our company, MRES, Great River Energy, Minnesota Power, and Xcel Energy.",
+       "supports": "GRE is co-owner",
+       "verifiedByScript": true,
+       "section": "We filed a transmission line Route Permit application in Minnesota"
+      }
+     ]
+    },
+    {
+     "utilityId": "minnesota-power",
+     "name": "Minnesota Power",
+     "evidence": [
+      {
+       "sourceId": "otp-bssa-route-permit-news",
+       "exactExcerpt": "The eastern segment, known as the Alexandria to Big Oaks transmission line, is being developed by Xcel Energy on behalf of the co-owners, which include our company, MRES, Great River Energy, Minnesota Power, and Xcel Energy.",
+       "supports": "Minnesota Power is co-owner",
+       "verifiedByScript": true,
+       "section": "We filed a transmission line Route Permit application in Minnesota"
+      }
+     ]
+    },
+    {
+     "utilityId": "otter-tail",
+     "name": "Otter Tail Power Company",
+     "evidence": [
+      {
+       "sourceId": "otp-bssa-route-permit-news",
+       "exactExcerpt": "The eastern segment, known as the Alexandria to Big Oaks transmission line, is being developed by Xcel Energy on behalf of the co-owners, which include our company, MRES, Great River Energy, Minnesota Power, and Xcel Energy.",
+       "supports": "OTP ('our company') is co-owner",
+       "verifiedByScript": true,
+       "section": "We filed a transmission line Route Permit application in Minnesota"
+      }
+     ]
+    },
+    {
+     "utilityId": "mres",
+     "name": "Missouri River Energy Services (on behalf of Western Minnesota Municipal Power Agency)",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "Northern States Power Company, doing business as Xcel Energy (Xcel Energy), along with Great River Energy, Minnesota Power, Otter Tail Power Company (Otter Tail), and Missouri River Energy Services, on behalf of Western Minnesota Municipal Power Agency (Western Minnesota), (collectively, the Applicants)",
+       "supports": "MRES applicant on behalf of WMMPA",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "construction",
+    "asOf": "2025-10-31",
+    "evidence": [
+     {
+      "sourceId": "mn-biennial-2025-pdf",
+      "exactExcerpt": "issued a route permit for the Alexandria to Big Oaks Project in 2024. The project is currently under construction.",
+      "supports": "route permit 2024; under construction",
+      "verifiedByScript": true,
+      "page": 42,
+      "printedPage": "38",
+      "section": "5.4 West Central Zone"
+     },
+     {
+      "sourceId": "abo-project-page",
+      "exactExcerpt": "Xcel Energy has begun construction activities in support of the Alexandria-Big Oaks project - building the Big Oaks substation and adding the second circuit to the existing CapX2020 transmission line.",
+      "supports": "construction under way",
+      "verifiedByScript": true,
+      "section": "Current status"
+     }
+    ]
+   },
+   "states": [
+    "MN"
+   ],
+   "docketId": "MPUC CN-22-538; TL-23-159",
+   "parentInitiative": "MISO LRTP Tranche 1 - Big Stone South-Alexandria-Big Oaks ('MISO LRTP 2 Project' in the 2025 MN Biennial Report)",
+   "places": [
+    {
+     "id": "abo-alexandria",
+     "label": "Alexandria Substation (WMMPA 345 kV, Alexandria)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 45.84728,
+     "lon": -95.40596,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM relation 9098050 power=substation name='Alexandria Switching Substation' operator='Western Minnesota Municipal Power Agency' voltage=345000;115000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "The Project involves construction of an approximately 105 to 108-mile long, 345 kV transmission line from the existing Alexandria Substation located in Alexandria, Douglas County to the new Big Oaks Substation",
+       "supports": "Alexandria Substation is the west terminal",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "id": "abo-riverview",
+     "label": "Riverview Substation (near Freeport; bypassed)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 45.65635,
+     "lon": -94.70837,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way 872338053 power=substation name='Riverview Substation' operator='Great River Energy' voltage=345000;115000;69000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "to bypass the Riverview Substation near the city of Freeport, and to bypass the Quarry Substation near the city of Waite Park",
+       "supports": "route passes Riverview (Freeport)",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "id": "abo-quarry",
+     "label": "Quarry Substation (near Waite Park; bypassed)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 45.54282,
+     "lon": -94.27437,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM relation 9094967 power=substation name='Quarry Substation' voltage=345000;115000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "to bypass the Riverview Substation near the city of Freeport, and to bypass the Quarry Substation near the city of Waite Park",
+       "supports": "route passes Quarry (Waite Park)",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "id": "abo-big-oaks",
+     "label": "Big Oaks Substation (new, Becker)",
+     "kind": "substation",
+     "precision": "locality",
+     "lat": 45.3931821,
+     "lon": -93.8768904,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Becker, Sherburne County, MN (OSM relation 137501) city centroid; Big Oaks Substation not found in OSM (Overpass name search 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "the new Big Oaks Substation located northwest of the Monticello Nuclear Generating Plant in Becker.",
+       "supports": "Big Oaks location in Becker",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "New 345 kV circuit strung on existing CapX2020 double-circuit structures running mainly along Interstate 94 from the Alexandria Substation, bypassing the Riverview (Freeport) and Quarry (Waite Park) substations, then a new Mississippi River crossing near Monticello to the new Big Oaks Substation in Becker.",
+    "caveat": "schematic / not survey accurate; waypoints are named facilities in source order, not a digitized alignment",
+    "evidence": [
+     {
+      "sourceId": "mres-bssa-approval-news",
+      "exactExcerpt": "That segment, totaling about 105 miles, will add a second 345 kV circuit to the existing CapX2020 project that was installed mostly along Interstate 94 between 2010 and 2015.",
+      "supports": "route on CapX2020 structures along I-94",
+      "verifiedByScript": true,
+      "section": "New transmission line approved in Minnesota"
+     },
+     {
+      "sourceId": "xcel-abo-route-permit-app-2023",
+      "exactExcerpt": "to bypass the Riverview Substation near the city of Freeport, and to bypass the Quarry Substation near the city of Waite Park",
+      "supports": "intermediate substations",
+      "verifiedByScript": true,
+      "page": 16,
+      "printedPage": "1",
+      "section": "1 Introduction"
+     },
+     {
+      "sourceId": "xcel-abo-route-permit-app-2023",
+      "exactExcerpt": "new right-of-way will be required for a new crossing over the Mississippi River to connect the new 345 kV transmission line near Monticello to the new Big Oaks Substation",
+      "supports": "river crossing near Monticello to Big Oaks",
+      "verifiedByScript": true,
+      "page": 16,
+      "printedPage": "1",
+      "section": "1 Introduction"
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "Alexandria Substation",
+      "lat": 45.84728,
+      "lon": -95.40596,
+      "coordinateSource": "OSM relation 9098050 (Alexandria Switching Substation, WMMPA)"
+     },
+     {
+      "name": "Riverview Substation",
+      "lat": 45.65635,
+      "lon": -94.70837,
+      "coordinateSource": "OSM way 872338053 (Riverview Substation, GRE)"
+     },
+     {
+      "name": "Quarry Substation",
+      "lat": 45.54282,
+      "lon": -94.27437,
+      "coordinateSource": "OSM relation 9094967 (Quarry Substation)"
+     },
+     {
+      "name": "Big Oaks Substation (Becker locality)",
+      "lat": 45.3931821,
+      "lon": -93.8768904,
+      "coordinateSource": "Nominatim: Becker, MN (OSM relation 137501) city centroid"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "xcel-abo-route-permit-app-2023",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2024-10-01",
+      "latest": "2025-03-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2027-10-01",
+      "latest": "2027-12-31",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "note": "Route Permit Application dated September 29, 2023 (pre-approval): start Q4 2024 or Q1 2025, construction completed Q4 2027.",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "Construction for the Project is expected to begin in the fourth quarter of 2024 or first quarter of 2025. The Applicants anticipate Project construction to be completed in the fourth quarter of 2027.",
+       "supports": "construction Q4 2024/Q1 2025 to Q4 2027",
+       "verifiedByScript": true,
+       "page": 41,
+       "printedPage": "26",
+       "section": "2.7 Project Schedule"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-bssa-abo-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2025-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "note": "Xcel project-page schedule bucket covering the second circuit, Big Oaks substation and Alexandria substation expansion; much longer than other claims and may include Alexandria substation work tied to the western segment.",
+     "evidence": [
+      {
+       "sourceId": "xcel-bssa-abo-page",
+       "exactExcerpt": "Add second circuit to transmission line; build new infrastructure, including Big Oaks substation and expand existing Alexandria substation: 2025 - 2030",
+       "supports": "construction bucket 2025-2030",
+       "verifiedByScript": true,
+       "section": "Project Construction Schedule"
+      },
+      {
+       "sourceId": "xcel-bssa-abo-page",
+       "exactExcerpt": "Construction will begin in 2025 on the Alexandria-Big Oaks eastern segment that will add a new transmission circuit to the existing 345 kV transmission structures that run mainly along Interstate 94",
+       "supports": "construction begins 2025",
+       "verifiedByScript": true,
+       "section": "Big Stone South to Alexandria to Big Oaks"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "mres-bssa-approval-news",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2025-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-10-01",
+      "latest": "2027-12-31",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "note": "MRES news dated 2024-10-03; start refers to Big Oaks substation work, end to eastern segment completion ('by the end of 2027' mapped to Q4 2027).",
+     "evidence": [
+      {
+       "sourceId": "mres-bssa-approval-news",
+       "exactExcerpt": "Xcel Energy expects work on the Big Oaks substation will begin in 2025 with the eastern segment being complete by the end of 2027.",
+       "supports": "start 2025, complete end of 2027",
+       "verifiedByScript": true,
+       "section": "New transmission line approved in Minnesota"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "abo-project-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2025-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-07-01",
+      "latest": "2027-12-31",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "note": "Line foundations began near Alexandria in 2025; final line segment expected late 2026; Big Oaks substation expected late 2027 ('late 2027' mapped to H2 2027).",
+     "evidence": [
+      {
+       "sourceId": "abo-project-page",
+       "exactExcerpt": "In 2025 the primary work was near the Alexandria Substation area where crews began installing the concrete foundations in areas where new structures are needed.",
+       "supports": "construction began 2025",
+       "verifiedByScript": true,
+       "section": "2025 and 2026 construction activities"
+      },
+      {
+       "sourceId": "abo-project-page",
+       "exactExcerpt": "Work on the substation has begun and is expected to be completed in late 2027.",
+       "supports": "Big Oaks substation completion late 2027",
+       "verifiedByScript": true,
+       "section": "Big Oaks Substation"
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "mn-biennial-2025-pdf",
+     "label": "Eastern Segment completion",
+     "date": {
+      "earliest": "2026-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Schedule: The Eastern Segment is expected to be completed in 2026 -2027. The Western Segment is planned to be completed by the end of 2030.",
+       "supports": "Eastern Segment completion 2026-2027",
+       "verifiedByScript": true,
+       "page": 128,
+       "printedPage": "124",
+       "section": "Big Stone South \u2013 Alexandria \u2013 Big Oaks 345 kV - Schedule"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-abo-route-permit-app-2023",
+     "label": "in-service (Table 2.7-1, Sept 2023)",
+     "date": {
+      "earliest": "2027-10-01",
+      "latest": "2027-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "Start Project Construction Second Quarter 2025 Project In-Service Fourth Quarter 2027",
+       "supports": "in-service Q4 2027",
+       "verifiedByScript": true,
+       "page": 41,
+       "printedPage": "26",
+       "section": "Table 2.7-1 Anticipated Project Schedule"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "abo-project-page",
+     "label": "line construction complete (final segment Quarry-Big Oaks)",
+     "date": {
+      "earliest": "2026-07-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "abo-project-page",
+       "exactExcerpt": "The final segment from the Quarry Substation to the new Big Oaks Substation near Monticello is anticipated to be completed in late 2026.",
+       "supports": "final line segment late 2026",
+       "verifiedByScript": true,
+       "section": "2026 activities"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "abo-project-page",
+     "label": "Big Oaks Substation completion",
+     "date": {
+      "earliest": "2027-07-01",
+      "latest": "2027-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "abo-project-page",
+       "exactExcerpt": "Work on the substation has begun and is expected to be completed in late 2027.",
+       "supports": "substation late 2027",
+       "verifiedByScript": true,
+       "section": "Big Oaks Substation"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "mres-bssa-approval-news",
+     "label": "eastern segment complete",
+     "date": {
+      "earliest": "2027-10-01",
+      "latest": "2027-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "mres-bssa-approval-news",
+       "exactExcerpt": "Xcel Energy expects work on the Big Oaks substation will begin in 2025 with the eastern segment being complete by the end of 2027.",
+       "supports": "complete by end of 2027",
+       "verifiedByScript": true,
+       "section": "New transmission line approved in Minnesota"
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "otp-mres-bssa",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "ABO and the Big Stone South-Alexandria western segment are the two segments of the Big Stone South-Alexandria-Big Oaks project, which submitted a combined Certificate of Need; both connect at the Alexandria Substation.",
+     "evidence": [
+      {
+       "sourceId": "abo-project-page",
+       "exactExcerpt": "The Alexandria-Big Oaks project is associated with the Big Stone South-Alexandria-Big Oaks project, which submitted a combined Certificate of Need application to the Minnesota Public Utilities Commission.",
+       "supports": "combined CN with western segment",
+       "verifiedByScript": true,
+       "section": "Project overview"
+      },
+      {
+       "sourceId": "bssa-library-page",
+       "exactExcerpt": "This Big Stone South to Alexandria (BSSA) project is the western segment of a larger project called Big Stone South to Alexandria to Big Oaks.",
+       "supports": "BSSA is the western segment",
+       "verifiedByScript": true,
+       "section": "Related Projects"
+      }
+     ]
+    },
+    {
+     "partner": "mp-gre-northland",
+     "status": "reported-coordination",
+     "scope": "shared-facility",
+     "description": "ABO builds the new Big Oaks Substation where the Northland line terminates; the Biennial Report states Big Oaks is Xcel's separate project outside Northland's scope. Interface only; no resource sharing documented.",
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "The proposed Big Oaks 345 kV Substation on the south end of Segment 2 is being permitted, engineered, and constructed by Xcel Energy as part of a separate project, and is not included in this scope of work.",
+       "supports": "Big Oaks interface with Northland",
+       "verifiedByScript": true,
+       "page": 86,
+       "printedPage": "82",
+       "section": "Northland Reliability Project"
+      },
+      {
+       "sourceId": "xcel-bssa-abo-page",
+       "exactExcerpt": "The Alexandria to Big Oaks segment will connect to the existing substation near Alexandria and the new Big Oaks substation near Becker.",
+       "supports": "ABO connects to new Big Oaks substation",
+       "verifiedByScript": true,
+       "section": "Big Stone South to Alexandria to Big Oaks"
+      }
+     ]
+    }
+   ],
+   "counties": [
+    {
+     "name": "Douglas",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "approval to construct the Alexandria to Big Oaks 345 kilovolt (kV) Transmission Project (Project or Alexandria to Big Oaks Project) in Douglas, Todd, Stearns, Sherburne, and Wright counties in Minnesota.",
+       "supports": "counties",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "name": "Todd",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "approval to construct the Alexandria to Big Oaks 345 kilovolt (kV) Transmission Project (Project or Alexandria to Big Oaks Project) in Douglas, Todd, Stearns, Sherburne, and Wright counties in Minnesota.",
+       "supports": "counties",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "name": "Stearns",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "approval to construct the Alexandria to Big Oaks 345 kilovolt (kV) Transmission Project (Project or Alexandria to Big Oaks Project) in Douglas, Todd, Stearns, Sherburne, and Wright counties in Minnesota.",
+       "supports": "counties",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "name": "Sherburne",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "approval to construct the Alexandria to Big Oaks 345 kilovolt (kV) Transmission Project (Project or Alexandria to Big Oaks Project) in Douglas, Todd, Stearns, Sherburne, and Wright counties in Minnesota.",
+       "supports": "counties",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "name": "Wright",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "approval to construct the Alexandria to Big Oaks 345 kilovolt (kV) Transmission Project (Project or Alexandria to Big Oaks Project) in Douglas, Todd, Stearns, Sherburne, and Wright counties in Minnesota.",
+       "supports": "counties",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "The Project involves construction of an approximately 105 to 108-mile long, 345 kV transmission line from the existing Alexandria Substation located in Alexandria, Douglas County to the new Big Oaks Substation",
+       "supports": "345 kV",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Length (Route Permit Application)",
+     "value": "105-108",
+     "evidence": [
+      {
+       "sourceId": "xcel-abo-route-permit-app-2023",
+       "exactExcerpt": "The Project involves construction of an approximately 105 to 108-mile long, 345 kV transmission line from the existing Alexandria Substation located in Alexandria, Douglas County to the new Big Oaks Substation",
+       "supports": "105-108 miles",
+       "verifiedByScript": true,
+       "page": 16,
+       "printedPage": "1",
+       "section": "1 Introduction"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Length (MRES news)",
+     "value": "about 105",
+     "evidence": [
+      {
+       "sourceId": "mres-bssa-approval-news",
+       "exactExcerpt": "That segment, totaling about 105 miles, will add a second 345 kV circuit to the existing CapX2020 project that was installed mostly along Interstate 94 between 2010 and 2015.",
+       "supports": "about 105 miles",
+       "verifiedByScript": true,
+       "section": "New transmission line approved in Minnesota"
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "alexandriatobigoaks.com still carries a pre-approval conditional sentence ('construction could begin in late 2024 and be complete in 2026'); treated as superseded and not modelled as a window.",
+    "Five co-owners overlap with Northland (MP, GRE) and BSSA (OTP, MRES) owner sets; pairs with those projects are shared-owner context.",
+    "Big Oaks Substation not in OSM; plotted at Becker city centroid.",
+    "Status asOf is the Biennial Report date; the undated ABO project page also reports construction under way."
+   ]
+  },
+  {
+   "id": "otp-mres-bssa",
+   "title": "Big Stone South to Alexandria 345 kV Transmission Line",
+   "shortTitle": "Big Stone South-Alexandria 345 kV",
+   "titleEvidence": [
+    {
+     "sourceId": "mnpuc-bssa-route-permit-2026-06",
+     "exactExcerpt": "ROUTE PERMIT FOR Big Stone South to Alexandria 345 kV Transmission Line A HIGH-VOLTAGE TRANSMISSION LINE AND ASSOCIATED FACILITIES IN Big Stone, Swift, Pope, Stevens and Douglas Counties, MN ISSUED TO Otter Tail Power Company and Western Minnesota Municipal Power Agency",
+     "supports": "title, counties, permittees",
+     "verifiedByScript": true,
+     "page": 1,
+     "section": "Route Permit cover"
+    }
+   ],
+   "summary": "Otter Tail Power and Western Minnesota Municipal Power Agency (represented by Missouri River Energy Services) will build an approximately 100-mile 345 kV line (92.3 miles in Minnesota) from the Big Stone South Substation near Big Stone City, SD to the Alexandria Substation; the Minnesota route permit was issued June 25, 2026 and construction is expected to begin in spring 2028.",
+   "owners": [
+    {
+     "utilityId": "otter-tail",
+     "name": "Otter Tail Power Company",
+     "evidence": [
+      {
+       "sourceId": "otp-bssa-route-permit-news",
+       "exactExcerpt": "We\u2019ll co-own the approximately 100-mile line with MRES and lead development and construction.",
+       "supports": "OTP co-owns with MRES and leads construction",
+       "verifiedByScript": true,
+       "section": "We filed a transmission line Route Permit application in Minnesota"
+      }
+     ]
+    },
+    {
+     "utilityId": "mres",
+     "name": "Missouri River Energy Services (representing Western Minnesota Municipal Power Agency)",
+     "evidence": [
+      {
+       "sourceId": "bssa-landowners-page",
+       "exactExcerpt": "Otter Tail Power Company and Western Minnesota Municipal Power Agency (represented by Missouri River Energy Services) will present landowners with an easement offer.",
+       "supports": "WMMPA represented by MRES",
+       "verifiedByScript": true,
+       "section": "Easements & structures"
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "approved",
+    "asOf": "2026-06-25",
+    "evidence": [
+     {
+      "sourceId": "bssa-regulatory-page",
+      "exactExcerpt": "On April 30, 2026, the MN PUC gave verbal approval of the Route Permit, and we received the written approval on June 25, 2026.",
+      "supports": "MN route permit approved",
+      "verifiedByScript": true,
+      "section": "Regulatory Process"
+     },
+     {
+      "sourceId": "bssa-landowners-page",
+      "exactExcerpt": "We expect construction to begin in Spring 2028, with the new transmission line tentatively planned for energization by the end of 2030.",
+      "supports": "construction not yet started (begins spring 2028)",
+      "verifiedByScript": true,
+      "section": "What's next"
+     }
+    ]
+   },
+   "states": [
+    "MN",
+    "SD"
+   ],
+   "docketId": "MPUC E017,ET10/TL-23-160 (CN-22-538)",
+   "parentInitiative": "MISO LRTP Tranche 1 - Big Stone South-Alexandria-Big Oaks ('MISO LRTP 2 Project' in the 2025 MN Biennial Report)",
+   "places": [
+    {
+     "id": "bssa-big-stone-south",
+     "label": "Big Stone South Substation (near Big Stone City, SD)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 45.28151,
+     "lon": -96.50694,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way 641025665 power=substation name='Big Stone South Substation' operator='Otter Tail Power Company' voltage=345000;230000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "bssa-project-page",
+       "exactExcerpt": "Otter Tail Power and Missouri River Energy Services are constructing a new transmission line to connect Otter Tail Power's Big Stone South Substation near Big Stone City in South Dakota to the Alexandria Substation owned by Western Minnesota Municipal Power Agency (WMMPA) near Alexandria, Minnesota.",
+       "supports": "endpoints",
+       "verifiedByScript": true,
+       "section": "Big Stone South to Alexandria"
+      }
+     ]
+    },
+    {
+     "id": "bssa-border-ortonville",
+     "label": "MN-SD border crossing approx. 1 mile south of Ortonville",
+     "kind": "state-line",
+     "precision": "locality",
+     "lat": 45.304687,
+     "lon": -96.444779,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Ortonville, Big Stone County, MN (OSM relation 136864) city centroid; border crossing described as about one mile south of Ortonville, not digitized",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "South Region: from the Minnesota-South Dakota border approximately one mile south of Ortonville, Minnesota, following BSSR04 and connecting to SSR01 incorporating S205, to a point in Tara Township, Swift County, Minnesota.",
+       "supports": "border crossing location",
+       "verifiedByScript": true,
+       "page": 9,
+       "printedPage": "5",
+       "section": "3 Designated Route"
+      }
+     ]
+    },
+    {
+     "id": "bssa-tara-twp",
+     "label": "Point in Tara Township, Swift County (South/Central region break)",
+     "kind": "route-endpoint",
+     "precision": "locality",
+     "lat": 45.368797,
+     "lon": -95.808945,
+     "uncertaintyMeters": 6000,
+     "coordinateSource": "Mapbox geocoding v6: 'Tara Township, Swift County, Minnesota' -> locality 'Tara Township, Minnesota' (Nominatim returned no match)",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "Central Region: from a point in Tara Township, following HSR01 and connecting to CSR02 and then connecting to WBLSR04 to a point in Ben Wade Township, Pope County, Minnesota.",
+       "supports": "Tara Township waypoint",
+       "verifiedByScript": true,
+       "page": 9,
+       "printedPage": "5",
+       "section": "3 Designated Route"
+      }
+     ]
+    },
+    {
+     "id": "bssa-ben-wade-twp",
+     "label": "Point in Ben Wade Township, Pope County (Central/North region break)",
+     "kind": "route-endpoint",
+     "precision": "locality",
+     "lat": 45.701283,
+     "lon": -95.566696,
+     "uncertaintyMeters": 6000,
+     "coordinateSource": "Mapbox geocoding v6: 'Ben Wade Township, Pope County, Minnesota' -> locality 'Ben Wade Township, Minnesota' (Nominatim returned no match)",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "North Region: from a point in Ben Wade Township following ASR01 incorporating Route Segments N9 and N205 to the existing Alexandria Substation near the city of Alexandria, Douglas County, Minnesota.",
+       "supports": "Ben Wade Township waypoint",
+       "verifiedByScript": true,
+       "page": 9,
+       "printedPage": "5",
+       "section": "3 Designated Route"
+      }
+     ]
+    },
+    {
+     "id": "bssa-alexandria",
+     "label": "Alexandria Substation (WMMPA, near Alexandria)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 45.84728,
+     "lon": -95.40596,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM relation 9098050 power=substation name='Alexandria Switching Substation' operator='Western Minnesota Municipal Power Agency' voltage=345000;115000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "North Region: from a point in Ben Wade Township following ASR01 incorporating Route Segments N9 and N205 to the existing Alexandria Substation near the city of Alexandria, Douglas County, Minnesota.",
+       "supports": "east terminal Alexandria Substation",
+       "verifiedByScript": true,
+       "page": 9,
+       "printedPage": "5",
+       "section": "3 Designated Route"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "Designated route: from the Big Stone South Substation in SD to the MN-SD border about one mile south of Ortonville, east through Big Stone and Swift counties to a point in Tara Township, then to a point in Ben Wade Township (Pope County), then to the existing Alexandria Substation.",
+    "caveat": "schematic / not survey accurate; township points are township centroids, not the permitted alignment; SD portion not reviewed",
+    "evidence": [
+     {
+      "sourceId": "mnpuc-bssa-route-permit-2026-06",
+      "exactExcerpt": "South Region: from the Minnesota-South Dakota border approximately one mile south of Ortonville, Minnesota, following BSSR04 and connecting to SSR01 incorporating S205, to a point in Tara Township, Swift County, Minnesota.",
+      "supports": "south region",
+      "verifiedByScript": true,
+      "page": 9,
+      "printedPage": "5",
+      "section": "3 Designated Route"
+     },
+     {
+      "sourceId": "mnpuc-bssa-route-permit-2026-06",
+      "exactExcerpt": "Central Region: from a point in Tara Township, following HSR01 and connecting to CSR02 and then connecting to WBLSR04 to a point in Ben Wade Township, Pope County, Minnesota.",
+      "supports": "central region",
+      "verifiedByScript": true,
+      "page": 9,
+      "printedPage": "5",
+      "section": "3 Designated Route"
+     },
+     {
+      "sourceId": "mnpuc-bssa-route-permit-2026-06",
+      "exactExcerpt": "North Region: from a point in Ben Wade Township following ASR01 incorporating Route Segments N9 and N205 to the existing Alexandria Substation near the city of Alexandria, Douglas County, Minnesota.",
+      "supports": "north region",
+      "verifiedByScript": true,
+      "page": 9,
+      "printedPage": "5",
+      "section": "3 Designated Route"
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "Big Stone South Substation",
+      "lat": 45.28151,
+      "lon": -96.50694,
+      "coordinateSource": "OSM way 641025665 (Big Stone South Substation, OTP)"
+     },
+     {
+      "name": "MN-SD border near Ortonville (locality)",
+      "lat": 45.304687,
+      "lon": -96.444779,
+      "coordinateSource": "Nominatim: Ortonville, MN (OSM relation 136864) city centroid"
+     },
+     {
+      "name": "Tara Township (centroid)",
+      "lat": 45.368797,
+      "lon": -95.808945,
+      "coordinateSource": "Mapbox geocoding v6 locality 'Tara Township, Minnesota'"
+     },
+     {
+      "name": "Ben Wade Township (centroid)",
+      "lat": 45.701283,
+      "lon": -95.566696,
+      "coordinateSource": "Mapbox geocoding v6 locality 'Ben Wade Township, Minnesota'"
+     },
+     {
+      "name": "Alexandria Substation",
+      "lat": 45.84728,
+      "lon": -95.40596,
+      "coordinateSource": "OSM relation 9098050 (Alexandria Switching Substation, WMMPA)"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "bssa-library-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2028-03-01",
+      "latest": "2028-06-30",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2030-10-01",
+      "latest": "2030-12-31",
+      "precision": "quarter"
+     },
+     "continuous": true,
+     "note": "'Spring 2028' mapped to 2028-03-01..2028-06-30; 'complete by the end of 2030' mapped to Q4 2030; start conditional on easement acquisition.",
+     "evidence": [
+      {
+       "sourceId": "bssa-library-page",
+       "exactExcerpt": "After easements have been acquired, construction is expected to begin Spring 2028, with the new line tentatively scheduled to be complete by the end of 2030.",
+       "supports": "construction spring 2028 to end of 2030",
+       "verifiedByScript": true,
+       "section": "What is the timeline for this project?"
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "bssa-project-page",
+     "label": "completed and energized (tentative)",
+     "date": {
+      "earliest": "2030-10-01",
+      "latest": "2030-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "bssa-project-page",
+       "exactExcerpt": "The new line is tentatively scheduled to be completed and energized by the end of 2030.",
+       "supports": "energized by end of 2030",
+       "verifiedByScript": true,
+       "section": "Big Stone South to Alexandria"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "bssa-landowners-page",
+     "label": "energization (tentative)",
+     "date": {
+      "earliest": "2030-10-01",
+      "latest": "2030-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "bssa-landowners-page",
+       "exactExcerpt": "We expect construction to begin in Spring 2028, with the new transmission line tentatively planned for energization by the end of 2030.",
+       "supports": "energization by end of 2030",
+       "verifiedByScript": true,
+       "section": "What's next"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "mn-biennial-2025-pdf",
+     "label": "Western Segment completion",
+     "date": {
+      "earliest": "2030-10-01",
+      "latest": "2030-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "mn-biennial-2025-pdf",
+       "exactExcerpt": "Schedule: The Eastern Segment is expected to be completed in 2026 -2027. The Western Segment is planned to be completed by the end of 2030.",
+       "supports": "Western Segment by end of 2030",
+       "verifiedByScript": true,
+       "page": 128,
+       "printedPage": "124",
+       "section": "Big Stone South \u2013 Alexandria \u2013 Big Oaks 345 kV - Schedule"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "otp-bssa-route-permit-news",
+     "label": "in service (Oct 2024 statement)",
+     "date": {
+      "earliest": "2031-10-01",
+      "latest": "2031-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "otp-bssa-route-permit-news",
+       "exactExcerpt": "We anticipate Big Stone South to Alexandria to be in service by the end of 2031.",
+       "supports": "in service by end of 2031",
+       "verifiedByScript": true,
+       "section": "We filed a transmission line Route Permit application in Minnesota"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "mres-bssa-approval-news",
+     "label": "construction complete (Oct 2024 statement)",
+     "date": {
+      "earliest": "2031-10-01",
+      "latest": "2031-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "mres-bssa-approval-news",
+       "exactExcerpt": "They also filed a Facility Permit with the South Dakota Public Utilities Commission in April 2024 and expect a decision in April 2025. Construction is estimated to be complete by the end of 2031.",
+       "supports": "construction complete by end of 2031",
+       "verifiedByScript": true,
+       "section": "New transmission line approved in Minnesota"
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "abo-alexandria-big-oaks",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "BSSA is the western segment of the Big Stone South-Alexandria-Big Oaks project; the eastern Alexandria-Big Oaks segment is developed by Xcel Energy on behalf of co-owners that include OTP and MRES. Both connect at the Alexandria Substation.",
+     "evidence": [
+      {
+       "sourceId": "bssa-library-page",
+       "exactExcerpt": "This Big Stone South to Alexandria (BSSA) project is the western segment of a larger project called Big Stone South to Alexandria to Big Oaks.",
+       "supports": "same parent project",
+       "verifiedByScript": true,
+       "section": "Related Projects"
+      },
+      {
+       "sourceId": "otp-bssa-route-permit-news",
+       "exactExcerpt": "The eastern segment, known as the Alexandria to Big Oaks transmission line, is being developed by Xcel Energy on behalf of the co-owners, which include our company, MRES, Great River Energy, Minnesota Power, and Xcel Energy.",
+       "supports": "eastern segment co-owners include OTP and MRES",
+       "verifiedByScript": true,
+       "section": "We filed a transmission line Route Permit application in Minnesota"
+      }
+     ]
+    }
+   ],
+   "counties": [
+    {
+     "name": "Big Stone",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "This route permit authorizes the Permittee to construct and operate an approximately 92.3-mile 345 kilovolt (kV) double-circuit capable transmission line and associated facilities in Big Stone, Swift, Stevens, Pope, and Douglas counties, Minnesota",
+       "supports": "MN counties",
+       "verifiedByScript": true,
+       "page": 5,
+       "printedPage": "1",
+       "section": "1 Route Permit"
+      }
+     ]
+    },
+    {
+     "name": "Swift",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "This route permit authorizes the Permittee to construct and operate an approximately 92.3-mile 345 kilovolt (kV) double-circuit capable transmission line and associated facilities in Big Stone, Swift, Stevens, Pope, and Douglas counties, Minnesota",
+       "supports": "MN counties",
+       "verifiedByScript": true,
+       "page": 5,
+       "printedPage": "1",
+       "section": "1 Route Permit"
+      }
+     ]
+    },
+    {
+     "name": "Stevens",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "This route permit authorizes the Permittee to construct and operate an approximately 92.3-mile 345 kilovolt (kV) double-circuit capable transmission line and associated facilities in Big Stone, Swift, Stevens, Pope, and Douglas counties, Minnesota",
+       "supports": "MN counties",
+       "verifiedByScript": true,
+       "page": 5,
+       "printedPage": "1",
+       "section": "1 Route Permit"
+      }
+     ]
+    },
+    {
+     "name": "Pope",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "This route permit authorizes the Permittee to construct and operate an approximately 92.3-mile 345 kilovolt (kV) double-circuit capable transmission line and associated facilities in Big Stone, Swift, Stevens, Pope, and Douglas counties, Minnesota",
+       "supports": "MN counties",
+       "verifiedByScript": true,
+       "page": 5,
+       "printedPage": "1",
+       "section": "1 Route Permit"
+      }
+     ]
+    },
+    {
+     "name": "Douglas",
+     "state": "MN",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "This route permit authorizes the Permittee to construct and operate an approximately 92.3-mile 345 kilovolt (kV) double-circuit capable transmission line and associated facilities in Big Stone, Swift, Stevens, Pope, and Douglas counties, Minnesota",
+       "supports": "MN counties",
+       "verifiedByScript": true,
+       "page": 5,
+       "printedPage": "1",
+       "section": "1 Route Permit"
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "This route permit authorizes the Permittee to construct and operate an approximately 92.3-mile 345 kilovolt (kV) double-circuit capable transmission line and associated facilities in Big Stone, Swift, Stevens, Pope, and Douglas counties, Minnesota",
+       "supports": "345 kV",
+       "verifiedByScript": true,
+       "page": 5,
+       "printedPage": "1",
+       "section": "1 Route Permit"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Minnesota portion length (route permit)",
+     "value": "92.3",
+     "evidence": [
+      {
+       "sourceId": "mnpuc-bssa-route-permit-2026-06",
+       "exactExcerpt": "This route permit authorizes the Permittee to construct and operate an approximately 92.3-mile 345 kilovolt (kV) double-circuit capable transmission line and associated facilities in Big Stone, Swift, Stevens, Pope, and Douglas counties, Minnesota",
+       "supports": "92.3 miles in MN",
+       "verifiedByScript": true,
+       "page": 5,
+       "printedPage": "1",
+       "section": "1 Route Permit"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Total line length (OTP)",
+     "value": "approximately 100",
+     "evidence": [
+      {
+       "sourceId": "otp-bssa-route-permit-news",
+       "exactExcerpt": "We\u2019ll co-own the approximately 100-mile line with MRES and lead development and construction.",
+       "supports": "approximately 100 miles",
+       "verifiedByScript": true,
+       "section": "We filed a transmission line Route Permit application in Minnesota"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Circuits",
+     "value": "double-circuit capable structures; one circuit installed initially",
+     "evidence": [
+      {
+       "sourceId": "bssa-landowners-page",
+       "exactExcerpt": "Otter Tail Power Company and Missouri River Energy Services will only install one circuit at this time.",
+       "supports": "one circuit initially",
+       "verifiedByScript": true,
+       "section": "Typical monopole structures"
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "Completion claims conflict: end of 2030 (project site, Biennial Report) vs end of 2031 (OTP and MRES, both October 2024).",
+    "South Dakota portion permitted by SD PUC on January 30, 2025; SD county and SD route not captured from cached sources.",
+    "Township waypoints are centroids of the townships named in the permit, not the permitted alignment."
+   ]
+  },
+  {
+   "id": "xcel-mmrt-wilmarth-north-rochester",
+   "title": "Mankato-Mississippi River Transmission Project, Segments 1-2 (Wilmarth-West Faribault-North Rochester 345 kV)",
+   "shortTitle": "MMRT Wilmarth-N. Rochester",
+   "titleEvidence": [
+    {
+     "sourceId": "xcel-mmrt-library-page",
+     "exactExcerpt": "Xcel Energy will develop and own the infrastructure between the Wilmarth Substation near Mankato and the North Rochester substation near Pine Island (Segments 1 and 2).",
+     "supports": "Segments 1-2 scope",
+     "verifiedByScript": true,
+     "section": "FAQ - Who is developing this project?"
+    },
+    {
+     "sourceId": "xcel-mmrt-application-2024",
+     "exactExcerpt": "Segment 1 Wilmarth to West Faribault\u2014a new 345 kV transmission line between the existing Wilmarth Substation and a point near the West Faribault Substation.",
+     "supports": "Segment 1 name",
+     "verifiedByScript": true,
+     "page": 20,
+     "printedPage": "1",
+     "section": "1.1 Introduction"
+    }
+   ],
+   "summary": "Xcel Energy will develop and own Segments 1 and 2 of the Mankato-Mississippi River Transmission Project, new 345 kV line of about 40 plus 35-40 miles from the Wilmarth Substation near Mankato past the West Faribault Substation to the North Rochester Substation near Pine Island; the MPUC approved the Certificate of Need and Route Permit on Feb. 5, 2026, and project materials describe construction in 2026-2028.",
+   "owners": [
+    {
+     "utilityId": "xcel-nspm",
+     "name": "Northern States Power Co.-Minnesota (Xcel Energy)",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Xcel Energy will develop and own the infrastructure between the Wilmarth Substation near Mankato and the North Rochester substation near Pine Island (Segments 1 and 2).",
+       "supports": "Xcel owns Segments 1-2",
+       "verifiedByScript": true,
+       "section": "FAQ - Who is developing this project?"
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "approved",
+    "asOf": "2026-02-05",
+    "evidence": [
+     {
+      "sourceId": "xcel-mmrt-page",
+      "exactExcerpt": "The Minnesota Public Utilities Commission (MPUC) approved the Certificate of Need and Route Permit for the Mankato-Mississippi River Transmission Project (MMRTProject) on Thursday, Feb. 5, 2026.",
+      "supports": "CN and route permit approved",
+      "verifiedByScript": true,
+      "section": "Current Project Status"
+     },
+     {
+      "sourceId": "xcel-mmrt-approval-news",
+      "exactExcerpt": "With route approval secured, Xcel Energy will move into final design, right-of-way acquisition and detailed permitting. Construction will begin after remaining approvals are completed, with in-service timing to be shared as schedules are finalized.",
+      "supports": "construction not yet begun as of Feb 2026",
+      "verifiedByScript": true,
+      "section": "Xcel Energy receives approval for Mankato\u2013Mississippi River Transmission Line Project"
+     }
+    ]
+   },
+   "states": [
+    "MN"
+   ],
+   "docketId": "MPUC E002/CN-22-532; E002/TL-23-157",
+   "parentInitiative": "MISO LRTP Tranche 1 Project 4 (LRTP4), Wilmarth-North Rochester-Tremval",
+   "places": [
+    {
+     "id": "mmrt12-wilmarth",
+     "label": "Wilmarth Substation (Mankato)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.19853,
+     "lon": -94.00833,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 107336795 power=substation name='Wilmarth Substation' voltage=345000;115000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 1: Mankato to Faribault (345 kV) - Develop about 40 miles of new 345 kV transmission lines in existing transmission corridors between the Wilmarth Substation near Mankato and the West Faribault Substation in Faribault.",
+       "supports": "Wilmarth Substation near Mankato",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "id": "mmrt12-west-faribault",
+     "label": "West Faribault Substation (Faribault)",
+     "kind": "substation",
+     "precision": "locality",
+     "lat": 44.2949637,
+     "lon": -93.268827,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Faribault, Rice County, MN (OSM relation 137656) city centroid; West Faribault Substation not found by name in OSM",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 1: Mankato to Faribault (345 kV) - Develop about 40 miles of new 345 kV transmission lines in existing transmission corridors between the Wilmarth Substation near Mankato and the West Faribault Substation in Faribault.",
+       "supports": "West Faribault Substation in Faribault",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "id": "mmrt12-north-rochester",
+     "label": "North Rochester Substation (near Pine Island)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.22306,
+     "lon": -92.65892,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 352702251 power=substation name='North Rochester Substation' voltage=345000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 2: Faribault to North Rochester Substation (345 kV) - Develop about 35-40 miles of 345 kV transmission lines in either a new corridor and/or in existing transmission corridors from near the West Faribault Substation to the North Rochester Substation near Pine Island.",
+       "supports": "North Rochester Substation near Pine Island",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "Segment 1: about 40 miles in existing transmission corridors from the Wilmarth Substation near Mankato to near the West Faribault Substation; Segment 2: about 35-40 miles in a new and/or existing corridor from near West Faribault to the North Rochester Substation near Pine Island.",
+    "caveat": "schematic / not survey accurate; only named substations used as waypoints; the route approved Feb. 5, 2026 (North vs South options in the 2024 application) was not reviewed",
+    "evidence": [
+     {
+      "sourceId": "xcel-mmrt-library-page",
+      "exactExcerpt": "Segment 1: Mankato to Faribault (345 kV) - Develop about 40 miles of new 345 kV transmission lines in existing transmission corridors between the Wilmarth Substation near Mankato and the West Faribault Substation in Faribault.",
+      "supports": "Segment 1 route",
+      "verifiedByScript": true,
+      "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+     },
+     {
+      "sourceId": "xcel-mmrt-library-page",
+      "exactExcerpt": "Segment 2: Faribault to North Rochester Substation (345 kV) - Develop about 35-40 miles of 345 kV transmission lines in either a new corridor and/or in existing transmission corridors from near the West Faribault Substation to the North Rochester Substation near Pine Island.",
+      "supports": "Segment 2 route",
+      "verifiedByScript": true,
+      "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "Wilmarth Substation",
+      "lat": 44.19853,
+      "lon": -94.00833,
+      "coordinateSource": "OSM way 107336795 (Wilmarth Substation)"
+     },
+     {
+      "name": "West Faribault Substation (Faribault locality)",
+      "lat": 44.2949637,
+      "lon": -93.268827,
+      "coordinateSource": "Nominatim: Faribault, MN (OSM relation 137656) city centroid"
+     },
+     {
+      "name": "North Rochester Substation",
+      "lat": 44.22306,
+      "lon": -92.65892,
+      "coordinateSource": "OSM way 352702251 (North Rochester Substation)"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "xcel-mmrt-library-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "note": "Whole-project schedule from pre-decision FAQ (says specific construction schedules would follow the MPUC decision); not segment-specific.",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "We expect to begin construction in 2026 with completion in 2028. Specific construction schedules will be developed following the MPUC decision.",
+       "supports": "construction 2026 to 2028",
+       "verifiedByScript": true,
+       "section": "FAQ - Project timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-mmrt-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "Timeline bucket '2026-2028' combines detailed design and engineering with construction; construction likely occupies only part of it. Whole-project, not segment-specific.",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-page",
+       "exactExcerpt": "2026-2028 Detailed design and engineering Construction 2028 In-service and restoration",
+       "supports": "2026-2028 design and construction bucket",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "xcel-mmrt-page",
+     "label": "anticipated in-service",
+     "date": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-page",
+       "exactExcerpt": "We're working in your communities to share information, collect your input and if approved, build this project. We anticipate this project being in service in 2028.",
+       "supports": "in-service 2028",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-mmrt-application-2024",
+     "label": "scheduled in-service (by 2030, April 2024 application)",
+     "date": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-application-2024",
+       "exactExcerpt": "Xcel Energy anticipates starting Project construction in 2026. The Project is scheduled to be in service by 2030.",
+       "supports": "in service by 2030",
+       "verifiedByScript": true,
+       "page": 30,
+       "printedPage": "11",
+       "section": "1.8 Project Schedule and Cost"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-mmrt-application-2024",
+     "label": "MISO MTEP21 expected in-service for LRTP4 (as reported in application)",
+     "date": {
+      "earliest": "2028-06-01",
+      "latest": "2028-06-01",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-application-2024",
+       "exactExcerpt": "In MTEP21, MISO listed an expected in-service date of June 1, 2028 for LRTP4.",
+       "supports": "MTEP21 in-service June 1, 2028",
+       "verifiedByScript": true,
+       "page": 30,
+       "printedPage": "11",
+       "section": "1.8 Project Schedule and Cost (footnote 9)"
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "mmrt-north-rochester-mississippi",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "Segments 1-2 (Xcel-owned) and Segments 3-4 (all partners participate) are parts of the same Mankato-Mississippi River Transmission Project and are permitted together; they meet at the North Rochester Substation.",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-segments-page",
+       "exactExcerpt": "Xcel Energy will develop and own the infrastructure in segments 1 and 2, while all project partners will participate in segments 3 and 4. All segments will be permitted together.",
+       "supports": "same project, permitted together",
+       "verifiedByScript": true,
+       "section": "Project Segments"
+      }
+     ]
+    },
+    {
+     "partner": "dpc-alma-blair",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "MMRT is MISO LRTP4; Dairyland's Alma-Blair line is the Wisconsin portion of the same LRTP Tranche 1 Project 4 (Wilmarth-North Rochester-Tremval). Same initiative only; no resource sharing documented.",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-summary-2024",
+       "exactExcerpt": "The Project, designated as LRTP4 in MTEP21, is a key part of the LRTP Tranche 1 Portfolio.",
+       "supports": "MMRT is LRTP4",
+       "verifiedByScript": true,
+       "page": 1,
+       "section": "Summary of Certificate of Need and Route Permit Application"
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "This Project is part of the larger Midcontinent Independent System Operator, Inc. (MISO) Tranche 1 Long-Range Transmission Planning (LRTP) Project 4, Wilmarth-North Rochester-Tremval Project, located across both Minnesota and Wisconsin.",
+       "supports": "Alma-Blair is part of LRTP Project 4",
+       "verifiedByScript": true,
+       "page": 21,
+       "printedPage": "1",
+       "section": "Executive Summary - Introduction"
+      }
+     ]
+    }
+   ],
+   "counties": [],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 1: Mankato to Faribault (345 kV) - Develop about 40 miles of new 345 kV transmission lines in existing transmission corridors between the Wilmarth Substation near Mankato and the West Faribault Substation in Faribault.",
+       "supports": "345 kV",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Segment 1 length",
+     "value": "about 40",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 1: Mankato to Faribault (345 kV) - Develop about 40 miles of new 345 kV transmission lines in existing transmission corridors between the Wilmarth Substation near Mankato and the West Faribault Substation in Faribault.",
+       "supports": "about 40 miles",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Segment 2 length",
+     "value": "about 35-40",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 2: Faribault to North Rochester Substation (345 kV) - Develop about 35-40 miles of 345 kV transmission lines in either a new corridor and/or in existing transmission corridors from near the West Faribault Substation to the North Rochester Substation near Pine Island.",
+       "supports": "about 35-40 miles",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Whole MMRT project cost estimate (all four segments, April 2024)",
+     "value": "$524.7 million - $577.2 million",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-application-2024",
+       "exactExcerpt": "The estimated cost for the Project is between $524.7 million and $577.2 million.",
+       "supports": "whole-project cost estimate",
+       "verifiedByScript": true,
+       "page": 30,
+       "printedPage": "11",
+       "section": "1.8 Project Schedule and Cost"
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "Construction windows and completion claims are published for the whole MMRT project, not per segment.",
+    "Feb. 6, 2026 Xcel release: construction begins after remaining approvals; in-service timing to be shared later. No source reviewed confirms construction start as of 2026-09-26.",
+    "Whole-project county list (Blue Earth, Le Sueur, Waseca, Rice, Dodge, Olmsted, Goodhue, Winona, Wabasha; 'may traverse') is not split by segment, so no counties attached.",
+    "West Faribault Substation not found by name in OSM; plotted at Faribault city centroid."
+   ]
+  },
+  {
+   "id": "mmrt-north-rochester-mississippi",
+   "title": "Mankato-Mississippi River Transmission Project, Segments 3-4 (North Rochester-Mississippi River 345 kV; North Rochester-Chester 161 kV)",
+   "shortTitle": "MMRT N. Rochester-Mississippi",
+   "titleEvidence": [
+    {
+     "sourceId": "xcel-mmrt-library-page",
+     "exactExcerpt": "All project partners will participate in the additional 345 kV infrastructure from the North Rochester Substation to the Mississippi River (Segment 3) and the 161 kV line from Pine Island to the Rochester area (Segment 4).",
+     "supports": "Segments 3-4 scope",
+     "verifiedByScript": true,
+     "section": "FAQ - Who is developing this project?"
+    },
+    {
+     "sourceId": "xcel-mmrt-library-page",
+     "exactExcerpt": "Segment 4: North Rochester Substation to Chester Junction (161 kV) - Develop about 20 miles of a new single-circuit 161 kV line from the North Rochester Substation to an existing transmission line northeast of Rochester.",
+     "supports": "Segment 4 name",
+     "verifiedByScript": true,
+     "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+    }
+   ],
+   "summary": "Xcel Energy, Dairyland Power Cooperative, Southern Minnesota Municipal Power Agency and Rochester Public Utilities participate in MMRT Segments 3 and 4: a 345 kV circuit on existing double-circuit structures from the North Rochester Substation to the Mississippi River near Kellogg and a new ~20-mile 161 kV line to an existing line northeast of Rochester; the MPUC approved the project on Feb. 5, 2026.",
+   "owners": [
+    {
+     "utilityId": "xcel-nspm",
+     "name": "Northern States Power Co.-Minnesota (Xcel Energy)",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-application-2024",
+       "exactExcerpt": "It is anticipated that portions of the Project will either be individually or jointly owned by Xcel Energy, Dairyland Power Cooperative (Dairyland), Southern Minnesota Municipal Power Agency (Southern Minnesota), and the City of Rochester, Minnesota, acting through its Public Utility Board (City of Rochester)",
+       "supports": "individual/joint ownership by four utilities",
+       "verifiedByScript": true,
+       "page": 23,
+       "printedPage": "4",
+       "section": "Chapter 1 Executive Summary"
+      }
+     ]
+    },
+    {
+     "utilityId": "dairyland",
+     "name": "Dairyland Power Cooperative",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "All project partners will participate in the additional 345 kV infrastructure from the North Rochester Substation to the Mississippi River (Segment 3) and the 161 kV line from Pine Island to the Rochester area (Segment 4).",
+       "supports": "partners participate in Segments 3-4",
+       "verifiedByScript": true,
+       "section": "FAQ - Who is developing this project?"
+      }
+     ]
+    },
+    {
+     "utilityId": "smmpa",
+     "name": "Southern Minnesota Municipal Power Agency",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Xcel Energy, Dairyland Power Cooperative, Rochester Public Utilities and Southern Minnesota Municipal Power Agency are developing this project to serve southern Minnesota.",
+       "supports": "SMMPA is a project partner",
+       "verifiedByScript": true,
+       "section": "FAQ - Who is developing this project?"
+      }
+     ]
+    },
+    {
+     "utilityId": "rpu",
+     "name": "Rochester Public Utilities (City of Rochester, MN)",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Xcel Energy, Dairyland Power Cooperative, Rochester Public Utilities and Southern Minnesota Municipal Power Agency are developing this project to serve southern Minnesota.",
+       "supports": "RPU is a project partner",
+       "verifiedByScript": true,
+       "section": "FAQ - Who is developing this project?"
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "approved",
+    "asOf": "2026-02-05",
+    "evidence": [
+     {
+      "sourceId": "xcel-mmrt-page",
+      "exactExcerpt": "The Minnesota Public Utilities Commission (MPUC) approved the Certificate of Need and Route Permit for the Mankato-Mississippi River Transmission Project (MMRTProject) on Thursday, Feb. 5, 2026.",
+      "supports": "CN and route permit approved",
+      "verifiedByScript": true,
+      "section": "Current Project Status"
+     },
+     {
+      "sourceId": "xcel-mmrt-approval-news",
+      "exactExcerpt": "With route approval secured, Xcel Energy will move into final design, right-of-way acquisition and detailed permitting. Construction will begin after remaining approvals are completed, with in-service timing to be shared as schedules are finalized.",
+      "supports": "construction not yet begun as of Feb 2026",
+      "verifiedByScript": true,
+      "section": "Xcel Energy receives approval for Mankato\u2013Mississippi River Transmission Line Project"
+     }
+    ]
+   },
+   "states": [
+    "MN"
+   ],
+   "docketId": "MPUC E002/CN-22-532; E002/TL-23-157",
+   "parentInitiative": "MISO LRTP Tranche 1 Project 4 (LRTP4), Wilmarth-North Rochester-Tremval",
+   "places": [
+    {
+     "id": "mmrt34-north-rochester",
+     "label": "North Rochester Substation (near Pine Island)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.22306,
+     "lon": -92.65892,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way 352702251 power=substation name='North Rochester Substation' voltage=345000 (Overpass 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 3: North Rochester Substation to the Mississippi River (345 kV) - Convert about 26 miles of 161 kV line to 345 kV line and install about 16 miles of new 345 kV line on existing structures",
+       "supports": "Segment 3 starts at North Rochester Substation",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "id": "mmrt34-plainview",
+     "label": "Plainview (Segment 3 structures turn northeast)",
+     "kind": "locality",
+     "precision": "locality",
+     "lat": 44.1647423,
+     "lon": -92.1717609,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Plainview, Wabasha County, MN (OSM relation 137050) city centroid",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "Hampton-Rochester-La Crosse 345-kV structures, which extends diagonally northeast from the Town of Plainview to the City of Kellogg, Minnesota.",
+       "supports": "structure path Plainview to Kellogg",
+       "verifiedByScript": true,
+       "page": 21,
+       "printedPage": "1",
+       "section": "Executive Summary - Introduction"
+      }
+     ]
+    },
+    {
+     "id": "mmrt34-mississippi-kellogg",
+     "label": "Connection point at the Mississippi River near Kellogg",
+     "kind": "river-crossing",
+     "precision": "locality",
+     "lat": 44.3085769,
+     "lon": -91.9957204,
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim: Kellogg, Wabasha County, MN (OSM relation 137053) city centroid",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-page",
+       "exactExcerpt": "The Mankato-Mississippi River Transmission Project includes about 120 miles of new and upgraded 345 kilovolt (kV) transmission lines between the existing Wilmarth Substation near Mankato and a connection point at the Mississippi River near Kellogg.",
+       "supports": "connection point near Kellogg",
+       "verifiedByScript": true,
+       "section": "Infrastructure for Southern Minnesota and the Midwest"
+      }
+     ]
+    },
+    {
+     "id": "mmrt34-seg4-end",
+     "label": "Segment 4 end: existing transmission line northeast of Rochester",
+     "kind": "route-endpoint",
+     "precision": "locality",
+     "lat": 44.0234387,
+     "lon": -92.4630182,
+     "uncertaintyMeters": 12000,
+     "coordinateSource": "Nominatim: Rochester, Olmsted County, MN (OSM relation 137100) city centroid; tap point northeast of Rochester unknown",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 4: North Rochester Substation to Chester Junction (161 kV) - Develop about 20 miles of a new single-circuit 161 kV line from the North Rochester Substation to an existing transmission line northeast of Rochester.",
+       "supports": "Segment 4 endpoint northeast of Rochester",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "Segment 3 uses existing Hampton-Rochester-La Crosse double-circuit 345 kV structures from the North Rochester Substation, running diagonally northeast from Plainview to Kellogg and the western bank of the Mississippi River; Segment 4 is a new ~20-mile 161 kV line from North Rochester to an existing line northeast of Rochester (not drawn).",
+    "caveat": "schematic / not survey accurate; Plainview and Kellogg are town centroids on the described structure path; Segment 4 alignment not drawn",
+    "evidence": [
+     {
+      "sourceId": "dpc-alma-blair-cpcn-2024",
+      "exactExcerpt": "This new 345-kV line, referred to as the Mankato to Mississippi River 345-kV Transmission Project, would use the double-circuit capability of the Hampton-Rochester-La Crosse project between North Rochester and the western banks of the Mississippi.",
+      "supports": "Segment 3 on H-R-LC structures to west bank",
+      "verifiedByScript": true,
+      "page": 21,
+      "printedPage": "1",
+      "section": "Executive Summary - Introduction"
+     },
+     {
+      "sourceId": "dpc-alma-blair-cpcn-2024",
+      "exactExcerpt": "Hampton-Rochester-La Crosse 345-kV structures, which extends diagonally northeast from the Town of Plainview to the City of Kellogg, Minnesota.",
+      "supports": "Plainview to Kellogg path",
+      "verifiedByScript": true,
+      "page": 21,
+      "printedPage": "1",
+      "section": "Executive Summary - Introduction"
+     },
+     {
+      "sourceId": "xcel-mmrt-library-page",
+      "exactExcerpt": "Segment 3: North Rochester Substation to the Mississippi River (345 kV) - Convert about 26 miles of 161 kV line to 345 kV line and install about 16 miles of new 345 kV line on existing structures",
+      "supports": "Segment 3 endpoints",
+      "verifiedByScript": true,
+      "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "North Rochester Substation",
+      "lat": 44.22306,
+      "lon": -92.65892,
+      "coordinateSource": "OSM way 352702251 (North Rochester Substation)"
+     },
+     {
+      "name": "Plainview (locality)",
+      "lat": 44.1647423,
+      "lon": -92.1717609,
+      "coordinateSource": "Nominatim: Plainview, MN (OSM relation 137050) city centroid"
+     },
+     {
+      "name": "Kellogg / Mississippi River connection (locality)",
+      "lat": 44.3085769,
+      "lon": -91.9957204,
+      "coordinateSource": "Nominatim: Kellogg, MN (OSM relation 137053) city centroid"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "xcel-mmrt-library-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "note": "Whole-project schedule from pre-decision FAQ (says specific construction schedules would follow the MPUC decision); not segment-specific.",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "We expect to begin construction in 2026 with completion in 2028. Specific construction schedules will be developed following the MPUC decision.",
+       "supports": "construction 2026 to 2028",
+       "verifiedByScript": true,
+       "section": "FAQ - Project timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-mmrt-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "Timeline bucket '2026-2028' combines detailed design and engineering with construction. Whole-project, not segment-specific.",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-page",
+       "exactExcerpt": "2026-2028 Detailed design and engineering Construction 2028 In-service and restoration",
+       "supports": "2026-2028 design and construction bucket",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "xcel-mmrt-page",
+     "label": "anticipated in-service",
+     "date": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-page",
+       "exactExcerpt": "We're working in your communities to share information, collect your input and if approved, build this project. We anticipate this project being in service in 2028.",
+       "supports": "in-service 2028",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-mmrt-application-2024",
+     "label": "scheduled in-service (by 2030, April 2024 application)",
+     "date": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-application-2024",
+       "exactExcerpt": "Xcel Energy anticipates starting Project construction in 2026. The Project is scheduled to be in service by 2030.",
+       "supports": "in service by 2030",
+       "verifiedByScript": true,
+       "page": 30,
+       "printedPage": "11",
+       "section": "1.8 Project Schedule and Cost"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-mmrt-application-2024",
+     "label": "MISO MTEP21 expected in-service for LRTP4 (as reported in application)",
+     "date": {
+      "earliest": "2028-06-01",
+      "latest": "2028-06-01",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-application-2024",
+       "exactExcerpt": "In MTEP21, MISO listed an expected in-service date of June 1, 2028 for LRTP4.",
+       "supports": "MTEP21 in-service June 1, 2028",
+       "verifiedByScript": true,
+       "page": 30,
+       "printedPage": "11",
+       "section": "1.8 Project Schedule and Cost (footnote 9)"
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "dpc-alma-blair",
+     "status": "known-joint",
+     "scope": "interconnection-design",
+     "description": "Segment 3 brings the new 345 kV circuit on Hampton-Rochester-La Crosse structures to the western bank of the Mississippi; Dairyland's Alma-Blair line (Wisconsin portion of LRTP Tranche 1 Project 4) starts at structure LQ-34-3 on the east bank near the Alma Substation. Interface and same initiative only; no resource sharing documented.",
+     "evidence": [
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "This new 345-kV line, referred to as the Mankato to Mississippi River 345-kV Transmission Project, would use the double-circuit capability of the Hampton-Rochester-La Crosse project between North Rochester and the western banks of the Mississippi.",
+       "supports": "MMRT reaches west bank",
+       "verifiedByScript": true,
+       "page": 21,
+       "printedPage": "1",
+       "section": "Executive Summary - Introduction"
+      },
+      {
+       "sourceId": "dpc-alma-blair-cpcn-2024",
+       "exactExcerpt": "will start at Dairyland\u2019s existing LQ-34 transmission line structure 3 (LQ-34-3) located on the east side of the Mississippi River near the Alma Substation in the City of Alma, Wisconsin in Buffalo County",
+       "supports": "Alma-Blair starts on east bank",
+       "verifiedByScript": true,
+       "page": 21,
+       "printedPage": "1",
+       "section": "Executive Summary - Introduction"
+      }
+     ]
+    },
+    {
+     "partner": "dairyland",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "Dairyland's existing Q-3 161 kV line on the Segment 3 structures must be relocated to make room for the new 345 kV circuit; the relocation is a separately permitted Dairyland project.",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-application-2024",
+       "exactExcerpt": "The existing 161 kV transmission line on this portion of Segment 3 is Dairyland Power Cooperative\u2019s Q-3 line that will need to be relocated to accommodate the new 345 kV circuit on these existing double-circuit structures.",
+       "supports": "Q-3 relocation dependency",
+       "verifiedByScript": true,
+       "page": 20,
+       "printedPage": "1",
+       "section": "1.1 Introduction (footnote 2)"
+      },
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Dairyland Power will develop a related segment, the relocation of an existing 161 kV line east of Plainview, which will be permitted separately from this project.",
+       "supports": "separately permitted Dairyland relocation",
+       "verifiedByScript": true,
+       "section": "FAQ - Who is developing this project?"
+      }
+     ]
+    },
+    {
+     "partner": "xcel-mmrt-wilmarth-north-rochester",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "Same MMRT project, permitted together; the segment packages meet at the North Rochester Substation.",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-segments-page",
+       "exactExcerpt": "Xcel Energy will develop and own the infrastructure in segments 1 and 2, while all project partners will participate in segments 3 and 4. All segments will be permitted together.",
+       "supports": "same project, permitted together",
+       "verifiedByScript": true,
+       "section": "Project Segments"
+      }
+     ]
+    }
+   ],
+   "counties": [],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Segment 3 voltage",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 3: North Rochester Substation to the Mississippi River (345 kV) - Convert about 26 miles of 161 kV line to 345 kV line and install about 16 miles of new 345 kV line on existing structures",
+       "supports": "345 kV",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "key": "voltageKv",
+     "label": "Segment 4 voltage",
+     "value": "161",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 4: North Rochester Substation to Chester Junction (161 kV) - Develop about 20 miles of a new single-circuit 161 kV line from the North Rochester Substation to an existing transmission line northeast of Rochester.",
+       "supports": "161 kV",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Segment 3 (website): convert ~26 mi of 161 kV to 345 kV + ~16 mi new 345 kV circuit on existing structures",
+     "value": "26 + 16",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 3: North Rochester Substation to the Mississippi River (345 kV) - Convert about 26 miles of 161 kV line to 345 kV line and install about 16 miles of new 345 kV line on existing structures",
+       "supports": "Segment 3 lengths",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Segment 3 conversion length (April 2024 application)",
+     "value": "about 27",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-application-2024",
+       "exactExcerpt": "This segment involves converting about 27 miles of existing 161/345 kV transmission line to 345/345 kV operation",
+       "supports": "27 miles conversion",
+       "verifiedByScript": true,
+       "page": 20,
+       "printedPage": "1",
+       "section": "1.1 Introduction"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Segment 4 length",
+     "value": "about 20",
+     "evidence": [
+      {
+       "sourceId": "xcel-mmrt-library-page",
+       "exactExcerpt": "Segment 4: North Rochester Substation to Chester Junction (161 kV) - Develop about 20 miles of a new single-circuit 161 kV line from the North Rochester Substation to an existing transmission line northeast of Rochester.",
+       "supports": "about 20 miles",
+       "verifiedByScript": true,
+       "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "'All project partners will participate' in Segments 3-4; exact ownership shares of each asset are not stated.",
+    "Construction windows and completion claims are published for the whole MMRT project, not per segment.",
+    "No source reviewed confirms construction start as of 2026-09-26.",
+    "Segment 3 conversion length conflicts: about 26 miles (website) vs about 27 miles (April 2024 application)."
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "projectA": "mp-gre-northland",
+   "projectB": "abo-alexandria-big-oaks",
+   "kind": "shared-site",
+   "siteLabel": "Big Oaks Substation (Becker)",
+   "description": "Northland terminates at the new Big Oaks Substation, which is built by Xcel Energy as part of the Alexandria-Big Oaks work (outside Northland's scope). Owner sets overlap (MP, GRE).",
+   "evidence": [
+    {
+     "sourceId": "mn-biennial-2025-pdf",
+     "exactExcerpt": "The proposed Big Oaks 345 kV Substation on the south end of Segment 2 is being permitted, engineered, and constructed by Xcel Energy as part of a separate project, and is not included in this scope of work.",
+     "supports": "Big Oaks is Xcel's separate project at Northland's south end",
+     "verifiedByScript": true,
+     "page": 86,
+     "printedPage": "82",
+     "section": "Northland Reliability Project"
+    },
+    {
+     "sourceId": "xcel-bssa-abo-page",
+     "exactExcerpt": "The Alexandria to Big Oaks segment will connect to the existing substation near Alexandria and the new Big Oaks substation near Becker.",
+     "supports": "ABO connects to Big Oaks",
+     "verifiedByScript": true,
+     "section": "Big Stone South to Alexandria to Big Oaks"
+    }
+   ]
+  },
+  {
+   "projectA": "abo-alexandria-big-oaks",
+   "projectB": "otp-mres-bssa",
+   "kind": "shared-site",
+   "siteLabel": "Alexandria Substation (WMMPA)",
+   "description": "ABO starts and BSSA ends at the existing Alexandria Substation owned by WMMPA.",
+   "evidence": [
+    {
+     "sourceId": "xcel-abo-route-permit-app-2023",
+     "exactExcerpt": "The Project involves construction of an approximately 105 to 108-mile long, 345 kV transmission line from the existing Alexandria Substation located in Alexandria, Douglas County to the new Big Oaks Substation",
+     "supports": "ABO starts at Alexandria Substation",
+     "verifiedByScript": true,
+     "page": 16,
+     "printedPage": "1",
+     "section": "1 Introduction"
+    },
+    {
+     "sourceId": "bssa-project-page",
+     "exactExcerpt": "Otter Tail Power and Missouri River Energy Services are constructing a new transmission line to connect Otter Tail Power's Big Stone South Substation near Big Stone City in South Dakota to the Alexandria Substation owned by Western Minnesota Municipal Power Agency (WMMPA) near Alexandria, Minnesota.",
+     "supports": "BSSA ends at Alexandria Substation",
+     "verifiedByScript": true,
+     "section": "Big Stone South to Alexandria"
+    }
+   ]
+  },
+  {
+   "projectA": "abo-alexandria-big-oaks",
+   "projectB": "otp-mres-bssa",
+   "kind": "same-initiative",
+   "siteLabel": "Big Stone South-Alexandria-Big Oaks (MISO LRTP Tranche 1)",
+   "description": "Eastern and western segments of the Big Stone South-Alexandria-Big Oaks project with a combined Certificate of Need (CN-22-538); owner sets overlap (OTP, MRES).",
+   "evidence": [
+    {
+     "sourceId": "bssa-library-page",
+     "exactExcerpt": "This Big Stone South to Alexandria (BSSA) project is the western segment of a larger project called Big Stone South to Alexandria to Big Oaks.",
+     "supports": "same parent project",
+     "verifiedByScript": true,
+     "section": "Related Projects"
+    },
+    {
+     "sourceId": "mn-biennial-2025-pdf",
+     "exactExcerpt": "Big Stone South to Alexandria to Big Oaks Transmission Projects: Commission Docket Numbers CN-22-538, TL-23-159, and TL-23-160",
+     "supports": "shared CN docket, separate route dockets",
+     "verifiedByScript": true,
+     "page": 253,
+     "printedPage": "249",
+     "section": "10.2 Tranche 1"
+    }
+   ]
+  },
+  {
+   "projectA": "xcel-mmrt-wilmarth-north-rochester",
+   "projectB": "mmrt-north-rochester-mississippi",
+   "kind": "shared-site",
+   "siteLabel": "North Rochester Substation",
+   "description": "Segments 1-2 end and Segments 3-4 begin at the North Rochester Substation; same MMRT project permitted together (Xcel common owner).",
+   "evidence": [
+    {
+     "sourceId": "xcel-mmrt-library-page",
+     "exactExcerpt": "Segment 2: Faribault to North Rochester Substation (345 kV) - Develop about 35-40 miles of 345 kV transmission lines in either a new corridor and/or in existing transmission corridors from near the West Faribault Substation to the North Rochester Substation near Pine Island.",
+     "supports": "Segment 2 ends at North Rochester",
+     "verifiedByScript": true,
+     "section": "FAQ - What is the Mankato-Mississippi River Transmission Project?"
+    },
+    {
+     "sourceId": "xcel-mmrt-segments-page",
+     "exactExcerpt": "Xcel Energy will develop and own the infrastructure in segments 1 and 2, while all project partners will participate in segments 3 and 4. All segments will be permitted together.",
+     "supports": "segment ownership split; permitted together",
+     "verifiedByScript": true,
+     "section": "Project Segments"
+    }
+   ]
+  },
+  {
+   "projectA": "mmrt-north-rochester-mississippi",
+   "projectB": "dpc-alma-blair",
+   "kind": "interconnects",
+   "siteLabel": "Mississippi River crossing (Kellogg MN / Alma WI)",
+   "description": "MMRT Segment 3 reaches the western bank of the Mississippi on Hampton-Rochester-La Crosse structures; Alma-Blair starts at structure LQ-34-3 on the east bank near Alma; both are parts of MISO LRTP Tranche 1 Project 4. Owner sets overlap (Dairyland).",
+   "evidence": [
+    {
+     "sourceId": "dpc-alma-blair-cpcn-2024",
+     "exactExcerpt": "This new 345-kV line, referred to as the Mankato to Mississippi River 345-kV Transmission Project, would use the double-circuit capability of the Hampton-Rochester-La Crosse project between North Rochester and the western banks of the Mississippi.",
+     "supports": "MMRT to west bank",
+     "verifiedByScript": true,
+     "page": 21,
+     "printedPage": "1",
+     "section": "Executive Summary - Introduction"
+    },
+    {
+     "sourceId": "dpc-alma-blair-cpcn-2024",
+     "exactExcerpt": "will start at Dairyland\u2019s existing LQ-34 transmission line structure 3 (LQ-34-3) located on the east side of the Mississippi River near the Alma Substation in the City of Alma, Wisconsin in Buffalo County",
+     "supports": "Alma-Blair from east bank",
+     "verifiedByScript": true,
+     "page": 21,
+     "printedPage": "1",
+     "section": "Executive Summary - Introduction"
+    }
+   ]
+  },
+  {
+   "projectA": "xcel-mmrt-wilmarth-north-rochester",
+   "projectB": "dpc-alma-blair",
+   "kind": "same-initiative",
+   "siteLabel": "MISO LRTP Tranche 1 Project 4 (Wilmarth-North Rochester-Tremval)",
+   "description": "MMRT (LRTP4, Minnesota) and Alma-Blair (Wisconsin portion of Project 4) belong to the same MISO initiative; disjoint owners (Xcel NSPM vs Dairyland).",
+   "evidence": [
+    {
+     "sourceId": "dpc-alma-blair-cpcn-2024",
+     "exactExcerpt": "This Project is part of the larger Midcontinent Independent System Operator, Inc. (MISO) Tranche 1 Long-Range Transmission Planning (LRTP) Project 4, Wilmarth-North Rochester-Tremval Project, located across both Minnesota and Wisconsin.",
+     "supports": "LRTP Project 4 spans MN and WI",
+     "verifiedByScript": true,
+     "page": 21,
+     "printedPage": "1",
+     "section": "Executive Summary - Introduction"
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "to construct and operate the Wisconsin portion of Long Range Transmission Project Tranche 1 Project 4, consisting of a new 345 kV transmission line in the counties of Buffalo and Trempealeau, Wisconsin",
+     "supports": "Alma-Blair is WI portion of Project 4",
+     "verifiedByScript": true,
+     "page": 1,
+     "section": "Caption"
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "Huntley-Wilmarth 345 kV (Xcel Energy + ITC Midwest) not modelled: the 2025 MN Biennial Report (PDF p.45 / printed 41) states it 'was completed in 2021'; no future construction window; usable only as an archive/negative example.",
+  "xcel-wwtc relation NOT recorded: the Wisconsin portion of MISO LRTP Tranche 1 Project 4 is Dairyland's Alma-Blair line (PSC 1515-CE-103 final decision p.1), while the Western Wisconsin Transmission Connection (PSC 5-CE-158 final decision p.1) is LRTP Tranche 1 Project 5 (Tremval-Eau Claire-Jump River). MMRT interconnects with dpc-alma-blair at the Mississippi River; any MMRT-WWTC link is only indirect (via Alma-Blair's Tremval-area terminus) and is not stated in a source.",
+  "Minnesota PUC eDockets downloads (efiling.web.commerce.state.mn.us) returned HTTP 403 and mn.gov/puc pages returned a bot-verification CAPTCHA; not bypassed. The MMRT Feb. 5, 2026 written order, the MMRT approved route (North vs South options for Segments 1-2 in the 2024 application) and MN PUC Tranche 1 pages were not reviewed.",
+  "MMRT construction start: the April 2024 application Table 2-3 appears to list 'Start Project Construction' Fourth Quarter 2026 and 'Project In-Service' First Quarter 2030 (PDF p.46 / printed 27), but pdftotext separates table labels from dates, so the pairing was not used as verified evidence. The Feb. 6, 2026 Xcel release says construction begins after remaining approvals, with in-service timing to be shared later. No source reviewed confirms MMRT construction has started as of 2026-09-26 (status kept 'approved').",
+  "MMRT ownership: website says Xcel develops and owns Segments 1-2 and 'all project partners will participate' in Segments 3-4; the application says segments will be 'individually or jointly owned' by Xcel, Dairyland, SMMPA and City of Rochester. Ownership shares are not stated. The application/summary name Xcel as sole Applicant, while Dairyland's 2024 Alma-Blair CPCN says Xcel, Dairyland, RPU and SMMPA filed the MMRT CN/RP applications - discrepancy.",
+  "MMRT schedule, cost and county list are published for the whole project only; the same construction windows and completion claims are attached to both segment packages; per-segment timing unknown. Whole-project counties ('may traverse', April 2024): Blue Earth, Le Sueur, Waseca, Rice, Dodge, Olmsted, Goodhue, Winona, Wabasha - not attached to either segment package.",
+  "MMRT length conflict: about 130 miles of 345 kV (April 2024 summary/application) vs about 120 miles (project website and Feb. 2026 release); Segment 3 conversion about 26 miles (website) vs about 27 miles (application).",
+  "Dairyland Minnesota work packages tied to LRTP4 not modelled for lack of a construction window: relocation of Dairyland's Q-3 161 kV line east of Plainview (MN dockets CN-23-504 / TL-23-388) and the Kellogg 161 kV substation + 9-mile 161 kV line (Biennial tracking 2023-SE-N9, in-service late 2027 to early 2028; PDF p.202-203).",
+  "Northland construction timing: the Biennial Report says construction began Q3 2025 and 'is expected to be completed over 3 years' (end bound 2028 is derived arithmetic - needs human review); the GRE project page (modified 2024-01-04) says '2027-2030 Construction'; a January 2026 phased-construction map on northlandreliabilityproject.com (image only, alt text 'Study area map') shows 2025-2026 Segment 2 and realignments, 2026-2027 Benton County-Cuyuna, 2027-2029 Cuyuna-Iron Range - not text-verifiable, so not used. A text source for the phased schedule would allow per-phase windows.",
+  "Alexandria-Big Oaks: alexandriatobigoaks.com still contains a conditional pre-approval sentence ('construction could begin in late 2024 and be complete in 2026') - not modelled. Xcel's project-page bucket '2025 - 2030' is far longer than other ABO claims (late 2026 line / late 2027 substation) and may include Alexandria substation expansion work tied to the western segment (MRES Alexandria Substation Expansion, Biennial 2023-WC-N14: part complete by Q2 2027, fully in service by Q2 2030).",
+  "Big Stone South-Alexandria completion conflict: end of 2030 (project website, landowner page, Biennial Report) vs end of 2031 (OTP news 2024-10-23; MRES news 2024-10-03). South Dakota portion (SD PUC facility permit approved Jan. 30, 2025): SD county and SD route not captured (SD application not cached).",
+  "Geocoding gaps: Big Oaks Substation and Cuyuna Series Compensation Station are new and absent from OSM (placed at Becker and Riverton centroids); West Faribault Substation not found by name in OSM (Faribault centroid); Tara and Ben Wade townships geocoded via Mapbox locality (Nominatim returned nothing). Alexandria Substation matched to OSM 'Alexandria Switching Substation' (operator WMMPA, 345/115 kV) and Sherco to OSM 'Sherburne County Substation' (operator Xcel Energy) - name variants.",
+  "Resource sharing: no reviewed source documents shared crews, equipment, materials or outage coordination for any pair in this cluster (Northland/ABO at Big Oaks; ABO/BSSA at Alexandria; MMRT/Alma-Blair at the Mississippi River). This is 'not found in sources', not evidence of no coordination.",
+  "Owner-set overlaps (shared-owner context under plan.md section 8): Northland (MP, GRE) vs ABO (Xcel, GRE, MP, OTP, MRES); ABO vs BSSA (OTP, MRES); ABO vs MMRT Segments 1-2 and 3-4 (Xcel); MMRT 1-2 vs 3-4 (Xcel); MMRT 3-4 vs Alma-Blair (Dairyland). Disjoint-owner pairs available for cross-utility comparison: Northland vs BSSA, Northland vs MMRT 1-2, Northland vs MMRT 3-4, BSSA vs MMRT 1-2, BSSA vs MMRT 3-4, MMRT 1-2 vs dpc-alma-blair.",
+  "The task's 'Iron Range-Benton County-Big Oaks 345 kV' corresponds to the Northland Reliability Project; sources list only Minnesota Power and Great River Energy as owners - NSPM builds the Big Oaks Substation as a separate project, not as a Northland co-owner. The MISO LRTP Tranche 1 project number for Northland was not found in cached text.",
+  "New canonical utility ids introduced: 'smmpa' (Southern Minnesota Municipal Power Agency) and 'rpu' (Rochester Public Utilities / City of Rochester Public Utility Board). 'mres' is used for Missouri River Energy Services acting for Western Minnesota Municipal Power Agency (the permittee/co-owner named by the MN PUC is WMMPA)."
+ ]
+}

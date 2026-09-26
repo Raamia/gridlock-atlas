@@ -6,9 +6,9 @@ import { AlertTriangle } from "lucide-react";
 import { useMemo, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { CompletionClaim, ConstructionWindow, Match, Project } from "@/lib/domain/types";
-import { formatBound, formatSpan, formatWindow } from "@/lib/format";
+import { formatBound, formatPoint, formatSpan, formatWindow } from "@/lib/format";
 import { usePreviewPair } from "@/lib/hooks";
-import { activeWindows } from "@/lib/matching/time";
+import { activeWindows, windowsBySource } from "@/lib/matching/time";
 import { ownerNames } from "@/lib/selectors";
 import { useAtlas } from "@/lib/store";
 
@@ -36,9 +36,21 @@ function pct(iso: string, y0: number, y1: number) {
   return Math.max(0, Math.min(100, ((d - a) / (b - a)) * 100));
 }
 
+function pairDomain(a: Project, b: Project, full: { y0: number; y1: number }) {
+  const ys: number[] = [Number(SNAPSHOT.snapshotDate.slice(0, 4))];
+  for (const p of [a, b]) {
+    for (const w of activeWindows(p)) ys.push(Number(w.start.earliest.slice(0, 4)), Number(w.end.latest.slice(0, 4)));
+    for (const c of p.completionClaims) ys.push(Number(c.date.earliest.slice(0, 4)), Number(c.date.latest.slice(0, 4)));
+  }
+  const lo = Math.max(full.y0, Math.min(...ys) - 1);
+  const hi = Math.min(full.y1, Math.max(...ys) + 2);
+  return hi - lo >= 4 ? { y0: lo, y1: hi } : { y0: lo, y1: lo + 4 };
+}
+
 export function Timeline() {
   const preview = usePreviewPair();
-  const { y0, y1 } = useDomain();
+  const full = useDomain();
+  const { y0, y1 } = preview ? pairDomain(preview.a, preview.b, full) : full;
   const years = Array.from({ length: y1 - y0 }, (_, i) => y0 + i);
   const today = pct(SNAPSHOT.snapshotDate, y0, y1);
 
@@ -166,7 +178,7 @@ function InServiceGap({ m, y0, y1 }: { m: Match; y0: number; y1: number }) {
 
 function PairRow({ p, role, y0, y1, m, highlightConflict }: { p: Project; role: "a" | "b"; y0: number; y1: number; m: Match; highlightConflict: boolean }) {
   const color = role === "a" ? "var(--a)" : "var(--b)";
-  const windows = activeWindows(p);
+  const groups = windowsBySource(p);
   const conflict = m.conflicts.find((c) => c.projectId === p.id && c.field === "completion");
   return (
     <div className="flex items-center">
@@ -178,14 +190,17 @@ function PairRow({ p, role, y0, y1, m, highlightConflict }: { p: Project; role: 
         </div>
       </div>
       <div className="relative h-[38px] flex-1">
-        {windows.length === 0 && (
+        {groups.length === 0 && (
           <div className="absolute inset-y-2 left-0 right-0 flex items-center rounded-md border border-dashed border-line-2 px-2 text-[10.5px] text-text-3">
             No published construction window — overlap unknown
           </div>
         )}
-        {windows.map((w, i) => (
-          <WindowBar key={w.id} w={w} color={color} y0={y0} y1={y1} top={windows.length === 1 ? 9 : 2 + i * 18} height={windows.length === 1 ? 20 : 14} />
+        {groups.slice(0, 2).map((g, i) => (
+          <WindowBar key={g[0].id} ws={g} color={color} y0={y0} y1={y1} top={groups.length === 1 ? 9 : 2 + i * 18} height={groups.length === 1 ? 20 : 14} />
         ))}
+        {groups.length > 2 && (
+          <span className="mono absolute -bottom-1 right-0 text-[9.5px] text-text-3">+{groups.length - 2} more source{groups.length > 3 ? "s" : ""}</span>
+        )}
         {p.completionClaims.map((c) => (
           <CompletionMark key={c.id} c={c} y0={y0} y1={y1} conflicted={!!conflict?.claimIds.includes(c.id)} emphasize={highlightConflict} />
         ))}
@@ -195,20 +210,22 @@ function PairRow({ p, role, y0, y1, m, highlightConflict }: { p: Project; role: 
   );
 }
 
-function WindowBar({ w, color, y0, y1, top, height }: { w: ConstructionWindow; color: string; y0: number; y1: number; top: number; height: number }) {
+function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[]; color: string; y0: number; y1: number; top: number; height: number }) {
   const [hover, setHover] = useState(false);
-  const s0 = pct(w.start.earliest, y0, y1);
-  const s1 = pct(w.start.latest, y0, y1);
-  const e0 = pct(w.end.earliest, y0, y1);
-  const e1 = pct(w.end.latest, y0, y1);
-  const width = e1 - s0;
-  const fuzzL = ((s1 - s0) / width) * 100;
-  const fuzzR = ((e1 - e0) / width) * 100;
-  const src = IDX.source(w.claimSourceId);
-  const soft = w.start.precision !== "day" || w.end.precision !== "day";
-  const bg = soft
-    ? `linear-gradient(90deg, color-mix(in oklab, ${color} 15%, transparent) 0%, color-mix(in oklab, ${color} 55%, transparent) ${Math.min(fuzzL, 45)}%, color-mix(in oklab, ${color} 55%, transparent) ${100 - Math.min(fuzzR, 45)}%, color-mix(in oklab, ${color} 15%, transparent) 100%)`
-    : `color-mix(in oklab, ${color} 55%, transparent)`;
+  const startE = ws.map((w) => w.start.earliest).sort()[0];
+  const endL = ws.map((w) => w.end.latest).sort().at(-1)!;
+  const s0 = pct(startE, y0, y1);
+  const e1 = pct(endL, y0, y1);
+  const width = Math.max(e1 - s0, 0.4);
+  const src = IDX.source(ws[0].claimSourceId);
+  const coarse = ws.some((w) => !w.continuous);
+  const w0 = ws[0];
+  const open = ws.some((w) => w.openEnded);
+  const label = open
+    ? `from ${formatPoint(startE, w0.start.precision)} →`
+    : ws.length === 1
+      ? formatWindow(w0.start, w0.end)
+      : `${formatPoint(startE, w0.start.precision)}–${formatPoint(endL, ws.at(-1)!.end.precision)}`;
   return (
     <motion.div
       initial={{ scaleX: 0, opacity: 0 }}
@@ -217,23 +234,60 @@ function WindowBar({ w, color, y0, y1, top, height }: { w: ConstructionWindow; c
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className="absolute origin-left rounded-[5px]"
-      style={{ left: `${s0}%`, width: `${width}%`, top, height, background: bg, boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${color} 60%, transparent)` }}
+      style={{
+        left: `${s0}%`,
+        width: `${width}%`,
+        top,
+        height,
+        background: coarse
+          ? `repeating-linear-gradient(135deg, color-mix(in oklab, ${color} 30%, transparent) 0 5px, color-mix(in oklab, ${color} 14%, transparent) 5px 10px)`
+          : `color-mix(in oklab, ${color} 16%, transparent)`,
+        boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${color} 55%, transparent)`,
+      }}
     >
-      <div className="mono flex h-full items-center overflow-hidden whitespace-nowrap px-2 text-[10px] font-medium text-text-0">
-        {formatWindow(w.start, w.end)}
-        <span className="ml-1.5 truncate font-normal text-text-1/80">· {src?.publisher ?? w.claimSourceId}</span>
+      {!coarse &&
+        ws.map((w) => {
+          const a0 = ((pct(w.start.earliest, y0, y1) - s0) / width) * 100;
+          const a1 = ((pct(w.start.latest, y0, y1) - s0) / width) * 100;
+          const b0 = ((pct(w.end.earliest, y0, y1) - s0) / width) * 100;
+          const b1 = ((pct(w.end.latest, y0, y1) - s0) / width) * 100;
+          const span = Math.max(b1 - a0, 0.5);
+          const fl = ((a1 - a0) / span) * 100;
+          const fr = ((b1 - b0) / span) * 100;
+          return (
+            <div
+              key={w.id}
+              className="absolute inset-y-0 rounded-[4px]"
+              style={{
+                left: `${a0}%`,
+                width: `${span}%`,
+                background: `linear-gradient(90deg, color-mix(in oklab, ${color} 12%, transparent) 0%, color-mix(in oklab, ${color} 52%, transparent) ${Math.min(fl, 45)}%, color-mix(in oklab, ${color} 52%, transparent) ${100 - Math.min(fr, 45)}%, color-mix(in oklab, ${color} 12%, transparent) 100%)`,
+              }}
+            />
+          );
+        })}
+      <div className="mono relative flex h-full items-center overflow-hidden whitespace-nowrap px-2 text-[10px] font-medium text-text-0">
+        {label}
+        <span className="ml-1.5 truncate font-normal text-text-1/80">
+          · {src?.publisher ?? w0.claimSourceId}
+          {ws.length > 1 && ` · ${ws.length} components`}
+          {coarse && !open && " · coarse"}
+          {open && " · end not published"}
+        </span>
       </div>
       {hover && (
-        <div className="glass absolute bottom-full left-0 z-40 mb-2 w-[300px] rounded-lg p-2.5 text-[11.5px]">
-          <div className="font-medium text-text-0">Construction {formatWindow(w.start, w.end)}</div>
-          <div className="text-text-2">
-            {src?.title} · {src?.publisher}
-          </div>
-          <div className="mt-1 text-text-3">
-            Start {formatBound(w.start)} ({w.start.precision}) · end {formatBound(w.end)} ({w.end.precision})
-            {w.start.precision !== "day" && " — soft edges show the range the source allows."}
-          </div>
-          {w.note && <div className="mt-1 text-text-2">{w.note}</div>}
+        <div className="glass absolute bottom-full left-0 z-40 mb-2 w-[320px] rounded-lg p-2.5 text-[11.5px]">
+          <div className="font-medium text-text-0">{src?.title}</div>
+          <div className="text-text-2">{src?.publisher}</div>
+          <ul className="mt-1.5 space-y-1">
+            {ws.map((w) => (
+              <li key={w.id} className="text-text-2">
+                <span className="num text-text-0">{formatWindow(w.start, w.end, w.openEnded)}</span>
+                <span className="text-text-3"> · {w.start.precision} precision</span>
+                {w.note && <div className="text-[10.5px] leading-snug text-text-3">{w.note}</div>}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </motion.div>

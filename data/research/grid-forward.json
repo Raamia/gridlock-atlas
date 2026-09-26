@@ -1,0 +1,2144 @@
+{
+ "cluster": "grid-forward",
+ "sources": [
+  {
+   "id": "psc-grid-forward-case",
+   "title": "Grid Forward - Central Wisconsin Transmission Line Project (PSC highlighted case page)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://psc.wi.gov/Pages/CommissionActions/CasePages/GridForwardCentralWisconsin.aspx",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Undated web page; retrieved 2026-09-26"
+  },
+  {
+   "id": "psc-grid-forward-final",
+   "title": "Final Decision, docket 5-CE-157 (PSC REF# 570269)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=570269",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2025-12-10",
+   "documentDateEvidence": "p64 'Dated at Madison, Wisconsin, the 10th day of December, 2025'; ERF stamp RECEIVED 12/10/2025"
+  },
+  {
+   "id": "psc-grid-forward-app",
+   "title": "Joint CPCN/WDNR Utility Permit Application, docket 5-CE-157 (PSC REF# 529025)",
+   "publisher": "American Transmission Company LLC and Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=529025",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2025-01-10",
+   "documentDateEvidence": "Cover dated October 2024; ERF stamp RECEIVED 1/10/2025; viewer page = printed page + 12"
+  },
+  {
+   "id": "psc-grid-forward-feis",
+   "title": "Final Environmental Impact Statement, docket 5-CE-157 (PSC REF# 555092)",
+   "publisher": "Public Service Commission of Wisconsin and Wisconsin Department of Natural Resources",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=555092",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2025-07-18",
+   "documentDateEvidence": "Cover 'Date Issued: July 2025'; ERF stamp RECEIVED 7/18/2025"
+  },
+  {
+   "id": "psc-grid-forward-atc-q2-2026",
+   "title": "Grid Forward Quarterly Progress Report Q2 2026, docket 5-CE-157 (PSC REF# 601110)",
+   "publisher": "American Transmission Company LLC (filed with PSC of Wisconsin)",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=601110",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-07-30",
+   "documentDateEvidence": "Letter dated July 30, 2026; ERF stamp RECEIVED 7/31/2026; covers April 1 - June 30, 2026"
+  },
+  {
+   "id": "psc-grid-forward-nspw-q2-2026",
+   "title": "NSPW Q2 2026 Progress Report, Grid Forward NSPW Segment, docket 5-CE-157 (PSC REF# 600509)",
+   "publisher": "Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=600509",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-07-28",
+   "documentDateEvidence": "Letter dated July 28, 2026; ERF stamp RECEIVED 7/28/2026; report ending June 30, 2026"
+  },
+  {
+   "id": "psc-grid-forward-nspw-q1-2026",
+   "title": "NSPW Q1 2026 Progress Report, Grid Forward NSPW Segment, docket 5-CE-157 (PSC REF# 589005)",
+   "publisher": "Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=589005",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-04-28",
+   "documentDateEvidence": "Letter dated April 28, 2026; ERF stamp RECEIVED 4/28/2026"
+  },
+  {
+   "id": "psc-grid-forward-map",
+   "title": "Grid Forward Central Wisconsin Transmission Project 5-CE-157 map (PSC)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://psc.wi.gov/Documents/HighlightedCases/GridForwardCentralWisconsinMap.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Undated image-only PDF (no text layer); used only to visually check waypoint order; shows both proposed routes"
+  },
+  {
+   "id": "atc-grid-forward-page",
+   "title": "Grid Forward - Central Wisconsin Project (ATC project website)",
+   "publisher": "American Transmission Company",
+   "url": "https://atc-gridforward.com/grid-forward/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Undated web page; footer '(c) ATC 2026'"
+  },
+  {
+   "id": "atc-grid-forward-timeline",
+   "title": "Grid Forward - Process and Timeline (ATC project website)",
+   "publisher": "American Transmission Company",
+   "url": "https://atc-gridforward.com/process-and-timeline/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Undated; schedule bars are an SVG image (uploads/2025/12/timeline-graphic-01-1.svg) not captured in cached text"
+  },
+  {
+   "id": "atc-grid-forward-news",
+   "title": "Grid Forward - News and Updates (ATC project website)",
+   "publisher": "American Transmission Company",
+   "url": "https://atc-gridforward.com/news-and-updates/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Undated web page"
+  },
+  {
+   "id": "xcel-grid-forward-page",
+   "title": "Grid Forward (LRTP 6) Project - Xcel Energy Transmission Projects",
+   "publisher": "Xcel Energy",
+   "url": "https://xcelenergytransmission.com/projects/gridforward/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Undated web page; footer '(c) 2026 Xcel Energy Inc.'"
+  },
+  {
+   "id": "xcel-grid-forward-infosheet",
+   "title": "Grid Forward - Central Wisconsin Project Information Sheet (26-03-414)",
+   "publisher": "Xcel Energy",
+   "url": "https://cdn.xcelenergytransmission.com/blobvizxe609304b0a5/wp-content/uploads/2026/03/26-03-414_GridForward_IS_P02b.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No printed date; document code 26-03-414 and upload path /2026/03/ suggest March 2026"
+  },
+  {
+   "id": "psc-1515-ce-103-final",
+   "title": "Final Decision, docket 1515-CE-103 (Alma to Blair)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/1515-CE-103%20Final%20Decision.pdf",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Cached by the Dairyland researcher; used here only for the Tremval-site relation and hypothesis test"
+  },
+  {
+   "id": "dpc-alma-blair-page",
+   "title": "Alma-Blair Transmission Project",
+   "publisher": "Dairyland Power Cooperative",
+   "url": "https://dairylandpower.com/alma-blair-transmission-project",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Cached by another researcher; used only for the hypothesis test"
+  },
+  {
+   "id": "psc-wwtc-final",
+   "title": "Final Decision, docket 5-CE-158 (Western Wisconsin Transmission Connection)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=570292",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Cached by another researcher; used for Tremval North site authorization"
+  },
+  {
+   "id": "xcel-wwtc-page",
+   "title": "Western Wisconsin Transmission Connection project page",
+   "publisher": "Xcel Energy",
+   "url": "https://xcelenergytransmission.com/projects/western-wisconsin-transmission-connection/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Cached by another researcher; used for Larkin Valley location"
+  }
+ ],
+ "projects": [
+  {
+   "id": "grid-forward-nspw",
+   "title": "Grid Forward \u2013 Central Wisconsin: NSPW segment (Larkin Valley / Tremval North to PCO), 345 kV line W-36 west portion",
+   "shortTitle": "Grid Forward NSPW seg.",
+   "titleEvidence": [
+    {
+     "sourceId": "psc-grid-forward-nspw-q2-2026",
+     "exactExcerpt": "This report includes information on the progress of activities on the NSPW Segment of the Grid Forward Central Wisconsin Project during the Second Quarter 2026. ATC is submitting a separate quarterly report for its portion of Grid Forward.",
+     "supports": "Owner-specific packages report separately",
+     "page": 2,
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-app",
+     "exactExcerpt": "NSPW will own, construct, and operate 100% of the Project from the PCO location to the Tremval Substation.",
+     "supports": "NSPW owns/builds PCO-Tremval",
+     "page": 15,
+     "printedPage": "Page 3 of 222",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "NSPW (Xcel Energy) will construct and operate, and co-own with WPPI Energy and SMMPA Wisconsin, the ~39-mile western segment of the PSC-approved Grid Forward 345 kV line from the Larkin Valley (Tremval North) substation near Blair to the ATC change-of-ownership point in Clark County; its latest progress report anticipates construction starting Q4 2027 with in-service December 2030.",
+   "owners": [
+    {
+     "utilityId": "xcel-nspw",
+     "name": "Northern States Power Company-Wisconsin (Xcel Energy)",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "NSPW will own, construct, and operate 100% of the Project from the PCO location to the Tremval Substation.",
+       "supports": "NSPW owns/builds PCO-Tremval",
+       "page": 15,
+       "printedPage": "Page 3 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-nspw-q2-2026",
+       "exactExcerpt": "NSPW will construct and operate the NSPW Segment; NSPW will share ownership of the NSPW segment as tenants in common with WPPI Energy and SMMPA Wisconsin, LLC.",
+       "supports": "NSPW builds; co-owned with WPPI and SMMPA Wisconsin",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "wppi-energy",
+     "name": "WPPI Energy",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "NSPW also testified that an agreement had been reached with SMMPA and WPPI and that both would be co-owners of the NSPW portion of the project.",
+       "supports": "SMMPA and WPPI co-own the NSPW portion",
+       "page": 4,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-nspw-q2-2026",
+       "exactExcerpt": "NSPW will construct and operate the NSPW Segment; NSPW will share ownership of the NSPW segment as tenants in common with WPPI Energy and SMMPA Wisconsin, LLC.",
+       "supports": "NSPW builds; co-owned with WPPI and SMMPA Wisconsin",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "smmpa-wisconsin",
+     "name": "SMMPA Wisconsin, LLC (Southern Minnesota Municipal Power Agency)",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "NSPW also testified that an agreement had been reached with SMMPA and WPPI and that both would be co-owners of the NSPW portion of the project.",
+       "supports": "SMMPA and WPPI co-own the NSPW portion",
+       "page": 4,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-nspw-q2-2026",
+       "exactExcerpt": "NSPW will construct and operate the NSPW Segment; NSPW will share ownership of the NSPW segment as tenants in common with WPPI Energy and SMMPA Wisconsin, LLC.",
+       "supports": "NSPW builds; co-owned with WPPI and SMMPA Wisconsin",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "approved",
+    "asOf": "2026-06-30",
+    "evidence": [
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "The CPCN application is APPROVED subject to conditions and as modified by this Final Decision.",
+      "supports": "CPCN approved (status approved)",
+      "page": 1,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-nspw-q2-2026",
+      "exactExcerpt": "At this time, construction of the NSPW Segment of the Project is anticipated to start in the fourth quarter of 2027 with an in-service date of December 2030.",
+      "supports": "NSPW segment construction start Q4 2027 (latest report); in-service December 2030",
+      "page": 2,
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "docketId": "5-CE-157",
+   "parentInitiative": "Grid Forward Central Wisconsin (PSC docket 5-CE-157) - MISO LRTP Tranche 1 Project 6",
+   "counties": [
+    {
+     "name": "Trempealeau",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Trempealeau 1, C1 Primary and Alternate Trempealeau and Jackson 2, C2 Primary Jackson and Clark 3, C3 Primary Clark and Wood 4",
+       "supports": "Counties by segment (segments 1-3 NSPW; 4 ATC)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "from the Tremval Substation in the town of Preston, Trempealeau County, to the expanded Arpin Substation in the town of Sherry, Wood County, to the Columbia Substation in the town of Pacific, Columbia County",
+       "supports": "Endpoint substations and their towns",
+       "page": 19,
+       "printedPage": "Page 7 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Jackson",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Trempealeau 1, C1 Primary and Alternate Trempealeau and Jackson 2, C2 Primary Jackson and Clark 3, C3 Primary Clark and Wood 4",
+       "supports": "Counties by segment (segments 1-3 NSPW; 4 ATC)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "The approved route will travel from the Larkin Valley Substation northeast into Jackson County toward Alma Center then east through Clark County and Wood County to the Arpin Substation.",
+       "supports": "Route description Larkin Valley -> Alma Center -> Clark/Wood -> Arpin",
+       "section": "Route Details",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Clark",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Trempealeau 1, C1 Primary and Alternate Trempealeau and Jackson 2, C2 Primary Jackson and Clark 3, C3 Primary Clark and Wood 4",
+       "supports": "Counties by segment (segments 1-3 NSPW; 4 ATC)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Nominal voltage (new line W-36, Tremval\u2013Arpin)",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "one (1) new 345 kV transmission line from the Tremval Substation to the Arpin Substation and one (1) new 345 kV transmission line from the Arpin Substation to the Columbia Substation.",
+       "supports": "Two new 345 kV lines: Tremval-Arpin and Arpin-Columbia",
+       "page": 27,
+       "printedPage": "Page 15 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Length of Xcel/NSPW-constructed segment",
+     "value": "39.25 (web page); ~39 (Mar 2026 info sheet)",
+     "evidence": [
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "The total length of this segment is approximately 39.25 miles. WPPI Energy and the Southern Minnesota Municipal Power Agency (SMMPA) are co-owners of the segment being constructed by Xcel Energy.",
+       "supports": "Xcel segment length 39.25 mi; WPPI and SMMPA co-owners",
+       "section": "Project Details",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-grid-forward-infosheet",
+       "exactExcerpt": "This segment is approximately 39 miles long and travels from the Larkin Valley Substation northeast into Jackson County toward Alma Center, then east through Clark and Wood Counties to the Arpin Substation.",
+       "supports": "Xcel segment ~39 miles",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "PSC-approved cost estimate, NSPW segment (lines + other costs); actuals to 2026-06-30 $6,781,364",
+     "value": "239888000",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-nspw-q2-2026",
+       "exactExcerpt": "Transmission Route Cost Estimates for the NSPW Segment Project Cost Category PSC Approval NSPW Transmission Lines Material $78,255,000 Labor $98,067,000 Other $49,527,000 NSPW Transmission Lines Subtotal: $225,849,000",
+       "supports": "NSPW segment PSC-approved cost table",
+       "page": 3,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-nspw-q2-2026",
+       "exactExcerpt": "$2,943,339 $0 $0 $2,943,339 TOTAL PROJECT COSTS $239,888,000 $6,781,364",
+       "supports": "NSPW segment total: $239,888,000 approved; $6,781,364 actual to June 30, 2026",
+       "page": 3,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Whole Grid Forward project estimated cost (both packages, not NSPW-only)",
+     "value": "$1,595,917,000",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "operation of a new 345 kV transmission line connecting the Tremval-Arpin-Columbia Substations in Trempealeau, Wood, and Columbia Counties. The project has an estimated total cost of $1,595,917,000.",
+       "supports": "345 kV; whole-project estimated cost $1,595,917,000",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "gf-larkin-valley",
+     "label": "Larkin Valley Substation (Tremval Substation Expansion North / 'Tremval North'), near Blair",
+     "kind": "substation",
+     "precision": "locality",
+     "lat": 44.2946235,
+     "lon": -91.2338433,
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: Blair, Trempealeau County, WI (OSM relation 251764) town centroid; new substation not in OSM; Xcel places it ~0.5 mi north of the existing Tremval Substation near Blair",
+     "evidence": [
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "Xcel Energy is responsible for constructing the portion of the project that runs from the Larkin Valley Substation near the City of Blair in Trempealeau County to a transmission tower location known as the \u201cGolden Spike\u201d located approximately 3 miles south of Neilsville, WI.",
+       "supports": "Xcel segment: Larkin Valley Substation (near Blair) to 'Golden Spike'",
+       "section": "Project Details",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "will travel from the new Larkin Valley Substation (previously referred to as Tremval Substation Expansion), located approximately 0.5miles to the north of the existing Tremval Substation near Blair",
+       "supports": "Larkin Valley = Tremval Substation Expansion, ~0.5 mi north of existing Tremval, near Blair",
+       "section": "Project Route",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Segment 1N, C1N: The proposed 345 kV line W-36 would exit east out of NSPW\u2019s Tremval Substation Expansion North then head south paralleling the existing W-13/W3204 alignment",
+       "supports": "Line W-36 exits NSPW's Tremval Substation Expansion North",
+       "page": 102,
+       "printedPage": "Page 90 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "gf-tremval-existing",
+     "label": "Tremval Substation (existing, Town of Preston, west of Blair)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.2933362,
+     "lon": -91.2550361,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "Overpass: OSM way 258582476 power=substation name=\"Tremval Substation\" (161/69 kV), centroid",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-feis",
+       "exactExcerpt": "Tremval Substation: The existing Tremval Substation is located west of Blair in Trempealeau County. An expansion would accommodate the new 345 kV line, W-36.",
+       "supports": "Existing Tremval Substation is west of Blair",
+       "page": 45,
+       "printedPage": "15",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "from the Tremval Substation in the town of Preston, Trempealeau County, to the expanded Arpin Substation in the town of Sherry, Wood County, to the Columbia Substation in the town of Pacific, Columbia County",
+       "supports": "Endpoint substations and their towns",
+       "page": 19,
+       "printedPage": "Page 7 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "gf-pco",
+     "label": "Point of Change of Ownership (PCO) between NSPW and ATC segments, ~1,400 ft west of Sherwood Rd & River Ave, Clark County (Xcel calls its segment end the 'Golden Spike')",
+     "kind": "route-endpoint",
+     "precision": "locality",
+     "lat": 44.4652464,
+     "lon": -90.6193705,
+     "uncertaintyMeters": 1500,
+     "coordinateSource": "Overpass: OSM node 147099194 = intersection of highway ways named \"Sherwood Road\" and \"River Avenue\" (bbox 44.40,-90.75,44.60,-90.40); coordinate is the intersection itself, NOT offset the ~1,400 ft west the application describes; identity of PCO with Xcel's \"Golden Spike\" is not stated in sources",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The PCO will be located at the intersection of Segment 3 and 4, approximately 1,400 feet west of the intersection of Sherwood Rd and River Ave for the Primary Route",
+       "supports": "PCO location (Primary Route)",
+       "page": 15,
+       "printedPage": "Page 3 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "until W-36 reaches the Point of Change of Ownership (PCO) location west of River Avenue as agreed upon between NSPW and ATC for transfer of line ownership.",
+       "supports": "PCO location agreed between NSPW and ATC",
+       "page": 104,
+       "printedPage": "Page 92 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "caveat": "schematic / not survey accurate: waypoints are the substations and communities the approved-route descriptions name, in order, geocoded to OSM features or town centroids; order cross-checked visually against the PSC project map PDF (psc-grid-forward-map) and Xcel web map; actual alignment detours (e.g., south of Blair, north around Hixton)",
+    "description": "Approved Proposed Route, NSPW portion (segments 1N, 1, 2, 3): exits Tremval Substation Expansion North (Larkin Valley), crosses the Trempealeau River, passes the south side of Blair, the northern outskirts of Taylor, north around Hixton, Alma Center, the north edge of Merrillan along STH 95, then east along Sherwood Road to the PCO west of River Avenue in Clark County.",
+    "evidence": [
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "The Commission authorizes the Proposed Route, consisting of single-circuit 345 kV transmission line, and double-circuit configurations with existing 69 kV, 115 kV, 138 kV, and 345 kV transmission lines",
+      "supports": "Proposed Route authorized",
+      "page": 36,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "As a Common Route, both the Proposed and Alternative Routes would exit the Tremval Substation Expansion North and travel south to cross the Trempealeau River as new ROW for segment 1N.",
+      "supports": "Route begins at Tremval Substation Expansion North, crosses Trempealeau River",
+      "page": 31,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-app",
+      "exactExcerpt": "Between the Tremval Substation in Trempealeau County and the Arpin Substation in Wood County, the Primary Route would cross the south side of the city of Blair along existing transmission lines",
+      "supports": "Route crosses south side of Blair",
+      "page": 26,
+      "printedPage": "Page 14 of 222",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-app",
+      "exactExcerpt": "would primarily follow existing transmission lines near or through the northern outskirts of the villages of Taylor, Hixton, and Alma Center. From Alma Center, the Primary Route would pass through the north edge of the village of Merrillan adjacent to STH 95",
+      "supports": "Route past Taylor, Hixton, Alma Center, Merrillan",
+      "page": 26,
+      "printedPage": "Page 14 of 222",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "As the route approaches the Village of Hixton, it would turn north and then east as new ROW, before turning northeast again as largely expanded ROW.",
+      "supports": "Route passes around Hixton",
+      "page": 31,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "the Proposed Route would continue as segment 3, northeast and east as largely expanded ROW, but including a few sections of new ROW as well. Here, the route would generally follow State Highway (STH) 95 with some exceptions.",
+      "supports": "Segment 3 follows STH 95",
+      "page": 31,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-app",
+      "exactExcerpt": "until W-36 reaches the Point of Change of Ownership (PCO) location west of River Avenue as agreed upon between NSPW and ATC for transfer of line ownership.",
+      "supports": "PCO location agreed between NSPW and ATC",
+      "page": 104,
+      "printedPage": "Page 92 of 222",
+      "verifiedByScript": true
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "Tremval Substation (existing; line exits the adjacent Tremval Expansion North/Larkin Valley site)",
+      "lat": 44.2933362,
+      "lon": -91.2550361,
+      "coordinateSource": "OSM way 258582476 power=substation name=\"Tremval Substation\""
+     },
+     {
+      "name": "Blair (route crosses south side of city)",
+      "lat": 44.2946235,
+      "lon": -91.2338433,
+      "coordinateSource": "Nominatim: Blair, Trempealeau County, WI (relation 251764) centroid"
+     },
+     {
+      "name": "Taylor (northern outskirts)",
+      "lat": 44.3217773,
+      "lon": -91.1236072,
+      "coordinateSource": "Nominatim: Taylor, Jackson County, WI (relation 251887) centroid"
+     },
+     {
+      "name": "Hixton (route turns north around village)",
+      "lat": 44.3860141,
+      "lon": -91.014352,
+      "coordinateSource": "Nominatim: Hixton, Jackson County, WI (relation 251884) centroid"
+     },
+     {
+      "name": "Alma Center",
+      "lat": 44.4371047,
+      "lon": -90.9126506,
+      "coordinateSource": "Nominatim: Alma Center, Jackson County, WI (relation 251880) centroid"
+     },
+     {
+      "name": "Merrillan (north edge, along STH 95)",
+      "lat": 44.4510731,
+      "lon": -90.8412278,
+      "coordinateSource": "Nominatim: Merrillan, Jackson County, WI (relation 251886) centroid"
+     },
+     {
+      "name": "PCO near Sherwood Rd & River Ave (end of NSPW segment)",
+      "lat": 44.4652464,
+      "lon": -90.6193705,
+      "coordinateSource": "Overpass: OSM node 147099194 intersection of Sherwood Road and River Avenue"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "psc-grid-forward-final",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-10-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with completion by December 2030.",
+       "supports": "Project-wide construction start Q4 2026, completion by December 2030",
+       "page": 54,
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Project-wide PSC statement (both packages), not specific to the NSPW segment; 'completion by December 2030' read as end of construction; application notes spreads may be skipped and sequence starts near Columbia."
+    },
+    {
+     "claimSourceId": "psc-grid-forward-app",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-10-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "continuous": false,
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Applicants anticipate commencing construction in the fourth quarter of 2026. The Applicants anticipate placing all scopes of work in-service in December of 2030.",
+       "supports": "As-filed: construction Q4 2026; all scopes in-service December 2030",
+       "page": 14,
+       "printedPage": "Page 2 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Applicants expect that construction work will occur sequentially, but it could occur in multiple construction spreads at one time, and some skipping of spreads or within spreads may occur.",
+       "supports": "Construction not necessarily continuous at any location",
+       "page": 39,
+       "printedPage": "Page 27 of 222",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "As-filed project-wide schedule ('as soon as Q4 2026'). End bound is the source's in-service date; the source gives no separate construction-end date, so the end is an upper bound derived from in-service, not a stated construction end."
+    },
+    {
+     "claimSourceId": "psc-grid-forward-nspw-q1-2026",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-10-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "continuous": false,
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-nspw-q1-2026",
+       "exactExcerpt": "At this time construction of the NSPW Segment of the Project is anticipated to start in the fourth quarter of 2026 with an in-service date of December 2030.",
+       "supports": "Earlier NSPW claim: start Q4 2026",
+       "page": 2,
+       "verifiedByScript": true
+      }
+     ],
+     "note": "NSPW Q1 2026 progress report (filed 2026-04-28). Superseded in time by the Q2 2026 report's Q4 2027 start; kept side by side. End bound is the source's in-service date; the source gives no separate construction-end date, so the end is an upper bound derived from in-service, not a stated construction end."
+    },
+    {
+     "claimSourceId": "psc-grid-forward-nspw-q2-2026",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2027-10-01",
+      "latest": "2027-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "continuous": false,
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-nspw-q2-2026",
+       "exactExcerpt": "At this time, construction of the NSPW Segment of the Project is anticipated to start in the fourth quarter of 2027 with an in-service date of December 2030.",
+       "supports": "NSPW segment construction start Q4 2027 (latest report); in-service December 2030",
+       "page": 2,
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Latest NSPW-specific claim (Q2 2026 report filed 2026-07-28). End bound is the source's in-service date; the source gives no separate construction-end date, so the end is an upper bound derived from in-service, not a stated construction end."
+    },
+    {
+     "claimSourceId": "xcel-grid-forward-page",
+     "phase": "preconstruction",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "Pre-construction ground activities: 2026-2027 General construction: 2027-2030 Project in service: 2030",
+       "supports": "Xcel timeline: pre-construction 2026-2027, general construction 2027-2030",
+       "section": "Project Timeline",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "Pre-construction ground activities are expected to begin in late 2026 with general construction to begin in 2027 and the project to be in service in 2030.",
+       "supports": "Xcel: pre-construction late 2026, general construction from 2027, in service 2030",
+       "section": "Current Status",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Xcel 'pre-construction ground activities' 2026-2027 (text says begin late 2026); preconstruction, not general construction."
+    },
+    {
+     "claimSourceId": "xcel-grid-forward-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "Pre-construction ground activities: 2026-2027 General construction: 2027-2030 Project in service: 2030",
+       "supports": "Xcel timeline: pre-construction 2026-2027, general construction 2027-2030",
+       "section": "Project Timeline",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "Pre-construction ground activities are expected to begin in late 2026 with general construction to begin in 2027 and the project to be in service in 2030.",
+       "supports": "Xcel: pre-construction late 2026, general construction from 2027, in service 2030",
+       "section": "Current Status",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Xcel published general construction 2027-2030 (same in Mar 2026 info sheet); page describes Xcel's portion but timeline may be project-level."
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "psc-grid-forward-final",
+     "label": "completion (project-wide)",
+     "date": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with completion by December 2030.",
+       "supports": "Project-wide construction start Q4 2026, completion by December 2030",
+       "page": 54,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-grid-forward-final",
+     "label": "projected in-service year (cost-basis sentence; conflicts with Dec 2030)",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "The estimated costs are based on 2029 dollars, the projected in-service year for the proposed project, and include transmission line, substation, pre-certification, and environmental impact fee costs.",
+       "supports": "Final decision also calls 2029 the projected in-service year (conflicts with December 2030)",
+       "page": 53,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-grid-forward-app",
+     "label": "all scopes in-service (as filed)",
+     "date": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Applicants anticipate commencing construction in the fourth quarter of 2026. The Applicants anticipate placing all scopes of work in-service in December of 2030.",
+       "supports": "As-filed: construction Q4 2026; all scopes in-service December 2030",
+       "page": 14,
+       "printedPage": "Page 2 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-grid-forward-case",
+     "label": "estimated completion (PSC summary of application)",
+     "date": {
+      "earliest": "2030-10-01",
+      "latest": "2030-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-case",
+       "exactExcerpt": "If approved, t\u200bhe applicant anticipates construction for this project to begin in Q4 2026 with an estimated\u200b completion date of Q4 2030.",
+       "supports": "As-filed schedule summary: construction Q4 2026, completion Q4 2030",
+       "section": "Proposed schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-grid-forward-nspw-q2-2026",
+     "label": "in-service (NSPW segment)",
+     "date": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-nspw-q2-2026",
+       "exactExcerpt": "At this time, construction of the NSPW Segment of the Project is anticipated to start in the fourth quarter of 2027 with an in-service date of December 2030.",
+       "supports": "NSPW segment construction start Q4 2027 (latest report); in-service December 2030",
+       "page": 2,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "xcel-grid-forward-page",
+     "label": "project in service",
+     "date": {
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "Pre-construction ground activities: 2026-2027 General construction: 2027-2030 Project in service: 2030",
+       "supports": "Xcel timeline: pre-construction 2026-2027, general construction 2027-2030",
+       "section": "Project Timeline",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "grid-forward-atc",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "Single joint CPCN (docket 5-CE-157) with ATC; executed Common Interest, Joint Prosecution, and Confidentiality Agreement; Xcel describes construction as a collaboration between Xcel Energy and ATC. Each owner builds its own segment.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "American Transmission Company LLC (ATC), Northern States Power Company-Wisconsin (NSPW), SMMPA Wisconsin, LLC (SMMPA), and WPPI Energy (WPPI) (together, applicants) for a Certificate of Public Convenience and Necessity (CPCN) to construct the Grid Forward Central Wisconsin Project",
+       "supports": "Final applicants: ATC, NSPW, SMMPA Wisconsin, WPPI Energy",
+       "page": 1,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "ATC and NSPW have entered into a Common Interest, Joint Prosecution, and Confidentiality Agreement related to the Project.",
+       "supports": "Executed ATC-NSPW agreement",
+       "page": 16,
+       "printedPage": "Page 4 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-grid-forward-page",
+       "exactExcerpt": "Construction of the Grid Forward-Central Wisconsin/LRTP 6 project is a collaboration between Xcel Energy and ATC.",
+       "supports": "Xcel-ATC collaboration",
+       "section": "Project Overview",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "grid-forward-atc",
+     "status": "known-joint",
+     "scope": "interconnection-design",
+     "description": "The two segments meet at a Point of Change of Ownership location agreed between NSPW and ATC; further agreements (Owners Coordination, Transmission-to-Transmission Interconnection) are listed only as possible ('may include').",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "until W-36 reaches the Point of Change of Ownership (PCO) location west of River Avenue as agreed upon between NSPW and ATC for transfer of line ownership.",
+       "supports": "PCO location agreed between NSPW and ATC",
+       "page": 104,
+       "printedPage": "Page 92 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Other agreements as needed or agreed to by ATC and NSPW may include: a Joint Development Agreement; an Owners Coordination Agreement; a Transmission-to-Transmission Interconnection Agreement; and a Fiber Ownership and Use Agreement.",
+       "supports": "Possible (not confirmed) further ATC-NSPW agreements",
+       "page": 16,
+       "printedPage": "Page 4 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "grid-forward-atc",
+     "status": "known-joint",
+     "scope": "resource-sharing",
+     "description": "One combined independent environmental/agricultural monitor (IEM/IAM) required by PSC order condition 7, procured through a single RFP reviewed by NSPW and ATC. This is a shared regulatory compliance monitor, not shared construction crews or equipment. Planned outage coordination with ATC and NSPW system operators is also stated.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "The applicants shall work with Commission staff in the preparation and issuance of an RFP to hire a combined IEM/IAM that shall report directly to the Commission.",
+       "supports": "Order condition 7: one combined IEM/IAM for the applicants",
+       "page": 58,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-nspw-q2-2026",
+       "exactExcerpt": "In accordance with Order Point 7, the PSCW provided NSPW and ATC a draft Independent Environmental Monitor / Independent Agricultural Monitor (IEM/IAM) Request for Proposals (RFP) for review and revision.",
+       "supports": "Single IEM/IAM RFP reviewed by both NSPW and ATC",
+       "page": 2,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Project team will coordinate with ATC system operations, NSPW system operators and MISO\u2019s Reliability Coordinator to establish outage sequencing and to coordinate the transmission outages necessary to construct the Project.",
+       "supports": "Planned outage coordination among ATC, NSPW, MISO",
+       "page": 39,
+       "printedPage": "Page 27 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "xcel-wwtc",
+     "status": "known-joint",
+     "scope": "shared-facility",
+     "description": "NSPW segment terminates at the Tremval Substation Expansion North (now Larkin Valley Substation), whose scope is in the Western Wisconsin docket 5-CE-158 (also NSPW); the 5-CE-158 decision authorized the North site.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Tremval Substation scope to accommodate the new W-36 transmission line is described in Docket No. 5-CE-158.",
+       "supports": "Tremval substation work is scoped in WWTC docket",
+       "page": 135,
+       "printedPage": "Page 123 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-final",
+       "exactExcerpt": "The Commission authorizes the Tremval North Substation Expansion site and its associated transmission corridor connecting with Route 2.",
+       "supports": "WWTC decision authorizes Tremval North Substation Expansion site",
+       "page": 35,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "xcel-wwtc-page",
+       "exactExcerpt": "will travel from the new Larkin Valley Substation (previously referred to as Tremval Substation Expansion), located approximately 0.5miles to the north of the existing Tremval Substation near Blair",
+       "supports": "Larkin Valley = Tremval Substation Expansion, ~0.5 mi north of existing Tremval, near Blair",
+       "section": "Project Route",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "dpc-alma-blair",
+     "status": "reported-coordination",
+     "scope": "joint-initiative",
+     "description": "ATC's project page says ATC, Xcel Energy and Dairyland are 'cooperatively working on plans' to develop the three MISO MVP lines in Wisconsin (planning-level statement only).",
+     "evidence": [
+      {
+       "sourceId": "atc-grid-forward-page",
+       "exactExcerpt": "Three MISO-approved MVP projects are being developed within Wisconsin, and three separate utilities are cooperatively working on plans to develop these new high-voltage power lines within their existing service areas. These utilities include ATC, Xcel Energy and Dairyland Power Cooperative.",
+       "supports": "ATC reports ATC, Xcel and Dairyland cooperatively planning the three Wisconsin MVP lines",
+       "section": "Grid Forward \u2013 Central Wisconsin Project",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "dpc-alma-blair",
+     "status": "not-found-in-sources",
+     "scope": "resource-sharing",
+     "description": "No cited Grid Forward source documents shared crews, equipment, laydown, outage or construction-schedule coordination with Dairyland's Alma\u2013Blair project; Dairyland (an intervenor in 5-CE-157) offered no evidence and filed no briefs, and Alma\u2013Blair appears only as a planning-model assumption. Not evidence of no coordination.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "DPC, Em3 2 Holdings LLC, Joseph and Travis Randall, Steven and Kris Pickhardt, and WIEG did not offer evidence.",
+       "supports": "Dairyland offered no evidence in 5-CE-157",
+       "page": 4,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "DPC, Em3 2 Holdings LLC, For-Ever-Green Inc., Joseph and Travis Randall, MISO, Steve and Kris Pickhardt, the Archaeological Conservancy, and WIEG filed no briefs.",
+       "supports": "Dairyland filed no briefs in 5-CE-157",
+       "page": 4,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "review of the project without the inclusion of the Western Wisconsin Transmission Project or the Alma-Blair Transmission Line Project in docket 1515-CE-103 assumed to be in service",
+       "supports": "Alma-Blair and Western Wisconsin appear only as modeling assumptions",
+       "page": 20,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "dairyland",
+     "status": "unknown",
+     "scope": "interconnection-design",
+     "description": "Application route text says the rebuilt NSPW 69 kV line W3401 on this segment would tap to switch structures for existing DPC Badger Sands, Hixton and May Coulee taps; no coordination arrangement with Dairyland for this work is described.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "then turning east and crossing Bridge Street, where W3401 would tap to a switch structure for the DPC Badger Sands Tap east of Bridge Street.",
+       "supports": "Rebuilt NSPW line interfaces with existing DPC tap",
+       "page": 103,
+       "printedPage": "Page 91 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The DPC Hixton Tap would be just east of N Lincoln Road and the DPC May Coulee Tap would be just north of Green Acres Road.",
+       "supports": "Two more existing DPC taps on rebuilt W3401",
+       "page": 103,
+       "printedPage": "Page 91 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "NSPW-specific construction start moved from Q4 2026 (Q1 2026 report) to Q4 2027 (Q2 2026 report); PSC final decision gives a project-wide Q4 2026 start. All kept side by side.",
+    "No source gives a construction-end date separate from in-service/completion (December 2030); window ends are upper bounds from completion/in-service statements.",
+    "Final decision states both 'completion by December 2030' and that 2029 is 'the projected in-service year' (cost-basis sentence).",
+    "Endpoint naming differs: Xcel web page says Larkin Valley was 'previously known as the Tremval North Substation'; Xcel info sheet says 'near the Tremval North Substation'; application/decision say 'Tremval Substation Expansion North'.",
+    "Xcel says its segment ends at the 'Golden Spike' ~3 miles south of Neillsville, ~39.25 mi; the application places the PCO ~1,400 ft west of Sherwood Rd & River Ave, which geocodes ~6.7 mi south of the Neillsville centroid. Whether they are the same point is not stated.",
+    "Application construction-sequence statements conflict (Tremval-to-Arpin vs. Columbia-to-Arpin then west to Tremval)."
+   ]
+  },
+  {
+   "id": "grid-forward-atc",
+   "title": "Grid Forward \u2013 Central Wisconsin: ATC portion (PCO\u2013Arpin\u2013Columbia 345 kV, Arpin/Columbia substation expansions and remote-end work)",
+   "shortTitle": "Grid Forward ATC",
+   "titleEvidence": [
+    {
+     "sourceId": "psc-grid-forward-app",
+     "exactExcerpt": "ATC will own, construct, and operate one hundred percent (100%) of the Project from a point of change of ownership (PCO) location (including the PCO structure itself) east to the Arpin Substation and from the Arpin Substation to the Columbia Substation.",
+     "supports": "ATC owns/builds PCO-Arpin-Columbia",
+     "page": 15,
+     "printedPage": "Page 3 of 222",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-nspw-q2-2026",
+     "exactExcerpt": "This report includes information on the progress of activities on the NSPW Segment of the Grid Forward Central Wisconsin Project during the Second Quarter 2026. ATC is submitting a separate quarterly report for its portion of Grid Forward.",
+     "supports": "Owner-specific packages report separately",
+     "page": 2,
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "ATC owns and is building the PSC-approved Grid Forward 345 kV line from the NSPW/ATC change-of-ownership point in Clark County east to an expanded Arpin Substation and on to the Columbia Substation, plus substation work; ATC reports transmission line construction began in Q2 2026 with in-service planned for December 2030.",
+   "owners": [
+    {
+     "utilityId": "atc",
+     "name": "American Transmission Company LLC (ATC Management Inc.)",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "ATC will own, construct, and operate one hundred percent (100%) of the Project from a point of change of ownership (PCO) location (including the PCO structure itself) east to the Arpin Substation and from the Arpin Substation to the Columbia Substation.",
+       "supports": "ATC owns/builds PCO-Arpin-Columbia",
+       "page": 15,
+       "printedPage": "Page 3 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "ATC will own, construct, and operate the expansions at the Arpin and the Columbia Substations, along with modifications at the remote substations listed in Section 1.6 of this Joint Application.",
+       "supports": "ATC owns substation work at Arpin, Columbia and remote substations",
+       "page": 16,
+       "printedPage": "Page 4 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "construction",
+    "asOf": "2026-06-30",
+    "evidence": [
+     {
+      "sourceId": "psc-grid-forward-atc-q2-2026",
+      "exactExcerpt": "The planned Project in-service date is December 2030. ATC began transmission line construction in Q2 2026. ATC is currently working on the development of laydown yards to support the project.",
+      "supports": "ATC portion under construction since Q2 2026; in-service December 2030",
+      "page": 1,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-atc-q2-2026",
+      "exactExcerpt": "In addition, ATC set one structure on segment C22 in July to support system outage constraints with the remainder of construction starting in Q3 2026.",
+      "supports": "First structure July 2026; remainder of construction Q3 2026",
+      "page": 1,
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "docketId": "5-CE-157",
+   "parentInitiative": "Grid Forward Central Wisconsin (PSC docket 5-CE-157) - MISO LRTP Tranche 1 Project 6",
+   "counties": [
+    {
+     "name": "Clark",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Trempealeau 1, C1 Primary and Alternate Trempealeau and Jackson 2, C2 Primary Jackson and Clark 3, C3 Primary Clark and Wood 4",
+       "supports": "Counties by segment (segments 1-3 NSPW; 4 ATC)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Wood",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Trempealeau 1, C1 Primary and Alternate Trempealeau and Jackson 2, C2 Primary Jackson and Clark 3, C3 Primary Clark and Wood 4",
+       "supports": "Counties by segment (segments 1-3 NSPW; 4 ATC)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Wood, Portage, Adams, and Waushara 15 Primary and Alternate Waushara 16, C16, 17, C17",
+       "supports": "Counties by segment (ATC portion)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Portage",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Wood, Portage, Adams, and Waushara 15 Primary and Alternate Waushara 16, C16, 17, C17",
+       "supports": "Counties by segment (ATC portion)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Rocky Run Within fence City of Stevens Point, Portage County N/A N/A ATC Substation See Section 5.8",
+       "supports": "Rocky Run Substation (ATC) in Stevens Point is a project work site",
+       "page": 23,
+       "printedPage": "Page 11 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Adams",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Wood, Portage, Adams, and Waushara 15 Primary and Alternate Waushara 16, C16, 17, C17",
+       "supports": "Counties by segment (ATC portion)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Waushara",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Wood, Portage, Adams, and Waushara 15 Primary and Alternate Waushara 16, C16, 17, C17",
+       "supports": "Counties by segment (ATC portion)",
+       "page": 101,
+       "printedPage": "Page 89 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Waushara, Marquette, and Green Lake 18, C18 Primary and Alternate Green Lake and Columbia 19, C19 Primary and Alternate Columbia 20, 21, C21, C22",
+       "supports": "Counties by segment (ATC portion)",
+       "page": 102,
+       "printedPage": "Page 90 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Marquette",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Waushara, Marquette, and Green Lake 18, C18 Primary and Alternate Green Lake and Columbia 19, C19 Primary and Alternate Columbia 20, 21, C21, C22",
+       "supports": "Counties by segment (ATC portion)",
+       "page": 102,
+       "printedPage": "Page 90 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Green Lake",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Waushara, Marquette, and Green Lake 18, C18 Primary and Alternate Green Lake and Columbia 19, C19 Primary and Alternate Columbia 20, 21, C21, C22",
+       "supports": "Counties by segment (ATC portion)",
+       "page": 102,
+       "printedPage": "Page 90 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Columbia",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Primary and Alternate Waushara, Marquette, and Green Lake 18, C18 Primary and Alternate Green Lake and Columbia 19, C19 Primary and Alternate Columbia 20, 21, C21, C22",
+       "supports": "Counties by segment (ATC portion)",
+       "page": 102,
+       "printedPage": "Page 90 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "from the Tremval Substation in the town of Preston, Trempealeau County, to the expanded Arpin Substation in the town of Sherry, Wood County, to the Columbia Substation in the town of Pacific, Columbia County",
+       "supports": "Endpoint substations and their towns",
+       "page": 19,
+       "printedPage": "Page 7 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Nominal voltage (new 345 kV lines Tremval\u2013Arpin and Arpin\u2013Columbia)",
+     "value": "345",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "one (1) new 345 kV transmission line from the Tremval Substation to the Arpin Substation and one (1) new 345 kV transmission line from the Arpin Substation to the Columbia Substation.",
+       "supports": "Two new 345 kV lines: Tremval-Arpin and Arpin-Columbia",
+       "page": 27,
+       "printedPage": "Page 15 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Whole-project approved route length (both packages; ATC-only length not stated)",
+     "value": "200 miles",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "proposed route is 200 miles and primarily travels through Clark County, while the alternate route is 205 miles and primarily travels through Jackson County.",
+       "supports": "Approved (Proposed) route length 200 miles, whole project",
+       "page": 16,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Whole Grid Forward project estimated cost (both packages; ATC-only total not stated as one figure)",
+     "value": "$1,595,917,000",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "operation of a new 345 kV transmission line connecting the Tremval-Arpin-Columbia Substations in Trempealeau, Wood, and Columbia Counties. The project has an estimated total cost of $1,595,917,000.",
+       "supports": "345 kV; whole-project estimated cost $1,595,917,000",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Reported progress (ATC Q2 2026 report)",
+     "value": "approximately 5% complete",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-atc-q2-2026",
+       "exactExcerpt": "Arpin Substation equipment will begin arriving in mid-2027. The Project is approximately 5% complete.",
+       "supports": "Progress ~5% (ATC report)",
+       "page": 2,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Post-CPCN substation scope changes",
+     "value": "Metomen eliminated; Rockdale and Sand Lake removed",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-atc-q2-2026",
+       "exactExcerpt": "The scope at Metomen Substation has been eliminated due to further engineering studies. The project scope at Rockdale and Sand Lake substations have also been removed from the Project due to interconnection projects (J1779 and J2193) having a larger scope.",
+       "supports": "Substation scope changes after CPCN",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "gf-pco",
+     "label": "Point of Change of Ownership (PCO) between NSPW and ATC segments, ~1,400 ft west of Sherwood Rd & River Ave, Clark County (Xcel calls its segment end the 'Golden Spike')",
+     "kind": "route-endpoint",
+     "precision": "locality",
+     "lat": 44.4652464,
+     "lon": -90.6193705,
+     "uncertaintyMeters": 1500,
+     "coordinateSource": "Overpass: OSM node 147099194 = intersection of highway ways named \"Sherwood Road\" and \"River Avenue\" (bbox 44.40,-90.75,44.60,-90.40); coordinate is the intersection itself, NOT offset the ~1,400 ft west the application describes; identity of PCO with Xcel's \"Golden Spike\" is not stated in sources",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The PCO will be located at the intersection of Segment 3 and 4, approximately 1,400 feet west of the intersection of Sherwood Rd and River Ave for the Primary Route",
+       "supports": "PCO location (Primary Route)",
+       "page": 15,
+       "printedPage": "Page 3 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "until W-36 reaches the Point of Change of Ownership (PCO) location west of River Avenue as agreed upon between NSPW and ATC for transfer of line ownership.",
+       "supports": "PCO location agreed between NSPW and ATC",
+       "page": 104,
+       "printedPage": "Page 92 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "gf-arpin",
+     "label": "Arpin Substation (to be expanded; Town of Sherry, Wood County)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.5579891,
+     "lon": -89.9445042,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "Overpass: OSM way 176263710 power=substation name=\"Arpin Substation\" (345/138/115 kV), centroid",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "from the Tremval Substation in the town of Preston, Trempealeau County, to the expanded Arpin Substation in the town of Sherry, Wood County, to the Columbia Substation in the town of Pacific, Columbia County",
+       "supports": "Endpoint substations and their towns",
+       "page": 19,
+       "printedPage": "Page 7 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-feis",
+       "exactExcerpt": "Arpin Substation: The existing Arpin Substation is located southeast of Marshfield in Wood County.",
+       "supports": "Arpin Substation location",
+       "page": 45,
+       "printedPage": "15",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "gf-columbia",
+     "label": "Columbia Substation (Town of Pacific, Columbia County)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 43.4863809,
+     "lon": -89.4171238,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "Overpass: OSM way 176434079 power=substation name=\"Columbia Station\" operator=\"American Transmission Company\" (345/138/69 kV), centroid",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "from the Tremval Substation in the town of Preston, Trempealeau County, to the expanded Arpin Substation in the town of Sherry, Wood County, to the Columbia Substation in the town of Pacific, Columbia County",
+       "supports": "Endpoint substations and their towns",
+       "page": 19,
+       "printedPage": "Page 7 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "Segment 21 would turn north and then travel generally west, before terminating at the Columbia Substation from the northeast.",
+       "supports": "Route terminates at Columbia Substation",
+       "page": 33,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "gf-rocky-run",
+     "label": "Rocky Run Substation (remote-end work: replace overdutied breakers; Stevens Point)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 44.5000769,
+     "lon": -89.6052715,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "Overpass: OSM way 28269279 power=substation name=\"Rocky Run Substation\" operator=\"American Transmission Company\" (345/115 kV), centroid",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Rocky Run Within fence City of Stevens Point, Portage County N/A N/A ATC Substation See Section 5.8",
+       "supports": "Rocky Run Substation (ATC) in Stevens Point is a project work site",
+       "page": 23,
+       "printedPage": "Page 11 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Rocky Run Replace overdutied breakers Rockdale Replace overdutied breakers",
+       "supports": "Rocky Run scope: replace overdutied breakers",
+       "page": 42,
+       "printedPage": "Page 30 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "caveat": "schematic / not survey accurate: waypoints are substations and communities named in the approved-route descriptions, in order, geocoded to OSM features or town centroids; order cross-checked visually against the PSC project map PDF; the Green Lake Substation leg (segments 18\u201319) could not be located in OSM and is represented only via North Randolph, so the schematic line runs west of the actual alignment between Wautoma and Wyocena",
+    "description": "Approved Proposed Route, ATC portion: from the PCO east along Sherwood Road/STH 73/STH 80 and County Road C (Pittsville Substation), north near Vesper to the Arpin Substation expansion; then south past Sigel to Port Edwards Substation, across the Wisconsin River to 7 Mile Creek Substation, southeast across I-39 to Wautoma, to the Green Lake Substation, south toward North Randolph and STH 33/STH 16 near Wyocena, terminating at the Columbia Substation from the northeast.",
+    "evidence": [
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "The Commission authorizes the Proposed Route, consisting of single-circuit 345 kV transmission line, and double-circuit configurations with existing 69 kV, 115 kV, 138 kV, and 345 kV transmission lines",
+      "supports": "Proposed Route authorized",
+      "page": 36,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-app",
+      "exactExcerpt": "as the rebuilt Y-108 line exits south out of Pittsville Substation and crosses County Road C.",
+      "supports": "Route passes Pittsville Substation",
+      "page": 104,
+      "printedPage": "Page 92 of 222",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "Segment 5 would follow County Road C east until turning north near the Village of Vesper. North of Vesper, segment 6 would continue north towards the Aripin Substation.",
+      "supports": "Route via County Road C and Vesper to Arpin",
+      "page": 32,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "Segment 10 would travel south out of the substation, generally along existing road corridors. Segment 11 would begin near the Sigel Substation, largely following the same southern direction.",
+      "supports": "Route south from Arpin past Sigel Substation",
+      "page": 32,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "Segment 13 would turn east towards the Village of Port Edwards, into the Port Edwards Substation. From the substation, segment 14 would travel south over the Wisconsin River and move east, following existing line over the river and into the 7 Mile Creek Substation.",
+      "supports": "Route via Port Edwards Substation, Wisconsin River, 7 Mile Creek Substation",
+      "page": 32,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "From I-39, segment 16 would continue the same southeastern path before reaching the City of Wautoma. Near the Wautoma Substation, segment 17 would travel south before turning east along County Road YY.",
+      "supports": "Route via Wautoma Substation",
+      "page": 32,
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-app",
+      "exactExcerpt": "Wautoma - Green Lake C17 18, C18 Green Lake - North Randolph 19, C19 North Randolph - Split 20 Split - Columbia North 21, C21",
+      "supports": "ATC construction spreads via Green Lake and North Randolph",
+      "page": 41,
+      "printedPage": "Page 29 of 222",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-app",
+      "exactExcerpt": "The Primary Route and a Companion Segment along existing transmission lines would pass near the residential concentration in the village of Wyocena and an unincorporated area in the town of Pacific.",
+      "supports": "Route near Wyocena and town of Pacific",
+      "page": 27,
+      "printedPage": "Page 15 of 222",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "psc-grid-forward-final",
+      "exactExcerpt": "Segment 21 would turn north and then travel generally west, before terminating at the Columbia Substation from the northeast.",
+      "supports": "Route terminates at Columbia Substation",
+      "page": 33,
+      "verifiedByScript": true
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "PCO near Sherwood Rd & River Ave",
+      "lat": 44.4652464,
+      "lon": -90.6193705,
+      "coordinateSource": "Overpass: OSM node 147099194 intersection of Sherwood Road and River Avenue"
+     },
+     {
+      "name": "Pittsville Substation (County Road C)",
+      "lat": 44.482759,
+      "lon": -90.124668,
+      "coordinateSource": "OSM way 1186514437 power=substation name=\"Pittsville\""
+     },
+     {
+      "name": "Vesper",
+      "lat": 44.4833204,
+      "lon": -89.9678982,
+      "coordinateSource": "Nominatim: Vesper, Wood County, WI (relation 251869) centroid"
+     },
+     {
+      "name": "Arpin Substation",
+      "lat": 44.5579891,
+      "lon": -89.9445042,
+      "coordinateSource": "OSM way 176263710 name=\"Arpin Substation\""
+     },
+     {
+      "name": "Sigel Substation",
+      "lat": 44.4820675,
+      "lon": -89.9464516,
+      "coordinateSource": "OSM way 205783707 power=substation name=\"Sigel\""
+     },
+     {
+      "name": "Port Edwards Substation",
+      "lat": 44.340835,
+      "lon": -89.8833568,
+      "coordinateSource": "OSM way 205717770 power=substation name=\"Port Edwards\""
+     },
+     {
+      "name": "Wautoma Substation",
+      "lat": 44.0639737,
+      "lon": -89.288709,
+      "coordinateSource": "OSM way 263616256 power=substation name=\"Wautoma\""
+     },
+     {
+      "name": "North Randolph Substation (end of Green Lake\u2013North Randolph spread)",
+      "lat": 43.5639917,
+      "lon": -89.0369852,
+      "coordinateSource": "OSM way 176434188 power=substation name=\"North Randolph\""
+     },
+     {
+      "name": "Wyocena",
+      "lat": 43.4958907,
+      "lon": -89.3091946,
+      "coordinateSource": "Nominatim: Wyocena, Columbia County, WI (relation 251788) centroid"
+     },
+     {
+      "name": "Columbia Substation",
+      "lat": 43.4863809,
+      "lon": -89.4171238,
+      "coordinateSource": "OSM way 176434079 name=\"Columbia Station\" operator ATC"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "psc-grid-forward-final",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-10-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with completion by December 2030.",
+       "supports": "Project-wide construction start Q4 2026, completion by December 2030",
+       "page": 54,
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Project-wide PSC statement (both packages); 'completion by December 2030' read as end of construction."
+    },
+    {
+     "claimSourceId": "psc-grid-forward-app",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-10-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "continuous": false,
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Applicants anticipate commencing construction in the fourth quarter of 2026. The Applicants anticipate placing all scopes of work in-service in December of 2030.",
+       "supports": "As-filed: construction Q4 2026; all scopes in-service December 2030",
+       "page": 14,
+       "printedPage": "Page 2 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Applicants expect that construction work will occur sequentially, but it could occur in multiple construction spreads at one time, and some skipping of spreads or within spreads may occur.",
+       "supports": "Construction not necessarily continuous at any location",
+       "page": 39,
+       "printedPage": "Page 27 of 222",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "As-filed project-wide schedule. End bound is the source's in-service date; the source gives no separate construction-end date, so the end is an upper bound derived from in-service, not a stated construction end."
+    },
+    {
+     "claimSourceId": "psc-grid-forward-atc-q2-2026",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-04-01",
+      "latest": "2026-06-30",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "continuous": false,
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-atc-q2-2026",
+       "exactExcerpt": "The planned Project in-service date is December 2030. ATC began transmission line construction in Q2 2026. ATC is currently working on the development of laydown yards to support the project.",
+       "supports": "ATC portion under construction since Q2 2026; in-service December 2030",
+       "page": 1,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-atc-q2-2026",
+       "exactExcerpt": "In addition, ATC set one structure on segment C22 in July to support system outage constraints with the remainder of construction starting in Q3 2026.",
+       "supports": "First structure July 2026; remainder of construction Q3 2026",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ],
+     "note": "ATC says line construction began Q2 2026 (laydown-yard development); one structure set on C22 in July 2026; 'remainder of construction starting in Q3 2026'. End bound is the source's in-service date; the source gives no separate construction-end date, so the end is an upper bound derived from in-service, not a stated construction end."
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "psc-grid-forward-final",
+     "label": "completion (project-wide)",
+     "date": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with completion by December 2030.",
+       "supports": "Project-wide construction start Q4 2026, completion by December 2030",
+       "page": 54,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-grid-forward-final",
+     "label": "projected in-service year (cost-basis sentence; conflicts with Dec 2030)",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "The estimated costs are based on 2029 dollars, the projected in-service year for the proposed project, and include transmission line, substation, pre-certification, and environmental impact fee costs.",
+       "supports": "Final decision also calls 2029 the projected in-service year (conflicts with December 2030)",
+       "page": 53,
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-grid-forward-app",
+     "label": "all scopes in-service (as filed)",
+     "date": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Applicants anticipate commencing construction in the fourth quarter of 2026. The Applicants anticipate placing all scopes of work in-service in December of 2030.",
+       "supports": "As-filed: construction Q4 2026; all scopes in-service December 2030",
+       "page": 14,
+       "printedPage": "Page 2 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-grid-forward-case",
+     "label": "estimated completion (PSC summary of application)",
+     "date": {
+      "earliest": "2030-10-01",
+      "latest": "2030-12-31",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-case",
+       "exactExcerpt": "If approved, t\u200bhe applicant anticipates construction for this project to begin in Q4 2026 with an estimated\u200b completion date of Q4 2030.",
+       "supports": "As-filed schedule summary: construction Q4 2026, completion Q4 2030",
+       "section": "Proposed schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "psc-grid-forward-atc-q2-2026",
+     "label": "planned in-service",
+     "date": {
+      "earliest": "2030-12-01",
+      "latest": "2030-12-31",
+      "precision": "month"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-atc-q2-2026",
+       "exactExcerpt": "The planned Project in-service date is December 2030. ATC began transmission line construction in Q2 2026. ATC is currently working on the development of laydown yards to support the project.",
+       "supports": "ATC portion under construction since Q2 2026; in-service December 2030",
+       "page": 1,
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "grid-forward-nspw",
+     "status": "known-joint",
+     "scope": "joint-initiative",
+     "description": "Single joint CPCN (docket 5-CE-157) with NSPW (co-owners WPPI, SMMPA); executed Common Interest, Joint Prosecution, and Confidentiality Agreement; ATC says the Arpin\u2013Tremval route is co-developed with Xcel.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "American Transmission Company LLC (ATC), Northern States Power Company-Wisconsin (NSPW), SMMPA Wisconsin, LLC (SMMPA), and WPPI Energy (WPPI) (together, applicants) for a Certificate of Public Convenience and Necessity (CPCN) to construct the Grid Forward Central Wisconsin Project",
+       "supports": "Final applicants: ATC, NSPW, SMMPA Wisconsin, WPPI Energy",
+       "page": 1,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "ATC and NSPW have entered into a Common Interest, Joint Prosecution, and Confidentiality Agreement related to the Project.",
+       "supports": "Executed ATC-NSPW agreement",
+       "page": 16,
+       "printedPage": "Page 4 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "atc-grid-forward-page",
+       "exactExcerpt": "*The ordered route from the Arpin Substation to the Tremval Substation is being co-developed by ATC and Xcel Energy",
+       "supports": "Arpin-Tremval route co-developed by ATC and Xcel",
+       "section": "Grid Forward \u2013 Central Wisconsin Project",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "grid-forward-nspw",
+     "status": "known-joint",
+     "scope": "interconnection-design",
+     "description": "Segments meet at a PCO location agreed between NSPW and ATC. Other agreements are listed only as possible.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "until W-36 reaches the Point of Change of Ownership (PCO) location west of River Avenue as agreed upon between NSPW and ATC for transfer of line ownership.",
+       "supports": "PCO location agreed between NSPW and ATC",
+       "page": 104,
+       "printedPage": "Page 92 of 222",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "Other agreements as needed or agreed to by ATC and NSPW may include: a Joint Development Agreement; an Owners Coordination Agreement; a Transmission-to-Transmission Interconnection Agreement; and a Fiber Ownership and Use Agreement.",
+       "supports": "Possible (not confirmed) further ATC-NSPW agreements",
+       "page": 16,
+       "printedPage": "Page 4 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "grid-forward-nspw",
+     "status": "known-joint",
+     "scope": "resource-sharing",
+     "description": "One combined IEM/IAM (PSC order condition 7) procured via a single RFP for both applicants - a shared regulatory compliance monitor, not shared construction crews or equipment; outage coordination with ATC and NSPW operators and MISO is planned.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "The applicants shall work with Commission staff in the preparation and issuance of an RFP to hire a combined IEM/IAM that shall report directly to the Commission.",
+       "supports": "Order condition 7: one combined IEM/IAM for the applicants",
+       "page": 58,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-atc-q2-2026",
+       "exactExcerpt": "In accordance with Condition 7 of the Order, ATC worked with Commission staff to prepare and issue an RFP to hire a combined IEM/IAM that will report directly to the Commission.",
+       "supports": "Combined IEM/IAM RFP",
+       "page": 1,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-app",
+       "exactExcerpt": "The Project team will coordinate with ATC system operations, NSPW system operators and MISO\u2019s Reliability Coordinator to establish outage sequencing and to coordinate the transmission outages necessary to construct the Project.",
+       "supports": "Planned outage coordination among ATC, NSPW, MISO",
+       "page": 39,
+       "printedPage": "Page 27 of 222",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "dpc-alma-blair",
+     "status": "reported-coordination",
+     "scope": "joint-initiative",
+     "description": "ATC's project page says ATC, Xcel Energy and Dairyland are 'cooperatively working on plans' to develop the three MISO MVP lines in Wisconsin (planning-level statement only).",
+     "evidence": [
+      {
+       "sourceId": "atc-grid-forward-page",
+       "exactExcerpt": "Three MISO-approved MVP projects are being developed within Wisconsin, and three separate utilities are cooperatively working on plans to develop these new high-voltage power lines within their existing service areas. These utilities include ATC, Xcel Energy and Dairyland Power Cooperative.",
+       "supports": "ATC reports ATC, Xcel and Dairyland cooperatively planning the three Wisconsin MVP lines",
+       "section": "Grid Forward \u2013 Central Wisconsin Project",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "dpc-alma-blair",
+     "status": "not-found-in-sources",
+     "scope": "resource-sharing",
+     "description": "No cited source documents shared crews, equipment, or construction-schedule coordination between ATC and Dairyland for these projects; Dairyland offered no evidence in 5-CE-157, and Alma\u2013Blair (LRTP 4) appears only as a modeling case. Not evidence of no coordination.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "DPC, Em3 2 Holdings LLC, Joseph and Travis Randall, Steven and Kris Pickhardt, and WIEG did not offer evidence.",
+       "supports": "Dairyland offered no evidence in 5-CE-157",
+       "page": 4,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-final",
+       "exactExcerpt": "review of the project without the inclusion of the Western Wisconsin Transmission Project or the Alma-Blair Transmission Line Project in docket 1515-CE-103 assumed to be in service",
+       "supports": "Alma-Blair and Western Wisconsin appear only as modeling assumptions",
+       "page": 20,
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-feis",
+       "exactExcerpt": "Only Grid Forward and LRTP 4 are constructed, with Western Wisconsin project removed.",
+       "supports": "LRTP 4 (Alma-Blair) appears in EIS only as a modeling sensitivity",
+       "page": 87,
+       "printedPage": "57",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "caveats": [
+    "ATC Q2 2026 report says line construction began Q2 2026, while ATC's website timeline graphic (SVG image on the Process & Timeline page, not machine-verifiable text) shows pre-construction 2026\u20132027 and general construction 2027\u20132030; not entered as a construction window because its dates are not in cached text.",
+    "Construction is planned to begin near Columbia; Arpin and Green Lake substation construction lags Columbia (ATC Q2 2026).",
+    "No source gives a construction-end date separate from in-service/completion; window ends are upper bounds.",
+    "Final decision gives both December 2030 completion and 2029 as projected in-service year.",
+    "ATC-only cost and length are not stated as single figures in the sources; only whole-project values are given."
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "projectA": "grid-forward-nspw",
+   "projectB": "grid-forward-atc",
+   "kind": "interconnects",
+   "siteLabel": "Point of Change of Ownership (PCO), Sherwood Rd west of River Ave, Clark County",
+   "description": "Owner-specific segments of one CPCN meet at the PCO agreed between NSPW and ATC; the 345 kV line cannot be fully in service until both are complete.",
+   "evidence": [
+    {
+     "sourceId": "psc-grid-forward-app",
+     "exactExcerpt": "The PCO will be located at the intersection of Segment 3 and 4, approximately 1,400 feet west of the intersection of Sherwood Rd and River Ave for the Primary Route",
+     "supports": "PCO location (Primary Route)",
+     "page": 15,
+     "printedPage": "Page 3 of 222",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-app",
+     "exactExcerpt": "while the 345 kV line cannot be placed fully in-service until completed from Tremval to Arpin and from Arpin to Columbia.",
+     "supports": "Full in-service requires both packages complete",
+     "page": 39,
+     "printedPage": "Page 27 of 222",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "grid-forward-nspw",
+   "projectB": "grid-forward-atc",
+   "kind": "same-initiative",
+   "description": "Both are portions of the Grid Forward Central Wisconsin project (PSC docket 5-CE-157; MISO LRTP Tranche 1 Project 6), reporting separately.",
+   "evidence": [
+    {
+     "sourceId": "psc-grid-forward-case",
+     "exactExcerpt": "The project is one part of the MISO Long-Range Transmission Planning (LRTP) Tranche 1 Portfolio of projects (specifically the LRTP Project 6)",
+     "supports": "Parent initiative: MISO LRTP Tranche 1 Project 6",
+     "section": "Applicant stated need",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-nspw-q2-2026",
+     "exactExcerpt": "This report includes information on the progress of activities on the NSPW Segment of the Grid Forward Central Wisconsin Project during the Second Quarter 2026. ATC is submitting a separate quarterly report for its portion of Grid Forward.",
+     "supports": "Owner-specific packages report separately",
+     "page": 2,
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "grid-forward-nspw",
+   "projectB": "xcel-wwtc",
+   "kind": "shared-site",
+   "siteLabel": "Larkin Valley Substation (Tremval Substation Expansion North), ~0.5 mi north of existing Tremval Substation near Blair",
+   "description": "Grid Forward line W-36 exits NSPW's Tremval Substation Expansion North; that substation's scope and site choice are in the Western Wisconsin docket 5-CE-158, which authorized the North site; Xcel names it Larkin Valley and starts the WWTC route there. Both are NSPW facilities (shared owner).",
+   "evidence": [
+    {
+     "sourceId": "psc-grid-forward-app",
+     "exactExcerpt": "Segment 1N, C1N: The proposed 345 kV line W-36 would exit east out of NSPW\u2019s Tremval Substation Expansion North then head south paralleling the existing W-13/W3204 alignment",
+     "supports": "Line W-36 exits NSPW's Tremval Substation Expansion North",
+     "page": 102,
+     "printedPage": "Page 90 of 222",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-app",
+     "exactExcerpt": "The Tremval Substation scope to accommodate the new W-36 transmission line is described in Docket No. 5-CE-158.",
+     "supports": "Tremval substation work is scoped in WWTC docket",
+     "page": 135,
+     "printedPage": "Page 123 of 222",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-wwtc-final",
+     "exactExcerpt": "The Commission authorizes the Tremval North Substation Expansion site and its associated transmission corridor connecting with Route 2.",
+     "supports": "WWTC decision authorizes Tremval North Substation Expansion site",
+     "page": 35,
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "xcel-wwtc-page",
+     "exactExcerpt": "will travel from the new Larkin Valley Substation (previously referred to as Tremval Substation Expansion), located approximately 0.5miles to the north of the existing Tremval Substation near Blair",
+     "supports": "Larkin Valley = Tremval Substation Expansion, ~0.5 mi north of existing Tremval, near Blair",
+     "section": "Project Route",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "grid-forward-nspw",
+   "projectB": "dpc-alma-blair",
+   "kind": "shared-site",
+   "siteLabel": "Tremval North Substation / Larkin Valley Substation (approved in 5-CE-158), near Blair",
+   "description": "Grid Forward NSPW segment starts at the Tremval Substation Expansion North; Dairyland's 2026 PSC decision says Alma\u2013Blair terminates at the new Tremval North Substation / Tremval switching station approved in 5-CE-158, built and owned by NSPW. The shared site is established by this chain of decisions plus Xcel's renaming note; no single document states both lines terminate there, and Xcel's info sheet says Larkin Valley is 'near' Tremval North.",
+   "evidence": [
+    {
+     "sourceId": "psc-grid-forward-final",
+     "exactExcerpt": "As a Common Route, both the Proposed and Alternative Routes would exit the Tremval Substation Expansion North and travel south to cross the Trempealeau River as new ROW for segment 1N.",
+     "supports": "Route begins at Tremval Substation Expansion North, crosses Trempealeau River",
+     "page": 31,
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "connect to the new 345 kV Tremval Nouth Substation that was approved in docket 5-CE-158. The terminating substation would be constructed, owned, and operated by Northern States Power Company-Wisconsin.",
+     "supports": "Alma-Blair terminating substation approved in 5-CE-158, owned by NSPW",
+     "page": 13,
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-1515-ce-103-final",
+     "exactExcerpt": "both routes follow a common segment east for approximately 13 miles following the LQ-18 corridor terminating at the new Tremval switching station approved in docket 5-CE-158.",
+     "supports": "Alma-Blair terminates at Tremval switching station approved in 5-CE-158",
+     "page": 14,
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "xcel-grid-forward-page",
+     "exactExcerpt": "from the Larkin Valley Substation (previously known as the Tremval North Substation) in Trempealeau County to the Columbia Substation in Columbia County.",
+     "supports": "Larkin Valley = former Tremval North Substation name (Xcel web page)",
+     "section": "Project Overview",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "xcel-grid-forward-infosheet",
+     "exactExcerpt": "approximately 200 miles of 345 kV high-voltage line from the Larkin Valley Substation (near the Tremval North Substation) in Trempealeau County to the Columbia Substation in Columbia County.",
+     "supports": "Infosheet says Larkin Valley is 'near' Tremval North (naming conflict with web page)",
+     "page": 1,
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "grid-forward-atc",
+   "projectB": "dpc-alma-blair",
+   "kind": "same-initiative",
+   "description": "Both are MISO LRTP Tranche 1 projects (Alma\u2013Blair is LRTP Project 4); Grid Forward planning analyses assume or remove it as a modeling case, and ATC reports cooperative planning among ATC, Xcel and Dairyland.",
+   "evidence": [
+    {
+     "sourceId": "psc-grid-forward-app",
+     "exactExcerpt": "The NA base case in the Applicants\u2019 Planning Analysis assumes that all other LRTP Tranche 1 projects, including the Alma-Blair Transmission Line Project (LRTP Project 4) proposed in Docket No. 1515-CE-103, are placed inservice.",
+     "supports": "Alma-Blair (LRTP Project 4) referenced only as a planning-model assumption; same MISO LRTP Tranche 1 portfolio",
+     "page": 47,
+     "printedPage": "Page 35 of 222",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "atc-grid-forward-page",
+     "exactExcerpt": "Three MISO-approved MVP projects are being developed within Wisconsin, and three separate utilities are cooperatively working on plans to develop these new high-voltage power lines within their existing service areas. These utilities include ATC, Xcel Energy and Dairyland Power Cooperative.",
+     "supports": "ATC reports ATC, Xcel and Dairyland cooperatively planning the three Wisconsin MVP lines",
+     "section": "Grid Forward \u2013 Central Wisconsin Project",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "grid-forward-atc",
+   "projectB": "xcel-wwtc",
+   "kind": "same-initiative",
+   "description": "The Western Wisconsin project (5-CE-158) is also in MISO LRTP Tranche 1 and was evaluated jointly with Grid Forward.",
+   "evidence": [
+    {
+     "sourceId": "psc-grid-forward-app",
+     "exactExcerpt": "Western Wisconsin Project, which is a second proposed 345 kV transmission line project in Wisconsin that, like the Project, was included in LRTP Tranche 1.",
+     "supports": "Western Wisconsin project is also LRTP Tranche 1",
+     "page": 44,
+     "printedPage": "Page 32 of 222",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-final",
+     "exactExcerpt": "both individually and in conjunction with the Western Wisconsin Transmission Project being approved in docket 5-CE-158, produces reliability, economic, and public policy benefits in all futures studied",
+     "supports": "Grid Forward evaluated with Western Wisconsin project (5-CE-158)",
+     "page": 19,
+     "verifiedByScript": true
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "Hypothesis part 1 (Tremval convergence): SUPPORTED for the NSPW-owned Grid Forward segment, not the ATC portion. Grid Forward segment 1N exits the Tremval Substation Expansion North (authorized); WWTC decision 5-CE-158 authorized the Tremval North site; Dairyland's 1515-CE-103 decision says Alma\u2013Blair terminates at the new Tremval North Substation/switching station approved in 5-CE-158; Xcel names it Larkin Valley, ~0.5 mi north of the existing Tremval Substation near Blair. The link is a chain across documents, and Xcel's info sheet says Larkin Valley is 'near' (not 'formerly') Tremval North.",
+  "Hypothesis part 2 (both publish 2026\u201327 construction windows): NOT CONFIRMED as stated. Dairyland's page shows construction 2026\u20132027 (PSC decision: begin Q4 2026, in-service Sept 2028). Grid Forward publishes a project-wide Q4 2026 start with completion December 2030, not a 2026\u201327 window; for the Tremval-end NSPW segment, Xcel shows pre-construction ground activities 2026\u20132027 and general construction 2027\u20132030, and NSPW's Q2 2026 report moved its construction start to Q4 2027. Overlap with Alma\u2013Blair general construction is therefore at most possible in 2027 (latest NSPW claim: Q4 2027), plus pre-construction overlap in 2026\u201327.",
+  "Hypothesis part 3 (shared-resource plans): CONFIRMED that the cited sources do not establish Dairyland\u2013ATC (or Dairyland\u2013NSPW) shared crews, equipment, laydown yards or schedules. The only documented statement is ATC's planning-level 'cooperatively working on plans' among ATC, Xcel and Dairyland. Note the Tremval-end work belongs to NSPW (Xcel), not ATC. Status is not-found-in-sources, not 'uncoordinated'.",
+  "Umbrella id 'atc-nspw-grid-forward' not used: sources clearly split the project into owner-specific packages (ATC PCO\u2013Arpin\u2013Columbia; NSPW, with WPPI/SMMPA co-owners, Tremval\u2013PCO), each with its own construction responsibility, schedule claim and quarterly report. Modeled as grid-forward-atc and grid-forward-nspw.",
+  "NSPW construction-start claims conflict: Q4 2026 (final decision project-wide; NSPW Q1 2026 report) vs Q4 2027 (NSPW Q2 2026 report). The reason for the slip is not stated.",
+  "ATC construction status conflict: ATC Q2 2026 report says line construction began Q2 2026, but ATC's own website timeline graphic (image only, unverifiable as text) shows pre-construction 2026\u20132027 and general construction 2027\u20132030.",
+  "In-service conflict inside the final decision: 'completion by December 2030' (p54) vs '2029 dollars, the projected in-service year' (p53). All other sources say December 2030 or 2030.",
+  "No source gives a construction end date distinct from completion/in-service; all construction-window ends are upper bounds from completion or in-service statements.",
+  "Application construction-sequence statements conflict: p38 (printed 26) 'from Columbia to Aprin and from Tremval to Aprin' vs p42 (printed 30) 'from the Columbia Substation northward to the Arpin Substation and then west towards the Tremval Substation'.",
+  "The Xcel 'Golden Spike' end point (~3 mi south of Neillsville; segment ~39.25 mi) is not explicitly equated with the application's PCO (~1,400 ft west of Sherwood Rd & River Ave, which geocodes ~6.7 mi south of Neillsville's centroid). The PCO coordinate is the road intersection, not the offset point.",
+  "Larkin Valley Substation (new) is not in OSM; placed at Blair locality (5 km uncertainty). The existing Tremval Substation (OSM way 258582476) is ~1.7 km west of that centroid.",
+  "Green Lake Substation and 7 Mile Creek Substation could not be found by name in OSM; the ATC schematic route omits them (uses Wautoma -> North Randolph -> Wyocena), so it runs west of the actual Green Lake leg.",
+  "Final decision Certificate paragraph (p57) lists segments '1, 2, 3, ...' without 1N, while the Authorized Project Route paragraph (p36) lists '1N (C1N)'; treated as authorizing 1N.",
+  "Application lists existing Dairyland (DPC) taps (Badger Sands, Hixton, May Coulee) on the rebuilt NSPW W3401 line; whether Dairyland is coordinating on that work is not documented.",
+  "Columbia Substation (ATC endpoint) also appears in MISO BECI materials (miso-beci-scope-2025 p27) with separate substation modification work; that relation was not modeled here and needs a BECI project id and verification.",
+  "An ATC-only total cost is not stated as a single figure (itemized ATC costs appear in the final decision cost table, p53\u201354); only the NSPW segment total ($239,888,000) and whole-project total ($1,595,917,000) are sourced.",
+  "ATC and Xcel project web pages are undated; retrieval date 2026-09-26."
+ ]
+}

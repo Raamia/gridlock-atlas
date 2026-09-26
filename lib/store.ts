@@ -1,7 +1,10 @@
 "use client";
 
 import { create } from "zustand";
+import { SNAPSHOT } from "@/lib/data/snapshot";
 import type { Match, MatchRun } from "@/lib/domain/types";
+
+const DEFAULT_REGION = SNAPSHOT.regions[0]?.id ?? "all";
 
 export type QueueTab = "needs-review" | "known-coordination" | "conflicts" | "possible";
 export type FlagFilter = "BOTH" | "GEO" | "TIME" | "POSSIBLE";
@@ -54,7 +57,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   tab: "needs-review",
   flags: ["BOTH", "GEO", "TIME", "POSSIBLE"],
   utilityFilter: null,
-  region: "southeast",
+  region: DEFAULT_REGION,
   showFarApart: false,
 
   selectedMatchId: null,
@@ -111,7 +114,10 @@ export const useAtlas = create<AtlasState>((set, get) => ({
       return;
     }
     const m = get().run?.matches.find((x) => x.id === id);
+    const pairRegion = m ? SNAPSHOT.projects.find((p) => p.id === m.projectAId)?.region : undefined;
+    const region = get().region === "all" || !pairRegion ? get().region : pairRegion;
     set({
+      region,
       selectedMatchId: id,
       inspectorOpen: true,
       inspectorSection: opts?.section ?? null,

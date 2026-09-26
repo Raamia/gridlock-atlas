@@ -99,8 +99,11 @@ function MapControls() {
 }
 
 function Legend() {
-  const [open, setOpen] = useState(true);
+  const [pref, setOpen] = useState<boolean | null>(null);
   const preview = usePreviewPair();
+  const inspectorOpen = useAtlas((s) => s.inspectorOpen);
+  // collapse by default while a pair is inspected so the legend never covers its geometry
+  const open = pref ?? !inspectorOpen;
   const region = useAtlas((s) => s.region);
   const demo = useAtlas((s) => s.demoStep);
   const focal = FOCAL_UTILITIES[region];
@@ -108,7 +111,7 @@ function Legend() {
   return (
     <div className="absolute bottom-4 left-4 z-10 w-[252px]">
       <div className="glass overflow-hidden rounded-xl">
-        <button onClick={() => setOpen((o) => !o)} className="flex w-full items-center justify-between px-3 py-2" aria-expanded={open}>
+        <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between px-3 py-2" aria-expanded={open}>
           <span className="eyebrow">Map truth rules</span>
           <ChevronDown size={13} className={clsx("text-text-3 transition-transform", !open && "-rotate-90")} />
         </button>

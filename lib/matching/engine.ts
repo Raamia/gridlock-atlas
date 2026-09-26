@@ -11,7 +11,7 @@ import type {
 } from "@/lib/domain/types";
 import { formatBound } from "@/lib/format";
 import { DEFAULT_THRESHOLD_MILES, evaluateGeo } from "./geo";
-import { activeWindows, evaluateTime } from "./time";
+import { activeWindows, evaluateTime, windowsBySource } from "./time";
 
 export const ENGINE_VERSION = "gridlock-engine/1.1.0";
 
@@ -33,42 +33,82 @@ function boundsIntersect(x: DateBound, y: DateBound): boolean {
   return x.earliest <= y.latest && y.earliest <= x.latest;
 }
 
-/** Source disagreements inside one project. Kept side by side; never silently resolved. */
-export function projectConflicts(p: Project, sourceTitle: (id: string) => string): Conflict[] {
-  const out: Conflict[] = [];
-  const cc = p.completionClaims;
-  for (let i = 0; i < cc.length; i++) {
-    for (let j = i + 1; j < cc.length; j++) {
-      if (!boundsIntersect(cc[i].date, cc[j].date)) {
-        const versioned = cc[i].current === false || cc[j].current === false;
-        const [now, then] = cc[j].current === false ? [cc[i], cc[j]] : [cc[j], cc[i]];
-        out.push({
-          id: `${p.id}:completion:${cc[i].id}:${cc[j].id}`,
-          projectId: p.id,
-          field: "completion",
-          description: versioned
-            ? `Schedule changed between plan editions: ${then.label.replace(/^.*\((.*)\)$/, "$1")} gave ${formatBound(then.date)}; the current edition gives ${formatBound(now.date)}.`
-            : `${sourceTitle(cc[i].claimSourceId)} gives ${formatBound(cc[i].date)}; ${sourceTitle(cc[j].claimSourceId)} gives ${formatBound(cc[j].date)}.`,
-          claimIds: [cc[i].id, cc[j].id],
-          affectsMatch: false,
-        });
-      }
-    }
+const IN_SERVICE_LABEL = /in-service|in service|need date|completion|complete|energiz|operation/i;
+
+interface Dated {
+  id: string;
+  sourceId: string;
+  start: DateBound;
+  end: DateBound;
+  earlier: boolean;
+}
+
+/** Group claims whose dates agree (intersect); two or more groups = one disagreement. */
+function cluster(items: Dated[]): Dated[][] {
+  const groups: { items: Dated[]; start: DateBound; end: DateBound }[] = [];
+  for (const it of items) {
+    const g = groups.find((x) => boundsIntersect(x.start, it.start) && boundsIntersect(x.end, it.end));
+    if (g) g.items.push(it);
+    else groups.push({ items: [it], start: it.start, end: it.end });
   }
-  const ws = activeWindows(p);
-  for (let i = 0; i < ws.length; i++) {
-    for (let j = i + 1; j < ws.length; j++) {
-      if (!boundsIntersect(ws[i].start, ws[j].start) || !boundsIntersect(ws[i].end, ws[j].end)) {
-        out.push({
-          id: `${p.id}:window:${ws[i].id}:${ws[j].id}`,
-          projectId: p.id,
-          field: "constructionWindow",
-          description: `Construction windows disagree between ${sourceTitle(ws[i].claimSourceId)} and ${sourceTitle(ws[j].claimSourceId)}.`,
-          claimIds: [ws[i].id, ws[j].id],
-          affectsMatch: true,
-        });
-      }
-    }
+  return groups.map((g) => g.items);
+}
+
+/**
+ * Source disagreements inside one project, kept side by side and never silently resolved.
+ * Several windows or dates from ONE source are components of the work, not competing claims;
+ * sources that agree are grouped, so each disagreement is reported once with who says what.
+ */
+export function projectConflicts(p: Project, sourceTitle: (id: string) => string, sourceDoc: (id: string) => string = sourceTitle): Conflict[] {
+  const out: Conflict[] = [];
+  const describe = (groups: Dated[][], fmt: (d: Dated) => string) => {
+    // when one publisher appears on more than one side, name the documents instead
+    const sidesOf = (pub: string) => groups.filter((g) => g.some((x) => sourceTitle(x.sourceId) === pub)).length;
+    const label = (id: string) => (sidesOf(sourceTitle(id)) > 1 ? sourceDoc(id) : sourceTitle(id));
+    return groups
+      .map((g) => `${[...new Set(g.map((x) => label(x.sourceId)))].join(", ")}${g.every((x) => x.earlier) ? " (earlier edition)" : ""}: ${fmt(g[0])}`)
+      .join(" · ");
+  };
+
+  // completion / in-service: one representative claim per source (its latest-listed date)
+  const perSource = new Map<string, Dated>();
+  for (const c of p.completionClaims.filter((c) => IN_SERVICE_LABEL.test(c.label))) {
+    if (!perSource.has(c.claimSourceId)) perSource.set(c.claimSourceId, { id: c.id, sourceId: c.claimSourceId, start: c.date, end: c.date, earlier: c.current === false });
+  }
+  const cGroups = cluster([...perSource.values()]);
+  if (cGroups.length > 1) {
+    const versionOnly = cGroups.filter((g) => !g.every((x) => x.earlier)).length === 1;
+    out.push({
+      id: `${p.id}:completion`,
+      projectId: p.id,
+      field: "completion",
+      description: (versionOnly ? "Schedule changed between plan editions — " : "Sources give different completion / in-service dates — ") + describe(cGroups, (d) => formatBound(d.start)),
+      sides: cGroups.map((g) => ({ value: formatBound(g[0].start), sourceIds: g.map((x) => x.sourceId), claimIds: g.map((x) => x.id), earlier: g.every((x) => x.earlier) })),
+      claimIds: cGroups.flat().map((x) => x.id),
+      affectsMatch: false,
+    });
+  }
+
+  // construction windows: one envelope per source
+  const envs: Dated[] = windowsBySource(p).map((ws) => ({
+    id: ws[0].id,
+    sourceId: ws[0].claimSourceId,
+    start: { earliest: ws.map((w) => w.start.earliest).sort()[0], latest: ws.map((w) => w.start.latest).sort()[0], precision: ws[0].start.precision },
+    end: { earliest: ws.map((w) => w.end.earliest).sort().at(-1)!, latest: ws.map((w) => w.end.latest).sort().at(-1)!, precision: ws.at(-1)!.end.precision },
+    earlier: false,
+  }));
+  const wGroups = cluster(envs);
+  if (wGroups.length > 1) {
+    const fmt = (d: Dated) => `${formatBound(d.start).split("–")[0]}–${formatBound(d.end).split("–").at(-1)}`;
+    out.push({
+      id: `${p.id}:window`,
+      projectId: p.id,
+      field: "constructionWindow",
+      description: "Sources give different construction windows — " + describe(wGroups, fmt),
+      sides: wGroups.map((g) => ({ value: fmt(g[0]), sourceIds: g.map((x) => x.sourceId), claimIds: windowsBySource(p).filter((ws) => g.some((x) => x.sourceId === ws[0].claimSourceId)).flat().map((w) => w.id) })),
+      claimIds: wGroups.flat().map((x) => x.id),
+      affectsMatch: true,
+    });
   }
   return out;
 }
@@ -123,8 +163,9 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   const time = evaluateTime(a, b);
 
   const sourceTitle = (id: string) => snapshot.sources.find((s) => s.id === id)?.publisher ?? id;
+  const sourceDoc = (id: string) => snapshot.sources.find((s) => s.id === id)?.title ?? id;
   const coordination = coordinationBetween(a, b, snapshot);
-  const conflicts = [...projectConflicts(a, sourceTitle), ...projectConflicts(b, sourceTitle)];
+  const conflicts = [...projectConflicts(a, sourceTitle, sourceDoc), ...projectConflicts(b, sourceTitle, sourceDoc)];
 
   const badge: Match["badge"] =
     geo.level === "confirmed" && time.level === "confirmed" ? "BOTH" : geo.level === "confirmed" ? "GEO" : "POSSIBLE";
