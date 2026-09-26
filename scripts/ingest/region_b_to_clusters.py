@@ -153,7 +153,8 @@ def desc_clusters(parsed, geo):
         key = f"desc:{pid}"
         E = r["evidence"]
         title_ev = E["title"]
-        places, caveats = places_for(key, geo, title_ev, r["title"], strict=pid in dup_ids)
+        qualified = f"desc:{pid}@p{r['page']}"
+        places, caveats = places_for(qualified if qualified in geo else key, geo, title_ev, r["title"], strict=pid in dup_ids and qualified not in geo)
         if len(r.get("phaseDates") or []) > 1:
             caveats.append(f"Phased in-service dates: {r['inServiceRaw']}. The last phase is used as the project's in-service date.")
 
@@ -270,9 +271,25 @@ def gpc_clusters(parsed, geo):
     return {"cluster": "sc-ga-gpc", "sources": [], "projects": projects, "relations": [], "unresolved": []}
 
 
+def check_batches(geo):
+    """Every key sent for geocoding must come back; a truncated batch is reported, never silently accepted."""
+    missing = []
+    returned = set(geo)
+    for b in json.load(open(RB / "batches.json")):
+        for x in b["items"]:
+            key = x["key"]
+            if key not in returned and not any(k.startswith(key + "@") for k in returned):
+                missing.append((b["id"], key))
+    if missing:
+        print(f"WARNING: {len(missing)} projects were sent for geocoding but not returned:", file=sys.stderr)
+        for bid, key in missing:
+            print(f"  {bid}: {key}", file=sys.stderr)
+
+
 def main():
     parsed = json.load(open(RB / "parsed.json"))
     geo = load_geo()
+    check_batches(geo)
     OUT.mkdir(parents=True, exist_ok=True)
     src = []
     for sid in [CURRENT, *EARLIER, "gpc-irp-2025-vol3"]:

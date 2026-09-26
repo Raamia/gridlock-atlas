@@ -34,16 +34,21 @@ export function buildBrief(m: Match): Brief {
   const a = IDX.project(m.projectAId);
   const b = IDX.project(m.projectBId);
   const citations: BriefCitation[] = [];
+  // one number per distinct excerpt (same source, page and text), however many claims cite it
+  const numberOf = new Map<string, number>();
   const cite = (ids: string[], max = 2): string => {
     const nums: number[] = [];
     for (const id of [...new Set(ids)].slice(0, max)) {
       const e = IDX.evidence(id);
       if (!e) continue;
-      const src = IDX.source(e.sourceId);
-      let c = citations.find((x) => `${x.url}|${x.anchor ?? ""}|${x.excerpt}` === `${src?.url}|${pageLabel(e) ?? ""}|${e.exactExcerpt}`);
-      if (!c) {
-        c = {
-          n: citations.length + 1,
+      const key = `${e.sourceId}|${e.page ?? ""}|${e.exactExcerpt}`;
+      let n = numberOf.get(key);
+      if (n === undefined) {
+        const src = IDX.source(e.sourceId);
+        n = citations.length + 1;
+        numberOf.set(key, n);
+        citations.push({
+          n,
           publisher: src?.publisher ?? e.sourceId,
           title: src?.title ?? e.sourceId,
           url: pdfAnchor(e, src?.url, src?.mimeType),
@@ -51,10 +56,9 @@ export function buildBrief(m: Match): Brief {
           documentDate: src?.publishedAt ?? src?.updatedAt,
           excerpt: e.exactExcerpt,
           provenance: `${e.verifiedInSource ? "located verbatim by script" : "not auto-located"} · ${e.reviewedByHuman ? "human-checked" : "awaiting human check"}`,
-        };
-        citations.push(c);
+        });
       }
-      nums.push(c.n);
+      nums.push(n);
     }
     return nums.length ? ` [${nums.join(", ")}]` : "";
   };
