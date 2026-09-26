@@ -21,11 +21,14 @@ export function Atlas() {
   useKeyboard();
   useUrlSync();
   return (
-    <div className="grid h-dvh grid-rows-[56px_minmax(0,1fr)] bg-bg-0">
+    <div className="grid h-dvh w-full max-w-[100vw] grid-cols-[minmax(0,1fr)] grid-rows-[56px_minmax(0,1fr)] overflow-hidden bg-bg-0">
       <TopBar />
-      <div className="grid min-h-0 grid-cols-[340px_minmax(0,1fr)]">
-        <Queue />
-        <main className="flex min-h-0 min-w-0 flex-col">
+      {/* desktop: queue | map+timeline. narrow: map on top, queue below as a scrollable sheet */}
+      <div className="grid min-h-0 grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,55fr)_minmax(0,45fr)] lg:grid-cols-[340px_minmax(0,1fr)] lg:grid-rows-1">
+        <div className="order-2 min-h-0 lg:order-1 [&>aside]:h-full">
+          <Queue />
+        </div>
+        <main className="order-1 flex min-h-0 min-w-0 flex-col lg:order-2">
           <div className="relative min-h-0 flex-1 overflow-hidden bg-bg-0">
             <MapStage />
             <MapOverlays />

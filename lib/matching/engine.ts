@@ -71,18 +71,34 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
   };
 
   // completion / in-service: one representative claim per source (its latest-listed date)
-  const perSource = new Map<string, Dated>();
+  const perSource = new Map<string, Dated & { label: string }>();
   for (const c of p.completionClaims.filter((c) => IN_SERVICE_LABEL.test(c.label))) {
-    if (!perSource.has(c.claimSourceId)) perSource.set(c.claimSourceId, { id: c.id, sourceId: c.claimSourceId, start: c.date, end: c.date, earlier: c.current === false });
+    if (!perSource.has(c.claimSourceId))
+      perSource.set(c.claimSourceId, { id: c.id, sourceId: c.claimSourceId, start: c.date, end: c.date, earlier: c.current === false, label: c.label });
   }
   const cGroups = cluster([...perSource.values()]);
   if (cGroups.length > 1) {
-    const versionOnly = cGroups.filter((g) => !g.every((x) => x.earlier)).length === 1;
+    const versionOnly = cGroups.filter((g) => !g.every((x) => x.earlier)).length === 1 && cGroups.flat().some((x) => x.earlier);
+    // plan editions read best by edition name: "2024–2028 list: Dec 31, 2025 → current: Dec 1, 2026"
+    const edition = (x: Dated & { label?: string }) => x.label?.match(/\(([^)]*)\)\s*$/)?.[1];
+    const versionText = () =>
+      [...cGroups]
+        .sort((g1, g2) => {
+          const k = (g: typeof g1) => (g.every((x) => x.earlier) ? (edition(g[0]) ?? sourceDoc(g[0].sourceId)) : "9999 current");
+          return k(g1) < k(g2) ? -1 : k(g1) > k(g2) ? 1 : 0;
+        })
+        .map((g) => {
+          const names = g.map((x) => (x.earlier ? edition(x) : null) ?? (x.earlier ? sourceDoc(x.sourceId) : "current edition"));
+          return `${[...new Set(names)].join(", ")}: ${formatBound(g[0].start)}`;
+        })
+        .join(" → ");
     out.push({
       id: `${p.id}:completion`,
       projectId: p.id,
       field: "completion",
-      description: (versionOnly ? "Schedule changed between plan editions — " : "Sources give different completion / in-service dates — ") + describe(cGroups, (d) => formatBound(d.start)),
+      description: versionOnly
+        ? `Schedule changed between plan editions — ${versionText()}`
+        : "Sources give different completion / in-service dates — " + describe(cGroups, (d) => formatBound(d.start)),
       sides: cGroups.map((g) => ({ value: formatBound(g[0].start), sourceIds: g.map((x) => x.sourceId), claimIds: g.map((x) => x.id), earlier: g.every((x) => x.earlier) })),
       claimIds: cGroups.flat().map((x) => x.id),
       affectsMatch: false,

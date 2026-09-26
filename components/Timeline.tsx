@@ -55,7 +55,7 @@ export function Timeline() {
   const today = pct(SNAPSHOT.snapshotDate, y0, y1);
 
   return (
-    <section aria-label="Construction timeline" className="relative h-[184px] shrink-0 border-t border-line bg-bg-1">
+    <section aria-label="Construction timeline" className="relative hidden h-[184px] shrink-0 border-t border-line bg-bg-1 md:block">
       <div className="flex h-8 items-center justify-between px-4">
         <div className="eyebrow">Construction windows · as published</div>
         <div className="flex items-center gap-4 text-[10.5px] text-text-3">
@@ -84,7 +84,7 @@ export function Timeline() {
           })}
           <div className="absolute inset-y-0 z-20" style={{ left: `${today}%` }}>
             <div className="absolute inset-y-0 w-px border-l border-dashed border-text-1/60" />
-            <div className="mono absolute -top-0.5 left-1.5 whitespace-nowrap rounded bg-bg-1 px-1 text-[10px] text-text-1">Snapshot</div>
+            <div className="mono absolute -top-0.5 right-1 whitespace-nowrap rounded bg-bg-1 px-1 text-[10px] text-text-1">Snapshot</div>
           </div>
         </div>
         <div className="absolute inset-x-0 bottom-0 top-4">
@@ -178,7 +178,12 @@ function InServiceGap({ m, y0, y1 }: { m: Match; y0: number; y1: number }) {
 
 function PairRow({ p, role, y0, y1, m, highlightConflict }: { p: Project; role: "a" | "b"; y0: number; y1: number; m: Match; highlightConflict: boolean }) {
   const color = role === "a" ? "var(--a)" : "var(--b)";
-  const groups = windowsBySource(p);
+  // two documents from one publisher with the same window read as one bar
+  const groups = windowsBySource(p).filter((g, i, all) => {
+    const key = (x: ConstructionWindow[]) =>
+      `${IDX.source(x[0].claimSourceId)?.publisher}|${x.map((w) => w.start.earliest + w.end.latest).sort().join()}`;
+    return all.findIndex((h) => key(h) === key(g)) === i;
+  });
   const conflict = m.conflicts.find((c) => c.projectId === p.id && c.field === "completion");
   return (
     <div className="flex items-center">
@@ -201,8 +206,8 @@ function PairRow({ p, role, y0, y1, m, highlightConflict }: { p: Project; role: 
         {groups.length > 2 && (
           <span className="mono absolute -bottom-1 right-0 text-[9.5px] text-text-3">+{groups.length - 2} more source{groups.length > 3 ? "s" : ""}</span>
         )}
-        {p.completionClaims.map((c) => (
-          <CompletionMark key={c.id} c={c} y0={y0} y1={y1} conflicted={!!conflict?.claimIds.includes(c.id)} emphasize={highlightConflict} />
+        {p.completionClaims.map((c, i) => (
+          <CompletionMark key={c.id} c={c} y0={y0} y1={y1} conflicted={!!conflict?.claimIds.includes(c.id)} emphasize={highlightConflict} showLabel={i === 0} />
         ))}
         {conflict && <ConflictLink p={p} claimIds={conflict.claimIds} y0={y0} y1={y1} emphasize={highlightConflict} />}
       </div>
@@ -294,7 +299,21 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
   );
 }
 
-function CompletionMark({ c, y0, y1, conflicted, emphasize }: { c: CompletionClaim; y0: number; y1: number; conflicted: boolean; emphasize: boolean }) {
+function CompletionMark({
+  c,
+  y0,
+  y1,
+  conflicted,
+  emphasize,
+  showLabel,
+}: {
+  c: CompletionClaim;
+  y0: number;
+  y1: number;
+  conflicted: boolean;
+  emphasize: boolean;
+  showLabel: boolean;
+}) {
   const [hover, setHover] = useState(false);
   const x0 = pct(c.date.earliest, y0, y1);
   const x1 = pct(c.date.latest, y0, y1);
@@ -312,14 +331,17 @@ function CompletionMark({ c, y0, y1, conflicted, emphasize }: { c: CompletionCla
         className={clsx("absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border-[1.5px] bg-bg-1 transition-transform", conflicted && emphasize && "scale-150")}
         style={{ borderColor: tone, boxShadow: conflicted && emphasize ? "0 0 12px var(--conflict)" : undefined }}
       />
-      <div className="mono pointer-events-none absolute left-1/2 top-[calc(50%+8px)] -translate-x-1/2 whitespace-nowrap text-[9.5px]" style={{ color: tone }}>
-        {formatBound(c.date)}
-      </div>
+      {(showLabel || hover) && (
+        <div className="mono pointer-events-none absolute left-1/2 top-[calc(50%+8px)] -translate-x-1/2 whitespace-nowrap rounded bg-bg-1/80 px-0.5 text-[9.5px]" style={{ color: tone }}>
+          {formatBound(c.date)}
+        </div>
+      )}
       {hover && (
         <div className="glass absolute bottom-full left-1/2 z-40 mb-1 w-[260px] -translate-x-1/2 rounded-lg p-2.5 text-[11.5px]">
-          <div className="font-medium capitalize text-text-0">
-            {c.label} · {formatBound(c.date)}
+          <div className="font-medium text-text-0">
+            {c.label[0].toUpperCase() + c.label.slice(1)} · {formatBound(c.date)}
           </div>
+          {c.current === false && <div className="text-[10.5px] text-conflict">Earlier plan edition</div>}
           <div className="text-text-2">{src?.publisher}</div>
           <div className="mt-1 text-text-3">Completion dates never drive the construction-window match.</div>
         </div>

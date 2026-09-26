@@ -1,0 +1,153 @@
+{
+ "batch": "desc-3",
+ "projects": [
+  {
+   "key": "desc:6842 C,D",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Clemson Wind Turbine",
+     "lat": 32.85427,
+     "lon": -79.9572,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1065459660 power=substation substation=industrial voltage=115000 (unnamed, start_date=2020), 13th St / Supply St, former Navy Base, North Charleston",
+     "confidence": "lower-confidence",
+     "validation": "Clemson's wind-turbine drivetrain test facility (Dominion Energy Innovation Center) sits on the Charleston Innovation Campus at 1250 Supply St, on the former Navy Base (clemson.edu visit page). Nominatim puts 1250 Supply St at 32.8567,-79.9590. The only 115 kV industrial customer substation next to the campus is this unnamed OSM feature, about 300 m away. That fits the plan's 115 kV line, but OSM has no name confirming it is the 'Clemson Wind Turbine' substation."
+    },
+    {
+     "name": "Coast Guard",
+     "lat": 32.84753,
+     "lon": -79.94189,
+     "precision": "locality",
+     "uncertaintyMeters": 1500,
+     "coordinateSource": "Nominatim: 'U.S. Coast Guard - Base Charleston' landuse=military, 1050, North Charleston, Charleston County (site centroid, not a substation)",
+     "confidence": "lower-confidence",
+     "validation": "The plan names only 'the Coast Guard substation site'. USCG Base Charleston's new 64-acre campus is on the Cooper River at the former Navy Base in North Charleston (USCG groundbreaking release, Jan 2024). It is about 1.6 km from the Clemson facility, which fits the plan's radial 115 kV line between the two. The substation has no exact position in any public source."
+    }
+   ],
+   "notes": "Endpoint order: A = Clemson Wind Turbine, B = Coast Guard (new radial 115 kV line). Both points are within 2 km of each other in North Charleston, Charleston County."
+  },
+  {
+   "key": "desc:6864 D, E",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Dunbar Road",
+     "lat": 33.94177,
+     "lon": -81.0855,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185400354 power=substation name=Dunbar Road Substation operator=South Carolina Gas & Electric voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Operator is SCE&G (now DESC), voltage is 115 kV as in the plan, and it is in Cayce/West Columbia, Lexington County. OSM topology shows a 115 kV path from here north through West Columbia to the Lyles 230/115 kV substation (about 10.9 line-km)."
+    },
+    {
+     "name": "Lyles",
+     "lat": 34.02204,
+     "lon": -81.06064,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185230443 power=substation substation=transmission voltage=230000;115000;33000 (unnamed), Lucius Rd / Three Points, Elmwood, Columbia",
+     "confidence": "confirmed",
+     "validation": "SC PSC order in Docket 2014-86-E (cached as scpsc-2014-86-e-lyles-lake-murray-order, p.6) describes SCE&G's 'existing Lyles 230/115 kV Substation in Columbia' in Richland County. It needed new right-of-way near the Columbia Canal/Riverfront Park. This is the only 230/115 kV substation there, about 0.7 km from Lyles Street. OSM topology links it by 230/115 kV west toward Saluda River/Lake Murray, as the order describes, and by 115 kV south to Dunbar Road. Unnamed in OSM."
+    },
+    {
+     "name": "Millrace",
+     "lat": 34.0079,
+     "lon": -81.08443,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "Nominatim address point: 1300 Mohawk Drive, Saluda Terrace, West Columbia, Lexington County (planned substation site)",
+     "confidence": "confirmed",
+     "validation": "WestMetroNews reports a City of West Columbia announcement that Dominion Energy plans to build the 'Millrace Substation' on existing company property in the 1300 block of Mohawk Drive, with construction 2027-2028. That matches the plan's in-service date of 12/31/2028. The site lies between Dunbar Road and Lyles, next to the 115 kV corridor through West Columbia, and near Millrace Rapids on the Saluda River. The evidence is local news, not a utility filing, so it was not cached."
+    }
+   ],
+   "notes": "endpoints[0..1] = the Dunbar Road \u2013 Lyles 115 kV line being rebuilt (A, B). endpoints[2] = the new Millrace tap substation named in the title. All three are within about 9 km of each other in the Columbia / West Columbia area."
+  },
+  {
+   "key": "desc:1060A, I, L",
+   "kind": "other",
+   "endpoints": [
+    {
+     "name": "Williams Street",
+     "lat": 34.00029,
+     "lon": -81.04873,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/329102047 power=substation substation=distribution voltage=115000 (unnamed), Williams St at Washington St, The Vista, Columbia",
+     "confidence": "lower-confidence",
+     "validation": "No name in OSM. A public Waze place listing gives a 'Dominion Energy substation, 1401 Williams St, Columbia', and this is the only 115 kV substation on Williams Street in The Vista. Columbia is inside DESC territory. No utility or regulator source confirms it."
+    },
+    {
+     "name": "AM Williams",
+     "lat": 33.0177,
+     "lon": -79.93217,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/184867924 power=substation name=Williams Substation voltage=230000;115000, next to relation/20086234 power=plant name=Williams Station operator=South Carolina Generating Company",
+     "confidence": "confirmed",
+     "validation": "A.M. Williams Station is the DESC/GENCO coal plant at Bushy Park, Goose Creek, Berkeley County. The switchyard substation sits next to the plant, which OSM tags with operator SC Generating Co (a DESC affiliate). The name matches."
+    },
+    {
+     "name": "McMeekin",
+     "lat": 34.0559,
+     "lon": -81.21686,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/186840912 power=plant name=McMeekin Station operator=Dominion Energy South Carolina, Inc addr=6055 Bush River Road, Columbia",
+     "confidence": "confirmed",
+     "validation": "The plan adds a switch house to move relays out of the plant relay room, so the work is at the McMeekin plant itself. The plant is at the Lake Murray dam, Lexington County. The name matches and the operator is DESC."
+    }
+   ],
+   "notes": "Multi-site package with three sites about 150 km apart (downtown Columbia, Goose Creek, Lake Murray). Do NOT average them into one center; treat them as three separate points. The work is switch-house and relay replacement only (no line work)."
+  },
+  {
+   "key": "desc:6810 T",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Cameron Jct",
+     "lat": 33.54637,
+     "lon": -80.69793,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM node/5211620240: 46 kV line junction (degree 3), 2.26 line-km south of Cameron Substation, Calhoun County. Found by shortest-path analysis of the OSM 46 kV network (Overpass mirror overpass.kumi.systems)",
+     "confidence": "confirmed",
+     "validation": "Cameron Jct is a line junction, not a substation. Three plan mileages match this OSM junction: Cameron Jct \u2013 Cameron \u2013 St Matthews is 9.8 mi in the plan and 9.84 mi in OSM; Orangeburg #1 \u2013 Cameron Jct is 7.5 mi (desc-scrtp-2025-2029 p41) and 7.8 mi in OSM; Cameron Jct \u2013 Elloree is 7.3 mi (desc-scrtp-2024-2028 p41) and 8.1 mi in OSM. No other 3-way split on the Cameron 46 kV line fits."
+    },
+    {
+     "name": "St Matthews",
+     "lat": 33.66747,
+     "lon": -80.77124,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/1077428670 power=substation substation=distribution voltage=46000 (unnamed), Emily St, St. Matthews, Calhoun County",
+     "confidence": "confirmed",
+     "validation": "It is the only 46 kV substation in the town of St. Matthews, and the plan's line is 46 kV. The OSM 46 kV line runs directly from Cameron Substation (way/318318141) to here, 8.4 mi, so Cameron Jct to here is 9.84 mi, matching the plan's 9.8 mi. Unnamed in OSM."
+    }
+   ],
+   "notes": "Title route Cameron Jct -> Cameron -> St Matthews. The intermediate Cameron Substation is at 33.56369,-80.70900 (OSM way/318318141, name=Cameron Substation, 46 kV, confirmed)."
+  },
+  {
+   "key": "desc:6888",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Okatie",
+     "lat": 33,
+     "lon": -81,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "placeholder",
+     "confidence": "confirmed",
+     "validation": "placeholder"
+    }
+   ],
+   "notes": "placeholder"
+  }
+ ],
+ "unresolved": [
+  "placeholder"
+ ]
+}

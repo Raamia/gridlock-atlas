@@ -29,7 +29,7 @@ export function Inspector() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 28 }}
           transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-          className="glass absolute bottom-3 right-3 top-3 z-20 flex w-[408px] flex-col overflow-hidden rounded-2xl"
+          className="glass fixed inset-x-0 bottom-0 top-[28vh] z-40 flex flex-col overflow-hidden rounded-t-2xl !bg-bg-1/[0.94] sm:absolute sm:inset-x-auto sm:bottom-3 sm:right-3 sm:top-3 sm:w-[408px] sm:rounded-2xl"
           aria-label="Evidence inspector"
         >
           <InspectorBody key={pair.match.id} m={pair.match} a={pair.a} b={pair.b} />
@@ -62,34 +62,39 @@ function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
 
   return (
     <>
-      <header className="border-b border-line px-5 pb-4 pt-4">
-        <div className="flex items-center justify-between">
-          <span className="eyebrow">Pair under review</span>
-          <div className="flex items-center gap-1">
-            <span className="hidden items-center gap-1 text-[10.5px] text-text-3 sm:flex">
-              <Kbd>Esc</Kbd>
-            </span>
-            <IconButton label="Close inspector" onClick={() => select(null)}>
-              <X size={15} />
-            </IconButton>
+      <header className="flex items-center gap-2 border-b border-line px-4 py-2.5">
+        <div className="min-w-0 flex-1">
+          <div className="eyebrow">Pair under review</div>
+          <div className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[12px] font-medium">
+            <span className="truncate text-a">{a.shortTitle}</span>
+            <span className="shrink-0 text-text-3">×</span>
+            <span className="truncate text-b">{b.shortTitle}</span>
           </div>
         </div>
-        <div className="mt-2 space-y-2.5">
-          <PairTitle p={a} color="var(--a)" />
-          <div className="flex items-center gap-2 pl-[18px] text-[11px] text-text-3">
-            <span className="h-px w-4 bg-line-3" />×<span className="h-px flex-1 bg-line" />
-          </div>
-          <PairTitle p={b} color="var(--b)" />
-        </div>
-        <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
-          <MatchBadges m={m} />
-          <StatusChip status={m.reviewStatus} />
-          <ConflictChip count={m.conflicts.length} />
-        </div>
-        <p className="mt-3 text-[13px] leading-[1.5] text-text-1">{whyFlagged(m)}</p>
+        <span className="hidden items-center gap-1 text-[10.5px] text-text-3 sm:flex">
+          <Kbd>Esc</Kbd>
+        </span>
+        <IconButton label="Close inspector" onClick={() => select(null)}>
+          <X size={15} />
+        </IconButton>
       </header>
 
-      <div ref={scroller} className="scroll-thin min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4">
+      <div ref={scroller} className="scroll-thin min-h-0 flex-1 space-y-3 overflow-y-auto px-4 pb-4">
+        <div className="px-1 pb-1 pt-4">
+          <div className="space-y-2.5">
+            <PairTitle p={a} color="var(--a)" />
+            <div className="flex items-center gap-2 pl-[18px] text-[11px] text-text-3">
+              <span className="h-px w-4 bg-line-3" />×<span className="h-px flex-1 bg-line" />
+            </div>
+            <PairTitle p={b} color="var(--b)" />
+          </div>
+          <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
+            <MatchBadges m={m} />
+            <StatusChip status={m.reviewStatus} />
+            <ConflictChip count={m.conflicts.length} />
+          </div>
+          <p className="mt-3 text-[13px] leading-[1.5] text-text-1">{whyFlagged(m)}</p>
+        </div>
         <ReviewPanel m={m} />
         <PlaceSection m={m} a={a} b={b} active={section === "place"} />
         <ScheduleSection m={m} a={a} b={b} active={section === "schedule"} />

@@ -22,6 +22,7 @@ export function MapOverlays() {
 
 function FocusChip() {
   const preview = usePreviewPair();
+  const inspectorOpen = useAtlas((s) => s.inspectorOpen);
   const region = useAtlas((s) => s.region);
   const run = useAtlas((s) => s.run);
   const r = SNAPSHOT.regions.find((x) => x.id === region);
@@ -36,7 +37,10 @@ function FocusChip() {
     sub += ` · ${run.matches.length} candidate pairs`;
   }
   return (
-    <div className="pointer-events-none absolute left-4 top-4 z-10 max-w-[60%]">
+    <div
+      className="pointer-events-none absolute left-3 top-3 z-10 max-w-[55%] sm:left-4 sm:top-4"
+      style={{ maxWidth: inspectorOpen ? "calc(100% - 700px)" : "calc(100% - 330px)", minWidth: 200 }}
+    >
       <div className="glass rounded-xl px-3.5 py-2.5">
         <div className="eyebrow">{preview ? "Pair in view" : "Overview"}</div>
         <div className="mt-0.5 truncate text-[14px] font-medium tracking-[-0.01em] text-text-0">{title}</div>
@@ -109,7 +113,7 @@ function Legend() {
   const focal = FOCAL_UTILITIES[region];
   if (demo !== null) return null;
   return (
-    <div className="absolute bottom-4 left-4 z-10 w-[252px]">
+    <div className="absolute bottom-4 left-4 z-10 hidden w-[252px] sm:block">
       <div className="glass overflow-hidden rounded-xl">
         <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between px-3 py-2" aria-expanded={open}>
           <span className="eyebrow">Map truth rules</span>

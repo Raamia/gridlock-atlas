@@ -65,8 +65,8 @@ function offlineStyle(): StyleSpecification {
     },
     layers: [
       { id: "bg", type: "background", paint: { "background-color": "#060d1c" } },
-      { id: "ctx-states-fill", type: "fill", source: "ctx-states", paint: { "fill-color": "#0b1528", "fill-opacity": 1 } },
-      { id: "ctx-states-line", type: "line", source: "ctx-states", paint: { "line-color": "#2a3a5c", "line-width": 1.1 } },
+      { id: "ctx-states-fill", type: "fill", source: "ctx-states", paint: { "fill-emissive-strength": 1, "fill-color": "#0b1528", "fill-opacity": 1 } },
+      { id: "ctx-states-line", type: "line", source: "ctx-states", paint: { "line-emissive-strength": 1, "line-color": "#2a3a5c", "line-width": 1.1 } },
     ],
   };
 }
@@ -96,7 +96,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "ctx-counties-line",
     type: "line",
     source: "ctx-counties",
-    paint: { "line-color": "#8aa0ce", "line-opacity": basemap === "offline" ? 0.13 : 0.0, "line-width": 0.6 },
+    paint: { "line-emissive-strength": 1, "line-color": "#8aa0ce", "line-opacity": basemap === "offline" ? 0.13 : 0.0, "line-width": 0.6 },
     ...slot,
   });
   map.addLayer({
@@ -104,7 +104,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "fill",
     source: "ctx-counties",
     filter: ["==", ["get", "fips"], "__none__"],
-    paint: { "fill-color": "#8aa0ce", "fill-opacity": 0.05 },
+    paint: { "fill-emissive-strength": 1, "fill-color": "#8aa0ce", "fill-opacity": 0.05 },
     ...slot,
   });
   map.addLayer({
@@ -112,7 +112,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "ctx-counties",
     filter: ["==", ["get", "fips"], "__none__"],
-    paint: { "line-color": "#8aa0ce", "line-opacity": 0.4, "line-width": 1, "line-dasharray": [2, 2] },
+    paint: { "line-emissive-strength": 1, "line-color": "#8aa0ce", "line-opacity": 0.4, "line-width": 1, "line-dasharray": [2, 2] },
     ...slot,
   });
 
@@ -120,14 +120,14 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-halos-fill",
     type: "fill",
     source: "gl-halos",
-    paint: { "fill-color": roleColor, "fill-opacity": roleOpacity(0.1, 0.03) },
+    paint: { "fill-emissive-strength": 1, "fill-color": roleColor, "fill-opacity": roleOpacity(0.1, 0.03) },
     ...slot,
   });
   map.addLayer({
     id: "gl-halos-line",
     type: "line",
     source: "gl-halos",
-    paint: { "line-color": roleColor, "line-opacity": roleOpacity(0.55, 0.15), "line-width": 1, "line-dasharray": [1.5, 1.5] },
+    paint: { "line-emissive-strength": 1, "line-color": roleColor, "line-opacity": roleOpacity(0.55, 0.15), "line-width": 1, "line-dasharray": [1.5, 1.5] },
     ...slot,
   });
 
@@ -136,7 +136,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "gl-routes",
     layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-color": roleColor, "line-width": ["interpolate", ["linear"], ["zoom"], 5, 6, 10, 14], "line-blur": 8, "line-opacity": roleOpacity(0.35, 0.05) },
+    paint: { "line-emissive-strength": 1, "line-color": roleColor, "line-width": ["interpolate", ["linear"], ["zoom"], 5, 6, 10, 14], "line-blur": 8, "line-opacity": roleOpacity(0.35, 0.05) },
     ...slot,
   });
   map.addLayer({
@@ -144,7 +144,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "gl-routes",
     layout: { "line-cap": "round", "line-join": "round" },
-    paint: {
+    paint: { "line-emissive-strength": 1,
       "line-color": roleColor,
       "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2, 10, 3.5],
       "line-opacity": roleOpacity(0.95, 0.3),
@@ -159,11 +159,11 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "gl-overlaps",
     layout: { "line-cap": "round" },
-    paint: {
+    paint: { "line-emissive-strength": 1,
       "line-color": COLORS.amber,
       "line-width": ["interpolate", ["linear"], ["get", "priority"], 20, 4, 100, 12],
       "line-blur": 6,
-      "line-opacity": ["case", ["get", "selected"], 0.5, ["get", "dim"], 0.04, 0.22],
+      "line-opacity": ["case", ["get", "selected"], 0.5, ["get", "dim"], 0, 0.22],
     },
     ...slot,
   });
@@ -172,10 +172,10 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "gl-overlaps",
     layout: { "line-cap": "round" },
-    paint: {
+    paint: { "line-emissive-strength": 1,
       "line-color": COLORS.amber,
       "line-width": ["interpolate", ["linear"], ["get", "priority"], 20, 1.2, 100, 2.6],
-      "line-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.12, 0.75],
+      "line-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.05, 0.75],
       "line-dasharray": [1, 1.6],
     },
     ...slot,
@@ -185,7 +185,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-connector",
     type: "line",
     source: "gl-connector",
-    paint: { "line-color": COLORS.amber, "line-width": 1.6, "line-dasharray": [0.5, 2], "line-opacity": 0.9 },
+    paint: { "line-emissive-strength": 1, "line-color": COLORS.amber, "line-width": 1.6, "line-dasharray": [0.5, 2], "line-opacity": 0.9 },
     layout: { "line-cap": "round" },
     ...slot,
   });
@@ -194,7 +194,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-points-halo",
     type: "circle",
     source: "gl-points",
-    paint: {
+    paint: { "circle-emissive-strength": 1,
       "circle-radius": ["match", ["get", "precision"], "named-facility", 9, 6],
       "circle-color": roleColor,
       "circle-opacity": roleOpacity(0.18, 0.04),
@@ -206,7 +206,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-points",
     type: "circle",
     source: "gl-points",
-    paint: {
+    paint: { "circle-emissive-strength": 1,
       "circle-radius": ["match", ["get", "precision"], "named-facility", 4.5, 3.5],
       "circle-color": ["match", ["get", "precision"], "named-facility", roleColor, "rgba(12,21,40,0.9)"],
       "circle-stroke-color": ["match", ["get", "precision"], "named-facility", "rgba(4,9,20,0.9)", roleColor],
@@ -221,13 +221,13 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-overlap-dots",
     type: "circle",
     source: "gl-overlap-dots",
-    paint: {
+    paint: { "circle-emissive-strength": 1,
       "circle-radius": ["interpolate", ["linear"], ["get", "priority"], 20, 3.5, 100, 7],
       "circle-color": COLORS.amber,
-      "circle-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.15, 0.95],
+      "circle-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.12, 0.95],
       "circle-stroke-color": "rgba(4,9,20,0.9)",
       "circle-stroke-width": 1.5,
-      "circle-stroke-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.15, 1],
+      "circle-stroke-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.1, 1],
     },
     ...slot,
   });
@@ -236,7 +236,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-centers",
     type: "circle",
     source: "gl-centers",
-    paint: {
+    paint: { "circle-emissive-strength": 1,
       "circle-radius": 5,
       "circle-color": "rgba(4,9,20,0.6)",
       "circle-stroke-color": ["match", ["get", "role"], "a", COLORS.a, COLORS.b],
@@ -259,9 +259,9 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
         "text-offset": [0, 1.1],
         "text-anchor": "top",
         "text-optional": true,
-        "text-max-width": 12,
+        "text-max-width": 10,
       },
-      paint: { "text-color": "#c1cbe0", "text-halo-color": "#040914", "text-halo-width": 1.4 },
+      paint: { "text-emissive-strength": 1, "text-color": "#c1cbe0", "text-halo-color": "#040914", "text-halo-width": 1.4 },
       ...slot,
     });
   }
@@ -316,6 +316,7 @@ export default function MapStage() {
   const markers = useRef<mapboxgl.Marker[]>([]);
   const popup = useRef<mapboxgl.Popup | null>(null);
   const [styleReady, setStyleReady] = useState(0);
+  const [mapReady, setMapReady] = useState(false);
   const reduced = useReducedMotion();
 
   const basemap = useAtlas((s) => s.basemap);
@@ -381,6 +382,7 @@ export default function MapStage() {
       setStyleReady((n) => n + 1);
     });
 
+    map.once("load", () => setMapReady(true));
     map.on("error", (e) => {
       const status = (e.error as { status?: number } | undefined)?.status;
       const msg = String(e.error?.message ?? "");
@@ -512,14 +514,18 @@ export default function MapStage() {
     if (preview) {
       const site = sharedSite(preview.match);
       if (site) markers.current.push(new mapboxgl.Marker({ element: siteMarker(site.label, site.stated), anchor: "center" }).setLngLat([site.lon, site.lat]).addTo(map));
+      const c = preview.match.geoDetail.center;
       for (const [p, role] of [
         [preview.a, "a"],
         [preview.b, "b"],
       ] as const) {
-        const at = anchorOf(p);
+        // label each project at its center point (the sponsor's distance anchor): A above, B below
+        const at = c ? (role === "a" ? c.a : c.b) : anchorOf(p);
         if (!at) continue;
+        const aAbove = !c || c.a[1] >= c.b[1];
+        const above = role === "a" ? aAbove : !aAbove;
         markers.current.push(
-          new mapboxgl.Marker({ element: projectLabel(p.shortTitle, ownerNames(p, IDX, true), role), anchor: role === "a" ? "bottom-right" : "top-left", offset: role === "a" ? [-8, -8] : [8, 8] })
+          new mapboxgl.Marker({ element: projectLabel(p.shortTitle, ownerNames(p, IDX, true), role), anchor: above ? "bottom" : "top", offset: above ? [0, -12] : [0, 12] })
             .setLngLat(at)
             .addTo(map),
         );
@@ -533,6 +539,7 @@ export default function MapStage() {
   }, [styleReady, preview, hoveredProjectId, visibleProjectIds, run]);
 
   /* camera */
+  const firstCamera = useRef(true);
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
@@ -564,14 +571,12 @@ export default function MapStage() {
         : (boundsOf(SNAPSHOT.projects.flatMap(projectCoords)) as LngLatBoundsLike | null);
       if (target) map.fitBounds(target, { padding: { top: 80, bottom: 60, left: 60, right }, pitch: 0, bearing: 0, duration, essential: true });
     };
-    const once = () => apply(false);
-    if (!map.loaded()) map.once("load", once);
-    else apply(true);
-    return () => {
-      map.off("load", once);
-    };
+    // first placement after load is instant; later moves animate
+    if (!mapReady) return;
+    apply(firstCamera.current ? false : true);
+    firstCamera.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cameraNonce, selected?.match.id, inspectorOpen]);
+  }, [cameraNonce, selected?.match.id, inspectorOpen, mapReady]);
 
   // mapbox-gl.css is unlayered and sets .mapboxgl-map{position:relative}, so size the map through a wrapper
   return (
@@ -605,7 +610,7 @@ function siteMarker(label: string, stated: boolean) {
   root.innerHTML = `
     <span class="site-pulse absolute left-1/2 top-1/2 block h-10 w-10 rounded-full" style="border:1.5px solid #fbbf24"></span>
     <span class="absolute left-1/2 top-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.25),0 0 18px #fbbf24"></span>
-    <div class="absolute left-4 top-3 whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.82);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
+    <div class="absolute bottom-3 left-4 whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.86);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
       <div class="mono text-[9.5px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${stated ? "Shared site stated in source" : "Both projects end here"}</div>
       ${escapeHtml(label)}
     </div>`;

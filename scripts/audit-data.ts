@@ -37,7 +37,10 @@ for (const p of snap.projects) {
   if (!has(p.status.evidenceIds)) fail.push(`${p.id}: status has no evidence`);
   for (const w of p.constructionWindows) if (!has(w.evidenceIds)) fail.push(`${p.id}: window ${w.id} has no evidence`);
   for (const c of p.completionClaims) if (!has(c.evidenceIds)) fail.push(`${p.id}: completion ${c.id} has no evidence`);
-  for (const c of p.knownCoordination) if (!has(c.evidenceIds)) fail.push(`${p.id}: coordination claim has no evidence`);
+  // absence claims ("not found in sources") are notes, not facts; documented coordination needs a quote
+  for (const c of p.knownCoordination) {
+    if ((c.status === "known-joint" || c.status === "reported-coordination") && !has(c.evidenceIds)) fail.push(`${p.id}: coordination claim has no evidence`);
+  }
   for (const pl of p.places) {
     if (!pl.coordinateSource) fail.push(`${p.id}: place ${pl.label} has no coordinate source`);
     if (!Number.isFinite(pl.lat) || !Number.isFinite(pl.lon)) fail.push(`${p.id}: place ${pl.label} has no coordinates`);

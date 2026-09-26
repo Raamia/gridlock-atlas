@@ -55,9 +55,11 @@ export const SCOPE_LABEL: Record<string, string> = {
 
 /** Headline title: long titles drop their parenthetical detail (the full title stays in tooltips/brief sources). */
 export function displayTitle(p: { title: string }): string {
-  if (p.title.length <= 48) return p.title;
-  const t = p.title.replace(/\s*\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
-  return t || p.title;
+  // planning-area prefixes ("SAV: …") are kept in the docket line, not the headline
+  const base = p.title.replace(/^(SAV|GTC|MEAG|DU)\s*:\s*/, "");
+  if (base.length <= 48) return base;
+  const t = base.replace(/\s*\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
+  return t || base;
 }
 
 /** First sentence of a researcher description, capped at ~`words` words. */

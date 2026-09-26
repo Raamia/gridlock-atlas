@@ -51,7 +51,8 @@ def title_case(s):
             out.append(w.lower())
         else:
             out.append(w[:1].upper() + w[1:].lower())
-    return re.sub(r"\bKv\b", "kV", " ".join(out))
+    t = re.sub(r"\bKv\b", "kV", " ".join(out))
+    return re.sub(r"\b(Mc)([a-z])", lambda m: m.group(1) + m.group(2).upper(), t)
 
 
 def short_title(t):

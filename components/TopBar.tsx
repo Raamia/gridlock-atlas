@@ -31,8 +31,8 @@ export function TopBar() {
   const regions = [...SNAPSHOT.regions.map((r) => ({ id: r.id, label: r.label })), { id: "all", label: "All" }];
 
   return (
-    <header className="relative z-30 flex h-14 items-center gap-3 border-b border-line bg-bg-1/95 px-4 backdrop-blur">
-      <div className="flex items-center gap-2.5">
+    <header className="relative z-30 flex h-14 min-w-0 items-center gap-2 overflow-hidden border-b border-line bg-bg-1/95 px-3 backdrop-blur sm:gap-3 sm:px-4">
+      <div className="flex shrink-0 items-center gap-2.5">
         <LogoMark />
         <div className="leading-none">
           <div className="text-[14px] font-semibold tracking-[-0.015em] text-text-0">
@@ -68,14 +68,16 @@ export function TopBar() {
         ))}
       </nav>
 
-      <div className="ml-auto flex items-center gap-1 md:ml-0">
-        <Button variant="ghost" size="sm" onClick={() => set({ sourcesOpen: true })} title="Source registry">
+      <div className="ml-auto flex min-w-0 items-center gap-1 md:ml-0">
+        <Button variant="ghost" size="sm" onClick={() => set({ sourcesOpen: true })} title="Source registry" aria-label={`Source registry: ${SNAPSHOT.sources.length} sources, ${utilities.size} utilities`}>
           <Database size={13} />
-          <span className="num">{SNAPSHOT.sources.length}</span> sources
-          <span className="text-text-3">·</span>
-          <span className="num">{utilities.size}</span> utilities
+          <span className="num">{SNAPSHOT.sources.length}</span>
+          <span className="hidden xl:inline">sources</span>
+          <span className="hidden text-text-3 xl:inline">·</span>
+          <span className="num hidden xl:inline">{utilities.size}</span>
+          <span className="hidden xl:inline">utilities</span>
         </Button>
-        <Button variant="ghost" size="sm" onClick={() => set({ methodOpen: true })}>
+        <Button variant="ghost" size="sm" onClick={() => set({ methodOpen: true })} className="hidden sm:inline-flex">
           <BookOpenText size={13} />
           Method
         </Button>
@@ -86,7 +88,7 @@ export function TopBar() {
         <div className="mx-1 h-5 w-px bg-line-2" />
         <Button variant={demoStep === null ? "outline" : "subtle"} size="sm" onClick={() => set({ demoStep: demoStep === null ? 0 : null })}>
           <PlayCircle size={13} className="text-amber" />
-          {demoStep === null ? "Guided demo" : "Exit demo"}
+          <span className="hidden sm:inline">{demoStep === null ? "Guided demo" : "Exit demo"}</span>
         </Button>
       </div>
     </header>

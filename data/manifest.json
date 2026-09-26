@@ -171,6 +171,24 @@
   "sha256": "cecb7d1dabd7a63b06b95c2e6e628f9a2cd9397781e9d1457a826f85965975fd"
  },
  {
+  "id": "gpc-callaway-thomson-page",
+  "url": "https://www.georgiapower.com/about/grid-reliability/grid-improvements/grid-projects/transmission-projects/callaway-thomson.html",
+  "publisher": "Georgia Power",
+  "title": "Callaway Road – Thomson Primary 500 kV Area Transmission Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:02:51Z",
+  "sha256": "6909a4b1203de305a6e6fae48890a481d5b50556f5078b49dbeb670459d4b310"
+ },
+ {
+  "id": "gpc-effingham-page",
+  "url": "https://www.georgiapower.com/about/grid-reliability/grid-improvements/grid-projects/transmission-projects/effingham-county.html",
+  "publisher": "Georgia Power",
+  "title": "Effingham County 500 kV Area Transmission Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:02:51Z",
+  "sha256": "4386e199bea6688bc288148d486188989971c39a63868e126f2cc1689c0b599b"
+ },
+ {
   "id": "gpc-irp-2025-vol3",
   "url": "https://psc.ga.gov/search/facts-document/?documentId=221233",
   "publisher": "Georgia Power (Georgia PSC Docket 56002)",

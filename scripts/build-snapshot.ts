@@ -160,7 +160,9 @@ const abbr = (s: string) => STATE_ABBR[s] ?? s;
 function shortLabel(raw: string): string {
   let t = raw.replace(/\s*\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
   t = t.split(" / ")[0].trim();
+  for (const sep of [". ", "; ", ": "]) if (t.length > 34 && t.includes(sep)) t = t.split(sep)[0].trim();
   if (t.length > 34 && t.includes(", ")) t = t.split(", ")[0].trim();
+  if (t.length > 40) t = t.slice(0, 38).replace(/\s+\S*$/, "") + "…";
   return t || raw;
 }
 
@@ -231,7 +233,9 @@ for (const c of clusters) {
             coordinates: p.route.waypoints.map((w: R) => [Number(w.lon), Number(w.lat)] as [number, number]),
             waypointNames: p.route.waypoints.map((w: R) => w.name),
             evidenceIds: ev(p.route.evidence),
-            caveat: p.route.caveat || "Schematic / not survey accurate.",
+            caveat: /schematic|approximate|not survey/i.test(p.route.caveat ?? "")
+              ? p.route.caveat
+              : `Schematic / not survey accurate.${p.route.caveat ? ` ${p.route.caveat}` : ""}`,
           }
         : undefined;
 

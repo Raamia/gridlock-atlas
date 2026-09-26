@@ -4,7 +4,8 @@ import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { useCallback, useEffect } from "react";
-import type { MatchRun } from "@/lib/domain/types";
+import { SNAPSHOT } from "@/lib/data";
+import type { Match, MatchRun } from "@/lib/domain/types";
 import { useAtlas, type InspectorSection } from "@/lib/store";
 import { Button, IconButton, Kbd } from "./ui";
 
@@ -19,8 +20,11 @@ const FEATURED = ["dpc-alma-blair", "xcel-wwtc"];
 function featured(run: MatchRun | null) {
   return run?.matches.find((m) => FEATURED.includes(m.projectAId) && FEATURED.includes(m.projectBId)) ?? null;
 }
-function lead(run: MatchRun | null) {
-  return run?.matches.find((m) => m.reviewStatus === "needs-review" && m.relevance !== "low") ?? null;
+
+/** Top-ranked Savannah River lead: DESC × Georgia Power, place confirmed, not already coordinated. */
+function topSoutheast(run: MatchRun | null) {
+  const inSE = (id: string) => SNAPSHOT.projects.find((p) => p.id === id)?.region === "southeast";
+  return run?.matches.find((m) => inSE(m.projectAId) && m.geo === "confirmed" && m.reviewStatus === "needs-review") ?? run?.matches.find((m) => inSE(m.projectAId)) ?? null;
 }
 
 async function ensureRun() {
@@ -28,12 +32,13 @@ async function ensureRun() {
   return st.run ?? (await st.compare());
 }
 
-function focus(section: InspectorSection | null, extra: Partial<ReturnType<typeof useAtlas.getState>> = {}) {
+function open(pick: (run: MatchRun | null) => Match | null, section: InspectorSection | null, extra: Partial<ReturnType<typeof useAtlas.getState>> = {}) {
   return async () => {
     const run = await ensureRun();
-    const m = featured(run);
+    const m = pick(run);
+    if (!m) return;
     const st = useAtlas.getState();
-    if (m && st.selectedMatchId !== m.id) st.select(m.id, { section: section ?? undefined });
+    if (st.selectedMatchId !== m.id) st.select(m.id, { section: section ?? undefined });
     useAtlas.setState({ inspectorOpen: true, inspectorSection: section, briefOpen: false, highlightConflict: false, ...extra });
   };
 }
@@ -41,57 +46,51 @@ function focus(section: InspectorSection | null, extra: Partial<ReturnType<typeo
 const STEPS: Step[] = [
   {
     title: "Two utilities, two separate plans",
-    body: "Dairyland and Xcel publish their Wisconsin construction plans in different project pages, filings and PDFs. Nothing on either page puts them side by side.",
+    body: "Dominion Energy South Carolina and Georgia Power publish their future transmission work in separate documents — an SCRTP project list and an IRP ten-year plan. Here they are on one map for the first time.",
     run: () => {
-      useAtlas.setState({ region: "upper-midwest", selectedMatchId: null, inspectorOpen: false, briefOpen: false, hoveredMatchId: null });
-      useAtlas.setState((s) => ({ cameraNonce: s.cameraNonce + 1 }));
+      const region = SNAPSHOT.regions.some((r) => r.id === "southeast") ? "southeast" : (SNAPSHOT.regions[0]?.id ?? "all");
+      useAtlas.setState((s) => ({ region, selectedMatchId: null, inspectorOpen: false, briefOpen: false, hoveredMatchId: null, cameraNonce: s.cameraNonce + 1 }));
     },
   },
   {
     title: "Compare public plans",
-    body: "The deterministic engine checks every pair of distinct-owner plans for proximity OR construction-window overlap — and keeps documented coordination separate.",
+    body: "The deterministic engine measures every cross-utility pair center-to-center, keeps those within 25 miles, then ranks them by closeness and timing. Amber links mark every flagged pair.",
     run: async () => {
       await useAtlas.getState().compare();
-      useAtlas.setState({ tab: "known-coordination" });
+      useAtlas.setState((s) => ({ tab: "needs-review", selectedMatchId: null, inspectorOpen: false, cameraNonce: s.cameraNonce + 1 }));
     },
   },
   {
-    title: "Where they meet",
-    body: "The Wisconsin PSC's 2026 decision has Dairyland's line ending at Tremval North — the substation approved for Xcel's project. That relation is stated in text, not guessed from a map.",
-    run: focus("place"),
+    title: "The top coordination opportunity",
+    body: "The highest-ranked Savannah River pair: where each project's terminals are, how far apart the centers are, and how precise each location is.",
+    run: open(topSoutheast, "place"),
   },
   {
     title: "When they build",
-    body: "Both utilities publish 2026–2027 construction. Year-precision dates stay fuzzy on the timeline; the amber band is the only overlap the sources support.",
-    run: focus("schedule"),
+    body: "Published windows are compared; where only in-service dates exist, the gap in days is the secondary signal. Nothing is inferred beyond what the sources state.",
+    run: open(topSoutheast, "schedule"),
   },
   {
-    title: "A known interface — not a new gap",
-    body: "The sources already document the interconnection. GridLock files the pair under Known coordination and says plainly that shared crews or equipment are not established.",
-    run: focus("coordination"),
+    title: "A rough, sourced impact estimate",
+    body: "How much right-of-way one shared corridor would avoid encumbering twice — every default is a cited number, every assumption is editable, and it is labeled as a scenario, not a saving.",
+    run: open(topSoutheast, "impact"),
+  },
+  {
+    title: "Known coordination is kept separate",
+    body: "In Wisconsin, the PSC decision has Dairyland's line ending at Tremval North, the substation approved for Xcel's project. GridLock files it under Known coordination — a known interface, not a new gap.",
+    run: open(featured, "coordination"),
   },
   {
     title: "Sources disagree — both are kept",
-    body: "Xcel's page and the PSC give different completion dates. The conflict is shown side by side and does not change the construction-window match.",
-    run: focus("conflicts", { highlightConflict: true }),
+    body: "Xcel's page and the Wisconsin PSC give different completion dates. The conflict is shown side by side and does not change the construction-window match.",
+    run: open(featured, "conflicts", { highlightConflict: true }),
   },
   {
     title: "Export a cited review brief",
     body: "One question a planner can act on, with every fact numbered to a short excerpt and page. It never contacts a utility.",
     run: async () => {
-      await focus("coordination")();
+      await open(topSoutheast, "coordination")();
       useAtlas.setState({ briefOpen: true });
-    },
-  },
-  {
-    title: "An honest review lead",
-    body: "Pairs where the reviewed sources say nothing about coordination land in Needs review — an unknown status, never “uncoordinated.”",
-    run: async () => {
-      const run = await ensureRun();
-      const m = lead(run);
-      useAtlas.setState({ briefOpen: false, highlightConflict: false });
-      if (m) useAtlas.getState().select(m.id, { section: "coordination" });
-      else useAtlas.setState({ tab: "needs-review", selectedMatchId: null, inspectorOpen: false });
     },
   },
 ];
@@ -134,7 +133,7 @@ export function GuidedDemo() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute bottom-4 left-4 z-30 w-[440px]"
+          className="absolute bottom-3 left-3 right-3 z-30 sm:bottom-4 sm:left-4 sm:right-auto sm:w-[440px]"
           role="region"
           aria-label="Guided demo"
         >
