@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./globals.css";
 
+// Geist for words, Geist Mono for every number, Instrument Serif italic only in the wordmark and the brief title.
+// All three are cached by next/font at build/dev time, so the app runs offline.
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 const instrumentSerif = Instrument_Serif({
@@ -16,11 +18,13 @@ export const metadata: Metadata = {
   title: "GridLock Atlas — compare public utility construction plans",
   description:
     "GridLock Atlas compares public future construction plans from different power utilities, flags geographic proximity or schedule overlap, and shows the cited evidence behind every match.",
+  applicationName: "GridLock Atlas",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#040914",
+  themeColor: "#05080e",
   colorScheme: "dark",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
