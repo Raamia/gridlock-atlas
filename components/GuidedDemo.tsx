@@ -695,7 +695,8 @@ export function GuidedDemo() {
                   <div
                     className={clsx(
                       "num mt-auto flex h-9 min-w-0 items-center gap-2 rounded-card bg-fill-1 px-3 text-fg-2",
-                      phone ? "text-caption" : "text-ui",
+                      // the 400px card pinned beside the brief takes the caption size, so step 8's line reads in full
+                      phone || pinned ? "text-caption" : "text-ui",
                       phone && pinned && "hidden",
                       !showFailure && (key || (on && running)) ? "" : "invisible",
                     )}

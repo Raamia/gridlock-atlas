@@ -244,10 +244,14 @@ export function rowOwner(p: Project): RowOwner {
 }
 
 export type FactState = "confirmed" | "possible" | "none";
+/**
+ * A row fact in plain words ("6.7 mi apart", "may overlap 2028"). `value` is the part of `text` set in mono tabular
+ * figures (a distance, a year span); the icon state carries confirmed / possible (SPEC §1).
+ */
 export interface Fact {
   state: FactState;
   text: string;
-  mono: boolean;
+  value?: string;
   tooltip: string;
 }
 
@@ -258,54 +262,68 @@ function compactYears(span: { start: string; end: string }): string {
   return a === z ? a : a.slice(0, 2) === z.slice(0, 2) ? `${a}–${z.slice(2)}` : `${a}–${z}`;
 }
 
-/** Place fact: the distance between centers, or the shared facility itself. */
+/** Place fact: "6.7 mi apart" (centers), "at McIntosh" (the shared facility), or what little is known. */
 export function placeFact(m: Match): Fact {
   const d = m.geoDetail;
   const g = geoShort(m);
   const state: FactState = m.geo === "confirmed" ? "confirmed" : m.geo === "possible" ? "possible" : "none";
-  if (d.method === "shared-site" || d.method === "shared-endpoint") return { state, text: g.text, mono: false, tooltip: g.title };
+  if (d.method === "shared-site" || d.method === "shared-endpoint") {
+    const named = g.text !== "Shared site stated";
+    return { state, text: named ? `at ${g.text}` : "shared site stated", tooltip: g.title };
+  }
   if (d.method === "measured" && d.center) {
     const c = d.center;
+    const miles = formatMilesNear(c.miles, d.thresholdMiles);
     const range = `${c.lowMiles.toFixed(1)}–${c.highMiles.toFixed(1)} mi with location uncertainty`;
     return {
       state,
-      text: formatMilesNear(c.miles, d.thresholdMiles),
-      mono: true,
+      text: `${miles} apart`,
+      value: miles,
       tooltip: `Centers ${g.text} · ${state === "possible" ? `range ${range}; treat as a lead to verify` : range}`,
     };
   }
-  if (d.method === "coarse") return { state, text: "County-level", mono: false, tooltip: "County-level only — no project center, so no mileage" };
-  return { state, text: "Location unknown", mono: false, tooltip: "Location unknown" };
+  if (d.method === "coarse") return { state, text: "county-level only", tooltip: "County-level only — no project center, so no mileage" };
+  return { state, text: "location unknown", tooltip: "Location unknown" };
 }
 
-/** Time fact: "2025–26" (published schedules overlap), "2028" (may overlap), or text only (no overlap / unknown). */
+/**
+ * Time fact: "schedules overlap 2025–26" (published schedules, start → in-service — never called a construction
+ * overlap, T2), "windows overlap 2027" (published construction windows), "may overlap 2028", "no overlap", "timing unknown".
+ */
 export function timeFact(m: Match): Fact {
   const t = m.timeDetail;
   const revised = m.conflicts.length > 0 && m.conflicts.every((c) => c.versionOnly);
   const note = revised ? " · Date revised: a newer edition of the plan moved a date; both are kept." : "";
   const gap = t.inService ? ` · ${inServicePhrase(m)}` : "";
   if (m.time === "confirmed" && t.confirmedOverlap) {
+    const years = compactYears(t.confirmedOverlap);
     if (t.basis === "schedule") {
       const months = t.schedule?.days ? Math.round(t.schedule.days / 30.44) : null;
       return {
         state: "confirmed",
-        text: compactYears(t.confirmedOverlap),
-        mono: true,
+        text: `schedules overlap ${years}`,
+        value: years,
         tooltip: `Published schedules (start → in-service) overlap${months ? ` for ${months} months` : ""} (${formatSpan(t.confirmedOverlap, "month")}); field-work dates are not published${note}`,
       };
     }
-    return { state: "confirmed", text: compactYears(t.confirmedOverlap), mono: true, tooltip: `Published construction windows overlap ${formatSpan(t.confirmedOverlap, t.precision)}${note}` };
+    return {
+      state: "confirmed",
+      text: `windows overlap ${years}`,
+      value: years,
+      tooltip: `Published construction windows overlap ${formatSpan(t.confirmedOverlap, t.precision)}${note}`,
+    };
   }
   if (m.time === "possible" && t.possibleOverlap) {
+    const years = compactYears(t.possibleOverlap);
     return {
       state: "possible",
-      text: compactYears(t.possibleOverlap),
-      mono: true,
+      text: `may overlap ${years}`,
+      value: years,
       tooltip: `Construction windows may overlap ${formatSpan(t.possibleOverlap, t.precision)} · ${precisionLabel(t.precision)} precision${note}`,
     };
   }
-  if (m.time === "no-match") return { state: "none", text: "No overlap", mono: false, tooltip: `No overlap: published windows do not overlap${gap}${note}` };
-  return { state: "none", text: "Unknown", mono: false, tooltip: `Timing unknown: no published construction window — overlap unknown, not ruled out${gap}${note}` };
+  if (m.time === "no-match") return { state: "none", text: "no overlap", tooltip: `No overlap: published windows do not overlap${gap}${note}` };
+  return { state: "none", text: "timing unknown", tooltip: `Timing unknown: no published construction window — overlap unknown, not ruled out${gap}${note}` };
 }
 
 /** Chip line facts (only when present). */

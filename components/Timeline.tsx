@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
 import { IDX } from "@/lib/data";
 import type { Match } from "@/lib/domain/types";
-import { useLayout } from "@/lib/layout";
+import { DOCK, useLayout } from "@/lib/layout";
 import { ownerNames } from "@/lib/selectors";
 import { useAtlas } from "@/lib/store";
 import { Eyebrow, IconButton, Panel, SignalFact, signalState } from "./ui";
@@ -16,7 +16,7 @@ import { PairGantt } from "./timeline/PairGantt";
 
 /**
  * The timeline dock (SPEC §3, §4 C, §5.4): a floating panel along the bottom of the focal area, sized by lib/layout
- * (--dock-h: overview 96 · pair 196 · collapsed 44). Three faces:
+ * (--dock-h: overview 96 · pair 196 · a height dragged on its top edge · collapsed 44). Three faces:
  *   overview   "Planned in-service years" — the same strip before and after a run (the reveal brightens flagged ticks)
  *   pair       the selected pair's construction Gantt (PairGantt)
  *   collapsed  a one-line summary of whichever face is current, with the expand toggle (hidden when the layout forces
@@ -50,7 +50,7 @@ export function Timeline() {
       <AnimatePresence initial={false}>
         <motion.div
           key={face}
-          className="absolute inset-0"
+          className="scroll-thin absolute inset-0 overflow-x-hidden overflow-y-auto overscroll-contain"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 0.24, delay: 0.1, ease: [0.22, 1, 0.36, 1] } }}
           exit={{ opacity: 0, transition: { duration: 0.12 } }}
@@ -58,9 +58,9 @@ export function Timeline() {
           {collapsed ? (
             <Collapsed pair={pair} toggle={toggle} />
           ) : pair ? (
-            <PairGantt matchId={pair.id} headerRight={toggle} />
+            <PairGantt matchId={pair.id} headerRight={toggle} extra={layout.dockH - DOCK.pair} />
           ) : (
-            <InServiceStrip headerRight={toggle} />
+            <InServiceStrip headerRight={toggle} extra={layout.dockH - DOCK.overview} />
           )}
         </motion.div>
       </AnimatePresence>

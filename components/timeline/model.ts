@@ -9,6 +9,15 @@ import { FOCAL_UTILITIES, overviewRole } from "@/lib/mapdata";
 import { activeWindows, currentInService, dayCount, durationText, scheduleWindows } from "@/lib/matching/time";
 
 export const SNAP_ISO = SNAPSHOT.snapshotDate;
+
+/**
+ * The label type size in px right now: 11, or 12 on the desktop tiers (globals.css steps the whole scale up 1px at
+ * ≥1024px). Label-collision maths (axis years, the Snapshot marker, lane dates) measure mono glyphs with it.
+ */
+export function labelPx(): number {
+  if (typeof window === "undefined") return 11;
+  return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--text-label")) || 11;
+}
 export const SNAP_YEAR = Number(SNAP_ISO.slice(0, 4));
 
 /** A calendar domain: Jan 1 of `y0` → Jan 1 of `y1` (exclusive). */

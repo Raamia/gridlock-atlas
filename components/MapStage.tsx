@@ -938,6 +938,10 @@ export default function MapStage() {
         s.uiHidden !== prev.uiHidden
       )
         cam.scheduleSync();
+      // a panel resized by hand: nothing moves while the edge is dragged; on the drop (or a keyboard step) only the
+      // padding eases, so the map stays where the user was looking (padding comes from lib/layout at call time)
+      else if (!s.resizing && (prev.resizing || s.dockHeight !== prev.dockHeight || s.railWidth !== prev.railWidth || s.inspectorWidth !== prev.inspectorWidth))
+        cam.scheduleSync(prev.resizing ? 60 : 160, true);
     });
     // the guided-demo card can change height between steps (phones), and it mounts after its step starts
     let card: HTMLElement | null = null;

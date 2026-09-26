@@ -304,6 +304,85 @@ test.describe("revamp", () => {
     await expect(caption.first()).toBeVisible();
   });
 
+  test("panels resize: drag the queue edge, arrow keys on the inspector and timeline edges, reset, sizes persist", async ({ page }) => {
+    const errors = trackErrors(page);
+    await openPair(page, SE_PAIR);
+    await mapReady(page);
+    const rail = page.locator("[data-slot=rail]");
+    const inspector = page.locator("[data-slot=inspector]");
+    const dock = page.locator("[data-slot=dock]");
+    const width = async (l: Locator) => Math.round((await l.boundingBox())!.width);
+    const height = async (l: Locator) => Math.round((await l.boundingBox())!.height);
+    const railHandle = page.getByRole("separator", { name: "Resize coordination queue" });
+    const inspectorHandle = page.getByRole("separator", { name: "Resize evidence inspector" });
+    const dockHandle = page.getByRole("separator", { name: "Resize construction timeline" });
+    await expect(railHandle).toHaveAttribute("aria-valuenow", "360");
+    await expect(inspectorHandle).toHaveAttribute("aria-valuenow", "418");
+    await expect(dockHandle).toHaveAttribute("aria-valuenow", "196");
+    expect(await width(rail)).toBe(360);
+
+    // drag the queue's right edge 80px out; transitions are off while the edge moves
+    const box = (await railHandle.boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width / 2 + 40, box.y + box.height / 2, { steps: 4 });
+    await expect(page.locator(".atlas-shell")).toHaveAttribute("data-resizing", "");
+    await page.mouse.move(box.x + box.width / 2 + 80, box.y + box.height / 2, { steps: 4 });
+    await page.mouse.up();
+    await expect(page.locator(".atlas-shell")).not.toHaveAttribute("data-resizing", "");
+    await expect(railHandle).toHaveAttribute("aria-valuenow", "440");
+    await expect.poll(() => width(rail)).toBe(440);
+
+    // keyboard: ArrowLeft grows the inspector (16px, Shift 64px), the dock grows with ArrowUp
+    await inspectorHandle.focus();
+    await page.keyboard.press("ArrowLeft");
+    await page.keyboard.press("Shift+ArrowLeft");
+    await expect(inspectorHandle).toHaveAttribute("aria-valuenow", "498");
+    await expect.poll(() => width(inspector)).toBe(498);
+    await dockHandle.focus();
+    await page.keyboard.press("Shift+ArrowUp");
+    await expect.poll(() => height(dock)).toBe(260);
+    // the map keeps a focal hole ≥ 360px wide however far a panel is dragged
+    await railHandle.focus();
+    for (let i = 0; i < 6; i++) await page.keyboard.press("Shift+ArrowRight");
+    const max = Number(await railHandle.getAttribute("aria-valuemax"));
+    await expect(railHandle).toHaveAttribute("aria-valuenow", String(max));
+    const focalW = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--focal-w")));
+    expect(focalW).toBeGreaterThanOrEqual(360);
+
+    // sizes persist per browser; Home resets one panel, a double-click another
+    await page.reload();
+    await expect(page.getByRole("complementary", { name: "Evidence inspector" })).toBeVisible({ timeout: 20_000 });
+    await expect(inspectorHandle).toHaveAttribute("aria-valuenow", "498");
+    await expect(railHandle).toHaveAttribute("aria-valuenow", String(max));
+    await railHandle.focus();
+    await page.keyboard.press("Home");
+    await expect(railHandle).toHaveAttribute("aria-valuenow", "360");
+    await inspectorHandle.dblclick();
+    await expect(inspectorHandle).toHaveAttribute("aria-valuenow", "418");
+    expect(errors).toEqual([]);
+  });
+
+  test("rows read in plain words: two-line titles, “6.7 mi apart”, “may overlap 2028”; Export is a labelled button", async ({ page }) => {
+    await page.goto("/");
+    await compare(page);
+    const first = page.locator(`[data-match-id="${SE_PAIR}"]`);
+    await expect(first).toContainText("6.7 mi apart");
+    await expect(first).toContainText("may overlap 2028");
+    await expect(cards(page).nth(1)).toContainText(/schedules overlap 20\d\d/);
+    // never a "construction overlap" for a schedule-basis pair (honesty T2)
+    await expect(queue(page)).not.toContainText(/construction overlap/i);
+    // titles wrap to at most two lines instead of truncating on one
+    const clamp = await first.locator("[title]").filter({ hasText: "Okatie" }).first().evaluate((el) => getComputedStyle(el).webkitLineClamp);
+    expect(clamp).toBe("2");
+    const exportBtn = queue(page).getByRole("button", { name: "Export", exact: true });
+    await expect(exportBtn).toHaveText(/Export/);
+    await exportBtn.click();
+    await expect(page.getByRole("menu", { name: "Export" }).getByRole("menuitem", { name: "Export overlap table as CSV" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(queue(page).getByRole("button", { name: "Re-run comparison", exact: true })).toBeVisible();
+  });
+
   test.describe("phone", () => {
     test.use({ viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true });
 

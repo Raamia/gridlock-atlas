@@ -13,7 +13,8 @@
  *               border-edge-strong · border-divider · bg-util-a/b/other · text-overlap · bg-overlap-wash
  *               text-ok · text-warn · bg-inverse · text-on-inverse
  *   type        text-label 11 · text-caption 12 · text-ui 13 · text-body 14 · text-heading 16 · text-title 20
- *               text-display 32 · font-sans · font-mono · font-display (Instrument Serif; wordmark + brief title only)
+ *               text-display 32 (one step up on desktop, ≥1024px: 12 · 13 · 14 · 15 · 17 · 21 · 32 — see below)
+ *               font-sans · font-mono · font-display (Instrument Serif; wordmark + brief title only)
  *   radius      rounded-chip 6 · rounded-control 10 · rounded-card 12 · rounded-panel 18 · rounded-dialog 22 · rounded-pill
  *   elevation   shadow-float · shadow-pop · shadow-chip
  *   blur        backdrop-blur-chrome 12 · backdrop-blur-panel 22
@@ -219,6 +220,22 @@
   }
 }
 
+/*
+ * Desktop tiers (lg/xl, ≥1024px wide): the type scale steps up 1px, for reading at laptop and projector distance.
+ * Phones and tablets keep the base scale. The tokens are theme variables, so every text-* class, the eyebrow and
+ * anything sized with var(--text-*) follows; display (the headline number) stays 32.
+ */
+@media (min-width: 1024px) {
+  :root {
+    --text-label: 12px;
+    --text-caption: 13px;
+    --text-ui: 14px;
+    --text-body: 15px;
+    --text-heading: 17px;
+    --text-title: 21px;
+  }
+}
+
 /* colours + fonts reference the vars above, so a subtree can re-theme (e.g. .theme-paper) */
 @theme inline {
   --color-canvas: var(--canvas);
@@ -357,7 +374,7 @@
     background: var(--canvas);
     color: var(--fg-1);
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -408,10 +425,18 @@
 
 /* ── utilities ────────────────────────────────────────────────── */
 
+/* a panel edge is being dragged (components/ResizeHandle): the edges follow the pointer, no slide transitions */
+.atlas-shell[data-resizing],
+.atlas-shell[data-resizing] * {
+  transition: none !important;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 /* mono uppercase micro-label that names a block */
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-label);
   line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;

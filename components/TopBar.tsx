@@ -130,8 +130,9 @@ function DesktopHeader({ wide, compact, legend }: { wide: boolean; compact: bool
  */
 function Brand({ legend }: { legend: boolean }) {
   return (
-    // 292px fits the widest region legend ("● Dominion Energy SC × ● Georgia Power", 236px + the mark); pair legends truncate to it
-    <div className={clsx("flex min-w-0 shrink-0 items-center gap-2.5", legend && "w-[292px]")}>
+    // 336px fits the widest legend at the desktop type size ("Focal pair per region ●● · owners named on rows", 295px +
+    // the mark); pair legends truncate to it. Fixed, so the Region nav never moves when the legend changes.
+    <div className={clsx("flex min-w-0 shrink-0 items-center gap-2.5", legend && "w-[336px]")}>
       <LogoMark size={30} />
       <div className="min-w-0 flex-1">
         <h1 className="flex items-baseline gap-[5px] leading-none whitespace-nowrap text-fg-1">

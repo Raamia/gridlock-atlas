@@ -125,12 +125,12 @@ export function ProjectHeading({
         {allPairs}
       </div>
       <h2
-        className="mt-1 line-clamp-2 text-heading font-semibold text-balance text-fg-1"
+        className="mt-1 line-clamp-2 text-heading leading-[1.25] font-semibold text-balance text-fg-1"
         title={p.title}
       >
         {title}
       </h2>
-      <FactsLine facts={facts} className="mt-1" />
+      <FactsLine facts={facts} className="mt-0.5" />
     </div>
   );
 }
@@ -179,7 +179,7 @@ function FactsLine({
 
 /**
  * A tile's signal fact: SignalFact's encoding, at heading size; a word value (a facility name) wraps to two lines
- * instead of truncating in a narrow tile, and a long number ("≈25.9 mi") steps down one size.
+ * instead of truncating in a narrow tile, and a long number ("2026–28", "≈25.9 mi") steps down one size.
  */
 function FactValue({ kind, fact }: { kind: "place" | "time"; fact: TileFact }) {
   return (
@@ -188,7 +188,7 @@ function FactValue({ kind, fact }: { kind: "place" | "time"; fact: TileFact }) {
       state={fact.state}
       mono={fact.mono}
       wrap={!fact.mono}
-      size={fact.mono && fact.value.length > 7 ? "body" : "heading"}
+      size={fact.mono && fact.value.length > 6 ? "body" : "heading"}
       tooltip={fact.tooltip}
       title={fact.tooltip ? undefined : fact.title}
       className="font-medium"
@@ -215,11 +215,11 @@ function Tile({
     <div
       className={clsx(
         "flex min-w-0 flex-col rounded-control bg-fill-1 px-2 @max-[340px]:px-1.5 @min-[380px]:px-2.5",
-        compact ? "py-1.5" : "py-2.5",
+        compact ? "py-1.5" : "py-2",
       )}
     >
       <span
-        className={clsx("eyebrow block truncate", compact ? "mb-1" : "mb-2")}
+        className={clsx("eyebrow block truncate", compact ? "mb-1" : "mb-1.5")}
       >
         {label}
       </span>
@@ -237,7 +237,8 @@ export function Tiles({ m, compact }: { m: Match; compact?: boolean }) {
   const c = coordinationTile(m);
   return (
     <div className="@container">
-      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.3fr)] gap-1.5 @max-[340px]:gap-1">
+      {/* the coordination tile is wider: its caveat ("status unknown, not “uncoordinated”") then takes two lines, not four */}
+      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.4fr)] gap-1.5 @max-[340px]:gap-1">
         <Tile label="Distance" sub={d.sub} compact={compact}>
           <FactValue kind="place" fact={d} />
         </Tile>
@@ -438,14 +439,14 @@ export function ReviewQuestion({
     <div
       className={clsx(
         "rounded-card bg-fill-1",
-        compact ? "px-3 pt-2 pb-2.5" : "px-3.5 pt-3 pb-3.5",
+        compact ? "px-3 pt-2 pb-2.5" : "px-3.5 pt-2.5 pb-3",
       )}
     >
       <Eyebrow>Question for the planners</Eyebrow>
       <p
         className={clsx(
           "text-pretty text-fg-1",
-          compact ? "mt-1 text-ui" : "mt-2 text-body",
+          compact ? "mt-1 text-ui" : "mt-1.5 text-body leading-[1.45]",
         )}
       >
         {q}

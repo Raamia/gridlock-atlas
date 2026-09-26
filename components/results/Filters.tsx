@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import { AlertTriangle, Crosshair, X } from "lucide-react";
 import { IDX } from "@/lib/data";
 import type { SignalLevel } from "@/lib/domain/types";
@@ -33,7 +34,7 @@ export function Filters({ counts, utilities }: { counts: FilterCounts; utilities
   const toggle = (t: TimingFilter) => set({ timing: timing.includes(t) ? timing.filter((x) => x !== t) : [...timing, t] });
 
   return (
-    <div className="space-y-1.5">
+    <div className="@container space-y-1.5">
       <div role="group" aria-label="Timing" className="flex min-w-0 flex-wrap gap-1.5">
         {TIMING.map((t) => (
           <Chip key={t.id} size="sm" pressed={timing.includes(t.id)} count={counts.timing[t.id]} tooltip={t.tooltip} onClick={() => toggle(t.id)}>
@@ -46,7 +47,8 @@ export function Filters({ counts, utilities }: { counts: FilterCounts; utilities
           size="sm"
           pressed={conflictsOnly}
           count={counts.conflicts}
-          icon={<AlertTriangle aria-hidden size={12} strokeWidth={2} className={conflictsOnly ? "text-warn" : "text-fg-3"} />}
+          // the triangle gives way first in a narrow rail, so "All utilities" still reads in full beside the chip
+          icon={<AlertTriangle aria-hidden size={12} strokeWidth={2} className={clsx("hidden @min-[324px]:block", conflictsOnly ? "text-warn" : "text-fg-3")} />}
           tooltip="Pairs where a newer plan edition revised a date, or current sources disagree — every claim is kept"
           onClick={() => set({ conflictsOnly: !conflictsOnly })}
         >

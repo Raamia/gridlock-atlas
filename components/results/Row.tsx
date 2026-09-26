@@ -10,7 +10,7 @@ import { rankLabel } from "@/lib/rank";
 import { LABELS, type ReviewLabel } from "@/lib/review";
 import { useAtlas } from "@/lib/store";
 import { SignalFact, Tag, UtilityDot, type UtilityKey } from "../ui";
-import { placeFact, rowFlags, rowOwner, timeFact, type SperryTag } from "./model";
+import { placeFact, rowFlags, rowOwner, timeFact, type Fact, type SperryTag } from "./model";
 
 export interface RowProps {
   m: Match;
@@ -31,8 +31,9 @@ const LABEL_TEXT = Object.fromEntries(LABELS.map((l) => [l.id, l.text])) as Reco
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
- * One ranked pair (SPEC §5.2): rank gutter · two owner-first title lines · a pair-level facts block (place over time) ·
- * an optional chips line. The focusable element is the <button data-match-id aria-pressed>; Enter opens the pair.
+ * One ranked pair (SPEC §5.2): rank gutter · two owner-first titles (up to two lines each) · a pair-level facts block in
+ * plain words (place over time) · an optional chips line. The focusable element is the <button data-match-id
+ * aria-pressed>; Enter opens the pair.
  */
 export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId, sperry, label }: RowProps) {
   const selected = useAtlas((s) => s.selectedMatchId === m.id);
@@ -81,20 +82,21 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
         onFocus={() => set({ hoveredMatchId: m.id })}
         onBlur={() => useAtlas.getState().hoveredMatchId === m.id && set({ hoveredMatchId: null })}
         className={clsx(
-          "group relative grid w-full scroll-mt-(--sticky-h,8px) scroll-mb-2 grid-cols-[16px_minmax(0,1fr)_auto] gap-x-1.5 rounded-control py-2 pr-1.5 pl-2 text-left transition-colors duration-150 ease-enter",
+          // --row-lh: one line box for the rank, dots, owner codes and title lines, so they share a first line
+          "group relative grid w-full scroll-mt-(--sticky-h,8px) scroll-mb-2 grid-cols-[16px_minmax(0,1fr)_auto] gap-x-1.5 rounded-control py-2 pr-1.5 pl-2 text-left transition-colors duration-150 ease-enter [--row-lh:calc(var(--text-ui)*1.3)]",
           selected ? "bg-fill-3" : "hover:bg-fill-2 data-hovered:bg-fill-2",
         )}
       >
         {selected && (
           <span aria-hidden className="absolute top-2 bottom-2 left-0 w-0.5 rounded-full bg-[linear-gradient(var(--util-a)_50%,var(--util-b)_50%)]" />
         )}
-        <span className="num pt-px text-[11px] leading-[18px] text-fg-3 tabular-nums">
+        <span className="num text-[length:var(--text-label)] leading-(--row-lh) text-fg-3 tabular-nums">
           <span aria-hidden>{rankLabel(rank)}</span>
           <span className="sr-only">Rank {rank}: </span>
         </span>
         <span className="min-w-0">
           <TitleLine p={a} role={selected ? "a" : undefined} times={a.id === focusId ? 0 : (repeats.get(a.id) ?? 0)} />
-          <TitleLine p={b} role={selected ? "b" : undefined} times={b.id === focusId ? 0 : (repeats.get(b.id) ?? 0)} className="mt-0.5" />
+          <TitleLine p={b} role={selected ? "b" : undefined} times={b.id === focusId ? 0 : (repeats.get(b.id) ?? 0)} className="mt-1" />
           {chips && (
             <span className="mt-1.5 flex flex-wrap gap-1">
               {sperry && (
@@ -125,14 +127,14 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
             </span>
           )}
         </span>
-        {/* pair-level facts: the distance between centers over the timing signal (never per project); 76px holds "2025–26"
-            with its icon, the rest of the row goes to the titles */}
-        <span className="flex w-[76px] min-w-0 flex-col justify-center gap-1 self-stretch border-l border-divider pl-2">
-          <SignalFact kind="place" state={place.state} mono={place.mono} tooltip={place.tooltip} className="gap-1!">
-            {place.text}
+        {/* pair-level facts in plain words: the distance between centers over the timing (never per project). The
+            column holds "may overlap 2028" on one line and "schedules overlap / 2025–26" on two; the titles get the rest */}
+        <span className="flex w-[134px] min-w-0 flex-col justify-center gap-1 self-stretch border-l border-divider pl-2">
+          <SignalFact kind="place" state={place.state} mono={false} wrap alignIcon tooltip={place.tooltip} className="gap-1! leading-[1.3]">
+            <FactText f={place} />
           </SignalFact>
-          <SignalFact kind="time" state={time.state} mono={time.mono} tooltip={time.tooltip} className="gap-1!">
-            {time.text}
+          <SignalFact kind="time" state={time.state} mono={false} wrap alignIcon tooltip={time.tooltip} className="gap-1! leading-[1.3]">
+            <FactText f={time} />
           </SignalFact>
         </span>
       </button>
@@ -140,26 +142,43 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
   );
 });
 
+/** "may overlap 2028": the words in the body face, the figures (`f.value`) in mono tabular numerals. */
+function FactText({ f }: { f: Fact }) {
+  const at = f.value ? f.text.lastIndexOf(f.value) : -1;
+  if (!f.value || at < 0) return <>{f.text}</>;
+  return (
+    <>
+      {f.text.slice(0, at)}
+      <span className="num">{f.value}</span>
+      {f.text.slice(at + f.value.length)}
+    </>
+  );
+}
+
 const DOT: Record<UtilityKey, UtilityKey> = { a: "a", b: "b", other: "other" };
 
 /**
- * Owner first (dot + mono short name, full names for screen readers), then the title, then "×18" when repeated. The
- * "×18" gives way first: it shows only in a wide rail (≥1520px windows), where it no longer costs the title its words.
+ * Owner first (dot + mono short name, full names for screen readers), then the title — up to two lines, the full title
+ * in its tooltip — then "×18" when repeated. The owner code runs inline with the title, so a second line starts under
+ * it and gets the full width; the dot and "×18" sit on the first line box (--row-lh). The "×18" gives way first: it shows
+ * only in a wide rail, where it no longer costs the title its words.
  */
 function TitleLine({ p, role, times, className }: { p: Project; role?: "a" | "b"; times: number; className?: string }) {
   const owner = rowOwner(p);
   return (
-    <span className={clsx("flex h-[18px] min-w-0 items-center gap-1", className)}>
-      <UtilityDot utility={DOT[role ?? owner.hue]} />
-      <span aria-hidden title={owner.full} className="num max-w-[42%] shrink-0 truncate text-[11px] leading-none text-fg-3">
-        {owner.label}
+    <span className={clsx("flex min-w-0 items-start gap-1.5", className)}>
+      <span className="flex h-(--row-lh) shrink-0 items-center">
+        <UtilityDot utility={DOT[role ?? owner.hue]} />
       </span>
-      <span className="sr-only">{owner.full}: </span>
-      <span className="min-w-0 truncate text-ui font-medium text-fg-1" title={p.title}>
+      <span className="line-clamp-2 min-w-0 text-ui leading-(--row-lh) font-medium text-fg-1" title={p.title}>
+        <span aria-hidden title={owner.full} className="num mr-1.5 text-[length:var(--text-label)] font-normal text-fg-3">
+          {owner.label}
+        </span>
+        <span className="sr-only">{owner.full}: </span>
         {p.shortTitle}
       </span>
       {times >= 3 && (
-        <span className="num hidden shrink-0 pl-0.5 text-[11px] leading-none text-fg-3 @[372px]:inline" title={`In ${times} pairs of this tab`}>
+        <span className="num hidden shrink-0 pl-0.5 text-[length:var(--text-label)] leading-(--row-lh) text-fg-3 @[372px]:inline" title={`In ${times} pairs of this tab`}>
           ×{times}
         </span>
       )}

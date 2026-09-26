@@ -180,6 +180,8 @@ export class CameraDirector {
   private userMoved = false;
   private pendingSync = false;
   private syncTimer: ReturnType<typeof setTimeout> | null = null;
+  /** The pending sync only eases the padding (a panel resized by hand): the target stays where the user left it. */
+  private syncPaddingOnly = false;
   reduced = false;
 
   constructor(map: mapboxgl.Map) {
@@ -189,8 +191,9 @@ export class CameraDirector {
     });
     map.on("moveend", () => {
       if (!this.pendingSync) return;
+      const paddingOnly = this.syncPaddingOnly;
       this.pendingSync = false;
-      this.scheduleSync(0);
+      this.scheduleSync(0, paddingOnly);
     });
   }
 
@@ -285,8 +288,13 @@ export class CameraDirector {
     });
   }
 
-  /** Something that changes the padding happened (panel, dock, sheet, card): re-frame once the map is still. */
-  scheduleSync(delay = 60) {
+  /**
+   * Something that changes the padding happened (panel, dock, sheet, card): re-frame once the map is still.
+   * `paddingOnly` (a panel resized by hand): just ease the padding, never re-run the last move. A re-frame requested
+   * meanwhile wins.
+   */
+  scheduleSync(delay = 60, paddingOnly = false) {
+    this.syncPaddingOnly = this.syncTimer || this.pendingSync ? this.syncPaddingOnly && paddingOnly : paddingOnly;
     if (this.syncTimer) clearTimeout(this.syncTimer);
     this.syncTimer = setTimeout(() => {
       this.syncTimer = null;
@@ -302,7 +310,9 @@ export class CameraDirector {
       this.pendingSync = true;
       return;
     }
-    if (!this.userMoved && this.last) {
+    const paddingOnly = this.syncPaddingOnly;
+    this.syncPaddingOnly = false;
+    if (!paddingOnly && !this.userMoved && this.last) {
       // keep the target framed: re-run the last intent with the new padding, quickly
       this.move(this.last.kind === "reveal" ? { kind: "overview" } : this.last, { duration: 600 });
       return;

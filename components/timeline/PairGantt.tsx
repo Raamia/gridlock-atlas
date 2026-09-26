@@ -14,7 +14,7 @@ import { useAtlas } from "@/lib/store";
 import { Eyebrow, IconButton, SignalFact, signalState, windowDocs, windowNote } from "../ui";
 import { FloatTip } from "./FloatTip";
 import { Axis } from "./InServiceStrip";
-import { frac, isCoarseGroup, overlapStatement, pairCaption, pairDomain, pct, SNAP_ISO, years, type Domain, type OverlapStatement } from "./model";
+import { frac, isCoarseGroup, labelPx, overlapStatement, pairCaption, pairDomain, pct, SNAP_ISO, years, type Domain, type OverlapStatement } from "./model";
 
 /*
  * The selected pair's construction Gantt (SPEC §5.4) — the original encoding, given room:
@@ -38,14 +38,18 @@ const OPEN_START_FADE = "linear-gradient(90deg, transparent 0, black 22%)";
 const HATCH = (c: string, a = 30, b = 12) => `repeating-linear-gradient(135deg, color-mix(in oklab, ${c} ${a}%, transparent) 0 4px, color-mix(in oklab, ${c} ${b}%, transparent) 4px 8px)`;
 const BAND_HATCH = "repeating-linear-gradient(135deg, color-mix(in oklab, var(--overlap) 20%, transparent) 0 5px, color-mix(in oklab, var(--overlap) 5%, transparent) 5px 10px)";
 
-export function PairGantt({ matchId, compact = false, headerRight }: { matchId: string; compact?: boolean; headerRight?: ReactNode }) {
+/**
+ * `extra`: px the dock was dragged taller than its 196px default (components/ResizeHandle); the bars take it (up to
+ * +20px each), so a bigger dock means a bigger, easier-to-read Gantt rather than empty space.
+ */
+export function PairGantt({ matchId, compact = false, headerRight, extra = 0 }: { matchId: string; compact?: boolean; headerRight?: ReactNode; extra?: number }) {
   const run = useAtlas((s) => s.run);
   const m = run?.matches.find((x) => x.id === matchId);
   if (!m) return null;
-  return <Gantt key={m.id} m={m} compact={compact} headerRight={headerRight} />;
+  return <Gantt key={m.id} m={m} compact={compact} headerRight={headerRight} extra={extra} />;
 }
 
-function Gantt({ m, compact, headerRight }: { m: Match; compact: boolean; headerRight?: ReactNode }) {
+function Gantt({ m, compact, headerRight, extra }: { m: Match; compact: boolean; headerRight?: ReactNode; extra: number }) {
   const a = IDX.project(m.projectAId);
   const b = IDX.project(m.projectBId);
   const d = useMemo(() => pairDomain(a, b), [a, b]);
@@ -57,7 +61,7 @@ function Gantt({ m, compact, headerRight }: { m: Match; compact: boolean; header
     [a, "a"],
     [b, "b"],
   ];
-  const bar = 28;
+  const bar = compact ? 28 : 28 + Math.min(20, Math.max(0, Math.floor(extra / 2)));
   const lanes = rows.map(([p]) => laneModel(p, m, d, width));
   // a disagreement the lane had no room to label is said in the caption instead (never silently dropped)
   const unlabeled = width > 0 ? rows.filter((_, i) => lanes[i].conflictUnlabeled).map(([p]) => p.shortTitle) : [];
@@ -96,7 +100,7 @@ function Gantt({ m, compact, headerRight }: { m: Match; compact: boolean; header
   }
 
   return (
-    <div className="flex h-full min-w-0 flex-col px-4 pb-2.5 pt-2.5">
+    <div className="flex min-h-full min-w-0 flex-col px-4 pb-2.5 pt-2.5">
       <header className="flex h-7 min-w-0 shrink-0 items-center gap-3">
         <Eyebrow as="h2" className="shrink-0 @max-[560px]:hidden">
           Construction windows
@@ -153,12 +157,13 @@ function RowLabel({ p, role, height, inline }: { p: Project; role: Role; height?
     );
   }
   return (
-    <div className="flex min-w-0 flex-col justify-center gap-[3px]" style={{ height }}>
+    <div className="flex min-w-0 flex-col justify-center gap-0.5" style={{ height }}>
       <span className="flex min-w-0 items-center gap-1.5">
         <span aria-hidden className="size-1.5 shrink-0 rounded-full" style={{ background: ROLE_COLOR[role] }} />
         {owner}
       </span>
-      <span className="line-clamp-2 text-ui font-medium leading-[1.15] text-fg-1" title={p.title}>
+      {/* owner + two title lines fit the 44px row at the desktop type size; with a "+N more" line the title takes one */}
+      <span className={clsx("text-ui font-medium leading-[1.1] text-fg-1", more > 0 ? "line-clamp-1" : "line-clamp-2")} title={p.title}>
         {p.shortTitle}
       </span>
       {more > 0 && (
@@ -462,9 +467,10 @@ function placeLabels(width: number, marks: number[], items: { key: string; lo: n
   return out;
 }
 
-const CHAR_W = 7.2; // Geist Mono at 11px
-
-const CONFLICT_LABEL_W = 176;
+/** Geist Mono glyph advance at the label size (7.2px at 11px; the desktop tiers use 12px). */
+const charW = () => labelPx() * 0.655;
+/** "completion dates disagree" with its icon, at the label size. */
+const conflictLabelW = () => Math.ceil(labelPx() * 16);
 
 export interface LaneModel {
   conflict: Conflict | undefined;
@@ -498,6 +504,7 @@ function laneModel(p: Project, m: Match, d: Domain, width: number): LaneModel {
   const dateText = current ? `${formatBound(current.date)}${passed ? " · date passed" : ""}` : "";
   // the disagreement label rides on its own dashed link when the link is long enough, else beside it
   const c0 = (lo + hi) / 2;
+  const CONFLICT_LABEL_W = conflictLabelW();
   const onLink = spread && hi - lo >= CONFLICT_LABEL_W + 20 && xs.every((x) => x < c0 - CONFLICT_LABEL_W / 2 - 6 || x > c0 + CONFLICT_LABEL_W / 2 + 6);
   const onLinkSpan: [number, number][] = onLink ? [[(lo + hi) / 2 - CONFLICT_LABEL_W / 2, (lo + hi) / 2 + CONFLICT_LABEL_W / 2]] : [];
   const labels: Map<string, "l" | "r" | "c"> = placeLabels(
@@ -505,7 +512,7 @@ function laneModel(p: Project, m: Match, d: Domain, width: number): LaneModel {
     xs,
     [
       ...(spread && !onLink ? [{ key: "conflict", lo, hi, w: CONFLICT_LABEL_W }] : []),
-      ...(current ? [{ key: current.id, lo: mid(current) * width, hi: mid(current) * width, w: dateText.length * CHAR_W + 4 }] : []),
+      ...(current ? [{ key: current.id, lo: mid(current) * width, hi: mid(current) * width, w: dateText.length * charW() + 4 }] : []),
     ],
     onLinkSpan,
   );

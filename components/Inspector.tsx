@@ -93,7 +93,7 @@ function Verdict({ m, phone, scrolled }: { m: Match; phone: boolean; scrolled: b
         // a size container: the 360px md inspector drops the Esc hint so a long status ("Known coordination") still fits
         "@container shrink-0 px-(--panel-pad) transition-shadow duration-200",
         // phone: the sheet's grabber sits in the top 20px
-        phone ? "pt-4 pb-2" : "pt-3 pb-3",
+        phone ? "pt-4 pb-2" : "pt-3 pb-2.5",
         scrolled && "shadow-[0_1px_0_var(--divider)]",
       )}
     >
@@ -188,17 +188,17 @@ function InspectorBody({
     <div ref={scroller} data-inspector-scroll="" className="scroll-thin relative min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-(--panel-pad)">
       {/* 2 · titles */}
       {/* phone: spacing tight enough that the question box clears the footer at the 64dvh opening height */}
-      <div className={clsx(phone ? "space-y-2 pt-0.5" : "space-y-3.5 pt-0.5")}>
+      <div className={clsx(phone ? "space-y-2 pt-0.5" : "space-y-3 pt-0.5")}>
         <ProjectHeading p={a} role="a" compact={phone} />
         <ProjectHeading p={b} role="b" compact={phone} />
       </div>
       {/* 3 · tiles + chips ("Why #01?" sits on the verdict line) */}
-      <div className={clsx(phone ? "mt-2.5" : "mt-3.5 space-y-2.5")}>
+      <div className={clsx(phone ? "mt-2.5" : "mt-3 space-y-2")}>
         <Tiles m={m} compact={phone} />
         {!phone && <Chips m={m} onJump={(id) => jump(id, { pulse: true })} />}
       </div>
       {/* 4 · the ask (phone: before the chips, so the 64dvh sheet shows it) */}
-      <div className={phone ? "mt-2 space-y-2.5" : "mt-3"}>
+      <div className={phone ? "mt-2 space-y-2.5" : "mt-2.5"}>
         <ReviewQuestion m={m} compact={phone} />
         {phone && <Chips m={m} onJump={(id) => jump(id, { pulse: true })} />}
       </div>

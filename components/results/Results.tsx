@@ -11,7 +11,7 @@ import { useReview, type PairReview } from "@/lib/review";
 import { regionPairCounts } from "@/lib/selectors";
 import { useViewport } from "@/lib/layout";
 import { passesFilters, useAtlas, type SheetSnap } from "@/lib/store";
-import { Eyebrow, IconButton, Segmented, Tooltip } from "../ui";
+import { Button, Eyebrow, Segmented, Tooltip } from "../ui";
 import { EmptyTab } from "./EmptyTab";
 import { ExportMenu } from "./ExportMenu";
 import { Filters, FocusChip, type FilterCounts } from "./Filters";
@@ -114,7 +114,8 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
       size="sm"
       value={tab}
       onChange={(t) => set({ tab: t })}
-      items={REVIEW_TABS.map((t) => ({ value: t, label: TAB_LABEL[t], count: view.tabCounts[t], tooltip: TAB_TOOLTIP[t], controls: LIST_ID }))}
+      // tighter than the default sm padding: the three tabs (label + count) fit a 336px rail at the desktop type size
+      items={REVIEW_TABS.map((t) => ({ value: t, label: TAB_LABEL[t], count: view.tabCounts[t], tooltip: TAB_TOOLTIP[t], controls: LIST_ID, className: "px-2!" }))}
     />
   );
 
@@ -234,20 +235,36 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
   );
 }
 
-/** Eyebrow + the run's radius ("· 25 mi", tests read it) · Re-run · Export. */
+/**
+ * Eyebrow + the run's radius ("· 25 mi", tests read it) · Re-run · a labelled Export button. The row is a size
+ * container (the rail is resizable): "Coordination" shows before "opportunities" once the full heading fits beside the
+ * buttons (screen readers always hear it), and Re-run gains its visible label once there is room for that too.
+ */
 function HeaderRow({ radius, running }: { radius: number; running: boolean }) {
   const compare = useAtlas((s) => s.compare);
+  const spin = <RotateCw size={14} strokeWidth={1.75} className={clsx(running && "animate-spin [animation-duration:900ms]")} />;
   return (
-    <div className="flex h-10 shrink-0 items-center gap-1.5 pr-1.5 pl-(--panel-pad)">
+    <div className="@container flex h-11 shrink-0 items-center gap-1.5 pr-1.5 pl-(--panel-pad)">
       <Eyebrow as="h2" className="min-w-0 truncate tracking-[0.07em]">
-        Coordination opportunities
+        <span className="sr-only @min-[424px]:not-sr-only">Coordination </span>
+        opportunities
       </Eyebrow>
       <span className="num shrink-0 text-caption whitespace-nowrap text-fg-3">· {radius} mi</span>
-      <span className="ml-auto flex shrink-0 items-center">
-        <IconButton label="Re-run comparison" size="sm" onClick={() => !running && void compare()} aria-disabled={running || undefined} tooltip="Re-run comparison">
-          <RotateCw size={14} strokeWidth={1.75} className={clsx(running && "animate-spin [animation-duration:900ms]")} />
-        </IconButton>
-        <ExportMenu />
+      <span className="ml-auto flex shrink-0 items-center gap-0.5">
+        <Tooltip content="Re-run the comparison at this radius" side="bottom">
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-label="Re-run comparison"
+            aria-disabled={running || undefined}
+            onClick={() => !running && void compare()}
+            icon={spin}
+            className="w-7 gap-1.5! px-0! @min-[488px]:w-auto @min-[488px]:px-2.5!"
+          >
+            <span className="hidden @min-[488px]:inline">Re-run</span>
+          </Button>
+        </Tooltip>
+        <ExportMenu labelled />
       </span>
     </div>
   );

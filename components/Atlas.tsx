@@ -5,10 +5,10 @@ import { ChevronDown, Info, Link2Off, ListOrdered, MapPinOff } from "lucide-reac
 import { MotionConfig } from "motion/react";
 import dynamic from "next/dynamic";
 import { catchError, type ErrorInfo } from "next/error";
-import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { SNAPSHOT } from "@/lib/data";
 import type { MatchRun } from "@/lib/domain/types";
-import { PHONE_SHEET, PILL, useLayout } from "@/lib/layout";
+import { INSPECTOR, PHONE_SHEET, PILL, RAIL, useLayout } from "@/lib/layout";
 import { regionMatches } from "@/lib/rank";
 import { useReview } from "@/lib/review";
 import { useAtlas, type SheetSnap } from "@/lib/store";
@@ -19,6 +19,7 @@ import { GuidedDemo } from "./GuidedDemo";
 import { Inspector } from "./Inspector";
 import { MapOverlays } from "./MapOverlays";
 import { Queue } from "./Queue";
+import { ResizeHandle, usePanelSizePersistence } from "./ResizeHandle";
 import { Timeline } from "./Timeline";
 import { TopBar } from "./TopBar";
 import { mapUi, Notice } from "./ui";
@@ -85,6 +86,13 @@ function ShellEffects() {
   useLayout();
   useKeyboard();
   useUrlSync();
+  usePanelSizePersistence();
+  // while a panel edge is dragged, the slots drop their transitions so the edges track the pointer (globals.css).
+  // A layout effect, after useLayout's: the attribute lands in the same frame as the new sizes.
+  const resizing = useAtlas((s) => s.resizing);
+  useLayoutEffect(() => {
+    document.querySelector(".atlas-shell")?.toggleAttribute("data-resizing", resizing);
+  }, [resizing]);
   useEffect(() => useReview.getState().hydrate(), []);
   // dev only, like window.__map: lets screenshot/probe scripts drive the store (`__atlas.getState().openCloseup()`)
   useEffect(() => {
@@ -409,6 +417,10 @@ function RailSlot({ children }: { children: ReactNode }) {
       >
         {children}
       </div>
+      {/* after the panel in tab order: header → queue → its resize handle */}
+      {layout.resizable && layout.railDocked && (
+        <ResizeHandle edge="right" sizeKey="railWidth" current={layout.railW} min={RAIL.min} max={layout.railMaxW} label="Resize coordination queue" />
+      )}
     </div>
   );
 }
@@ -465,6 +477,9 @@ function InspectorSlot({ children }: { children: ReactNode }) {
       style={style}
     >
       {children}
+      {layout.resizable && shown && (
+        <ResizeHandle edge="left" sizeKey="inspectorWidth" current={layout.inspectorW} min={INSPECTOR.min} max={layout.inspectorMaxW} label="Resize evidence inspector" />
+      )}
       {phone && open && (
         <button
           type="button"
@@ -515,6 +530,9 @@ function DockSlot({ children }: { children: ReactNode }) {
       style={{ left: "var(--focal-l)", right: "var(--focal-r)", bottom: "var(--gutter)", height: "var(--dock-h)" }}
     >
       {children}
+      {layout.resizable && shown && !layout.dockCollapsed && (
+        <ResizeHandle edge="top" sizeKey="dockHeight" current={layout.dockH} min={layout.dockMinH} max={layout.dockMaxH} label="Resize construction timeline" />
+      )}
     </div>
   );
 }

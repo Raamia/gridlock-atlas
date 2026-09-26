@@ -12,7 +12,7 @@ import { ownerNames } from "@/lib/selectors";
 import { useAtlas } from "@/lib/store";
 import { Eyebrow } from "../ui";
 import { FloatTip } from "./FloatTip";
-import { inServiceModel, pairsByProject, pct, ROW_COLOR, SNAP_ISO, tickExtent, years, type Domain, type InServiceModel, type InServiceRow, type InServiceTick } from "./model";
+import { inServiceModel, labelPx, pairsByProject, pct, ROW_COLOR, SNAP_ISO, tickExtent, years, type Domain, type InServiceModel, type InServiceRow, type InServiceTick } from "./model";
 
 /*
  * "Planned in-service years" (SPEC §4 C): one row per plan (utility A, utility B, other owners), one tick per planned project
@@ -145,10 +145,14 @@ interface Hover {
   anchor: DOMRect;
 }
 
-const LABEL_W = 108;
+/** Row labels ("Georgia Power") at the desktop caption size, plus the dot and the gap to the track. */
+const LABEL_W = 120;
 
-/** The 96px overview dock: header, 2–3 rows of ticks, the year axis with the Snapshot marker. */
-export function InServiceStrip({ headerRight }: { headerRight?: ReactNode }) {
+/**
+ * The 96px overview dock: header, 2–3 rows of ticks, the year axis with the Snapshot marker. `extra`: px the dock was
+ * dragged taller than 96; the rows take it (up to +16px each), so the ticks get bigger instead of the strip floating.
+ */
+export function InServiceStrip({ headerRight, extra = 0 }: { headerRight?: ReactNode; extra?: number }) {
   const { model, flagged, byProject, run } = useStrip();
   const meta = useInServiceMeta();
   const region = useAtlas((s) => s.region);
@@ -164,6 +168,7 @@ export function InServiceStrip({ headerRight }: { headerRight?: ReactNode }) {
   const width = useWidth(track);
   const d = model.domain;
   const three = model.rows.length > 2;
+  const rowH = (three ? 9 : 12) + Math.min(16, Math.max(0, Math.floor(extra / (model.rows.length + 1))));
 
   // the list row / map / hero plan under the pointer lights its ticks too
   const listPair = !hover && hoveredMatchId ? runObj?.matches.find((m) => m.id === hoveredMatchId) : undefined;
@@ -244,7 +249,7 @@ export function InServiceStrip({ headerRight }: { headerRight?: ReactNode }) {
       <div className="mt-2 grid min-h-0 flex-1" style={{ gridTemplateColumns: `${LABEL_W}px minmax(0,1fr)` }}>
         <div className={clsx("flex flex-col pr-3", three ? "gap-1" : "gap-1.5")}>
           {model.rows.map((row) => (
-            <div key={row.key} className={clsx("flex items-center gap-1.5", three ? "h-[9px]" : "h-3")} title={row.title}>
+            <div key={row.key} className="flex items-center gap-1.5" style={{ height: rowH }} title={row.title}>
               <span aria-hidden className="size-1.5 shrink-0 rounded-full" style={{ background: ROW_COLOR[row.key] }} />
               <span className={clsx("min-w-0 truncate font-medium text-fg-2", three ? "text-label leading-none" : "text-caption leading-none")}>{row.label}</span>
             </div>
@@ -259,7 +264,8 @@ export function InServiceStrip({ headerRight }: { headerRight?: ReactNode }) {
                 key={row.key}
                 role="img"
                 aria-label={rowSummary(row, flagged)}
-                className={clsx("relative rounded-full bg-fill-1", three ? "h-[9px]" : "h-3", hover?.tick.row === row.key && byProject.has(hover.tick.project.id) && "cursor-pointer")}
+                style={{ height: rowH }}
+                className={clsx("relative rounded-full bg-fill-1", hover?.tick.row === row.key && byProject.has(hover.tick.project.id) && "cursor-pointer")}
                 onPointerMove={(e) => e.pointerType !== "touch" && pick(row, e)}
                 onClick={click}
               >
@@ -307,9 +313,10 @@ export function Axis({ d, width, className }: { d: Domain; width: number; classN
   const colW = width / Math.max(1, ys.length);
   const every = colW >= 36 ? 1 : colW >= 18 ? 2 : 3;
   const snapX = (pct(SNAP_ISO, d) / 100) * width;
-  // Geist Mono 11px ≈ 7.2px per glyph: "Snapshot" ≈ 58px, a year ≈ 29px
-  const SNAP_W = 58;
-  const YEAR_W = 30;
+  // Geist Mono ≈ 0.6em per glyph + the label's 0.08em tracking: "Snapshot" ≈ 60px and a year ≈ 30px at 11px (65 / 33 at 12)
+  const em = labelPx();
+  const SNAP_W = Math.ceil(em * 5.45);
+  const YEAR_W = Math.ceil(em * 2.75);
   const labels = ys
     .map((y, i) => ({ y, cx: ((pct(`${y}-01-01`, d) + pct(`${y + 1}-01-01`, d)) / 200) * width, keep: (ys.length - 1 - i) % every === 0 }))
     .filter((l) => l.keep);
