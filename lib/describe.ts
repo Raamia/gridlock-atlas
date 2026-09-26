@@ -1,6 +1,7 @@
 import { SNAPSHOT } from "@/lib/data/snapshot";
 import type { Match } from "@/lib/domain/types";
 import { formatMilesNear, formatSpan } from "@/lib/format";
+import { dayCount } from "@/lib/matching/time";
 
 export { displayTitle } from "@/lib/format";
 
@@ -77,10 +78,10 @@ export function firstSentence(text: string, words = 30): string {
   return out;
 }
 
-/** "in-service dates 152 days apart" · "≥ 365 days apart" · "overlapping in-service dates" */
+/** "in-service dates 152 days apart" · "in-service dates at least 1 day apart" · "overlapping in-service dates" */
 export function inServicePhrase(m: Match): string {
   const g = m.timeDetail.inService;
   if (!g) return "";
   if (g.coarse && g.gapDays === 0) return "overlapping in-service dates (at stated precision)";
-  return `in-service dates ${g.coarse ? "at least " : ""}${g.gapDays.toLocaleString("en-US")} days apart`;
+  return `in-service dates ${g.coarse ? "at least " : ""}${dayCount(g.gapDays)} apart`;
 }

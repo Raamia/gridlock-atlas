@@ -121,6 +121,25 @@ test.describe("GridLock Atlas smoke path", () => {
       expect(r[cols.indexOf("review_radius_mi")]).toBe("25");
     }
     expect(new Set(rows.map((r) => r[cols.indexOf("pair_id")])).size).toBe(rows.length);
+    // a published in-service date is filled even when the other side has none
+    const eff = rows.find((r) => r[cols.indexOf("pair_id")] === "desc-6888__gpc-effingham-500");
+    if (eff) expect(eff[cols.indexOf("in_service_a")]).toBe("2028-12-31");
+  });
+
+  test("the pair API returns every excerpt its projects cite", async ({ request }) => {
+    const body = await (await request.get("/api/matches/desc-6888__gpc-20065")).json();
+    const ids = new Set<string>();
+    const walk = (v: unknown): void => {
+      if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === "object")
+        for (const [k, x] of Object.entries(v)) {
+          if (/evidenceids$/i.test(k) && Array.isArray(x)) x.forEach((id) => ids.add(id));
+          else walk(x);
+        }
+    };
+    walk([body.match, body.projects]);
+    expect(ids.size).toBeGreaterThan(6);
+    for (const id of ids) expect(body.evidence[id], id).toBeTruthy();
   });
 
   test("shortcuts do not act behind the brief; Escape works from inside inputs", async ({ page }) => {

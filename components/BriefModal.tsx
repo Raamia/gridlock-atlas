@@ -11,6 +11,8 @@ import { useSelectedPair } from "@/lib/hooks";
 import { useAtlas } from "@/lib/store";
 import { Button, IconButton, MatchBadges, StatusChip } from "./ui";
 
+const DEMO_COMPANION = { companion: () => document.querySelector<HTMLElement>('[aria-label="Guided demo"]') };
+
 export function BriefModal() {
   const open = useAtlas((s) => s.briefOpen);
   const demo = useAtlas((s) => s.demoStep !== null);
@@ -20,7 +22,8 @@ export function BriefModal() {
   const md = useMemo(() => (brief ? briefToMarkdown(brief) : ""), [brief]);
   const [copied, setCopied] = useState(false);
   const panel = useRef<HTMLDivElement>(null);
-  useDialogFocus(panel, open && !!pair);
+  // during the guided demo its card rides above the backdrop: Tab reaches its Previous / Finish, and Space on Next stays there
+  useDialogFocus(panel, open && !!pair, demo ? DEMO_COMPANION : undefined);
 
   const copy = async () => {
     await navigator.clipboard.writeText(md);

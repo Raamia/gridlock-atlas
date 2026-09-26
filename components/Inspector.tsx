@@ -3,19 +3,20 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { AlertTriangle, Calculator, CalendarRange, Check, FileOutput, FileSearch, Handshake, Link2, Library, MapPin, X } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { IDX } from "@/lib/data";
 import { displayTitle, firstSentence, SCOPE_LABEL, whyFlagged } from "@/lib/describe";
 import type { Conflict, ConflictSide, Evidence, Match, Project, SignalLevel } from "@/lib/domain/types";
 import { formatBound, formatDate, formatMilesNear, precisionLabel } from "@/lib/format";
 import { useSelectedPair } from "@/lib/hooks";
-import { activeWindows, coarsest, displayWindowGroups } from "@/lib/matching/time";
-import { conflictMatches, evidenceHref, matchSourceIds, ownerNames, pageLabel, readableNote, windowGroupText } from "@/lib/selectors";
+import { centerOf } from "@/lib/matching/geo";
+import { activeWindows, coarsest, currentInService, dayWord, displayWindowGroups } from "@/lib/matching/time";
+import { conflictMatches, evidenceHref, matchSourceIds, ownerNames, pageLabel, readableNote, windowGroupText, windowSourceText } from "@/lib/selectors";
 import { useAtlas, type InspectorSection } from "@/lib/store";
 import { EvidenceCard, SourceRow, type EvidenceTone } from "./Evidence";
 import { ImpactEstimate } from "./Impact";
 import { ReviewPanel } from "./Review";
-import { Button, ConflictChip, Dot, IconButton, Kbd, MatchBadges, PrecisionTag, StatusChip } from "./ui";
+import { Button, ConflictChip, Dot, IconButton, Kbd, MatchBadges, PrecisionTag, StatusChip, windowDocs, windowNote } from "./ui";
 
 export function Inspector() {
   const open = useAtlas((s) => s.inspectorOpen);
@@ -29,7 +30,7 @@ export function Inspector() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 28 }}
           transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-          className="glass fixed inset-x-0 bottom-0 top-[46vh] z-40 flex flex-col overflow-hidden rounded-t-2xl !bg-bg-1 sm:!bg-bg-1/[0.94] sm:absolute sm:inset-x-auto sm:bottom-3 sm:right-3 sm:top-3 sm:w-[360px] sm:rounded-2xl xl:w-[408px]"
+          className="glass fixed inset-x-0 bottom-0 top-[max(46vh,calc(var(--demo-card-bottom,0px)_+_120px))] z-40 flex flex-col overflow-hidden rounded-t-2xl !bg-bg-1 sm:!bg-bg-1/[0.94] sm:absolute sm:inset-x-auto sm:bottom-3 sm:right-3 sm:top-3 sm:w-[360px] sm:rounded-2xl xl:w-[408px]"
           aria-label="Evidence inspector"
         >
           <InspectorBody key={pair.match.id} m={pair.match} a={pair.a} b={pair.b} />
@@ -301,11 +302,18 @@ function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; a
 function EndpointList({ p, color }: { p: Project; color: string }) {
   const eps = p.places.filter((pl) => pl.role === "endpoint");
   const list = eps.length ? eps : p.places.filter((pl) => pl.precision !== "county").slice(0, 2);
+  // the points the center is computed from (the first two located terminals), named when the list shows more
+  const used = centerOf(p)?.places ?? [];
+  const extra = list.some((pl) => !used.some((u) => u.id === pl.id));
+  const center =
+    used.length === 2 ? (extra ? `center = midpoint of ${used[0].label} & ${used[1].label}` : "center = midpoint") : used.length === 1 ? (extra ? `center = ${used[0].label}` : "center = this point") : "";
   return (
     <div className="rounded-lg bg-bg-2/60 px-3 py-2 ring-1 ring-line">
       <div className="flex items-center gap-2 text-[11px] text-text-2">
-        <Dot color={color} size={6} /> <span className="truncate">{p.shortTitle}</span>
-        <span className="ml-auto text-[10px] text-text-3">{list.length === 2 ? "center = midpoint" : list.length === 1 ? "center = this point" : ""}</span>
+        <Dot color={color} size={6} /> <span className="min-w-0 truncate">{p.shortTitle}</span>
+        <span className="ml-auto max-w-[62%] shrink-0 truncate text-[10px] text-text-3" title={center}>
+          {center}
+        </span>
       </div>
       {list.length === 0 && <div className="mt-1 text-[11.5px] text-text-3">No located terminal</div>}
       {list.map((pl) => (
@@ -321,6 +329,7 @@ function EndpointList({ p, color }: { p: Project; color: string }) {
           <div className="flex shrink-0 flex-col items-end gap-1">
             <PrecisionTag precision={pl.precision} />
             {pl.confidence === "lower-confidence" && <span className="text-[10px] text-conflict">lower confidence</span>}
+            {extra && !used.some((u) => u.id === pl.id) && <span className="text-[10px] text-text-3">not used for center</span>}
           </div>
         </div>
       ))}
@@ -349,15 +358,16 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
                 {groups.length ? (
                   groups.map(({ ws, sourceIds }) => {
                     const coarse = ws.some((w) => !w.continuous);
-                    const src = IDX.source(ws[0].claimSourceId)?.publisher;
+                    const src = windowSourceText(ws, IDX);
                     const meta = `${sourceIds.length > 1 ? `${sourceIds.length} documents · ` : ""}${ws.length > 1 ? `${ws.length} components` : `${precisionLabel(coarsest(ws))} precision`}${coarse ? " · coarse" : ""}`;
-                    const docs = sourceIds.map((id) => IDX.source(id)?.title).filter(Boolean);
+                    const notes = ws.map(windowNote).filter(Boolean);
                     return (
                       <div key={ws[0].id} className="mt-1.5">
                         <div className="num whitespace-nowrap text-[13px] leading-tight text-text-0">{windowGroupText(ws)}</div>
-                        <div className="truncate text-[10.5px] text-text-3" title={[...docs, `${src} · ${meta}`, ...ws.map((w) => w.note).filter(Boolean)].join("\n")}>
+                        <div className="text-[10.5px] leading-snug text-text-3" title={[...windowDocs(ws, sourceIds), `${src} · ${meta}`, ...notes].join("\n")}>
                           {src} · {meta}
                         </div>
+                        {ws.length === 1 && notes[0] && <ClampedNote text={notes[0]} />}
                       </div>
                     );
                   })
@@ -377,7 +387,11 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
               {m.timeDetail.inService.gapDays.toLocaleString("en-US")}
             </div>
             <div className="mt-1 text-[10.5px] leading-tight text-text-3">
-              {m.timeDetail.inService.coarse ? (m.timeDetail.inService.gapDays === 0 ? "days · ranges overlap" : "days · nearest edges") : "days between in-service dates"}
+              {m.timeDetail.inService.coarse
+                ? m.timeDetail.inService.gapDays === 0
+                  ? "days · ranges overlap"
+                  : `${dayWord(m.timeDetail.inService.gapDays)} · nearest edges`
+                : `${dayWord(m.timeDetail.inService.gapDays)} between in-service dates`}
             </div>
           </div>
           <div className="w-px self-stretch bg-line-2" />
@@ -511,16 +525,49 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
               ))}
             </div>
             <p className="mt-2 text-[11px] leading-snug text-text-3">
-              {c.field === "constructionWindow"
-                ? "Windows differ by source; the engine evaluated every source combination before calling the TIME signal."
-                : c.affectsMatch
-                  ? "All claims are kept. The newer in-service date also sets the end of this project's current schedule window (it replaces the earlier date as the window's outer bound), so it does feed the TIME signal; the earlier date is kept as version history."
-                  : "All claims are kept. Completion dates never drive the construction-window match, so the TIME signal is unaffected."}
+              {c.field === "constructionWindow" ? "Windows differ by source; the engine evaluated every source combination before calling the TIME signal." : completionNote(c, p)}
             </p>
           </div>
         );
       })}
     </Section>
+  );
+}
+
+/** What a completion disagreement does to TIME: a date that ends a current window feeds the window match; the in-service gap always uses the current date. */
+function completionNote(c: Conflict, p: Project): string {
+  const cur = currentInService(p);
+  const gap = cur ? `the in-service gap (secondary signal) uses the current date, ${formatBound(cur.date)}` : "no in-service gap is computed";
+  const bound = c.sides.filter((s) => s.claimIds.some((id) => c.boundClaimIds?.includes(id)));
+  const earlier = c.sides.filter((s) => s.earlier).length;
+  const history = `the earlier date${earlier > 1 ? "s are" : " is"} kept as version history`;
+  if (!c.affectsMatch || !bound.length) return `All claims are kept. These dates do not bound a construction window; ${gap}${c.versionOnly ? `, and ${history}` : ""}.`;
+  if (c.versionOnly)
+    return `All claims are kept. The current date, ${bound[0].value}, also sets the end of this project's current schedule window, so it feeds the TIME match and the in-service gap; ${history}.`;
+  const n = new Set(bound.flatMap((s) => s.sourceIds)).size;
+  return `All claims are kept. ${bound.map((s) => s.value).join(" and ")} is also the end of ${n > 1 ? "those sources' own schedule windows" : "its source's own schedule window"}; the window match evaluates every source combination, so ${c.sides.length > 2 ? "no date is picked over the others" : "neither date is picked over the other"}. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
+}
+
+/** A window's note under its schedule row: two lines, the rest on demand. */
+function ClampedNote({ text }: { text: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [open, setOpen] = useState(false);
+  const [clipped, setClipped] = useState(false);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (el && !open) setClipped(el.scrollHeight > el.clientHeight + 1);
+  }, [text, open]);
+  return (
+    <p className="mt-0.5 text-[10.5px] leading-snug text-text-3">
+      <span ref={ref} className={open ? "block" : "line-clamp-2"}>
+        {text}
+      </span>
+      {(clipped || open) && (
+        <button onClick={() => setOpen((o) => !o)} aria-expanded={open} className="text-text-2 hover:text-text-0">
+          {open ? "less" : "more"}
+        </button>
+      )}
+    </p>
   );
 }
 

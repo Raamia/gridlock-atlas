@@ -93,7 +93,7 @@ export function displayTitle(p: { title: string }): string {
 
 // researcher-to-developer sentences (schema, ids, placeholders, cache paths, UI hints) that are not findings about a project
 const INTERNAL_NOTE =
-  /plan\.md|test-matrix|is a placeholder shared|placeholders? and must be matched|id mismatch|\bids? (used|introduced)\b|id normalization|the UI (should|may)\b|This schema|\.cache\/|find_excerpt|This record maps|Duplicate key|Match this entry only|\benum\b|Reconcile before|KEY COLLISION|key-based merge/i;
+  /plan\.md|test-matrix|is a placeholder shared|placeholders? and must be matched|id mismatch|\bids? (used|introduced)\b|id normalization|the UI (should|may)\b|This schema|\.cache\/|find_excerpt|This record maps|Duplicate key|Match this entry only|\benum\b|Reconcile before|KEY COLLISION|key-based merge|Engines? should|Intended as the|\bno-match\b|no-TIME control|output schema|supersededBy/i;
 const ORDINAL = ["first", "second", "third", "fourth", "fifth"];
 
 /**
@@ -102,6 +102,11 @@ const ORDINAL = ["first", "second", "third", "fourth", "fifth"];
  */
 export function publicNote(t: string): string {
   return t
+    // test-fixture and schema wording around a finding: keep the finding
+    .replace(/^COARSE-GEOGRAPHY case: the /, "The ")
+    .replace(/ and should be flagged supersededBy\./g, ".")
+    .replace(/;[^;.]*phase 'unknown',? (?:and )?continuous=false\./g, ".")
+    .replace(/ is kept in completionClaims\./g, " is kept.")
     .replace(/\s*\(see route\.caveat\)/g, "")
     .replace(/\u0007/g, "")
     .replace(/\s*\(centerOf\)/g, "")

@@ -111,6 +111,8 @@ export interface ConstructionWindow {
   /** Work began before the earliest year the source itemizes (DESC's 'Previous' column): the start year is not published,
    *  and start.earliest is only a floor for matching and the timeline axis, never a sourced date. */
   openStart?: boolean;
+  /** Visible source credit when the bounds come from more than one document ("Georgia Power Ten-Year Plan start → SERTP 2025 in-service year"). */
+  sourceLabel?: string;
 }
 
 export interface CompletionClaim {
@@ -320,9 +322,14 @@ export interface Conflict {
   description: string;
   sides: ConflictSide[];
   claimIds: string[];
-  /** Whether this disagreement changes the construction-window match: always for window conflicts; for completion conflicts,
-   *  only when the newer in-service date is the outer bound of a current window that replaced an older one (GPC Start → SERTP year). */
+  /** Whether this disagreement feeds the construction-window match: always for window conflicts; for completion conflicts, when
+   *  a disputed current date is also the end of an active window (see `endsWindow`: boundClaimIds is non-empty). The in-service
+   *  gap (secondary signal) always uses the current date, whatever this says. */
   affectsMatch: boolean;
+  /** Completion conflicts: one current side, the rest earlier editions (version history), not competing current claims. */
+  versionOnly?: boolean;
+  /** Completion conflicts: the disputed claim ids whose date ends an active window. */
+  boundClaimIds?: string[];
 }
 
 export interface MatchCoordination {

@@ -23,6 +23,8 @@ export function EvidenceCard({ e, tone = "neutral", compact }: { e: Evidence; to
   const src = IDX.source(e.sourceId);
   const href = evidenceHref(e, src);
   const anchor = pageLabel(e);
+  // an HTML section anchor that only repeats the title is not read out twice
+  const ariaAnchor = anchor && !e.page && src?.title.toLowerCase().includes(anchor.toLowerCase()) ? undefined : anchor;
   return (
     <figure className="relative overflow-hidden rounded-lg bg-bg-2/80 ring-1 ring-line" style={{ boxShadow: `inset 2px 0 0 ${TONE[tone]}` }}>
       <figcaption className="flex items-center gap-1.5 px-3 pt-2.5">
@@ -37,7 +39,7 @@ export function EvidenceCard({ e, tone = "neutral", compact }: { e: Evidence; to
             target="_blank"
             rel="noreferrer"
             className="ml-auto inline-flex shrink-0 items-center gap-1 rounded px-1 text-[10.5px] text-text-2 hover:bg-bg-3 hover:text-a"
-            aria-label={`Open source: ${src?.title ?? e.sourceId}${anchor ? `, ${anchor}` : ""}`}
+            aria-label={`Open source: ${src?.title ?? e.sourceId}${ariaAnchor ? `, ${ariaAnchor}` : ""}`}
           >
             Open <ExternalLink size={10} />
           </a>

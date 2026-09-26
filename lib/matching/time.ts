@@ -1,4 +1,4 @@
-import type { ConstructionWindow, DateBound, Project, SignalLevel, TimeDetail } from "@/lib/domain/types";
+import type { CompletionClaim, ConstructionWindow, DateBound, Project, SignalLevel, TimeDetail } from "@/lib/domain/types";
 import { displayTitle, formatSpan, precisionLabel } from "@/lib/format";
 
 const PRECISION_RANK: Record<DateBound["precision"], number> = { day: 0, month: 1, quarter: 2, half: 3, year: 4 };
@@ -25,6 +25,24 @@ const min = (a: string, b: string) => (a < b ? a : b);
 const IN_SERVICE = /in-service|in service|need date|completion|complete|energiz|operation/i;
 /** A required-by date ("no later than June 1, 2034") bounds the schedule; it is not a forecast in-service date. */
 export const DEADLINE = /deadline|no later than/i;
+
+/** "1 day", "396 days" */
+export const dayWord = (n: number): string => (n === 1 ? "day" : "days");
+export const dayCount = (n: number): string => `${n.toLocaleString("en-US")} ${dayWord(n)}`;
+
+/**
+ * A current in-service / completion forecast that is also the end bound of an active TIME window: the window comes from the
+ * claim's own source (or cites the same excerpt) and its end range holds the date — DESC budget windows and the Dominion page
+ * window end at the SCRTP planned in-service date, GPC Start → SERTP windows at the SERTP year, PSC/NSPW windows at the
+ * completion quarter. Earlier editions and required-by deadlines never bound a window.
+ */
+export function endsWindow(p: Project, c: CompletionClaim): boolean {
+  if (c.current === false || DEADLINE.test(c.label)) return false;
+  const d = c.date.latest;
+  return activeWindows(p).some(
+    (w) => (w.claimSourceId === c.claimSourceId || w.evidenceIds.some((e) => c.evidenceIds.includes(e))) && w.end.earliest <= d && d <= w.end.latest,
+  );
+}
 
 const spanMs = (b: DateBound) => Date.parse(b.latest) - Date.parse(b.earliest);
 
@@ -128,8 +146,8 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
     ? base.inService.coarse
       ? base.inService.gapDays === 0
         ? " Published in-service dates overlap at their stated precision (secondary signal)."
-        : ` In-service dates are at least ${base.inService.gapDays.toLocaleString("en-US")} days apart at their stated precision (secondary signal).`
-      : ` In-service dates are ${base.inService.gapDays.toLocaleString("en-US")} days apart (secondary signal).`
+        : ` In-service dates are at least ${dayCount(base.inService.gapDays)} apart at their stated precision (secondary signal).`
+      : ` In-service dates are ${dayCount(base.inService.gapDays)} apart (secondary signal).`
     : "";
 
   if (!wa.length || !wb.length) {

@@ -1,14 +1,15 @@
 import { describe, expect, it } from "vitest";
 import type { ConstructionWindow, DateBound, Place, Project, Relation, Snapshot } from "@/lib/domain/types";
-import { SNAPSHOT } from "@/lib/data";
+import { IDX, SNAPSHOT } from "@/lib/data";
 import { buildBrief } from "@/lib/brief";
 import { whyFlagged } from "@/lib/describe";
 import { overlapTableCsv } from "@/lib/export";
-import { formatBound, formatMilesNear, formatPoint, formatSpan, formatWindow, nameRecordIds, precisionLabel, publicNote, windowStartText, year } from "@/lib/format";
+import { displayTitle, formatBound, formatMilesNear, formatPoint, formatSpan, formatWindow, nameRecordIds, precisionLabel, publicNote, windowStartText, year } from "@/lib/format";
 import { impactDefaults, needsNewCorridor } from "@/lib/impact";
 import { evaluatePair, projectConflicts, runMatching } from "@/lib/matching/engine";
 import { evaluateGeo } from "@/lib/matching/geo";
-import { coarsest, currentInService, displayWindowGroups, evaluateTime } from "@/lib/matching/time";
+import { coarsest, currentInService, dayCount, dayWord, displayWindowGroups, endsWindow, evaluateTime } from "@/lib/matching/time";
+import { readableNote, windowSourceText } from "@/lib/selectors";
 
 /* ------------------------------- fixture builders ------------------------------- */
 
@@ -733,6 +734,9 @@ describe("snapshot data regressions", () => {
     // queue_rank restarts at 1 in each review-status tab
     const firsts = parsed.filter((r) => r[at("queue_rank")] === "1").map((r) => r[at("review_status")]);
     expect(new Set(firsts).size).toBe(firsts.length);
+    // a published in-service date is filled even when the other side has none (no gap, so no gap basis)
+    const eff = parsed.find((r) => r[at("pair_id")] === "desc-6888__gpc-effingham-500")!;
+    expect([eff[at("in_service_a")], eff[at("time_gap (day)")], eff[at("time_gap_basis")]]).toEqual(["2028-12-31", "", ""]);
   });
 
   it("briefs quote whole sentences and full titles (no mid-sentence ellipses)", () => {
@@ -755,19 +759,70 @@ describe("snapshot data regressions", () => {
     for (const p of SNAPSHOT.projects) for (const c of p.caveats) expect(publicNote(c)).not.toMatch(/\bA = |endpoints\[|\.cache\/|This record maps/);
     expect(nameRecordIds("(gpc-irp-2025-vol3: no hits) breaker-and-a-half", (id) => (id === "gpc-irp-2025-vol3" ? "Ten-Year Plan" : undefined))).toBe("(Ten-Year Plan: no hits) breaker-and-a-half");
     for (const u of SNAPSHOT.unresolved) expect(u.note).not.toMatch(/atc-nspw-grid-forward|placeholder shared|U\+0007/);
+    // open research questions read without record ids, cluster names or schema values
+    for (const u of SNAPSHOT.unresolved)
+      expect(readableNote(u.note, IDX)).not.toMatch(
+        /\b(?:scrtp-home|sertp-home|scrtp-meeting|scpsc-aep|psc-wwtc-map|transource-ok|sc-ga-(?:desc|gpc)|xcel-mmrt|maribell-\*|not-found-in-sources|reported-coordination)\b|utility id|cached by another researcher/,
+      );
+    // test-fixture instructions are dropped; the finding they wrap is kept
+    const maribell = proj("dpc-glh-maribell").caveats.map(publicNote);
+    expect(maribell).toContain(
+      "The published text places the line only by six counties plus two endpoint towns (Marion, Bell Center). The new Houston County 161 kV switching station is truly county-only (site 'not yet identified').",
+    );
+    for (const p of SNAPSHOT.projects) for (const c of p.caveats) expect(publicNote(c)).not.toMatch(/Engines? should|no-TIME control|\bno-match\b|supersededBy|continuous=false|completionClaims/);
     // shared-owner exclusions name utilities, not internal ids
     const short = SNAPSHOT.utilities.map((u) => u.shortName);
     const shared = run.excludedPairs.filter((e) => e.reason === "shared-owner");
     expect(shared.length).toBeGreaterThan(0);
     for (const x of shared) for (const n of x.detail.match(/^Shared owner \((.*)\):/)![1].split(", ")) expect(short).toContain(n);
   });
-  it("a newer in-service date that bounds a current window is reported as feeding TIME", () => {
+  it("a disputed in-service date that also ends a current window is reported as feeding TIME", () => {
     const g = pair("desc-6888", "gpc-20065")!.conflicts.find((c) => c.id === "gpc-20065:completion")!;
-    expect(g.affectsMatch).toBe(true);
+    expect(g).toMatchObject({ affectsMatch: true, versionOnly: true, boundClaimIds: ["gpc-20065:c1"] });
     const ab = pair("dpc-alma-blair", "xcel-wwtc")!;
-    expect(ab.conflicts.find((c) => c.id === "dpc-alma-blair:completion")!.affectsMatch).toBe(true);
-    // Xcel's page vs the PSC reports: two current claims, no window re-bounded by either
-    expect(ab.conflicts.find((c) => c.id === "xcel-wwtc:completion")!.affectsMatch).toBe(false);
+    expect(ab.conflicts.find((c) => c.id === "dpc-alma-blair:completion")).toMatchObject({ affectsMatch: true, versionOnly: true, boundClaimIds: ["dpc-alma-blair:c2"] });
+    // Xcel's page vs the PSC/NSPW reports: two current sides; the Q3 2029 claims end those sources' own bounds-only windows
+    expect(ab.conflicts.find((c) => c.id === "xcel-wwtc:completion")).toMatchObject({
+      affectsMatch: true,
+      versionOnly: false,
+      boundClaimIds: ["xcel-wwtc:c1", "xcel-wwtc:c4", "xcel-wwtc:c5"],
+    });
+    expect(ab.time).not.toBe("no-match");
+    // DESC: the current SCRTP date ends both the Dominion page window and the budget window; earlier editions are history
+    const desc = pair("desc-06367-d-g", "gpc-20065")!.conflicts.find((c) => c.id === "desc-06367-d-g:completion")!;
+    expect(desc).toMatchObject({ affectsMatch: true, versionOnly: true, boundClaimIds: ["desc-06367-d-g:c1"] });
+    // Midwest windows that end at a stated construction end, not at the disputed dates
+    expect(projectConflicts(proj("otp-mres-bssa"), pub, doc).find((c) => c.field === "completion")!.affectsMatch).toBe(false);
+  });
+
+  it("endsWindow: current forecasts that bound an active window, never earlier editions or deadlines", () => {
+    const ends = (pid: string) => Object.fromEntries(proj(pid).completionClaims.map((c) => [c.id.split(":")[1], endsWindow(proj(pid), c)]));
+    expect(ends("desc-6888")).toEqual({ c1: true });
+    expect(ends("desc-06367-d-g")).toEqual({ c1: true, c2: false, c3: false });
+    expect(ends("gpc-20065")).toEqual({ c1: true, c2: false });
+    expect(ends("xcel-wwtc")).toEqual({ c1: true, c2: false, c3: false, c4: true, c5: true, c6: false, c7: true });
+    expect(ends("dpc-alma-blair")).toEqual({ c1: false, c2: true, c3: false });
+    expect(ends("transource-beci")).toEqual({ c1: true, c2: false, c3: false, c4: false });
+    // a claim from another source that shares no excerpt with the window never bounds it
+    const a = project("a", "u1", {
+      constructionWindows: [win(2026, 2027)],
+      completionClaims: [
+        { id: "same", claimSourceId: "src", label: "in-service", date: yr(2027), evidenceIds: [] },
+        { id: "other", claimSourceId: "psc", label: "in-service", date: yr(2027), evidenceIds: [] },
+        { id: "cited", claimSourceId: "psc", label: "in-service", date: yr(2027), evidenceIds: ["ev1"] },
+        { id: "old", claimSourceId: "src", label: "in-service", date: yr(2027), evidenceIds: [], current: false },
+        { id: "due", claimSourceId: "src", label: "required in-service deadline", date: yr(2027), evidenceIds: [] },
+      ],
+    });
+    expect(a.completionClaims.map((c) => endsWindow(a, c))).toEqual([true, false, true, false, false]);
+  });
+
+  it("a gap of one day reads '1 day'", () => {
+    expect([dayWord(1), dayWord(0), dayWord(2), dayCount(1), dayCount(3074)]).toEqual(["day", "days", "days", "1 day", "3,074 days"]);
+    const m = runMatching(SNAPSHOT, { now: "t", thresholdMiles: 40 }).matches.find((x) => x.id === "desc-6808-l__gpc-20065")!;
+    expect(m.timeDetail.inService!.gapDays).toBe(1);
+    expect(m.timeReason).toContain("at least 1 day apart");
+    expect(whyFlagged(m) + m.priorityReasons.join()).not.toMatch(/\b1 days\b/);
   });
 
   it("the impact note never treats substation, bank or reconductor work as a new line", () => {
@@ -789,7 +844,11 @@ describe("snapshot data regressions", () => {
     expect(formatSpan(m.timeDetail.possibleOverlap!, m.timeDetail.precision)).toBe("Late 2029–Late 2030");
     const b = buildBrief(m);
     expect(b.question).toContain("Late 2029–Late 2030");
-    expect(b.unresolved).toContain("Published schedules are half-year-precision; the exact months of field work are not stated.");
+    // the precision caveat names each coarse project and is worded as a lower bound
+    expect(b.unresolved).toContain(
+      `At least one published schedule date for ${displayTitle(proj("transource-beci"))} is only half-year-precision; the exact months of its field work are not stated.`,
+    );
+    expect(b.unresolved.some((u) => u.startsWith("Published schedules are"))).toBe(false);
     expect(overlapTableCsv([m])).not.toContain("(half)");
   });
 
@@ -806,5 +865,88 @@ describe("snapshot data regressions", () => {
     expect(at10.geoDetail.center!.anyLocality).toBe(true);
     expect(whyFlagged(at10)).toMatch(/centers ≈9\.7 mi apart, at the edge of the 10 mi radius.*A location is approximate \(town-level\)/);
     expect(whyFlagged(pair("desc-6888", "gpc-20787")!)).toMatch(/Located at named facilities/);
+  });
+
+  it("SERTP 2025 in-service years are current for every Savannah-area project that states one", () => {
+    for (const [id, y] of [["gpc-20065", 2028], ["gpc-20989", 2028], ["gpc-20407", 2029], ["gpc-20784", 2029], ["gpc-20787", 2029]] as const) {
+      const c = currentInService(proj(id));
+      expect([id, c.claimSourceId, c.date.latest]).toEqual([id, "sertp-2025-plan", `${y}-12-31`]);
+      expect(proj(id).completionClaims.find((k) => k.claimSourceId === "gpc-irp-2025-vol3")?.current).toBe(false);
+    }
+    // Start Date 06/01/2030 is after the SERTP year 2029: no inverted window, and it says why
+    expect(proj("gpc-20787").constructionWindows).toEqual([]);
+    expect(proj("gpc-20787").caveats.join(" ")).toMatch(/Start Date \(06\/01\/2030\) is after the SERTP 2025 in-service year \(2029\)/);
+    expect(proj("gpc-20784").caveats.join(" ")).toMatch(/approximately 8\.1 miles/);
+    for (const p of SNAPSHOT.projects)
+      for (const w of p.constructionWindows) {
+        expect(w.start.earliest <= w.end.latest).toBe(true);
+        if (w.supersededBy) expect(p.constructionWindows.some((x) => x.id === w.supersededBy)).toBe(true);
+      }
+    const m = pair("desc-6888", "gpc-20407")!;
+    expect(m.timeDetail.possibleOverlap).toEqual({ start: "2028-01-01", end: "2028-12-31" });
+    expect(m.timeDetail.inService!.gapDays).toBeLessThanOrEqual(366);
+  });
+
+  it("windows built from two documents credit both; others credit their publisher", () => {
+    const label = (pid: string, wid: string) => windowSourceText([proj(pid).constructionWindows.find((w) => w.id === `${pid}:${wid}`)!], IDX);
+    expect(label("gpc-20065", "w2")).toBe("Georgia Power Ten-Year Plan start → SERTP 2025 in-service year");
+    expect(label("gpc-20989", "w2")).toBe("Georgia Power Ten-Year Plan start → SERTP 2025 in-service year");
+    expect(label("desc-06367-d-g", "w1")).toBe("Dominion project page start → SCRTP planned in-service");
+    expect(label("desc-06367-d-g", "w2")).toBe(IDX.source("desc-scrtp-2026-2030")!.publisher);
+    expect(label("transource-beci", "w1")).toBe(IDX.source("mgs-beci-factsheet")!.publisher);
+  });
+
+  it("a name-only shared site is implied, not source-stated", () => {
+    const rel = SNAPSHOT.relations.find((r) => [r.projectA, r.projectB].sort().join() === "grid-forward-atc,transource-beci" && r.kind === "shared-site")!;
+    expect(rel.basis).toBe("inferred");
+    const m = pair("grid-forward-atc", "transource-beci")!;
+    expect(m.priorityReasons).toContain("Shared facility implied by sources");
+    expect(whyFlagged(m)).toContain("a shared facility implied by the sources");
+    // the stated shared sites keep their basis
+    expect(pair("dpc-alma-blair", "xcel-wwtc")!.priorityReasons).toContain("Shared facility stated in a source");
+  });
+
+  it("'Previous' spending of 5% or more starts a DESC window before 2026, not before its first large year", () => {
+    const text = (pid: string) => {
+      const w = proj(pid).constructionWindows[0];
+      return formatWindow(w.start, w.end, w.openEnded, w.openStart);
+    };
+    expect(text("desc-06372-a")).toBe("before 2026 → Dec 31, 2028");
+    expect(text("desc-6808-v")).toBe("before 2026 → Dec 31, 2030");
+    for (const w of SNAPSHOT.projects.flatMap((p) => p.constructionWindows).filter((w) => w.openStart)) expect(w.start.latest).toBe("2026-12-31");
+    expect(runMatching(SNAPSHOT, { now: "t", thresholdMiles: 100 }).matches.find((x) => x.id === "desc-6808-v__gpc-20065")!.timeReason).toContain("may overlap (2025–2028)");
+  });
+
+  it("briefs cite the budget cell that starts a window and never repeat a title as its anchor", () => {
+    const m = runMatching(SNAPSHOT, { now: "t", thresholdMiles: 100 }).matches.find((x) => x.id === "desc-6854-c__gpc-21116")!;
+    const b = buildBrief(m);
+    const time = b.rows.find((r) => r.label === "Why flagged")!.text.split("\n")[1];
+    const nums = time.match(/\[([\d, ]+)\]$/)![1].split(", ").map(Number);
+    expect(nums.map((n) => b.citations[n - 1].excerpt)).toContain("2027 $3,000,000");
+    expect(nums.map((n) => b.citations[n - 1].excerpt)).not.toContain("Previous 2026 $3,760 $0");
+    for (const x of run.matches.slice(0, 40))
+      for (const c of buildBrief(x).citations) if (c.anchor && !/^(PDF )?p\. /.test(c.anchor)) expect(c.title.toLowerCase()).not.toContain(c.anchor.toLowerCase());
+    const gf = buildBrief(pair("grid-forward-atc", "transource-beci")!);
+    expect(gf.citations.find((c) => c.title.startsWith("Transource and BHE Transmission"))!.anchor).toBeUndefined();
+  });
+
+  it("GET /api/matches/:id returns every excerpt the pair and its projects cite", async () => {
+    const { GET } = await import("@/app/api/matches/[id]/route");
+    const res = await GET(new Request("http://x/api/matches/dpc-alma-blair__xcel-wwtc"), { params: Promise.resolve({ id: "dpc-alma-blair__xcel-wwtc" }) });
+    const body = (await res.json()) as { match: unknown; projects: unknown[]; evidence: Record<string, unknown>; sources: { id: string }[] };
+    const ids = new Set<string>();
+    const walk = (v: unknown): void => {
+      if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === "object")
+        for (const [k, x] of Object.entries(v)) {
+          if (/evidenceids$/i.test(k) && Array.isArray(x)) x.forEach((id) => ids.add(id));
+          else walk(x);
+        }
+    };
+    walk([body.match, body.projects]);
+    expect(ids.size).toBeGreaterThan(100);
+    for (const id of ids) expect(body.evidence[id], id).toBeDefined();
+    const srcs = new Set(body.sources.map((s) => s.id));
+    for (const e of Object.values(body.evidence) as { sourceId: string }[]) expect(srcs.has(e.sourceId)).toBe(true);
   });
 });

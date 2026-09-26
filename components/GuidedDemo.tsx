@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { SNAPSHOT } from "@/lib/data";
 import type { Match, MatchRun } from "@/lib/domain/types";
 import { useAtlas, type FlagFilter, type InspectorSection } from "@/lib/store";
@@ -116,7 +116,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Sources disagree — both are kept",
-    body: "Xcel's page and the Wisconsin PSC give different completion dates. The conflict is shown side by side and does not change the construction-window match.",
+    body: "Xcel's page and the Wisconsin PSC give different completion dates. Both are kept side by side, and each source's own window is evaluated, so neither date is picked over the other.",
     run: open(featured, "conflicts", (m) => ({ highlightConflict: true, focusConflict: wwtcCompletion(m) })),
   },
   {
@@ -137,6 +137,9 @@ export function GuidedDemo() {
   const inspectorOpen = useAtlas((s) => s.inspectorOpen && s.selectedMatchId !== null);
   const drawerOpen = useAtlas((s) => s.sourcesOpen || s.methodOpen);
   const set = useAtlas((s) => s.set);
+  // phones: with the inspector sheet up, the card shrinks to its title, two lines and the buttons, so the pair keeps a strip of map
+  const compact = inspectorOpen && !briefOpen;
+  const [more, setMore] = useState(false);
   const card = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const wasActive = useRef(false);
@@ -148,6 +151,7 @@ export function GuidedDemo() {
     (n: number) => {
       const k = Math.max(0, Math.min(STEPS.length - 1, n));
       stepToken++;
+      setMore(false);
       set({ demoStep: k });
       void STEPS[k].run();
     },
@@ -170,6 +174,16 @@ export function GuidedDemo() {
     if (was && (!el || el === document.body || card.current?.contains(el))) document.getElementById("demo-toggle")?.focus({ preventScroll: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
+
+  // Previous disables itself on step 1, and an arrow-key step can leave focus on <body>: hand it to the primary button
+  useEffect(() => {
+    if (step === null) return;
+    const id = requestAnimationFrame(() => {
+      const el = document.activeElement;
+      if (!el || el === document.body || (el instanceof HTMLButtonElement && el.disabled && card.current?.contains(el))) nextRef.current?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [step]);
 
   useEffect(() => {
     if (step === null) return;
@@ -198,6 +212,26 @@ export function GuidedDemo() {
     };
   }, [briefOpen, active]);
 
+  // phones: publish the card's bottom edge so the inspector sheet starts below it, leaving a strip of map for the pair.
+  // A layout effect, so the camera (which reads the sheet's top) sees it on the same commit; the layout box, not the
+  // entry animation's transform (the card is fixed there, so offsetTop is from the viewport)
+  useLayoutEffect(() => {
+    const el = card.current;
+    if (!el || !active || briefOpen) return;
+    const root = document.documentElement.style;
+    const upd = () => {
+      if (getComputedStyle(el).position === "fixed") root.setProperty("--demo-card-bottom", `${el.offsetTop + el.offsetHeight}px`);
+      else root.removeProperty("--demo-card-bottom");
+    };
+    upd();
+    const ro = new ResizeObserver(upd);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      root.removeProperty("--demo-card-bottom");
+    };
+  }, [active, briefOpen, compact]);
+
   return (
     <AnimatePresence>
       {step !== null && (
@@ -224,7 +258,7 @@ export function GuidedDemo() {
             <div className="h-[2px] bg-bg-3">
               <motion.div className="h-full bg-gradient-to-r from-a to-b" animate={{ width: `${((step + 1) / STEPS.length) * 100}%` }} transition={{ duration: 0.4 }} />
             </div>
-            <div className="p-4">
+            <div className={clsx("p-4", compact && "max-sm:p-3")}>
               <div className="flex items-center justify-between">
                 <span className="eyebrow text-text-1">
                   Guided demo · {step + 1}/{STEPS.length}
@@ -235,12 +269,26 @@ export function GuidedDemo() {
               </div>
               <AnimatePresence mode="wait">
                 <motion.div key={step} initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.2 }}>
-                  <h3 className="mt-1 font-serif text-[22px] leading-[1.15] text-text-0">{STEPS[step].title}</h3>
-                  <p className="mt-1.5 text-[12.5px] leading-[1.55] text-text-1">{STEPS[step].body}</p>
+                  <h3 className={clsx("mt-1 font-serif text-[22px] leading-[1.15] text-text-0", compact && "max-sm:text-[18px]")}>{STEPS[step].title}</h3>
+                  <p id="demo-body" className={clsx("mt-1.5 text-[12.5px] leading-[1.55] text-text-1", compact && !more && "max-sm:line-clamp-2")}>
+                    {STEPS[step].body}
+                  </p>
                 </motion.div>
               </AnimatePresence>
-              <div className="mt-3.5 flex flex-wrap items-center gap-2">
-                <div className="flex gap-1">
+              <div className={clsx("mt-3.5 flex flex-wrap items-center gap-2", compact && "max-sm:mt-2")}>
+                {compact && (
+                  <button
+                    type="button"
+                    onClick={() => setMore(!more)}
+                    aria-expanded={more}
+                    aria-controls="demo-body"
+                    className="text-[11.5px] text-text-2 underline underline-offset-2 hover:text-text-0 sm:hidden"
+                  >
+                    {more ? "Less" : "More"}
+                  </button>
+                )}
+                {/* the eyebrow already counts the steps: compact phones drop the dots */}
+                <div className={clsx("flex gap-1", compact && "max-sm:hidden")}>
                   {STEPS.map((_, i) => (
                     <button
                       key={i}
@@ -263,7 +311,7 @@ export function GuidedDemo() {
                       Next <ArrowRight size={13} />
                     </Button>
                   ) : (
-                    <Button variant="primary" size="sm" onClick={end}>
+                    <Button ref={nextRef} variant="primary" size="sm" onClick={end}>
                       Finish
                     </Button>
                   )}

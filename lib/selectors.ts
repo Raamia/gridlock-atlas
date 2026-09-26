@@ -59,6 +59,13 @@ export function windowGroupText(ws: ConstructionWindow[]): string {
   return formatWindow(first.start, last.end, ws.some((w) => w.openEnded), first.openStart);
 }
 
+/** Source credit for one display group of windows: the window's own label when its bounds come from several documents, else the publisher. */
+export function windowSourceText(ws: ConstructionWindow[], idx: SnapshotIndex): string {
+  const labels = new Set(ws.map((w) => w.sourceLabel));
+  if (labels.size === 1 && ws[0]?.sourceLabel) return ws[0].sourceLabel;
+  return idx.source(ws[0].claimSourceId)?.publisher ?? ws[0].claimSourceId;
+}
+
 const SLUG = "[a-z][a-z0-9]*(?:-[a-z0-9]+){2,}";
 /**
  * A research note for readers (publicNote), with record ids put in words: a snapshot source or project id reads as its title,

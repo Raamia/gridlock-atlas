@@ -11102,7 +11102,8 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Bounds: the Ten-Year Plan's Start Date \u2192 the SERTP 2025 in-service year (2028), which replaces the plan's Need Date; the months of field work within it are not stated."
+     "note": "Bounds: the Ten-Year Plan's Start Date \u2192 the SERTP 2025 in-service year (2028), which replaces the plan's Need Date; the months of field work within it are not stated.",
+     "sourceLabel": "Georgia Power Ten-Year Plan start \u2192 SERTP 2025 in-service year"
     }
    ],
    "completionClaims": [
@@ -13730,13 +13731,67 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Project window as published (Start Date \u2192 Need Date); the months of field work within it are not stated, so only the bounds are used."
+     "note": "Project window as published (Start Date \u2192 Need Date); the months of field work within it are not stated, so only the bounds are used.",
+     "supersededBy": "gpc-20407:w2"
+    },
+    {
+     "claimSourceId": "sertp-2025-plan",
+     "phase": "unknown",
+     "start": {
+      "earliest": "2025-06-01",
+      "latest": "2025-06-01",
+      "precision": "day"
+     },
+     "end": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "boundsOnly": true,
+     "evidence": [
+      {
+       "sourceId": "gpc-irp-2025-vol3",
+       "page": 335,
+       "exactExcerpt": "Need Date 06/01/2028 Start Date 06/01/2025",
+       "supports": "need (in-service) date and start date",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "sertp-2025-plan",
+       "page": 130,
+       "exactExcerpt": "In-Service Year: 2029 Project Name: SAV: BOULEVARD \u2013 MAGNOLIA \u2013 TRUMAN PARKWAY 115 KV TRANSMISSION LINES, REBUILD",
+       "supports": "in-service year 2029 (SERTP 2025)",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Bounds: the Ten-Year Plan's Start Date \u2192 the SERTP 2025 in-service year (2029), which replaces the plan's Need Date; the months of field work within it are not stated.",
+     "sourceLabel": "Georgia Power Ten-Year Plan start \u2192 SERTP 2025 in-service year"
     }
    ],
    "completionClaims": [
     {
+     "claimSourceId": "sertp-2025-plan",
+     "label": "in-service year (SERTP 2025)",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "sertp-2025-plan",
+       "page": 130,
+       "exactExcerpt": "In-Service Year: 2029 Project Name: SAV: BOULEVARD \u2013 MAGNOLIA \u2013 TRUMAN PARKWAY 115 KV TRANSMISSION LINES, REBUILD",
+       "supports": "in-service year 2029 (SERTP 2025)",
+       "verifiedByScript": true
+      }
+     ],
+     "current": true
+    },
+    {
      "claimSourceId": "gpc-irp-2025-vol3",
-     "label": "need date (in-service)",
+     "label": "need date (2024 Ten-Year Plan)",
      "date": {
       "earliest": "2028-06-01",
       "latest": "2028-06-01",
@@ -13751,12 +13806,13 @@
        "verifiedByScript": true
       }
      ],
-     "current": true
+     "current": false
     }
    ],
    "knownCoordination": [],
    "caveats": [
-    "Listed with project sponsor \u201cSAV\u201d (Georgia Power's Savannah area) in the Ten-Year Plan summary table."
+    "Listed with project sponsor \u201cSAV\u201d (Georgia Power's Savannah area) in the Ten-Year Plan summary table.",
+    "SERTP 2025 (November 2025) gives an in-service year of 2029; the Ten-Year Plan (a December 2024 snapshot) gives a Need Date of 06/01/2028. The newer year is used; the Need Date is kept as version history."
    ],
    "docketId": "TEAMS 20407 \u00b7 zone 219",
    "region": "southeast"
@@ -17280,7 +17336,8 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Bounds: the Ten-Year Plan's Start Date \u2192 the SERTP 2025 in-service year (2028), which replaces the plan's Need Date; the months of field work within it are not stated."
+     "note": "Bounds: the Ten-Year Plan's Start Date \u2192 the SERTP 2025 in-service year (2028), which replaces the plan's Need Date; the months of field work within it are not stated.",
+     "sourceLabel": "Georgia Power Ten-Year Plan start \u2192 SERTP 2025 in-service year"
     }
    ],
    "completionClaims": [
@@ -23047,13 +23104,67 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Project window as published (Start Date \u2192 Need Date); the months of field work within it are not stated, so only the bounds are used."
+     "note": "Project window as published (Start Date \u2192 Need Date); the months of field work within it are not stated, so only the bounds are used.",
+     "supersededBy": "gpc-20784:w2"
+    },
+    {
+     "claimSourceId": "sertp-2025-plan",
+     "phase": "unknown",
+     "start": {
+      "earliest": "2029-06-01",
+      "latest": "2029-06-01",
+      "precision": "day"
+     },
+     "end": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "boundsOnly": true,
+     "evidence": [
+      {
+       "sourceId": "gpc-irp-2025-vol3",
+       "page": 407,
+       "exactExcerpt": "Need Date 06/01/2032 Start Date 06/01/2029",
+       "supports": "need (in-service) date and start date",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "sertp-2025-plan",
+       "page": 131,
+       "exactExcerpt": "In-Service Year: Project Name: 2029 SAV: COLEMAN \u2013 MELDRIM 115 KV TRANSMISSION LINE, REBUILD",
+       "supports": "in-service year 2029 (SERTP 2025)",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Bounds: the Ten-Year Plan's Start Date \u2192 the SERTP 2025 in-service year (2029), which replaces the plan's Need Date; the months of field work within it are not stated.",
+     "sourceLabel": "Georgia Power Ten-Year Plan start \u2192 SERTP 2025 in-service year"
     }
    ],
    "completionClaims": [
     {
+     "claimSourceId": "sertp-2025-plan",
+     "label": "in-service year (SERTP 2025)",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "sertp-2025-plan",
+       "page": 131,
+       "exactExcerpt": "In-Service Year: Project Name: 2029 SAV: COLEMAN \u2013 MELDRIM 115 KV TRANSMISSION LINE, REBUILD",
+       "supports": "in-service year 2029 (SERTP 2025)",
+       "verifiedByScript": true
+      }
+     ],
+     "current": true
+    },
+    {
      "claimSourceId": "gpc-irp-2025-vol3",
-     "label": "need date (in-service)",
+     "label": "need date (2024 Ten-Year Plan)",
      "date": {
       "earliest": "2032-06-01",
       "latest": "2032-06-01",
@@ -23068,13 +23179,15 @@
        "verifiedByScript": true
       }
      ],
-     "current": true
+     "current": false
     }
    ],
    "knownCoordination": [],
    "caveats": [
     "The rebuilt section runs from Four Lakes to Meldrim, about 3 mi. Four Lakes is OSM way/1489153847 (32.10050,-81.37288, Georgia Power, 115 kV, 2025), but OSM does not connect it to the line. The Coleman - Meldrim 115 kV segment way/660617933 (2.76 mi) runs from a junction about 1.8 km north of Four Lakes to Meldrim.",
-    "Listed with project sponsor \u201cSAV\u201d (Georgia Power's Savannah area) in the Ten-Year Plan summary table."
+    "Listed with project sponsor \u201cSAV\u201d (Georgia Power's Savannah area) in the Ten-Year Plan summary table.",
+    "SERTP 2025 (November 2025) gives an in-service year of 2029; the Ten-Year Plan (a December 2024 snapshot) gives a Need Date of 06/01/2032. The newer year is used; the Need Date is kept as version history.",
+    "SERTP 2025 describes a longer rebuild (Four Lakes \u2013 Structure 76A, approximately 8.1 miles) than the Ten-Year Plan's 3-mile Four Lakes \u2013 Meldrim section; its 2029 in-service year is used as the newer statement, but the two may not describe identical work."
    ],
    "docketId": "TEAMS 20784 \u00b7 zone 219",
    "region": "southeast"
@@ -25151,38 +25264,30 @@
     "precision": "none",
     "evidence": []
    },
-   "constructionWindows": [
+   "constructionWindows": [],
+   "completionClaims": [
     {
-     "claimSourceId": "gpc-irp-2025-vol3",
-     "phase": "unknown",
-     "start": {
-      "earliest": "2030-06-01",
-      "latest": "2030-06-01",
-      "precision": "day"
+     "claimSourceId": "sertp-2025-plan",
+     "label": "in-service year (SERTP 2025)",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
      },
-     "end": {
-      "earliest": "2034-06-01",
-      "latest": "2034-06-01",
-      "precision": "day"
-     },
-     "continuous": true,
-     "boundsOnly": true,
      "evidence": [
       {
-       "sourceId": "gpc-irp-2025-vol3",
-       "page": 424,
-       "exactExcerpt": "Need Date 06/01/2034 Start Date 06/01/2030",
-       "supports": "need (in-service) date and start date",
+       "sourceId": "sertp-2025-plan",
+       "page": 131,
+       "exactExcerpt": "In-Service Year: Project Name: 2029 SAV: LITTLE OGEECHEE 230/115 KV, BANK REPLACEMENT",
+       "supports": "in-service year 2029 (SERTP 2025)",
        "verifiedByScript": true
       }
      ],
-     "note": "Project window as published (Start Date \u2192 Need Date); the months of field work within it are not stated, so only the bounds are used."
-    }
-   ],
-   "completionClaims": [
+     "current": true
+    },
     {
      "claimSourceId": "gpc-irp-2025-vol3",
-     "label": "need date (in-service)",
+     "label": "need date (2024 Ten-Year Plan)",
      "date": {
       "earliest": "2034-06-01",
       "latest": "2034-06-01",
@@ -25197,12 +25302,14 @@
        "verifiedByScript": true
       }
      ],
-     "current": true
+     "current": false
     }
    ],
    "knownCoordination": [],
    "caveats": [
-    "Listed with project sponsor \u201cSAV\u201d (Georgia Power's Savannah area) in the Ten-Year Plan summary table."
+    "Listed with project sponsor \u201cSAV\u201d (Georgia Power's Savannah area) in the Ten-Year Plan summary table.",
+    "The Ten-Year Plan's Start Date (06/01/2030) is after the SERTP 2025 in-service year (2029); no project window is used.",
+    "SERTP 2025 (November 2025) gives an in-service year of 2029; the Ten-Year Plan (a December 2024 snapshot) gives a Need Date of 06/01/2034. The newer year is used; the Need Date is kept as version history."
    ],
    "docketId": "TEAMS 20787 \u00b7 zone 219",
    "region": "southeast"

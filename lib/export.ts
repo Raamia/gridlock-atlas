@@ -1,6 +1,7 @@
 import { IDX } from "@/lib/data";
 import type { DateBound, Match } from "@/lib/domain/types";
 import { precisionLabel } from "@/lib/format";
+import { currentInService } from "@/lib/matching/time";
 
 const cell = (v: string | number | undefined | null) => {
   const s = v === undefined || v === null ? "" : String(v);
@@ -18,6 +19,8 @@ const bound = (b: DateBound) => (b.precision === "day" && b.earliest === b.lates
  * docket_* keep the plan's own labels. review_radius_mi is the radius the row was flagged at, so geo_signal
  * reads against it. time_gap (day) is exact only when time_gap_basis is "exact": "at-least" is the gap between
  * the nearest edges of coarse (year/half-year/quarter/month) dates, and "ranges-overlap" means the stated ranges overlap (0).
+ * in_service_a/b are each project's current in-service claim whenever one is published, even when the other side's is not
+ * (then time_gap and time_gap_basis are blank).
  */
 export function overlapTableCsv(matches: Match[]): string {
   const head = [
@@ -73,8 +76,11 @@ export function overlapTableCsv(matches: Match[]): string {
       m.reviewStatus,
       m.conflicts.length,
       g ? (!g.coarse ? "exact" : g.gapDays === 0 ? "ranges-overlap" : "at-least") : "",
-      g ? bound(g.boundA) : "",
-      g ? bound(g.boundB) : "",
+      // the same claims the gap is computed from (inServiceGap reads currentInService)
+      ...[a, b].map((p) => {
+        const isd = currentInService(p);
+        return isd ? bound(isd.date) : "";
+      }),
       a.docketId ?? "",
       b.docketId ?? "",
       m.id,

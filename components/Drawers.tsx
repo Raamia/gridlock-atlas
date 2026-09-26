@@ -130,6 +130,19 @@ function Metric({ n, label, suffix }: { n: number; label: string; suffix?: strin
 
 /* ---------------------------------- method ---------------------------------- */
 
+const CLUSTER_LABEL: Record<string, string> = {
+  "beci-columbia": "BECI · Columbia",
+  controls: "Upper Midwest controls",
+  "dairyland-alma-blair": "Alma–Blair",
+  "grid-forward": "Grid Forward",
+  "mn-lrtp": "Minnesota LRTP",
+  "potter-beckham": "Potter–Beckham",
+  "sc-ga-context": "SC–GA context",
+  "sc-ga-desc": "DESC plan",
+  "sc-ga-gpc": "Georgia Power plan",
+  "xcel-wwtc": "Western Wisconsin (WWTC)",
+};
+
 export function MethodDrawer() {
   const open = useAtlas((s) => s.methodOpen);
   const set = useAtlas((s) => s.set);
@@ -164,8 +177,9 @@ export function MethodDrawer() {
           window — both can support at most a “possible” overlap. The in-service gap in days (the sponsor&apos;s secondary signal) informs ranking; missing windows stay “unknown.”
         </Rule>
         <Rule k="Status">
-          Documented joint work, tie lines or interface coordination file a pair under <i>Known coordination</i>. Anything else within the radius is <i>Needs review</i> — which means the
-          reviewed sources are silent, never that the utilities are uncoordinated.
+          Documented joint work or interface coordination between the two projects (a sourced coordination claim naming the other project, or a shared initiative) files a pair under{" "}
+          <i>Known coordination</i>; a tie line alone does not. Anything else within the radius is <i>Needs review</i> — which means the reviewed sources are silent, never that the
+          utilities are uncoordinated.
         </Rule>
         <Rule k="Rank">
           Explainable ordering, not a probability: shared facility or closer centers first (up to 60 pts), then schedule (window overlap, or in-service gap within {IN_SERVICE_HORIZON_DAYS / 365}{" "}
@@ -232,7 +246,7 @@ export function MethodDrawer() {
           <ul className="space-y-1.5">
             {openQs.map((u, i) => (
               <li key={i} className="rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug text-text-1 ring-1 ring-line [overflow-wrap:anywhere]">
-                <span className="mono mr-1.5 text-[10px] uppercase text-text-3">{u.cluster}</span>
+                <span className="mono mr-1.5 text-[10px] uppercase text-text-3">{CLUSTER_LABEL[u.cluster] ?? u.cluster}</span>
                 {u.note}
               </li>
             ))}
@@ -295,8 +309,8 @@ function CorpusChecks() {
       const m = run.matches.find((x) => x.projectAId === "xcel-wwtc" || x.projectBId === "xcel-wwtc");
       out.push({
         label: "Xcel vs PSC completion dates",
-        expect: "conflict shown, TIME unaffected",
-        ok: m ? m.conflicts.some((c) => c.projectId === "xcel-wwtc" && c.field === "completion" && !c.affectsMatch) : null,
+        expect: "conflict shown, every source's window evaluated",
+        ok: m ? m.conflicts.some((c) => c.projectId === "xcel-wwtc" && c.field === "completion" && c.sides.length > 1) && m.time !== "no-match" : null,
         got: m ? `${m.conflicts.length} conflict(s) · TIME ${m.time}` : "—",
       });
     }

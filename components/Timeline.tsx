@@ -9,9 +9,10 @@ import { IDX, SNAPSHOT } from "@/lib/data";
 import type { CompletionClaim, ConstructionWindow, Match, Project } from "@/lib/domain/types";
 import { formatBound, formatSpan, formatWindow, precisionLabel } from "@/lib/format";
 import { usePreviewPair, useWidth } from "@/lib/hooks";
-import { activeWindows, coarsest, displayWindowGroups } from "@/lib/matching/time";
-import { conflictMatches, ownerNames, windowGroupText } from "@/lib/selectors";
+import { activeWindows, coarsest, dayCount, displayWindowGroups, endsWindow } from "@/lib/matching/time";
+import { conflictMatches, ownerNames, windowGroupText, windowSourceText } from "@/lib/selectors";
 import { useAtlas } from "@/lib/store";
+import { windowDocs, windowNote } from "./ui";
 
 const LABEL_W = 208;
 /** Row = bars in the top BAR_H px, then a lane for completion claims so diamonds and dates never sit on bar text. */
@@ -217,7 +218,7 @@ function InServiceGap({ m, y0, y1 }: { m: Match; y0: number; y1: number }) {
         <span className="mono translate-y-1/2 whitespace-nowrap rounded bg-bg-1 px-1.5 text-[10px] text-text-1">
           {g.coarse && g.gapDays === 0
             ? "In-service ranges overlap at stated precision"
-            : `Δ ${g.coarse ? "≥" : ""}${g.gapDays.toLocaleString("en-US")} days between in-service dates`}
+            : `Δ ${g.coarse ? "≥" : ""}${dayCount(g.gapDays)} between in-service dates`}
         </span>
       </div>
     </div>
@@ -246,7 +247,7 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
   const track = useRef<HTMLDivElement>(null);
   const width = useWidth(track);
   // two documents from one publisher with the same window read as one bar (same grouping as the inspector)
-  const groups = displayWindowGroups(p, (id) => IDX.source(id)?.publisher).map((g) => g.ws);
+  const groups = displayWindowGroups(p, (id) => IDX.source(id)?.publisher);
   const conflict = m.conflicts.find((c) => c.projectId === p.id && c.field === "completion");
   const claims = p.completionClaims;
   const xs = claims.map((c) => ((pct(c.date.earliest, y0, y1) + pct(c.date.latest, y0, y1)) / 200) * width);
@@ -275,7 +276,7 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
           </div>
         )}
         {groups.slice(0, 2).map((g, i) => (
-          <WindowBar key={g[0].id} ws={g} color={color} y0={y0} y1={y1} top={groups.length === 1 ? 7 : 1 + i * 17} height={groups.length === 1 ? 20 : 14} />
+          <WindowBar key={g.ws[0].id} ws={g.ws} sourceIds={g.sourceIds} color={color} y0={y0} y1={y1} top={groups.length === 1 ? 7 : 1 + i * 17} height={groups.length === 1 ? 20 : 14} />
         ))}
         {conflict && <ConflictLink p={p} claimIds={conflict.claimIds} y0={y0} y1={y1} emphasize={emphasize} label={labels.get("conflict")} />}
         {claims.map((c) => (
@@ -285,7 +286,7 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
             y0={y0}
             y1={y1}
             conflicted={!!conflict?.claimIds.includes(c.id)}
-            boundsWindow={!!conflict?.affectsMatch && c.current !== false && conflict.claimIds.includes(c.id)}
+            boundsWindow={endsWindow(p, c)}
             emphasize={emphasize}
             label={labels.get(c.id)}
           />
@@ -295,17 +296,17 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
   );
 }
 
-function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[]; color: string; y0: number; y1: number; top: number; height: number }) {
+function WindowBar({ ws, sourceIds, color, y0, y1, top, height }: { ws: ConstructionWindow[]; sourceIds: string[]; color: string; y0: number; y1: number; top: number; height: number }) {
   const [anchor, setAnchor] = useState<DOMRect | null>(null);
   const first = ws.reduce((x, y) => (y.start.earliest < x.start.earliest ? y : x));
   const last = ws.reduce((x, y) => (y.end.latest > x.end.latest ? y : x));
   const s0 = pct(first.start.earliest, y0, y1);
   const e1 = pct(last.end.latest, y0, y1);
   const width = Math.max(e1 - s0, 0.4);
-  const src = IDX.source(ws[0].claimSourceId);
+  const credit = windowSourceText(ws, IDX);
+  const docs = windowDocs(ws, sourceIds);
   const coarse = ws.some((w) => !w.continuous || w.boundsOnly);
   const bounds = ws.every((w) => w.boundsOnly);
-  const w0 = ws[0];
   const open = ws.some((w) => w.openEnded);
   // the earliest start is only a floor ("spending before 2026"): no start year is shown
   const openStart = !!first.openStart;
@@ -361,14 +362,18 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
         {/* the source gives up its room before the date does; the date truncates only when it alone overflows the bar */}
         <span className="max-w-full shrink-0 truncate">{label}</span>
         <span className="ml-1.5 min-w-0 truncate font-normal text-text-1/80">
-          · {src?.publisher ?? w0.claimSourceId}
+          · {credit}
           {note}
         </span>
       </div>
       {anchor && (
         <FloatingTip anchor={anchor} width={320} align="start">
-          <div className="font-medium text-text-0">{src?.title}</div>
-          <div className="text-text-2">{src?.publisher}</div>
+          {docs.map((d) => (
+            <div key={d} className="font-medium text-text-0">
+              {d}
+            </div>
+          ))}
+          <div className="text-text-2">{credit}</div>
           <ul className="mt-1.5 space-y-1">
             {ws.map((w) => (
               <li key={w.id} className="text-text-2">
@@ -377,7 +382,7 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
                   {" "}
                   · {precisionLabel(coarsest([w]))} precision{w.openStart ? " · start not published" : ""}
                 </span>
-                {w.note && <div className="text-[10.5px] leading-snug text-text-3">{w.note}</div>}
+                {windowNote(w) && <div className="text-[10.5px] leading-snug text-text-3">{windowNote(w)}</div>}
               </li>
             ))}
           </ul>
@@ -400,7 +405,7 @@ function CompletionMark({
   y0: number;
   y1: number;
   conflicted: boolean;
-  /** the newer disputed date is also the outer bound of the current schedule window (Conflict.affectsMatch) */
+  /** the date also ends a current schedule window used for the TIME match (endsWindow) */
   boundsWindow: boolean;
   emphasize: boolean;
   /** side the date label fits on; hidden (hover only) when it would collide */
@@ -412,7 +417,8 @@ function CompletionMark({
   const x1 = pct(c.date.latest, y0, y1);
   const src = IDX.source(c.claimSourceId);
   const tone = conflicted ? "var(--conflict)" : "var(--text-1)";
-  const side = label ?? (hover ? "r" : null);
+  // an unlabeled diamond shows its date in the hover tip only, so it never lands on neighbouring text
+  const side = label ?? null;
   return (
     <div
       className={clsx("absolute", hover ? "z-40" : "z-20")}
@@ -444,7 +450,11 @@ function CompletionMark({
           {c.current === false && <div className="text-[10.5px] text-conflict">Superseded by a newer source</div>}
           <div className="text-text-2">{src?.publisher}</div>
           <div className="mt-1 text-text-3">
-            {boundsWindow ? "This in-service date also bounds the current schedule window used for the TIME match." : "Completion dates never drive the construction-window match."}
+            {boundsWindow
+              ? "This date is also the end of a current schedule window used for the TIME match."
+              : c.current === false
+                ? "Earlier edition: kept as version history, not used for TIME."
+                : "Not used as a schedule-window bound."}
           </div>
         </FloatingTip>
       )}

@@ -8,7 +8,8 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
  * radius reply race, demo Finish under the brief, demo radius, overview chip count, filtered empty state,
  * engine failure message, 3D overview tilt, reviewer note on Escape, sources "no match" state, brief print,
  * demo card vs inspector, demo step 1 reset and tabs, demo keys behind a drawer, demo focus on start,
- * demo exit during a pending step, deep links at a non-default radius.
+ * demo exit during a pending step, deep links at a non-default radius, keyboard presenter through Finish,
+ * phone demo map strip, touch tap on a project dot.
  */
 
 const SE_PAIR = "desc-6888__gpc-20065"; // top Savannah River lead: DESC Deerfield × Georgia Power Goshen–McIntosh rebuild
@@ -18,6 +19,7 @@ type MapHandle = {
   getCenter: () => { lng: number; lat: number };
   isStyleLoaded: () => boolean;
   loaded: () => boolean;
+  isMoving: () => boolean;
   getStyle: () => { layers: { id: string }[] };
   getSource: (id: string) => { serialize: () => { data: { features: unknown[] } } } | undefined;
 };
@@ -442,6 +444,51 @@ test.describe("interactions", () => {
     expect(await page.evaluate(() => (window as unknown as { __map: { keyboard: { isEnabled: () => boolean } } }).__map.keyboard.isEnabled())).toBe(false);
   });
 
+  test("guided demo: a keyboard presenter finishes with Space, and never copies the brief", async ({ page, context }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await page.goto("/");
+    await mapReady(page);
+    await page.evaluate(() => navigator.clipboard.writeText("untouched"));
+    await page.getByRole("button", { name: "Start guided demo" }).click();
+    const demo = page.getByRole("region", { name: "Guided demo" });
+    const brief = page.getByRole("dialog", { name: "Review brief" });
+    const next = demo.getByRole("button", { name: /^Next/ });
+    await expect(next).toBeFocused();
+
+    // Previous disables itself on step 1: focus goes back to Next, not to <body>
+    await page.keyboard.press("Space");
+    await expect(demo).toContainText("2/8");
+    await page.keyboard.press("Shift+Tab");
+    await expect(demo.getByRole("button", { name: "Previous step" })).toBeFocused();
+    await page.keyboard.press("Space");
+    await expect(demo).toContainText("1/8");
+    await expect(next).toBeFocused();
+
+    for (let step = 2; step <= 8; step++) {
+      await page.keyboard.press("Space");
+      await expect(demo).toContainText(`${step}/8`);
+    }
+    await expect(brief).toBeVisible({ timeout: 15_000 });
+    await page.waitForTimeout(400); // past the brief's own initial focus
+    const finish = demo.getByRole("button", { name: "Finish" });
+    await expect(finish).toBeFocused();
+    // the card's buttons share the brief's Tab cycle
+    await page.keyboard.press("Shift+Tab");
+    await expect(demo.getByRole("button", { name: "Previous step" })).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(finish).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(brief.getByRole("button", { name: "Copy Markdown" })).toBeFocused();
+    await page.keyboard.press("Shift+Tab");
+    await expect(finish).toBeFocused();
+
+    await page.keyboard.press("Space");
+    await expect(demo).toBeHidden();
+    await expect(brief).toBeHidden();
+    await expect(page.getByRole("button", { name: "Start guided demo" })).toBeFocused();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe("untouched");
+  });
+
   test("guided demo: leaving while a step waits for the engine drops that step", async ({ page }) => {
     await page.route(/\/api\/matches/, async (route) => {
       await new Promise((r) => setTimeout(r, 1200));
@@ -592,5 +639,65 @@ test.describe("interactions", () => {
 
     await filter.fill("");
     await expect(rows).toHaveCount(all);
+  });
+
+  test.describe("phone", () => {
+    test.use({ viewport: { width: 375, height: 667 }, isMobile: true, hasTouch: true });
+
+    test("guided demo keeps a strip of map for the pair between the card and the inspector sheet", async ({ page }) => {
+      await page.goto("/");
+      await page.getByRole("button", { name: "Start guided demo" }).click();
+      const demo = page.getByRole("region", { name: "Guided demo" });
+      const sheet = page.getByRole("complementary", { name: "Evidence inspector" });
+      await expect(demo).toContainText("1/8");
+      for (let step = 2; step <= 7; step++) {
+        await demo.getByRole("button", { name: /^Next/ }).click();
+        await expect(demo).toContainText(`${step}/8`);
+        if (step < 3) {
+          await expect(page.locator("[data-match-id]").first()).toBeVisible({ timeout: 15_000 });
+          continue;
+        }
+        await expect(sheet).toBeVisible({ timeout: 15_000 });
+        // once the camera and the callouts settle: at least 110 px of map between the card and the sheet, and the
+        // pair's callouts all drawn inside that strip, on screen
+        const strip = () =>
+          page.evaluate(() => {
+            const card = document.querySelector('[aria-label="Guided demo"]')!.getBoundingClientRect();
+            const top = document.querySelector('aside[aria-label="Evidence inspector"]')!.getBoundingClientRect().top;
+            const shown = [...document.querySelectorAll<HTMLElement>("[data-callout]")]
+              .filter((c) => Number(getComputedStyle(c).opacity) > 0.1)
+              .map((c) => c.getBoundingClientRect());
+            const stray = shown.filter((r) => r.top < card.bottom - 1 || r.bottom > top + 1 || r.left < -1 || r.right > window.innerWidth + 1);
+            const gap = Math.round(top - card.bottom);
+            const moving = (window as unknown as { __map: MapHandle }).__map.isMoving();
+            return { gap, moving, enough: gap >= 110, labels: shown.length >= 2, stray: stray.length };
+          });
+        await expect.poll(strip, { timeout: 10_000, message: `step ${step}` }).toMatchObject({ moving: false, enough: true, labels: true, stray: 0 });
+      }
+    });
+
+    test("tapping a project dot shows its card", async ({ page }) => {
+      await page.goto("/");
+      await mapReady(page);
+      await page.waitForTimeout(800);
+      type Touchable = { getCanvas: () => HTMLCanvasElement; project: (c: [number, number]) => { x: number; y: number }; queryRenderedFeatures: (o: { layers: string[] }) => { properties: Record<string, unknown>; geometry: { coordinates: [number, number] } }[] };
+      const pt = await page.evaluate(() => {
+        const m = (window as unknown as { __map: Touchable }).__map;
+        const canvas = m.getCanvas();
+        const rect = canvas.getBoundingClientRect();
+        for (const f of m.queryRenderedFeatures({ layers: ["gl-points"] })) {
+          if (!f.properties.projectId) continue;
+          const p = m.project(f.geometry.coordinates);
+          const [x, y] = [rect.left + p.x, rect.top + p.y];
+          if (document.elementFromPoint(x, y) === canvas) return { x, y };
+        }
+        return null;
+      });
+      expect(pt, "a plan dot on the visible map").toBeTruthy();
+      await page.touchscreen.tap(pt!.x, pt!.y);
+      const card = page.locator(".mapboxgl-popup");
+      await expect(card).toBeVisible();
+      await expect(card).not.toBeEmpty();
+    });
   });
 });

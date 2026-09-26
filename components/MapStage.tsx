@@ -3,7 +3,8 @@
 import mapboxgl, { type GeoJSONSource, type LngLatBoundsLike, type StyleSpecification } from "mapbox-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
-import { inServicePhrase } from "@/lib/describe";
+import type { Project } from "@/lib/domain/types";
+import { geoShort, inServicePhrase } from "@/lib/describe";
 import { formatMilesNear } from "@/lib/format";
 import { usePreviewPair, useReducedMotion, useSelectedPair } from "@/lib/hooks";
 import {
@@ -409,19 +410,44 @@ export default function MapStage() {
     });
 
     const hoverLayers = ["gl-overlap-dots", "gl-overlaps", "gl-routes", "gl-points", "gl-halos-fill"];
+    // touch: no hover and no mouseout to ever close a hover card, so a tap shows the project card instead
+    const isTouch = (oe: Event) =>
+      !!(oe as MouseEvent & { sourceCapabilities?: { firesTouchEvents?: boolean } }).sourceCapabilities?.firesTouchEvents || !!window.matchMedia?.("(hover: none)").matches;
+    const showCard = (html: string, at: mapboxgl.LngLat) => {
+      if (!popup.current) popup.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 14, maxWidth: "300px" });
+      popup.current.setLngLat(at).setHTML(html).addTo(map);
+    };
+    const projectCard = (f: mapboxgl.MapboxGeoJSONFeature, p: Project) => {
+      const label = (f.properties?.label as string | undefined) ?? p.shortTitle;
+      const precision = (f.properties?.precision as string | undefined) ?? "";
+      return `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:260px">
+        <div class="font-medium text-text-0">${escapeHtml(p.title)}</div>
+        <div class="text-text-2">${escapeHtml(ownerNames(p, IDX))}</div>
+        <div class="mono mt-1 text-[10.5px] text-text-3">${escapeHtml(label)}${precision ? ` · ${escapeHtml(precisionText(precision))}` : ""}</div>
+      </div>`;
+    };
     map.on("click", (ev) => {
       const layers = ["gl-overlap-dots", "gl-overlaps"].filter((l) => map.getLayer(l));
-      const f = map.queryRenderedFeatures(ev.point, { layers })[0];
-      const id = f?.properties?.id as string | undefined;
-      if (!id) return;
-      // a tap also fires an emulated mousemove that opened the hover card; it would ride along with the camera
-      popup.current?.remove();
-      useAtlas.getState().select(id);
+      const id = map.queryRenderedFeatures(ev.point, { layers })[0]?.properties?.id as string | undefined;
+      if (id) {
+        // a tap also fires an emulated mousemove that opened the hover card; it would ride along with the camera
+        popup.current?.remove();
+        useAtlas.getState().select(id);
+        return;
+      }
+      if (!isTouch(ev.originalEvent)) return;
+      const { x, y } = ev.point;
+      const box: [mapboxgl.PointLike, mapboxgl.PointLike] = [
+        [x - 10, y - 10],
+        [x + 10, y + 10],
+      ];
+      const f = map.queryRenderedFeatures(box, { layers: hoverLayers.filter((l) => map.getLayer(l)) }).find((x) => x.properties?.projectId);
+      const p = f ? IDX.project(f.properties!.projectId as string) : undefined;
+      if (f && p) showCard(projectCard(f, p), ev.lngLat);
+      else popup.current?.remove();
     });
     const onMove = (ev: mapboxgl.MapMouseEvent) => {
-      // touch: no hover, and no mouseout to ever close a hover card
-      const oe = ev.originalEvent as MouseEvent & { sourceCapabilities?: { firesTouchEvents?: boolean } };
-      if (oe.sourceCapabilities?.firesTouchEvents || window.matchMedia?.("(hover: none)").matches) return;
+      if (isTouch(ev.originalEvent)) return;
       const layers = hoverLayers.filter((l) => map.getLayer(l));
       const all = map.queryRenderedFeatures(ev.point, { layers });
       const ov = all.find((x) => x.layer?.id === "gl-overlap-dots" || x.layer?.id === "gl-overlaps");
@@ -432,15 +458,25 @@ export default function MapStage() {
           const pa = IDX.project(m.projectAId);
           const pb = IDX.project(m.projectBId);
           const c = m.geoDetail.center;
-          const html = `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:280px">
+          const thr = m.geoDetail.thresholdMiles;
+          // flagged for a shared facility, not for distance: name the facility, never a bare "105 mi apart"
+          const byFacility = m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint";
+          const place = byFacility
+            ? `${geoShort(m).title}${c && c.miles > thr ? ` (centers ${formatMilesNear(c.miles, thr)} apart)` : ""}`
+            : c
+              ? `${formatMilesNear(c.miles, thr)} apart`
+              : geoShort(m).text;
+          showCard(
+            `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:280px">
             <div class="mono text-[10px] uppercase tracking-[0.08em]" style="color:#fbbf24">Flagged pair · P${m.priority}</div>
             <div class="mt-0.5 font-medium" style="color:#2fd6f2">${escapeHtml(pa.shortTitle)}</div>
             <div class="font-medium" style="color:#a78bfa">${escapeHtml(pb.shortTitle)}</div>
-            <div class="mono mt-1 text-[10.5px] text-text-2">${c ? `${escapeHtml(formatMilesNear(c.miles, m.geoDetail.thresholdMiles))} apart` : "shared site"}${m.timeDetail.inService ? ` · ${escapeHtml(inServicePhrase(m))}` : ""}</div>
+            <div class="mono mt-1 text-[10.5px] text-text-2">${escapeHtml(place)}</div>
+            ${m.timeDetail.inService ? `<div class="mono text-[10.5px] text-text-2">${escapeHtml(inServicePhrase(m))}</div>` : ""}
             <div class="mt-1 text-[10.5px] text-text-3">Click to inspect</div>
-          </div>`;
-          if (!popup.current) popup.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 14, maxWidth: "300px" });
-          popup.current.setLngLat(ev.lngLat).setHTML(html).addTo(map);
+          </div>`,
+            ev.lngLat,
+          );
         }
         return;
       }
@@ -455,15 +491,7 @@ export default function MapStage() {
       const p = IDX.project(pid);
       if (!p) return;
       if (useAtlas.getState().hoveredProjectId !== pid && !useAtlas.getState().selectedMatchId) set({ hoveredProjectId: pid });
-      const label = (f.properties?.label as string | undefined) ?? p.shortTitle;
-      const precision = (f.properties?.precision as string | undefined) ?? "";
-      const html = `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:260px">
-        <div class="font-medium text-text-0">${escapeHtml(p.title)}</div>
-        <div class="text-text-2">${escapeHtml(ownerNames(p, IDX))}</div>
-        <div class="mono mt-1 text-[10.5px] text-text-3">${escapeHtml(label)}${precision ? ` · ${escapeHtml(precisionText(precision))}` : ""}</div>
-      </div>`;
-      if (!popup.current) popup.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 14, maxWidth: "280px" });
-      popup.current.setLngLat(ev.lngLat).setHTML(html).addTo(map);
+      showCard(projectCard(f, p), ev.lngLat);
     };
     map.on("mousemove", onMove);
     map.on("mouseout", () => popup.current?.remove());
@@ -581,10 +609,17 @@ export default function MapStage() {
           { x: l, y: 12 },
           { x: -w / 2, y: 22 },
         ];
-        return left ? [spots[1], spots[0], spots[2], spots[4], spots[3], spots[5]] : spots;
+        // last resort: fully above or below the dot, slid toward it (the dot is ±9px)
+        const tight = [
+          { x: -12, y: 12 },
+          { x: 12 - w, y: 12 },
+          { x: -12, y: -12 - h },
+          { x: 12 - w, y: -12 - h },
+        ];
+        return left ? [spots[1], spots[0], spots[2], spots[4], spots[3], spots[5], tight[1], tight[0], tight[3], tight[2]] : [...spots, ...tight];
       });
-      // the shared-site dot costs extra to cover: it is the pair's one amber landmark
-      dots.push({ at: [site.lon, site.lat], weight: 3 });
+      // the shared-site dot is the pair's one amber landmark: covering it is all but ruled out
+      dots.push({ at: [site.lon, site.lat], weight: 20, site: true });
     }
     const aAbove = !c || c.a[1] >= c.b[1];
     for (const [id, role] of [
@@ -646,7 +681,8 @@ export default function MapStage() {
       const ch = map.getContainer().clientHeight;
       const rect = map.getContainer().getBoundingClientRect();
       const mobile = cw < 640;
-      const sheetTop = window.innerHeight * 0.46;
+      // the phone sheet moves down to clear a tall demo card: read where it really starts
+      const sheetTop = document.querySelector('aside[aria-label="Evidence inspector"]')?.getBoundingClientRect().top ?? window.innerHeight * 0.46;
       // the guided-demo card sits over the map (top on phones, bottom-left on desktop): keep the pair clear of it
       const demo = st.demoStep !== null && !st.briefOpen ? document.querySelector('[aria-label="Guided demo"]')?.getBoundingClientRect() : undefined;
       const pad = mobile
@@ -714,7 +750,8 @@ export default function MapStage() {
   }, [cameraNonce, selected?.match.id, inspectorOpen, demoOn, mapReady]);
 
   // phones: the demo card sits over the top of the map and changes height from step to step (steps 3-5 keep
-  // the same pair, so nothing else refits); refit when it grows or shrinks, and the callouts relayout after the move
+  // the same pair, so nothing else refits), and the inspector sheet's top follows the card down; refit when it grows
+  // or shrinks (the camera reads the sheet's new top), and the callouts relayout after the move
   useEffect(() => {
     const map = mapRef.current;
     const card = document.querySelector<HTMLElement>('[aria-label="Guided demo"]');
@@ -818,7 +855,7 @@ interface Callout {
 }
 
 type Box = { x: number; y: number; w: number; h: number };
-type Dot = { at: [number, number]; weight: number };
+type Dot = { at: [number, number]; weight: number; site?: boolean };
 
 function overlapArea(a: Box, b: Box) {
   const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
@@ -836,35 +873,62 @@ function overlapArea(a: Box, b: Box) {
 function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[], moving = false) {
   if (!items.length) return;
   const host = map.getContainer().getBoundingClientRect();
-  const view: Box = { x: 4, y: 4, w: host.width - 8, h: host.height - 8 };
-  const fixed: Box[] = [...document.querySelectorAll<HTMLElement>('[data-map-ui], [aria-label="Evidence inspector"]')]
+  // the map under the inspector (a side column, or a bottom sheet on phones) and under a full-width phone demo card is
+  // hidden outright: take it out of the usable view rather than weighing it as a panel
+  let [top, bottom, right] = [4, host.height - 4, host.width - 4];
+  for (const q of ['[aria-label="Evidence inspector"]', '[aria-label="Guided demo"]']) {
+    const r = document.querySelector(q)?.getBoundingClientRect();
+    if (!r || !r.width || !r.height) continue;
+    const [t, b, l] = [r.top - host.top, r.bottom - host.top, r.left - host.left];
+    if (r.width >= host.width * 0.9) {
+      if (t + b < host.height) top = Math.max(top, b + 4);
+      else bottom = Math.min(bottom, t - 4);
+    } else if (Math.min(b, host.height) - Math.max(t, 0) >= host.height / 2 && l > host.width / 4) right = Math.min(right, l - 4);
+  }
+  const view: Box = { x: 4, y: top, w: Math.max(80, right - 4), h: Math.max(40, bottom - top) };
+  const panels: Box[] = [...document.querySelectorAll<HTMLElement>("[data-map-ui]")]
     .map((el) => el.getBoundingClientRect())
     .filter((r) => r.width > 0 && r.height > 0)
     .map((r) => ({ x: r.left - host.left, y: r.top - host.top, w: r.width, h: r.height }));
   const dotBoxes = dots.map((d) => {
     const p = map.project(d.at);
-    return { x: p.x - 9, y: p.y - 9, w: 18, h: 18, weight: d.weight };
+    return { x: p.x - 9, y: p.y - 9, w: 18, h: 18, weight: d.weight, site: !!d.site };
   });
-  // the pair's place names (gl-point-labels: 11px, anchored top 1.1em below the dot, wrapped at 10em)
+  const sites = dotBoxes.filter((d) => d.site).map((d) => ({ x: d.x + 9, y: d.y + 9 }));
+  // the pair's place names (gl-point-labels: 11px, anchored top 1.1em below the dot, wrapped at 10em); the one on the
+  // shared site is left out, since the site callout already names that place
+  const names: Box[] = [];
   const labels = map.getLayer("gl-point-labels") ? map.queryRenderedFeatures({ layers: ["gl-point-labels"] }) : [];
   for (const f of labels) {
     if (f.geometry.type !== "Point") continue;
     const p = map.project(f.geometry.coordinates as [number, number]);
+    if (sites.some((s) => Math.hypot(s.x - p.x, s.y - p.y) < 2)) continue;
     const text = String(f.properties?.label ?? "");
     const w = Math.min(text.length * 6, 116);
     const h = Math.ceil((text.length * 6) / 116) * 13;
-    fixed.push({ x: p.x - w / 2, y: p.y + 10, w, h });
+    names.push({ x: p.x - w / 2, y: p.y + 10, w, h });
   }
+  const clamp = (v: number, lo: number, hi: number) => Math.min(Math.max(v, lo), Math.max(lo, hi));
   const cands = items.map((c) => {
     const p = map.project(c.at);
     const [w, h] = [c.box.offsetWidth, c.box.offsetHeight];
-    return c.spots(w, h).map((s) => ({ s, r: { x: p.x + s.x, y: p.y + s.y, w, h } }));
+    const base = c.spots(w, h).map((s) => ({ s, r: { x: p.x + s.x, y: p.y + s.y, w, h } }));
+    // each spot again, slid back inside the view by at most half the box so it stays attached to its point; the
+    // originals keep indices 0..n-1, so a callout's remembered spot stays stable and ties go to the preferred spots
+    const slid = base.map(({ s, r }) => {
+      const sx = clamp(clamp(r.x, view.x, view.x + view.w - w) - r.x, -w / 2, w / 2);
+      const sy = clamp(clamp(r.y, view.y, view.y + view.h - h) - r.y, -h / 2, h / 2);
+      return { s: { x: s.x + sx, y: s.y + sy }, r: { x: r.x + sx, y: r.y + sy, w, h } };
+    });
+    return [...base, ...slid];
   });
   const grow = (r: Box): Box => ({ x: r.x - 4, y: r.y - 4, w: r.w + 8, h: r.h + 8 });
-  // covering another callout (or the shared site) costs more than covering a panel or running off screen
+  // clipped or hidden text is lost outright; covering map UI costs as much as covering another callout; the shared
+  // site's dot is weighted near a hard rule; a pair's own place names cost least
   const cost = (r: Box, placed: Box[]) =>
-    (r.w * r.h - overlapArea(r, view)) * 2 +
-    fixed.reduce((sum, t) => sum + overlapArea(r, t), 0) +
+    (r.w * r.h - overlapArea(r, view)) * 4 +
+    panels.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0) +
+    names.reduce((sum, t) => sum + overlapArea(r, t), 0) +
     dotBoxes.reduce((sum, t) => sum + t.weight * overlapArea(r, t), 0) +
     placed.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0);
 

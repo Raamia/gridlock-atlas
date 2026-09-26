@@ -11,7 +11,7 @@ import type {
 } from "@/lib/domain/types";
 import { displayTitle, formatBound } from "@/lib/format";
 import { DEFAULT_THRESHOLD_MILES, evaluateGeo } from "./geo";
-import { activeWindows, currentInService, DEADLINE, evaluateTime, windowsBySource } from "./time";
+import { activeWindows, currentInService, dayCount, DEADLINE, endsWindow, evaluateTime, windowsBySource } from "./time";
 
 export const ENGINE_VERSION = "gridlock-engine/1.1.0";
 
@@ -111,12 +111,9 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
         .sort((g1, g2) => Number(!g1.every((x) => x.earlier)) - Number(!g2.every((x) => x.earlier)) || names(g1)[0].localeCompare(names(g2)[0]))
         .map((g) => `${names(g).join(", ")}: ${formatBound(g[0].start)}`)
         .join(" → ");
-    // the newer date also feeds TIME when it is the outer bound of a current window that replaced an older one (GPC Start Date → SERTP year)
-    const boundsWindow = activeWindows(p).some(
-      (w) =>
-        p.constructionWindows.some((o) => o.supersededBy === w.id) &&
-        [...perSource.values()].some((c) => !c.earlier && c.sourceId === w.claimSourceId && c.end.latest === w.end.latest),
-    );
+    // disputed dates that also end a current TIME window (DESC/Dominion windows end at the SCRTP date, GPC's at the SERTP year, PSC/NSPW's at the completion quarter)
+    const claimIds = cGroups.flat().map((x) => x.id);
+    const boundClaimIds = claimIds.filter((id) => endsWindow(p, p.completionClaims.find((k) => k.id === id)!));
     out.push({
       id: `${p.id}:completion`,
       projectId: p.id,
@@ -125,8 +122,10 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
         ? `${onePublisher ? "Schedule changed between plan editions" : "Earlier date superseded by a later source"} — ${versionText()}`
         : "Sources give different completion / in-service dates — " + describe(cGroups, (d) => formatBound(d.start)),
       sides: cGroups.map((g) => ({ value: formatBound(g[0].start), sourceIds: g.map((x) => x.sourceId), claimIds: g.map((x) => x.id), earlier: g.every((x) => x.earlier) })),
-      claimIds: cGroups.flat().map((x) => x.id),
-      affectsMatch: boundsWindow,
+      claimIds,
+      affectsMatch: boundClaimIds.length > 0,
+      versionOnly,
+      boundClaimIds,
     });
   }
 
@@ -246,7 +245,9 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   // timing: more evidence never scores lower — confirmed 30 > possible 18–30 > unknown ≤ 15 > no-match 0
   const gap = time.detail.inService?.gapDays;
   const gapFactor = gap === undefined ? 0 : Math.max(0, 1 - gap / IN_SERVICE_HORIZON_DAYS);
-  const gapText = gap === undefined ? "" : `in-service dates ${time.detail.inService!.coarse ? "≥" : ""}${gap.toLocaleString("en-US")} days apart`;
+  const coarseGap = time.detail.inService?.coarse;
+  const gapText =
+    gap === undefined ? "" : coarseGap && gap === 0 ? "in-service dates overlap at stated precision" : `in-service dates ${coarseGap ? "≥" : ""}${dayCount(gap)} apart`;
   if (time.level === "confirmed") add(30, "Construction windows overlap");
   else if (time.level === "possible") add(18 + 12 * gapFactor, `Construction windows may overlap${gapText ? `; ${gapText}` : ""}`);
   else if (time.level === "unknown" && gap !== undefined) add(15 * gapFactor, gapText[0].toUpperCase() + gapText.slice(1));

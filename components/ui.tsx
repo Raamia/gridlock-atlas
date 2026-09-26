@@ -3,7 +3,9 @@
 import clsx from "clsx";
 import { AlertTriangle, CalendarRange, CircleDashed, Handshake, MapPin, Search } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
-import type { Match, Precision, ReviewStatus, SignalLevel } from "@/lib/domain/types";
+import { IDX } from "@/lib/data";
+import type { ConstructionWindow, Match, Precision, ReviewStatus, SignalLevel } from "@/lib/domain/types";
+import { readableNote } from "@/lib/selectors";
 
 export function Kbd({ children }: { children: ReactNode }) {
   return (
@@ -182,3 +184,28 @@ export function SectionTitle({ icon, children, right }: { icon?: ReactNode; chil
 }
 
 export const ROLE_COLOR = { a: "var(--a)", b: "var(--b)" } as const;
+
+/** Documents behind one display group of windows: a window credited to several documents (sourceLabel) lists each cited one, in citation order. */
+export function windowDocs(ws: ConstructionWindow[], sourceIds: string[] = [ws[0].claimSourceId]): string[] {
+  const ids = ws.some((w) => w.sourceLabel)
+    ? [...ws.flatMap((w) => w.evidenceIds.map((id) => IDX.evidence(id)?.sourceId)), ...ws.map((w) => w.claimSourceId)]
+    : sourceIds;
+  return [...new Set(ids.filter(Boolean) as string[])].map((id) => IDX.source(id)?.title ?? id);
+}
+
+/** A window's research note as readers see it: record ids named, schema notation ("continuous=false", the 2099 open-end sentinel) put in words. */
+export function windowNote(w: ConstructionWindow): string {
+  if (!w.note) return "";
+  return readableNote(w.note, IDX)
+    .replace(/,? so phase is 'unknown' and continuous=false:/g, ":")
+    .replace(/,?\s*phase 'unknown', continuous=false\)/g, ")")
+    .replace(/\s*\(\)/g, "")
+    .replace(/\bMarked continuous=false for this package because/g, "Not treated as one continuous phase for this package because")
+    .replace(/\bMarked non-continuous\./g, "Not treated as one continuous phase.")
+    .replace(/: end\.(?:earliest = start\.earliest and end\.)?latest(?: =)? \d{4}-\d\d-\d\d is an open-end sentinel meaning 'not published'/g, "")
+    .replace(/The end is the open sentinel(?: \([^)]*\))? meaning 'not published'\./g, "The end is not published.")
+    .replace(/; 'quarter' is the closest precision value\)/g, ")")
+    .split(/(?<=\.)\s+(?=[A-Z'(“"])/)
+    .filter((x) => !/^Display as |\bschema has no\b/.test(x))
+    .join(" ");
+}

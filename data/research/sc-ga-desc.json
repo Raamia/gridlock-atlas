@@ -2597,7 +2597,8 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Dominion project page: tree clearing and construction begin Q1 2025 (its timeline is marked 'Anticipated \u2013 Subject to Change'). The page gives no end, so the SCRTP planned in-service date bounds the window; the field work within is not dated."
+     "note": "Dominion project page: tree clearing and construction begin Q1 2025 (its timeline is marked 'Anticipated \u2013 Subject to Change'). The page gives no end, so the SCRTP planned in-service date bounds the window; the field work within is not dated.",
+     "sourceLabel": "Dominion project page start \u2192 SCRTP planned in-service"
     },
     {
      "claimSourceId": "desc-scrtp-2026-2030",
@@ -6825,8 +6826,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2025-01-01",
-      "latest": "2028-12-31",
+      "earliest": "2023-01-01",
+      "latest": "2026-12-31",
       "precision": "year"
      },
      "end": {
@@ -6837,6 +6838,13 @@
      "continuous": false,
      "openStart": true,
      "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 32,
+       "exactExcerpt": "Previous 2026 $4,412,330 $12,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 32,
@@ -6854,19 +6862,12 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 32,
-       "exactExcerpt": "Previous 2026 $4,412,330 $12,000",
-       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026 (under 5% of the total: treated as preconstruction)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 32,
        "exactExcerpt": "Planned In-Service Date 12/31/2028",
        "supports": "planned in-service date",
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024; spending under 5% of the total (2026: $12,000) is treated as preconstruction and does not start the window."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -7058,13 +7059,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 33,
-       "exactExcerpt": "Previous 2026 $3,760 $0",
-       "supports": "spending before 2026 ('Previous' column)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 33,
        "exactExcerpt": "2027 $3,000,000",
        "supports": "budgeted spending in 2027",
        "verifiedByScript": true
@@ -7074,6 +7068,13 @@
        "page": 33,
        "exactExcerpt": "Total $3,003,760",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 33,
+       "exactExcerpt": "Previous 2026 $3,760 $0",
+       "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -7516,13 +7517,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 35,
-       "exactExcerpt": "Previous 2026 $25,000 $0",
-       "supports": "spending before 2026 ('Previous' column)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 35,
        "exactExcerpt": "2028 $7,550,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -7532,6 +7526,13 @@
        "page": 35,
        "exactExcerpt": "Total $7,912,400",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 35,
+       "exactExcerpt": "Previous 2026 $25,000 $0",
+       "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -7768,13 +7769,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 36,
-       "exactExcerpt": "Previous 2026 $463,118 $0",
-       "supports": "spending before 2026 ('Previous' column)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 36,
        "exactExcerpt": "2028 $12,722,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -7784,6 +7778,13 @@
        "page": 36,
        "exactExcerpt": "Total $13,285,118",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 36,
+       "exactExcerpt": "Previous 2026 $463,118 $0",
+       "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -8250,13 +8251,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 38,
-       "exactExcerpt": "Previous 2026 $75,000 $0",
-       "supports": "spending before 2026 ('Previous' column)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 38,
        "exactExcerpt": "2028 $3,075,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -8266,6 +8260,13 @@
        "page": 38,
        "exactExcerpt": "Total $3,200,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 38,
+       "exactExcerpt": "Previous 2026 $75,000 $0",
+       "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -10187,13 +10188,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 46,
-       "exactExcerpt": "Previous 2026 $150,000 0",
-       "supports": "spending before 2026 ('Previous' column)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 46,
        "exactExcerpt": "2028 $18,550,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -10210,6 +10204,13 @@
        "page": 46,
        "exactExcerpt": "Total $42,375,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "Previous 2026 $150,000 0",
+       "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -11566,8 +11567,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2029-12-31",
+      "earliest": "2023-01-01",
+      "latest": "2026-12-31",
       "precision": "year"
      },
      "end": {
@@ -11578,6 +11579,20 @@
      "continuous": false,
      "openStart": true,
      "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 52,
+       "exactExcerpt": "Previous 2026 $1,314,478 $600,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 52,
+       "exactExcerpt": "2028 $200,000",
+       "supports": "budgeted spending in 2028",
+       "verifiedByScript": true
+      },
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 52,
@@ -11602,26 +11617,12 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 52,
-       "exactExcerpt": "Previous 2026 $1,314,478 $600,000",
-       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026 (under 5% of the total: treated as preconstruction)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 52,
-       "exactExcerpt": "2028 $200,000",
-       "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 52,
        "exactExcerpt": "Planned In-Service Date 12/31/30",
        "supports": "planned in-service date",
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; spending under 5% of the total (2026: $600,000, 2028: $200,000) is treated as preconstruction and does not start the window."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -12049,13 +12050,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 54,
-       "exactExcerpt": "Previous 2026 2027 25,000 $0 $0",
-       "supports": "spending before 2026 ('Previous' column)",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 54,
        "exactExcerpt": "2030 $18,000,000",
        "supports": "budgeted spending in 2030",
        "verifiedByScript": true
@@ -12065,6 +12059,13 @@
        "page": 54,
        "exactExcerpt": "Total $18,875,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 54,
+       "exactExcerpt": "Previous 2026 2027 25,000 $0 $0",
+       "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {

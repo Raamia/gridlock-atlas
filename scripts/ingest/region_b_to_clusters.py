@@ -30,6 +30,7 @@ RB = ROOT / "data" / "region-b"
 OUT = ROOT / "data" / "research"
 
 CURRENT = "desc-scrtp-2026-2030"
+LIST_FIRST_YEAR = 2026  # the current list itemizes 2026–2030; its 'Previous' column is everything before 2026
 EARLIER = ["desc-scrtp-2025-2029", "desc-scrtp-2024-2028"]
 LIST_LABEL = {"desc-scrtp-2026-2030": "2026–2030 list", "desc-scrtp-2025-2029": "2025–2029 list", "desc-scrtp-2024-2028": "2024–2028 list"}
 SNAPSHOT = "2026-09-26"
@@ -48,7 +49,17 @@ SERTP = "sertp-2025-plan"
 SERTP_IN_SERVICE = {
     "20065": (111, "In-Service Year: Project Name: 2028 SAV: GOSHEN (SAV) – MCINTOSH 115 KV TRANSMISSION LINE, REBUILD", 2028),
     "20989": (111, "In-Service Year: Project Name: 2028 SAV: RICE HOPE, NEW 230/115 KV AUTOTRANSFORMER, INSTALL", 2028),
+    "20407": (130, "In-Service Year: 2029 Project Name: SAV: BOULEVARD – MAGNOLIA – TRUMAN PARKWAY 115 KV TRANSMISSION LINES, REBUILD", 2029),
+    "20784": (131, "In-Service Year: Project Name: 2029 SAV: COLEMAN – MELDRIM 115 KV TRANSMISSION LINE, REBUILD", 2029),
+    "20787": (131, "In-Service Year: Project Name: 2029 SAV: LITTLE OGEECHEE 230/115 KV, BANK REPLACEMENT", 2029),
 }
+# SERTP entries whose scope differs from the Ten-Year Plan's: TEAMS → (page, excerpt, caveat)
+SERTP_SCOPE_NOTE = {
+    "20784": (131, "Rebuild the Coleman – Meldrim 115 kV transmission line from Four Lakes – Structure 76A, approximately 8.1 miles",
+              "SERTP 2025 describes a longer rebuild (Four Lakes – Structure 76A, approximately 8.1 miles) than the Ten-Year Plan's 3-mile "
+              "Four Lakes – Meldrim section; its 2029 in-service year is used as the newer statement, but the two may not describe identical work."),
+}
+SERTP_WINDOW_LABEL = "Georgia Power Ten-Year Plan start → SERTP 2025 in-service year"
 # owner project pages that date field work the SCRTP list leaves undated: DESC project ID → page, start, excerpts, note
 DESC_PAGE_WINDOWS = {
     "06367 D - G": {
@@ -61,9 +72,14 @@ DESC_PAGE_WINDOWS = {
         ],
         "note": "Dominion project page: tree clearing and construction begin Q1 2025 (its timeline is marked 'Anticipated – Subject to Change'). "
                 "The page gives no end, so the SCRTP planned in-service date bounds the window; the field work within is not dated.",
+        "sourceLabel": "Dominion project page start → SCRTP planned in-service",
     },
 }
 MINOR_SHARE = 0.05
+
+
+def mdy(iso):
+    return f"{iso[5:7]}/{iso[8:]}/{iso[:4]}"
 
 
 def slug(s):
@@ -271,14 +287,15 @@ def desc_clusters(parsed, geo):
             windows.append({
                 "claimSourceId": pw["sourceId"], "phase": "general-construction", "start": pw["start"], "end": iso_fix(r["inService"])[0],
                 "continuous": True, "boundsOnly": True, "evidence": [x for x in pe if x["verifiedByScript"]] + [E["inService"]], "note": pw["note"],
+                "sourceLabel": pw["sourceLabel"],
             })
         # coarse budget-year window; a year under 5% of the total is preconstruction spending and never starts it
-        def window_costs(costs, skipped_years):
-            """Years that set the window first; skipped (preconstruction) years last, labelled as such."""
+        def window_costs(costs, skipped_years, prev_minor=False):
+            """Years that set the window first; skipped (preconstruction) years and a minor 'Previous' cell last, labelled as such."""
             ok = [x for x in costs if x["verifiedByScript"]]
             pre = {f"budgeted spending in {y}" for y in skipped_years}
-            # a combined "Previous 2026 $A $B" excerpt ends with its last year's label
-            is_pre = lambda x: any(x["supports"].endswith(p) for p in pre)  # noqa: E731
+            # a combined "Previous 2026 $A $B" excerpt ends with its last year's label; a 'Previous'-only cell ends with the column name
+            is_pre = lambda x: any(x["supports"].endswith(p) for p in pre) or (prev_minor and x["supports"].endswith("('Previous' column)"))  # noqa: E731
             return [x for x in ok if not is_pre(x)] + [
                 {**x, "supports": x["supports"] + " (under 5% of the total: treated as preconstruction)"} for x in ok if is_pre(x)]
 
@@ -290,13 +307,18 @@ def desc_clusters(parsed, geo):
         years = sorted(int(y) for y, v in r["costs"].items() if y.isdigit() and v > 0)
         if years and r["inService"]:
             first = next((y for y in years if not minor(r["costs"][str(y)])), years[0])
-            skipped = [f"{y}: ${r['costs'][str(y)]:,}" for y in years if y < first]
             prev = r["costs"].get("Previous", 0)
-            if 0 < prev and minor(prev):
-                skipped.insert(0, f"before 2026: ${prev:,}")
+            prev_minor = 0 < prev and minor(prev)
             started_before = prev > 0 and not minor(prev)
-            # 'Previous' spending: the start year is not published; first - 3 is only a floor for matching and the axis (openStart)
-            start = {"earliest": f"{first - 3 if started_before else first}-01-01", "latest": f"{first}-12-31", "precision": "year"}
+            # 'Previous' spending (5%+) means work began before the list's first itemized year, whatever 2026+ holds: the window
+            # starts before 2026 and every itemized year falls inside it; the start year is not published, so 2026 - 3 is only a
+            # floor for matching and the axis (openStart)
+            pre_years = [] if started_before else [y for y in years if y < first]
+            skipped = [f"{y}: ${r['costs'][str(y)]:,}" for y in pre_years]
+            if prev_minor:
+                skipped.insert(0, f"before {LIST_FIRST_YEAR}: ${prev:,}")
+            start_year = LIST_FIRST_YEAR if started_before else first
+            start = {"earliest": f"{start_year - 3 if started_before else start_year}-01-01", "latest": f"{start_year}-12-31", "precision": "year"}
             old24 = earlier["desc-scrtp-2024-2028"].get(norm_id(pid))
             before_2024 = started_before and old24 and (pid not in dup_ids or same_project(old24["title"], r["title"])) and old24["costs"].get("Previous", 0) > 0
             end_iso = iso_fix(r["inService"])[0]["latest"]
@@ -307,7 +329,7 @@ def desc_clusters(parsed, geo):
                 windows.append({
                     "claimSourceId": CURRENT, "phase": "unknown", "start": start, "end": end, "continuous": False,
                     **({"openStart": True} if started_before else {}),
-                    "evidence": window_costs(E["costs"], [y for y in years if y < first]) + [E["inService"]],
+                    "evidence": window_costs(E["costs"], pre_years, prev_minor) + [E["inService"]],
                     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates"
                             + ("; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published" if started_before else "")
                             + ("; the 2024–2028 list already shows spending before 2024" if before_2024 else "")
@@ -379,14 +401,21 @@ def gpc_clusters(parsed, geo):
             for c in claims:
                 c.update(current=False, label="need date (2024 Ten-Year Plan)")
             claims.insert(0, {"claimSourceId": SERTP, "label": "in-service year (SERTP 2025)", "date": yb, "evidence": [se], "current": True})
-            if windows:
+            if windows and windows[0]["start"]["earliest"] > yb["latest"]:
+                # Start Date after the newer in-service year: the two do not form a window (the plan's own window is outdated too)
+                windows.clear()
+                caveats.append(f"The Ten-Year Plan's Start Date ({mdy(r['start'])}) is after the SERTP 2025 in-service year ({year}); no project window is used.")
+            elif windows:
                 windows[0]["supersededBy"] = f"gpc-{r['teams']}:w2"
                 windows.append({
                     "claimSourceId": SERTP, "phase": "unknown", "start": windows[0]["start"], "end": yb,
                     "continuous": True, "boundsOnly": True, "evidence": [E["dates"], se],
                     "note": f"Bounds: the Ten-Year Plan's Start Date → the SERTP 2025 in-service year ({year}), which replaces the plan's Need Date; the months of field work within it are not stated.",
+                    "sourceLabel": SERTP_WINDOW_LABEL,
                 })
-            caveats.append(f"SERTP 2025 (November 2025) gives an in-service year of {year}; the Ten-Year Plan (a December 2024 snapshot) gives a Need Date of {r['need'][5:7]}/{r['need'][8:]}/{r['need'][:4]}. The newer year is used; the Need Date is kept as version history.")
+            caveats.append(f"SERTP 2025 (November 2025) gives an in-service year of {year}; the Ten-Year Plan (a December 2024 snapshot) gives a Need Date of {mdy(r['need'])}. The newer year is used; the Need Date is kept as version history.")
+            if r["teams"] in SERTP_SCOPE_NOTE:
+                caveats.append(SERTP_SCOPE_NOTE[r["teams"]][2])
         facts = []
         me = miles_ev(r["sourceId"], r["page"], r["description"]) if r["description"] else None
         if r["miles"] and me:
@@ -427,10 +456,48 @@ def check_batches(geo):
             print(f"  {bid}: {key}", file=sys.stderr)
 
 
+SERTP_GENERIC = {"sav", "transmission", "line", "lines", "rebuild", "reconductor", "new", "install", "installation", "construct",
+                 "replacement", "substation", "bank", "auto", "transformer", "autotransformer", "aka"}
+
+
+def sertp_kind(title):
+    t = title.upper()
+    return "bank" if re.search(r"BANK|AUTO|TRANSFORMER", t) else "line" if re.search(r"\bLINES?\b|REBUILD|RECONDUCTOR", t) else "other"
+
+
+def check_sertp(parsed):
+    """Every SERTP 2025 Savannah-area entry whose Ten-Year Plan project states a different year must be in SERTP_IN_SERVICE.
+
+    Entries are matched to TEAMS projects by place words (one set inside the other) and kind of work (line / bank / other);
+    a project passes when any matching entry states its Need Date year (e.g. a split rebuild whose first part keeps the year)."""
+    entries = []
+    for f in sorted((CACHE / "text" / SERTP).glob("p*.txt")):
+        for blk in re.split(r"In-Service\s+Year:", f.read_text(errors="replace"))[1:]:
+            y = re.search(r"\b(20\d\d)\b", blk)
+            name = re.search(r"SAV\s*:(.+?)(?=\n\s*Description:)", blk, re.S)
+            if y and name:
+                entries.append((int(y.group(1)), " ".join(name.group(1).split())))
+    place = lambda t: {w for w in re.findall(r"[a-z]{3,}", re.sub(r"^\w+\s*:", "", t.lower())) if w not in SERTP_GENERIC}  # noqa: E731
+    problems = []
+    for r in parsed["gpc"]:
+        if r["sponsor"] not in ("GPC", "SAV") or not r["need"]:
+            continue
+        pw, kind = place(r["title"]), sertp_kind(r["title"])
+        years = {y for y, t in entries if sertp_kind(t) == kind and pw and (pw <= place(t) or place(t) <= pw)}
+        if years and int(r["need"][:4]) not in years and r["teams"] not in SERTP_IN_SERVICE:
+            problems.append(f"TEAMS {r['teams']} ({r['title']}): Need Date {r['need']}, SERTP 2025 year(s) {sorted(years)}")
+    for teams, (page, excerpt, _) in {**SERTP_IN_SERVICE, **{k: (v[0], v[1], None) for k, v in SERTP_SCOPE_NOTE.items()}}.items():
+        if not ev(SERTP, page, excerpt, "")["verifiedByScript"]:
+            problems.append(f"TEAMS {teams}: SERTP excerpt not found on p. {page}: {excerpt}")
+    if problems:
+        sys.exit("SERTP 2025 in-service years not reconciled with the Ten-Year Plan (add them to SERTP_IN_SERVICE):\n  " + "\n  ".join(problems))
+
+
 def main():
     parsed = json.load(open(RB / "parsed.json"))
     geo = load_geo()
     check_batches(geo)
+    check_sertp(parsed)
     OUT.mkdir(parents=True, exist_ok=True)
     src = []
     for sid in [CURRENT, *EARLIER, "gpc-irp-2025-vol3", SERTP, *{w["sourceId"] for w in DESC_PAGE_WINDOWS.values()}]:

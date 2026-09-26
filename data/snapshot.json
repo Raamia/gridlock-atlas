@@ -1,6 +1,6 @@
 {
- "version": "snap-2026-09-26-f14c275e",
- "generatedAt": "2026-09-26T10:18:55.939Z",
+ "version": "snap-2026-09-26-cae45764",
+ "generatedAt": "2026-09-26T11:56:23.677Z",
  "snapshotDate": "2026-09-26",
  "regions": [
   {
@@ -8057,6 +8057,16 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-788a4017f6b5": {
+   "id": "ev-788a4017f6b5",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 32,
+   "exactExcerpt": "Previous 2026 $4,412,330 $12,000",
+   "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-2fe41ff7459f": {
    "id": "ev-2fe41ff7459f",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8073,16 +8083,6 @@
    "page": 32,
    "exactExcerpt": "Total $11,424,330",
    "supports": "total estimated project cost",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
-  "ev-788a4017f6b5": {
-   "id": "ev-788a4017f6b5",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 32,
-   "exactExcerpt": "Previous 2026 $4,412,330 $12,000",
-   "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8147,16 +8147,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-6bec44b5a05b": {
-   "id": "ev-6bec44b5a05b",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 33,
-   "exactExcerpt": "Previous 2026 $3,760 $0",
-   "supports": "spending before 2026 ('Previous' column)",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-20f62707b229": {
    "id": "ev-20f62707b229",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8173,6 +8163,16 @@
    "page": 33,
    "exactExcerpt": "Total $3,003,760",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-6bec44b5a05b": {
+   "id": "ev-6bec44b5a05b",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 33,
+   "exactExcerpt": "Previous 2026 $3,760 $0",
+   "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8317,16 +8317,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-c5729d58afd8": {
-   "id": "ev-c5729d58afd8",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 35,
-   "exactExcerpt": "Previous 2026 $25,000 $0",
-   "supports": "spending before 2026 ('Previous' column)",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-55839ac59710": {
    "id": "ev-55839ac59710",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8343,6 +8333,16 @@
    "page": 35,
    "exactExcerpt": "Total $7,912,400",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-c5729d58afd8": {
+   "id": "ev-c5729d58afd8",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 35,
+   "exactExcerpt": "Previous 2026 $25,000 $0",
+   "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8417,16 +8417,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-f4f1683ac2fc": {
-   "id": "ev-f4f1683ac2fc",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 36,
-   "exactExcerpt": "Previous 2026 $463,118 $0",
-   "supports": "spending before 2026 ('Previous' column)",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-3b420388723c": {
    "id": "ev-3b420388723c",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8443,6 +8433,16 @@
    "page": 36,
    "exactExcerpt": "Total $13,285,118",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-f4f1683ac2fc": {
+   "id": "ev-f4f1683ac2fc",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 36,
+   "exactExcerpt": "Previous 2026 $463,118 $0",
+   "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8617,16 +8617,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-b2b43b8803c1": {
-   "id": "ev-b2b43b8803c1",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 38,
-   "exactExcerpt": "Previous 2026 $75,000 $0",
-   "supports": "spending before 2026 ('Previous' column)",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-b81f683468c0": {
    "id": "ev-b81f683468c0",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8643,6 +8633,16 @@
    "page": 38,
    "exactExcerpt": "Total $3,200,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-b2b43b8803c1": {
+   "id": "ev-b2b43b8803c1",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 38,
+   "exactExcerpt": "Previous 2026 $75,000 $0",
+   "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9387,16 +9387,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-f3a971e9a157": {
-   "id": "ev-f3a971e9a157",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 46,
-   "exactExcerpt": "Previous 2026 $150,000 0",
-   "supports": "spending before 2026 ('Previous' column)",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-f65e6105aac5": {
    "id": "ev-f65e6105aac5",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9423,6 +9413,16 @@
    "page": 46,
    "exactExcerpt": "Total $42,375,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-f3a971e9a157": {
+   "id": "ev-f3a971e9a157",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 46,
+   "exactExcerpt": "Previous 2026 $150,000 0",
+   "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9967,6 +9967,26 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-0bd756912284": {
+   "id": "ev-0bd756912284",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 52,
+   "exactExcerpt": "Previous 2026 $1,314,478 $600,000",
+   "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-9fe5737cde90": {
+   "id": "ev-9fe5737cde90",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 52,
+   "exactExcerpt": "2028 $200,000",
+   "supports": "budgeted spending in 2028",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-52c49575199e": {
    "id": "ev-52c49575199e",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9993,26 +10013,6 @@
    "page": 52,
    "exactExcerpt": "Total $18,964,478",
    "supports": "total estimated project cost",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
-  "ev-0bd756912284": {
-   "id": "ev-0bd756912284",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 52,
-   "exactExcerpt": "Previous 2026 $1,314,478 $600,000",
-   "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026 (under 5% of the total: treated as preconstruction)",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
-  "ev-9fe5737cde90": {
-   "id": "ev-9fe5737cde90",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 52,
-   "exactExcerpt": "2028 $200,000",
-   "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -10157,16 +10157,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-7f5ebd030930": {
-   "id": "ev-7f5ebd030930",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 54,
-   "exactExcerpt": "Previous 2026 2027 25,000 $0 $0",
-   "supports": "spending before 2026 ('Previous' column)",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-d1db4ca34d4f": {
    "id": "ev-d1db4ca34d4f",
    "sourceId": "desc-scrtp-2026-2030",
@@ -10183,6 +10173,16 @@
    "page": 54,
    "exactExcerpt": "Total $18,875,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-7f5ebd030930": {
+   "id": "ev-7f5ebd030930",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 54,
+   "exactExcerpt": "Previous 2026 2027 25,000 $0 $0",
+   "supports": "spending before 2026 ('Previous' column) (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -13957,6 +13957,16 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-fc40798d5921": {
+   "id": "ev-fc40798d5921",
+   "sourceId": "sertp-2025-plan",
+   "page": 130,
+   "exactExcerpt": "In-Service Year: 2029 Project Name: SAV: BOULEVARD – MAGNOLIA – TRUMAN PARKWAY 115 KV TRANSMISSION LINES, REBUILD",
+   "supports": "in-service year 2029 (SERTP 2025)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-5e38016a1de1": {
    "id": "ev-5e38016a1de1",
    "sourceId": "gpc-irp-2025-vol3",
@@ -16387,6 +16397,16 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-c911b0b018f9": {
+   "id": "ev-c911b0b018f9",
+   "sourceId": "sertp-2025-plan",
+   "page": 131,
+   "exactExcerpt": "In-Service Year: Project Name: 2029 SAV: COLEMAN – MELDRIM 115 KV TRANSMISSION LINE, REBUILD",
+   "supports": "in-service year 2029 (SERTP 2025)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-f98ea868b122": {
    "id": "ev-f98ea868b122",
    "sourceId": "gpc-irp-2025-vol3",
@@ -16933,6 +16953,16 @@
    "page": 424,
    "exactExcerpt": "SAV: LITTLE OGEECHEE 230/115KV BANK REPLACEMENT",
    "supports": "project name",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-6a00970b0658": {
+   "id": "ev-6a00970b0658",
+   "sourceId": "sertp-2025-plan",
+   "page": 131,
+   "exactExcerpt": "In-Service Year: Project Name: 2029 SAV: LITTLE OGEECHEE 230/115 KV, BANK REPLACEMENT",
+   "supports": "in-service year 2029 (SERTP 2025)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -26501,6 +26531,7 @@
      },
      "continuous": true,
      "boundsOnly": true,
+     "sourceLabel": "Dominion project page start → SCRTP planned in-service",
      "evidenceIds": [
       "ev-bfb67cd65d91",
       "ev-c936bc446cb0",
@@ -29214,8 +29245,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2025-01-01",
-      "latest": "2028-12-31",
+      "earliest": "2023-01-01",
+      "latest": "2026-12-31",
       "precision": "year"
      },
      "end": {
@@ -29226,12 +29257,12 @@
      "continuous": false,
      "openStart": true,
      "evidenceIds": [
+      "ev-788a4017f6b5",
       "ev-2fe41ff7459f",
       "ev-2a07deb2f11d",
-      "ev-788a4017f6b5",
       "ev-6a2526234072"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024; spending under 5% of the total (2026: $12,000) is treated as preconstruction and does not start the window."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -29368,9 +29399,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-6bec44b5a05b",
       "ev-20f62707b229",
       "ev-d557e3ec4a0d",
+      "ev-6bec44b5a05b",
       "ev-def6dee3703b"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $3,760) is treated as preconstruction and does not start the window."
@@ -29660,9 +29691,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-c5729d58afd8",
       "ev-55839ac59710",
       "ev-681009292903",
+      "ev-c5729d58afd8",
       "ev-42cfa14be646",
       "ev-f3f13f25cc1e"
      ],
@@ -29819,9 +29850,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-f4f1683ac2fc",
       "ev-3b420388723c",
       "ev-c5683b286e5a",
+      "ev-f4f1683ac2fc",
       "ev-25ff82c70956",
       "ev-6528cb5d216e"
      ],
@@ -30122,9 +30153,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-b2b43b8803c1",
       "ev-b81f683468c0",
       "ev-b23226558d89",
+      "ev-b2b43b8803c1",
       "ev-690f522fe8a8",
       "ev-fcfb099f1824"
      ],
@@ -31328,10 +31359,10 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-f3a971e9a157",
       "ev-f65e6105aac5",
       "ev-603d8bbfde61",
       "ev-3a6597cb8286",
+      "ev-f3a971e9a157",
       "ev-8195b9f92515",
       "ev-74e8f191dac2"
      ],
@@ -32184,8 +32215,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2029-12-31",
+      "earliest": "2023-01-01",
+      "latest": "2026-12-31",
       "precision": "year"
      },
      "end": {
@@ -32196,14 +32227,14 @@
      "continuous": false,
      "openStart": true,
      "evidenceIds": [
+      "ev-0bd756912284",
+      "ev-9fe5737cde90",
       "ev-52c49575199e",
       "ev-eb724f09c392",
       "ev-371628cc0ff6",
-      "ev-0bd756912284",
-      "ev-9fe5737cde90",
       "ev-c54c6fc0bb1d"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; spending under 5% of the total (2026: $600,000, 2028: $200,000) is treated as preconstruction and does not start the window."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -32487,9 +32518,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-7f5ebd030930",
       "ev-d1db4ca34d4f",
       "ev-22651669e0dc",
+      "ev-7f5ebd030930",
       "ev-24a08de6476a",
       "ev-cd91b0b971bb"
      ],
@@ -40067,6 +40098,7 @@
      },
      "continuous": true,
      "boundsOnly": true,
+     "sourceLabel": "Georgia Power Ten-Year Plan start → SERTP 2025 in-service year",
      "evidenceIds": [
       "ev-ddde380575da",
       "ev-ed7eb989d8c4"
@@ -41857,17 +41889,54 @@
      },
      "continuous": true,
      "boundsOnly": true,
+     "supersededBy": "gpc-20407:w2",
      "evidenceIds": [
       "ev-ba6a0d28ac5c"
      ],
      "note": "Project window as published (Start Date → Need Date); the months of field work within it are not stated, so only the bounds are used."
+    },
+    {
+     "id": "gpc-20407:w2",
+     "claimSourceId": "sertp-2025-plan",
+     "phase": "unknown",
+     "start": {
+      "earliest": "2025-06-01",
+      "latest": "2029-12-31",
+      "precision": "day"
+     },
+     "end": {
+      "earliest": "2025-06-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "boundsOnly": true,
+     "sourceLabel": "Georgia Power Ten-Year Plan start → SERTP 2025 in-service year",
+     "evidenceIds": [
+      "ev-ba6a0d28ac5c",
+      "ev-fc40798d5921"
+     ],
+     "note": "Bounds: the Ten-Year Plan's Start Date → the SERTP 2025 in-service year (2029), which replaces the plan's Need Date; the months of field work within it are not stated."
     }
    ],
    "completionClaims": [
     {
      "id": "gpc-20407:c1",
+     "claimSourceId": "sertp-2025-plan",
+     "label": "in-service year (SERTP 2025)",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "evidenceIds": [
+      "ev-fc40798d5921"
+     ]
+    },
+    {
+     "id": "gpc-20407:c2",
      "claimSourceId": "gpc-irp-2025-vol3",
-     "label": "need date (in-service)",
+     "label": "need date (2024 Ten-Year Plan)",
      "date": {
       "earliest": "2028-06-01",
       "latest": "2028-06-01",
@@ -41875,15 +41944,18 @@
      },
      "evidenceIds": [
       "ev-ba6a0d28ac5c"
-     ]
+     ],
+     "current": false
     }
    ],
    "knownCoordination": [],
    "caveats": [
-    "Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table."
+    "Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table.",
+    "SERTP 2025 (November 2025) gives an in-service year of 2029; the Ten-Year Plan (a December 2024 snapshot) gives a Need Date of 06/01/2028. The newer year is used; the Need Date is kept as version history."
    ],
    "sourceIds": [
-    "gpc-irp-2025-vol3"
+    "gpc-irp-2025-vol3",
+    "sertp-2025-plan"
    ],
    "region": "southeast"
   },
@@ -44265,6 +44337,7 @@
      },
      "continuous": true,
      "boundsOnly": true,
+     "sourceLabel": "Georgia Power Ten-Year Plan start → SERTP 2025 in-service year",
      "evidenceIds": [
       "ev-912678d1350e",
       "ev-192b49a278c4"
@@ -48172,17 +48245,54 @@
      },
      "continuous": true,
      "boundsOnly": true,
+     "supersededBy": "gpc-20784:w2",
      "evidenceIds": [
       "ev-f404e85eca71"
      ],
      "note": "Project window as published (Start Date → Need Date); the months of field work within it are not stated, so only the bounds are used."
+    },
+    {
+     "id": "gpc-20784:w2",
+     "claimSourceId": "sertp-2025-plan",
+     "phase": "unknown",
+     "start": {
+      "earliest": "2029-06-01",
+      "latest": "2029-12-31",
+      "precision": "day"
+     },
+     "end": {
+      "earliest": "2029-06-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "continuous": true,
+     "boundsOnly": true,
+     "sourceLabel": "Georgia Power Ten-Year Plan start → SERTP 2025 in-service year",
+     "evidenceIds": [
+      "ev-f404e85eca71",
+      "ev-c911b0b018f9"
+     ],
+     "note": "Bounds: the Ten-Year Plan's Start Date → the SERTP 2025 in-service year (2029), which replaces the plan's Need Date; the months of field work within it are not stated."
     }
    ],
    "completionClaims": [
     {
      "id": "gpc-20784:c1",
+     "claimSourceId": "sertp-2025-plan",
+     "label": "in-service year (SERTP 2025)",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "evidenceIds": [
+      "ev-c911b0b018f9"
+     ]
+    },
+    {
+     "id": "gpc-20784:c2",
      "claimSourceId": "gpc-irp-2025-vol3",
-     "label": "need date (in-service)",
+     "label": "need date (2024 Ten-Year Plan)",
      "date": {
       "earliest": "2032-06-01",
       "latest": "2032-06-01",
@@ -48190,16 +48300,20 @@
      },
      "evidenceIds": [
       "ev-f404e85eca71"
-     ]
+     ],
+     "current": false
     }
    ],
    "knownCoordination": [],
    "caveats": [
     "The rebuilt section runs from Four Lakes to Meldrim, about 3 mi. Four Lakes is OSM way/1489153847 (32.10050,-81.37288, Georgia Power, 115 kV, 2025), but OSM does not connect it to the line. The Coleman - Meldrim 115 kV segment way/660617933 (2.76 mi) runs from a junction about 1.8 km north of Four Lakes to Meldrim.",
-    "Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table."
+    "Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table.",
+    "SERTP 2025 (November 2025) gives an in-service year of 2029; the Ten-Year Plan (a December 2024 snapshot) gives a Need Date of 06/01/2032. The newer year is used; the Need Date is kept as version history.",
+    "SERTP 2025 describes a longer rebuild (Four Lakes – Structure 76A, approximately 8.1 miles) than the Ten-Year Plan's 3-mile Four Lakes – Meldrim section; its 2029 in-service year is used as the newer statement, but the two may not describe identical work."
    ],
    "sourceIds": [
-    "gpc-irp-2025-vol3"
+    "gpc-irp-2025-vol3",
+    "sertp-2025-plan"
    ],
    "region": "southeast"
   },
@@ -49603,34 +49717,25 @@
      "confidence": "confirmed"
     }
    ],
-   "constructionWindows": [
-    {
-     "id": "gpc-20787:w1",
-     "claimSourceId": "gpc-irp-2025-vol3",
-     "phase": "unknown",
-     "start": {
-      "earliest": "2030-06-01",
-      "latest": "2034-06-01",
-      "precision": "day"
-     },
-     "end": {
-      "earliest": "2030-06-01",
-      "latest": "2034-06-01",
-      "precision": "day"
-     },
-     "continuous": true,
-     "boundsOnly": true,
-     "evidenceIds": [
-      "ev-8008ff78f5cd"
-     ],
-     "note": "Project window as published (Start Date → Need Date); the months of field work within it are not stated, so only the bounds are used."
-    }
-   ],
+   "constructionWindows": [],
    "completionClaims": [
     {
      "id": "gpc-20787:c1",
+     "claimSourceId": "sertp-2025-plan",
+     "label": "in-service year (SERTP 2025)",
+     "date": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "evidenceIds": [
+      "ev-6a00970b0658"
+     ]
+    },
+    {
+     "id": "gpc-20787:c2",
      "claimSourceId": "gpc-irp-2025-vol3",
-     "label": "need date (in-service)",
+     "label": "need date (2024 Ten-Year Plan)",
      "date": {
       "earliest": "2034-06-01",
       "latest": "2034-06-01",
@@ -49638,15 +49743,19 @@
      },
      "evidenceIds": [
       "ev-8008ff78f5cd"
-     ]
+     ],
+     "current": false
     }
    ],
    "knownCoordination": [],
    "caveats": [
-    "Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table."
+    "Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table.",
+    "The Ten-Year Plan's Start Date (06/01/2030) is after the SERTP 2025 in-service year (2029); no project window is used.",
+    "SERTP 2025 (November 2025) gives an in-service year of 2029; the Ten-Year Plan (a December 2024 snapshot) gives a Need Date of 06/01/2034. The newer year is used; the Need Date is kept as version history."
    ],
    "sourceIds": [
-    "gpc-irp-2025-vol3"
+    "gpc-irp-2025-vol3",
+    "sertp-2025-plan"
    ],
    "region": "southeast"
   },
@@ -50615,7 +50724,7 @@
    "projectB": "grid-forward-atc",
    "kind": "shared-site",
    "siteLabel": "Columbia Substation",
-   "basis": "stated",
+   "basis": "inferred",
    "sitePlaceId": "beci-columbia-substation",
    "description": "BECI's 765 kV lines terminate at the Columbia Substation and Grid Forward Central Wisconsin (ATC/NSPW with SMMPA Wisconsin and WPPI, docket 5-CE-157, CPCN approved 2025-12-10) adds a 345 kV position there. The shared site is established by name (both say 'Columbia Substation'; Grid Forward and the MGS map place it in Columbia County), not by any source that discusses both projects. No source reviewed documents coordination between them (status unknown). Reported windows overlap: Grid Forward construction Q4 2026 - by Dec 2030 (PSC decision) vs BECI tree clearing/construction late 2029 - late 2033 (MGS, approximate). But Grid Forward expects to build from Columbia northward (early), and the timing of BECI/ATC work at Columbia itself is not stated, so concurrent work at the Columbia site is not established.",
    "evidenceIds": [
@@ -50632,7 +50741,7 @@
    "projectB": "grid-forward-atc",
    "kind": "shared-site",
    "siteLabel": "Columbia Substation",
-   "basis": "stated",
+   "basis": "inferred",
    "sitePlaceId": "atc-columbia-substation",
    "description": "ATC's BECI-related Columbia Substation modification and Grid Forward's 345 kV position addition are both at the Columbia Substation; ATC is an owner of both (shared-owner/internal context).",
    "evidenceIds": [
@@ -51399,7 +51508,7 @@
   },
   {
    "cluster": "beci-columbia",
-   "note": "MariBell: Dairyland (May 8, 2025 release) and the MariBell site say Dairyland and GridLiance Heartland will jointly develop and co-own a 765/161 kV double-circuit line from Marion, MN to Bell Center, WI (Wisconsin segment ~32 miles in Vernon and Crawford counties along an existing corridor), the 'middle segment of the North Rochester-Columbia 765 kV line'. This very likely includes MISO facility 50948, but no source says so; GridLiance was not added as an owner and MariBell's schedule (project-details page: construction 2031-2034, in service 2034; Wisconsin CPCN filing anticipated Q4 2026) was not attached to the DPC record. Reconcile with any MariBell cluster (maribell-* sources were cached by another researcher) to avoid a duplicate work package."
+   "note": "MariBell: Dairyland (May 8, 2025 release) and the MariBell site say Dairyland and GridLiance Heartland will jointly develop and co-own a 765/161 kV double-circuit line from Marion, MN to Bell Center, WI (Wisconsin segment ~32 miles in Vernon and Crawford counties along an existing corridor), the 'middle segment of the North Rochester-Columbia 765 kV line'. This very likely includes MISO facility 50948, but no source says so; GridLiance was not added as an owner and MariBell's schedule (project-details page: construction 2031-2034, in service 2034; Wisconsin CPCN filing anticipated Q4 2026) was not attached to the DPC record. If MariBell is modeled separately, it should be reconciled with this record to avoid a duplicate work package."
   },
   {
    "cluster": "beci-columbia",
@@ -51451,7 +51560,7 @@
   },
   {
    "cluster": "controls",
-   "note": "Xcel's Mankato-Mississippi River (MMRT) project is not modeled in this cluster. It is cached by another researcher (xcel-mmrt-* sources); g2b-library says MMRT adds ~20 miles of new 161 kV lines from North Rochester Substation, so it shares a site (and the Xcel owner) with the G2B Xcel segment."
+   "note": "Xcel's Mankato-Mississippi River (MMRT) project is not modeled in this cluster. g2b-library says MMRT adds ~20 miles of new 161 kV lines from North Rochester Substation, so it shares a site (and the Xcel owner) with the G2B Xcel segment."
   },
   {
    "cluster": "controls",
@@ -51603,7 +51712,7 @@
   },
   {
    "cluster": "grid-forward",
-   "note": "Hypothesis part 3 (shared-resource plans): CONFIRMED that the cited sources do not establish Dairyland–ATC (or Dairyland–NSPW) shared crews, equipment, laydown yards or schedules. The only related statement is ATC's utility-level, planning-level 'cooperatively working on plans' among ATC, Xcel and Dairyland, which does not name Alma–Blair; it is recorded against the utility id 'dairyland' (reported-coordination, scope unknown) so it does not by itself mark the Alma–Blair pair as known coordination. The Tremval-end work belongs to NSPW (Xcel), not ATC. Status is not-found-in-sources, not 'uncoordinated'."
+   "note": "Hypothesis part 3 (shared-resource plans): CONFIRMED that the cited sources do not establish Dairyland–ATC (or Dairyland–NSPW) shared crews, equipment, laydown yards or schedules. The only related statement is ATC's utility-level, planning-level 'cooperatively working on plans' among ATC, Xcel and Dairyland, which does not name Alma–Blair; it is recorded as reported coordination with Dairyland as a whole (scope unknown) so it does not by itself mark the Alma–Blair pair as known coordination. The Tremval-end work belongs to NSPW (Xcel), not ATC. Status: not found in sources, which is not the same as 'uncoordinated'."
   },
   {
    "cluster": "grid-forward",
@@ -51771,7 +51880,7 @@
   },
   {
    "cluster": "potter-beckham",
-   "note": "The owning Transource entity is named inconsistently: 'Transource Energy LLC' (Xcel page), 'Transource Energy, LLC' (award releases) and 'Transource Oklahoma, LLC' (SPP minutes, as the bidder). The owner is mapped to transource-ok."
+   "note": "The owning Transource entity is named inconsistently: 'Transource Energy LLC' (Xcel page), 'Transource Energy, LLC' (award releases) and 'Transource Oklahoma, LLC' (SPP minutes, as the bidder). The owner is recorded as Transource Oklahoma, LLC."
   },
   {
    "cluster": "potter-beckham",
@@ -51823,7 +51932,7 @@
   },
   {
    "cluster": "sc-ga-context",
-   "note": "Documents checked for coordination statements: gpc-effingham-page, gpc-callaway-thomson-page, sertp-2025-plan (searched Dominion/DESC/SCE&G/McIntosh/Purrysburg/Thurmond/Goshen/Evans/Thomson/Vogtle/Callaway/Effingham/Okatie), gpc-irp-2025-vol3, the three DESC SCRTP lists, scrtp-home, sertp-home, scrtp-meeting-2025-06-03, and scpsc-aep-briefing-2026-03. The SC PSC briefing (docket ND-2024-46-E; scheduled for March 5, 2026, and not confirmed as held) covers the SERTP FERC Order 1920 stakeholder process in general, not these projects."
+   "note": "Documents checked for coordination statements: gpc-effingham-page, gpc-callaway-thomson-page, sertp-2025-plan (searched Dominion/DESC/SCE&G/McIntosh/Purrysburg/Thurmond/Goshen/Evans/Thomson/Vogtle/Callaway/Effingham/Okatie), gpc-irp-2025-vol3, the three DESC SCRTP project lists, the SCRTP and SERTP home pages, the June 3, 2025 SCRTP stakeholder meeting presentation, and the SC PSC March 2026 briefing notice. The SC PSC briefing (docket ND-2024-46-E; scheduled for March 5, 2026, and not confirmed as held) covers the SERTP FERC Order 1920 stakeholder process in general, not these projects."
   },
   {
    "cluster": "sc-ga-context",
@@ -51847,7 +51956,7 @@
   },
   {
    "cluster": "sc-ga-context",
-   "note": "DESC 6810 A (Hooks – Thurmond 115kV Tie rebuild, ISD 12/31/2024) appears only in the 2024-2028 list and has no project record in the sc-ga-desc cluster, so no relation was created for it. Its absence from later lists suggests completion, but no source states that."
+   "note": "DESC 6810 A (Hooks – Thurmond 115kV Tie rebuild, ISD 12/31/2024) appears only in the 2024-2028 list and is not among the DESC projects mapped here, so no relation was created for it. Its absence from later lists suggests completion, but no source states that."
   },
   {
    "cluster": "sc-ga-context",
@@ -51855,7 +51964,7 @@
   },
   {
    "cluster": "sc-ga-context",
-   "note": "SERTP 2025 vs GPC 2024 ten-year plan conflicts, kept side by side for the sc-ga-gpc cluster. Goshen (Sav) – McIntosh 115 kV rebuild (GPC 20065): GPC need 2027-06-01 with 100C 795 ACSR Drake, vs SERTP in-service 2028 with 200°C 1351 ACSS (p.111). Goshen – Kraft 115 kV rebuild (GPC 20785): GPC lists 9.3 mi, need 2027-06-01; SERTP splits it into 3.48 mi in 2027 (p.93) and 3.04 mi Goshen–Rice Hope in 2031 (p.157)."
+   "note": "SERTP 2025 vs GPC 2024 ten-year plan conflicts, kept side by side. Goshen (Sav) – McIntosh 115 kV rebuild (GPC 20065): GPC need 2027-06-01 with 100C 795 ACSR Drake, vs SERTP in-service 2028 with 200°C 1351 ACSS (p.111). Goshen – Kraft 115 kV rebuild (GPC 20785): GPC lists 9.3 mi, need 2027-06-01; SERTP splits it into 3.48 mi in 2027 (p.93) and 3.04 mi Goshen–Rice Hope in 2031 (p.157)."
   },
   {
    "cluster": "sc-ga-context",
@@ -51967,7 +52076,7 @@
   },
   {
    "cluster": "xcel-wwtc",
-   "note": "psc-wwtc-map (the PSC project map PDF) is image-only with no text layer. It was used only to check the GIS route visually and cannot anchor excerpts."
+   "note": "The PSC project map PDF is image-only with no text layer. It was used only to check the GIS route visually and cannot anchor excerpts."
   },
   {
    "cluster": "xcel-wwtc",

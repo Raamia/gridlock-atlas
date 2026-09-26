@@ -214,6 +214,7 @@ for (const c of clusters) {
       ...(w.boundsOnly ? { boundsOnly: true } : {}),
       ...(w.openStart ? { openStart: true } : {}),
       ...(w.supersededBy ? { supersededBy: w.supersededBy } : {}),
+      ...(w.sourceLabel ? { sourceLabel: w.sourceLabel } : {}),
       evidenceIds: ev(w.evidence),
       note: w.note || undefined,
       ...(overrides.windowPatches?.[`${id}:w${i + 1}`] ?? {}),
@@ -373,7 +374,13 @@ for (const c of clusters) {
       kind: r.kind,
       siteLabel: r.siteLabel ? shortLabel(r.siteLabel) : undefined,
       siteDetail: r.siteLabel && shortLabel(r.siteLabel) !== r.siteLabel ? r.siteLabel : undefined,
-      basis: /\binferr?|\bimpl(y|ies|ied)\b|no single document|no source names/i.test(r.description ?? "") ? "inferred" : "stated",
+      // an explicit research basis wins; otherwise the description's own wording decides
+      basis:
+        r.basis === "stated" || r.basis === "inferred"
+          ? r.basis
+          : /\binferr?|\bimpl(y|ies|ied)\b|no single document|no source names|not by any source|not stated by a source|established by name/i.test(r.description ?? "")
+            ? "inferred"
+            : "stated",
       sitePlaceId: sitePlace?.id,
       description: r.description,
       evidenceIds: ids,

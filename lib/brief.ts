@@ -2,7 +2,7 @@ import { IDX, SNAPSHOT } from "@/lib/data";
 import { displayTitle, firstSentence, SCOPE_LABEL } from "@/lib/describe";
 import type { Evidence, Match, Project } from "@/lib/domain/types";
 import { formatDate, formatSpan, precisionLabel } from "@/lib/format";
-import { activeWindows, currentInService } from "@/lib/matching/time";
+import { activeWindows, coarsest, currentInService } from "@/lib/matching/time";
 import { ownerNames, pageLabel } from "@/lib/selectors";
 
 export interface BriefCitation {
@@ -45,14 +45,17 @@ export function buildBrief(m: Match): Brief {
       let n = numberOf.get(key);
       if (n === undefined) {
         const src = IDX.source(e.sourceId);
+        const title = src?.title ?? e.sourceId;
+        const label = pageLabel(e);
         n = citations.length + 1;
         numberOf.set(key, n);
         citations.push({
           n,
           publisher: src?.publisher ?? e.sourceId,
-          title: src?.title ?? e.sourceId,
+          title,
           url: pdfAnchor(e, src?.url, src?.mimeType),
-          anchor: pageLabel(e),
+          // an HTML section that only repeats the title is no anchor; a page anchor always stays
+          anchor: label && !e.page && title.toLowerCase().includes(label.toLowerCase()) ? undefined : label,
           documentDate: src?.publishedAt ?? src?.updatedAt,
           excerpt: e.exactExcerpt,
           provenance: `${e.verifiedInSource ? "located verbatim by script" : "not auto-located"} · ${e.reviewedByHuman ? "human-checked" : "awaiting human check"}`,
@@ -96,8 +99,13 @@ export function buildBrief(m: Match): Brief {
   }
   if (m.conflicts.length) unresolved.push("Confirm the current phase dates with both planners before discussing shared resources.");
   if (m.time === "unknown") unresolved.push("At least one construction window is not published; schedule overlap cannot be assessed.");
-  if (m.timeDetail.precision === "year" || m.timeDetail.precision === "half" || m.timeDetail.precision === "quarter")
-    unresolved.push(`Published schedules are ${precisionLabel(m.timeDetail.precision)}-precision; the exact months of field work are not stated.`);
+  // named per project and worded as a lower bound: the other project's schedule may be month- or day-precise
+  for (const p of [a, b]) {
+    const ws = activeWindows(p);
+    const prec = ws.length ? coarsest(ws) : undefined; // no window: covered by the "not published" line above
+    if (prec === "year" || prec === "half" || prec === "quarter")
+      unresolved.push(`At least one published schedule date for ${displayTitle(p)} is only ${precisionLabel(prec)}-precision; the exact months of its field work are not stated.`);
+  }
   if (m.geoDetail.method === "coarse") unresolved.push("Only county-level locations are published; site proximity is unverified.");
   if ([a, b].some((p) => p.route?.precision === "official-map-digitized"))
     unresolved.push("Route lines on the map are schematic traces of official route-options graphics, not survey-accurate alignments.");
