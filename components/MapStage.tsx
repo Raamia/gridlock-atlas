@@ -257,7 +257,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
       id: "gl-point-labels",
       type: "symbol",
       source: "gl-points",
-      filter: ["match", ["get", "role"], ["a", "b", "hover"], true, false],
+      filter: ["all", ["match", ["get", "role"], ["a", "b", "hover"], true, false], ["!=", ["get", "onSite"], true]],
       layout: {
         "text-field": ["get", "label"],
         "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
@@ -553,7 +553,15 @@ export default function MapStage() {
     };
     (map.getSource("gl-routes") as GeoJSONSource | undefined)?.setData(routeFeatures(ctx));
     (map.getSource("gl-halos") as GeoJSONSource | undefined)?.setData(haloFeatures(ctx));
-    (map.getSource("gl-points") as GeoJSONSource | undefined)?.setData(pointFeatures(ctx));
+    // the shared-site callout names the meeting point, so the map's own place names there are not repeated under it
+    const site = sharedSite(preview?.match ?? null);
+    const points = pointFeatures(ctx);
+    if (site)
+      for (const f of points.features) {
+        const [lon, lat] = f.geometry.coordinates;
+        if (Math.hypot((lon - site.lon) * Math.cos((lat * Math.PI) / 180), lat - site.lat) * 69 < 0.6) f.properties.onSite = true;
+      }
+    (map.getSource("gl-points") as GeoJSONSource | undefined)?.setData(points);
     (map.getSource("gl-connector") as GeoJSONSource | undefined)?.setData(connectorFeature(preview?.match ?? null));
     (map.getSource("gl-centers") as GeoJSONSource | undefined)?.setData(centerFeatures(preview?.match ?? null));
     const visibleMatches = (run?.matches ?? []).filter((m) => visibleProjectIds.has(m.projectAId) && visibleProjectIds.has(m.projectBId));

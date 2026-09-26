@@ -29,9 +29,13 @@ export function EvidenceCard({ e, tone = "neutral", compact }: { e: Evidence; to
     <figure className="relative overflow-hidden rounded-lg bg-bg-2/80 ring-1 ring-line" style={{ boxShadow: `inset 2px 0 0 ${TONE[tone]}` }}>
       <figcaption className="flex items-center gap-1.5 px-3 pt-2.5">
         <SourceIcon type={src?.sourceType} />
-        <span className="mono truncate text-[10px] uppercase tracking-[0.06em] text-text-2">
-          {src?.publisher ?? e.sourceId}
-          {anchor && <span className="text-text-1"> · {anchor}</span>}
+        {/* the publisher gives way first, so the page anchor always shows */}
+        <span
+          className="mono flex min-w-0 items-baseline text-[10px] uppercase tracking-[0.06em] text-text-2"
+          title={anchor ? `${src?.publisher ?? e.sourceId} · ${anchor}` : (src?.publisher ?? e.sourceId)}
+        >
+          <span className="min-w-0 truncate">{src?.publisher ?? e.sourceId}</span>
+          {anchor && <span className="max-w-[65%] shrink-0 truncate whitespace-nowrap text-text-1">&nbsp;· {anchor}</span>}
         </span>
         {href && (
           <a

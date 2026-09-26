@@ -539,13 +539,21 @@ function completionNote(c: Conflict, p: Project): string {
   const cur = currentInService(p);
   const gap = cur ? `the in-service gap (secondary signal) uses the current date, ${formatBound(cur.date)}` : "no in-service gap is computed";
   const bound = c.sides.filter((s) => s.claimIds.some((id) => c.boundClaimIds?.includes(id)));
-  const earlier = c.sides.filter((s) => s.earlier).length;
-  const history = `the earlier date${earlier > 1 ? "s are" : " is"} kept as version history`;
+  const old = c.sides.filter((s) => s.earlier).map((s) => s.value);
+  const history = `the superseded date${old.length > 1 ? "s" : ""} from the older source${old.length > 1 ? "s" : ""} (${old.join(", ")}) ${old.length > 1 ? "are" : "is"} kept as version history`;
   if (!c.affectsMatch || !bound.length) return `All claims are kept. These dates do not bound a construction window; ${gap}${c.versionOnly ? `, and ${history}` : ""}.`;
   if (c.versionOnly)
-    return `All claims are kept. The current date, ${bound[0].value}, also sets the end of this project's current schedule window, so it feeds the TIME match and the in-service gap; ${history}.`;
+    return `All claims are kept. The current date, ${bound[0].value}, also falls within the end of this project's current schedule window, so it feeds the TIME match and the in-service gap; ${history}.`;
+  // a side whose sources publish no window is kept for review but never matched (e.g. AEP's 2034 for BECI)
+  const windowed = new Set(activeWindows(p).map((w) => w.claimSourceId));
+  const unwindowed = c.sides.filter((s) => !s.sourceIds.some((id) => windowed.has(id)));
+  if (unwindowed.length) {
+    const vals = (xs: typeof c.sides) => xs.map((s) => s.value).join(" and ");
+    const many = unwindowed.length > 1;
+    return `All claims are kept. Only ${vals(bound)} comes with a schedule window, so the TIME match uses it; ${vals(unwindowed)} ${many ? "have" : "has"} no window of ${many ? "their" : "its"} own and ${many ? "are" : "is"} kept for review but not matched. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
+  }
   const n = new Set(bound.flatMap((s) => s.sourceIds)).size;
-  return `All claims are kept. ${bound.map((s) => s.value).join(" and ")} is also the end of ${n > 1 ? "those sources' own schedule windows" : "its source's own schedule window"}; the window match evaluates every source combination, so ${c.sides.length > 2 ? "no date is picked over the others" : "neither date is picked over the other"}. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
+  return `All claims are kept. ${bound.map((s) => s.value).join(" and ")} also falls within the end of ${n > 1 ? "those sources' own schedule windows" : "its source's own schedule window"}; the window match evaluates every source combination, so ${c.sides.length > 2 ? "no date is picked over the others" : "neither date is picked over the other"}. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
 }
 
 /** A window's note under its schedule row: two lines, the rest on demand. */
@@ -591,7 +599,7 @@ function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: C
             <div key={pub} className="mono truncate text-[9.5px] uppercase tracking-[0.05em] text-text-3" title={docs.map((d) => d!.title).join("\n")}>
               {pub}
               {docs.length > 1 && ` · ${docs.length} docs`}
-              {side.earlier && " · earlier edition"}
+              {side.earlier && " · superseded"}
             </div>
           );
         })}

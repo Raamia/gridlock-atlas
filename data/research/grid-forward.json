@@ -430,11 +430,11 @@
      "id": "gf-larkin-valley",
      "label": "Larkin Valley Substation (new; formerly Tremval Substation Expansion North / 'Tremval North'), near Blair",
      "kind": "substation",
-     "precision": "locality",
-     "lat": 44.2946235,
-     "lon": -91.2338433,
-     "uncertaintyMeters": 5000,
-     "coordinateSource": "Nominatim: Blair, Trempealeau County, WI (OSM relation 251764) town centroid; new substation not in OSM (Overpass power=substation within 6 km of Blair returns only the existing Tremval Substation and two unnamed 69 kV stations); Xcel places it ~0.5 mi north of the existing Tremval Substation, which is ~1.7 km west of this centroid",
+     "precision": "official-gis",
+     "lat": 44.3015764977413,
+     "lon": -91.25419971043041,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "PSC map service WesternWisconsin_5CE158 MapServer layer 36 'Substation', Sub_Name='Tremval Expansion North' (the same point as the WWTC record's Larkin Valley substation)",
      "evidence": [
       {
        "sourceId": "xcel-grid-forward-page",
@@ -457,8 +457,15 @@
        "page": 102,
        "printedPage": "Page 90 of 222",
        "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-wwtc-gis-substations",
+       "exactExcerpt": "\"Sub_Name\": \"Tremval Expansion North\", \"Route_Opti\": 2 }, \"geometry\": { \"x\": -91.254199710430413, \"y\": 44.301576497741301",
+       "supports": "official PSC GIS point for Tremval Expansion North (Larkin Valley)",
+       "verifiedByScript": true
       }
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "gf-tremval-existing",
@@ -486,7 +493,8 @@
        "printedPage": "Page 7 of 222",
        "verifiedByScript": true
       }
-     ]
+     ],
+     "role": "context"
     },
     {
      "id": "gf-pco",
@@ -514,7 +522,8 @@
        "printedPage": "Page 92 of 222",
        "verifiedByScript": true
       }
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "route": {

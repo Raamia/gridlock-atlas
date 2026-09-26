@@ -376,7 +376,7 @@
    "places": [
     {
      "id": "larkin-valley-substation",
-     "label": "Larkin Valley Substation (Tremval Substation Expansion North; new 345 kV switching station)",
+     "label": "Tremval North (Larkin Valley) Substation; new 345 kV switching station (formerly Tremval Substation Expansion North)",
      "kind": "switching-station",
      "precision": "official-gis",
      "lat": 44.3015764977413,
@@ -405,7 +405,8 @@
        "section": "Project Costs",
        "verifiedByScript": true
       }
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "tremval-substation-existing",
@@ -431,7 +432,8 @@
        "section": "Application Summary - Overview",
        "verifiedByScript": true
       }
-     ]
+     ],
+     "role": "context"
     },
     {
      "id": "elk-farm-substation",
@@ -491,7 +493,8 @@
        "supports": "official PSC GIS point for Jump River South Substation",
        "verifiedByScript": true
       }
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "route": {

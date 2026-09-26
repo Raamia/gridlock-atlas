@@ -325,15 +325,18 @@ def desc_clusters(parsed, geo):
             last_spend = f"{years[-1]}-12-31"
             end_latest = max(end_iso, last_spend)
             end = {"earliest": min(iso_fix(r["inService"])[0]["earliest"], end_latest), "latest": end_latest, "precision": "day" if end_latest == end_iso else "year"}
+            late = [y for y in years if y > int(end_iso[:4])]
+            late_txt = ", ".join(f"{y}: ${r['costs'][str(y)]:,}" for y in late)
             if start["earliest"] <= end["latest"]:
                 windows.append({
                     "claimSourceId": CURRENT, "phase": "unknown", "start": start, "end": end, "continuous": False,
                     **({"openStart": True} if started_before else {}),
                     "evidence": window_costs(E["costs"], pre_years, prev_minor) + [E["inService"]],
-                    "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates"
+                    "note": "Coarse budget-year window: first budgeted spending year → planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates"
                             + ("; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published" if started_before else "")
                             + ("; the 2024–2028 list already shows spending before 2024" if before_2024 else "")
                             + (f"; spending under 5% of the total ({', '.join(skipped)}) is treated as preconstruction and does not start the window" if skipped else "")
+                            + (f"; DESC also budgets spending after the planned in-service date ({late_txt}), so the window may run to the end of {late[-1]}" if late else "")
                             + ".",
                 })
 

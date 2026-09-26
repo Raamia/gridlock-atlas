@@ -41,7 +41,7 @@ export function roleOf(projectId: string, ctx: RoleContext): Role {
   return p ? overviewRole(p) : "all";
 }
 
-type Props = { projectId: string; role: Role; label?: string; precision?: string; kind?: string; title?: string; context?: boolean };
+type Props = { projectId: string; role: Role; label?: string; precision?: string; kind?: string; title?: string; context?: boolean; onSite?: boolean };
 
 function fc<G extends Geometry>(features: Feature<G, Props>[]): FeatureCollection<G, Props> {
   return { type: "FeatureCollection", features };

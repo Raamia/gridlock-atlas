@@ -119,7 +119,7 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
       projectId: p.id,
       field: "completion",
       description: versionOnly
-        ? `${onePublisher ? "Schedule changed between plan editions" : "Earlier date superseded by a later source"} — ${versionText()}`
+        ? `${onePublisher ? "Schedule changed between plan editions" : "Date superseded by a newer source"} — ${versionText()}`
         : "Sources give different completion / in-service dates — " + describe(cGroups, (d) => formatBound(d.start)),
       sides: cGroups.map((g) => ({ value: formatBound(g[0].start), sourceIds: g.map((x) => x.sourceId), claimIds: g.map((x) => x.id), earlier: g.every((x) => x.earlier) })),
       claimIds,

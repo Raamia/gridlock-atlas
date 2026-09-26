@@ -451,7 +451,7 @@ function CompletionMark({
           <div className="text-text-2">{src?.publisher}</div>
           <div className="mt-1 text-text-3">
             {boundsWindow
-              ? "This date is also the end of a current schedule window used for the TIME match."
+              ? "This date also falls within the end of a current schedule window used for the TIME match."
               : c.current === false
                 ? "Earlier edition: kept as version history, not used for TIME."
                 : "Not used as a schedule-window bound."}

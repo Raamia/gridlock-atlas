@@ -8,7 +8,7 @@ import { displayTitle, formatBound, formatMilesNear, formatPoint, formatSpan, fo
 import { impactDefaults, needsNewCorridor } from "@/lib/impact";
 import { evaluatePair, projectConflicts, runMatching } from "@/lib/matching/engine";
 import { evaluateGeo } from "@/lib/matching/geo";
-import { coarsest, currentInService, dayCount, dayWord, displayWindowGroups, endsWindow, evaluateTime } from "@/lib/matching/time";
+import { activeWindows, coarsest, currentInService, dayCount, dayWord, displayWindowGroups, endsWindow, evaluateTime } from "@/lib/matching/time";
 import { readableNote, windowSourceText } from "@/lib/selectors";
 
 /* ------------------------------- fixture builders ------------------------------- */
@@ -626,7 +626,7 @@ describe("snapshot data regressions", () => {
 
   it("'plan editions' only for one publisher's own lists; a later source superseding an earlier one says so", () => {
     const g = pair("desc-6888", "gpc-20065")!.conflicts.find((c) => c.id === "gpc-20065:completion")!;
-    expect(g.description).toBe("Earlier date superseded by a later source — 2024 Ten-Year Plan: Jun 1, 2027 → SERTP 2025: 2028");
+    expect(g.description).toBe("Date superseded by a newer source — 2024 Ten-Year Plan: Jun 1, 2027 → SERTP 2025: 2028");
     const desc = projectConflicts(proj("desc-06005-b"), pub, doc).find((c) => c.field === "completion")!;
     // edition names oldest first
     expect(desc.description).toBe("Schedule changed between plan editions — 2024–2028 list, 2025–2029 list: Mar 31, 2027 → current edition: Dec 31, 2028");
@@ -855,16 +855,41 @@ describe("snapshot data regressions", () => {
   it("Grid Forward ATC runs from the change-of-ownership point to Columbia; ABO from Alexandria to Big Oaks", () => {
     expect(proj("grid-forward-atc").places.filter((pl) => pl.role === "endpoint").map((pl) => pl.id)).toEqual(["gf-pco", "gf-columbia"]);
     expect(proj("abo-alexandria-big-oaks").places.filter((pl) => pl.role === "endpoint").map((pl) => pl.id)).toEqual(["abo-alexandria", "abo-big-oaks"]);
-    expect(pair("grid-forward-atc", "grid-forward-nspw")!.geoDetail.center!.miles).toBeCloseTo(53, 0);
+    expect(pair("grid-forward-atc", "grid-forward-nspw")!.geoDetail.center!.miles).toBeCloseTo(53.5, 0);
     expect(pair("grid-forward-atc", "transource-beci")!.geoDetail.center!.miles).toBeCloseTo(80, 0);
   });
 
   it("near-edge wording: one decimal beside the radius, and 'named facilities' only when no point is town-level", () => {
-    expect(pair("atc-wwtc-jump-river", "xcel-wwtc")!.geoReason).toContain("≈26.1 mi apart");
+    expect(pair("atc-wwtc-jump-river", "xcel-wwtc")!.geoReason).toContain("≈25.8 mi apart");
     const at10 = runMatching(SNAPSHOT, { now: "t", thresholdMiles: 10 }).matches.find((m) => m.id === "desc-6367-d__gpc-20785")!;
     expect(at10.geoDetail.center!.anyLocality).toBe(true);
     expect(whyFlagged(at10)).toMatch(/centers ≈9\.7 mi apart, at the edge of the 10 mi radius.*A location is approximate \(town-level\)/);
     expect(whyFlagged(pair("desc-6888", "gpc-20787")!)).toMatch(/Located at named facilities/);
+  });
+
+  it("WWTC and Grid Forward NSPW start at Tremval North (Larkin Valley), not the existing Tremval substation", () => {
+    const ends = (id: string) => proj(id).places.filter((pl) => pl.role === "endpoint").map((pl) => pl.id);
+    expect(ends("xcel-wwtc")).toEqual(["larkin-valley-substation", "jump-river-south-endpoint"]);
+    expect(ends("grid-forward-nspw")).toEqual(["gf-larkin-valley", "gf-pco"]);
+    expect(proj("xcel-wwtc").places.find((pl) => pl.id === "tremval-substation-existing")!.role).toBe("context");
+  });
+
+  it("a coarse pair names the project that is only located by county", () => {
+    const m = pair("desc-6888", "gpc-effingham-500")!;
+    expect(m.geoDetail.method).toBe("coarse");
+    expect(m.geoReason).toMatch(/^Effingham County 500 kV.* is located only at county level/);
+    expect(buildBrief(m).unresolved.join(" ")).not.toMatch(/Only county-level locations are published for either/);
+  });
+
+  it("superseded wording never implies the date moved later (Rice Hope moved earlier)", () => {
+    const c = pair("desc-6888", "gpc-20989")!.conflicts.find((x) => x.projectId === "gpc-20989" && x.field === "completion")!;
+    expect(c.description).toMatch(/^Date superseded by a newer source — 2024 Ten-Year Plan: Jun 1, 2029 → SERTP 2025: 2028/);
+  });
+
+  it("DESC windows that run past the in-service date say why", () => {
+    const w = activeWindows(proj("desc-0139-m-n")).find((x) => x.claimSourceId === "desc-scrtp-2026-2030")!;
+    expect(w.end.latest).toBe("2027-12-31");
+    expect(w.note).toMatch(/after the planned in-service date \(2027: \$1,024,912\), so the window may run to the end of 2027/);
   });
 
   it("SERTP 2025 in-service years are current for every Savannah-area project that states one", () => {

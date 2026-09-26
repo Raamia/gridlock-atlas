@@ -116,7 +116,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Sources disagree — both are kept",
-    body: "Xcel's page and the Wisconsin PSC give different completion dates. Both are kept side by side, and each source's own window is evaluated, so neither date is picked over the other.",
+    body: "Xcel's page and the Wisconsin PSC give different completion dates. Both are kept side by side and every source's own construction window is compared; the in-service gap (secondary signal) uses NSPW's latest filing, Q3 2029.",
     run: open(featured, "conflicts", (m) => ({ highlightConflict: true, focusConflict: wwtcCompletion(m) })),
   },
   {

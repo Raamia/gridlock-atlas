@@ -185,7 +185,7 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
     let low = Infinity;
     for (const [x, ex] of pa) for (const [y, ey] of pb) low = Math.min(low, Math.max(0, miles(x, y) - ex - ey));
     return low <= thresholdMiles
-      ? { level: "possible", reason: "Only county-level locations are published; the areas could be within the review radius.", detail }
+      ? { level: "possible", reason: `${countyOnlyText([ca ? null : a, cb ? null : b])}; the areas could be within the review radius.`, detail }
       : { level: "no-match", reason: "Even the nearest edges of the published county-level areas are beyond the review radius.", detail };
   }
 
@@ -194,4 +194,10 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
     reason: "No usable location evidence for one of the projects; proximity is unknown.",
     detail: { ...base, method: "none" },
   };
+}
+
+/** Which side of a coarse pair is known only by county (the other may sit at named facilities). */
+export function countyOnlyText(sides: (Project | null)[]): string {
+  const only = sides.filter((p): p is Project => !!p);
+  return only.length === 1 ? `${displayTitle(only[0])} is located only at county level (no site published)` : "Only county-level locations are published for either project";
 }
