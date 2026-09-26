@@ -275,9 +275,9 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
   const matches: Match[] = [];
   const excludedPairs: ExcludedPair[] = [];
   const excludedCounts: MatchRun["excludedCounts"] = { "shared-owner": 0, "no-signal": 0, "beyond-radius": 0, "different-region": 0, "location-unknown": 0 };
-  const exclude = (x: ExcludedPair) => {
+  const exclude = (x: ExcludedPair, notable = false) => {
     excludedCounts[x.reason]++;
-    if (x.reason === "shared-owner" || opts.listExclusions !== false) excludedPairs.push(x);
+    if (notable || opts.listExclusions !== false) excludedPairs.push(x);
   };
   let pairsEvaluated = 0;
   for (let i = 0; i < eligible.length; i++) {
@@ -286,12 +286,17 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
       const oa = ownerIds(a);
       const shared = [...ownerIds(b)].filter((u) => oa.has(u));
       if (shared.length) {
-        exclude({
-          projectAId: a.id,
-          projectBId: b.id,
-          reason: "shared-owner",
-          detail: `Shared owner (${shared.join(", ")}): internal context, not a cross-utility lead.`,
-        });
+        // listed individually only when the pair would otherwise meet the place rule (useful internal context)
+        const g = a.region === b.region ? evaluateGeo(a, b, snapshot.relations, thresholdMiles).level : "no-match";
+        exclude(
+          {
+            projectAId: a.id,
+            projectBId: b.id,
+            reason: "shared-owner",
+            detail: `Shared owner (${shared.join(", ")}): internal context, not a cross-utility lead.`,
+          },
+          g === "confirmed" || g === "possible",
+        );
         continue;
       }
       if (a.region !== b.region) {

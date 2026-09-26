@@ -183,6 +183,7 @@ export function MethodDrawer() {
             ))}
             {run.excludedPairs
               .filter((p) => p.reason === "shared-owner")
+              .slice(0, 8)
               .map((p) => (
                 <div key={`${p.projectAId}-${p.projectBId}`} className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[12px] ring-1 ring-line">
                   <span className="mono mt-0.5 rounded bg-bg-3 px-1.5 text-[10px] uppercase text-text-2">shared owner</span>
@@ -194,6 +195,11 @@ export function MethodDrawer() {
                   </span>
                 </div>
               ))}
+            <p className="pt-1 text-[11px] leading-snug text-text-3">
+              Pair totals: {run.excludedCounts["shared-owner"].toLocaleString("en-US")} shared-owner (internal context; {Math.min(8, run.excludedPairs.filter((p) => p.reason === "shared-owner").length)} nearby ones shown) ·{" "}
+              {(run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"]).toLocaleString("en-US")} farther than {run.thresholdMiles} mi ·{" "}
+              {run.excludedCounts["location-unknown"].toLocaleString("en-US")} with a location not yet established · {run.excludedCounts["different-region"].toLocaleString("en-US")} across regions.
+            </p>
           </div>
         </>
       )}
