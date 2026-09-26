@@ -1,0 +1,642 @@
+{
+ "batch": "gpc-border",
+ "projects": [
+  {
+   "key": "gpc:17075",
+   "kind": "substation",
+   "notes": "Relay modernization at Little Ogeechee. It also adds a BAAH rung for the new Big Ogeechee - Little Ogeechee (Red) 230kV line, but the only work site is Little Ogeechee.",
+   "endpoints": [
+    {
+     "name": "Little Ogeechee",
+     "lat": 32.00679,
+     "lon": -81.25315,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121701191 power=substation name=Little Ogeechee Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: I re-ran the gazetteer. This is the only feature with this name in SC/GA. The name matches exactly, the operator is Georgia Power, and the 230/115 kV voltage matches the plan's 230kV ring bus and 115kV bus. It is in west Chatham County (Savannah, zone 219). The OSM 230 kV lines 'Meldrim - Little Ogeechee 230kV' and the path to Dean Forest end here."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20277",
+   "kind": "line",
+   "notes": "The reactors are installed at McIntosh, and the GPC rebuild is only 0.1 mi at the McIntosh end. Purrysburg is on the SC side. SERTP 2014 p.45 (sertp-2014-plan, excerpt verified) calls it 'Purrysburg (SCPSA)', so it is a Santee Cooper substation, not a DESC one. The DESC Jasper Generating Plant switchyard (OSM way/185380597, 'Jasper Substation', 230 kV generation) is about 0.9 km south and is a different facility.",
+   "endpoints": [
+    {
+     "name": "McIntosh",
+     "lat": 32.35212,
+     "lon": -81.17511,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/121624352 power=substation name=McIntosh Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the Georgia Power McIntosh substation next to Plant McIntosh in Effingham County (zone 219). Overpass (re-queried) shows the 2-circuit 230 kV way/185380583 leaving it for SC, and the 115 kV lines (way/1015932064 to Goshen and way/185380584 to SC) also end here, so it is the 230/115 kV McIntosh named in SERTP 2014. I did not use West McIntosh (500 kV, way/121624371) or the McIntosh CC switchyard (way/863571829)."
+    },
+    {
+     "name": "Purrysburg",
+     "lat": 32.36884,
+     "lon": -81.12243,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/185380609 power=substation substation=transmission voltage=230000;115000 (unnamed, no operator), identified by line topology (Overpass mirror, re-queried 2026-09-26); Nominatim Purrysburg Road, Baker Hill, Jasper County SC (way/12420907, 32.36908,-81.12146) is about 95 m away",
+     "confidence": "confirmed",
+     "validation": "Fact-check: I re-traced the topology. The only 2-circuit 230 kV line from McIntosh into SC (way/185380583, 4.43 mi, plus way/185380585, 0.28 mi, 4.71 mi in total) ends at this unnamed 230/115 kV transmission substation in Jasper County, SC. It does not end at the DESC Jasper generating switchyard (way/185380597). A 230 kV line also leaves this substation toward the Bluffton area (way/185381110, 19.6 mi), which fits a Santee Cooper (SCPSA) station, as SERTP 2014 p.45 says. I confirmed with Nominatim that Purrysburg Road (way/12420907) is next to it. The researcher's EIPC 4.79 mi circuit length is not in the cache, so I could not re-verify it. The identification does not depend on it."
+    }
+   ]
+  },
+  {
+   "key": "gpc:19523",
+   "kind": "other",
+   "notes": "Multi-element project: the new Hyundai substation, the new Newton Rd 230kV switching station (loops in Little Ogeechee - Meldrim), the new Hyundai-Newton Rd (12 mi) and Hyundai-Meldrim (10 mi) lines, and a breaker added at Meldrim. The primary site is Hyundai. All three sites are in OSM, and the new ones carry start_date 2025.",
+   "endpoints": [
+    {
+     "name": "Hyundai",
+     "lat": 32.16662,
+     "lon": -81.46093,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1458221220 power=substation name=Hyundai Motors Substation voltage=230000 substation=industrial start_date=2025",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the only Hyundai power feature in the SC/GA export. It is 230 kV and sits at the Hyundai Metaplant, Ellabell, Bryan County (Savannah area, zone 219). I re-traced the OSM 230 kV lines: 10.89 mi to Meldrim (plan 10 mi) and 12.35 mi to Newton Road (plan 12 mi). OSM has no operator tag."
+    },
+    {
+     "name": "Newton Rd",
+     "lat": 32.11268,
+     "lon": -81.37316,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/1489153816 power=substation name=Newton Road Substation operator=Georgia Power voltage=230000 substation=switching start_date=2025",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it is a 230 kV switching station built in 2025. It sits on the Meldrim - Little Ogeechee 230 kV corridor (3.13 mi to Meldrim, 10.77 mi to Little Ogeechee), which matches the plan's loop-in, and it is 12.35 mi by line from Hyundai."
+    },
+    {
+     "name": "Meldrim",
+     "lat": 32.15528,
+     "lon": -81.36838,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121624363 power=substation name=Meldrim Substation operator=Georgia Power voltage=230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the only Meldrim in the SC/GA export. The operator is Georgia Power and it carries 230/115/46 kV. It is in Effingham County near Savannah (zone 219), and it is the terminal of the 10.89 mi 230 kV line from Hyundai."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20067",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Deptford",
+     "lat": 32.06683,
+     "lon": -81.04838,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/122007500 power=substation name=Deptford Substation operator=Georgia Power voltage=115000;46000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the only Deptford in the export. The operator is Georgia Power and it carries 115 kV. It is in east Savannah (zone 219). The single 115 kV way/121857250 runs from Deptford to Magnolia and is 5.11 mi, which matches the plan's ~5 mi."
+    },
+    {
+     "name": "Magnolia",
+     "lat": 32.02269,
+     "lon": -81.08618,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121857248 power=substation name=Magnolia Substation operator=Georgia Power voltage=115000;46000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. It is in south Savannah and is the other end of the 5.11 mi way/121857250 from Deptford. I ruled out Magnolia Park (Tifton area, way/174466539)."
+    }
+   ]
+  },
+  {
+   "key": "gpc:16007",
+   "kind": "line",
+   "notes": "The reconductored section runs from Fenwick St to East Augusta Jct (2.72 mi). Both terminals are in Augusta (Richmond County, zone 215), and neither is named in OSM. The 115 kV path runs from the Fenwick-area substations southeast along way/170166776 toward the east Augusta industrial area. A junction on that line (33.4355,-81.9378) is 2.86 mi from unnamed substation way/170166804, and 3.75 mi from way/1007026803 by way of way/382258417. From that junction way/170166814 runs 0.5 mi to the unnamed GPC 115 kV substation way/170166793. This junction is a plausible East Augusta Jct, but that is not confirmed.",
+   "endpoints": [
+    {
+     "name": "Fenwick Street",
+     "lat": 33.46865,
+     "lon": -81.96832,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/1007026803 power=substation operator=Georgia Power voltage=115000 substation=distribution (unnamed); Overpass: Fenwick Street way/389734559 is 66 m away",
+     "confidence": "lower-confidence",
+     "validation": "OSM has no feature named Fenwick. This unnamed Georgia Power 115 kV substation is 66 m from Fenwick Street (way/389734559). The researcher cited way/364426905, which is 458 m away. It has 115 kV lines to 15th Street (1.33 mi) and to the southeast. A second unnamed GPC 115 kV substation, way/170166804 (33.46077,-81.96474), is 0.93 km southeast and 722 m from Fenwick Street. Its line distance to the east Augusta junction (2.86 mi) fits the plan's 2.72 mi better. I cannot tell which of the two is Fenwick Street, so the uncertainty is 1000 m to cover both. Lower confidence."
+    },
+    {
+     "name": "Sand Bar Ferry",
+     "lat": 33.44856,
+     "lon": -81.92257,
+     "precision": "locality",
+     "uncertaintyMeters": 3000,
+     "coordinateSource": "Nominatim 'Sand Bar Ferry Road, Marion Homes, Augusta, Richmond County, GA' (way/858401457, re-verified by lookup)",
+     "confidence": "lower-confidence",
+     "validation": "OSM has no substation named Sand Bar Ferry, and a web search found none. The coordinate is on Sand Bar Ferry Road (GA-28) in east Augusta, the road the station is presumably named after. Candidate unnamed GPC 115 kV substations are way/170166793, way/170166816 and way/170166800, about 1.1-1.3 km from the road, and the switching station way/1007026782 is 2 km away. All are within 3 km of this point. way/170166793 is reached 0.5 mi past a junction on the line from the Fenwick-area substations, but I cannot say which one is Sand Bar Ferry. Locality only."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20066",
+   "kind": "line",
+   "notes": "The bus and jumper upgrade is at Bolton Street Substation (OSM way/964045266, 32.06417,-81.08895, Georgia Power 115 kV). I re-traced the OSM 115 kV path Boulevard - 52nd Street - Bolton Street - Deptford at 7.87 mi, which matches the plan's ~8 mi.",
+   "endpoints": [
+    {
+     "name": "Boulevard",
+     "lat": 32.04123,
+     "lon": -81.14446,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/381797798 power=substation name=Boulevard Substation operator=Georgia Power voltage=230000;115000;46000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the only Boulevard in the export. The operator is Georgia Power and it carries 115 kV. It is in Savannah (zone 219). The OSM 115 kV path to Deptford by way of 52nd Street and Bolton Street is 7.87 mi (plan ~8 mi)."
+    },
+    {
+     "name": "Deptford",
+     "lat": 32.06683,
+     "lon": -81.04838,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/122007500 power=substation name=Deptford Substation operator=Georgia Power voltage=115000;46000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. It is in east Savannah, at the end of the 7.87 mi OSM 115 kV path from Boulevard."
+    }
+   ]
+  },
+  {
+   "key": "gpc:19966",
+   "kind": "substation",
+   "notes": "This is a new 500/230 kV substation, and OSM does not have it yet (re-checked Overpass extract bigog.json). SERTP 2025 p.75 says it is 'near Little Ogeechee substation'. The Georgia Power article (gpc-big-ogeechee-news-2026) places it in west Chatham County along an existing high-voltage line, with a new line nearly five miles down Little Neck Road. WTOC (2025-02-27, https://www.wtoc.com/2025/02/27/residents-little-neck-rd-concerned-about-upcoming-georgia-power-project/) says the line runs from an existing substation on Little Neck Road to 'a new one on Bush Road'. STATUS FLAG: a 2026-07-24 syndicated news report (https://www.aol.com/articles/georgia-power-substation-set-power-090526000.html) says the substation began moving energy in early July 2026. It may already be complete at the snapshot date, so eligibility should be reviewed. This source is not cached.",
+   "endpoints": [
+    {
+     "name": "Big Ogeechee",
+     "lat": 32.0386,
+     "lon": -81.3018,
+     "precision": "locality",
+     "uncertaintyMeters": 1500,
+     "coordinateSource": "Estimated where Bush Road (OSM way/9093411, Nominatim lookup) crosses the shared right of way of the Thalmann - Blandford 500kV line (way/556396013) and the Meldrim - Little Ogeechee 230kV line (way/660617934). I recomputed the crossing at 32.0381,-81.3012, within 70 m of this point.",
+     "confidence": "lower-confidence",
+     "validation": "The plan says the site is next to the shared 500 kV/230 kV right of way and near Little Ogeechee. WTOC says it is on Bush Road. Bush Road crosses the shared right of way only once, at this point, 5.8 km from Little Ogeechee, which fits the 'nearly five miles' Little Neck Road line. The plan's 'McCall Road - Thalmann 500kV' is tagged 'Thalmann - Blandford 500kV' in OSM, and it is the only 500 kV line on this right of way. The fenced site is not mapped, so this is an estimate: locality, lower confidence."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20785",
+   "kind": "line",
+   "notes": "The rebuilt section runs Kraft - Godley J - Rice Hope, so Kraft and Rice Hope are the project's terminals; Goshen is kept as a context place. The IRP gives 9.3 mi. SERTP 2025 describes a 3.48 mi portion (p.93) and lists a separate 3.04 mi Goshen - Rice Hope rebuild (p.157). In OSM the full Goshen (SAV) - Kraft 115 kV path is about 9.6 mi. It runs from Goshen through Rice Hope (unnamed way/897598553, 3.04 mi from Goshen), past the Godley Tract tap junction, to Kraft.",
+   "endpoints": [
+    {
+     "name": "Rice Hope",
+     "lat": 32.20886,
+     "lon": -81.20821,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/897598553 power=substation operator=Georgia Power voltage=115000 (unnamed), identified by line topology; SERTP 2025 p.157 (sertp-2025-plan) gives Goshen to Rice Hope as 3.04 mi, equal to OSM way/1015932067 (3.04 mi, Goshen (SAV) to this substation)",
+     "confidence": "confirmed",
+     "validation": "The plan rebuilds only the Kraft - Godley J - Rice Hope section of the Goshen (SAV) - Kraft line; SERTP 2025 p.157 lists Goshen - Rice Hope (3.04 mi) as a separate 2031 rebuild."
+    },
+    {
+     "name": "Kraft",
+     "lat": 32.14814,
+     "lon": -81.14598,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121986375 power=substation name=Kraft Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the only Kraft in the export. The operator is Georgia Power and it carries 115 kV. It is in Port Wentworth/Garden City (zone 219). The OSM 115 kV path from Kraft past the Godley Tract tap (way/193440184) reaches Rice Hope (way/897598553) and then Goshen."
+    }
+   ],
+   "otherPlaces": [
+    {
+     "name": "Goshen (SAV)",
+     "lat": 32.2487,
+     "lon": -81.20947,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/1008141064 power=substation name=Goshen Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "The Goshen (SAV) - Kraft line starts here, but the Goshen - Rice Hope section is a separate 2031 SERTP rebuild (SERTP 2025 p.157), outside this project. Fact-check: the gazetteer returns two Georgia Power 'Goshen Substation' features. This is the one near Rincon in Effingham County (Savannah, zone 219), which the '(SAV)' qualifier requires. The other is the Augusta-area Goshen (way/52019569, 230/115 kV, zone 215), which I rejected. Its 115 kV lines run to McIntosh (8.41 mi) and to Rice Hope/Kraft.",
+     "role": "context",
+     "label": "Goshen line terminal; outside the rebuilt section"
+    }
+   ]
+  },
+  {
+   "key": "gpc:20065",
+   "kind": "line",
+   "notes": "The rebuilt section runs from Goshen (SAV) to Georgia Pacific (Rincon), about 6.7 mi, so those are the project's terminals. Georgia Pacific (Rincon) is the unnamed Georgia Power 115 kV substation OSM way/652933520 (32.33053,-81.18768), next to the Georgia-Pacific Savannah River Mill. It lies 83 m from the Goshen - McIntosh 115 kV way/1015932064, 6.72 mi along the line from Goshen, which matches the plan's 6.7 mi. The line itself continues about 1.7 mi to McIntosh, which is kept as a context place, not a terminal.",
+   "endpoints": [
+    {
+     "name": "Goshen (SAV)",
+     "lat": 32.2487,
+     "lon": -81.20947,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/1008141064 power=substation name=Goshen Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the '(Sav)' qualifier and zone 219 rule out the Augusta Goshen (way/52019569). The OSM 115 kV way/1015932064 (8.41 mi) runs directly from this Goshen to McIntosh."
+    },
+    {
+     "name": "Georgia Pacific (Rincon)",
+     "lat": 32.33053,
+     "lon": -81.18768,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/652933520 power=substation operator=Georgia Power voltage=115000 (unnamed), next to the Georgia-Pacific Savannah River Mill near Rincon; identified by line topology",
+     "confidence": "confirmed",
+     "validation": "The plan rebuilds only the Goshen (Savannah) - Georgia Pacific (Rincon) section of the Goshen (Sav) - McIntosh line. This Georgia Power 115 kV substation lies 83 m from the Goshen - McIntosh 115 kV way/1015932064, 6.72 mi along the line from Goshen, matching the plan's 6.7 mi (SERTP 2025 p.111 says the same)."
+    }
+   ],
+   "otherPlaces": [
+    {
+     "name": "McIntosh",
+     "lat": 32.35212,
+     "lon": -81.17511,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/121624352 power=substation name=McIntosh Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "The Goshen (Sav) - McIntosh line ends here, about 1.7 mi north of the rebuilt section's end at Georgia Pacific (Rincon). Kept as context, not as a terminal of this project. Fact-check: the 115 kV way/1015932064 from Goshen ends inside this substation, and I re-verified this in Overpass. OSM tags only 230 kV, but the 115 kV lines end here and SERTP 2014 calls McIntosh a 230/115 kV substation.",
+     "role": "context",
+     "label": "McIntosh line terminal; outside the rebuilt section"
+    }
+   ]
+  },
+  {
+   "key": "gpc:20783",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Coleman",
+     "lat": 32.10772,
+     "lon": -81.22691,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/608270486 power=substation name=Coleman Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the gazetteer returns two Georgia Power 'Coleman Substation' features. By re-traced topology, this one has a 115 kV path to Dean Forest (ways 660617935, 1028292141, 121685004) of about 6.5-6.6 mi, against the plan's 6.67 mi. It also has a 115 kV path to Meldrim (12.7 mi). The other Coleman (way/1011846565, 32.0973,-81.1161) connects only by a 46 kV line (way/1011846564), so I rejected it."
+    },
+    {
+     "name": "Dean Forest",
+     "lat": 32.08351,
+     "lon": -81.18872,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121674829 power=substation name=Dean Forest Substation operator=Georgia Power voltage=230000;115000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the only Dean Forest in the export. The operator is Georgia Power and it carries 230/115 kV. It is in Garden City/Savannah (zone 219) and is the end of the 115 kV path from Coleman."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20407",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Magnolia",
+     "lat": 32.02269,
+     "lon": -81.08618,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121857248 power=substation name=Magnolia Substation operator=Georgia Power voltage=115000;46000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. It is in south Savannah (zone 219)."
+    },
+    {
+     "name": "Truman Parkway",
+     "lat": 31.99338,
+     "lon": -81.08202,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/905020324 power=substation operator=Georgia Power voltage=115000 (unnamed); Nominatim Harry Truman Parkway, Savannah (way/87906607, 31.99814,-81.08011, re-verified by lookup)",
+     "confidence": "confirmed",
+     "validation": "OSM has no feature with this name, so I identified it by topology. Re-traced: Magnolia's 115 kV neighbors are this substation (2.92 mi by ways 1119923452 and 1027421697), Boulevard (4.49 mi), Deptford (4.99 mi), Grove Point Road (6.50 mi) and 52nd Street (6.74 mi). Only this one matches the plan's 3 miles, which SERTP 2025 p.130 also gives for Magnolia - Truman Parkway. It is about 570 m from Harry Truman Parkway."
+    }
+   ]
+  },
+  {
+   "key": "gpc:21006",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Boulevard",
+     "lat": 32.04123,
+     "lon": -81.14446,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/381797798 power=substation name=Boulevard Substation operator=Georgia Power voltage=230000;115000;46000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. The re-traced OSM 115 kV path from Boulevard to Magnolia is 4.44 mi, against the plan's 4.56 mi."
+    },
+    {
+     "name": "Magnolia",
+     "lat": 32.02269,
+     "lon": -81.08618,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121857248 power=substation name=Magnolia Substation operator=Georgia Power voltage=115000;46000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. It is the end of the 4.44 mi 115 kV path from Boulevard."
+    }
+   ]
+  },
+  {
+   "key": "gpc:21023",
+   "kind": "line",
+   "notes": "The line runs by way of Salt Creek, an intermediate point near the Salt Creek waterway in Garden City (Nominatim 32.0446,-81.2040). Salt Creek is not an endpoint. The re-traced OSM 230 kV path from Dean Forest to Little Ogeechee is 7.70 mi (plan ~8 mi) and passes the Silk Hope (way/1027495919) and Grove Point Road (way/121701187) substations.",
+   "endpoints": [
+    {
+     "name": "Dean Forest",
+     "lat": 32.08351,
+     "lon": -81.18872,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121674829 power=substation name=Dean Forest Substation operator=Georgia Power voltage=230000;115000;13800",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 230 kV. It is in Garden City/Savannah (zone 219). The OSM 230 kV path to Little Ogeechee is 7.70 mi."
+    },
+    {
+     "name": "Little Ogeechee",
+     "lat": 32.00679,
+     "lon": -81.25315,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121701191 power=substation name=Little Ogeechee Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 230 kV. It is in west Chatham County, at the end of the 7.70 mi OSM 230 kV path from Dean Forest (plan ~8 mi)."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20989",
+   "kind": "substation",
+   "notes": "SERTP 2025 p.111 gives an in-service year of 2028. The Crossgate - McIntosh 230kV line is tagged 'Kraft - McIntosh 230kV' in OSM (way/121624353). Its south end is the unnamed GPC 230 kV substation way/423222141 (32.15163,-81.17384), about 500 m from Crossgate Road (Nominatim way/9092580), which is probably Crossgate. Rice Hope was built as a 115 kV ring bus in 2016, per SERTP 2014 p.52.",
+   "endpoints": [
+    {
+     "name": "Rice Hope",
+     "lat": 32.20886,
+     "lon": -81.20821,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/897598553 power=substation operator=Georgia Power voltage=115000 (unnamed), identified by line topology; SERTP 2025 p.157 (sertp-2025-plan) gives Goshen to Rice Hope as 3.04 mi, equal to OSM way/1015932067 (3.04 mi, Goshen (SAV) to this substation)",
+     "confidence": "confirmed",
+     "validation": "Upgraded from lower-confidence. SERTP 2014 p.52 (excerpt verified) describes Rice Hope as a 115 kV ring bus that terminates the Goshen and Kraft 115 kV lines. This is the only substation on the OSM Goshen (SAV) - Kraft 115 kV line between Goshen and the Godley tap. SERTP 2025 p.157 (excerpt verified) says 'Rebuild 3.04 miles of Goshen \u2013 Kraft 115 kV transmission line from Goshen to Rice Hope', and OSM way/1015932067 from Goshen (SAV) to this substation is exactly 3.04 mi. It is 140 m from the Crossgate(Kraft) - McIntosh 230 kV line that the plan loops in. Nominatim finds businesses named after Rice Hope on Augusta Road in Port Wentworth, 0.8-1.5 km away ('Animal Hospital at Rice Hope', way/638242186; 'the market at rice hope', node/13353831853). The IRP's 9.3 mi refers to the Kraft-side section, not to this site's identity."
+    }
+   ]
+  },
+  {
+   "key": "gpc:19996",
+   "kind": "line",
+   "notes": "Only 0.34 mi is rebuilt. In OSM only two 230 kV lines leave Warrenton Primary: Harlee Branch - Warrenton (way/170296003) and Thomson Primary - Warrenton Primary (way/1020780345). Goldens Creek is probably on one of them, but I could not confirm which.",
+   "endpoints": [
+    {
+     "name": "Goldens Creek",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "not found: no OSM/gazetteer feature; Nominatim has no 'Goldens Creek' in GA (re-queried 4 variants); web searches found no substation; no mention in any cached source other than the IRP p.380 and SERTP 2025 p.141 project entries",
+     "confidence": "not-found",
+     "validation": "A GDOT TFA forecast lists a bridge 'GOLDENS CREEK CIRCLE @ GOLDENS CREEK' in Warren County, so a stream with this name exists. It is not a substation location, and I did not use it. I give no coordinate."
+    },
+    {
+     "name": "Warrenton Primary",
+     "lat": 33.3805,
+     "lon": -82.6873,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/170296005 power=substation name=Warrenton Primary Substation operator=Georgia Power voltage=230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, including 'Primary'. I did not use Warrenton Substation (way/1046106634, 46 kV) or East Warrenton (46 kV). The operator is Georgia Power and it carries 230 kV. It is in Warrenton, Warren County (zone 215), and the 230 kV lines to Thomson Primary and Harlee Branch end here."
+    }
+   ]
+  },
+  {
+   "key": "gpc:21116",
+   "kind": "line",
+   "notes": "Plan: a new 230kV switching station on the Waynesboro - Wilson 230kV line, and a new 12.3 mi 230kV line from it to Goshen. In OSM the host line is way/9044021 (22.07 mi, 230 kV, tagged 'Vogtle - Wadley 230kV'). It runs from Gough Substation #9 near Waynesboro (way/170156542, 33.089,-82.050) to the Plant Wilson generation switchyard (way/1117139178, 33.1378,-81.7490) in Burke County. The switching station site is not published.",
+   "endpoints": [
+    {
+     "name": "New switching station on Waynesboro - Wilson 230kV line",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "not found: new facility, site not given in any public source found",
+     "confidence": "not-found",
+     "validation": "The plan names no site. It lies somewhere on the Waynesboro - Wilson 230 kV line in Burke County, about 12.3 line-miles from Goshen. I did not invent a coordinate."
+    },
+    {
+     "name": "Goshen",
+     "lat": 33.31976,
+     "lon": -81.99531,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/52019569 power=substation name=Goshen Substation operator=Georgia Power voltage=230000;115000;12470",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the Augusta-area Goshen (zone 215, south Richmond County), a Georgia Power 230/115 kV substation. The re-traced OSM 230 kV path from Goshen to Vogtle is 18.65 mi, which matches the plan's 'Goshen - Vogtle corridor'. It is not the 115 kV Goshen (SAV) in zone 219."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20756",
+   "kind": "line",
+   "notes": "This is a new 500kV line of about 70 mi between Appling County (Hatch) and Jefferson County (Wadley). Hatch is well outside the Savannah River border area.",
+   "endpoints": [
+    {
+     "name": "Hatch",
+     "lat": 31.93467,
+     "lon": -82.3477,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/160308126 power=substation name=Hatch Nuclear Plant Substation operator=Georgia Power voltage=500000;230000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the 500/230 kV switchyard at Plant Hatch near Baxley, Appling County, operated by Georgia Power. It is the only 500 kV feature at the site. I did not use Hatch Site #1 (115 kV) or the unnamed 230 kV way/160308104."
+    },
+    {
+     "name": "Wadley Primary",
+     "lat": 32.88466,
+     "lon": -82.41587,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1005940922 power=substation name=Wadley Substation operator=Georgia Power voltage=500000 substation=transmission",
+     "confidence": "confirmed",
+     "validation": "Fact-check: --around 4 km shows this is the only transmission substation at Wadley, Jefferson County. Its OSM description says it was expanded in 2018 for the Vogtle expansion. It is 500 kV, which matches a 500kV line. I ruled out Wadley #4 (115 kV), South Wadley (115 kV) and the Alabama Power Wadley (46 kV). OSM lacks the word 'Primary'."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20784",
+   "kind": "line",
+   "notes": "The rebuilt section runs from Four Lakes to Meldrim, about 3 mi. Four Lakes is OSM way/1489153847 (32.10050,-81.37288, Georgia Power, 115 kV, 2025), but OSM does not connect it to the line. The Coleman - Meldrim 115 kV segment way/660617933 (2.76 mi) runs from a junction about 1.8 km north of Four Lakes to Meldrim.",
+   "endpoints": [
+    {
+     "name": "Coleman",
+     "lat": 32.10772,
+     "lon": -81.22691,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/608270486 power=substation name=Coleman Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: of the two 'Coleman' features, this is the one connected by 115 kV to Meldrim (ways 660617935, 9079093, 660617933; 12.7 mi re-traced). The same feature matches the Coleman - Dean Forest length in gpc:20783. The other Coleman (way/1011846565) has only a 46 kV connection."
+    },
+    {
+     "name": "Meldrim",
+     "lat": 32.15528,
+     "lon": -81.36838,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121624363 power=substation name=Meldrim Substation operator=Georgia Power voltage=230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. It is the end of the OSM 115 kV path from Coleman."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20793",
+   "kind": "line",
+   "notes": "The rebuilt segment runs from Euchee Creek to Thurmond Dam (5.45 mi). Euchee Creek is an intermediate point in Columbia County. The unnamed 115 kV substation OSM way/52102613 (33.5893,-82.1955) is 5.29 mi by line from Thurmond, a possible but unconfirmed candidate. Thurmond Dam is on the GA/SC state line.",
+   "endpoints": [
+    {
+     "name": "Evans Primary",
+     "lat": 33.54399,
+     "lon": -82.16865,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/52103255 power=substation name=Evans Primary Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, including 'Primary'. The operator is Georgia Power and it carries 115 kV. It is in Evans, Columbia County (zone 215), and the OSM 115 kV lines to Thurmond Substation end here."
+    },
+    {
+     "name": "Thurmond Dam (USA)",
+     "lat": 33.66013,
+     "lon": -82.19593,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/52102019 power=substation name=Thurmond Substation operator=Georgia Power voltage=115000 substation=generation",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the 115 kV generation switchyard at J. Strom Thurmond Dam, next to the US Army Corps of Engineers plant (OSM way/1042037357, 200 m away). 'USA' refers to the Army. It is on the Savannah River at the GA/SC line, and the OSM 115 kV lines to Evans Primary end here."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20794",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Evans Primary",
+     "lat": 33.54399,
+     "lon": -82.16865,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/52103255 power=substation name=Evans Primary Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. It is in Columbia County (zone 215). The re-traced shortest OSM 115 kV path to Thurmond is 8.77 mi, against the plan's 8.9 mi for the #6 line."
+    },
+    {
+     "name": "Thurmond Dam (USA)",
+     "lat": 33.66013,
+     "lon": -82.19593,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/52102019 power=substation name=Thurmond Substation operator=Georgia Power voltage=115000 substation=generation",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the 115 kV switchyard at the Corps of Engineers' J. Strom Thurmond Dam on the GA/SC line. It is the end of the 8.77 mi 115 kV path from Evans Primary."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20796",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Meldrim",
+     "lat": 32.15528,
+     "lon": -81.36838,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121624363 power=substation name=Meldrim Substation operator=Georgia Power voltage=230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: this is the only Meldrim in the export. The operator is Georgia Power and it carries 230/115 kV, which matches the 230/115kV Bank D. It is in Effingham County (zone 219)."
+    }
+   ]
+  },
+  {
+   "key": "gpc:14222",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Thomson Primary",
+     "lat": 33.45396,
+     "lon": -82.41422,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/160065782 power=substation name=Thomson Primary Substation operator=Georgia Power voltage=500000;230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, including 'Primary'. The operator is Georgia Power and it carries 230 and 115 kV, which matches the 230/115kV transformer. It is in McDuffie County (zone 215). I did not use the in-town Thomson, East Thomson, North Thomson or West Thomson substations."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20787",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Little Ogeechee",
+     "lat": 32.00679,
+     "lon": -81.25315,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121701191 power=substation name=Little Ogeechee Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 230/115 kV, which matches the 230/115kV autotransformer. It is in west Chatham County (zone 219)."
+    }
+   ]
+  },
+  {
+   "key": "gpc:17993",
+   "kind": "line",
+   "notes": "The rebuilt section runs from Thomson Primary to Pumpkin Center (5.28 mi). Pumpkin Center is OSM way/1173724569 (33.48711,-82.33049, a Jefferson EMC 115 kV distribution substation). The re-traced OSM 115 kV distance from Thomson Primary to Pumpkin Center is 5.24 mi, which matches. The full path from Thomson Primary to Evans Primary, by way of Pumpkin Center and unnamed way/340540420, is 15.43 mi.",
+   "endpoints": [
+    {
+     "name": "Evans Primary",
+     "lat": 33.54399,
+     "lon": -82.16865,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/52103255 power=substation name=Evans Primary Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. It is in Columbia County (zone 215) and is connected to Thomson Primary by the 15.43 mi OSM 115 kV path."
+    },
+    {
+     "name": "Thomson Primary",
+     "lat": 33.45396,
+     "lon": -82.41422,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/160065782 power=substation name=Thomson Primary Substation operator=Georgia Power voltage=500000;230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "Fact-check: the name matches, the operator is Georgia Power, and it carries 115 kV. It is in McDuffie County (zone 215), 5.24 mi by 115 kV line from Pumpkin Center, against the plan's 5.28 mi."
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "gpc:19996 Goldens Creek: no coordinates. There is no OSM, Nominatim or web match, and no cached source other than the IRP p.380 and SERTP 2025 p.141 project entries. It is probably on the Harlee Branch - Warrenton or Thomson Primary - Warrenton Primary 230 kV line.",
+  "gpc:21116: the new switching station on the Waynesboro - Wilson 230kV line (OSM way/9044021, Gough to Plant Wilson, Burke County) has no published site, so it is not-found. Only the Goshen end is located.",
+  "gpc:16007: Fenwick Street is ambiguous between the unnamed GPC 115 kV substations way/1007026803 (66 m from Fenwick St, used) and way/170166804 (0.93 km southeast, better line-distance fit). Sand Bar Ferry is locality only (Sand Bar Ferry Road, 3 km uncertainty); the candidates are unnamed GPC 115 kV substations way/170166793, way/170166816, way/170166800 and way/1007026782. East Augusta Jct is not confirmed.",
+  "gpc:19966 Big Ogeechee: the fenced site is not yet in OSM. It is estimated where Bush Road crosses the 500/230 kV right of way (locality, 1.5 km). A news report says it was energized in July 2026, so its eligibility at the snapshot date needs review.",
+  "Intermediate points not geocoded because they are not endpoints: East Augusta Jct, Euchee Creek (candidate way/52102613), Godley J (tap near Godley Tract Substation way/193440181), Salt Creek. Georgia Pacific (Rincon) = way/652933520 is supported by the 6.72 mi line distance.",
+  "The researcher's EIPC 2013 figure (McIntosh - Purrysburg ckt 2, 4.79 mi) is not cached, so I could not re-verify it. The Purrysburg match rests on OSM topology, SERTP 2014 p.45 and Purrysburg Road."
+ ],
+ "issuesFixed": [
+  "gpc:20989 Rice Hope: upgraded from lower-confidence to confirmed and cut uncertainty from 2500 m to 500 m. At 2500 m it was inconsistent with named-facility precision (300-1000 m). New evidence: SERTP 2025 p.157 'Rebuild 3.04 miles of Goshen \u2013 Kraft 115 kV transmission line from Goshen to Rice Hope' (excerpt verified with find_excerpt.py) equals the OSM way/1015932067 length of 3.04 mi from Goshen (SAV) to way/897598553. SERTP 2014 p.52 describes Rice Hope as a ring bus that terminates the Goshen and Kraft 115 kV lines (verified). Businesses named after Rice Hope on Augusta Road, Port Wentworth, are 0.8-1.5 km away (Nominatim). The researcher's 9.3 mi mismatch applies to the Kraft-side section, not to this site's identity.",
+  "gpc:16007 Fenwick Street: corrected the coordinateSource. The cited Fenwick Street way/364426905 is 458 m from the substation; the adjacent segment is way/389734559 at 66 m (Overpass). Raised uncertainty from 800 m to 1000 m and documented the competing candidate way/170166804 (0.93 km away), whose 2.86 mi line distance to the east Augusta junction fits the plan's 2.72 mi better than the chosen feature's 3.75 mi. It stays lower-confidence.",
+  "gpc:16007 Sand Bar Ferry: kept at locality and lower-confidence. Added the candidate substations and the junction topology, and verified the Nominatim way/858401457 coordinate.",
+  "gpc:19966 Big Ogeechee: recomputed the Bush Road / right-of-way crossing (32.0381,-81.3012; the researcher's point is within 70 m). Verified the WTOC wording 'a new one on Bush Road'. Added a status flag: a 2026-07-24 news report says the substation began moving energy in early July 2026, so the project may be complete by the snapshot date and its eligibility needs review.",
+  "gpc:20065: turned the 'most likely' Georgia Pacific (Rincon) note into a measured match. way/652933520 is 83 m from way/1015932064, 6.72 mi from Goshen, against the plan's 6.7 mi.",
+  "gpc:20783: corrected the stated Coleman - Dean Forest OSM length from 6.68 mi to about 6.5-6.6 mi (re-traced). The plan says 6.67 mi, so the match is unchanged. I also confirmed that the second Coleman (way/1011846565) connects only by 46 kV.",
+  "gpc:20784: corrected the note. Four Lakes is not connected to the line in OSM, and the junction starting way/660617933 (2.76 mi to Meldrim) is about 1.8 km from Four Lakes.",
+  "gpc:21023: added the re-traced OSM 230 kV path from Dean Forest to Little Ogeechee (7.70 mi, plan ~8 mi), which passes Silk Hope and Grove Point Road.",
+  "gpc:20277 Purrysburg: re-verified by Overpass. The 2-circuit 230 kV line from McIntosh ends at way/185380609, not at the DESC Jasper generating switchyard way/185380597. Purrysburg Road way/12420907 is confirmed. Kept confirmed, and flagged that the EIPC 4.79 mi figure is not cached.",
+  "gpc:21116: identified the OSM host line ends: Gough Substation #9 near Waynesboro (way/170156542) and the Plant Wilson switchyard (way/1117139178). Re-traced Goshen - Vogtle at 18.65 mi.",
+  "Verified line lengths against the plan: Evans Primary - Thurmond 8.77 mi (plan 8.9 mi for #6); Thomson Primary - Pumpkin Center 5.24 mi (plan 5.28); Boulevard - Deptford 7.87 mi (~8); Boulevard - Magnolia 4.44 mi (4.56); Deptford - Magnolia 5.11 mi (~5); Magnolia - Truman Parkway 2.92 mi (3).",
+  "Checked all 34 OSM ids cited by the researcher against data/region-b/osm-power-sc-ga.json. Every name, operator, voltage and coordinate matches. I re-ran the gazetteer for every endpoint name to check same-name features (Goshen x2, Coleman x2, Magnolia/Magnolia Park, Wadley x4, Thomson x5, Warrenton x3, McIntosh variants). No false match was found, and all terminal names match the plan titles.",
+  "Tooling note: overpass-api.de was unreachable from this sandbox. I ran the Overpass re-queries through the overpass.private.coffee and maps.mail.ru mirrors. My working scripts are in scratchpad/fc/ (adj.py, path2.py, show.py)."
+ ]
+}

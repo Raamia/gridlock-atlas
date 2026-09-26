@@ -1,0 +1,1838 @@
+{
+ "cluster": "beci-columbia",
+ "sources": [
+  {
+   "id": "miso-beci-scope-2025",
+   "title": "Competitive Project RFP Informational Workshop (RIKY, WISE, BECI) - Item 02 Presentation",
+   "publisher": "MISO",
+   "url": "https://cdn.misoenergy.org/20250317%20Competitive%20Project%20RFP%20Item%2002%20Presentation685217.pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2025-03-17",
+   "documentDateEvidence": "Title slide (PDF p.1): 'March 17, 2025'"
+  },
+  {
+   "id": "miso-beci-selection-2026",
+   "title": "Selection Report: Bell Center\u2013Columbia\u2013Sugar Creek\u2013IL/WI State Line 765 kV Competitive Transmission Project",
+   "publisher": "MISO",
+   "url": "https://cdn.misoenergy.org/BECI%20Selection%20Report734487.pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2026-01-06",
+   "documentDateEvidence": "Cover (PDF p.1): 'January 6, 2026'"
+  },
+  {
+   "id": "miso-wi-selection-news-2026",
+   "title": "MISO announces Selected Developers for competitive transmission projects in Wisconsin",
+   "publisher": "MISO",
+   "url": "https://www.misoenergy.org/meet-miso/media-center/2026---news-releases/miso-announces-selected-developers-for-competitive-transmission-projects-in-wisconsin",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2026-01-06",
+   "documentDateEvidence": "Release header: 'For Immediate Release January 6, 2026'"
+  },
+  {
+   "id": "transource-beci-page",
+   "title": "Bell Center\u2013Columbia\u2013Sugar Creek\u2013Illinois/Wisconsin State Line (BECI) Project",
+   "publisher": "Transource Energy",
+   "url": "https://www.transourceenergy.com/projects/BellCenter/",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No date on page; retrieved 2026-09-26"
+  },
+  {
+   "id": "aep-beci-news-2026",
+   "title": "Transource and BHE Transmission to Build Nearly 200-Mile 765-kV Transmission Line in Wisconsin",
+   "publisher": "American Electric Power (Transource parent)",
+   "url": "https://www.aep.com/news/stories/view/10673/",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2026-01-07",
+   "documentDateEvidence": "Release header: 'Jan. 7, 2026'"
+  },
+  {
+   "id": "mgs-beci-factsheet",
+   "title": "BECI 765-kV Transmission Line Project fact sheet",
+   "publisher": "Midcontinent Grid Solutions (Transource Energy / BHE Transmission JV)",
+   "url": "https://mgs-projects.com/BECI_ASSETS/resources/Fact%20Sheet.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2026-09-22",
+   "documentDateEvidence": "Page 1 footer: '09/22/2026'"
+  },
+  {
+   "id": "mgs-beci-oh-boards",
+   "title": "BECI Open House Display Boards",
+   "publisher": "Midcontinent Grid Solutions (Transource Energy / BHE Transmission JV)",
+   "url": "https://mgs-projects.com/BECI_ASSETS/resources/BECI_OH-Boards.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No explicit date on the boards; board p.7 cites a MISO forecast dated April 13, 2026, so produced after that. Use at the Aug. 24-27, 2026 open houses is inferred from the file name and the announcement packet, not stated on the boards."
+  },
+  {
+   "id": "mgs-beci-aug-press-release",
+   "title": "Public input begins for new power line to reinforce Wisconsin electric grid (BECI August news release)",
+   "publisher": "Midcontinent Grid Solutions (Transource Energy / BHE Transmission JV)",
+   "url": "https://mgs-projects.com/BECI_ASSETS/resources/BECI_August_PressRelease.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No explicit date in text; file name 'BECI_August_PressRelease' and text announcing August open houses imply August 2026"
+  },
+  {
+   "id": "mgs-beci-announcement-packet",
+   "title": "BECI open house announcement packet (letter and study segment map)",
+   "publisher": "Midcontinent Grid Solutions (Transource Energy / BHE Transmission JV)",
+   "url": "https://mgs-projects.com/BECI_ASSETS/resources/Announcement%20Packet.pdf",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "Map page (p.2) footer '09/22/2026'; letter (p.1) lists open houses Aug. 24-27 and a Sept. 7, 2026 comment deadline (no letter date printed)."
+  },
+  {
+   "id": "psc-grid-forward-final",
+   "title": "Final Decision, docket 5-CE-157 (Grid Forward Central Wisconsin)",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=570269",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2025-12-10",
+   "documentDateEvidence": "PDF p.64: 'Dated at Madison, Wisconsin, the 10th day of December, 2025.'"
+  },
+  {
+   "id": "psc-grid-forward-case",
+   "title": "Grid Forward Central Wisconsin case page",
+   "publisher": "Public Service Commission of Wisconsin",
+   "url": "https://psc.wi.gov/Pages/CommissionActions/CasePages/GridForwardCentralWisconsin.aspx",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "Cached by another researcher; no page date"
+  },
+  {
+   "id": "dairyland-maribell-news",
+   "title": "Dairyland and GridLiance to Develop MariBell Transmission Project",
+   "publisher": "Dairyland Power Cooperative",
+   "url": "https://dairylandpower.com/dairyland-and-gridliance-develop-maribell-transmission-project",
+   "sourceType": "utility",
+   "cached": true,
+   "publishedAt": "2025-05-08",
+   "documentDateEvidence": "Page header: 'Thursday | May 8, 2025'"
+  },
+  {
+   "id": "maribell-wisconsin-regulatory-process",
+   "title": "MariBell Transmission Project - Wisconsin Regulatory Process",
+   "publisher": "Dairyland Power Cooperative and GridLiance Heartland (MariBell project site)",
+   "url": "https://www.maribelltransmission.com/wisconsin-regulatory-process",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No page date (footer '\u00a92025'); cached by another researcher, retrieved 2026-09-26"
+  }
+ ],
+ "projects": [
+  {
+   "id": "transource-beci",
+   "title": "Bell Center\u2013Columbia\u2013Sugar Creek\u2013IL/WI State Line 765 kV Competitive Transmission Project (BECI)",
+   "shortTitle": "BECI 765 kV",
+   "titleEvidence": [
+    {
+     "sourceId": "miso-beci-selection-2026",
+     "page": 5,
+     "printedPage": "i",
+     "section": "Executive Summary",
+     "exactExcerpt": "MISO has chosen Transource, Inc. to develop the Bell Center\u2013Columbia\u2013Sugar Creek\u2013IL/WI State Line 765kV Competitive Transmission Project (BECI).",
+     "supports": "Official project name and that 'BECI' is MISO's name for it",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 1,
+     "section": "Title slide",
+     "exactExcerpt": "RIKY (Reid EHV \u2013 Indiana/Kentucky State Line) \u25aa WISE (Wisconsin Southeast Project) \u25aa BECI (Bell Center \u2013 Columbia \u2013 Sugar Creek \u2013 Illinois/Wisconsin State Line)",
+     "supports": "BECI stands for Bell Center \u2013 Columbia \u2013 Sugar Creek \u2013 Illinois/Wisconsin State Line",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "MISO selected Transource, Inc. to develop BECI - three new single-circuit 765 kV lines (Bell Center\u2013Columbia, Columbia\u2013Sugar Creek, Sugar Creek\u2013IL/WI State Line), about 190 miles, being developed by Midcontinent Grid Solutions (a 50/50 Transource Energy/BHE Transmission joint venture) - which MISO requires in service by June 1, 2034; MGS's September 2026 schedule shows tree clearing/construction/restoration late 2029\u2013late 2033.",
+   "owners": [
+    {
+     "utilityId": "transource",
+     "name": "Transource, Inc. / Transource Energy (MISO Selected Developer; 50% of Midcontinent Grid Solutions JV)",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 5,
+       "printedPage": "i",
+       "section": "Executive Summary",
+       "exactExcerpt": "MISO has chosen Transource, Inc. to develop the Bell Center\u2013Columbia\u2013Sugar Creek\u2013IL/WI State Line 765kV Competitive Transmission Project (BECI).",
+       "supports": "MISO selected Transource, Inc. as BECI developer",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "transource-beci-page",
+       "section": "Bell Center\u2013Columbia\u2013Sugar Creek\u2013Illinois/Wisconsin State Line (BECI) Project",
+       "exactExcerpt": "This $1.2 billion dollar project is being developed by a 50/50 joint venture, Midcontinent Grid Solutions, between Transource Energy and BHE Transmission.",
+       "supports": "Transource Energy is a 50/50 partner in the developing JV",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-wi-selection-news-2026",
+       "section": "MISO announces Selected Developers for competitive transmission projects in Wisconsin",
+       "exactExcerpt": "Transource, Inc. will lead the Bell Center\u2013Columbia\u2013Sugar Creek\u2013IL/WI State Line 765 kV Competitive Transmission Project (BECI).",
+       "supports": "MISO news release: Transource, Inc. will lead BECI",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "utilityId": "bhe-transmission",
+     "name": "BHE Transmission (50% of Midcontinent Grid Solutions JV)",
+     "evidence": [
+      {
+       "sourceId": "transource-beci-page",
+       "section": "Bell Center\u2013Columbia\u2013Sugar Creek\u2013Illinois/Wisconsin State Line (BECI) Project",
+       "exactExcerpt": "This $1.2 billion dollar project is being developed by a 50/50 joint venture, Midcontinent Grid Solutions, between Transource Energy and BHE Transmission.",
+       "supports": "BHE Transmission is the other 50/50 partner in Midcontinent Grid Solutions",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "About MGS",
+       "exactExcerpt": "MISO selected Midcontinent Grid Solutions (MGS) to build and maintain the BECI Project. MGS brings the expertise and experience of Transource Energy-a joint venture of American Electric Power and Evergy-and BHE Transmission.",
+       "supports": "MGS (Transource Energy + BHE Transmission) was selected to build and maintain BECI",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "aep-beci-news-2026",
+       "section": "Transource and BHE Transmission to Build Nearly 200-Mile 765-kV Transmission Line in Wisconsin",
+       "exactExcerpt": "said Ed Rihn, president and CEO, BHE Transmission, which will own 50% of the project.",
+       "supports": "BHE Transmission will own 50% of the BECI project",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "proposed",
+    "asOf": "2026-09-22",
+    "evidence": [
+     {
+      "sourceId": "mgs-beci-factsheet",
+      "page": 2,
+      "section": "Project Schedule",
+      "exactExcerpt": "Refine and Finalize Routes Late 2026 File CPCN1 with PSCW2 Early 2027 Anticipated PSCW Decision Summer 2028 Local and Federal Permitting Summer 2028-2029",
+      "supports": "As of the 09/22/2026 fact sheet the state CPCN had not been filed: filing planned early 2027, PSCW decision anticipated summer 2028",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "mgs-beci-announcement-packet",
+      "page": 1,
+      "section": "Open house invitation letter",
+      "exactExcerpt": "The project is in its early stages and we are evaluating routing options. No final route has been selected at this time.",
+      "supports": "Project is in early stages; no final route selected",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "miso-beci-selection-2026",
+      "page": 5,
+      "printedPage": "i",
+      "section": "Executive Summary",
+      "exactExcerpt": "MISO has chosen Transource, Inc. to develop the Bell Center\u2013Columbia\u2013Sugar Creek\u2013IL/WI State Line 765kV Competitive Transmission Project (BECI).",
+      "supports": "MISO developer selection (Jan 2026) - RTO selection, not a state construction certificate",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "counties": [
+    {
+     "name": "Crawford",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Richland",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Sauk",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Columbia",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Dodge",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Dane",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Jefferson",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Walworth",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "name": "Rock",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Location",
+       "exactExcerpt": "The BECI Project study area includes Crawford, Richland, Sauk, Columbia, Dodge, Dane, Jefferson, Walworth, and Rock counties.",
+       "supports": "County is in the BECI study area (study area, not a final route)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 9,
+       "printedPage": "2",
+       "section": "I. Competitive Project and Process",
+       "exactExcerpt": "The point of interconnection for one of the BECI transmission line facilities will be at the Illinois and Wisconsin State Line in Rock County, Wisconsin.",
+       "supports": "State-line interconnection point is in Rock County",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "765",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 27,
+       "printedPage": "20",
+       "section": "2B. Routing and Siting",
+       "exactExcerpt": "BECI will consist of three new single-circuit 765 kV transmission lines.",
+       "supports": "Three new single-circuit 765 kV lines",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 26,
+       "section": "BECI overview (slide 26)",
+       "exactExcerpt": "The BECI project consists of three 765 kV transmission line facilities in Wisconsin",
+       "supports": "765 kV line facilities in Wisconsin",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Approximate length (developer)",
+     "value": "~190",
+     "evidence": [
+      {
+       "sourceId": "transource-beci-page",
+       "section": "Bell Center\u2013Columbia\u2013Sugar Creek\u2013Illinois/Wisconsin State Line (BECI) Project",
+       "exactExcerpt": "Approximately 190 miles of new single circuit 765 kV transmission lines connecting Bell Center, Columbia, Sugar Creek, and the Illinois/Wisconsin state line to reinforce the region\u2019s high voltage backbone.",
+       "supports": "Approximately 190 miles of new single-circuit 765 kV lines",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Overview",
+       "exactExcerpt": "The BECI Project is an approximately 190-mile, 765-kV project in Wisconsin connecting electric facilities in Crawford County with facilities in Walworth County before continuing to the state line.",
+       "supports": "approximately 190-mile, 765-kV project",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Route length in Transource's first MISO proposal (E1; MISO says E2 changed the structure type)",
+     "value": "188",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 6,
+       "printedPage": "ii",
+       "section": "Executive Summary",
+       "exactExcerpt": "Transource, which was Developer E, submitted two proposals. It first proposed to run Tern ACSR conductor on galvanized steel guyed-V lattice structures over a 188-mile route.",
+       "supports": "Transource proposal used a 188-mile route",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Length stated at selection announcement (AEP)",
+     "value": "nearly 200",
+     "evidence": [
+      {
+       "sourceId": "aep-beci-news-2026",
+       "section": "Transource and BHE Transmission to Build Nearly 200-Mile 765-kV Transmission Line in Wisconsin",
+       "exactExcerpt": "A joint venture between Transource Energy, LLC and BHE Transmission plans to build a nearly 200 mile, 765-kV line in Wisconsin following selection by the Midcontinent Independent System Operator (MISO).",
+       "supports": "nearly 200 mile, 765-kV line",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Project investment (developer)",
+     "value": "1200000000",
+     "evidence": [
+      {
+       "sourceId": "transource-beci-page",
+       "section": "Bell Center\u2013Columbia\u2013Sugar Creek\u2013Illinois/Wisconsin State Line (BECI) Project",
+       "exactExcerpt": "This $1.2 billion dollar project is being developed by a 50/50 joint venture, Midcontinent Grid Solutions, between Transource Energy and BHE Transmission.",
+       "supports": "$1.2 billion project",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "aep-beci-news-2026",
+       "section": "Transource and BHE Transmission to Build Nearly 200-Mile 765-kV Transmission Line in Wisconsin",
+       "exactExcerpt": "Midcontinent Grid Solutions, a 50/50 joint venture between Transource and BHE Transmission, will make a $1.2 billion investment in this critical infrastructure",
+       "supports": "$1.2 billion investment by the MGS joint venture",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "costUsd",
+     "label": "MISO cost estimate (RFP stage)",
+     "value": ">1200000000",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 9,
+       "printedPage": "2",
+       "section": "I. Competitive Project and Process",
+       "exactExcerpt": "Project Scale and Scope: The project is relatively large, with a MISO-estimated cost exceeding $1.2 billion.",
+       "supports": "MISO-estimated cost exceeding $1.2 billion",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Scope",
+     "value": "Three single-circuit 765 kV lines: Bell Center\u2013Columbia, Columbia\u2013Sugar Creek, Sugar Creek\u2013IL/WI State Line; no substation facilities",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 8,
+       "printedPage": "1",
+       "section": "I. Competitive Project and Process",
+       "exactExcerpt": "MISO determined three 765 kV single-circuit transmission lines in these projects are eligible for its Competitive Transmission Process",
+       "supports": "Three 765 kV single-circuit lines are the competitive facilities",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 8,
+       "printedPage": "1",
+       "section": "I. Competitive Project and Process (bulleted list of the three competitive lines)",
+       "exactExcerpt": "Bell Center\u2013 Columbia Columbia \u2013 Sugar Creek Sugar Creek \u2013 IL/WI State Line",
+       "supports": "The three line segments",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 36,
+       "printedPage": "29",
+       "section": "3A. Normal Operations - Real-Time Operations Monitoring and Control",
+       "exactExcerpt": "The BECI project only includes transmission line facilities and does not have any substation facilities. The owners of these transmission lines will coordinate with the owners/controllers of the substations where the lines terminate.",
+       "supports": "BECI includes only transmission line facilities, no substations",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "State permit (CPCN) timing",
+     "value": "CPCN filing with PSCW planned early 2027; PSCW decision anticipated summer 2028",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 2,
+       "section": "Project Schedule",
+       "exactExcerpt": "Refine and Finalize Routes Late 2026 File CPCN1 with PSCW2 Early 2027 Anticipated PSCW Decision Summer 2028 Local and Federal Permitting Summer 2028-2029",
+       "supports": "Planned CPCN filing and anticipated decision dates",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-aug-press-release",
+       "page": 2,
+       "exactExcerpt": "MGS plans to file an application for a Certificate of Public Convenience and Necessity with the Public Service Commission of Wisconsin in early 2027.",
+       "supports": "MGS plans to file CPCN in early 2027",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "beci-west-bell-center-161kv",
+     "label": "Existing 161 kV line near Bell Center (BECI western interconnection point)",
+     "kind": "route-endpoint",
+     "precision": "locality",
+     "lat": 43.29157,
+     "lon": -90.8272997,
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim: Bell Center, Crawford County, Wisconsin (OSM relation 242237, village centroid; re-checked 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+       "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+       "supports": "BECI line 50949 runs from the existing 161 kV line near Bell Center to Columbia",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Overview",
+       "exactExcerpt": "The BECI Project is an approximately 190-mile, 765-kV project in Wisconsin connecting electric facilities in Crawford County with facilities in Walworth County before continuing to the state line.",
+       "supports": "BECI connects facilities in Crawford County (Bell Center is in Crawford County per geocoder, not per source)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "beci-columbia-substation",
+     "label": "Columbia Substation (ATC) - BECI intermediate terminal",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 43.4863809,
+     "lon": -89.4171238,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way 176434079 power=substation name='Columbia Station' operator='American Transmission Company' voltage=345000;138000;69000 (re-checked via Overpass mirror maps.mail.ru 2026-09-26; only ATC 345 kV station within 15 km). Name identity 'Columbia Station' = sources' 'Columbia Substation' is by name/operator; MGS fact sheet map p.2 places the Columbia Substation marker in Columbia County, consistent within ~3 km (visual reading).",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+       "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+       "supports": "Columbia Substation is a BECI terminal; ATC modifies it",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "beci-sugar-creek-substation",
+     "label": "Sugar Creek Substation (ATC) - BECI intermediate terminal",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 42.7027994,
+     "lon": -88.5529552,
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way 1420924219 power=substation name='Sugar Creek Substation' operator='American Transmission Company, We Energies' voltage=138000 addr 'N5843 Voss Road, Town of Sugar Creek' (re-checked via Overpass mirror maps.mail.ru 2026-09-26). OSM shows only a 138 kV station; footprint of the 765/345 kV modification unknown, hence 1 km uncertainty.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "Columbia - Sugar Creek 765kV Transmission Line BECI Selected Developer 51026 Construct new 765kV single-circuit transmission line.",
+       "supports": "Columbia\u2013Sugar Creek 765 kV line built by the BECI Selected Developer",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 8,
+       "printedPage": "1",
+       "section": "I. Competitive Project and Process (bulleted list of the three competitive lines)",
+       "exactExcerpt": "Bell Center\u2013 Columbia Columbia \u2013 Sugar Creek Sugar Creek \u2013 IL/WI State Line",
+       "supports": "Sugar Creek is the junction of the second and third BECI lines",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "beci-il-wi-state-line-poi",
+     "label": "IL/WI State Line interconnection point in Rock County (location undetermined)",
+     "kind": "state-line",
+     "precision": "county",
+     "lat": 42.6654418,
+     "lon": -89.081772,
+     "uncertaintyMeters": 30000,
+     "coordinateSource": "Nominatim: Rock County, Wisconsin (OSM relation 1799455) county point, re-checked 2026-09-26 - state-line interconnection point itself is undetermined",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 9,
+       "printedPage": "2",
+       "section": "I. Competitive Project and Process",
+       "exactExcerpt": "The point of interconnection for one of the BECI transmission line facilities will be at the Illinois and Wisconsin State Line in Rock County, Wisconsin.",
+       "supports": "State-line point of interconnection is in Rock County, WI",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Overview",
+       "exactExcerpt": "The exact connection point at the state line has not been determined because the connecting transmission line in Illinois is under development by another utility.",
+       "supports": "Exact state-line connection point not yet determined",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "Only a schematic MISO facility diagram (straight lines between terminals) and MGS's preliminary multi-alternative study segments are published; no final route has been selected. MGS plans to file route alternatives with its CPCN application in early 2027.",
+    "caveat": "Do not draw a route; MISO's scope diagram is 'for illustrative purposes only' and MGS study segments are alternatives, not a route. MISO treats developers' detailed routing and siting as confidential.",
+    "evidence": [
+     {
+      "sourceId": "aep-beci-news-2026",
+      "section": "Transource and BHE Transmission to Build Nearly 200-Mile 765-kV Transmission Line in Wisconsin",
+      "exactExcerpt": "A final line route has not been selected, and the project schedule is under development to meet a 2034 in-service date.",
+      "supports": "No final line route selected (Jan 2026)",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "mgs-beci-factsheet",
+      "page": 2,
+      "section": "Study segment map legend",
+      "exactExcerpt": "Study Segment No final route has been selected. These study segments are preliminary and subject to change based on landowner input, engineering, surveys, and studies.",
+      "supports": "Study segments are preliminary; no final route (Sept 2026)",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "miso-beci-selection-2026",
+      "page": 10,
+      "printedPage": "3",
+      "section": "Confidentiality",
+      "exactExcerpt": "MISO is obligated to treat the following information as confidential unless a developer consents to its disclosure:",
+      "supports": "Lead-in to MISO's confidential-information list",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "miso-beci-selection-2026",
+      "page": 10,
+      "printedPage": "3",
+      "section": "Confidentiality",
+      "exactExcerpt": "all detailed design, routing, siting, or specialty construction techniques, and",
+      "supports": "MISO treats developers' detailed routing/siting as confidential (list of confidential items)",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "mgs-beci-factsheet",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2029-07-01",
+      "latest": "2029-12-31",
+      "precision": "half"
+     },
+     "end": {
+      "earliest": "2033-07-01",
+      "latest": "2033-12-31",
+      "precision": "half"
+     },
+     "continuous": true,
+     "note": "'Tree Clearing, Construction, and Restoration Late 2029 - Late 2033' (MGS fact sheet 09/22/2026; identical row on the undated open-house schedule board p.10). 'Late YYYY' encoded as July-December of that year and shown at half-year precision ('Late 2029'), as the source states it; the schedule graphic bar starts near the end of 2029. Timeframes are approximate and subject to change and pre-date any PSCW decision. MISO's report says Transource proposed rolling crews building the three lines sequentially, so work at any single site (e.g., Columbia) will not span the whole window.",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 2,
+       "section": "Project Schedule",
+       "exactExcerpt": "Easement Acquisition, Final Design, and Surveys Summer 2028 - Summer 2030 Tree Clearing, Construction, and Restoration Late 2029 - Late 2033 Project In Service 2033",
+       "supports": "Construction window late 2029 - late 2033",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-oh-boards",
+       "page": 10,
+       "section": "Project Schedule board",
+       "exactExcerpt": "Easement Acquisition, Final Design, and Surveys Summer 2028 - Summer 2030 Tree Clearing, Construction, and Restoration Late 2029 - Late 2033 Project In Service 2033",
+       "supports": "Same construction window on the open house schedule board",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 2,
+       "section": "Project Schedule footnote",
+       "exactExcerpt": "CPCN: Certificate of Public Convenience and Necessity; 2PSCW: Public Service Commission of Wisconsin *Timeframes are approximate and subject to change.",
+       "supports": "Timeframes approximate and subject to change",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 33,
+       "printedPage": "26",
+       "section": "2D. Construction",
+       "exactExcerpt": "Transource proposed rolling crews to construct lines sequentially and mitigates some ROW acquisition risk by providing a larger schedule cushion for the likely more challenging Bell Center to Columbia line.",
+       "supports": "Construction planned sequentially by line with rolling crews (not all sites active at once)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "mgs-beci-factsheet",
+     "phase": "preconstruction",
+     "start": {
+      "earliest": "2028-06-01",
+      "latest": "2028-09-30",
+      "precision": "quarter",
+      "label": "Summer 2028"
+     },
+     "end": {
+      "earliest": "2030-06-01",
+      "latest": "2030-09-30",
+      "precision": "quarter",
+      "label": "Summer 2030"
+     },
+     "continuous": true,
+     "note": "'Easement Acquisition, Final Design, and Surveys Summer 2028 - Summer 2030'; 'Summer' encoded as June-September (interpretation; 'quarter' is the closest precision value). Preconstruction, not field construction.",
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 2,
+       "section": "Project Schedule",
+       "exactExcerpt": "Easement Acquisition, Final Design, and Surveys Summer 2028 - Summer 2030 Tree Clearing, Construction, and Restoration Late 2029 - Late 2033 Project In Service 2033",
+       "supports": "Easement acquisition, final design and surveys summer 2028 - summer 2030",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 2,
+       "section": "Project Schedule footnote",
+       "exactExcerpt": "CPCN: Certificate of Public Convenience and Necessity; 2PSCW: Public Service Commission of Wisconsin *Timeframes are approximate and subject to change.",
+       "supports": "Timeframes approximate and subject to change",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "completionClaims": [
+    {
+     "claimSourceId": "mgs-beci-factsheet",
+     "label": "anticipated in-service (Sept 2026 schedule)",
+     "date": {
+      "earliest": "2033-01-01",
+      "latest": "2033-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 2,
+       "section": "Project Schedule",
+       "exactExcerpt": "Easement Acquisition, Final Design, and Surveys Summer 2028 - Summer 2030 Tree Clearing, Construction, and Restoration Late 2029 - Late 2033 Project In Service 2033",
+       "supports": "Project In Service 2033",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "miso-beci-selection-2026",
+     "label": "required in-service deadline (no later than 2034-06-01; a deadline, not a forecast date)",
+     "date": {
+      "earliest": "2034-06-01",
+      "latest": "2034-06-01",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 5,
+       "printedPage": "i",
+       "section": "Executive Summary",
+       "exactExcerpt": "MISO grouped these three facilities and titled them the Bell Center \u2013 Columbia \u2013 Sugar Creek \u2013 IL/WI State Line 765 kV Competitive Transmission Project and refers to it as \u201cBECI.\u201d BECI must be placed into service by June 1, 2034.",
+       "supports": "MISO requires BECI in service by June 1, 2034",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 8,
+       "printedPage": "1",
+       "section": "I. Competitive Project and Process",
+       "exactExcerpt": "The BECI facilities must be placed into service by June 1, 2034.",
+       "supports": "BECI facilities must be in service by June 1, 2034",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "transource-beci-page",
+     "label": "required in-service deadline (no later than 2034-06-01; a deadline, not a forecast date)",
+     "date": {
+      "earliest": "2034-06-01",
+      "latest": "2034-06-01",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "transource-beci-page",
+       "section": "Bell Center\u2013Columbia\u2013Sugar Creek\u2013Illinois/Wisconsin State Line (BECI) Project",
+       "exactExcerpt": "Projected Timeline: Approved as part of MISO\u2019s Long Range Transmission Planning (LRTP) Tranche 2.1 portfolio, with the project required to be placed into service by June 1, 2034.",
+       "supports": "Transource restates the June 1, 2034 in-service requirement",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "claimSourceId": "aep-beci-news-2026",
+     "label": "target in-service (Jan 2026 announcement)",
+     "date": {
+      "earliest": "2034-01-01",
+      "latest": "2034-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "aep-beci-news-2026",
+       "section": "Transource and BHE Transmission to Build Nearly 200-Mile 765-kV Transmission Line in Wisconsin",
+       "exactExcerpt": "A final line route has not been selected, and the project schedule is under development to meet a 2034 in-service date.",
+       "supports": "Schedule under development to meet a 2034 in-service date",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "knownCoordination": [
+    {
+     "partner": "atc",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "MISO states the BECI lines will interconnect with ATC-owned facilities; its March 2025 RFP scope table assigns the Columbia (50950) and Sugar Creek (51027) substation modifications to ATC. The selection report lists planned coordination with interconnecting transmission owners on regulatory, permitting, design, construction and O&M activities as an important aspect for developers to address, and says (in its real-time operations section) that line owners will coordinate with the owners/controllers of the terminal substations; MGS's map legend says substation connection points are determined by local utilities. MISO also noted Transource's proposal lacked specificity on TO coordination at points of interconnection. This is planned/required interconnection coordination; no executed agreement, shared crews, equipment or other resource sharing is documented.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 27,
+       "printedPage": "20",
+       "section": "2B. Routing and Siting",
+       "exactExcerpt": "The BECI facilities will interconnect with facilities owned by ATC, Dairyland Power Cooperative, and Commonwealth Edison.",
+       "supports": "BECI interconnects with ATC facilities",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 36,
+       "printedPage": "29",
+       "section": "3A. Normal Operations - Real-Time Operations Monitoring and Control",
+       "exactExcerpt": "The BECI project only includes transmission line facilities and does not have any substation facilities. The owners of these transmission lines will coordinate with the owners/controllers of the substations where the lines terminate.",
+       "supports": "Real-time operations section: line owners will coordinate with terminal-substation owners/controllers (operational coordination)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 9,
+       "printedPage": "2",
+       "section": "I. Competitive Project and Process",
+       "exactExcerpt": "Coordination with Interconnecting Transmission Owners: The project will connect to facilities owned and operated by multiple, separate Transmission Owners. An important aspect of the project will be the planned coordination with these Transmission Owners on various regulatory, permitting, design, construction, and operations and maintenance activities.",
+       "supports": "MISO lists planned coordination with interconnecting TOs (regulatory, permitting, design, construction, O&M) as an important project aspect developers should address - an RFP expectation, not a documented arrangement",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 32,
+       "printedPage": "25",
+       "section": "2D. Construction - Engineering and Surveying (Transource)",
+       "exactExcerpt": "plan, though it lacks specificity regarding TO coordination at points of interconnection.",
+       "supports": "Transource's proposal lacked specificity on TO coordination at points of interconnection",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-announcement-packet",
+       "page": 2,
+       "section": "Study Segment Map legend",
+       "exactExcerpt": "Line Connection Point Determined by Local Utilities Substation Connection Point Determined by Local Utilities",
+       "supports": "MGS study-segment map legend: line and substation connection points are determined by local utilities",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "dairyland",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "MISO states BECI interconnects with Dairyland Power Cooperative facilities; the March 2025 RFP scope assigns the MN/WI State Line (Existing Genoa River Crossing) - Existing 161 kV Line Near Bell Center 765 kV rebuild (50948) and the Bell Center Substation connection work (50953) to DPC. Planned interconnection only; no executed agreement or resource sharing documented. Separately, Dairyland and GridLiance Heartland say they will co-own the MariBell 765/161 kV line from Marion, MN to Bell Center, WI, which appears to include facility 50948 (not stated by any source).",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 27,
+       "printedPage": "20",
+       "section": "2B. Routing and Siting",
+       "exactExcerpt": "The BECI facilities will interconnect with facilities owned by ATC, Dairyland Power Cooperative, and Commonwealth Edison.",
+       "supports": "BECI interconnects with Dairyland facilities",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+       "supports": "DPC owns the adjoining 765 kV-capable rebuild to the existing 161 kV line near Bell Center",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-announcement-packet",
+       "page": 2,
+       "section": "Study Segment Map legend",
+       "exactExcerpt": "Line Connection Point Determined by Local Utilities Substation Connection Point Determined by Local Utilities",
+       "supports": "MGS map legend: the western line connection point (Crawford County) is determined by local utilities",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "comed",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "MISO states BECI interconnects with Commonwealth Edison facilities and its RFP scope assigns the adjoining IL/WI State Line - Collins (PJM) 765 kV line (51029) to ComEd; the Rock County state-line point of interconnection will be defined through coordination with the interconnecting TO. MGS says the connecting Illinois line is under development by 'another utility' (not named). Planned interconnection only; no resource sharing documented.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "IL/WI State Line - Collins (PJM) 765kV Transmission Line 51029 Construct new 765kV single-circuit transmission line. ComEd",
+       "supports": "MISO scope assigns the adjoining IL/WI State Line - Collins 765 kV line to ComEd",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 9,
+       "printedPage": "2",
+       "section": "I. Competitive Project and Process",
+       "exactExcerpt": "The point of interconnection for one of the BECI transmission line facilities will be at the Illinois and Wisconsin State Line in Rock County, Wisconsin.",
+       "supports": "State-line POI is in Rock County, WI",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 9,
+       "printedPage": "2",
+       "section": "I. Competitive Project and Process",
+       "exactExcerpt": "given possible regulatory requirements and coordination with the interconnecting Transmission Owner that will influence and ultimately define the geographic location of the point of interconnection.",
+       "supports": "Coordination with the interconnecting TO will define the state-line POI location",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 27,
+       "printedPage": "20",
+       "section": "2B. Routing and Siting",
+       "exactExcerpt": "The BECI facilities will interconnect with facilities owned by ATC, Dairyland Power Cooperative, and Commonwealth Edison.",
+       "supports": "BECI interconnects with Commonwealth Edison facilities",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 1,
+       "section": "Overview",
+       "exactExcerpt": "The exact connection point at the state line has not been determined because the connecting transmission line in Illinois is under development by another utility.",
+       "supports": "State-line connection point undetermined; Illinois line under development by another utility",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "atc-nspw-grid-forward",
+     "status": "not-found-in-sources",
+     "scope": "unknown",
+     "description": "Grid Forward Central Wisconsin (PSC docket 5-CE-157; applicants ATC, NSPW, SMMPA Wisconsin and WPPI; CPCN approved 2025-12-10) adds a 345 kV position at a 'Columbia Substation' in Columbia County - by name and county the same substation where BECI lines terminate. No BECI source mentions Grid Forward, and the Grid Forward decision/case page contain no mention of BECI, 765 kV, Tranche 2.1, Transource or Sugar Creek. Coordination status is unknown, not absent.",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "page": 15,
+       "section": "Project description (docket 5-CE-157 final decision)",
+       "exactExcerpt": "Both routes included the expansion of the Arpin Substation for a new 345 kV yard, the addition of a 345 kV position at the Columbia Substation",
+       "supports": "Grid Forward adds a 345 kV position at the Columbia Substation",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "parentInitiative": "MISO LRTP Tranche 2.1 (MTEP24, Projects 26/30/31) - BECI competitive project facility set",
+   "caveats": [
+    "Developer identity: MISO's selection report and news release name Transource, Inc. (the report's proposal list says 'Transource LLC'); Transource/AEP/MGS materials say the project is being developed by Midcontinent Grid Solutions, a 50/50 JV of Transource Energy and BHE Transmission, and AEP says BHE Transmission will own 50% of the project. The report says MISO and Transource will execute the Selected Developer Agreement within 60 days; execution not confirmed in cached sources.",
+    "MGS's August 2026 news release expands BECI as 'Bell Center \u2013 Columbia \u2013 Illinois/Wisconsin State Line' (omitting Sugar Creek); MISO, Transource and the MGS fact sheet map include Sugar Creek.",
+    "Completion claims differ: MISO/Transource require in service by June 1, 2034; AEP (Jan 2026) said a 2034 in-service date; MGS (Sept 2026) anticipates in service in 2033. Not strictly contradictory (2033 is before the deadline) but the target moved.",
+    "Construction window comes from a developer planning schedule marked approximate and pre-CPCN; the PSCW has not approved the project or a route as of 2026-09-26.",
+    "Coordinates are terminal points only (named substations from OSM; western point is Bell Center village centroid; state-line point is Rock County centroid). No route geometry exists.",
+    "Counties are the MGS study area (nine counties), not a final route; a county listing does not mean construction in every county."
+   ]
+  },
+  {
+   "id": "atc-columbia-beci-work",
+   "title": "Columbia Substation modification for BECI 765 kV interconnection (MISO facility 50950)",
+   "shortTitle": "ATC Columbia (BECI)",
+   "titleEvidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+     "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+     "supports": "Facility 50950 'Columbia Substation - Modify existing substation', transmission owner ATC",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "MISO's March 2025 BECI RFP scope lists modification of the existing Columbia Substation (facility 50950) as a BECI-related facility assigned to incumbent ATC, where the BECI Selected Developer's Bell Center\u2013Columbia and Columbia\u2013Sugar Creek 765 kV lines terminate.",
+   "owners": [
+    {
+     "utilityId": "atc",
+     "name": "American Transmission Co.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+       "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+       "supports": "ATC is the transmission owner for the Columbia Substation modification",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "proposed",
+    "asOf": "2025-03-17",
+    "evidence": [
+     {
+      "sourceId": "miso-beci-scope-2025",
+      "page": 27,
+      "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+      "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+      "supports": "Listed as planned facility in MISO RFP scope (March 2025)",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "miso-beci-selection-2026",
+      "page": 8,
+      "printedPage": "1",
+      "section": "I. Competitive Project and Process",
+      "exactExcerpt": "On December 12, 2024, MISO approved the Long-Range Transmission Planning Tranche 2.1 portfolio for inclusion in the 2024 MISO Transmission Expansion Plan (MTEP24). Tranche 2.1 includes Projects 26, 30, and 31",
+      "supports": "Part of MISO-approved LRTP Tranche 2.1 portfolio (Dec 12, 2024); no state approval or construction evidence found",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "counties": [
+    {
+     "name": "Columbia",
+     "state": "WI",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "page": 15,
+       "section": "Project description (docket 5-CE-157 final decision)",
+       "exactExcerpt": "the intermediate Arpin Substation in Wood County, and then to the Columbia Substation in Columbia County.",
+       "supports": "PSC Grid Forward decision places the Columbia Substation in Columbia County (identity with BECI's Columbia Substation is by name)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-case",
+       "section": "Overview",
+       "exactExcerpt": "connect the expanded Arpin Substation to the Columbia Substation in Columbia County",
+       "supports": "PSC case page: Columbia Substation in Columbia County",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Interconnecting line voltage",
+     "value": "765",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+       "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+       "supports": "Bell Center\u2013Columbia 765 kV line terminates at the Columbia Substation",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "MISO facility ID / scope",
+     "value": "50950 - Modify existing substation",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+       "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+       "supports": "Facility 50950 scope of work",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "atc-columbia-substation",
+     "label": "Columbia Substation (ATC), Columbia Energy Center area, Town of Pacific",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 43.4863809,
+     "lon": -89.4171238,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way 176434079 power=substation name='Columbia Station' operator='American Transmission Company' voltage=345000;138000;69000 (re-checked via Overpass mirror maps.mail.ru 2026-09-26; only ATC 345 kV station within 15 km). Name identity with the sources' 'Columbia Substation' is by name/operator/county.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+       "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+       "supports": "Columbia Substation is the site of the ATC work",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "psc-grid-forward-final",
+       "page": 15,
+       "section": "Project description (docket 5-CE-157 final decision)",
+       "exactExcerpt": "the intermediate Arpin Substation in Wood County, and then to the Columbia Substation in Columbia County.",
+       "supports": "Columbia Substation is in Columbia County",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "Substation modification; no line route.",
+    "evidence": []
+   },
+   "constructionWindows": [],
+   "completionClaims": [],
+   "knownCoordination": [
+    {
+     "partner": "transource-beci",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "The BECI lines (Transource/MGS) terminate at the Columbia Substation that ATC modifies (MISO facility 50950); MISO states BECI line owners will coordinate with the owners/controllers of the terminal substations, and Transource's cost-containment offer refers to 'incumbent transmission owner terminal upgrades' whose completion could come after BECI is ready to energize. Interconnection coordination only; no executed agreement or resource sharing documented.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+       "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+       "supports": "ATC modifies the Columbia Substation where the BECI line terminates",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 36,
+       "printedPage": "29",
+       "section": "3A. Normal Operations - Real-Time Operations Monitoring and Control",
+       "exactExcerpt": "The BECI project only includes transmission line facilities and does not have any substation facilities. The owners of these transmission lines will coordinate with the owners/controllers of the substations where the lines terminate.",
+       "supports": "Real-time operations section: line owners will coordinate with terminal-substation owners/controllers",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 22,
+       "printedPage": "15",
+       "section": "1D. Cost Containment",
+       "exactExcerpt": "It estimated AFUDC and committed to not seek CWIP recovery, unless it is ready to energize the project before the incumbent transmission owner terminal upgrades are completed.",
+       "supports": "Transource's cost-containment offer references incumbent TO terminal upgrades as separate work whose completion affects BECI energization",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-announcement-packet",
+       "page": 2,
+       "section": "Study Segment Map legend",
+       "exactExcerpt": "Line Connection Point Determined by Local Utilities Substation Connection Point Determined by Local Utilities",
+       "supports": "MGS map legend: substation connection points (Columbia, Sugar Creek) are determined by local utilities",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "atc-nspw-grid-forward",
+     "status": "not-found-in-sources",
+     "scope": "unknown",
+     "description": "ATC is also an applicant (with NSPW, SMMPA Wisconsin and WPPI) for Grid Forward Central Wisconsin, which adds a 345 kV position at the Columbia Substation. Sources do not say whether the BECI-related modification (50950) and the Grid Forward 345 kV position are designed, scheduled or built together (shared owner ATC - internal context, not a cross-utility lead).",
+     "evidence": [
+      {
+       "sourceId": "psc-grid-forward-final",
+       "page": 15,
+       "section": "Project description (docket 5-CE-157 final decision)",
+       "exactExcerpt": "Both routes included the expansion of the Arpin Substation for a new 345 kV yard, the addition of a 345 kV position at the Columbia Substation",
+       "supports": "Grid Forward adds a 345 kV position at the Columbia Substation",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "parentInitiative": "MISO LRTP Tranche 2.1 (MTEP24, Projects 26/30/31) - BECI competitive project facility set",
+   "caveats": [
+    "Assignment to ATC comes from MISO's March 2025 RFP scope slide; the January 2026 selection report does not itemize incumbent substation work (it says BECI interconnects with ATC facilities).",
+    "No schedule, cost, docket or in-service date for the ATC Columbia work was found; BECI's June 1, 2034 deadline applies to the BECI line facilities and is not attributed to this work package.",
+    "OSM names the facility 'Columbia Station' (operator ATC, 345/138/69 kV) at the Columbia Energy Center; sources call it 'Columbia Substation'. The Grid Forward decision places it in Columbia County, consistent with OSM.",
+    "ATC was part of a losing joint BECI proposal (with ATXI, DPC, GridLiance Heartland); this is context only.",
+    "Grid Forward's final decision (2025-12-10) expects its construction from Q4 2026 to December 2030 (PDF p.54), proceeding from the Columbia substation north (PDF p.30), with 2029 given as the projected in-service year for cost purposes (PDF p.53). The timing of ATC's BECI-related Columbia work (50950) is not stated anywhere, so any overlap at Columbia is unknown."
+   ]
+  },
+  {
+   "id": "atc-sugar-creek-beci-work",
+   "title": "Sugar Creek Substation modification to interconnect 765 kV and 345 kV lines (MISO facility 51027)",
+   "shortTitle": "ATC Sugar Creek (BECI)",
+   "titleEvidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 23,
+     "section": "WISE substation facility table (slide 23); same facility ID 51027 is listed in the BECI table on slide 27",
+     "exactExcerpt": "Sugar Creek Substation 51027 Modify existing substation to enable interconnection of 765kV and 345kV transmission lines. ATC",
+     "supports": "Facility 51027 Sugar Creek Substation modification, ATC",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "MISO's March 2025 RFP materials list modification of ATC's existing Sugar Creek Substation (facility 51027) to enable interconnection of 765 kV and 345 kV lines, a facility shared by the BECI and WISE competitive project scopes.",
+   "owners": [
+    {
+     "utilityId": "atc",
+     "name": "American Transmission Co.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 23,
+       "section": "WISE substation facility table (slide 23); same facility ID 51027 is listed in the BECI table on slide 27",
+       "exactExcerpt": "Sugar Creek Substation 51027 Modify existing substation to enable interconnection of 765kV and 345kV transmission lines. ATC",
+       "supports": "ATC is the transmission owner for facility 51027",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "proposed",
+    "asOf": "2025-03-17",
+    "evidence": [
+     {
+      "sourceId": "miso-beci-scope-2025",
+      "page": 23,
+      "section": "WISE substation facility table (slide 23); same facility ID 51027 is listed in the BECI table on slide 27",
+      "exactExcerpt": "Sugar Creek Substation 51027 Modify existing substation to enable interconnection of 765kV and 345kV transmission lines. ATC",
+      "supports": "Listed as planned facility in MISO RFP scope (March 2025)",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "miso-beci-selection-2026",
+      "page": 8,
+      "printedPage": "1",
+      "section": "I. Competitive Project and Process",
+      "exactExcerpt": "On December 12, 2024, MISO approved the Long-Range Transmission Planning Tranche 2.1 portfolio for inclusion in the 2024 MISO Transmission Expansion Plan (MTEP24). Tranche 2.1 includes Projects 26, 30, and 31",
+      "supports": "Part of MISO-approved LRTP Tranche 2.1 portfolio; no state approval or construction evidence found",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "counties": [],
+   "facts": [
+    {
+     "key": "other",
+     "label": "MISO facility ID / scope",
+     "value": "51027 - Modify existing substation to enable interconnection of 765 kV and 345 kV lines",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 23,
+       "section": "WISE substation facility table (slide 23); same facility ID 51027 is listed in the BECI table on slide 27",
+       "exactExcerpt": "Sugar Creek Substation 51027 Modify existing substation to enable interconnection of 765kV and 345kV transmission lines. ATC",
+       "supports": "Facility 51027 scope of work",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "atc-sugar-creek-substation",
+     "label": "Sugar Creek Substation (ATC), Town of Sugar Creek",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 42.7027994,
+     "lon": -88.5529552,
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way 1420924219 power=substation name='Sugar Creek Substation' operator='American Transmission Company, We Energies' voltage=138000 addr 'N5843 Voss Road, Town of Sugar Creek' (re-checked via Overpass mirror maps.mail.ru 2026-09-26). OSM shows only a 138 kV station; footprint of the 765/345 kV modification unknown, hence 1 km uncertainty.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 23,
+       "section": "WISE substation facility table (slide 23); same facility ID 51027 is listed in the BECI table on slide 27",
+       "exactExcerpt": "Sugar Creek Substation 51027 Modify existing substation to enable interconnection of 765kV and 345kV transmission lines. ATC",
+       "supports": "Sugar Creek Substation is the site of the ATC work",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "Substation modification; no line route.",
+    "evidence": []
+   },
+   "constructionWindows": [],
+   "completionClaims": [],
+   "knownCoordination": [
+    {
+     "partner": "transource-beci",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "BECI's Columbia\u2013Sugar Creek and Sugar Creek\u2013IL/WI State Line 765 kV lines connect at the Sugar Creek Substation that ATC modifies; MISO states line owners will coordinate with terminal-substation owners/controllers. No resource sharing documented.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "Columbia - Sugar Creek 765kV Transmission Line BECI Selected Developer 51026 Construct new 765kV single-circuit transmission line.",
+       "supports": "BECI Selected Developer builds Columbia\u2013Sugar Creek 765 kV line",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 36,
+       "printedPage": "29",
+       "section": "3A. Normal Operations - Real-Time Operations Monitoring and Control",
+       "exactExcerpt": "The BECI project only includes transmission line facilities and does not have any substation facilities. The owners of these transmission lines will coordinate with the owners/controllers of the substations where the lines terminate.",
+       "supports": "Line owners will coordinate with terminal-substation owners/controllers",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "mgs-beci-announcement-packet",
+       "page": 2,
+       "section": "Study Segment Map legend",
+       "exactExcerpt": "Line Connection Point Determined by Local Utilities Substation Connection Point Determined by Local Utilities",
+       "supports": "MGS map legend: substation connection points are determined by local utilities",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "parentInitiative": "MISO LRTP Tranche 2.1 (MTEP24, Projects 26/30/31) - BECI competitive project facility set",
+   "caveats": [
+    "Excerpt comes from the WISE table (slide 23) because the BECI table's text extraction separates the Sugar Creek row from its owner cell; the rendered BECI table (slide 27) also shows Sugar Creek Substation 51027 'Modify existing substation' owned by ATC.",
+    "County not stated in sources for this substation (OSM places it in the Town of Sugar Creek, Walworth County); left out of counties.",
+    "No schedule or cost found for this work package.",
+    "OSM tags the 'Sugar Creek Substation' (ATC/We Energies) as a 138 kV station; MISO describes modifying the existing substation to enable 765 kV and 345 kV interconnection, so the final yard footprint may differ from the OSM polygon (uncertainty set to 1 km). The MGS fact sheet map (p.2) shows a Sugar Creek Substation marker in Walworth County, consistent with OSM (visual reading)."
+   ]
+  },
+  {
+   "id": "dpc-genoa-bell-center-765-beci-related",
+   "title": "MN/WI State Line (Existing Genoa River Crossing) \u2013 Existing 161 kV Line Near Bell Center 765 kV line and Bell Center Substation work (MISO facilities 50948, 50953)",
+   "shortTitle": "DPC Genoa\u2013Bell Center 765",
+   "titleEvidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27)",
+     "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+     "supports": "Facility 50948 name, scope and DPC ownership",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27)",
+     "exactExcerpt": "Bell Center Substation 50953 Modify existing 161kV transmission line to connect to Bell Center Substation. DPC",
+     "supports": "Facility 50953 Bell Center Substation work, DPC",
+     "verifiedByScript": true
+    }
+   ],
+   "summary": "MISO's March 2025 BECI RFP scope assigns to Dairyland Power Cooperative the replacement of existing single-circuit 161 kV structures from the MN/WI state line (existing Genoa river crossing) to near Bell Center with double-circuit 161/765 kV structures (facility 50948), plus modifying the existing 161 kV line to connect to Bell Center Substation (facility 50953).",
+   "owners": [
+    {
+     "utilityId": "dairyland",
+     "name": "Dairyland Power Cooperative",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+       "supports": "DPC is transmission owner of facility 50948",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "Bell Center Substation 50953 Modify existing 161kV transmission line to connect to Bell Center Substation. DPC",
+       "supports": "DPC is transmission owner of facility 50953",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "proposed",
+    "asOf": "2025-03-17",
+    "evidence": [
+     {
+      "sourceId": "miso-beci-scope-2025",
+      "page": 27,
+      "section": "BECI facility table (slide 27)",
+      "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+      "supports": "Listed as planned facility in MISO RFP scope (March 2025)",
+      "verifiedByScript": true
+     },
+     {
+      "sourceId": "miso-beci-selection-2026",
+      "page": 8,
+      "printedPage": "1",
+      "section": "I. Competitive Project and Process",
+      "exactExcerpt": "On December 12, 2024, MISO approved the Long-Range Transmission Planning Tranche 2.1 portfolio for inclusion in the 2024 MISO Transmission Expansion Plan (MTEP24). Tranche 2.1 includes Projects 26, 30, and 31",
+      "supports": "Part of MISO-approved LRTP Tranche 2.1 portfolio; no state approval or construction evidence found in these sources",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "states": [
+    "WI"
+   ],
+   "counties": [],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "765 (with underbuilt 161)",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+       "supports": "Double-circuit structures with one 161 kV and one 765 kV circuit",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "dpc-genoa-river-crossing",
+     "label": "Existing Genoa river crossing at MN/WI state line (approx., Genoa village)",
+     "kind": "river-crossing",
+     "precision": "locality",
+     "lat": 43.5750997,
+     "lon": -91.2256224,
+     "uncertaintyMeters": 6000,
+     "coordinateSource": "Nominatim: Genoa, Vernon County, Wisconsin (OSM relation 251824, village centroid; re-checked 2026-09-26); used for 'Existing Genoa River Crossing' - crossing location not mapped in sources",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+       "supports": "Line starts at MN/WI State Line (Existing Genoa River Crossing)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "id": "dpc-bell-center-substation",
+     "label": "Bell Center Substation (Dairyland)",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 43.2867328,
+     "lon": -90.8243911,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way 299956516 power=substation name='Bell Center' operator='Dairyland Power Cooperative' voltage=161000;69000 (re-checked via Overpass mirror maps.mail.ru 2026-09-26)",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "Bell Center Substation 50953 Modify existing 161kV transmission line to connect to Bell Center Substation. DPC",
+       "supports": "Bell Center Substation work by DPC",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "Source describes rebuilding the existing 161 kV line from the Genoa river crossing to near Bell Center but provides no map of that corridor.",
+    "evidence": [
+     {
+      "sourceId": "miso-beci-scope-2025",
+      "page": 27,
+      "section": "BECI facility table (slide 27)",
+      "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+      "supports": "Rebuild of existing 161 kV structures (existing corridor implied, not mapped)",
+      "verifiedByScript": true
+     }
+    ]
+   },
+   "constructionWindows": [],
+   "completionClaims": [],
+   "knownCoordination": [
+    {
+     "partner": "transource-beci",
+     "status": "reported-coordination",
+     "scope": "interconnection-design",
+     "description": "DPC's 765 kV-capable rebuild ends at the existing 161 kV line near Bell Center, where the BECI Bell Center\u2013Columbia 765 kV line begins; MISO states BECI interconnects with Dairyland facilities. No resource sharing documented.",
+     "evidence": [
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27)",
+       "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+       "supports": "DPC facility ends at existing 161 kV line near Bell Center",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-scope-2025",
+       "page": 27,
+       "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+       "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+       "supports": "BECI line 50949 starts at the existing 161 kV line near Bell Center",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "miso-beci-selection-2026",
+       "page": 27,
+       "printedPage": "20",
+       "section": "2B. Routing and Siting",
+       "exactExcerpt": "The BECI facilities will interconnect with facilities owned by ATC, Dairyland Power Cooperative, and Commonwealth Edison.",
+       "supports": "BECI interconnects with Dairyland facilities",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "partner": "gridliance-heartland",
+     "status": "unknown",
+     "scope": "joint-ownership",
+     "description": "Dairyland and GridLiance Heartland agreed to jointly develop and co-own the MariBell Transmission Project (Marion, MN - Bell Center, WI, 765/161 kV double circuit, 'middle segment of the North Rochester-Columbia 765 kV line'; Wisconsin segment ~32 miles in Vernon and Crawford counties along an existing corridor). This matches MISO facility 50948, but no source ties 50948 to MariBell, so whether this work package is co-owned is unconfirmed.",
+     "evidence": [
+      {
+       "sourceId": "dairyland-maribell-news",
+       "section": "Dairyland and GridLiance to Develop MariBell Transmission Project",
+       "exactExcerpt": "have reached an agreement to jointly develop and co-own the MariBell Transmission Project, a 139-mile, 765 kilovolt (kV) / 161 kV double circuit transmission line in Minnesota and Wisconsin.",
+       "supports": "Dairyland and GridLiance Heartland will jointly develop and co-own MariBell",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "dairyland-maribell-news",
+       "section": "Dairyland and GridLiance to Develop MariBell Transmission Project",
+       "exactExcerpt": "The 139-mile segment, which extends from Marion, Minn., to Bell Center, Wis., is a portion of a new 273-mile, 765 kV transmission line, and spans six counties in the two states.",
+       "supports": "MariBell runs from Marion, MN to Bell Center, WI",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "maribell-wisconsin-regulatory-process",
+       "section": "Wisconsin",
+       "exactExcerpt": "The Wisconsin segment of the proposed MariBell Transmission Project would span approximately 32 miles across portions of Vernon and Crawford counties following an existing transmission corridor.",
+       "supports": "MariBell's Wisconsin segment follows an existing corridor in Vernon and Crawford counties",
+       "verifiedByScript": true
+      }
+     ]
+    }
+   ],
+   "parentInitiative": "MISO LRTP Tranche 2.1 (MTEP24, Projects 26/30/31) - BECI competitive project facility set",
+   "caveats": [
+    "Ownership here is from MISO's March 2025 RFP scope table (owner 'DPC'). Dairyland's May 8, 2025 release says Dairyland and GridLiance Heartland agreed to jointly develop and co-own the MariBell Transmission Project, a 765/161 kV double-circuit line from Marion, MN to Bell Center, WI whose Wisconsin segment (~32 miles, Vernon and Crawford counties) follows an existing corridor. That matches facility 50948's description, but no source states that 50948 is part of MariBell, so GridLiance Heartland is NOT listed as an owner; co-ownership must be confirmed before display.",
+    "Facilities 50948 and 50953 grouped as one DPC work package here; they may be permitted separately.",
+    "Genoa point is the village centroid; the river-crossing location is not mapped in MISO's scope. Counties are not stated in the MISO source (Genoa is in Vernon County and Bell Center in Crawford County per geocoder; the MariBell Wisconsin page names Vernon and Crawford counties for MariBell's Wisconsin segment)."
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "projectA": "transource-beci",
+   "projectB": "atc-columbia-beci-work",
+   "kind": "interconnects",
+   "siteLabel": "Columbia Substation",
+   "description": "BECI's Bell Center\u2013Columbia and Columbia\u2013Sugar Creek 765 kV lines (developer-built) terminate at the Columbia Substation, whose modification MISO assigns to ATC; MISO says line owners will coordinate with terminal-substation owners.",
+   "evidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+     "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+     "supports": "Line 50949 (BECI developer) to Columbia; Columbia Substation 50950 (ATC)",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "miso-beci-selection-2026",
+     "page": 36,
+     "printedPage": "29",
+     "section": "3A. Normal Operations - Real-Time Operations Monitoring and Control",
+     "exactExcerpt": "The BECI project only includes transmission line facilities and does not have any substation facilities. The owners of these transmission lines will coordinate with the owners/controllers of the substations where the lines terminate.",
+     "supports": "Line owners coordinate with terminal-substation owners/controllers",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "transource-beci",
+   "projectB": "atc-columbia-beci-work",
+   "kind": "same-initiative",
+   "description": "Both are facilities in MISO's BECI scope ('three 765 kV transmission lines and six other related facilities'), part of LRTP Tranche 2.1.",
+   "evidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27)",
+     "exactExcerpt": "The project consists of three 765 kV transmission lines and six other related facilities in Wisconsin",
+     "supports": "BECI scope = three 765 kV lines plus six related facilities",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "transource-beci",
+   "projectB": "atc-sugar-creek-beci-work",
+   "kind": "interconnects",
+   "siteLabel": "Sugar Creek Substation",
+   "description": "BECI's Columbia\u2013Sugar Creek and Sugar Creek\u2013IL/WI State Line lines meet at the Sugar Creek Substation, which ATC modifies to interconnect 765 kV and 345 kV lines.",
+   "evidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27)",
+     "exactExcerpt": "Columbia - Sugar Creek 765kV Transmission Line BECI Selected Developer 51026 Construct new 765kV single-circuit transmission line.",
+     "supports": "Columbia\u2013Sugar Creek 765 kV line by BECI developer",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 23,
+     "section": "WISE substation facility table (slide 23); same facility ID 51027 is listed in the BECI table on slide 27",
+     "exactExcerpt": "Sugar Creek Substation 51027 Modify existing substation to enable interconnection of 765kV and 345kV transmission lines. ATC",
+     "supports": "ATC modifies Sugar Creek Substation for 765/345 kV interconnection",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "transource-beci",
+   "projectB": "dpc-genoa-bell-center-765-beci-related",
+   "kind": "interconnects",
+   "siteLabel": "Existing 161 kV line near Bell Center",
+   "description": "DPC's MN/WI state line\u2013near Bell Center 765 kV-capable rebuild ends at the existing 161 kV line near Bell Center, where BECI's Bell Center\u2013Columbia line begins.",
+   "evidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27)",
+     "exactExcerpt": "MN/WI State Line (Existing Genoa River Crossing) - Existing 161kV Line Near Bell Center 765kV Transmission Line 50948 Replace existing single-circuit 161kV structures with doublecircuit structures that have one underbuilt circuit operating at 161kV and one circuit operating at 765kV. DPC",
+     "supports": "DPC facility ends at existing 161 kV line near Bell Center",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+     "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+     "supports": "BECI line starts at existing 161 kV line near Bell Center",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "transource-beci",
+   "projectB": "atc-nspw-grid-forward",
+   "kind": "shared-site",
+   "siteLabel": "Columbia Substation",
+   "basis": "inferred",
+   "description": "BECI's 765 kV lines terminate at the Columbia Substation and Grid Forward Central Wisconsin (ATC/NSPW with SMMPA Wisconsin and WPPI, docket 5-CE-157, CPCN approved 2025-12-10) adds a 345 kV position there. The shared site is established by name (both say 'Columbia Substation'; Grid Forward and the MGS map place it in Columbia County), not by any source that discusses both projects. No source reviewed documents coordination between them (status unknown). Reported windows overlap: Grid Forward construction Q4 2026 - by Dec 2030 (PSC decision) vs BECI tree clearing/construction late 2029 - late 2033 (MGS, approximate). But Grid Forward expects to build from Columbia northward (early), and the timing of BECI/ATC work at Columbia itself is not stated, so concurrent work at the Columbia site is not established.",
+   "evidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+     "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+     "supports": "BECI line 50949 terminates at the Columbia Substation (modified by ATC, 50950)",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-final",
+     "page": 15,
+     "section": "Project description (docket 5-CE-157 final decision)",
+     "exactExcerpt": "Both routes included the expansion of the Arpin Substation for a new 345 kV yard, the addition of a 345 kV position at the Columbia Substation",
+     "supports": "Grid Forward adds a 345 kV position at the Columbia Substation",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-final",
+     "page": 1,
+     "section": "Final decision introduction",
+     "exactExcerpt": "construction and operation of a new 345 kV transmission line connecting the Tremval-Arpin-Columbia Substations in Trempealeau, Wood, and Columbia Counties.",
+     "supports": "Grid Forward connects Tremval-Arpin-Columbia substations",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-final",
+     "page": 54,
+     "section": "Project Cost and Construction Schedule",
+     "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with completion by December 2030.",
+     "supports": "Grid Forward construction window Q4 2026 - by December 2030",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-final",
+     "page": 30,
+     "section": "Transmission Line Route Alternatives",
+     "exactExcerpt": "Regardless of the route chosen, the applicants noted that they expect the construction sequence to move from the Columbia Substation north to the Arpin Substation",
+     "supports": "Grid Forward construction expected to proceed from the Columbia substation northward",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "projectA": "atc-columbia-beci-work",
+   "projectB": "atc-nspw-grid-forward",
+   "kind": "shared-site",
+   "siteLabel": "Columbia Substation",
+   "basis": "inferred",
+   "description": "ATC's BECI-related Columbia Substation modification and Grid Forward's 345 kV position addition are both at the Columbia Substation; ATC is an owner of both (shared-owner/internal context).",
+   "evidence": [
+    {
+     "sourceId": "miso-beci-scope-2025",
+     "page": 27,
+     "section": "BECI facility table (slide 27); table cells in text-extraction order - rendered table assigns 50949 to BECI Selected Developer and 50950 to ATC",
+     "exactExcerpt": "Existing 161kV Line Near Bell Center - Columbia 765kV Transmission Line 50949 Construct new 765kV single-circuit transmission line. Columbia Substation 50950 Modify existing substation. BECI Selected Developer ATC",
+     "supports": "ATC modifies Columbia Substation for BECI",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "psc-grid-forward-final",
+     "page": 15,
+     "section": "Project description (docket 5-CE-157 final decision)",
+     "exactExcerpt": "Both routes included the expansion of the Arpin Substation for a new 345 kV yard, the addition of a 345 kV position at the Columbia Substation",
+     "supports": "Grid Forward adds 345 kV position at Columbia Substation",
+     "verifiedByScript": true
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "Grid Forward vs BECI at Columbia, what the sources support: (a) both name the 'Columbia Substation' (PSC 5-CE-157 final decision PDF pp.1, 15; PSC case page; MISO RFP slides 26-27; MGS fact sheet map); (b) MISO assigns the Columbia modification (50950) to ATC - but only in the March 2025 RFP scope slide 27, not in the January 2026 selection report; (c) MISO 'anticipates' coordination with interconnecting TOs (selection report PDF p.9 / printed 2, listed as an aspect developers should address; PDF p.36 / printed 29 on real-time operations). NOT supported by any source: an existing arrangement between the BECI developer and the Grid Forward applicants, a schedule for ATC's Columbia work, or any route. Grid Forward sources never mention BECI, 765 kV, Tranche 2.1, Transource or Sugar Creek.",
+  "The shared site is name-based: BECI sources and Grid Forward sources each say 'Columbia Substation'; neither discusses the other project. Grid Forward and the MGS map place it in Columbia County, and OSM has a single ATC 345 kV 'Columbia Station' there, so identity is very likely but not stated by a source.",
+  "Timing at Columbia: Grid Forward's PSC decision expects construction Q4 2026 - by December 2030 (PDF p.54) and to proceed from the Columbia substation north (PDF p.30); BECI's MGS schedule shows tree clearing/construction/restoration late 2029 - late 2033 (approximate, pre-CPCN). Reported windows overlap roughly late 2029-2030 ('confirmed' only if 'completion by December 2030' is encoded as ending in Dec 2030; 'possible' if 'by' is treated as an upper bound only). Whether any BECI or ATC work at the Columbia site itself happens in that overlap is unknown.",
+  "No construction window, cost, docket or in-service date found for ATC's Columbia (50950) or Sugar Creek (51027) work, or for DPC's facilities 50948/50953. BECI's June 1, 2034 deadline applies to the three BECI lines only.",
+  "MariBell: Dairyland (May 8, 2025 release) and the MariBell site say Dairyland and GridLiance Heartland will jointly develop and co-own a 765/161 kV double-circuit line from Marion, MN to Bell Center, WI (Wisconsin segment ~32 miles in Vernon and Crawford counties along an existing corridor), the 'middle segment of the North Rochester-Columbia 765 kV line'. This very likely includes MISO facility 50948, but no source says so; GridLiance was not added as an owner and MariBell's schedule (project-details page: construction 2031-2034, in service 2034; Wisconsin CPCN filing anticipated Q4 2026) was not attached to the DPC record. If MariBell is modeled separately, it should be reconciled with this record to avoid a duplicate work package.",
+  "No PSCW docket exists yet for BECI (MGS plans to file the CPCN in early 2027; decision anticipated summer 2028); status 'proposed'. Re-check PSC ERF after filing for route alternatives and schedule.",
+  "Date encoding is interpretive: 'Late YYYY' encoded as July-December and 'Summer' as June-September, both with precision 'quarter' as the closest enum value. MISO's 'placed into service by June 1, 2034' is a deadline encoded as a single day; it is not a forecast in-service date.",
+  "In-service claims differ: MISO/Transource require in service by 2034-06-01; AEP (Jan 2026) said the schedule is being developed to meet a 2034 in-service date; MGS (Sept 2026) shows 'Project In Service 2033'.",
+  "Route: no final route; MGS study segments (multiple alternatives) are mapped on the fact sheet and announcement packet, MISO figures are schematic, and MISO treats developers' detailed routing as confidential. County map books at static.power-viz.com/mgs-beci-mapbooks/ were not fetched. Route left unavailable.",
+  "mgs-projects.com/BECI is a JavaScript single-page app; the cached copy (mgs-beci-page) is an empty shell and is not cited. The MariBell facts formerly attributed to its FAQ are now sourced from cached Dairyland/MariBell pages instead.",
+  "IL/WI State Line point: MISO says Rock County; the MGS map shows several candidate connection points along the state line ('only one to be selected'). ComEd's IL/WI State Line - Collins 765 kV line (51029) and Collins substation work (51030) in PJM/Illinois were not modeled as projects.",
+  "Sugar Creek Substation (51027) appears in both the BECI and WISE (Viridon) RFP scopes; a WISE-to-ATC/BECI shared-site relation at Sugar Creek was not modeled here.",
+  "Counties for Sugar Creek Substation (Walworth per OSM and MGS map reading) and DPC facilities (Vernon/Crawford per geocoder and MariBell page) are not stated in the MISO source for those facilities and were omitted.",
+  "Selected Developer Agreement: the selection report says MISO and Transource will execute it within 60 days of the Jan 6, 2026 report; execution not confirmed in cached sources. The report calls the winner 'Transource, Inc.' in the summary but lists 'Transource LLC' among proposers.",
+  "The open-house boards (mgs-beci-oh-boards) are undated; their schedule board duplicates the fact sheet schedule, so they add no independent date claim."
+ ],
+ "issuesFixed": [
+  "Re-ran find_excerpt.py on every evidence object (125 objects, 57 unique excerpts incl. additions): all FOUND on the stated page; also checked case-sensitively against cached text.",
+  "Fixed 2 original excerpts that were not verbatim in case: AEP 'a joint venture...' -> 'A joint venture...'; PSC 5-CE-157 p.1 'substations ... counties' -> 'Substations ... Counties'.",
+  "Confirmed slide 27 table cell assignments visually (50949 BECI Selected Developer, 50950 ATC, 51027 ATC, 50948/50953 DPC, 51029/51030 ComEd) and slide 23 row for 51027; no change needed.",
+  "ATC coordination (transource-beci): tightened description/supports - selection report p.9 is an RFP 'important aspect' for developers, and p.36 is real-time-operations coordination, not a documented arrangement; stated explicitly that no executed agreement or resource sharing is documented; added MGS map legend evidence ('Substation Connection Point Determined by Local Utilities').",
+  "ComEd coordination: added MISO slide 27 evidence assigning the IL/WI State Line - Collins 765 kV line (51029) to ComEd; noted MGS does not name the Illinois utility.",
+  "Dairyland coordination: clarified planned-interconnection scope, added MGS legend evidence and a note on MariBell.",
+  "Grid Forward coordination/relation: added applicants SMMPA Wisconsin and WPPI and the CPCN date (2025-12-10, PDF p.64); stated the shared site is name-based; added Grid Forward construction window 'Q4 2026 - by December 2030' (PDF p.54) and 'construction sequence from the Columbia Substation north' (PDF p.30); removed nothing but replaced the researcher's implicit 'timing unknown' with the sourced reported-window overlap (late 2029-2030) and the site-level caveat.",
+  "Route caveat 'Detailed routing in MISO proposals is confidential' was unsupported; added verified MISO selection report p.10 (printed 3) Confidentiality excerpts.",
+  "BHE Transmission ownership: added AEP excerpt 'BHE Transmission, which will own 50% of the project'; added MISO news-release evidence for Transource, Inc.; added AEP $1.2 billion investment evidence.",
+  "188-mile fact relabeled as Transource's first proposal (E1) route length.",
+  "Coordinates re-checked: OSM ways 176434079 (Columbia Station, ATC), 1420924219 (Sugar Creek Substation), 299956516 (Bell Center, DPC) via Overpass mirror; Nominatim Bell Center village, Genoa village, Rock County - all match exactly, none moved. Sugar Creek uncertainty raised 400 -> 1000 m because OSM shows only a 138 kV station while MISO describes a 765/345 kV modification; coordinateSource strings updated with re-check details and name-identity caveat.",
+  "DPC project: replaced the unverifiable MariBell caveat (based on an uncached JS FAQ) with verified cached Dairyland/MariBell sources; added knownCoordination partner gridliance-heartland (status unknown, scope joint-ownership) with verified excerpts; deliberately did NOT add GridLiance as owner or attach MariBell's 2031-2034 construction window because no source ties MISO facility 50948 to MariBell.",
+  "Sources: newly cached dairyland-maribell-news (Dairyland, May 8, 2025) and added maribell-wisconsin-regulatory-process; set psc-grid-forward-final publishedAt 2025-12-10 with evidence; corrected documentDateEvidence for mgs-beci-oh-boards (boards are undated; the 'per announcement packet' claim was not supported) and mgs-beci-announcement-packet (letter undated).",
+  "Completion claims for MISO/Transource relabeled as a deadline ('no later than 2034-06-01'), not a forecast date.",
+  "Construction-window notes now flag 'Late'/'Summer' encodings and 'quarter' precision as interpretation; confirmed no construction window was derived from an in-service date.",
+  "Added caveats: study-area counties are not route counties; Transource, Inc. vs Transource LLC naming; SDA execution unconfirmed; Grid Forward timing vs ATC Columbia work; Sugar Creek OSM 138 kV tagging.",
+  "Rewrote unresolved: explicit verdict on the plan.md Grid Forward/BECI hypothesis (supported: shared Columbia name, ATC assignment via 2025 RFP only, MISO-anticipated coordination; unsupported: any existing arrangement, ATC Columbia schedule, route), timing overlap analysis, Grid Forward owner-set gap, MariBell duplicate-package risk."
+ ]
+}

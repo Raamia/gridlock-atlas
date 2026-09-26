@@ -1,0 +1,1240 @@
+{
+ "cluster": "sc-ga-context",
+ "sources": [
+  {
+   "id": "gpc-effingham-page",
+   "title": "Effingham County 500 kV Area Transmission Project",
+   "publisher": "Georgia Power",
+   "url": "https://www.georgiapower.com/about/grid-reliability/grid-improvements/grid-projects/transmission-projects/effingham-county.html",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No content date printed; the timeline lists Summer 2026 through Fall 2027 milestones. HTTP Last-Modified header Fri, 25 Sep 2026 (re-checked 2026-09-26: 15:09:48 GMT) (server header, may reflect republishing). Retrieved 2026-09-26."
+  },
+  {
+   "id": "gpc-callaway-thomson-page",
+   "title": "Callaway Road \u2013 Thomson Primary 500 kV Area Transmission Project",
+   "publisher": "Georgia Power",
+   "url": "https://www.georgiapower.com/about/grid-reliability/grid-improvements/grid-projects/transmission-projects/callaway-thomson.html",
+   "sourceType": "utility",
+   "cached": true,
+   "documentDateEvidence": "No content date printed; the timeline runs from Early Spring 2026 to Summer 2027. HTTP Last-Modified header Fri, 25 Sep 2026 (re-checked 2026-09-26: 14:23:21 GMT) (server header). Retrieved 2026-09-26."
+  },
+  {
+   "id": "sertp-2025-plan",
+   "title": "2025 SERTP Regional Transmission Plan and Input Assumptions",
+   "publisher": "Southeastern Regional Transmission Planning (SERTP)",
+   "url": "https://www.southeasternrtp.com/docs/general/2025/2025%20Regional%20Transmission%20Plan%20and%20Input%20Assumptions.pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2025-11-26",
+   "documentDateEvidence": "Cover dated 'November 26, 2025'; SERTP home page news item dated November 26th, 2025 announces the final 2025 plan. Retrieved 2026-09-26 (257 pp.)."
+  },
+  {
+   "id": "gpc-irp-2025-vol3",
+   "title": "2025 IRP Technical Appendix Vol. 3 \u2014 2024 GA ITS Ten-Year Plan (Public Disclosure)",
+   "publisher": "Georgia Power (Georgia PSC Docket 56002)",
+   "url": "https://psc.ga.gov/search/facts-document/?documentId=221233",
+   "sourceType": "regulator",
+   "cached": true,
+   "documentDateEvidence": "2024 GA ITS Ten-Year Plan (2025-2034) filed with the 2025 IRP; already cached."
+  },
+  {
+   "id": "desc-scrtp-2026-2030",
+   "title": "DESC Planned Transmission Projects $2M and above, 2026-2030",
+   "publisher": "Dominion Energy South Carolina (SCRTP)",
+   "url": "https://www.scrtp.com/assets/pdfs/home/2026-2030-2million-and-above-project-descriptions.pdf",
+   "sourceType": "utility",
+   "cached": true
+  },
+  {
+   "id": "desc-scrtp-2025-2029",
+   "title": "DESC Planned Transmission Projects $2M and above, 2025-2029",
+   "publisher": "Dominion Energy South Carolina (SCRTP)",
+   "url": "https://www.scrtp.com/assets/pdfs/home/2025-2029-2million-and-above-project-descriptions.pdf",
+   "sourceType": "utility",
+   "cached": true
+  },
+  {
+   "id": "desc-scrtp-2024-2028",
+   "title": "DESC Planned Transmission Projects $2M and above, 2024-2028",
+   "publisher": "Dominion Energy South Carolina (SCRTP)",
+   "url": "https://www.scrtp.com/assets/pdfs/home/2024-2028-2million-and-above-project-descriptions.pdf",
+   "sourceType": "utility",
+   "cached": true
+  },
+  {
+   "id": "scrtp-home",
+   "title": "South Carolina Regional Transmission Planning \u2014 home page (FERC Order 1920 notice: DESC and Santee Cooper to join SERTP)",
+   "publisher": "South Carolina Regional Transmission Planning (SCRTP; Dominion Energy South Carolina and Santee Cooper)",
+   "url": "https://www.scrtp.com/",
+   "sourceType": "rto",
+   "cached": true,
+   "documentDateEvidence": "Undated page; says the next SCRTP stakeholder meeting will be held 3rd Quarter 2026. Retrieved 2026-09-26."
+  },
+  {
+   "id": "sertp-home",
+   "title": "Southeastern Regional Transmission Planning \u2014 home page / news",
+   "publisher": "Southeastern Regional Transmission Planning (SERTP)",
+   "url": "https://www.southeasternrtp.com/",
+   "sourceType": "rto",
+   "cached": true,
+   "documentDateEvidence": "News feed; the 'Dominion SC and Santee Cooper to Join SERTP' notice sits under the 'September 30th, 2025' entry (date inferred from feed position). Retrieved 2026-09-26."
+  },
+  {
+   "id": "scpsc-aep-briefing-2026-03",
+   "title": "PSC Reschedules AEP Communication Briefing for 3.5.26",
+   "publisher": "Public Service Commission of South Carolina",
+   "url": "https://psc.sc.gov/news/2026-02/psc-reschedules-aep-communication-briefing-3526",
+   "sourceType": "regulator",
+   "cached": true,
+   "publishedAt": "2026-02-17",
+   "documentDateEvidence": "Page dated 'Tue, 02/17/2026'; announces that the ex parte briefing was moved to Thursday, March 5 (2026) from March 3rd, 2026; docket ND-2024-46-E. The page does not confirm the briefing took place. Retrieved 2026-09-26."
+  },
+  {
+   "id": "scrtp-meeting-2025-06-03",
+   "title": "SCRTP Stakeholder Meeting presentation, June 3, 2025",
+   "publisher": "South Carolina Regional Transmission Planning (SCRTP)",
+   "url": "https://www.scrtp.com/assets/pdfs/meeting-archives/scrtp-meeting-2025-06-03-presentation.pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2025-06-03",
+   "documentDateEvidence": "Title slide: June 3, 2025. Searched for McIntosh, Purrysburg, Thurmond, Okatie, Georgia and SERTP: no hits. Slides 10-12 list earlier economic planning (transfer) studies, including SOCO to DESC transfers (2023: 1300 MW and 950 MW for 2028/29 winter; 2024: 300 MW for 2025 summer). Nothing on specific DESC or GPC projects."
+  }
+ ],
+ "projects": [
+  {
+   "id": "gpc-effingham-500",
+   "title": "Effingham County 500 kV Area Transmission Project",
+   "shortTitle": "Effingham County 500 kV (GPC)",
+   "titleEvidence": [
+    {
+     "sourceId": "gpc-effingham-page",
+     "exactExcerpt": "Effingham County 500 kV Area Transmission Project",
+     "supports": "project page title",
+     "verifiedByScript": true,
+     "section": "page header"
+    }
+   ],
+   "summary": "Georgia Power is planning a new 500/230 kV Effingham County Substation plus new 500 kV transmission infrastructure to serve a large-load customer and strengthen the local grid in Effingham and surrounding counties, Georgia. The timeline is tentative: substation land acquisition from Fall 2026, substation clearing and grading from Spring 2027, and substation construction from Fall 2027. No map, route, line length, or in-service date is published.",
+   "owners": [
+    {
+     "utilityId": "gpc",
+     "name": "Georgia Power Company",
+     "evidence": [
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "while ensuring Georgia Power\u2019s transmission network can safely and effectively serve current and future demand",
+       "supports": "project is part of Georgia Power's transmission network",
+       "verifiedByScript": true,
+       "section": "About the Project (FAQ)"
+      },
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "The project is expected to include a new 500/230 kV Effingham County Substation, new 500 kV transmission infrastructure, and associated facilities.",
+       "supports": "scope of the Georgia Power project page",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "proposed",
+    "asOf": "2026-09-26",
+    "evidence": [
+     {
+      "sourceId": "gpc-effingham-page",
+      "exactExcerpt": "The project is being planned to provide the transmission infrastructure needed to serve a large-load customer while also strengthening the local electric grid in a rapidly growing area.",
+      "supports": "'is being planned' - planning stage",
+      "verifiedByScript": true,
+      "section": "About the Project"
+     },
+     {
+      "sourceId": "gpc-effingham-page",
+      "exactExcerpt": "Project timeline is tentative and as planning progresses schedule may change.",
+      "supports": "timeline is tentative",
+      "verifiedByScript": true,
+      "section": "Project Timeline"
+     }
+    ]
+   },
+   "states": [
+    "GA"
+   ],
+   "counties": [
+    {
+     "name": "Effingham",
+     "state": "GA",
+     "evidence": [
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "The project will strengthen the local electric grid by adding capacity and improving reliability in Effingham and surrounding counties.",
+       "supports": "project benefits Effingham and surrounding counties",
+       "verifiedByScript": true,
+       "section": "About the Project (FAQ)"
+      },
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "The project is expected to include a new 500/230 kV Effingham County Substation, new 500 kV transmission infrastructure, and associated facilities.",
+       "supports": "new substation is named Effingham County Substation",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "500 kV lines; new 500/230 kV substation",
+     "evidence": [
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "The project is expected to include a new 500/230 kV Effingham County Substation, new 500 kV transmission infrastructure, and associated facilities.",
+       "supports": "500/230 kV substation and 500 kV infrastructure",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Driver",
+     "value": "Serve a large-load customer; strengthen local grid",
+     "evidence": [
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "Yes, this project is being developed to serve the electric needs of a large\u2011load customer that requires new transmission infrastructure.",
+       "supports": "developed to serve a large-load customer",
+       "verifiedByScript": true,
+       "section": "About the Project (FAQ)"
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "gpc-effingham-500-county",
+     "label": "Effingham County, GA (substation site not published)",
+     "kind": "county",
+     "precision": "county",
+     "lat": 32.3419626,
+     "lon": -81.338687,
+     "uncertaintyMeters": 30000,
+     "coordinateSource": "Nominatim search 'Effingham County, Georgia' (2026-09-26) -> OSM relation 413939 centroid 32.3419626,-81.3386870; bbox 32.096-32.595 N, 81.120-81.548 W. The farthest county-boundary vertex (Nominatim polygon) is 28.6 km from this centroid, so the 30 km halo covers the whole county. County level only: the page publishes no map or site.",
+     "evidence": [
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "The project will strengthen the local electric grid by adding capacity and improving reliability in Effingham and surrounding counties.",
+       "supports": "county named by the project page",
+       "verifiedByScript": true,
+       "section": "About the Project (FAQ)"
+      },
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "A project map is not available at this stage of the planning process.",
+       "supports": "no project map published",
+       "verifiedByScript": true,
+       "section": "Project Map Not Currently Available"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": false,
+    "precision": "none",
+    "description": "No route or map published.",
+    "caveat": "Georgia Power says a project map is not available at this stage; maps will be shared later.",
+    "evidence": [
+     {
+      "sourceId": "gpc-effingham-page",
+      "exactExcerpt": "A project map is not available at this stage of the planning process.",
+      "supports": "no project map/route",
+      "verifiedByScript": true,
+      "section": "Project Map Not Currently Available"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "gpc-effingham-page",
+     "phase": "preconstruction",
+     "start": {
+      "earliest": "2026-06-01",
+      "latest": "2026-09-22",
+      "precision": "quarter",
+      "label": "Summer 2026"
+     },
+     "end": {
+      "earliest": "2026-06-01",
+      "latest": "2099-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "Pre-construction milestones: Summer 2026 notification to elected officials and substation survey notifications; Fall 2026 substation land acquisition begins. The page publishes no end for pre-construction work: Spring 2027 is when clearing and grading begins, not when land acquisition ends. The end is the open sentinel (end.earliest = start.earliest, end.latest 2099-12-31) meaning 'not published'. Seasons are mapped to date ranges (Summer 06-01..09-22). The timeline is tentative. The time engine ignores preconstruction windows.",
+     "evidence": [
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "Summer 2026 Notification to elected officials Summer 2026 Substation survey notifications to property owners Fall 2026 Substation land acquisition activities begin",
+       "supports": "Summer/Fall 2026 pre-construction milestones",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      },
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "Project timeline is tentative and as planning progresses schedule may change.",
+       "supports": "timeline is tentative",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "gpc-effingham-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2027-03-01",
+      "latest": "2027-06-20",
+      "precision": "quarter",
+      "label": "Spring 2027"
+     },
+     "end": {
+      "earliest": "2027-03-01",
+      "latest": "2099-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "Start = 'Spring 2027 Substation clearing and grading begins'; 'Fall 2027 Substation construction activities begin' (09-01..12-20). NO END DATE IS PUBLISHED: end.earliest = start.earliest and end.latest = 2099-12-31 is an open-end sentinel meaning 'not published', so this window can only produce a 'possible' time signal, never 'confirmed'. Display as 'from Spring 2027, end not published'. Covers substation work only; line construction timing is not published.",
+     "evidence": [
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "Spring 2027 Substation clearing and grading begins Fall 2027 Substation construction activities begin",
+       "supports": "Spring 2027 clearing/grading and Fall 2027 substation construction start",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      },
+      {
+       "sourceId": "gpc-effingham-page",
+       "exactExcerpt": "Project timeline is tentative and as planning progresses schedule may change.",
+       "supports": "timeline is tentative",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    }
+   ],
+   "completionClaims": [],
+   "knownCoordination": [],
+   "caveats": [
+    "County-level location only: the page publishes no map, substation site or route; the county place is a halo, not a site.",
+    "The page does not state that the substation is inside Effingham County; that is inferred from the substation name ('Effingham County Substation') and 'improving reliability in Effingham and surrounding counties'.",
+    "No in-service or completion date is published; no line length or line endpoints are published.",
+    "Not found in the 2024 GA ITS Ten-Year Plan (gpc-irp-2025-vol3: no 'Effingham' hits). In the 2025 SERTP plan the word appears only on p.226, as a generating-plant name in the modeled-resources table, not as a transmission project. The project appears to post-date both documents.",
+    "Neither construction window has a published end date."
+   ]
+  },
+  {
+   "id": "gpc-callaway-thomson-500",
+   "title": "Callaway Road \u2013 Thomson Primary 500 kV Area Transmission Project",
+   "shortTitle": "Callaway Road\u2013Thomson 500 kV (GPC)",
+   "titleEvidence": [
+    {
+     "sourceId": "gpc-callaway-thomson-page",
+     "exactExcerpt": "Georgia Power is planning the Callaway Road \u2013 Thomson Primary 500 kV Area Transmission Project.",
+     "supports": "project name and owner",
+     "verifiedByScript": true,
+     "section": "About the Project"
+    }
+   ],
+   "summary": "Georgia Power is planning a new 500/230 kV Callaway Road Substation in Columbia County, GA and two new 500 kV lines (#1 about 10 miles, #2 about 7 miles; about 17 miles total) in McDuffie and Columbia counties to Thomson Primary Substation. Thomson Primary is an existing Georgia Power substation, per the 2024 ten-year plan, and OSM plus the page's map marker place it in McDuffie County. The project serves a large-load customer. Tentative timeline: substation clearing and grading Winter 2026, substation construction Spring 2027, line clearing and construction Summer 2027. The page map (pre-engineering, 'not based on field survey data') shows substation markers and two proposed line traces. No in-service date is published.",
+   "owners": [
+    {
+     "utilityId": "gpc",
+     "name": "Georgia Power Company",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Georgia Power is planning the Callaway Road \u2013 Thomson Primary 500 kV Area Transmission Project.",
+       "supports": "Georgia Power is planning the project",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    }
+   ],
+   "status": {
+    "value": "proposed",
+    "asOf": "2026-09-26",
+    "evidence": [
+     {
+      "sourceId": "gpc-callaway-thomson-page",
+      "exactExcerpt": "Georgia Power is planning the Callaway Road \u2013 Thomson Primary 500 kV Area Transmission Project.",
+      "supports": "'is planning' - planning stage",
+      "verifiedByScript": true,
+      "section": "About the Project"
+     },
+     {
+      "sourceId": "gpc-callaway-thomson-page",
+      "exactExcerpt": "The project timeline is tentative and subject to change as planning continues.",
+      "supports": "timeline is tentative",
+      "verifiedByScript": true,
+      "section": "Project Timeline"
+     }
+    ]
+   },
+   "states": [
+    "GA"
+   ],
+   "counties": [
+    {
+     "name": "Columbia",
+     "state": "GA",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Callaway Road Substation: Construction of a new substation in Columbia County to support both 500 kV and 230 kV transmission infrastructure.",
+       "supports": "Callaway Road Substation is in Columbia County",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "The project will include a new 500/230 kV Callaway Road Substation, approximately 17 miles of new 500 kV transmission infrastructure, and associated facilities in McDuffie and Columbia Counties.",
+       "supports": "facilities in McDuffie and Columbia Counties",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    },
+    {
+     "name": "McDuffie",
+     "state": "GA",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "The project will include a new 500/230 kV Callaway Road Substation, approximately 17 miles of new 500 kV transmission infrastructure, and associated facilities in McDuffie and Columbia Counties.",
+       "supports": "facilities in McDuffie and Columbia Counties",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Callaway Road\u2013Thomson #1 500 kV Transmission Line: Approximately 10 miles of new 500 kV transmission line in McDuffie and Columbia counties.",
+       "supports": "line #1 in McDuffie and Columbia counties",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    }
+   ],
+   "facts": [
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "500 kV lines; new 500/230 kV substation",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "The project will include a new 500/230 kV Callaway Road Substation, approximately 17 miles of new 500 kV transmission infrastructure, and associated facilities in McDuffie and Columbia Counties.",
+       "supports": "500/230 kV substation and 500 kV lines",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "New 500 kV line length",
+     "value": "about 17 mi (#1 about 10 mi, #2 about 7 mi)",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "The project will include a new 500/230 kV Callaway Road Substation, approximately 17 miles of new 500 kV transmission infrastructure, and associated facilities in McDuffie and Columbia Counties.",
+       "supports": "approximately 17 miles",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Callaway Road\u2013Thomson #1 500 kV Transmission Line: Approximately 10 miles of new 500 kV transmission line in McDuffie and Columbia counties.",
+       "supports": "#1 approx. 10 miles",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Callaway Road\u2013Thomson #2 500 kV Transmission Line: Approximately 7 miles of new 500 kV transmission line in McDuffie and Columbia counties.",
+       "supports": "#2 approx. 7 miles",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Driver",
+     "value": "Serve a large-load customer; strengthen local grid",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Yes, this project is being developed to serve the electric needs of a large load customer that requires new transmission infrastructure.",
+       "supports": "developed to serve a large load customer",
+       "verifiedByScript": true,
+       "section": "About the Project (FAQ)"
+      }
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "gpc-callaway-thomson-500-thomson-primary",
+     "label": "Thomson Primary Substation (Georgia Power), McDuffie County, GA",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 33.45396,
+     "lon": -82.41422,
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/160065782 'Thomson Primary Substation', operator Georgia Power, 500/230/115/46 kV (gazetteer.py 'Thomson Primary' --operator georgia). Confirmed by the Georgia Power page's own map marker 'Thomson Primary Substation' at 33.45645761,-82.41269284 (raw HTML map config), 0.3 km away; Nominatim reverse of the marker = McDuffie County, GA. Other 'Thomson' substations (Thomson, East/North/West Thomson) are 2.4-15 km away and not used.",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Georgia Power is planning the Callaway Road \u2013 Thomson Primary 500 kV Area Transmission Project.",
+       "supports": "project terminal named Thomson Primary",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "The project will include a new 500/230 kV Callaway Road Substation, approximately 17 miles of new 500 kV transmission infrastructure, and associated facilities in McDuffie and Columbia Counties.",
+       "supports": "facilities in McDuffie and Columbia Counties",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      }
+     ]
+    },
+    {
+     "id": "gpc-callaway-thomson-500-callaway-road",
+     "label": "Callaway Road Substation (proposed, Georgia Power), Columbia County, GA",
+     "kind": "substation",
+     "precision": "official-map-digitized",
+     "lat": 33.51091517,
+     "lon": -82.37582817,
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "Georgia Power project page map config (raw HTML, gmp-map #callaway-road-thomson-primary, locations[] 'Callaway Road Substation' lat 33.51091517 lng -82.37582817); pre-engineering, not survey data. Not in OSM (new facility). Nominatim reverse = Columbia County, GA, consistent with the page text; Morris Callaway Road is ~1.7 km ENE.",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Callaway Road Substation: Construction of a new substation in Columbia County to support both 500 kV and 230 kV transmission infrastructure.",
+       "supports": "new substation in Columbia County",
+       "verifiedByScript": true,
+       "section": "About the Project"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "MAP NOT BASED ON FIELD SURVEY DATA",
+       "supports": "map not based on field survey",
+       "verifiedByScript": true,
+       "section": "Project Map"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Structure and Line Locations based on Pre-Engineering data and subject to change",
+       "supports": "locations based on pre-engineering data",
+       "verifiedByScript": true,
+       "section": "Project Map"
+      }
+     ]
+    }
+   ],
+   "route": {
+    "available": true,
+    "precision": "official-map-digitized",
+    "description": "Both proposed 500 kV traces as published in the Georgia Power page's map data, read directly from the embedded coordinates (not hand-digitized). Waypoints run Thomson Primary -> Callaway Road along the 'White' route (32 points, 6.15 mi as drawn), then back Callaway Road -> Thomson Primary along the 'Black' route (19 points, 5.69 mi as drawn); near-duplicate vertices under 50 m apart were dropped.",
+    "caveat": "Preliminary route from pre-engineering data, 'not based on field survey data', and subject to change. The drawn traces total about 11.8 mi, but the page text says about 10 + 7 = 17 miles. The map does not say which trace is #1 or #2. Georgia Power names parallel circuits by color elsewhere (e.g. 'McIntosh - Purrysburg (Black and White)'), so White and Black are read as the two lines, not alternatives. The page does not state this.",
+    "evidence": [
+     {
+      "sourceId": "gpc-callaway-thomson-page",
+      "exactExcerpt": "This map shows the current proposed project route and is being provided to help communities understand the project's anticipated location. The route is preliminary and may change as engineering, environmental reviews, and field assessments are completed.",
+      "supports": "map shows the current proposed route; preliminary",
+      "verifiedByScript": true,
+      "section": "Project Map"
+     },
+     {
+      "sourceId": "gpc-callaway-thomson-page",
+      "exactExcerpt": "MAP NOT BASED ON FIELD SURVEY DATA",
+      "supports": "not based on field survey",
+      "verifiedByScript": true,
+      "section": "Project Map"
+     },
+     {
+      "sourceId": "gpc-callaway-thomson-page",
+      "exactExcerpt": "Structure and Line Locations based on Pre-Engineering data and subject to change",
+      "supports": "pre-engineering data",
+      "verifiedByScript": true,
+      "section": "Project Map"
+     }
+    ],
+    "waypoints": [
+     {
+      "name": "Thomson Primary Substation (map marker; White route start)",
+      "lat": 33.45645761,
+      "lon": -82.41269284,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls' / locations[] marker"
+     },
+     {
+      "name": "White route vertex 2",
+      "lat": 33.45875844,
+      "lon": -82.40626089,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 3",
+      "lat": 33.46009997,
+      "lon": -82.40622496,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 4",
+      "lat": 33.46150711,
+      "lon": -82.40902413,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 5",
+      "lat": 33.4684981,
+      "lon": -82.41095834,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 6",
+      "lat": 33.4769307,
+      "lon": -82.41168671,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 7",
+      "lat": 33.48345849,
+      "lon": -82.41304197,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 8",
+      "lat": 33.49111038,
+      "lon": -82.41296236,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 9",
+      "lat": 33.49415252,
+      "lon": -82.41207238,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 10",
+      "lat": 33.49765039,
+      "lon": -82.41104795,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 11",
+      "lat": 33.50966543,
+      "lon": -82.40752843,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 12",
+      "lat": 33.51718586,
+      "lon": -82.39458695,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 13",
+      "lat": 33.51247149,
+      "lon": -82.37866143,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "White route vertex 14",
+      "lat": 33.51168248,
+      "lon": -82.37732516,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls'"
+     },
+     {
+      "name": "Callaway Road Substation (map marker; White route end)",
+      "lat": 33.51091517,
+      "lon": -82.37582817,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway - Proposed White Route.xls' / locations[] marker"
+     },
+     {
+      "name": "Black route vertex 9",
+      "lat": 33.50601332,
+      "lon": -82.38059608,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     },
+     {
+      "name": "Black route vertex 8",
+      "lat": 33.49879975,
+      "lon": -82.37450549,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     },
+     {
+      "name": "Black route vertex 7",
+      "lat": 33.4950807,
+      "lon": -82.36720472,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     },
+     {
+      "name": "Black route vertex 6",
+      "lat": 33.49059904,
+      "lon": -82.37049657,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     },
+     {
+      "name": "Black route vertex 5",
+      "lat": 33.48624541,
+      "lon": -82.37369401,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     },
+     {
+      "name": "Black route vertex 4",
+      "lat": 33.45931921,
+      "lon": -82.39346355,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     },
+     {
+      "name": "Black route vertex 3",
+      "lat": 33.45541058,
+      "lon": -82.40395506,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     },
+     {
+      "name": "Black route vertex 2",
+      "lat": 33.45795657,
+      "lon": -82.40723109,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     },
+     {
+      "name": "Black route start near Thomson Primary Substation",
+      "lat": 33.45608291,
+      "lon": -82.41248625,
+      "coordinateSource": "gpc-callaway-thomson-page raw HTML, gmp-map #callaway-road-thomson-primary config polyline source 'Callaway -Proposed Black Route.xls' (traversed Callaway -> Thomson)"
+     }
+    ]
+   },
+   "constructionWindows": [
+    {
+     "claimSourceId": "gpc-callaway-thomson-page",
+     "phase": "preconstruction",
+     "start": {
+      "earliest": "2026-03-01",
+      "latest": "2026-04-30",
+      "precision": "quarter",
+      "label": "Early Spring 2026"
+     },
+     "end": {
+      "earliest": "2026-03-01",
+      "latest": "2099-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "Pre-construction milestones: Early Spring 2026 substation and line location process began; Summer 2026 survey notifications; Late Summer 2026 substation land acquisition begins; Spring 2027 line land acquisition begins. No end of pre-construction is published (line clearing and construction begin Summer 2027, but the end of land acquisition is not stated). The end is the open sentinel meaning 'not published'. 'Early Spring' is mapped to 03-01..04-30. The timeline is tentative. The time engine ignores preconstruction windows.",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Early Spring 2026 Substation Location Process Began Line Location Process Began Summer 2026 Substation Survey Notification to Property Owners Line Survey Notification to Property Owners",
+       "supports": "Early Spring/Summer 2026 milestones",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Late Summer 2026 Substation Land Acquisition Begins Winter 2026 Substation Clearing and Grading Begins",
+       "supports": "Late Summer 2026 land acquisition",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Spring 2027 Substation Construction Begins Line Land Acquisition Begins",
+       "supports": "Spring 2027 line land acquisition",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "The project timeline is tentative and subject to change as planning continues.",
+       "supports": "timeline is tentative",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "gpc-callaway-thomson-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2026-12-01",
+      "latest": "2027-03-19",
+      "precision": "quarter",
+      "label": "Winter 2026"
+     },
+     "end": {
+      "earliest": "2026-12-01",
+      "latest": "2099-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "SUBSTATION. Start = 'Winter 2026 Substation Clearing and Grading Begins' (listed after Late Summer 2026 and before Spring 2027, so read as winter 2026-27: 12-01..03-19); 'Spring 2027 Substation Construction Begins'. NO END DATE IS PUBLISHED: end.latest 2099-12-31 is an open-end sentinel meaning 'not published', so at most a 'possible' time signal.",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Late Summer 2026 Substation Land Acquisition Begins Winter 2026 Substation Clearing and Grading Begins",
+       "supports": "Winter 2026 substation clearing and grading",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Spring 2027 Substation Construction Begins Line Land Acquisition Begins",
+       "supports": "Spring 2027 substation construction begins",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "The project timeline is tentative and subject to change as planning continues.",
+       "supports": "timeline is tentative",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    },
+    {
+     "claimSourceId": "gpc-callaway-thomson-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2027-06-01",
+      "latest": "2027-09-22",
+      "precision": "quarter",
+      "label": "Summer 2027"
+     },
+     "end": {
+      "earliest": "2027-06-01",
+      "latest": "2099-12-31",
+      "precision": "year"
+     },
+     "continuous": false,
+     "note": "LINES. Start = 'Summer 2027 Line Clearing and Grading Begins / Line Construction Begins'. NO END DATE IS PUBLISHED: end.latest 2099-12-31 is an open-end sentinel meaning 'not published'.",
+     "evidence": [
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "Summer 2027 Line Clearing and Grading Begins Line Construction Begins",
+       "supports": "Summer 2027 line clearing and construction begin",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      },
+      {
+       "sourceId": "gpc-callaway-thomson-page",
+       "exactExcerpt": "The project timeline is tentative and subject to change as planning continues.",
+       "supports": "timeline is tentative",
+       "verifiedByScript": true,
+       "section": "Project Timeline"
+      }
+     ]
+    }
+   ],
+   "completionClaims": [],
+   "knownCoordination": [],
+   "caveats": [
+    "Map is preliminary, 'not based on field survey data', from pre-engineering data; route precision is official-map-digitized, not survey or GIS.",
+    "Drawn traces (6.15 mi + 5.69 mi = 11.8 mi) do not match the stated ~10 + ~7 = ~17 miles; which trace is #1 or #2 is not labeled.",
+    "The route and marker coordinates come from the page's embedded map script. They were re-read from the cached raw HTML (data/sources/.cache/raw/gpc-callaway-thomson-page.html, sha256 6909a4b1..., matching the source record) on 2026-09-26. The cached visible text (html.txt) has only the map disclaimers, so find_excerpt.py cannot verify the coordinate values.",
+    "No in-service or completion date is published; construction window ends are open sentinels (2099-12-31), not published dates.",
+    "Not found in the 2024 GA ITS Ten-Year Plan or the 2025 SERTP plan (no 'Callaway' hits in either); it appears to post-date both documents.",
+    "Shares the Thomson Primary terminal with other Georgia Power ten-year-plan items (gpc-14222, gpc-17993). These are same-owner context, not a cross-utility pair."
+   ]
+  }
+ ],
+ "interconnections": [
+  {
+   "name": "Okatie \u2013 McIntosh 115 kV tie line (series reactor + new Deerfield Switching Station)",
+   "descProjectKeys": [
+    "desc:6888"
+   ],
+   "gpcProjectKeys": [],
+   "description": "DESC's SCRTP lists (2025-2029 p.42; 2026-2030 p.41) call the Okatie \u2013 McIntosh 115 kV line a 'Tie Line'. Project 6888 (Planned, ISD 12/31/2028) builds a Deerfield Switching Station and adds a 9% series reactor on it. The project is not in the 2024-2028 list. The DESC source does not name the counterparty or say where the reactor or Deerfield will be. 'McIntosh' plausibly means Georgia Power's McIntosh substation (Effingham County, GA). In OSM, a 115 kV line (way/185380584) runs from McIntosh Substation to an unnamed 115 kV substation in Jasper County, SC, and a 115 kV line tagged operator 'Dominion Energy' (way/1062495950) runs from that site toward Okatie. Those tags are mapper-supplied, and no second official source confirms the link. The GPC 2024 ten-year plan has no Okatie or Deerfield item. Treat this as interconnection design context only; it is not resource sharing.",
+   "evidence": [
+    {
+     "sourceId": "desc-scrtp-2026-2030",
+     "exactExcerpt": "Construct Deerfield Switching Station and Install a 9% series reactor on the Okatie \u2013 McIntosh 115kV Tie Line.",
+     "supports": "DESC names the line a tie line; scope of 6888",
+     "verifiedByScript": true,
+     "page": 41,
+     "printedPage": "Project 41 of 54"
+    },
+    {
+     "sourceId": "desc-scrtp-2026-2030",
+     "exactExcerpt": "Okatie \u2013 McIntosh 115kV Tie: Add Series Reactor Project ID 6888",
+     "supports": "project title and ID 6888",
+     "verifiedByScript": true,
+     "page": 41,
+     "printedPage": "Project 41 of 54"
+    },
+    {
+     "sourceId": "desc-scrtp-2026-2030",
+     "exactExcerpt": "Project Status Planned Planned In-Service Date 12/31/2028",
+     "supports": "status Planned; ISD 12/31/2028",
+     "verifiedByScript": true,
+     "page": 41,
+     "printedPage": "Project 41 of 54"
+    },
+    {
+     "sourceId": "desc-scrtp-2025-2029",
+     "exactExcerpt": "Construct Deerfield Switching Station and Install a 9% series reactor on the Okatie \u2013 McIntosh 115kV Tie Line.",
+     "supports": "same scope in the 2025-2029 list",
+     "verifiedByScript": true,
+     "page": 42,
+     "printedPage": "Project 42 of 47"
+    },
+    {
+     "sourceId": "desc-scrtp-2025-2029",
+     "exactExcerpt": "Okatie \u2013 McIntosh 115kV Tie: Add Series Reactor Project ID 6888",
+     "supports": "same project ID in the 2025-2029 list",
+     "verifiedByScript": true,
+     "page": 42,
+     "printedPage": "Project 42 of 47"
+    }
+   ]
+  },
+  {
+   "name": "McIntosh \u2013 Purrysburg (Black and White) 230 kV tie lines",
+   "descProjectKeys": [],
+   "gpcProjectKeys": [
+    "gpc:20277"
+   ],
+   "description": "The GPC 2024 ten-year plan (p.227, Teams 20277; Need 06/01/2026, Start 01/01/2024) installs reactors 'at McIntosh' on the McIntosh \u2013 Purrysburg Black and White 230 kV tie lines. It rebuilds only 0.1 mi, the 'GPC portion', which implies another party owns the rest. The source does not name that party or locate Purrysburg. Nominatim finds only Purrysburg Road segments in Jasper County, SC. No DESC SCRTP list (2024-2028, 2025-2029, 2026-2030) mentions Purrysburg, and neither does the 2025 SERTP plan. Do not attribute Purrysburg to DESC without a source. Santee Cooper is another SC transmission provider on Southern's northern interfaces. The need date (06/01/2026) is before the snapshot date, and no source confirms completion.",
+   "evidence": [
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Install reactors on the McIntosh - Purrysburg (Black and White) 230kV tie lines at McIntosh. Rebuild 0.1 miles (GPC portion) for both lines to (2) 200C 1351 ACSS conductor.",
+     "supports": "GPC names them tie lines; 'GPC portion' rebuild",
+     "verifiedByScript": true,
+     "page": 227,
+     "printedPage": "Page 57 of 304"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "SAV: MCINTOSH - PURRYSBURG 230KV REACTORS",
+     "supports": "project title (SAV zone)",
+     "verifiedByScript": true,
+     "page": 227,
+     "printedPage": "Page 57 of 304"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Teams # 20277 Need Date 06/01/2026 Start Date 01/01/2024",
+     "supports": "Teams 20277; need 06/01/2026; start 01/01/2024",
+     "verifiedByScript": true,
+     "page": 227,
+     "printedPage": "Page 57 of 304"
+    }
+   ]
+  },
+  {
+   "name": "Thurmond / Thurmond Dam (USA) 115 kV terminal (same site inferred) \u2014 DESC 'Hooks \u2013 Thurmond 115kV Tie' and GPC 'Evans Primary \u2013 Thurmond Dam (USA)' #5/#6",
+   "descProjectKeys": [
+    "desc:6810 A"
+   ],
+   "gpcProjectKeys": [
+    "gpc:20793",
+    "gpc:20794"
+   ],
+   "description": "Both utilities' planning documents name a 115 kV line ending at Thurmond. DESC 6810 A, 'Hooks - Thurmond 115kV Tie: Rebuild', covered 2.3 mi and was In Progress with a planned ISD of 12/31/2024. It appears only in the 2024-2028 list, not in the 2025-2029 or 2026-2030 lists. GPC 20793 and 20794 rebuild the Evans Primary \u2013 Thurmond Dam (USA) #5 and #6 115 kV lines (listed starts 06/01/2029 and 06/01/2030, need 06/01/2033) and replace the main bus 'at Thurmond Dam (USA)'. Neither source says the DESC and GPC lines connect to each other, and neither names the Thurmond facility's owner. OSM has one 'Thurmond Substation' (tagged operator Georgia Power, 115 kV) 0.2 km from 'J Strom Thurmond Dam' (tagged operator 'U.S. Corps of Engineers'). Nominatim reverse geocoding places it in McCormick County, SC. DESC calls the terminal 'Thurmond' and GPC calls it 'Thurmond Dam (USA)'; treating them as the same site is an inference. No construction window is published for 6810 A. Its planned ISD (12/31/2024) is more than four years before GPC's listed start dates, so the plans as published do not suggest concurrent work.",
+   "evidence": [
+    {
+     "sourceId": "desc-scrtp-2024-2028",
+     "exactExcerpt": "Hooks - Thurmond 115kV Tie: Rebuild Project ID 6810 A",
+     "supports": "DESC tie line title and ID 6810 A",
+     "verifiedByScript": true,
+     "page": 31,
+     "printedPage": "Project 31 of 44"
+    },
+    {
+     "sourceId": "desc-scrtp-2024-2028",
+     "exactExcerpt": "Rebuilding section of line between Hooks and Thurmond. Approximately 2.3 miles. The line will be rebuilt on existing R/W using steel poles, 115 kV insulation, and 1272 ACSR conductor.",
+     "supports": "DESC scope (2.3 mi rebuild)",
+     "verifiedByScript": true,
+     "page": 31,
+     "printedPage": "Project 31 of 44"
+    },
+    {
+     "sourceId": "desc-scrtp-2024-2028",
+     "exactExcerpt": "Project Status In Progress Planned In-Service Date 12/31/2024",
+     "supports": "In Progress; ISD 12/31/2024",
+     "verifiedByScript": true,
+     "page": 31,
+     "printedPage": "Project 31 of 44"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Rebuild approximately 5.45 miles of Euchee Creek - Thurmond Dam segment of the Evans Primary Thurmond Dam (USA) #5 115kV line with 200C 1351 ACSS Martin conductor. Replace the main bus with a larger element at Thurmond Dam (USA).",
+     "supports": "GPC #5 rebuild and main bus at Thurmond Dam (USA)",
+     "verifiedByScript": true,
+     "page": 410,
+     "printedPage": "Page 240 of 304"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Rebuild approximately 8.9 miles of the Evans Primary - Thurmond Dam (USA) #6 115kV line with 200C 1351 ACSS Martin conductor. Replace the main bus with a larger element at Thurmond Dam (USA).",
+     "supports": "GPC #6 rebuild and main bus at Thurmond Dam (USA)",
+     "verifiedByScript": true,
+     "page": 411,
+     "printedPage": "Page 241 of 304"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Teams # 20793 Need Date 06/01/2033 Start Date 06/01/2029",
+     "supports": "GPC 20793 start 06/01/2029, need 06/01/2033",
+     "verifiedByScript": true,
+     "page": 410,
+     "printedPage": "Page 240 of 304"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Teams # 20794 Need Date 06/01/2033 Start Date 06/01/2030",
+     "supports": "GPC 20794 start 06/01/2030, need 06/01/2033",
+     "verifiedByScript": true,
+     "page": 411,
+     "printedPage": "Page 241 of 304"
+    }
+   ]
+  },
+  {
+   "name": "Southern Balancing Authority \u2013 DESC interface (system level)",
+   "descProjectKeys": [],
+   "gpcProjectKeys": [],
+   "description": "System-level context, not tied to any project. GPC's ten-year plan says GPC, Southern Company and OPC have interchange and reliability agreements with DESC. It lists DESC among the SBAA 'northern' interfaces whose transfer capability is assessed together, and its glossary names DESC among the VACAR interconnections. The 2025 SERTP plan's Table A6.2 models Southern BAA interface commitments by neighbor. The DESC value is 0 MW in 2027, 2030 and 2035; the Duke Carolinas column beside it is also 0, and the rows sum to the printed totals. SCRTP's June 3, 2025 stakeholder slides list earlier economic planning studies of hypothetical SOCO-to-DESC transfers (2023: 1300 MW and 950 MW, 2028/29 winter; 2024: 300 MW, 2025 summer). These are studies, not commitments or projects. Planning-process context: DESC is currently in the SCRTP region. The SCRTP and SERTP sites say DESC and Santee Cooper plan to join SERTP with DESC's Order 1920 compliance filing, and that the SERTP sponsors and SCRTP companies are working toward the needed OATT changes. The SC PSC scheduled a March 5, 2026 briefing on the SERTP Order 1920 process, requested by ORS, DESC, Santee Cooper and Duke. This is process-level coordination only; none of it concerns a specific project or resource sharing.",
+   "evidence": [
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "GPC, Southern Company (SoCo), and Oglethorpe Power Corporation (OPC) have interchange and reliability agreements with other systems such as Duke Power, Dominion Energy South Carolina (DESC), Tennessee Valley Authority (TVA), and the Florida utilities.",
+     "supports": "interchange and reliability agreements with DESC",
+     "verifiedByScript": true,
+     "page": 7,
+     "printedPage": "2"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "For the Northern interfaces of MISO, TVA, Duke Energy, Santee Cooper, and Dominion Energy \u2013 South Carolina, transferring power across one interface may mutually impact the ability to transfer power across other interfaces.",
+     "supports": "DESC is one of the SBAA northern interfaces",
+     "verifiedByScript": true,
+     "page": 207,
+     "printedPage": "Page 37 of 304"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "VACAR refers to the interconnections with Duke, DESC and SCPSA.",
+     "supports": "interconnections with DESC (VACAR)",
+     "verifiedByScript": true,
+     "page": 666,
+     "printedPage": "3",
+     "section": "Acronyms and Abbreviations"
+    },
+    {
+     "sourceId": "sertp-2025-plan",
+     "exactExcerpt": "Table A6.2: Interface commitments1 modeled in the SERTP Summer Peak models \u2013 Southern BAA",
+     "supports": "SERTP models Southern BAA interface commitments incl. DESC",
+     "verifiedByScript": true,
+     "page": 217,
+     "printedPage": "216",
+     "section": "Appendix 6: Southern BAA"
+    },
+    {
+     "sourceId": "sertp-2025-plan",
+     "exactExcerpt": "To Duke Carolinas DESC SCPSA TVA SEPA MISO FRCC Total",
+     "supports": "Table A6.2 column order (DESC is the 2nd column)",
+     "verifiedByScript": true,
+     "page": 217,
+     "printedPage": "216",
+     "section": "Appendix 6: Southern BAA"
+    },
+    {
+     "sourceId": "sertp-2025-plan",
+     "exactExcerpt": "2027 0 0 200 398 -625 -203 371 141",
+     "supports": "2027 row: DESC 0 MW; row sums to total 141",
+     "verifiedByScript": true,
+     "page": 217,
+     "printedPage": "216",
+     "section": "Appendix 6: Southern BAA"
+    },
+    {
+     "sourceId": "sertp-2025-plan",
+     "exactExcerpt": "A positive number represents a net export from the Southern BAA.",
+     "supports": "sign convention of Table A6.2",
+     "verifiedByScript": true,
+     "page": 217,
+     "printedPage": "216",
+     "section": "Appendix 6: Southern BAA"
+    },
+    {
+     "sourceId": "scrtp-home",
+     "exactExcerpt": "Dominion Energy South Carolina, Inc. (Dominion Energy South Carolina) and South Carolina Public Service Authority (Santee Cooper) are planning to join the Southeastern Regional Transmission Planning (SERTP) process region, to become effective as of the effective date of Dominion Energy South Carolina's Order 1920 compliance filing.",
+     "supports": "planning context: DESC plans to join SERTP (Order 1920)",
+     "verifiedByScript": true,
+     "section": "FERC Order 1920 Relevant State Entity Notice"
+    },
+    {
+     "sourceId": "scrtp-home",
+     "exactExcerpt": "Dominion Energy South Carolina and Santee Cooper are both NERC-registered Transmission Providers and currently members of the South Carolina Regional Transmission Planning (SCRTP) process region.",
+     "supports": "DESC currently in SCRTP, not SERTP",
+     "verifiedByScript": true,
+     "section": "FERC Order 1920 Relevant State Entity Notice"
+    },
+    {
+     "sourceId": "sertp-home",
+     "exactExcerpt": "Dominion SC and Santee Cooper to Join SERTP",
+     "supports": "SERTP news item on DESC joining",
+     "verifiedByScript": true,
+     "section": "News"
+    },
+    {
+     "sourceId": "scpsc-aep-briefing-2026-03",
+     "exactExcerpt": "will be updates on the Southeastern Regional Transmission Planning (SERTP) stakeholder process pursuant to Federal Energy Regulatory Commission (FERC) Order 1920.",
+     "supports": "SC PSC briefing topic: SERTP Order 1920 process (not project-specific)",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "sertp-home",
+     "exactExcerpt": "the SERTP sponsors and the SCRTP companies are working towards appropriate OATT changes and filings, as necessary to retire the SCRTP Order 1000 process and bring both of the SCRTP companies into the SERTP in conjunction with Order 1920 compliance.",
+     "supports": "process-level coordination between SERTP sponsors and SCRTP companies (not project-specific)",
+     "verifiedByScript": true,
+     "section": "News"
+    },
+    {
+     "sourceId": "scpsc-aep-briefing-2026-03",
+     "exactExcerpt": "which comes at the request of the South Carolina Office of Regulatory Staff, Dominion Energy South Carolina, Inc., South Carolina Public Service Authority (Santee Cooper), Duke Energy Carolinas, LLC and Duke Energy Progress, LLC",
+     "supports": "briefing requesters include DESC (Georgia Power not named)",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "scrtp-meeting-2025-06-03",
+     "exactExcerpt": "2023 SOCO DESC 2028/29 Winter 1300 MW",
+     "supports": "prior SCRTP economic planning study: SOCO to DESC transfer (study, not a commitment)",
+     "verifiedByScript": true,
+     "page": 11,
+     "section": "Previous Economic Planning Studies"
+    },
+    {
+     "sourceId": "scrtp-meeting-2025-06-03",
+     "exactExcerpt": "2024 SOCO DESC 2025 Summer 300 MW",
+     "supports": "prior SCRTP economic planning study: SOCO to DESC transfer (study, not a commitment)",
+     "verifiedByScript": true,
+     "page": 12,
+     "section": "Previous Economic Planning Studies"
+    }
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "projectA": "gpc-callaway-thomson-500",
+   "projectB": "gpc-14222",
+   "kind": "shared-site",
+   "siteLabel": "Thomson Primary Substation (Georgia Power), McDuffie County, GA",
+   "description": "The new Callaway Road \u2013 Thomson Primary 500 kV lines terminate at Thomson Primary. GPC ten-year-plan item 14222 installs a second 230/115 kV transformer at Thomson Primary (start 2025-08-01, need 2033-06-01). Both are Georgia Power projects, so this is same-owner context, not a cross-utility lead.",
+   "evidence": [
+    {
+     "sourceId": "gpc-callaway-thomson-page",
+     "exactExcerpt": "Georgia Power is planning the Callaway Road \u2013 Thomson Primary 500 kV Area Transmission Project.",
+     "supports": "Callaway project terminates at Thomson Primary",
+     "verifiedByScript": true,
+     "section": "About the Project"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Install a second 400 MVA, 230/115kV auto transformer at Thomson Primary substation.",
+     "supports": "14222 work at Thomson Primary substation",
+     "verifiedByScript": true,
+     "page": 420,
+     "printedPage": "Page 250 of 304"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Teams # 14222 Need Date 06/01/2033 Start Date 08/01/2025",
+     "supports": "14222 start 08/01/2025, need 06/01/2033",
+     "verifiedByScript": true,
+     "page": 420,
+     "printedPage": "Page 250 of 304"
+    }
+   ]
+  },
+  {
+   "projectA": "gpc-callaway-thomson-500",
+   "projectB": "gpc-17993",
+   "kind": "shared-site",
+   "siteLabel": "Thomson Primary Substation (Georgia Power), McDuffie County, GA",
+   "description": "GPC 17993 rebuilds the Thomson Primary \u2013 Pumpkin Center section of the Evans Primary \u2013 Thomson Primary 115 kV line (start 2031-01-01, need 2034-12-31), which starts at the Thomson Primary terminal used by the new 500 kV lines. Same owner (GPC). This is a shared terminal only; the work sites differ.",
+   "evidence": [
+    {
+     "sourceId": "gpc-callaway-thomson-page",
+     "exactExcerpt": "Georgia Power is planning the Callaway Road \u2013 Thomson Primary 500 kV Area Transmission Project.",
+     "supports": "Callaway project terminates at Thomson Primary",
+     "verifiedByScript": true,
+     "section": "About the Project"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Rebuild the existing 100C 336 ACSR conductor for the Thomson Primary to Pumpkin Center 115kV line section",
+     "supports": "17993 line section from Thomson Primary",
+     "verifiedByScript": true,
+     "page": 425,
+     "printedPage": "Page 255 of 304"
+    },
+    {
+     "sourceId": "gpc-irp-2025-vol3",
+     "exactExcerpt": "Teams # 17993 Need Date 12/31/2034 Start Date 01/01/2031",
+     "supports": "17993 start 01/01/2031, need 12/31/2034",
+     "verifiedByScript": true,
+     "page": 425,
+     "printedPage": "Page 255 of 304"
+    }
+   ]
+  }
+ ],
+ "unresolved": [
+  "No SC PSC, GA PSC, SERTP or SCRTP statement was found saying DESC and Georgia Power coordinate on any of these projects: Okatie \u2013 McIntosh tie 6888, McIntosh \u2013 Purrysburg reactors 20277, the Thurmond rebuilds, Effingham County 500 kV, or Callaway Road \u2013 Thomson 500 kV. knownCoordination is left empty. This is 'not found in sources', not evidence of no coordination.",
+  "Documents checked for coordination statements: gpc-effingham-page, gpc-callaway-thomson-page, sertp-2025-plan (searched Dominion/DESC/SCE&G/McIntosh/Purrysburg/Thurmond/Goshen/Evans/Thomson/Vogtle/Callaway/Effingham/Okatie), gpc-irp-2025-vol3, the three DESC SCRTP project lists, the SCRTP and SERTP home pages, the June 3, 2025 SCRTP stakeholder meeting presentation, and the SC PSC March 2026 briefing notice. The SC PSC briefing (docket ND-2024-46-E; scheduled for March 5, 2026, and not confirmed as held) covers the SERTP FERC Order 1920 stakeholder process in general, not these projects.",
+  "Plan context: the SCRTP and SERTP home pages both say DESC and Santee Cooper plan to join SERTP, effective with DESC's Order 1920 compliance filing (the SERTP news item sits under the September 30th, 2025 entry). The 2025 SERTP plan (Nov 26, 2025) still lists only Duke for South Carolina in Table I.1 (p.7). There, DESC appears only as an interface (Table A6.2, p.217), as 'SCE&G' in the Duke Energy Carolinas interface table (p.185), or as the 'DESC Eastover' terminal of Duke Progress projects (pp.51, 53). DESC's projects are not yet in a SERTP regional plan.",
+  "The owner and location of Purrysburg (McIntosh \u2013 Purrysburg 230 kV tie lines, GPC 20277) are not stated in any source found. OSM names no Purrysburg substation. Nominatim finds only Purrysburg Road segments in Jasper County, SC; one (way 12420907, 32.3691,-81.1215) runs about 0.1 km from an unnamed OSM 230/115 kV substation (way/185380609, 32.3688,-81.1224). That substation sits beside 'Jasper Substation' (way/185380597, 230 kV, no operator tag) and DESC's Jasper Generating Plant (OSM operator Dominion Energy South Carolina). An OSM 230 kV line (way/185380583) runs from this site to McIntosh. These are candidates only. Do not plot Purrysburg or attribute it to DESC.",
+  "DESC's 'McIntosh' (Okatie \u2013 McIntosh 115kV Tie, 6888) is Georgia Power's McIntosh substation (OSM way/121624352, Effingham County, GA): the V.C. Summer FSAR (Chapter 8, Rev. 22, filed with the NRC), Table 8.1-1 'Transmission System Ties to Other Utilities' (p.11), lists Okatie \u2013 McIntosh 115 kV as a tie with Georgia Power Company. OSM context (mapper-supplied tags): 115 kV line way/185380584 runs from McIntosh Substation (32.3514,-81.1741) to an unnamed 115 kV substation in Jasper County, SC (way/1097170331, 32.3671,-81.1212). The FSAR identifies the tie's terminals but says nothing about the Georgia Power projects at McIntosh, so no shared-site relation was recorded for desc-6888 with gpc-20065, gpc-20277 or gpc-20989.",
+  "The site of the new Deerfield Switching Station (DESC 6888) is not published; it is plotted at the Deerfield locality in Jasper County as a lower-confidence point and is not used for the project's center. DESC's existing Okatie substation is marked on Dominion's Jasper\u2013Okatie 230 kV #2 / Okatie\u2013Riverport route map and is placed at the unnamed OSM 230 kV substation there (way/498967280, 32.3358,-81.0314), matching the sponsor's 'Okatie Sub' (32.3338,-81.0325). OSM has no substation named Okatie; the unnamed 115 kV substations near Okatie village (32.3287,-80.9436; 32.2700,-80.9354) are not DESC's Okatie substation.",
+  "Hooks substation (DESC; Hooks \u2013 Thurmond tie 6810 A, Hooks \u2013 Modoc 6809 G) is not named in OSM. OSM has a 115 kV substation named 'GPC <-> SCG&E Compensator Station' (way/1074904615, 33.65682,-82.15948, substation=compensation). It is about 3.4 km east of the OSM Thurmond Substation, in McCormick County, SC per Nominatim reverse geocoding. The name is mapper-supplied and unverified, so it is not used as evidence.",
+  "DESC 6810 A (Hooks \u2013 Thurmond 115kV Tie rebuild, ISD 12/31/2024) appears only in the 2024-2028 list and is not among the DESC projects mapped here, so no relation was created for it. Its absence from later lists suggests completion, but no source states that.",
+  "GPC 20277 (McIntosh \u2013 Purrysburg reactors, need 06/01/2026) and GPC 20793/20794 (Evans Primary \u2013 Thurmond Dam rebuilds, need 2033) do not appear in the 2025 SERTP plan (no 'Purrysburg' or 'Thurmond' hits), although that plan covers 2026-2035. Their current status is unconfirmed.",
+  "SERTP 2025 vs GPC 2024 ten-year plan conflicts, kept side by side. Goshen (Sav) \u2013 McIntosh 115 kV rebuild (GPC 20065): GPC need 2027-06-01 with 100C 795 ACSR Drake, vs SERTP in-service 2028 with 200\u00b0C 1351 ACSS (p.111). Goshen \u2013 Kraft 115 kV rebuild (GPC 20785): GPC lists 9.3 mi, need 2027-06-01; SERTP splits it into 3.48 mi in 2027 (p.93) and 3.04 mi Goshen\u2013Rice Hope in 2031 (p.157).",
+  "SERTP 2025 p.107 'MCINTOSH 230 KV, BREAKER CONTROL RELAY UPGRADES' (2028, for interconnection of a proposed generating facility) has no 'SAV:' prefix, and Alabama also has McIntosh/West McIntosh facilities. Georgia Power ownership and location are unconfirmed, so it is not modeled.",
+  "Effingham County 500 kV: substation site, line endpoints, line length and in-service date are not published, and there is no map. Callaway Road \u2013 Thomson has no in-service date. None of the five construction windows (two preconstruction, three general-construction) has a published end.",
+  "The DESC OASIS 'Message Board - Information Postings' PDF (updated 12/11/2025) could not be retrieved because of a TLS certificate-chain error. It was not bypassed, not cached and not cited.",
+  "Other Georgia Power project pages listed on the transmission-projects index (Hatch\u2013Wadley 500 kV, Ashley Park, Tomochichi\u2013Towaliga and others) were not modeled. Only Callaway\u2013Thomson and Effingham are near the SC border.",
+  "The GPC ten-year plan names the terminal 'Thurmond Dam (USA)'. The '(USA)' suffix is not explained in the source, so the facility's owner (federal or Georgia Power) is not inferred."
+ ],
+ "issuesFixed": [
+  "Re-ran find_excerpt.py on all 47 unique original excerpts (source, excerpt, page) and on the 11 added here, 58 in the final cluster. Every one was found on its cited page or section. Each claim was then checked against the surrounding text, and the unsupported ones listed below were fixed.",
+  "Preconstruction window ends for Effingham and Callaway\u2013Thomson had been inferred as the start of construction; neither page publishes an end to land acquisition. Both are now open-ended sentinels (not published), and the Spring 2027 excerpt no longer serves as an end bound for Effingham.",
+  "Effingham caveat said 'Effingham' was not in the 2025 SERTP plan. It does appear there, on p.226, as a generating-plant name in the modeled-resources table, not as a transmission project. The caveat is corrected.",
+  "SC PSC briefing: the page only announces a rescheduled briefing, so 'held a March 2026 briefing' became 'scheduled a March 5, 2026 briefing'. Source publishedAt corrected from '2026-02' to '2026-02-17' (page date 'Tue, 02/17/2026'), and the requesters (ORS, DESC, Santee Cooper, Duke) were added as evidence.",
+  "Thurmond interconnection: 'Timing does not overlap' was inferred from DESC's in-service date alone. It is reworded: no construction window is published for 6810 A, and the plans as published do not suggest concurrent work. The J Strom Thurmond Dam OSM operator is now quoted as tagged ('U.S. Corps of Engineers').",
+  "Hooks note: the 'GPC <-> SCG&E Compensator Station' is about 3.4 km from the OSM Thurmond Substation, not 2.9 km (recomputed from OSM API coordinates).",
+  "Purrysburg note: 'Jasper Substation' is named in OSM, so it is no longer called unnamed. Nominatim returns several Purrysburg Road segments in Jasper County, not only Hardeeville. The claim that Purrysburg is a place in Jasper County, SC is replaced with what Nominatim actually returns.",
+  "McIntosh note: the OSM claim was verified by line geometry. Way/185380584 (115 kV) joins McIntosh Substation to a Jasper County, SC substation, and a 115 kV line tagged 'Dominion Energy' continues toward Okatie. These stay labeled mapper-supplied context, not evidence.",
+  "System-level interface: added the Table A6.2 column header, the 2027 row and the sign convention as verified excerpts, so the 0 MW DESC value is backed by text. Removed the generic SERTP p.10 'coordination and joint modeling' excerpt, which does not name DESC. Added the SERTP-SCRTP OATT process statement and the SCRTP SOCO-to-DESC economic transfer studies, both labeled study or process context.",
+  "Replaced generic date excerpts that match many pages ('Need Date 06/01/2026 Start Date 01/01/2024' on 8 pages) with Teams-number-anchored excerpts for 20277, 20793, 20794, 14222 and 17993. Added printed page labels (Page 240/241/250/255 of 304) and ID-anchored DESC title excerpts (6888, 6810 A).",
+  "Re-verified coordinates. Thomson Primary is OSM way/160065782, 0.31 km from Georgia Power's marker. Callaway Road marker and Thomson marker reverse-geocode to Columbia and McDuffie County, GA. Route vertices, counts and drawn lengths (6.149 mi and 5.686 mi) were recomputed from the cached raw HTML, whose sha256 matches the source record. Effingham county halo (30 km) exceeds the 28.6 km max centroid-to-boundary distance. Last-Modified headers were re-checked.",
+  "Earlier pass: Callaway\u2013Thomson route: the Georgia Power page embeds exact marker and polyline coordinates in its map script, so both traces were read from that data instead of hand-digitizing the image. Precision stays official-map-digitized because the map is pre-engineering and not survey-based.",
+  "Earlier pass: Thomson Primary is placed at the OSM feature named 'Thomson Primary Substation' (Georgia Power, 500/230/115/46 kV), cross-checked against Georgia Power's own marker 0.3 km away. The similarly named Thomson, East Thomson, North Thomson and West Thomson substations were rejected.",
+  "Earlier pass: Seasonal milestones are modeled with quarter precision and explicit date ranges. Open-ended construction phases use a documented 2099-12-31 end sentinel, so the time engine can return 'possible' but never a false 'confirmed' or 'no-match'.",
+  "Earlier pass: No shared-site relation was recorded between DESC 6888 and GPC McIntosh-area items. The DESC source does not name Georgia Power, and neither project's work is stated to be at McIntosh itself; recording one would have produced a false GEO-confirmed result.",
+  "Earlier pass: Purrysburg is not attributed to DESC. The GPC plan says only 'GPC portion', and no DESC list mentions Purrysburg."
+ ]
+}

@@ -1,0 +1,832 @@
+[
+ {
+  "id": "abo-project-page",
+  "url": "https://www.alexandriatobigoaks.com/",
+  "publisher": "Alexandria to Big Oaks project (Xcel Energy on behalf of co-owners)",
+  "title": "Alexandria to Big Oaks Transmission Line Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:05Z",
+  "sha256": "4719c37276e3c24274fc3ac7b0645d73b06377d59a7cab266d8e07713dac7560"
+ },
+ {
+  "id": "aep-beci-news-2026",
+  "url": "https://www.aep.com/news/stories/view/10673/",
+  "publisher": "American Electric Power (Transource parent)",
+  "title": "Transource and BHE Transmission to Build Nearly 200-Mile 765-kV Transmission Line in Wisconsin",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:26:50Z",
+  "sha256": "aaeac1ab939be4b57b1e28c9bf66380b68b089b246edcb67c60f9ce6982977d9"
+ },
+ {
+  "id": "atc-10yr-2018-major-projects",
+  "url": "https://www.atc10yearplan.com/2018/summary-report/emerging-projects-update/",
+  "publisher": "American Transmission Co.",
+  "title": "ATC 10-Year Transmission System Assessment 2018: Major projects update",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:30:05Z",
+  "sha256": "c329c3e9cb2fe2e169d3226021ae0c3069f6f04a665ef9261ab8ce62af3a227f"
+ },
+ {
+  "id": "atc-10yr-2019-completed",
+  "url": "https://www.atc10yearplan.com/2019/projects/projects-completed-since-last-report/",
+  "publisher": "American Transmission Co.",
+  "title": "ATC 10-Year Transmission System Assessment 2019: Projects completed since last report",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:29:45Z",
+  "sha256": "ef68ae0d13898f8dafee4cc185e238fb44373425c9121dbac16bbdba7c8b7d0f"
+ },
+ {
+  "id": "atc-grid-forward-page",
+  "url": "https://atc-gridforward.com/grid-forward/",
+  "publisher": "American Transmission Company",
+  "title": "Grid Forward - Central Wisconsin Project (ATC project website)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:31:23Z",
+  "sha256": "7879de7474440d171025ef00a54029cfbb55b25cf76e5cb3c8af96b6101bab01"
+ },
+ {
+  "id": "bssa-landowners-page",
+  "url": "https://bigstonesouthtoalexandria.com/landowners/",
+  "publisher": "Otter Tail Power Company and Missouri River Energy Services",
+  "title": "Big Stone South to Alexandria - Landowners",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:30:27Z",
+  "sha256": "2d67968124eb3c9200e1848700d19546fec86c5b3da1aeec012658151c627cc0"
+ },
+ {
+  "id": "bssa-library-page",
+  "url": "https://bigstonesouthtoalexandria.com/library/",
+  "publisher": "Otter Tail Power Company and Missouri River Energy Services",
+  "title": "Big Stone South to Alexandria - Library",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:30:27Z",
+  "sha256": "e23ceece018b6242d74c2191e4ccb5c8ffe81e7952cae021dff5c2966af025f3"
+ },
+ {
+  "id": "bssa-project-page",
+  "url": "https://bigstonesouthtoalexandria.com/",
+  "publisher": "Otter Tail Power Company and Missouri River Energy Services",
+  "title": "Big Stone South to Alexandria Transmission Line",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:05Z",
+  "sha256": "8a3c329c77d4c039bc792c35763d488d34e63b4ad6eb91675af7d59b474b80c9"
+ },
+ {
+  "id": "bssa-regulatory-page",
+  "url": "https://bigstonesouthtoalexandria.com/regulatory-process/",
+  "publisher": "Otter Tail Power Company and Missouri River Energy Services",
+  "title": "Big Stone South to Alexandria - Regulatory Process",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:30:27Z",
+  "sha256": "6365070233b29796b53731464a1a09b93b7e5c34cac4941ff556e7c4c2b7ed64"
+ },
+ {
+  "id": "dairyland-chc-energized",
+  "url": "https://dairylandpower.com/renewable-energy-flowing-cardinal-hickory-creek-line-energized",
+  "publisher": "Dairyland Power Cooperative",
+  "title": "Renewable Energy Flowing: Cardinal-Hickory Creek Line Energized",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:44:45Z",
+  "sha256": "86c56a675a0d216262b70bfab065dd7432d437085c46d66c7229a8e3db758947"
+ },
+ {
+  "id": "desc-jasper-okatie-sherwood-page",
+  "url": "https://www.dominionenergy.com/about/delivering-energy/electric-projects/power-line-projects/jasper-okatie-sherwood",
+  "publisher": "Dominion Energy South Carolina",
+  "title": "Jasper-Okatie-Sherwood power line project page",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:23:22Z",
+  "sha256": "4d2fa1be4ce71b9d968d17c8d66f47e5a7bbf6970f3bf423c07dc1bcd1787b16"
+ },
+ {
+  "id": "desc-scrtp-2024-2028",
+  "url": "https://www.scrtp.com/assets/pdfs/home/2024-2028-2million-and-above-project-descriptions.pdf",
+  "publisher": "Dominion Energy South Carolina (SCRTP)",
+  "title": "DESC Planned Transmission Projects $2M and above, 2024-2028",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:56:03Z",
+  "sha256": "890876d0faefd40576a0b5e598a804b54b4d8d2d56dd96fb7e40d5a406db0f46"
+ },
+ {
+  "id": "desc-scrtp-2025-2029",
+  "url": "https://www.scrtp.com/assets/pdfs/home/2025-2029-2million-and-above-project-descriptions.pdf",
+  "publisher": "Dominion Energy South Carolina (SCRTP)",
+  "title": "DESC Planned Transmission Projects $2M and above, 2025-2029",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:56:01Z",
+  "sha256": "265453ccf14b4f95054fed304b7999270a478dbefc3a812163395b31422e74e0"
+ },
+ {
+  "id": "desc-scrtp-2026-2030",
+  "url": "https://www.scrtp.com/assets/pdfs/home/2026-2030-2million-and-above-project-descriptions.pdf",
+  "publisher": "Dominion Energy South Carolina (SCRTP)",
+  "title": "DESC Planned Transmission Projects $2M and above, 2026-2030",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:56:00Z",
+  "sha256": "e98bfeb86f2263f790f95f3510a9ab1e1b128c47e4ae633b8ccd27bedfea9b26"
+ },
+ {
+  "id": "dpc-alma-blair-cpcn-2024",
+  "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/Dairyland%20Alma-Blair%20CPCN%20Application_2024-07-01.pdf",
+  "publisher": "Dairyland Power Cooperative",
+  "title": "Alma-Blair Transmission Line Project CPCN Application (July 2024), docket 1515-CE-103",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:21Z",
+  "sha256": "dddefa8bbf1f69e27a28a16cc1f8cf695245c8e16d2d5ee977bf683db1f1f793"
+ },
+ {
+  "id": "dpc-alma-blair-map-2024",
+  "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/Maps/DPC_Alma_Blair_MapHandout_04.08.2024.pdf",
+  "publisher": "Dairyland Power Cooperative",
+  "title": "Alma-Blair Transmission Project map handout (route options)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:22Z",
+  "sha256": "b5a158bf3859357c20088984fbdccbdc81da3e747b7dcbc3038dcebbf076afa5"
+ },
+ {
+  "id": "dpc-alma-blair-page",
+  "url": "https://dairylandpower.com/alma-blair-transmission-project",
+  "publisher": "Dairyland Power Cooperative",
+  "title": "Alma-Blair Transmission Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:15Z",
+  "sha256": "2a939693d1f6a48742cc9d3ea8e5d09aac08949459d9da61bae158eaef8095d7"
+ },
+ {
+  "id": "g2b-home",
+  "url": "https://www.gophertobadgerlink.com/",
+  "publisher": "Xcel Energy and Dairyland Power Cooperative (Gopher to Badger Link project site)",
+  "title": "Gopher to Badger Link - Home",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:27:27Z",
+  "sha256": "05ceefe965c4c440e3c2bd205d8e100dbd30a37e36f2b563608325e7bbdf8f63"
+ },
+ {
+  "id": "g2b-library",
+  "url": "https://www.gophertobadgerlink.com/library.html",
+  "publisher": "Xcel Energy and Dairyland Power Cooperative (Gopher to Badger Link project site)",
+  "title": "Gopher to Badger Link - Library",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:27:55Z",
+  "sha256": "6a724f3cd3e39e766554db6b39013df3e72e19e86a747194413a7a12b558e41a"
+ },
+ {
+  "id": "g2b-overview-factsheet-2026",
+  "url": "https://www.gophertobadgerlink.com/assets/documents/factsheets/GTBL_Overview_Factsheet_2026.pdf",
+  "publisher": "Xcel Energy and Dairyland Power Cooperative (Gopher to Badger Link project site)",
+  "title": "Gopher to Badger Link Overview Factsheet 2026",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:05Z",
+  "sha256": "cecb7d1dabd7a63b06b95c2e6e628f9a2cd9397781e9d1457a826f85965975fd"
+ },
+ {
+  "id": "gpc-callaway-thomson-page",
+  "url": "https://www.georgiapower.com/about/grid-reliability/grid-improvements/grid-projects/transmission-projects/callaway-thomson.html",
+  "publisher": "Georgia Power",
+  "title": "Callaway Road – Thomson Primary 500 kV Area Transmission Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:02:51Z",
+  "sha256": "6909a4b1203de305a6e6fae48890a481d5b50556f5078b49dbeb670459d4b310"
+ },
+ {
+  "id": "gpc-effingham-page",
+  "url": "https://www.georgiapower.com/about/grid-reliability/grid-improvements/grid-projects/transmission-projects/effingham-county.html",
+  "publisher": "Georgia Power",
+  "title": "Effingham County 500 kV Area Transmission Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:02:51Z",
+  "sha256": "4386e199bea6688bc288148d486188989971c39a63868e126f2cc1689c0b599b"
+ },
+ {
+  "id": "gpc-irp-2025-vol3",
+  "url": "https://psc.ga.gov/search/facts-document/?documentId=221233",
+  "publisher": "Georgia Power (Georgia PSC Docket 56002)",
+  "title": "2025 IRP Technical Appendix Vol. 3 — 2024 GA ITS Ten-Year Plan (Public Disclosure)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:56:38Z",
+  "sha256": "0dae2fc3a38462f0930cc2eb0acedca35e329cd0924e4749c81422bdc8602a12",
+  "localCopy": true
+ },
+ {
+  "id": "gre-northland-first-structures-news",
+  "url": "https://greatriverenergy.com/company-news/first-structures-set-for-northland-reliability-project/",
+  "publisher": "Great River Energy",
+  "title": "First structures set for Northland Reliability Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:26:51Z",
+  "sha256": "eb7fc9c7f37895215caef03825f89c6c9e6303b2df449689d2777965a56a893b"
+ },
+ {
+  "id": "gre-northland-groundbreaking-news",
+  "url": "https://greatriverenergy.com/company-news/minnesota-power-great-river-energy-break-ground-on-transformative-transmission-line-for-a-reliable-resilient-grid/",
+  "publisher": "Great River Energy",
+  "title": "Minnesota Power, Great River Energy break ground on transformative transmission line for a reliable, resilient grid",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:26:51Z",
+  "sha256": "cc54e17cb09b14076b668f43fd056b24291594d2428c5c7af11deea0e8d147ea"
+ },
+ {
+  "id": "gre-northland-page",
+  "url": "https://greatriverenergy.com/transmission_project/northland-reliability-project/",
+  "publisher": "Great River Energy",
+  "title": "Northland Reliability Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:26:50Z",
+  "sha256": "7f000bc31b29d7f235362cfee8294d7709f30144dd8234afcd2b050b5d79fa40"
+ },
+ {
+  "id": "gtc-pole-heights-easement-widths",
+  "url": "https://www.gatransmission.com/wp-content/uploads/2017/09/GTC_PoleHeightsFactSheet.pdf",
+  "publisher": "Georgia Transmission Corporation",
+  "title": "GTC Transmission Line Heights and Easement Widths (fact sheet)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:23:25Z",
+  "sha256": "646d388b4729564a5a55fcd8cbab5fd124f6b8111efd9f33a527acf9c4ff205f"
+ },
+ {
+  "id": "itc-chc-page",
+  "url": "https://www.itc-holdings.com/projects/cardinal-hickory-creek-transmission-line-project/",
+  "publisher": "ITC Holdings Corp.",
+  "title": "Cardinal-Hickory Creek Transmission Line Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:27Z",
+  "sha256": "521fd33445bdafe1a151696a3c3d3014455c0a11224a0e67d1d433207061dd20"
+ },
+ {
+  "id": "maribell-home",
+  "url": "https://www.maribelltransmission.com/",
+  "publisher": "Dairyland Power Cooperative and GridLiance Heartland (MariBell project site)",
+  "title": "MariBell Transmission Project - Home",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:25Z",
+  "sha256": "9831147834c13b806fe0ada52edb2250e48d82a4c864526672c4a7eafa4eae09"
+ },
+ {
+  "id": "maribell-project-details",
+  "url": "https://www.maribelltransmission.com/project-details",
+  "publisher": "Dairyland Power Cooperative and GridLiance Heartland (MariBell project site)",
+  "title": "MariBell Transmission Project - Project Details",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:36Z",
+  "sha256": "f974c33884e2e2ff60b92cc6e394bc546894b46eaf92418a9acc999280bf29f4"
+ },
+ {
+  "id": "maribell-wisconsin-regulatory-process",
+  "url": "https://www.maribelltransmission.com/wisconsin-regulatory-process",
+  "publisher": "Dairyland Power Cooperative and GridLiance Heartland (MariBell project site)",
+  "title": "MariBell Transmission Project - Wisconsin Regulatory Process",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:36Z",
+  "sha256": "eaa8a5c144400dedfb4c7c3be8762dad69199edf7de15ea641b831b4c3c56b01"
+ },
+ {
+  "id": "mgs-beci-announcement-packet",
+  "url": "https://mgs-projects.com/BECI_ASSETS/resources/Announcement%20Packet.pdf",
+  "publisher": "Midcontinent Grid Solutions (Transource Energy / BHE Transmission JV)",
+  "title": "BECI open house announcement packet (letter and study segment map)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:10Z",
+  "sha256": "679a5f3f801143dcf2a34d9605912617839fa755dc2b167c359fce5add0b6ca2"
+ },
+ {
+  "id": "mgs-beci-aug-press-release",
+  "url": "https://mgs-projects.com/BECI_ASSETS/resources/BECI_August_PressRelease.pdf",
+  "publisher": "Midcontinent Grid Solutions (Transource Energy / BHE Transmission JV)",
+  "title": "Public input begins for new power line to reinforce Wisconsin electric grid (BECI August news release)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:07Z",
+  "sha256": "9dd6d4a47a8d383ce2a0c64b9fa071602d95dbbb28da90366ebbf4d3814e3e29"
+ },
+ {
+  "id": "mgs-beci-factsheet",
+  "url": "https://mgs-projects.com/BECI_ASSETS/resources/Fact%20Sheet.pdf",
+  "publisher": "Midcontinent Grid Solutions (Transource Energy / BHE Transmission JV)",
+  "title": "BECI 765-kV Transmission Line Project fact sheet",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:27:58Z",
+  "sha256": "ec16ee212bcb057d57c7eafee7c847c8490e83188440203f2a4fb77afdb009dc"
+ },
+ {
+  "id": "mgs-beci-oh-boards",
+  "url": "https://mgs-projects.com/BECI_ASSETS/resources/BECI_OH-Boards.pdf",
+  "publisher": "Midcontinent Grid Solutions (Transource Energy / BHE Transmission JV)",
+  "title": "BECI Open House Display Boards",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:06Z",
+  "sha256": "283489fef5186e4509b28af9c9e9dd1c0a77c7901854c3b7104918575471c556"
+ },
+ {
+  "id": "miso-beci-scope-2025",
+  "url": "https://cdn.misoenergy.org/20250317%20Competitive%20Project%20RFP%20Item%2002%20Presentation685217.pdf",
+  "publisher": "MISO",
+  "title": "Competitive Project RFP Informational Workshop (RIKY, WISE, BECI) - Item 02 Presentation",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T05:25:12Z",
+  "sha256": "46cb41f90663eeac06c55edd6ba8aac50867cdd44cab96052299e913b0e21151"
+ },
+ {
+  "id": "miso-beci-selection-2026",
+  "url": "https://cdn.misoenergy.org/BECI%20Selection%20Report734487.pdf",
+  "publisher": "MISO",
+  "title": "Selection Report: Bell Center–Columbia–Sugar Creek–IL/WI State Line 765 kV Competitive Transmission Project",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T05:25:13Z",
+  "sha256": "60b454ac34ead7b7ec19ea121eb59cd74eaae41f00dd63183cccc15ac7d3d683"
+ },
+ {
+  "id": "miso-cost-guide-mtep18",
+  "url": "https://cdn.misoenergy.org/Transmission-and-Substation-Project-Cost-Estimation-Guide-for-MTEP-2018144804.pdf",
+  "publisher": "Midcontinent Independent System Operator (MISO)",
+  "title": "Transmission and Substation Project Cost Estimation Guide for MTEP 2018",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:35:04Z",
+  "sha256": "0a89f559966902b9c31e9855e14788b225bb1d40b5a8fadde55be2e3e5b57842"
+ },
+ {
+  "id": "miso-cost-guide-mtep24",
+  "url": "https://cdn.misoenergy.org/20240501%20PSC%20Item%2004%20MISO%20Transmission%20Cost%20Estimation%20Guide%20for%20MTEP24632680.pdf",
+  "publisher": "Midcontinent Independent System Operator (MISO)",
+  "title": "Transmission Cost Estimation Guide for MTEP24 (May 1, 2024)",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:30:37Z",
+  "sha256": "708b0103f8ea2ff458a09aa46334a537817a833814c8300a04fd07e4a74de167"
+ },
+ {
+  "id": "miso-cost-guide-mtep26",
+  "url": "https://cdn.misoenergy.org/MISO%20Transmission%20Cost%20Estimation%20Guide%20for%20MTEP26337433.pdf",
+  "publisher": "Midcontinent Independent System Operator (MISO)",
+  "title": "Transmission Cost Estimation Guide for MTEP26 (June 10, 2026)",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:30:38Z",
+  "sha256": "7d98dc46067e6b467c2cecbad7bf6830558bb2414c8347a47e1b27a301f9eded"
+ },
+ {
+  "id": "miso-wi-selection-news-2026",
+  "url": "https://www.misoenergy.org/meet-miso/media-center/2026---news-releases/miso-announces-selected-developers-for-competitive-transmission-projects-in-wisconsin",
+  "publisher": "MISO",
+  "title": "MISO announces Selected Developers for competitive transmission projects in Wisconsin",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T05:26:49Z",
+  "sha256": "6e5a43b23aa39c3eb009f756c2d26919fb570615e184c1a92f0ffa69954f9beb"
+ },
+ {
+  "id": "mn-biennial-2025-ch10",
+  "url": "https://www.minnelectrans.com/documents/2025_Biennial_Report/html/Ch_10_MISO-LRTP.htm",
+  "publisher": "Minnesota Transmission Owners",
+  "title": "2025 Minnesota Biennial Transmission Projects Report, Chapter 10: MISO Long Range Transmission Planning",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:17Z",
+  "sha256": "ec4a9969934e6c06ae0bb518301c9fc648ef0988ece9636c1c36c179fc23cbb1"
+ },
+ {
+  "id": "mn-biennial-2025-pdf",
+  "url": "https://www.minnelectrans.com/documents/2025_Biennial_Report/AS_FILED_Biennial_Transmission_Projects_Report_10.31.25.pdf",
+  "publisher": "Minnesota Transmission Owners",
+  "title": "2025 Minnesota Biennial Transmission Projects Report (as filed 10/31/2025)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:37Z",
+  "sha256": "aa42be6485a1e5598d89084bd3aa0a47716a957ab6558bd64efba75baffd7587"
+ },
+ {
+  "id": "mnpuc-bssa-order-2026-06",
+  "url": "https://bigstonesouthtoalexandria.com/documents/BSSA_Order_June_25_2026.pdf",
+  "publisher": "Minnesota Public Utilities Commission",
+  "title": "Order Issuing Route Permit, Big Stone South to Alexandria 345 kV (Docket TL-23-160)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:30:47Z",
+  "sha256": "be230e8a1c1d2e9698b8537173f444363f2f5d8cea239455d1836dbd6879a4d0"
+ },
+ {
+  "id": "mnpuc-bssa-route-permit-2026-06",
+  "url": "https://bigstonesouthtoalexandria.com/documents/BSSA_Final_Route_Permit_June_25_2026.pdf",
+  "publisher": "Minnesota Public Utilities Commission",
+  "title": "Route Permit, Big Stone South to Alexandria 345 kV Transmission Line (MPUC Docket E017,ET10/TL-23-160)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:30:54Z",
+  "sha256": "ae4f0bb6f4a0e830bb96b741a80f6328055ddb6de01c4bcc17e584c806c8031a"
+ },
+ {
+  "id": "mopsc-grainbelt-landowner-compensation-2016",
+  "url": "https://efis.psc.mo.gov/Document/Display/286460",
+  "publisher": "Grain Belt Express Clean Line LLC (filed with the Missouri Public Service Commission, Schedule DKL-3)",
+  "title": "Missouri Landowner Compensation Fact Sheet (June 2016)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:35:05Z",
+  "sha256": "d80ac0ab9bd02eb87b1a04101205f23f4e923139a915720083260b657a7a1fa9"
+ },
+ {
+  "id": "mres-bssa-approval-news",
+  "url": "https://www.mrenergy.com/news/minnesota-public-utilities-commission-approves-transmission-line",
+  "publisher": "Missouri River Energy Services",
+  "title": "New transmission line approved in Minnesota; will boost reliability, increase access to renewable energy for customers",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:07Z",
+  "sha256": "21f60d074edbbad108cecc2784cb2daf39e28c5ec82b85b7e259397276114e44"
+ },
+ {
+  "id": "otp-bssa-route-permit-news",
+  "url": "https://www.otpco.com/newsroom/posts/we-filed-a-transmission-line-route-permit-application-in-minnesota/",
+  "publisher": "Otter Tail Power Company",
+  "title": "We filed a transmission line Route Permit application in Minnesota",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:08Z",
+  "sha256": "2d35b7b4eefc4faf4206aeef974a9f6d7f464888427850a4c1a8e721c6803cff"
+ },
+ {
+  "id": "psc-1515-ce-103-final",
+  "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/1515-CE-103%20Final%20Decision.pdf",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Final Decision, docket 1515-CE-103",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:25:16Z",
+  "sha256": "37812710f8fc5be6f2156d335bfa65ad6593820fc1916c5a66b4d63510d082d1"
+ },
+ {
+  "id": "psc-5-ce-142-final",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=235295",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Final Decision, docket 5-CE-142 (Badger-Coulee 345 kV)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:30:04Z",
+  "sha256": "e4828e905da0e7bfb9a605a6b01ff7a74880b949a0bd9855b904a18d5ff25880"
+ },
+ {
+  "id": "psc-alma-blair-gis-segment-nodes",
+  "url": "https://maps.psc.wi.gov/server/rest/services/Electric/AlmaBlair_1515CE103/MapServer/63/query?where=1%3D1&outFields=*&outSR=4326&f=pjson",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Alma-Blair 1515-CE-103 map service, Project Data: 'Proposed Segment Nodes' layer (63), WGS84 query",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:59:07Z",
+  "sha256": "b266c13681fdfa3c1e7c3c0bd74c1df87c3ddcc8aaaed734fb393560194e925c"
+ },
+ {
+  "id": "psc-alma-blair-gis-south-route",
+  "url": "https://maps.psc.wi.gov/server/rest/services/Electric/AlmaBlair_1515CE103/MapServer/77/query?where=1%3D1&outFields=*&outSR=4326&f=pjson",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Alma-Blair 1515-CE-103 map service, Project Data: Southern Route 'Proposed Transmission Line' layer (77), WGS84 query",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:58:57Z",
+  "sha256": "2c7eb0f45a903bcbd62cb6748af8607e5764538c5da2e204d80a73739c56418b"
+ },
+ {
+  "id": "psc-alma-blair-gis-substations",
+  "url": "https://maps.psc.wi.gov/server/rest/services/Electric/AlmaBlair_1515CE103/MapServer/55/query?where=1%3D1&outFields=*&outSR=4326&f=pjson",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Alma-Blair 1515-CE-103 map service, Existing Infrastructure: 'Substation or Switchyard' layer (55), WGS84 query",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:59:08Z",
+  "sha256": "68780b0d6813bfdc2f6ac46582e046844ece5b4256f2b070180589438af28c35"
+ },
+ {
+  "id": "psc-grid-forward-app",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=529025",
+  "publisher": "American Transmission Company LLC and Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
+  "title": "Joint CPCN/WDNR Utility Permit Application, docket 5-CE-157 (PSC REF# 529025)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:26:22Z",
+  "sha256": "36c091ef8cebf19a40945d3c5aaf0c421059be3f114cb717f11ea1594d55775c"
+ },
+ {
+  "id": "psc-grid-forward-atc-q2-2026",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=601110",
+  "publisher": "American Transmission Company LLC (filed with PSC of Wisconsin)",
+  "title": "Grid Forward Quarterly Progress Report Q2 2026, docket 5-CE-157 (PSC REF# 601110)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:27:24Z",
+  "sha256": "8ec6cc7ded510dce90cb2bf2a1a39393bbac29139ead0a3e74ea155f7f9bd66e"
+ },
+ {
+  "id": "psc-grid-forward-case",
+  "url": "https://psc.wi.gov/Pages/CommissionActions/CasePages/GridForwardCentralWisconsin.aspx",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Grid Forward - Central Wisconsin Transmission Line Project (PSC highlighted case page)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:25:12Z",
+  "sha256": "2e0dd75ffcd2df53649ac3ee2d9a0790efa8fc024cb63eeb8c6d6388d8b028aa"
+ },
+ {
+  "id": "psc-grid-forward-feis",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=555092",
+  "publisher": "Public Service Commission of Wisconsin and Wisconsin Department of Natural Resources",
+  "title": "Final Environmental Impact Statement, docket 5-CE-157 (PSC REF# 555092)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:29:43Z",
+  "sha256": "08142ef841b70aae3d530e5fe9fc6552f63c8090cba329e57ef5ffdb000043b8"
+ },
+ {
+  "id": "psc-grid-forward-final",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=570269",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Final Decision, docket 5-CE-157 (Grid Forward Central Wisconsin)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:25:33Z",
+  "sha256": "4afe048a844dea27ae9fc9a5aee85ca86d908a04f4e896214ea28f3de534f249"
+ },
+ {
+  "id": "psc-grid-forward-nspw-q1-2026",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=589005",
+  "publisher": "Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
+  "title": "NSPW Q1 2026 Progress Report, Grid Forward NSPW Segment, docket 5-CE-157 (PSC REF# 589005)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:27:42Z",
+  "sha256": "8df6fc8c858d02ec820ff0315b179f847ed71fbede786b27a45fb59a590d11b6"
+ },
+ {
+  "id": "psc-grid-forward-nspw-q2-2026",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=600509",
+  "publisher": "Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
+  "title": "NSPW Q2 2026 Progress Report, Grid Forward NSPW Segment, docket 5-CE-157 (PSC REF# 600509)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:27:25Z",
+  "sha256": "ffb5975f2b0886e7874f1cdf2ac8fd857cea1c13febd6e31a6743910ae9708b4"
+ },
+ {
+  "id": "psc-wwtc-case",
+  "url": "https://psc.wi.gov/Pages/CommissionActions/CasePages/WesternWisconsin.aspx",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Western Wisconsin Transmission Connection case page",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:25:14Z",
+  "sha256": "b3b2eed1b3c671d88d1dff9278fc8676b47886a6ae71a155bb7fd28592acd2cb"
+ },
+ {
+  "id": "psc-wwtc-final",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=570292",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Final Decision, docket 5-CE-158 (Western Wisconsin Transmission Connection)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:25:34Z",
+  "sha256": "7ad7367201c7ba826c54a3f02923ce8bcffcda4f65be6b9f42793e5db44da5ca"
+ },
+ {
+  "id": "psc-wwtc-gis-route",
+  "url": "https://maps.psc.wi.gov/server/rest/services/Electric/WesternWisconsin_5CE158/MapServer/39/query?where=Label%20IN%20(%272A%27,%272B%27)&outFields=*&outSR=4326&f=pjson",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Western Wisconsin 5-CE-158 map service, Project Facilities: Transmission Route layer (39), Route 2 segments 2A/2B, WGS84 query",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:39:31Z",
+  "sha256": "2f0b9b46eb108e019bfe08f4bcd73ef6d174eed4e1da058f7775721a1492eb4f"
+ },
+ {
+  "id": "psc-wwtc-gis-substations",
+  "url": "https://maps.psc.wi.gov/server/rest/services/Electric/WesternWisconsin_5CE158/MapServer/36/query?where=1%3D1&outFields=*&outSR=4326&f=pjson",
+  "publisher": "Public Service Commission of Wisconsin",
+  "title": "Western Wisconsin 5-CE-158 map service, Project Facilities: Substation layer (36), WGS84 query",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:39:31Z",
+  "sha256": "09aa6f845b45a44f5b59631d686d788f1c8872369dbc19909c8f4a21b4c0bf32"
+ },
+ {
+  "id": "psc-wwtc-q2-2026-atc",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=601113",
+  "publisher": "American Transmission Company LLC (filed with PSC of Wisconsin)",
+  "title": "Q2 2026 Progress Report, docket 5-CE-158 (ATC, filed 2026-07-31)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:27:40Z",
+  "sha256": "ba26b62b6e177fd4f33b09600db0ac9651e3aad5d5787f32c64d105934255533"
+ },
+ {
+  "id": "psc-wwtc-q2-2026-nspw",
+  "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=600338",
+  "publisher": "Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
+  "title": "Q2 2026 Quarterly Progress Report, docket 5-CE-158 (NSPW, filed 2026-07-27)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:27:40Z",
+  "sha256": "079ee9c18f0b90eef7f64fd522fe377defe34421508dca133092fad2a8c689c8"
+ },
+ {
+  "id": "scpsc-2010-238-e-pineland-application",
+  "url": "https://dms.psc.sc.gov/Attachments/Matter/b270073b-edf6-5dca-7d64a28b1810c18a",
+  "publisher": "South Carolina Electric & Gas Company (filed with Public Service Commission of South Carolina)",
+  "title": "Application for a Certificate of Environmental Compatibility and Public Convenience and Necessity: Denny Terrace-Pineland 230 kV Transmission Line (Docket 2010-238-E)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T06:20:19Z",
+  "sha256": "0fb268bf68ffd82bd7049d4919f3fbb37d3e8db79d00bf78a8197ca54f5c3db8",
+  "localCopy": true
+ },
+ {
+  "id": "scpsc-vcs1-killian-order-2011",
+  "url": "https://dms.psc.sc.gov/attachments/matter/73C1EC9A-155D-2817-10A9698095AE7829",
+  "publisher": "South Carolina Electric & Gas Company, with the Town and the County (filed with the Public Service Commission of South Carolina)",
+  "title": "Joint Motion, Settlement Agreements and Joint Proposed Order: SCE&G 230 kV line from V.C. Summer Switchyard #1 to Killian Substation and two 230 kV lines from V.C. Summer Switchyard #2 to Lake Murray (Docket 2011-325-E)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T06:29:09Z",
+  "sha256": "e9454d0818883942a210f99786ef0edec03e7c4fb89a1388d97a4300a1fd50c5"
+ },
+ {
+  "id": "sertp-2025-plan",
+  "url": "https://www.southeasternrtp.com/docs/general/2025/2025%20Regional%20Transmission%20Plan%20and%20Input%20Assumptions.pdf",
+  "publisher": "Southeastern Regional Transmission Planning (SERTP)",
+  "title": "2025 SERTP Regional Transmission Plan and Input Assumptions",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:04:12Z",
+  "sha256": "9183e3ffcb4fc06e46db2afc50510948b6c0f950312440b6272aaa862bc9da6b"
+ },
+ {
+  "id": "spp-beckham-potter-iep-report",
+  "url": "https://www.spp.org/documents/75024/beckham%20county-potter%20345kv%20%20rfp_iep%20recommendation%20report%20-%20public%20version.pdf",
+  "publisher": "Southwest Power Pool",
+  "title": "Industry Expert Panel Transmission Provider Internal Report - Public Version, RFP-000009 Beckham County-Potter 345 kV",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T05:26:58Z",
+  "sha256": "36ed11d659a15742de5d5943726ce68d90cbc3962d9db680e7ae3159ae3c56e8"
+ },
+ {
+  "id": "spp-board-minutes-2025-11-04",
+  "url": "https://oklahoma.gov/content/dam/ok/en/occ/documents/pu/spp/board/2025/2025-11-04-spp-board-minutes.pdf",
+  "publisher": "Southwest Power Pool (copy posted by Oklahoma Corporation Commission)",
+  "title": "SPP Board of Directors & Members Committee Meeting Minutes, November 4, 2025",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T05:28:37Z",
+  "sha256": "f9890c30ca6f736cbd16ac0a90dc415eee8312a2e13d8e71baac3825d8cf8d5f"
+ },
+ {
+  "id": "transource-beci-page",
+  "url": "https://www.transourceenergy.com/projects/BellCenter/",
+  "publisher": "Transource Energy",
+  "title": "Bell Center–Columbia–Sugar Creek–Illinois/Wisconsin State Line (BECI) Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:26:47Z",
+  "sha256": "a06dc7d64cc87c6c471f6d56fd18cb445fe8b301cc78da2c69a08e4e148f81a5"
+ },
+ {
+  "id": "transource-beckham-potter-corp-page",
+  "url": "https://www.transourceenergy.com/projects/BeckhamCounty-Potter/",
+  "publisher": "Transource Energy",
+  "title": "Beckham County - Potter 345 kV",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:26:59Z",
+  "sha256": "3d8915bf2e89c3eb648c0d19c1a80bdf48115bfad9a31ead4f40f0331e9c99f9"
+ },
+ {
+  "id": "transource-potter-beckham-factsheet",
+  "url": "https://www.transourceenergyprojects.com/potter-beckham/docs/Potter-Beckham_FactSheet-V4.pdf",
+  "publisher": "Transource Energy",
+  "title": "Potter - Beckham Transmission Line Project, Oklahoma (Fact Sheet V4)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:30Z",
+  "sha256": "32e791a0599445c3c04ac931d6cd029d89b5affa43c41742a4287e65b2a1fa2e"
+ },
+ {
+  "id": "transource-potter-beckham-page",
+  "url": "https://www.transourceenergyprojects.com/potter-beckham/",
+  "publisher": "Transource Energy",
+  "title": "Potter - Beckham 345-KV Transmission Line Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:08Z",
+  "sha256": "acacf8cf1b7c0d9231679626a212d301ca594bc6822cb627d971888164530b10"
+ },
+ {
+  "id": "usda-nass-land-values-2026",
+  "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/land0726.pdf",
+  "publisher": "USDA National Agricultural Statistics Service",
+  "title": "Land Values 2026 Summary (July 2026)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T06:24:35Z",
+  "sha256": "2cfec88843c42cf93c3dddb0b7bade16666b249e6c6505ad5a4b2be79d4f9d61"
+ },
+ {
+  "id": "xcel-abo-route-permit-app-2023",
+  "url": "https://www.alexandriatobigoaks.com/PUBLIC%20Route%20Permit%20Application-Alexandria%20to%20Big%20Oaks%20345kV%20Transmission%20Project.pdf",
+  "publisher": "Northern States Power Company d/b/a Xcel Energy",
+  "title": "Route Permit Application, Alexandria to Big Oaks 345 kV Transmission Project (MPUC Docket TL-23-159)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:38:01Z",
+  "sha256": "4bb89e100c490b0d33be024053c86e539ca4fbd29003f6ce14cf977b29313ab2"
+ },
+ {
+  "id": "xcel-beckham-potter-award-news",
+  "url": "https://newsroom.xcelenergy.com/news/xcel-energy-texas-and-transource-to-expand-transmission-with-beckham-county-potter-345-kv-project",
+  "publisher": "Xcel Energy Newsroom",
+  "title": "Xcel Energy Texas and Transource to expand transmission with Beckham County - Potter 345 kV project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:26:59Z",
+  "sha256": "9af457c9128857249a2fc1e4806fece049856f9c47bfbc02cad619d71ba3a3f2"
+ },
+ {
+  "id": "xcel-bssa-abo-page",
+  "url": "https://xcelenergytransmission.com/projects/big-stone-south-alexandria-big-oaks/",
+  "publisher": "Xcel Energy",
+  "title": "Big Stone South to Alexandria to Big Oaks - Xcel Energy Transmission Projects",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:04Z",
+  "sha256": "bab4e985878d610ae1416842ceb022b58574bd98aec9171a8036329a7aa6089f"
+ },
+ {
+  "id": "xcel-grid-forward-infosheet",
+  "url": "https://cdn.xcelenergytransmission.com/blobvizxe609304b0a5/wp-content/uploads/2026/03/26-03-414_GridForward_IS_P02b.pdf",
+  "publisher": "Xcel Energy",
+  "title": "Grid Forward - Central Wisconsin Project Information Sheet (26-03-414)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:32:34Z",
+  "sha256": "81f8057ad2e85d5e1ed4e808353276ae9b15fd70120b6a526694998e52be02b6"
+ },
+ {
+  "id": "xcel-grid-forward-page",
+  "url": "https://xcelenergytransmission.com/projects/gridforward/",
+  "publisher": "Xcel Energy",
+  "title": "Grid Forward (LRTP 6) Project - Xcel Energy Transmission Projects",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:32:16Z",
+  "sha256": "6bad4868041ffcf1709999a188a2e048e31d1de4360fad05f379e81bd742930e"
+ },
+ {
+  "id": "xcel-mmrt-application-2024",
+  "url": "https://mmrtproject.com/documents/filing/MMRT_CombinedApplication_Apr2024.pdf",
+  "publisher": "Northern States Power Company d/b/a Xcel Energy",
+  "title": "Mankato-Mississippi River Transmission Project: Certificate of Need and Route Permit Application (MPUC E002/CN-22-532, E002/TL-23-157)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:32:06Z",
+  "sha256": "c9e8092fd9eb112c6a700f182d0882cdf39707596418198914d01fa908988649"
+ },
+ {
+  "id": "xcel-mmrt-approval-news",
+  "url": "https://newsroom.xcelenergy.com/news/xcel-energy-receives-approval-for-mankatomississippi-river-transmission-line-project",
+  "publisher": "Xcel Energy",
+  "title": "Xcel Energy receives approval for Mankato–Mississippi River Transmission Line Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:37Z",
+  "sha256": "e9a509c3bf697bc476aae23c7d1e2f43b02760deb3f77a0c27c909f152cca88d"
+ },
+ {
+  "id": "xcel-mmrt-library-page",
+  "url": "https://mmrtproject.com/library",
+  "publisher": "Xcel Energy",
+  "title": "Mankato-Mississippi River Transmission Project - Library & FAQs",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:29:22Z",
+  "sha256": "b3fa0a9d6e0aeabb1c58e359c96977d1fdc76effa73a4545def09ddacaca035a"
+ },
+ {
+  "id": "xcel-mmrt-page",
+  "url": "https://mmrtproject.com/",
+  "publisher": "Xcel Energy",
+  "title": "Mankato-Mississippi River Transmission Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:28:37Z",
+  "sha256": "16d2eb6797a169a5a36bf567088b938c2f63332c1524233c4e92971d2e698de8"
+ },
+ {
+  "id": "xcel-mmrt-segments-page",
+  "url": "https://mmrtproject.com/segments/",
+  "publisher": "Xcel Energy",
+  "title": "Mankato-Mississippi River Transmission Project - Project Segments",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:29:21Z",
+  "sha256": "62c9ef58ef2ba068a5f0033e42adcea9e8c3b7971f418e1a8c9b5bc28b8c8999"
+ },
+ {
+  "id": "xcel-mmrt-summary-2024",
+  "url": "https://mmrtproject.com/documents/filing/MMRT_SummaryCONRP_Apr2024.pdf",
+  "publisher": "Northern States Power Company d/b/a Xcel Energy",
+  "title": "Mankato-Mississippi River 345 kV Transmission Project: Summary of Certificate of Need and Route Permit Application",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:31:42Z",
+  "sha256": "0bfcaf450fbb5ea1159d613b2fba7877b67ab795aa2bed3cc8953999a44ecd2b"
+ },
+ {
+  "id": "xcel-potter-beckham-infosheet",
+  "url": "https://cdn.xcelenergytransmission.com/blobvizxe609304b0a5/wp-content/uploads/2026/05/Potter-Beckham-Information-Sheet-1.pdf",
+  "publisher": "Xcel Energy (Southwestern Public Service Company)",
+  "title": "Potter-Beckham 345-kV Transmission Line Project Overview (Information Sheet)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:32Z",
+  "sha256": "4d795e02810282d190eec96cd935228ee6e0bbdf897d956a2bd451bc2a9d2823"
+ },
+ {
+  "id": "xcel-potter-beckham-page",
+  "url": "https://xcelenergytransmission.com/projects/potter-beckham-345-kv/",
+  "publisher": "Xcel Energy (Southwestern Public Service Company)",
+  "title": "Potter-Beckham 345 kV Transmission Line Project",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:08Z",
+  "sha256": "6f429180fae49659e077ae3c7a33dea208b7c5c341be635787bd11761476d1bb"
+ },
+ {
+  "id": "xcel-potter-beckham-siting",
+  "url": "https://cdn.xcelenergytransmission.com/blobvizxe609304b0a5/wp-content/uploads/2026/05/Potter-Beckham-Siting-and-Permitting.pdf",
+  "publisher": "Xcel Energy (Southwestern Public Service Company)",
+  "title": "Potter-Beckham 345-kV Transmission Line: Siting and Permitting",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:33Z",
+  "sha256": "8731c8c982ab24a9141de42ddb4cc4b9c0a4744bb6f51a1638a1a50afd411bfb"
+ },
+ {
+  "id": "xcel-wwtc-infosheet-2026-01",
+  "url": "https://cdn.xcelenergytransmission.com/blobvizxe609304b0a5/wp-content/uploads/2026/01/26-01-406_WWTC_IS_P03.pdf",
+  "publisher": "Xcel Energy",
+  "title": "Western Wisconsin Transmission Connection Project Information Sheet - January 2026",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:26:48Z",
+  "sha256": "8980e458d27f472bb4a422d258dc91181824430d4a0da4912d2a00c41762a538"
+ },
+ {
+  "id": "xcel-wwtc-page",
+  "url": "https://xcelenergytransmission.com/projects/western-wisconsin-transmission-connection/",
+  "publisher": "Xcel Energy",
+  "title": "Western Wisconsin Transmission Connection project page",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T05:25:13Z",
+  "sha256": "1fb548400547c69595c5dad45dcddf574d84200e09ec7e70fb9735de2a405782"
+ }
+]

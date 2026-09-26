@@ -1,0 +1,478 @@
+{
+ "batch": "desc-1",
+ "projects": [
+  {
+   "key": "desc:06810 H",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Summerville",
+     "lat": 33.0237,
+     "lon": -80.14484,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185236364 power=substation substation=transmission voltage=230000;115000 (unnamed). HIFLD 113527 (SCE&G 230 kV, 22.9 km) runs from OSM way/184867924 'Williams Substation' to this sub.",
+     "confidence": "confirmed",
+     "validation": "This is DESC's 'Summerville 230kV Sub' (SCRTP 2024-28 05004 P) and the Summerville end of the 'Williams - Summerville 230 kV' line (SCRTP 6388 A). It is the only 230/115 kV transmission sub in Summerville, and HIFLD's 230 kV line from Williams ends here; I re-checked that geometry myself. Nominatim reverse puts it in Berkeley County, in the Summerwood part of Summerville. HIFLD shows 115 kV lines leaving it west and south into Dorchester County. The gazetteer's 'Summerville Substation' at 34.47,-85.34 is in Summerville, Georgia, a same-name false match that was correctly rejected. OSM has no name tag, so the ID rests on topology."
+    }
+   ],
+   "notes": "The point is the loop's source substation, not the work site. Dominion's page (desc-summerville-loop-page) describes about 8 miles of 115 kV wood-to-steel replacement in Dorchester County, starting fall 2025 and running to summer 2026. HIFLD shows the Summerville 115 kV lines running up to about 8 km west and southwest of this point (for example HIFLD 141505 to 32.984,-80.212)."
+  },
+  {
+   "key": "desc:02726 K",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Columbia Canal",
+     "lat": 33.99717,
+     "lon": -81.04929,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/291364662 power=plant name='Columbia Canal Power Plant' operator='South Carolina Electric & Gas Co.' (OSM way/1078308089 'Columbia Canal Substation', 33 kV, is 80 m away)",
+     "confidence": "confirmed",
+     "validation": "The name matches, and the operator is SCE&G, now DESC. It is on the Columbia Canal in downtown Columbia, Richland County. The only 115 kV line along the canal is HIFLD 110438 (SCE&G 115 kV, 3.2 km). It runs from the 230/115/33 kV sub at 34.0216,-81.0603 (OSM way/185230443) south along the canal to a 115 kV sub at 34.0004,-81.0486 (OSM way/329102047), 0.3 km from this plant. That line fits the plan's 'poles on the Columbia side of the canal'."
+    }
+   ],
+   "notes": "The pole work runs along HIFLD 115 kV line 110438 beside the canal, from this point up to about 2.8 km north (34.022,-81.060). The point marks the south end at the canal hydro plant, not a line terminus."
+  },
+  {
+   "key": "desc:6853 B-F",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Scout (customer substation)",
+     "lat": 34.19,
+     "lon": -81.005,
+     "precision": "locality",
+     "uncertaintyMeters": 3000,
+     "coordinateSource": "Site estimate, not a mapped feature. It sits inside the Scout Motors tract, west of I-77 (OSM way/172626836, about -80.982 at this latitude) and southeast of Blythewood Road (OSM way/714373391, which runs from 34.2136,-80.9892 to 34.1894,-81.0349). Bounds come from the Scout Motors FAQ (a buffer 'along Blythewood Road') and PSC Order 2024-357 p.3 (scpsc-2024-80-e-scout-order).",
+     "confidence": "lower-confidence",
+     "validation": "PSC Order 2024-357 p.3 says DESC will break the VCS1-Killian 230 kV line 'along Highway 21 near the existing Blythewood Switching Station', run it across I-77 and onto the Scout property with about 2.5 miles of new right-of-way, and 'carry the line in a westerly direction into the Scout Substation', on Richland County land leased to Scout. This point is 2.9 km (1.8 mi) from the VCS1-Killian line (HIFLD 148554), which fits a 2.5-mile routed fold-in. The earlier point (the west end of the OSM 'Scout Motors Spur' rail construction) sits on I-77 itself, only 1.4 km from the line, so it was moved 2.2 km west. The substation itself is not in OSM. A radius of 3 km covers the tract from I-77 to about -81.035."
+    }
+   ],
+   "notes": "The main construction is the Scout substation and the 230 kV fold-in near Blythewood (I-77 / Highway 21). 'Modify VCS1 and Killian terminals' is terminal work only at two existing subs. They are listed here and not as endpoints, because the map code (centerOf) averages the first two endpoints and would otherwise put the center 14 km from Scout. VCS1 = OSM way/185039621 'Virgil C. Summer Nuclear #1 Substation', 230 kV, 34.2960,-81.3149. Killian = unnamed 230/115 kV OSM way/185201670 at 34.1223,-80.9441 (HIFLD node 117539), which is the end of the V C Summer 230 kV line HIFLD 148554. Its HIFLD path to Wateree Station (137325 + 127629) is 34.5 mi, which matches SCRTP 6808 R 'Wateree - Killian 230 kV ... Length - 35 miles'. The 115 kV switching station at 34.1900,-80.9684 (OSM way/558947932), 0.14 km from the line, is probably 'Blythewood Switching Station', but it is unnamed. The PSC order expected completion by 2026-03-31, and the SCRTP in-service date is 5/31/2026."
+  },
+  {
+   "key": "desc:6846 A",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Eastover",
+     "lat": 33.90065,
+     "lon": -80.64465,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/478709848 power=substation substation=switching voltage=115000 (unnamed) = HIFLD node UNKNOWN120856. HIFLD 130675 (115 kV, 11.8 km) runs from here east to TAP142281, where Progress Energy 115 kV segments continue to Sumter.",
+     "confidence": "confirmed",
+     "validation": "The cached V.C. Summer FSAR Table 8.1-1, 'Transmission System Ties to Other Utilities' (nrc-vcsummer-fsar-ch8-rev22 p.10), lists a Duke Energy-Progress tie 'Eastover | Sumter | 115', which confirms both terminal names. In HIFLD, the only 115 kV line that leaves the DESC system toward Sumter starts at this DESC hub. The hub also has SCE&G 115 kV lines to the International Paper Eastover mill (HIFLD 146792), to Wateree (129112) and west (147010). It is 5 km east-northeast of Eastover town, next to the Sylvamo/IP mill, and about 1.6 km west of the Wateree River, consistent with a DESC section of about 1 mile. OSM has no name tag."
+    },
+    {
+     "name": "Sumter (DEP)",
+     "lat": 33.89766,
+     "lon": -80.32398,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185032893 power=substation name='Sumter Substation' substation=transmission (= HIFLD UNKNOWN120918)",
+     "confidence": "confirmed",
+     "validation": "The name matches, and the sub is in Sumter (Duke Energy Progress territory). HIFLD shows Progress Energy 115 kV lines (131345, 117730) and a 230 kV line to WATEREE STATION (130315) ending at this node. That matches the FSAR ties 'Eastover-Sumter 115' and 'Wateree-Sumter 230'."
+    }
+   ],
+   "notes": "Only the DESC section of about 1 mile is rebuilt, at the Eastover/Wateree River end. The Eastover-Sumter midpoint is about 15 km east of the actual work. The FSAR tie table confirms this is a DESC-DEP interconnection."
+  },
+  {
+   "key": "desc:6809 N",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Batesburg",
+     "lat": 33.91349,
+     "lon": -81.56444,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/178951280 power=substation name='Batesburg Substation' voltage=115000 (= HIFLD node UNKNOWN116732)",
+     "confidence": "confirmed",
+     "validation": "The name and 115 kV voltage match, it is in Batesburg-Leesville (DESC territory), and it is the only Batesburg-named feature in the gazetteer. HIFLD 137226 starts here."
+    },
+    {
+     "name": "Saluda County",
+     "lat": 33.99731,
+     "lon": -81.76622,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1041743427 power=substation name='Saluda Substation' voltage=115000 (town of Saluda, Saluda County) = HIFLD node UNKNOWN117178",
+     "confidence": "confirmed",
+     "validation": "The HIFLD 115 kV path from Batesburg (137226, 20.05 km, plus 122587, 1.64 km, via TAP153163) ends at this sub and totals 13.48 mi, against the plan's 'Rebuild 13.5 miles of conductor'. I re-measured this myself. It is the only 115 kV terminal sub in the town of Saluda; the only other 115 kV feature within 6 km is an unnamed industrial tap. The OSM name is 'Saluda', not 'Saluda County', but the location and length agree. This is not Saluda Hydro, which is 50 km east."
+    }
+   ]
+  },
+  {
+   "key": "desc:06874 B",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Summerville",
+     "lat": 33.0237,
+     "lon": -80.14484,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185236364 (unnamed 230/115 kV transmission sub). HIFLD 113527 (230 kV) runs from Williams Substation to this sub.",
+     "confidence": "confirmed",
+     "validation": "This is the same Summerville 230/115 kV sub as desc:06810 H, identified through the Williams-Summerville 230 kV topology."
+    },
+    {
+     "name": "Boone Hill",
+     "lat": 33.0021,
+     "lon": -80.2032,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: OSM way 12365469 'Boone Hill Parkway', Summerville, Dorchester County. Boone Hill United Methodist Church (OSM node 357116782) is 1.3 km southwest.",
+     "confidence": "lower-confidence",
+     "validation": "No substation named Boone Hill turned up in OSM, the gazetteer, HIFLD or web sources. 'Boone Hill' is a place and road name in west and southwest Summerville (Dorchester County). Boone Hill Road is US 17-A heading southwest out of Summerville. There are unnamed 115 kV distribution subs within about 4 km, at 33.03746,-80.20521, 33.01905,-80.22093 and 33.00667,-80.18064, but none can be confirmed. The feature at 32.98737,-80.22083 is named 'Summerville Wastewater Treatment Substation' (industrial), so it is not an unnamed candidate."
+    }
+   ],
+   "notes": "The work is about 1.2 miles (23 poles) of line relocated for the US 78 widening. In west Summerville, US 78 is W 5th North Street, around 33.028-33.040 and -80.17 to -80.21, all within this project's uncertainty. The exact relocated segment is not pinned down."
+  },
+  {
+   "key": "desc:6852",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Urquhart",
+     "lat": 33.43287,
+     "lon": -81.91108,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM relation/14317637 power=substation name='Urquhart Substation' voltage=230000, next to OSM way/449466234 'Urquhart Station' operator 'Dominion Energy South Carolina, Inc' (Beech Island). The HIFLD 115 kV node UNKNOWN120770 is 0.17 km away.",
+     "confidence": "confirmed",
+     "validation": "The name matches and the operator is DESC, at Beech Island in Aiken County, SC, about 3 km east of the Savannah River. HIFLD 167557 (115 kV, 23.2 km) runs from the Urquhart 115 kV node to TAP170026, and HIFLD 171835 continues to Toolebeck, so the two are connected."
+    },
+    {
+     "name": "Toolebeck",
+     "lat": 33.53463,
+     "lon": -81.66933,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/1073259467 power=substation name='Toolebeck Substation' voltage=230000;115000 start_date=2022",
+     "confidence": "confirmed",
+     "validation": "The name and 230/115 kV voltage match, it is in Aiken County (DESC), and it is the only Toolebeck in the gazetteer. The HIFLD 115 kV path to Urquhart is about 29.5 km (18 mi), which fits a line whose 477 ACSR portions total about 12.5 mi."
+    }
+   ],
+   "notes": "The Urquhart end is at the SC-GA border. HIFLD shows Georgia Power 115 kV lines (128878, 139254) leaving the Urquhart 115 kV node west into Georgia. This makes the project relevant for GPC proximity."
+  },
+  {
+   "key": "desc:6859",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Dawson",
+     "lat": 32.95843,
+     "lon": -80.30579,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1466128356 power=substation substation=transmission voltage=230000 (unnamed), next to OSM way/1466128357 substation=industrial 230 kV. Cached DESC PSC request scpsc-2024-91-e-dawson-request p.2.",
+     "confidence": "confirmed",
+     "validation": "The DESC request (p.2) puts Dawson on property controlled by Mallard, LLC in Dorchester County, near Ridgeville (the data-center facility). It calls for rebuilding about 2,000 ft of the 230 kV lines between Pine Hill Substation and Dawson, and carrying the fold-in 'in a westerly direction'. This new 230 kV transmission sub is 0.2-0.5 km west of the Canadys-Church Creek and Canadys-Faber Place 230 kV lines, about 560 m (1,850 ft) from the existing 230 kV sub on the line (OSM way/1319701989, probably Pine Hill), and 0.5 km from Research Center Drive. The gazetteer's 'Dawson Substation' at 31.76,-84.43 is in Dawson, Georgia, a same-name false match that was correctly rejected."
+    },
+    {
+     "name": "Canadys",
+     "lat": 33.0641,
+     "lon": -80.6206,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185032900 power=substation name='Canadys Substation' operator='South Carolina Electric & Gas Company' voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "The name matches, the operator is DESC's predecessor, it is at Canadys in Colleton County, and it is the only Canadys in the gazetteer. The DESC request names the 'Canadys 230 kV Substation'."
+    }
+   ],
+   "notes": "Phase 1 (SCRTP), called 'Phase IV' in the PSC filing, is the Dawson substation and fold-in near Ridgeville. Phase 2 rebuilds the two 20-mile Canadys-Pine Hill/Dawson 230 kV H-frame circuits. The dates conflict: the DESC request (p.4) says Phase IV will be completed by October 2025 in one place and October 2026 in another, and the PSC order (scpsc-dawson-substation-order-2024 p.4) says construction will be completed by October 2026."
+  },
+  {
+   "key": "desc:6341 A-F",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Cainhoy",
+     "lat": 32.9414,
+     "lon": -79.84228,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/229116275 power=substation name='Cainhoy Substation' operator='Dominion Energy South Carolina' voltage=230000;115000;23900",
+     "confidence": "confirmed",
+     "validation": "The name and DESC operator match, it is in the Cainhoy area of Berkeley County, and it is the only Cainhoy in the gazetteer."
+    },
+    {
+     "name": "Hamlin",
+     "lat": 32.85994,
+     "lon": -79.78844,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/229116306 power=substation name='Hamlin Substation' operator='South Carolina Gas & Electric' voltage=115000",
+     "confidence": "confirmed",
+     "validation": "The name, SCE&G/DESC operator and 115 kV voltage all match, it is in Mount Pleasant, and it is the only Hamlin in the gazetteer."
+    }
+   ]
+  },
+  {
+   "key": "desc:5392 A-C",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Coit",
+     "lat": 33.98022,
+     "lon": -81.04098,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/511182119 power=substation operator='Dominion Energy South Carolina' voltage=115000;33000 substation=transmission; HIFLD node 'COIT GT' at 33.98042,-81.04125 (HIFLD 109103)",
+     "confidence": "confirmed",
+     "validation": "This is a DESC 115/33 kV transmission sub 25 m from HIFLD's named 'COIT GT' node, at the Coit gas-turbine site in the Vista, Columbia. It fits the plan's 33 kV-to-115 kV conversion and 'Coit Bus #1'."
+    },
+    {
+     "name": "Gills Creek",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "none: no match in the OSM export or gazetteer, HIFLD line names, Nominatim or web search",
+     "confidence": "not-found",
+     "validation": "The line is only about 1.25 miles long, so Gills Creek sub is probably within about 2 km of Coit. The creek itself (Nominatim) and Gills Creek Parkway are 5-6 km east, too far to be the terminal. Several unnamed 115 and 33 kV subs lie within 2 km of Coit, but none can be tied to the name, so nothing is inferred."
+    }
+   ],
+   "notes": "Center on Coit, the one located point. The whole project is within about 2 km of it."
+  },
+  {
+   "key": "desc:0139 M,N",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Okatie",
+     "lat": 32.3358,
+     "lon": -81.03144,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/498967280 power=substation voltage=230000 (unnamed), next to OSM way/1064022697 230 kV switching (32.33376,-81.03261). 'Existing Okatie Substation' is marked on the official Dominion map desc-riverport-route-map.",
+     "confidence": "confirmed",
+     "validation": "I checked the map myself. Calibrating the rendered Dominion selected-route map on the Jasper Substation star and the 2-mile scale bar (about 31 m/px at 80 dpi) puts the 'Existing Okatie Substation' star at about 32.335,-81.030, within 150-200 m of this OSM feature. The star is where the Jasper-Okatie #2 corridor meets the existing Dominion line, east of I-95 and US 17, northeast of Hardeeville in Jasper County. The Jasper-Yemassee 230 kV #1 line that the plan folds in passes here. The gazetteer has no Okatie-named feature. This is not Okatie village in Beaufort County (32.296,-80.945)."
+    }
+   ],
+   "notes": "The name 'Okatie' does not mean the Okatie village/SC-170 area, which is about 8.5 km east. Do not use that town centroid."
+  },
+  {
+   "key": "desc:06367 D - G",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Jasper",
+     "lat": 32.3607,
+     "lon": -81.12415,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185380597 power=substation name='Jasper Substation' voltage=230000 substation=generation, at OSM way/449466227 'Jasper Generating Plant' operator DESC",
+     "confidence": "confirmed",
+     "validation": "The name matches and the operator is DESC, in Jasper County, SC. The other 'Jasper Substation' hits in the gazetteer (Tennessee, 35.07,-85.61; Florida, 30.51,-82.94) are wrong-state false matches and were rejected. The cached Dominion page says the first 230 kV line 'begins at the Jasper Generating Plant and ends at the Okatie substation'."
+    },
+    {
+     "name": "Okatie",
+     "lat": 32.3358,
+     "lon": -81.03144,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/498967280 (230 kV) and way/1064022697 (230 kV switching); Dominion map desc-riverport-route-map",
+     "confidence": "confirmed",
+     "validation": "Same Okatie substation as desc:0139 M,N, located from the official route map. The straight-line distance to Jasper is 9 km (5.7 mi), consistent with a 6.5-mile routed line."
+    }
+   ]
+  },
+  {
+   "key": "desc:6367 D",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Okatie",
+     "lat": 32.3358,
+     "lon": -81.03144,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/498967280; Dominion map desc-riverport-route-map",
+     "confidence": "confirmed",
+     "validation": "Same Okatie substation as desc:0139 M,N."
+    },
+    {
+     "name": "Riverport",
+     "lat": 32.2248,
+     "lon": -81.0928,
+     "precision": "locality",
+     "uncertaintyMeters": 2000,
+     "coordinateSource": "Read off the official Dominion map desc-riverport-route-map, the 'Proposed Riverport Substation' star (calibrated on Jasper Substation and the 2-mile scale bar). My own independent reading was about 32.227,-81.092, about 250 m away.",
+     "confidence": "lower-confidence",
+     "validation": "The map marks a proposed Riverport site at the south end of the 'Okatie - Riverport 230 kV' corridor, south of Hardeeville near Purrysburg Rd / SC-170 in Jasper County, on the SC side of the Savannah River. The same map shows a 'Proposed Sherwood Substation' about 1.6 km north (about 32.239,-81.095) on the same corridor. SCRTP 2024-28 (p.22) called project 06367 A-C,H 'Riverport Tap' ('Construct Okatie \u2013 Riverport 230 kV to feed new Distribution substation'). SCRTP 2025-29 (p.17) renamed the same ID 'Sherwood Tap' (Okatie \u2013 Sherwood 230 kV). The current Dominion page says the second line ends at Sherwood. So the terminus may be Sherwood; both sites are within the 2 km radius."
+    }
+   ],
+   "notes": "The SCRTP title says 115kV, but the description, the route map and the Dominion page all describe the Okatie-Riverport line as 230 kV. The line is about 8 miles and runs past Hardeeville. The Riverport end is about 10 km across the Savannah River from GPC's Savannah-area (zone 219) system, so it is a likely proximity candidate."
+  },
+  {
+   "key": "desc:6381",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Flat Rock",
+     "lat": 33.56064,
+     "lon": -81.88608,
+     "precision": "locality",
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Midpoint of the tapped Belvedere Sw Sta - Graniteville 115 kV line (HIFLD 137404, 16.7 km; all vertices within 7.9 km of this point). The parallel Belvedere-Graniteville path, HIFLD 103497 via node 117192, is also entirely within 8.0 km.",
+     "confidence": "lower-confidence",
+     "validation": "The plan says the new sub is fed by a tap off the 'Belv Sw Sta - Graniteville 115 kV #1' line, so it must lie along that corridor between North Augusta and Graniteville in Aiken County, SC. HIFLD has two parallel 115 kV paths between the same hubs and it is unclear which one is '#1', but both are covered by the 8 km radius. No Flat Rock substation turned up in SC in OSM or on the web. The gazetteer's 'Flat Rock Substation' at 32.55,-84.87 is in Georgia, a false match. Flat Rock Pond and Flat Rock Lane in Graniteville (Nominatim, about 33.585-33.594,-81.81 to -81.83), 7.6 km northeast, are possible namesakes near the Graniteville end, but that is not confirmed."
+    }
+   ],
+   "notes": "The substation site is unresolved; use this locality (\u00b18 km). The tapped line's terminals are context only, since no work is stated at them, so they are not listed as endpoints: Belvedere Sw Sta = unnamed 115 kV switching station, OSM way/1008277213 (33.5057,-81.9404, HIFLD hub 117199, North Augusta), and Graniteville = OSM relation/14294792 'Graniteville Substation' (33.5834,-81.8045). The area is about 10-25 km from Augusta, GA."
+  },
+  {
+   "key": "desc:6870 A",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Saluda Hydro",
+     "lat": 34.05343,
+     "lon": -81.21683,
+     "precision": "named-facility",
+     "uncertaintyMeters": 700,
+     "coordinateSource": "OSM way/186840913 power=plant name='Saluda Hydroelectric Plant' operator='Dominion Energy South Carolina' (6065 Bush River Road). The 230/115 kV switchyard where HIFLD 133140 starts (OSM way/185149204, 34.05304,-81.20935) is 0.7 km east.",
+     "confidence": "confirmed",
+     "validation": "The name matches and the operator is DESC, at the Lake Murray dam. HIFLD names the node 'SALUDA LEXINGTON'. The cached FSAR tie table lists 'Saluda Hydro #1' and 'Saluda Hydro #2' as the DESC terminals of these tie lines."
+    },
+    {
+     "name": "Bush River",
+     "lat": 34.25232,
+     "lon": -81.64903,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185168619 power=substation substation=transmission voltage=230000;100000;44000 (unnamed) = HIFLD node UNKNOWN116988 (34.25246,-81.64871), Newberry County. This is Duke Energy Carolinas' Bush River Tie.",
+     "confidence": "confirmed",
+     "validation": "This is Duke Energy Carolinas' Bush River Tie, not a DESC sub. The cached V.C. Summer FSAR Table 8.1-1 (p.10) lists Duke Energy-Carolinas ties 'Saluda Hydro #2 | Bush River (W) | 115', 'Saluda Hydro #1 | Bush River (B) | 115' and 'VCS2 | Bush River | 230'. The cached SERTP 2025 plan names 'BUSH RIVER TIE 115/100 KV AUTOTRANSFORMERS' (p.30) and the 'Bush River Tie \u2013 Buzzard Roost 100 kV' line (p.33). In HIFLD, node 116988 is the only node with all of these: a Duke 100 kV line to BUZZARD ROOST (126116), a Duke 230 kV line to the V.C. Summer 2/3 switching station (135934, ending at OSM way/552845047), and two 115 kV lines from the Saluda/Chapin direction (168312 and 118261). The 115 kV path runs 133140 \u2192 167351 \u2192 168312 from the Saluda Hydro switchyard. The new cached Dominion 'Saluda-Bush River' page (desc-saluda-bushriver-page) puts the rebuild in 'Lexington, Newberry and Richland counties' and 'between the Ballentine and Little Mountain communities'. HIFLD 133140 passes 2.3 km from Ballentine and 1.9 km from Little Mountain on its way here. OSM has no name tag."
+    }
+   ],
+   "notes": "This is a DESC-Duke Energy Carolinas interconnection (tie lines), which matters for the coordination context. Dominion's page (desc-saluda-bushriver-page) says the work replaces 15 miles of 115 kV steel lattice towers with steel poles (SPDC) between Ballentine and Little Mountain. Construction runs summer 2026 to March 2027; the SCRTP in-service date is 12/31/2026. The full Saluda Hydro-Bush River path is about 52 km (33 mi), so the endpoint midpoint (about 34.153,-81.433) falls in the Chapin/Little Mountain part of the work corridor."
+  },
+  {
+   "key": "desc:6847",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Church Creek",
+     "lat": 32.83032,
+     "lon": -80.07028,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185330726 power=substation name='Church Creek Substation' voltage=230000;115000 (= HIFLD node UNKNOWN120998)",
+     "confidence": "confirmed",
+     "validation": "The name and 230/115 kV voltage match, and it is in West Ashley, Charleston. It matches the Church Creek Substation box on Dominion's route map (church-creek-charleston-map.jpg, linked from the cached desc-church-creek-charleston-page)."
+    },
+    {
+     "name": "Charleston Transmission",
+     "lat": 32.84529,
+     "lon": -79.97417,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/229031773 power=substation voltage=115000 (unnamed). HIFLD 112634 (SCE&G 115 kV, 4.0 km) runs from Faber Place along Azalea Dr and ends at this feature (32.84532,-79.97412).",
+     "confidence": "confirmed",
+     "validation": "Dominion's route map labels the 'Charleston Transmission Substation' fence box at the east end of Azalea Dr, near US 52/78 and I-26 in North Charleston. A 115 kV line runs along Azalea Dr to it from Faber Place, and HIFLD 112634's end point is exactly this OSM feature. The OSM 'Accabee Substation' (32.85298,-79.97606) is north of the rail line, off the map's fence box, so it was not used. The quoted phrase 'its Charleston transmission substation on Azalea Drive' is not in the cached page text, so it has been removed."
+    },
+    {
+     "name": "Faber Place (intermediate)",
+     "lat": 32.85008,
+     "lon": -80.01462,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/217507829 power=substation name='Faber Place Substation' voltage=230000",
+     "confidence": "confirmed",
+     "validation": "The name matches, it is in North Charleston by Leeds Ave/Azalea Dr, and it matches Dominion's route map and the start of HIFLD 112634."
+    }
+   ],
+   "notes": "Route: Church Creek (Bees Ferry Rd) to Faber Place (Leeds Ave) to Charleston Transmission (Azalea Dr). Dominion's page describes a four-mile 115/230 kV rebuild plus a new 6.3-mile 230 kV line, with construction starting by summer 2026 and finishing by 2027."
+  },
+  {
+   "key": "desc:6359",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Yemassee",
+     "lat": 32.69743,
+     "lon": -80.86379,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185317032 power=substation name='Yemassee Substation' operator='South Carolina Electric & Gas Company' voltage=230000 (HIFLD node 'YEMASSEE')",
+     "confidence": "confirmed",
+     "validation": "The name and 230 kV voltage match, the operator is SCE&G/DESC, and HIFLD names this node 'YEMASSEE'. It is the only Yemassee substation in the gazetteer; Yemassee Solar is a separate plant."
+    },
+    {
+     "name": "Ritter",
+     "lat": 32.82319,
+     "lon": -80.62064,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185397978 power=substation substation=transmission voltage=230000;115000 (unnamed) = HIFLD UNKNOWN120999",
+     "confidence": "confirmed",
+     "validation": "I re-checked the topology myself. HIFLD 138245 is a 230 kV line (27.6 km) from here to YEMASSEE, the existing Ritter-Yemassee 230 kV. HIFLD 134622 is a 230 kV line (56.1 km) to the Church Creek node, matching the SCRTP 'Church Creek - Ritter 230kV'. Ritter hamlet (Nominatim 32.7896,-80.6304, Colleton County) is 3.8 km away, not 2.6 km as first stated. The cached Dominion page places the corridor in Colleton and Hampton counties near US 17-A. OSM has no name tag."
+    }
+   ],
+   "notes": "Dominion's page says construction starts spring 2026 and runs to the end of 2027. The corridor runs about 27.6 km (17 mi) along US 17-A."
+  },
+  {
+   "key": "desc:6238 H",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Fairfax",
+     "lat": 32.98916,
+     "lon": -81.2336,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/498828323 power=substation name='Fairfax Substation' operator='South Carolina Gas & Electric' voltage=115000;46000 (= HIFLD node UNKNOWN120908)",
+     "confidence": "confirmed",
+     "validation": "The name matches, the operator is SCE&G/DESC, and it has 115 kV. The second OSM 'Fairfax Substation' (way/993772289, 46 kV only) is distribution and was not used. HIFLD 107555 (115 kV, 15.9 km) runs from here to Hampton Substation (HIFLD 120909 = OSM way/498828321), and HIFLD 145698 (33.5 km) continues to YEMASSEE."
+    },
+    {
+     "name": "Yemassee",
+     "lat": 32.69743,
+     "lon": -80.86379,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185317032 name='Yemassee Substation' operator SCE&G",
+     "confidence": "confirmed",
+     "validation": "Same Yemassee substation as desc:6359."
+    }
+   ],
+   "notes": "Only the 336 ACSR portion between the DESCSQ #1151 interconnection point and Yemassee is upgraded. The Fairfax-Yemassee 115 kV path (about 49 km) runs via Hampton Substation. DESCSQ #1151 (a generator in the interconnection queue) could not be located in public sources, so the upgraded segment is somewhere on this corridor, most likely toward the Yemassee end."
+  }
+ ],
+ "issuesFixed": [
+  "desc:6870 A Bush River: FALSE MATCH fixed. The researcher chose an unnamed DESC 230/115 kV sub in West Columbia (OSM way/544217903, 34.01969,-81.12803). The terminal is actually Duke Energy Carolinas' Bush River Tie near Newberry: OSM way/185168619 (230/100/44 kV) = HIFLD node 116988, at 34.25232,-81.64903. Evidence: the FSAR tie table ('Saluda Hydro #1/#2 \u2013 Bush River (B)/(W) 115', listed under Duke Energy-Carolinas); SERTP 2025 'Bush River Tie' 115/100 kV autotransformers and Bush River Tie \u2013 Buzzard Roost 100 kV line, which HIFLD 126116 confirms; and a new cached Dominion Saluda-Bush River page (Ballentine to Little Mountain; Lexington, Newberry and Richland counties; 15 miles). The endpoint moved 54.5 km and the project center moved 27 km. Changed to confirmed; the notes now call it a DESC-Duke tie, give the 15-mile scope and the summer 2026 to March 2027 construction window, and drop the wrong '6-mile' reading.",
+  "desc:6853 B-F: the researcher listed 3 endpoints for a substation project (VCS1 and Killian after Scout). lib/matching/geo.ts centerOf() averages the first two endpoints, so the center would have been the Scout-VCS1 midpoint, 14.4 km from Scout. VCS1 and Killian now appear only in the notes, and Scout is the single site, as the schema requires.",
+  "desc:6853 B-F Scout point moved 2.2 km, from 34.1876,-80.98155 (the end of the rail spur, which sits on I-77 and is only 1.4 km from the VCS1-Killian line) to 34.19,-81.005, inside the Scout tract west of I-77 and south of Blythewood Road. PSC Order 2024-357 describes about 2.5 miles of new right-of-way running west across I-77. Kept as locality, 3000 m, lower-confidence.",
+  "desc:6853 B-F Killian (now in the notes) independently confirmed: the HIFLD Wateree-Killian 230 kV path totals 34.5 mi, against SCRTP 6808 R's 'Length - 35 miles'.",
+  "desc:6381: the researcher listed 3 endpoints for a substation project (Flat Rock locality, Belvedere Sw Sta, Graniteville). centerOf() would have averaged Flat Rock with Belvedere, pulling the center 4 km toward North Augusta and Georgia, even though no work is stated at either tapped-line terminal. Only the Flat Rock locality is kept; Belvedere and Graniteville moved to the notes.",
+  "desc:6381 Flat Rock: HIFLD has a second, parallel Belvedere-Graniteville 115 kV path (103497 via node 117192), so '#1' is ambiguous. Both paths are within 8.0 km of the point, so the \u00b18 km radius was kept. The gazetteer's Georgia 'Flat Rock Substation' (32.55,-84.87) was confirmed as a false match.",
+  "desc:6846 A Eastover: upgraded from lower-confidence to confirmed. The cached FSAR Table 8.1-1 (p.10) lists the Duke Energy-Progress tie 'Eastover | Sumter | 115', and in HIFLD the tie line (130675) starts at this DESC 115 kV hub, which also has lines to the IP Eastover mill and Wateree.",
+  "desc:02726 K Columbia Canal: identified the canal-side 115 kV line (HIFLD 110438, 3.2 km, from the 230/115/33 kV sub at 34.0216,-81.0603 to a 115 kV sub 0.3 km from the plant). Notes now say the work extends up to 2.8 km north of the point; uncertainty kept at the named-facility maximum of 1000 m.",
+  "desc:6859 Dawson notes: the researcher cited only October 2025. The same DESC request (p.4) also says October 2026, and the PSC order (scpsc-dawson-substation-order-2024 p.4) says construction completes by October 2026. The conflict is now shown. The Georgia 'Dawson Substation' (31.76,-84.43) was confirmed as rejected.",
+  "desc:6847 Charleston Transmission: removed the quote 'its Charleston transmission substation on Azalea Drive', which does not appear in the cached Dominion page text. The match is re-grounded on the route map's fence box plus HIFLD 112634 (115 kV, Faber Place to exactly this OSM feature).",
+  "desc:6367 D Riverport: added the SCRTP rename history. 2024-28 p.22 'Riverport Tap' (Okatie \u2013 Riverport 230 kV) became 2025-29 p.17 'Sherwood Tap' under the same ID 06367 A-C,H. Map position checked independently (within about 250 m). Stays lower-confidence locality at 2000 m, which covers both the Sherwood and Riverport stars.",
+  "desc:0139 M,N / 06367 D-G Okatie: independently re-read the official route map; the Okatie star falls within 150-200 m of OSM way/498967280. Confirmed.",
+  "desc:06874 B Boone Hill: corrected the validation. 32.98737,-80.22083 is the named 'Summerville Wastewater Treatment Substation' (industrial), not an unnamed loop sub. Candidate list updated; locality kept.",
+  "desc:6359 Ritter: corrected the distance to Ritter hamlet from 2.6 km to 3.8 km. Topology re-verified (HIFLD 138245 to YEMASSEE, 134622 to the Church Creek node).",
+  "desc:6870 A Saluda Hydro: uncertainty raised from 400 to 700 m, because the tie lines leave from the 230/115 kV switchyard 0.7 km east of the plant point.",
+  "desc:6809 N Saluda County: re-verified that the HIFLD path from Batesburg totals 13.48 mi and that this is the only 115 kV terminal in the town of Saluda. Kept confirmed, and noted the OSM name difference ('Saluda' vs 'Saluda County').",
+  "desc:6238 H: added that the Fairfax-Yemassee 115 kV path runs via Hampton Substation (HIFLD 120909 = OSM way/498828321), about 49 km total.",
+  "desc:6852: added that Urquhart's 115 kV node has Georgia Power 115 kV lines (HIFLD 128878, 139254) crossing into Georgia; a border-proximity note.",
+  "Re-ran the gazetteer for every named terminal. Confirmed that the wrong-state same-name features were not used: Summerville GA, Dawson GA, Flat Rock GA, Jasper TN/FL, and Saluda Retail NC. Re-verified all 12 HIFLD line IDs the researcher cited, against the live HIFLD service.",
+  "New public source cached and its excerpts verified with find_excerpt: desc-saluda-bushriver-page (Dominion Saluda-Bush River project page). Also verified excerpts in sertp-2025-plan (p.30, p.33), nrc-vcsummer-fsar-ch8-rev22 (p.10), scpsc-dawson-substation-order-2024 (p.4), and desc-scrtp-2024-2028 p.22 / 2025-2029 p.17."
+ ],
+ "unresolved": [
+  "desc:5392 A-C Gills Creek: no substation found in OSM, HIFLD, Nominatim or web search. The creek and Gills Creek Parkway are 5-6 km east of Coit, too far for a 1.25-mile line. The project center uses Coit only.",
+  "desc:06874 B Boone Hill: no substation found. Given as a locality (Boone Hill place names in west Summerville) within 5 km. The exact US 78 relocation segment (about 1.2 mi) is also unlocated.",
+  "desc:6381 Flat Rock: the new substation site was not found, and it is ambiguous which of two parallel Belvedere-Graniteville 115 kV paths is '#1'. Given as a locality at the midpoint of the tapped line, within 8 km. Flat Rock Pond/Lane in Graniteville is a possible but unconfirmed namesake.",
+  "desc:6853 B-F Scout: the customer substation is not mapped. Given as a site estimate inside the Scout tract west of I-77 and south of Blythewood Road, within 3 km, based on PSC Order 2024-357 (about 2.5 mi of new right-of-way west across I-77) and the Scout FAQ.",
+  "desc:6367 D Riverport: read off the official Dominion map as a proposed site. The SCRTP 2025-29 list and the current Dominion page call the terminus Sherwood, 1.6 km north; both are inside the 2 km radius.",
+  "desc:6238 H: the DESCSQ #1151 interconnection point was not found in public sources, so the upgraded 336 ACSR segment's position on the Fairfax-Hampton-Yemassee corridor is unknown.",
+  "The Batesburg-Saluda Dominion project page (13.5 mi along US 178) now returns HTTP 404 and could not be cached. The Saluda County ID therefore rests on OSM and HIFLD only.",
+  "The Church Creek route map image (church-creek-charleston-map.jpg) was used but not cached, because fetch_source only handles PDF/HTML."
+ ]
+}
