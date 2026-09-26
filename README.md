@@ -46,7 +46,7 @@ Research was agent-assisted: AI research agents located facts and exact quotes, 
 
 The engine reproduces the sponsor's starter overlap table exactly (six rows, ±0.01 mi and to the day, no extra pairs) — see `tests/engine.test.ts` and the Method drawer.
 
-**Impact estimate (bonus).** For any flagged pair: acres of right-of-way one shared corridor would avoid encumbering twice (`miles × 5,280 × width ÷ 43,560`) and its value, plus one avoided crew mobilization. Defaults are cited (Georgia Transmission easement widths, USDA NASS 2026 land values, MISO transmission cost guide, an SC PSC order on co-building); every input is editable, and the result is labeled a scenario, not a saving.
+**Impact estimate (bonus).** For any flagged pair: acres of right-of-way one shared corridor would avoid encumbering twice (`miles × 5,280 × width ÷ 43,560`) and its value, plus one avoided crew mobilization. Defaults are cited (Georgia Transmission easement widths, USDA NASS 2026 land values, MISO transmission cost guide, and a joint proposed order in an SC PSC docket on co-building); every input is editable, and the result is labeled a scenario, not a saving.
 
 ## Run it
 

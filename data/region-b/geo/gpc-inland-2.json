@@ -1,0 +1,939 @@
+{
+ "batch": "gpc-inland-2",
+ "projects": [
+  {
+   "key": "gpc:17900",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Union City",
+     "lat": 33.55317,
+     "lon": -84.50907,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/159758306 power=substation name=Union Substation operator=Georgia Power voltage=500000",
+     "confidence": "confirmed",
+     "validation": "GPC's 500/230 kV Union City hub in south Fulton County. OSM's own 'O'Hara - Union City 230kV' line (way/180131611) and 'Villa Rica - Union 500kV' lines end at this fenced substation. The operator is Georgia Power, and a 230 kV yard is implied. It sits beside Flat Shoals Rd in Union City, zone 208 (metro south)."
+    },
+    {
+     "name": "Yates",
+     "lat": 33.46119,
+     "lon": -84.89653,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/171166735 power=substation name=Yates Switchyard voltage=230000 (adjacent Plant Yates way/1024438670 operator=Georgia Power)",
+     "confidence": "confirmed",
+     "validation": "The 230 kV switchyard at GPC's Plant Yates in Coweta County. The voltage matches the 230 kV White line."
+    }
+   ],
+   "notes": "Rebuild of 23.4 mi of the Union City-Yates 230 kV White line. The center is the midpoint of Union City and the Plant Yates switchyard."
+  },
+  {
+   "key": "gpc:20691",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Union City",
+     "lat": 33.55317,
+     "lon": -84.50907,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/159758306 name=Union Substation operator=Georgia Power voltage=500000",
+     "confidence": "confirmed",
+     "validation": "Same Union City 500/230 kV substation as gpc:17900. The OSM 'O'Hara - Union City 230kV' line ends here."
+    },
+    {
+     "name": "Yates",
+     "lat": 33.46119,
+     "lon": -84.89653,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/171166735 name=Yates Switchyard voltage=230000",
+     "confidence": "confirmed",
+     "validation": "230 kV switchyard at Plant Yates, Coweta County."
+    }
+   ],
+   "notes": "Switch and trap replacement at both terminal substations. The work happens at the two endpoints, not along the route."
+  },
+  {
+   "key": "gpc:19363",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Morrow",
+     "lat": 33.60593,
+     "lon": -84.33346,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171479107 power=substation name=Morrow Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "GPC substation in Morrow, Clayton County, zone 208. It is a 230/115 kV hub; the 115 kV line in the plan leaves from it."
+    },
+    {
+     "name": "Mountain View",
+     "lat": 33.641776,
+     "lon": -84.390203,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim place=locality 'Mountain View, Coxs Crossing, Clayton County, GA'",
+     "confidence": "lower-confidence",
+     "validation": "OSM has no substation named Mountain View. The locality centroid is used; several unnamed GPC 115 kV substations lie within 2 km (e.g. way/683983853 at 33.6376,-84.3972), but none could be tied to the name. Barnett Road, the named work section, is at Forest Park (Nominatim 33.6154,-84.3873), between Morrow and Mountain View. That fits the geography."
+    }
+   ],
+   "notes": "Work is limited to the Mountain View-Barnett Road section. An unnamed GPC 115 kV substation near Barnett Rd (OSM way/969681609, 33.6078,-84.3875) is probably Barnett Road, but it is unconfirmed."
+  },
+  {
+   "key": "gpc:19601",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Morrow",
+     "lat": 33.60593,
+     "lon": -84.33346,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171479107 name=Morrow Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "GPC Morrow substation in Clayton County. SERTP 2014 (sertp-2014-plan p.50) lists a 'Yates - Morrow 115 kV' line, which matches this line."
+    },
+    {
+     "name": "Yates Common",
+     "lat": 33.46164,
+     "lon": -84.9042,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/652943491 power=substation name=Yates Common Substation operator=Georgia Power voltage=115000;46000",
+     "confidence": "confirmed",
+     "validation": "Exact name match, GPC operator, and a 115 kV voltage that matches the plan. It is at Plant Yates, Coweta County."
+    }
+   ],
+   "notes": "The 5.8 mi of work is on the Fife - Fairburn SW - Owens Corning Tap sections, between Fairburn and Palmetto. Owens Corning Substation (GPC 115 kV) is OSM way/976171885 at 33.54053,-84.61496. Fife is a Nominatim suburb at 33.5348,-84.5455, with an unnamed GPC 115 kV substation at 33.54361,-84.54151 (way/171173864). By coincidence, the Morrow-Yates Common midpoint (33.534,-84.619) falls on this work area."
+  },
+  {
+   "key": "gpc:20771",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Line Creek",
+     "lat": 33.51832,
+     "lon": -84.62393,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/171171652 power=substation substation=transmission operator=Georgia Power voltage=230000 (unnamed; adjacent 115/46/12 kV way/171171654)",
+     "confidence": "lower-confidence",
+     "validation": "OSM has no feature named Line Creek; this match was made from topology. It is the only GPC 230 kV transmission substation (with a 115 kV yard) in the Palmetto/Fairburn area, and GPC 115 kV lines run through it along the Morrow-Yates Common corridor. Line Creek (the stream, OSM waterway) runs about 2 km east. Gullatt Rd passes next to it. It is about 0.33 mi from the new substation at the Microsoft Shugart Farms site; gpc:18736 describes two 0.3 mi Line Creek-Shugart Farms lines, which fits. Existing since 2012, which fits a 'rebuild'."
+    },
+    {
+     "name": "Gullatt Road (new customer station)",
+     "lat": 33.537582,
+     "lon": -84.625943,
+     "precision": "locality",
+     "uncertaintyMeters": 3000,
+     "coordinateSource": "Nominatim highway=tertiary 'Gullatt Road, Fairburn, Fulton County, GA 30268' (OSM way/9235548)",
+     "confidence": "lower-confidence",
+     "validation": "This is a new customer station, and the exact site is not public. The road runs 33.514-33.538 N along -84.61 to -84.63, right beside the Line Creek candidate and the Morrow-Yates Common 115 kV corridor, as the plan describes. The road midpoint is used."
+    }
+   ],
+   "notes": "The plan also mentions rebuilding the Line Creek-Fairburn #2 line and the North Coweta - Str 1 line. The unnamed substation way/1319980016 (33.52122,-84.62848, added 2024) could be this Gullatt Road customer station or the Shugart Farms station; it is assigned to Shugart Farms in gpc:18736."
+  },
+  {
+   "key": "gpc:18736",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Line Creek",
+     "lat": 33.51832,
+     "lon": -84.62393,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/171171652 power=substation substation=transmission operator=Georgia Power voltage=230000 (unnamed)",
+     "confidence": "lower-confidence",
+     "validation": "See gpc:20771. A 230 kV GPC transmission substation between Palmetto and Fairburn, identified from topology and nearby landmarks. It is not named in OSM."
+    },
+    {
+     "name": "Shugart Farms",
+     "lat": 33.52122,
+     "lon": -84.62848,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/1319980016 power=substation (unnamed, created 2024-10-01), 0.53 km NW of the Line Creek candidate",
+     "confidence": "lower-confidence",
+     "validation": "Microsoft CCO06 is at the Shugart Farms Industrial Park on Palmetto's east side (Tatum Rd off US-29); news reports give 8527 Williams Rd, which Nominatim places at 33.5251,-84.6257. A new substation mapped in 2024 sits 0.33 mi from Line Creek, which matches the plan's '0.3 miles each' lines. It could instead be the Gullatt Road customer station."
+    }
+   ],
+   "notes": "The Line Creek 230 kV rebuild (breaker-and-a-half), the Union City-Yates White and Morrow-Yates 230 kV lines tied into Line Creek, and two short lines to Shugart Farms. All work is in a cluster about 1 km across near Palmetto/Fairburn."
+  },
+  {
+   "key": "gpc:20736",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Austin Drive",
+     "lat": 33.73593,
+     "lon": -84.23512,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/967608054 power=substation operator=Georgia Power voltage=230000 (unnamed); OSM Austin Drive (tertiary, way/31032035 / way/223901740) passes within 0.1 km",
+     "confidence": "confirmed",
+     "validation": "This is the only GPC substation within 3 km of Austin Drive in DeKalb County (south of Belvedere/Decatur). It is tagged 230 kV, which fits the plan's 115/230 kV autotransformer. SERTP 2014 (p.70) says the Austin Drive-Morrow 115 kV line runs through Ellenwood (GPC Ellenwood 115 kV, way/837666362, 33.6086,-84.3021), just east of Morrow. The 17.5 km straight-line distance fits a 14.9 mi route. Other roads named 'Austin Drive' (Sandy Springs, Athens, Savannah, Columbus) have no substation and do not fit. The OSM feature is unnamed."
+    },
+    {
+     "name": "Morrow",
+     "lat": 33.60593,
+     "lon": -84.33346,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171479107 name=Morrow Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "GPC Morrow substation, Clayton County."
+    }
+   ],
+   "notes": "TA Realty Ellenwood customer driver. Includes an autotransformer replacement at Austin Drive."
+  },
+  {
+   "key": "gpc:20717",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Tomochichi",
+     "lat": 33.274343,
+     "lon": -84.137922,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "Georgia EPD GEOS NPDES infrastructure NOI 'Tomochichi Substation', owner/operator Georgia Power Company, Spalding County, Latitude 33.274343 Longitude -84.137922 (cached as ga-epd-noi-tomochichi-substation, p.1)",
+     "confidence": "confirmed",
+     "validation": "This is a regulator permit record for the named facility with Georgia Power as operator (construction 08/01/2025 to 12/31/2026, 70 acres disturbed, near Griffin). The OSM 'Scherer - O'Hara 500kV' line (way/9460274) passes about 3.5 km east. That fits the plan's statement that the station splits the Ohara-Scherer 500 kV line."
+    },
+    {
+     "name": "Towaliga River",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "none: no OSM feature, EPD record, or utility page found for a 'Towaliga River' substation",
+     "confidence": "not-found",
+     "validation": "This is a new 230 kV substation. The Towaliga River runs 52 miles (Henry, Spalding, Butts, Lamar, Monroe counties), so its name gives no usable locality. News reports mention data centers along the Towaliga in Hampton and on High Falls Rd, but none of them ties the substation to a site."
+    }
+   ],
+   "notes": "The project center should fall back to Tomochichi only. The O'Hara 500 kV terminal is OSM way/159784542 at 33.4819,-84.3674, and Scherer is way/159784568."
+  },
+  {
+   "key": "gpc:20656",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Plant Yates (Yates 6 & 7 substation)",
+     "lat": 33.45763,
+     "lon": -84.89696,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/1024438670 power=plant name=Plant Yates operator=Georgia Power",
+     "confidence": "confirmed",
+     "validation": "The Yates 6 & 7 substation belongs to Plant Yates, Coweta County. Several switchyards sit within 800 m: Yates Switchyard 230 kV (way/171166735) and an unnamed GPC 230 kV substation (way/652943490, 33.4534,-84.9055). The plant centroid covers them all."
+    }
+   ],
+   "notes": "Breaker-and-a-half rebuild at Plant Yates."
+  },
+  {
+   "key": "gpc:20274",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Union City",
+     "lat": 33.55317,
+     "lon": -84.50907,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/159758306 name=Union Substation operator=Georgia Power voltage=500000",
+     "confidence": "confirmed",
+     "validation": "Union City 500/230 kV hub; the OSM 'O'Hara - Union City 230kV' line ends here."
+    },
+    {
+     "name": "Yates",
+     "lat": 33.46119,
+     "lon": -84.89653,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/171166735 name=Yates Switchyard voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Plant Yates 230 kV switchyard."
+    }
+   ],
+   "notes": "Limiting elements also at Fairburn #1 and Line Creek (Line Creek candidate: OSM way/171171652, 33.5183,-84.6239)."
+  },
+  {
+   "key": "gpc:21062",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Ashley Park",
+     "lat": 33.507335,
+     "lon": -84.476871,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim place=neighbourhood 'Ashley Park, Fayette County, GA 30214'",
+     "confidence": "lower-confidence",
+     "validation": "A Georgia Power press release (cached as gpc-ashley-park-wansley-news-2025) places the Ashley Park 500/230 kV substation 'north of Fayetteville' in Fayette County. The Ashley Park neighbourhood in north Fayette County agrees. The gazetteer's 'Ashley Park' retail area in Newnan, Coweta County (33.3908,-84.7644), is a FALSE match and was rejected. The substation itself is not mapped in OSM, although the O'Hara-Union 500 kV and O'Hara-Union City 230 kV lines pass within 3 km."
+    },
+    {
+     "name": "Wansley",
+     "lat": 33.41096,
+     "lon": -85.03077,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/159784571 power=substation name=Wansley Substation voltage=500000",
+     "confidence": "confirmed",
+     "validation": "500 kV substation at Plant Wansley. The GPC release says 'Plant Wansley near Roopville' in Heard County, and the location agrees."
+    }
+   ],
+   "notes": "A 35 mi 500 kV line. GPC schedule: clearing Q1 2027, construction Q3 2027, completion Q2 2028 (from the press release and project page)."
+  },
+  {
+   "key": "gpc:20480",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "East Point",
+     "lat": 33.67635,
+     "lon": -84.46297,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM relation/14128477 power=substation name=East Point Primary Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Name, operator and 230 kV voltage all match. It is in East Point, Fulton County."
+    },
+    {
+     "name": "Union City",
+     "lat": 33.55317,
+     "lon": -84.50907,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/159758306 name=Union Substation operator=Georgia Power voltage=500000",
+     "confidence": "confirmed",
+     "validation": "Union City 500/230 kV hub."
+    }
+   ],
+   "notes": "Only 1.5 mi, from Flat Shoals Road station to the Stonewall Tell loop-in point. Flat Shoals Road station is probably the unnamed 230 kV substation OSM way/159784560 (33.5858,-84.5238) on Flat Shoals Rd in Union City. That is not confirmed, so the work center is near Union City rather than the line midpoint."
+  },
+  {
+   "key": "gpc:20690",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "East Point",
+     "lat": 33.67635,
+     "lon": -84.46297,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM relation/14128477 name=East Point Primary Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Name, operator and 230 kV voltage match."
+    },
+    {
+     "name": "Union City",
+     "lat": 33.55317,
+     "lon": -84.50907,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/159758306 name=Union Substation operator=Georgia Power voltage=500000",
+     "confidence": "confirmed",
+     "validation": "Union City 500/230 kV hub."
+    }
+   ],
+   "notes": "Rebuild of 5.49 mi from Welcome All to Union City. Welcome All Road is at Nominatim 33.652,-84.521 in South Fulton."
+  },
+  {
+   "key": "gpc:19187",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Bremen",
+     "lat": 33.70919,
+     "lon": -85.14272,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/9307582 power=substation name=Bremen Primary Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "GPC's Bremen primary (230/115 kV), Haralson County, zone 211."
+    },
+    {
+     "name": "Crooked Creek (APC)",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "none: no OSM feature named Crooked Creek in AL/GA; checked the bulk gazetteer, an Overpass name regex over 32.8-34.8N / 86.5-83.0W, and Nominatim",
+     "confidence": "not-found",
+     "validation": "DOE CX-270887 (cached as doe-cx-270887-crooked-creek-georgia-page) describes Alabama Power's 29.6 mi Crooked Creek-Georgia 115 kV line between the Crooked Creek substation and 'the existing Indian Creek substation at the Georgia-Alabama border'. That puts Crooked Creek in Alabama, about 30 mi west of the state line, but its exact site could not be found. The only Nominatim 'Crooked Creek, AL' is in Lee County (Opelika), which is inconsistent and was rejected."
+    }
+   ],
+   "notes": "GPC's work is from Bremen to 'Indian Creek Road', 14 mi, ending at the GA-AL line. Indian Creek, the stream, is at about 33.65,-85.29 (Haralson/Carroll). The Bremen endpoint alone gives a usable GPC-side location."
+  },
+  {
+   "key": "gpc:20431",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Villa Rica",
+     "lat": 33.74102,
+     "lon": -84.85487,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/159758304 power=substation name=Villa Rica Substation voltage=500000;230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. OSM 500 kV lines 'Villa Rica - Union', 'Villa Rica - Bowen' and 'Wansley - Villa Rica' end here. It is in Carroll/Douglas County, zone 211. West Villa Rica and South Villa Rica 115 kV substations also exist, but the plan's low-side breaker points to the main Villa Rica station."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20152",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Cass Pine",
+     "lat": 34.28407,
+     "lon": -84.80159,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1525009645 power=substation operator=Georgia Power (unnamed, created 2026-06-01) at the NW edge of OSM landuse 'Hanwha QCells' (way/1525009658)",
+     "confidence": "confirmed",
+     "validation": "The DOE draft EA-2257 for Qcells Project Redeemer (cached as doe-ea-2257-qcells-redeemer-draft-2024) says GPC 'is installing a 7.5-acre, 230-kilovolt (kV) substation in the northwest corner of the site' (p.7). The site is bounded by Great Valley Pkwy NE on the east and Cassville Pine Log Rd NE on the north-northwest (p.29). A newly mapped GPC substation sits exactly there, on Cassville Pine Log Rd. The name 'Cass Pine' and the plan's 'QCELLS' title both fit. The OSM feature is unnamed."
+    },
+    {
+     "name": "Hill View",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "none: no OSM/Nominatim/utility source for a 'Hill View' switching station",
+     "confidence": "not-found",
+     "validation": "This is a new 230 kV switching station on the Cartersville-McGrau Ford 230 kV line in Bartow County. The plan gives only its distances (8.5 mi from Grassy Hollow, 7.58 mi line to Cass Pine), and those do not fix a location."
+    }
+   ],
+   "notes": "A 7.58 mi 230 kV line. The Cass Pine endpoint gives a Bartow County anchor."
+  },
+  {
+   "key": "gpc:20175",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Two Run Ranch",
+     "lat": 34.223,
+     "lon": -84.889,
+     "precision": "locality",
+     "uncertaintyMeters": 2500,
+     "coordinateSource": "Derived from the Hyundai/SK On battery site description: US-411 'just over a mile west of Hamilton Crossing Road' (Nominatim Hamilton Crossing Rd NW 34.2247,-84.8695), on land owned by Two Run Ranch LLC (Bartow Centre)",
+     "confidence": "lower-confidence",
+     "validation": "The station is named after the Two Run Ranch LLC tract, the SK/Hyundai battery plant site on US-411 west of Cartersville. Two Run Creek flows nearby. An unnamed 230 kV transmission substation (OSM way/1056912088, 34.22294,-84.89003) sits on the 230 kV corridor running WNW toward Pinson (Floyd County hamlet 34.363,-85.064), which matches 'Cartersville - Pinson 230kV'. But it was mapped in May 2022, before the project (start 07/31/2023), so it is NOT claimed as Two Run Ranch."
+    }
+   ],
+   "notes": "Loop-in to the Cartersville-Pinson 230 kV line. The Cartersville Primary 230 kV terminal is OSM way/175158197 at 34.1799,-84.8107."
+  },
+  {
+   "key": "gpc:19636",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Hammond",
+     "lat": 34.25121,
+     "lon": -85.34558,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/186429831 power=substation name='Hammod Substation' (sic) operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "The OSM name is misspelled, but this is GPC's substation at Plant Hammond (Coosa, Floyd County). OSM lines 'Hammond - Lindale 115kV', 'Hammond - Aragon 115kV' and 'Hammond - Bowen 230kV' leave from here. The standard gazetteer search missed it because of the typo."
+    },
+    {
+     "name": "Weiss Dam",
+     "lat": 34.13218,
+     "lon": -85.79389,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1084525982 power=substation substation=generation name=Weiss Substation voltage=115000 (at OSM plant way/606808107 'Weiss Dam' operator=Alabama Power)",
+     "confidence": "confirmed",
+     "validation": "The 115 kV generation substation at Alabama Power's Weiss Dam (Cherokee County, AL). The voltage matches the Hammond-Weiss Dam 115 kV line."
+    }
+   ],
+   "notes": "The GPC work is 11.2 mi from Hammond to the APC border, so it lies in the Georgia half near Hammond."
+  },
+  {
+   "key": "gpc:20151",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Cass Pine",
+     "lat": 34.28407,
+     "lon": -84.80159,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1525009645 power=substation operator=Georgia Power (unnamed, created 2026-06-01), NW corner of the Hanwha QCells site on Cassville Pine Log Rd NE",
+     "confidence": "confirmed",
+     "validation": "See gpc:20152. DOE EA-2257 (p.7, p.13, p.29) places GPC's new 230 kV substation at the NW corner of the Qcells Cartersville site along Cassville Pine Log Road NE. A newly mapped GPC substation is there, and both the 'Cass Pine' name and the QCELLS title fit."
+    }
+   ]
+  },
+  {
+   "key": "gpc:15879",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Possum Branch",
+     "lat": 33.592007,
+     "lon": -85.139158,
+     "precision": "locality",
+     "uncertaintyMeters": 6000,
+     "coordinateSource": "Nominatim waterway=stream 'Possum Branch, Carroll County, GA 30118'",
+     "confidence": "lower-confidence",
+     "validation": "OSM has no substation with this name. The Possum Branch stream near Carrollton, Carroll County, fits the route: Yates Common goes west through Clem (Carroll EMC 115 kV, OSM way/652954544, 33.5124,-84.9945) and Oak Mountain (Carroll County hamlet, 33.5607,-85.0208). SERTP 2014 (sertp-2014-plan p.50) confirms a 'Yates - Possum Branch 115 kV' line exists. A Brooks County Possum Branch in south Georgia was rejected."
+    },
+    {
+     "name": "Yates Common",
+     "lat": 33.46164,
+     "lon": -84.9042,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/652943491 name=Yates Common Substation operator=Georgia Power voltage=115000;46000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC operator, 115 kV."
+    }
+   ],
+   "notes": "The work covers 11.2 mi from Yates Common to Oak Mountain (the title says 'Yates to Clem'). Oak Mountain is about 15.5 km from Yates in a straight line, which is consistent."
+  },
+  {
+   "key": "gpc:20150",
+   "kind": "other",
+   "endpoints": [
+    {
+     "name": "Hill View",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "none found",
+     "confidence": "not-found",
+     "validation": "This new 230 kV switching station is not in OSM or any public source found. It loops into the Cartersville-McGrau Ford 230 kV line, 8.5 mi from Grassy Hollow."
+    },
+    {
+     "name": "Grassy Hollow",
+     "lat": 34.283593,
+     "lon": -84.647927,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim highway=track 'Grassy Hollow Road' (tagged Cherokee County, near the Bartow County line)",
+     "confidence": "lower-confidence",
+     "validation": "The Georgia Power project page (Grassy Hollow-Great Valley 230 kV) says only 'Bartow County'. The only Grassy Hollow Rd sits on the Bartow/Cherokee line. An OSM 230 kV line (way/178742241, 34.269,-84.558) runs through this corridor toward McGrau Ford. No substation is mapped yet; GPC's schedule shows construction Q2 2026 and completion Q1 2027."
+    }
+   ],
+   "notes": "Also in scope: new lines Cass Pine-Great Valley and Great Valley-Grassy Hollow. Great Valley is probably near Great Valley Pkwy / Highland 75, Cartersville (Nominatim about 34.28,-84.787, locality). Cass Pine is at 34.2841,-84.8016."
+  },
+  {
+   "key": "gpc:20024",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Dyer Road",
+     "lat": 33.454091,
+     "lon": -84.900716,
+     "precision": "locality",
+     "uncertaintyMeters": 3000,
+     "coordinateSource": "Nominatim highway 'Dyer Road, Plant Yates, Coweta County, GA 30275'",
+     "confidence": "lower-confidence",
+     "validation": "SERTP 2014 (sertp-2014-plan p.50) lists 'Yates - Dyer Road White 115 kV' and 'Yates - Dyer Road Black 115 kV', plus Dyer Road-Thomaston, -LaGrange and -South Coweta 115 kV lines. That makes Dyer Road a 115 kV hub next to Plant Yates, and Dyer Road runs beside the plant. An unnamed GPC substation (way/652943490, 33.4534,-84.9055) is 0.45 km away but is tagged 230 kV, so it is not claimed. A second Dyer Road in Carroll County (33.6346,-84.99) was considered and judged less consistent."
+    },
+    {
+     "name": "East Roanoke (APC)",
+     "lat": 33.152242,
+     "lon": -85.374817,
+     "precision": "locality",
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim boundary 'Roanoke, Randolph County, Alabama'",
+     "confidence": "lower-confidence",
+     "validation": "No 'East Roanoke' substation was found. OSM 'Roanoke Substation' (Alabama Power, 46 kV distribution, way/1098770982) does not match the 115 kV terminal and was rejected. The town centroid is used."
+    }
+   ],
+   "notes": "GPC's rebuild covers 20.7 mi from Dyer Road to the Wansley tap. The Wansley 500 kV substation is at 33.411,-85.031, and 115 kV lines leave it toward Yates."
+  },
+  {
+   "key": "gpc:20774",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Villa Rica",
+     "lat": 33.74102,
+     "lon": -84.85487,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/159758304 power=substation name=Villa Rica Substation voltage=500000;230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "Villa Rica 500/230 kV station. OSM 500 kV lines to Union, Bowen and Wansley end here."
+    }
+   ],
+   "notes": "Bowen-Union City loop-in, a second 500/230 kV autotransformer, and a 230 kV breaker-and-a-half, all at Villa Rica."
+  },
+  {
+   "key": "gpc:21129",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Anniston (APC)",
+     "lat": 33.65047,
+     "lon": -85.85839,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/186427715 power=substation substation=transmission name=Anniston Substation voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Name match and a 230 kV voltage that matches the line, in Anniston, AL (Alabama Power territory). The operator tag is missing."
+    },
+    {
+     "name": "Hammond",
+     "lat": 34.25121,
+     "lon": -85.34558,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/186429831 name='Hammod Substation' (sic) operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Plant Hammond 230 kV substation, Floyd County (see gpc:19636)."
+    }
+   ],
+   "notes": "GPC rebuilds the 28.12 mi between Hammond and the Goshen tap. The Goshen tap may be near Goshen (Piedmont, Cherokee County, AL; churches at about 33.97,-85.617), which lies roughly on the Hammond-Anniston path. This is unverified. The gazetteer's Goshen substations near Augusta and Savannah are wrong-region false matches and were rejected."
+  },
+  {
+   "key": "gpc:10811",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Bowen",
+     "lat": 34.12158,
+     "lon": -84.92233,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/159758323 power=substation name=Bowen Substation operator=Georgia Power voltage=500000",
+     "confidence": "confirmed",
+     "validation": "500 kV substation at GPC Plant Bowen, Bartow County. Voltage matches the 500/230 kV autobank."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20326",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Anthony Shoals",
+     "lat": 34.00183,
+     "lon": -82.63628,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171540506 power=substation name=Anthony Shoals Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC operator, and 230 kV as in the plan. DOE CX-033755 (cached as doe-cx-033755-anthony-shoals-statcom, p.1) confirms the Anthony Shoals substation STATCOM project is 'in Elbert County, Georgia'. The site is near Richard B. Russell Dam on the Savannah River, about 1.4 km from the SC line."
+    }
+   ],
+   "notes": "This is the project in this batch closest to South Carolina."
+  },
+  {
+   "key": "gpc:19706",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Gainesville #2",
+     "lat": 34.26302,
+     "lon": -83.80967,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/179716524 power=substation name='Gainesville Substation #2' operator=Georgia Power voltage=230000;115000;46000;12000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC operator, and 230/115 kV, which matches the replacement of 230/115 kV autotransformers. Hall County."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20234",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Jacks Creek 230 kV switching station",
+     "lat": 33.824,
+     "lon": -83.695,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "Derived from the DOE/RUS Final EA, East Central Georgia Reliability Projects (cached as doe-ecgrp-final-ea-2026, p.31): the tract is bordered by Gratis Rd (N), Jacks Creek (W) and Old Athens Hwy (S) and is bisected by the Doyle - LG&E Monroe 230 kV line. The point was placed using OSM Gratis Rd way/9516400, Old Athens Hwy way/9515149, and a 230 kV line way/176906099 at 33.8257,-83.6951.",
+     "confidence": "confirmed",
+     "validation": "The EA (p.2) puts the new MEAG-owned, GTC-built switching station 'in Walton County and within the city of Monroe'. The facility is not yet in OSM; the coordinate comes from the regulator's site description plus OSM road and line geometry."
+    }
+   ],
+   "notes": "Loop-in of the Doyle-LG&E Monroe 230 kV line. Doyle (GPC 230 kV, OSM way/176906118) is at 33.83792,-83.69879. The LG&E Monroe end is at the Monroe switch station / Walton County Power plant cluster (OSM way/176896777, 33.8137,-83.6949). Both lie within 2.5 km of Jacks Creek. Coordinated with the East Walton project."
+  },
+  {
+   "key": "gpc:17977",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Athena",
+     "lat": 33.9764,
+     "lon": -83.34612,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171540528 power=substation name=Athena Substation operator=Georgia Power voltage=230000;115000;12000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC, has a 115 kV yard, Athens-Clarke County. An OSM line named 'Athena - East Watkinsville' exists."
+    },
+    {
+     "name": "East Watkinsville",
+     "lat": 33.86055,
+     "lon": -83.38476,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171540512 power=substation name=East Watkinsville Substation operator=Georgia Power voltage=230000;115000;12000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC, has a 115 kV yard, Oconee County."
+    }
+   ],
+   "notes": "The work is on the University of Georgia - East Watkinsville sections. The University of Georgia substation (GPC 115 kV) is OSM way/497514286 at 33.94008,-83.37121."
+  },
+  {
+   "key": "gpc:19621",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "McEver Road",
+     "lat": 34.27288,
+     "lon": -83.8738,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1037359821 power=substation name=McEver Road Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC, 115 kV, Gainesville (Hall County)."
+    },
+    {
+     "name": "Shoal Creek",
+     "lat": 34.148008,
+     "lon": -84.009788,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim waterway=stream 'Shoal Creek, Buford, Gwinnett County, GA'",
+     "confidence": "lower-confidence",
+     "validation": "OSM has no substation with this name. Following the route in the descriptions (McEver Road - College Square - Lakeside WTP - Gaines Ferry - Shoal Creek), the line heads southwest along Lake Lanier. The OSM 'Gaines Ferry Substation' (GPC 115 kV, way/1012559549, 34.1707,-83.9612) matches the plan's 'Gainesville Ferry' and points toward the Shoal Creek area near Buford. Candidate unnamed GPC 115 kV substations (e.g. way/1012559561, 34.1397,-83.9981) are not claimed."
+    }
+   ],
+   "notes": "Work is on the McEver Road - College Square section (College Square is GPC 115 kV, OSM way/1037359827, 34.2354,-83.8963) and the College Square - Lakeside WTP B section, both in Gainesville."
+  },
+  {
+   "key": "gpc:21130",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Gillsville Tap Junction",
+     "lat": 34.307881,
+     "lon": -83.633503,
+     "precision": "locality",
+     "uncertaintyMeters": 6000,
+     "coordinateSource": "Nominatim boundary 'Gillsville, Banks County, GA'",
+     "confidence": "lower-confidence",
+     "validation": "The tap junction is not mapped. The Gillsville town centroid is used. It is consistent with the companion GTC project (Pond Fork to Gillsville Tap Junction, about 6 mi, IRP p.387): the probable Pond Fork 230 kV substation (unnamed OSM way/159608149, 34.2605,-83.7134, near Pond Fork stream in Hall County) is about 9 km away."
+    },
+    {
+     "name": "Midway",
+     "lat": 34.306158,
+     "lon": -83.631211,
+     "precision": "locality",
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim amenity 'Midway Church, GA 52, Gillsville, Hall County' (Midway UMC Cemetery, Banks County, at 34.2971,-83.6192)",
+     "confidence": "lower-confidence",
+     "validation": "No Midway 115 kV substation is mapped. The gazetteer's 'Midway Substation' at 32.06,-85.52 (Alabama) is a false match and was rejected. The 'Midway' place name here is in the Gillsville/Banks area; the East Maysville 115 kV tap (GPC East Maysville, way/1017396857, 34.2461,-83.5464) ends at Midway, which points to the Gillsville-Maysville area. But the plan's 7 mi line length means the true site could be several miles away, so uncertainty is large."
+    }
+   ],
+   "notes": "About 7 mi of new 115 kV line in the retired North Jackson - Lawrence Smith 46 kV ROW (Hall/Banks/Jackson counties). Both endpoints are approximate."
+  },
+  {
+   "key": "gpc:10478",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Cornelia",
+     "lat": 34.511488,
+     "lon": -83.527116,
+     "precision": "locality",
+     "uncertaintyMeters": 6000,
+     "coordinateSource": "Nominatim boundary 'Cornelia, Habersham County, GA'",
+     "confidence": "lower-confidence",
+     "validation": "OSM has no substation named Cornelia, so the town centroid is used. The route (Cornelia - Chase Road - Clarksville - Hollywood - Tallulah) fits: Chase Rd is at 34.536,-83.52 near Cornelia, and Hollywood Substation (115 kV, OSM way/52566972) is at 34.6475,-83.4547."
+    },
+    {
+     "name": "Tallulah Lodge",
+     "lat": 34.72848,
+     "lon": -83.37831,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/52567096 power=substation name='Talulah Falls Substation' voltage=115000",
+     "confidence": "lower-confidence",
+     "validation": "The name does not match exactly ('Tallulah Lodge' vs 'Talulah Falls'). But the OSM line 'Talulah Falls - Toccoa 115kV' (way/1060215660) ends here. Its 16.5 km straight-line length to Toccoa Primary matches the plan's 10.3 mi Tallulah Lodge - Toccoa 115 kV line, and the historic Tallulah Lodge was at Tallulah Falls. Rabun/Habersham County."
+    }
+   ],
+   "notes": "Rebuild of about 9.7 mi across the Cornelia - Chase Road - Clarksville - Hollywood segments."
+  },
+  {
+   "key": "gpc:12120",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Gainesville #2",
+     "lat": 34.26302,
+     "lon": -83.80967,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/179716524 name='Gainesville Substation #2' operator=Georgia Power voltage=230000;115000;46000;12000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC, has a 115 kV yard."
+    },
+    {
+     "name": "McEver Road",
+     "lat": 34.27288,
+     "lon": -83.8738,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1037359821 name=McEver Road Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC, 115 kV. It is about 6 km west of Gainesville #2, which fits a 5.3 mi line."
+    }
+   ]
+  },
+  {
+   "key": "gpc:20789",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Jefferson Road",
+     "lat": 33.9778,
+     "lon": -83.57948,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1017583912 power=substation name='Jefferson Rd Substation' operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Name match (Rd = Road), GPC, 115 kV. It is about 11 km east of Russell (Barrow County, 33.979,-83.700), and Richardson Street is in Winder (33.9866,-83.7196), so the 11 mi route fits. The gazetteer's top hit for 'Russell', Russell Dam (Elbert County), is a false match and was rejected."
+    },
+    {
+     "name": "Winder Primary",
+     "lat": 33.99546,
+     "lon": -83.75313,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171583070 power=substation name=Winder Primary Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Exact name match, GPC, Winder (Barrow County). It is distinct from 'Winder Substation', way/171583083."
+    }
+   ]
+  },
+  {
+   "key": "gpc:19995",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Tallulah Lodge",
+     "lat": 34.72848,
+     "lon": -83.37831,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/52567096 name='Talulah Falls Substation' voltage=115000",
+     "confidence": "lower-confidence",
+     "validation": "The name differs, but the OSM line 'Talulah Falls - Toccoa 115kV' ends here, and the 16.5 km straight-line distance to Toccoa matches the plan's 10.3 mi line."
+    },
+    {
+     "name": "Toccoa",
+     "lat": 34.58095,
+     "lon": -83.35273,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/52440914 power=substation name=Toccoa Primary Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Name, GPC operator and 115 kV all match, Stephens County. TVA 'Toccoa River Substation' is a false match and was rejected."
+    }
+   ]
+  },
+  {
+   "key": "gpc:21053",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "McEver Road",
+     "lat": 34.27288,
+     "lon": -83.8738,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1037359821 name=McEver Road Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Exact name, GPC, 115 kV."
+    },
+    {
+     "name": "Shoal Creek",
+     "lat": 34.148008,
+     "lon": -84.009788,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim waterway=stream 'Shoal Creek, Buford, Gwinnett County, GA'",
+     "confidence": "lower-confidence",
+     "validation": "See gpc:19621. There is no OSM substation with this name; the endpoint is inferred from the line route past Gaines Ferry toward Buford."
+    }
+   ],
+   "notes": "Work is on the Gainesville Ferry - Lakeside WTP A section. 'Gainesville Ferry' is probably OSM 'Gaines Ferry Substation' (GPC 115 kV, way/1012559549, 34.1707,-83.9612)."
+  },
+  {
+   "key": "gpc:09661",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "McGrau Ford",
+     "lat": 34.32645,
+     "lon": -84.33701,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/159758301 power=substation name=McGrau Ford Substation voltage=500000",
+     "confidence": "confirmed",
+     "validation": "Exact name, 500 kV. The OSM line 'Mostellar Springs - McGrau Ford 500kV' ends here. Cherokee County."
+    },
+    {
+     "name": "Middle Fork (GTC)",
+     "lat": 34.42052,
+     "lon": -83.40058,
+     "precision": "named-facility",
+     "uncertaintyMeters": 2000,
+     "coordinateSource": "OSM way/52460256 power=substation substation=transmission voltage=230000 (unnamed)",
+     "confidence": "lower-confidence",
+     "validation": "The IRP says Middle Fork is an existing GTC 230 kV substation (GTC Middle Fork STATCOM; Hartwell Energy-Middle Fork 230 kV line). The IRP (p.418 area) says a new 500 kV yard will be built there. This unnamed 230 kV transmission substation is about 4 km from the Middle Fork Broad River (Franklin County). A 230 kV line runs south from it toward Center Primary (34.053,-83.398), which fits a SERTP 'Center Primary - Middle Fork 230 kV' line. It sits next to the existing 'South Hall - Oconee' 500 kV line, which would suit a new 500 kV yard. It is about 54 mi straight-line from McGrau Ford, which fits the plan's 64-65 mi. The feature is not named, so the match is unconfirmed."
+    }
+   ],
+   "notes": "A 500 kV line of about 64 mi, need date 2033."
+  },
+  {
+   "key": "gpc:18700",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Gainesville #1",
+     "lat": 34.34026,
+     "lon": -83.84025,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1037359840 power=substation name='Gainesville Primary Substation (#1)' operator=Georgia Power voltage=115000;46000",
+     "confidence": "confirmed",
+     "validation": "The name matches '#1', and it is GPC with a 115 kV yard, matching the '115 kV main bus'. Hall County. Gainesville #2 is a separate station (way/179716524)."
+    }
+   ],
+   "notes": "Although the title names a line, the work is only a main-bus replacement at Gainesville #1, so it is modeled as a substation. The other terminal, Dawson Crossing (GPC 230/115 kV), is OSM way/177912657 at 34.37812,-84.13358."
+  }
+ ],
+ "unresolved": [
+  "gpc:20717 Towaliga River (new 230 kV substation): no public location found; the project center should use Tomochichi (EPD NOI coordinate) only",
+  "gpc:19187 Crooked Creek (APC): in Alabama about 29.6 mi west of the Indian Creek state-line substation (DOE CX-270887), but no site found; the Bremen endpoint alone places the GPC work",
+  "gpc:20152 / gpc:20150 Hill View 230 kV switching station: not found (Bartow County, on the Cartersville-McGrau Ford 230 kV line)",
+  "gpc:20150 Grassy Hollow is locality-only (Grassy Hollow Rd, Bartow/Cherokee line); Great Valley is not located beyond the Great Valley Pkwy area",
+  "gpc:20175 Two Run Ranch is locality-only (Hyundai/SK site on US-411); the nearby 230 kV substation OSM way/1056912088 predates the project and is not claimed",
+  "gpc:21130 Gillsville Tap Junction and Midway are both locality-only, with large uncertainty",
+  "gpc:09661 Middle Fork: unnamed 230 kV substation OSM way/52460256 is a topology-based candidate only",
+  "gpc:20771 / gpc:18736 / gpc:20274 Line Creek (OSM way/171171652) and Shugart Farms (OSM way/1319980016) are identified from topology and nearby landmarks; unnamed in OSM",
+  "gpc:19363 Mountain View, gpc:15879 Possum Branch, gpc:20024 Dyer Road and East Roanoke, gpc:19621/21053 Shoal Creek, gpc:10478 Cornelia, gpc:21062 Ashley Park: locality-level only"
+ ],
+ "issuesFixed": [
+  "Ashley Park: rejected the gazetteer/Nominatim 'Ashley Park' retail area in Newnan (Coweta). A Georgia Power release puts the Ashley Park substation north of Fayetteville in Fayette County",
+  "Russell (Jefferson Road - Winder Primary route) is Russell in Barrow County, not Russell Dam Substation (the gazetteer's top hit, in Elbert County)",
+  "Hammond is mis-tagged in OSM as 'Hammod Substation', so the gazetteer missed it; found with --around at Rome",
+  "Tallulah Lodge has no OSM name match; matched to 'Talulah Falls Substation' through the OSM 'Talulah Falls - Toccoa 115kV' line and its 10.3 mi length",
+  "Rejected wrong-region gazetteer hits: Goshen (Augusta/Savannah), Midway (Alabama 32.06N), Owens Corning Switching Station (SC; used the GPC Owens Corning in Fairburn instead), Toccoa River (TVA), Pinson Solar Farm (SC), Roanoke Substation (APC 46 kV, not East Roanoke)",
+  "Tomochichi, a new substation not in OSM, was located from a Georgia EPD NOI (cached as ga-epd-noi-tomochichi-substation, verified p.1)",
+  "Cass Pine was located as the newly mapped GPC substation at the NW corner of the Qcells site, matching DOE EA-2257 (cached as doe-ea-2257-qcells-redeemer-draft-2024)",
+  "Jacks Creek was located from the site description in the DOE/RUS ECGRP Final EA (cached as doe-ecgrp-final-ea-2026, p.31)",
+  "Two Run Ranch: did not claim the unnamed 230 kV substation mapped in 2022, because it predates the project",
+  "Also cached: gpc-ashley-park-wansley-news-2025, doe-cx-270887-crooked-creek-georgia-page, and doe-cx-033755-anthony-shoals-statcom. The CX-270887 PDF (doe-cx-270887-crooked-creek-georgia-115kv) is a scan with no extractable text"
+ ]
+}

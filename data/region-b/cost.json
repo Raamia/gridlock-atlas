@@ -11,7 +11,7 @@
    "section": "Typical Transmission Line Easement Widths (approximates) - Roadside | Cross Country",
    "exactExcerpt": "115 kV Line Single pole 25-42.5 feet + 100 feet",
    "verifiedByScript": true,
-   "note": "Georgia Transmission Corp. fact sheet (2017). The two values are the Roadside and Cross Country columns. Typical is the cross-country width, which the sheet prints as '+ 100 feet'; I read that as 100 ft or more. Low is the roadside easement (25-42.5 ft), used where the line runs next to a road right-of-way. The H-frame row also says '+ 100 feet' cross-country. No source gives a high value. As a cross-check, MISO's indicative width is 90 ft (rowWidthFt.115.miso). I found no public DESC or Georgia Power statement of a 115 kV width."
+   "note": "Georgia Transmission Corp. fact sheet (2017). The two values are the Roadside and Cross Country columns. Typical is the cross-country width, printed as '+ 100 feet'; I read that as 100 ft or more, so 100 is the conservative end. Low is the bottom of the roadside easement range (25-42.5 ft), used where a line runs beside a road right-of-way. The H-frame row also says '+ 100 feet' cross-country. The sheet gives no upper bound. As a cross-check, MISO's indicative width is 90 ft (rowWidthFt.115.miso). I found no public DESC or Georgia Power statement of a 115 kV width."
   },
   {
    "key": "rowWidthFt.230",
@@ -20,10 +20,10 @@
    "unit": "ft",
    "sourceId": "scpsc-2010-238-e-pineland-application",
    "page": 5,
-   "section": "Application, SC PSC Docket 2010-238-E - line description (Denny Terrace-Pineland 230 kV)",
+   "section": "Application, SC PSC Docket 2010-238-E - Project Description (Denny Terrace-Pineland 230 kV)",
    "exactExcerpt": "WIDTH OF RIGHT-OF-WAY: 100 FEET (Typical) DESIGN VOLTAGE: 230 kV",
    "verifiedByScript": true,
-   "note": "South Carolina Electric & Gas (now Dominion Energy South Carolina) filed this Siting Act application for an 8.0-mile 230 kV line in northeast Columbia in 2010. It gives 100 ft as the typical width. Georgia Transmission gives 100 ft (single pole) to 125 ft (H-frame) cross-country (rowWidthFt.230.gtc). MISO's indicative width is 125 ft (rowWidthFt.230.miso)."
+   "note": "South Carolina Electric & Gas (now Dominion Energy South Carolina) filed this Siting Act application on July 7, 2010 (cover letter, page 2). It covers an 8.0-mile 230 kV line between two substations in northeast Columbia, Richland County (page 5), and states a typical width of 100 ft. The excerpt supports only this single value, so no low or high is given. Georgia Transmission gives 100 ft (single pole) to 125 ft (H-frame) cross-country (rowWidthFt.230.gtc). MISO's indicative width is 125 ft (rowWidthFt.230.miso)."
   },
   {
    "key": "rowWidthFt.230.gtc",
@@ -37,7 +37,7 @@
    "section": "Typical Transmission Line Easement Widths (approximates)",
    "exactExcerpt": "230 kV Line Single pole 25-42.5 feet + 100 feet 230 kV Line H-frame n/a + 125 feet",
    "verifiedByScript": true,
-   "note": "Low is the roadside single-pole easement (25-42.5 ft). Typical is the cross-country single-pole width ('+ 100 feet'). High is the cross-country H-frame width ('+ 125 feet'). The sheet says these values are approximate."
+   "note": "Low is the bottom of the roadside single-pole easement range (25-42.5 ft). Typical is the cross-country single-pole width ('+ 100 feet'). High is the cross-country H-frame width ('+ 125 feet'). The sheet calls these values approximate."
   },
   {
    "key": "rowWidthFt.500",
@@ -51,7 +51,7 @@
    "section": "Typical Transmission Line Easement Widths (approximates) - Cross Country",
    "exactExcerpt": "500 kV Steel Lattice Structure n/a 150-180 feet",
    "verifiedByScript": true,
-   "note": "The sheet gives a range of 150-180 ft cross-country and no roadside value. Typical is set to the low end of the published range (150 ft) so the estimate stays conservative; I did not compute a midpoint. The 100-150 ft figure in the structure-height table on the same page is a pole height, not a width. MISO's indicative width is 200 ft (rowWidthFt.500.miso). I found no DESC 500 kV width in public sources."
+   "note": "The sheet gives 150-180 ft cross-country and no roadside value. Typical is set to the low end of that range (150 ft) to stay conservative; I did not use a midpoint. The 100-150 ft figure in the structure-height table on the same page is a structure height, not a width. MISO's indicative width is 200 ft (rowWidthFt.500.miso). I found no public DESC 500 kV width."
   },
   {
    "key": "rowWidthFt.115.miso",
@@ -60,10 +60,10 @@
    "unit": "ft",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 32,
-   "section": "Table 3.1-1: Right-of-way width (printed page 31)",
+   "section": "3.1 Right-of-Way Width, Table 3.1-1 (printed page 31)",
    "exactExcerpt": "Table 3.1-1: Right-of-way width AC Transmission (single and double circuit) Voltage class 69 kV 115 kV 138 kV 161 kV 230 kV 345 kV 500 kV 765 kV Feet 80 90 95 100 125 175 200 225",
    "verifiedByScript": true,
-   "note": "The feet values line up with the voltage-class columns in order, so 115 kV = 90 ft. MISO says these widths are indicative and not tied to any project. Use as a cross-check only; SC and GA are outside MISO."
+   "note": "The feet values follow the voltage columns in order, so 115 kV = 90 ft. MISO calls these widths indicative; they are not tied to any project. Use as a cross-check only, because SC and GA are outside MISO."
   },
   {
    "key": "rowWidthFt.230.miso",
@@ -72,10 +72,10 @@
    "unit": "ft",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 32,
-   "section": "Table 3.1-1: Right-of-way width (printed page 31)",
+   "section": "3.1 Right-of-Way Width, Table 3.1-1 (printed page 31)",
    "exactExcerpt": "Table 3.1-1: Right-of-way width AC Transmission (single and double circuit) Voltage class 69 kV 115 kV 138 kV 161 kV 230 kV 345 kV 500 kV 765 kV Feet 80 90 95 100 125 175 200 225",
    "verifiedByScript": true,
-   "note": "230 kV = 125 ft, which matches Georgia Transmission's H-frame cross-country width. Cross-check only."
+   "note": "230 kV = 125 ft, the same as Georgia Transmission's H-frame cross-country width. Cross-check only."
   },
   {
    "key": "rowWidthFt.500.miso",
@@ -84,15 +84,14 @@
    "unit": "ft",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 32,
-   "section": "Table 3.1-1: Right-of-way width (printed page 31)",
+   "section": "3.1 Right-of-Way Width, Table 3.1-1 (printed page 31)",
    "exactExcerpt": "Table 3.1-1: Right-of-way width AC Transmission (single and double circuit) Voltage class 69 kV 115 kV 138 kV 161 kV 230 kV 345 kV 500 kV 765 kV Feet 80 90 95 100 125 175 200 225",
    "verifiedByScript": true,
-   "note": "500 kV = 200 ft, wider than Georgia Transmission's 150-180 ft. MISO assumes steel-pole designs. Cross-check only."
+   "note": "500 kV = 200 ft, wider than Georgia Transmission's 150-180 ft for steel lattice. The same page says MISO assumes steel-pole structures for all AC voltages from 69 to 765 kV. Cross-check only."
   },
   {
    "key": "landValuePerAcre.SC",
    "label": "South Carolina average farm real estate value, 2026",
-   "low": 4100,
    "typical": 4900,
    "unit": "USD/acre",
    "sourceId": "usda-nass-land-values-2026",
@@ -100,21 +99,19 @@
    "section": "Farm Real Estate Average Value per Acre - Regions, States, and United States: 2022-2026 (continued)",
    "exactExcerpt": "6,000 4,250 9,150 4,950 4,900",
    "verifiedByScript": true,
-   "note": "pdftotext reads this table one column at a time. This run is the 2026 column, rows in page order: Southeast, Alabama, Florida, Georgia, South Carolina. So SC = $4,900 and GA = $4,950. The layout rendering of the South Carolina row confirms it: 4,070 / 4,360 / 4,500 / 4,740 / 4,900 for 2022-2026, +3.4% from 2025. Farm real estate covers land and buildings. Low is SC cropland, $4,100 (landValuePerAcre.SC.cropland). The report was released July 31, 2026 (page 22). These are statewide averages, not values along a specific corridor."
+   "note": "pdftotext reads this table one column at a time. This run is the 2026 column, with rows in page order Southeast, Alabama, Florida, Georgia, South Carolina, so SC = $4,900 and GA = $4,950. Reading the South Carolina row across 2022-2026 gives 4,070 / 4,360 / 4,500 / 4,740 / 4,900, +3.4% from 2025. USDA defines farm real estate as all land and buildings on farms (page 4). The report was released July 31, 2026 (page 22). This is a statewide average, not a value for any specific corridor. Low and high were removed because the page-9 excerpt does not contain them. Bare-land alternatives from the same report are separate keys with their own verified excerpts: SC cropland $4,100 (landValuePerAcre.SC.cropland) and SC pasture $4,500 (landValuePerAcre.SC.pasture)."
   },
   {
    "key": "landValuePerAcre.GA",
    "label": "Georgia average farm real estate value, 2026",
-   "low": 4670,
    "typical": 4950,
-   "high": 5100,
    "unit": "USD/acre",
    "sourceId": "usda-nass-land-values-2026",
    "page": 9,
    "section": "Farm Real Estate Average Value per Acre - Regions, States, and United States: 2022-2026 (continued)",
    "exactExcerpt": "6,000 4,250 9,150 4,950 4,900",
    "verifiedByScript": true,
-   "note": "Same 2026 column as the SC entry (Southeast, Alabama, Florida, Georgia, South Carolina), so GA = $4,950. The layout rendering of the Georgia row reads 3,900 / 4,270 / 4,500 / 4,720 / 4,950, +4.9%. Low is GA cropland, $4,670 (landValuePerAcre.GA.cropland). High is GA pasture, $5,100 (landValuePerAcre.GA.pasture)."
+   "note": "This is the same 2026 column as the SC entry (Southeast, Alabama, Florida, Georgia, South Carolina), so GA = $4,950. The Georgia row reads 3,900 / 4,270 / 4,500 / 4,720 / 4,950 for 2022-2026, +4.9%. Low and high were removed because they came from other pages, not this excerpt. The alternatives are separate verified keys: GA cropland $4,670 (landValuePerAcre.GA.cropland) and GA pasture $5,100 (landValuePerAcre.GA.pasture)."
   },
   {
    "key": "landValuePerAcre.SC.cropland",
@@ -126,7 +123,7 @@
    "section": "Cropland Average Value per Acre - Regions, States, and United States: 2022-2026 (continued)",
    "exactExcerpt": "6,080 4,650 11,100 4,670 4,100",
    "verifiedByScript": true,
-   "note": "This is the 2026 column in row order Southeast, Alabama, Florida, Georgia, South Carolina, so SC cropland = $4,100 (+2.5%). Layout mode confirms it."
+   "note": "This is the 2026 column in row order Southeast, Alabama, Florida, Georgia, South Carolina, so SC cropland = $4,100 (+2.5%, the last value in the percent-change column)."
   },
   {
    "key": "landValuePerAcre.GA.cropland",
@@ -150,7 +147,7 @@
    "section": "Pasture Average Value per Acre - Regions, States, and United States: 2022-2026 (continued)",
    "exactExcerpt": "5,920 3,500 7,650 5,100 4,500",
    "verifiedByScript": true,
-   "note": "This is the 2026 column in row order Southeast, Alabama, Florida, Georgia, South Carolina, so SC pasture = $4,500 (+4.7%). MISO's guide uses the USDA pasture value as its base land cost."
+   "note": "This is the 2026 column in row order Southeast, Alabama, Florida, Georgia, South Carolina, so SC pasture = $4,500 (+4.7%). MISO's cost guide uses the USDA pasture value as its base land cost (miso-cost-guide-mtep24, page 7)."
   },
   {
    "key": "landValuePerAcre.GA.pasture",
@@ -166,15 +163,15 @@
   },
   {
    "key": "easementShare.misoConvention",
-   "label": "Right-of-way land priced at full USDA-based land value (MISO planning convention)",
+   "label": "Right-of-way easements priced at full USDA-based land value (MISO planning convention)",
    "typical": 1,
    "unit": "fraction of land value per acre",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 7,
-   "section": "2. Right-of-Way, Land Acquisition, and Regulatory and Permitting (printed page 6)",
-   "exactExcerpt": "MISO utilizes the annual USDA Land Values summary to estimate the value of pastureland",
+   "section": "2.1 Common Cost Categories - Right-of-Way, Land Acquisition, and Regulatory and Permitting (printed page 6)",
+   "exactExcerpt": "Right-of-way and land acquisition costs cover land easements on yet-to-be-installed projects and are typically charged to FERC plant accounts 350 and 359. MISO assumes that new right-of-way is required for all projects except transmission line rebuild projects. MISO has three categories of land costs: pasture, crop, and urban/suburban. MISO utilizes the annual USDA Land Values summary to estimate the value of pastureland.",
    "verifiedByScript": true,
-   "note": "This is a planning convention, not an observed ratio of easement price to fee value. On the same page MISO says 'All land costs are based upon the acreage of land that the new transmission line would traverse' (also verified, page 7). Table 2.1 on page 8 then prices right-of-way per acre at the land value (pasture; crop = 3x pasture; urban = 5x pasture), with no easement discount, so the implied share is 1.0. A separate right-of-way acquisition cost per acre is added on top (rowAcquisitionCostPerAcre). Use as a default only with that explanation. No SC or GA source states a typical share."
+   "note": "This is a planning convention, not an observed ratio of easement price to fee value. MISO says its right-of-way costs cover land easements and prices them from the USDA land value per acre (pasture; cropland = 3x pasture; urban/suburban = 5x pasture). The same page says 'All land costs are based upon the acreage of land that the new transmission line would traverse' (also verified). The guide applies no easement discount factor, so the implied share is 1.0. That share is my inference; MISO does not state it. MISO adds a separate acquisition cost per acre on top (rowAcquisitionCostPerAcre). No SC or GA source states a typical share."
   },
   {
    "key": "easementShare.cleanLineMO",
@@ -186,7 +183,7 @@
    "section": "Compensation Calculation - Easement Payment",
    "exactExcerpt": "Clean Line will pay 110% of the average value of the land, based on recent sales in the county",
    "verifiedByScript": true,
-   "note": "This is one developer's landowner offer, filed with the Missouri PSC as Schedule DKL-3 in June 2016, for a merchant HVDC line with an easement about 150-200 ft wide. It is not SC or GA and not a typical utility share. It is only evidence that easement payments can match or exceed fee value, so use it only as a high sensitivity case."
+   "note": "This is one developer's landowner offer, filed with the Missouri PSC as Schedule DKL-3 (June 2016), for a line with an easement 'approximately 150-200 feet wide' (page 1). It is not SC or GA and not a typical utility share. The source contradicts itself: page 2 repeats the 110% rule, but its worked example prices the easement at 100% of the stated $5,000/acre market value ('9.1 acres x $5,000 (price per acre offer) = $45,500', verified on page 2). Treat it only as evidence that easement payments can reach or exceed fee value, and use it only as a high sensitivity case."
   },
   {
    "key": "lineCostPerMile.115",
@@ -194,13 +191,13 @@
    "low": 1800000,
    "typical": 2200000,
    "high": 2200000,
-   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 39,
-   "section": "Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
-   "exactExcerpt": "Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M",
+   "section": "4.1 Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
+   "exactExcerpt": "Louisiana $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.1M $6.3M Michigan $1.8M $2.0M $2.1M $2.2M $2.3M $3.7M $4.6M $5.8M Minnesota $1.8M $2.0M $2.1M $2.1M $2.3M $3.6M $4.5M $5.7M Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M Missouri $1.7M $1.9M $2.0M $2.0M $2.2M $3.5M $4.4M $5.5M Montana $1.6M $1.8M $1.9M $1.9M $2.0M $3.2M $4.1M $5.2M",
    "verifiedByScript": true,
-   "note": "The columns are 69 / 115 / 138 / 161 / 230 / 345 / 500 / 765 kV (header verified on the same page), so Mississippi 115 kV = $2.2M/mile. SC and GA are not MISO states; I used Mississippi as the closest Southeast proxy, and that choice is mine, not the source's. Low and high span all 15 states in the table: $1.8M (Montana, North Dakota, South Dakota) to $2.2M (Louisiana, Mississippi, Texas). The table footnote reads 'Includes contingency (30%) and AFUDC (7.5%)'. Page 2 says data are in 2023 dollars 'escalated ... to 2024 U.S. dollars at a rate of 5%'. MTEP24 is the latest edition I could verify that prints the $/mile tables in the PDF; the MTEP26 guide moves its tables to a separate workbook (see costEscalationPerYear)."
+   "note": "The columns are 69 / 115 / 138 / 161 / 230 / 345 / 500 / 765 kV (header verified on the same page). The second value in each row is 115 kV: typical is Mississippi, $2.2M; low is Montana, $1.8M (the table minimum, shared with North and South Dakota); high is Louisiana and Mississippi, $2.2M (the table maximum, shared with Texas). SC and GA are not MISO states; using Mississippi as the closest Southeast proxy is my choice, not the source's. The footnote reads 'Includes contingency (30%) and AFUDC (7.5%)'. MISO says these $/mile figures are built from the guide's own assumptions and cost data (page 39), and that it assumes new right-of-way for all new lines (page 7), so this per-mile cost already includes right-of-way land and acquisition. Do not add an avoided right-of-way land value on top of it. MISO also says it 'does not recommend using exploratory cost estimates for any solution idea in the regular planning cycle' (page 39)."
   },
   {
    "key": "lineCostPerMile.230",
@@ -208,13 +205,13 @@
    "low": 2000000,
    "typical": 2600000,
    "high": 2600000,
-   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 39,
-   "section": "Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
-   "exactExcerpt": "Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M",
+   "section": "4.1 Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
+   "exactExcerpt": "Louisiana $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.1M $6.3M Michigan $1.8M $2.0M $2.1M $2.2M $2.3M $3.7M $4.6M $5.8M Minnesota $1.8M $2.0M $2.1M $2.1M $2.3M $3.6M $4.5M $5.7M Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M Missouri $1.7M $1.9M $2.0M $2.0M $2.2M $3.5M $4.4M $5.5M Montana $1.6M $1.8M $1.9M $1.9M $2.0M $3.2M $4.1M $5.2M",
    "verifiedByScript": true,
-   "note": "The fifth value is 230 kV = $2.6M/mile. Across the 15 states the range is $2.0M (Montana, North Dakota, South Dakota) to $2.6M (Louisiana, Mississippi). This is a MISO-footprint proxy, not a DESC or Georgia Power figure. Compare the DESC-derived examples: lineCostPerMile.230.descNewExample (~$2.97M/mile, including substation work) and lineCostPerMile.230.descRebuildExample (~$1.27M/mile)."
+   "note": "The fifth value in each row is 230 kV: typical is Mississippi, $2.6M; low is Montana, $2.0M (the table minimum, shared with North and South Dakota); high is Louisiana and Mississippi, $2.6M (the table maximum). This is a MISO-footprint proxy, not a DESC or Georgia Power figure. It includes right-of-way land and acquisition (see lineCostPerMile.115), so do not add avoided right-of-way land value on top. Compare the DESC-derived examples: lineCostPerMile.230.descNewExample (~$2.97M/mile, which also covers substation work) and lineCostPerMile.230.descRebuildExample (~$1.27M/mile)."
   },
   {
    "key": "lineCostPerMile.500",
@@ -222,77 +219,77 @@
    "low": 4100000,
    "typical": 5000000,
    "high": 5100000,
-   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 39,
-   "section": "Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
-   "exactExcerpt": "Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M",
+   "section": "4.1 Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
+   "exactExcerpt": "Louisiana $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.1M $6.3M Michigan $1.8M $2.0M $2.1M $2.2M $2.3M $3.7M $4.6M $5.8M Minnesota $1.8M $2.0M $2.1M $2.1M $2.3M $3.6M $4.5M $5.7M Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M Missouri $1.7M $1.9M $2.0M $2.0M $2.2M $3.5M $4.4M $5.5M Montana $1.6M $1.8M $1.9M $1.9M $2.0M $3.2M $4.1M $5.2M",
    "verifiedByScript": true,
-   "note": "The seventh value is 500 kV = $5.0M/mile. Across the 15 states the range is $4.1M (Montana, North Dakota, South Dakota) to $5.1M (Louisiana). This is a MISO proxy."
+   "note": "The seventh value in each row is 500 kV: typical is Mississippi, $5.0M; low is Montana, $4.1M (the table minimum, shared with North and South Dakota); high is Louisiana, $5.1M (the table maximum). This is a MISO proxy, and it includes right-of-way land and acquisition (see lineCostPerMile.115)."
   },
   {
    "key": "lineCostPerMile.115.rebuild",
    "label": "Single-circuit 115 kV rebuild, exploratory cost per mile (MISO)",
    "typical": 1700000,
-   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 40,
-   "section": "Table 4.1-3: Exploratory cost estimate - AC transmission, rebuild and reconductor transmission line $/mile (printed page 39)",
+   "section": "4.1 Table 4.1-3: Exploratory cost estimate - AC transmission, rebuild and reconductor transmission line $/mile (printed page 39)",
    "exactExcerpt": "Rebuild \u2013 single circuit $1.5M $1.7M $1.8M $1.8M $1.9M N/A N/A N/A",
    "verifiedByScript": true,
-   "note": "The columns are 69 / 115 / 138 / 161 / 230 / 345 / 500 / 765 kV, so 115 kV = $1.7M/mile. This table is not broken out by state. MISO assumes rebuilds need no new right-of-way. Many DESC and Georgia Power plan items are rebuilds, so this may suit rebuild-vs-rebuild pairs better. The DESC-derived Stevens Creek-Graniteville rebuild is about $1.21M/mile."
+   "note": "The columns are 69 / 115 / 138 / 161 / 230 / 345 / 500 / 765 kV, so 115 kV = $1.7M/mile. This table is not broken out by state. MISO says it 'assumes that new right-of-way is required for all projects except transmission line rebuild projects' (page 7, verified), so this figure carries no new right-of-way cost. Many DESC plan items are rebuilds; the DESC-derived Stevens Creek-Graniteville 115 kV rebuild works out to about $1.21M/mile (lineCostPerMile.115.descExample)."
   },
   {
    "key": "lineCostPerMile.230.rebuild",
    "label": "Single-circuit 230 kV rebuild, exploratory cost per mile (MISO)",
    "typical": 1900000,
-   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 40,
-   "section": "Table 4.1-3: Exploratory cost estimate - AC transmission, rebuild and reconductor transmission line $/mile (printed page 39)",
+   "section": "4.1 Table 4.1-3: Exploratory cost estimate - AC transmission, rebuild and reconductor transmission line $/mile (printed page 39)",
    "exactExcerpt": "Rebuild \u2013 single circuit $1.5M $1.7M $1.8M $1.8M $1.9M N/A N/A N/A",
    "verifiedByScript": true,
-   "note": "The fifth value is 230 kV = $1.9M/mile. MISO lists no 500 kV rebuild value (N/A)."
+   "note": "The fifth value is 230 kV = $1.9M/mile. MISO gives no 500 kV rebuild value (N/A). No new right-of-way is assumed for rebuilds (page 7)."
   },
   {
    "key": "lineCostPerMile.115.descExample",
    "label": "DESC plan example: Stevens Creek-Graniteville 115 kV rebuild, total cost / stated miles",
    "typical": 1213333,
-   "unit": "USD/mile (derived; DESC budget dollars)",
+   "unit": "USD/mile (derived; DESC nominal budget dollars)",
    "sourceId": "desc-scrtp-2026-2030",
    "page": 49,
    "section": "Project 49 of 54 - Stevens Creek - Graniteville 115 kV: Rebuild (Project ID 6809 T)",
    "exactExcerpt": "Rebuilding the 15 mile section of 115 kv line between Stevens Creek and Graniteville.",
    "verifiedByScript": true,
-   "note": "Derived: $18,200,000 / 15 miles = ~$1.21M/mile. The total comes from the same page, verified separately with the excerpt 'Total $18,200,000' (FOUND on page 49). The project is planned (in-service 12/31/29). Graniteville is in Aiken County, SC. This is DESC's own planning figure for one project, not a unit cost."
+   "note": "Derived: $18,200,000 / 15 miles = ~$1.21M/mile. The total is on the same page, verified separately with the excerpt 'Total $18,200,000'; it equals the sum of the yearly amounts ($100,000 + $200,000 + $9,300,000 + $8,600,000). Status is Planned, with a planned in-service date of 12/31/29 and a stated need of 'System Hardening'. This is DESC's planning estimate for one project, not a unit cost."
   },
   {
    "key": "lineCostPerMile.230.descNewExample",
    "label": "DESC plan example: Jasper-Okatie 230 kV #2 new line, total cost / stated miles",
    "typical": 2966227,
-   "unit": "USD/mile (derived; DESC budget dollars)",
+   "unit": "USD/mile (derived; DESC nominal budget dollars)",
    "sourceId": "desc-scrtp-2026-2030",
    "page": 12,
    "section": "Project 12 of 54 - Jasper - Okatie 230 kV #2: Construct (Project ID 06367 D-G)",
    "exactExcerpt": "Construct a 230 kV line with B1272 ACSR from Jasper to Okatie 230/115kV Substation. The line is estimated to be 6.5 miles long.",
    "verifiedByScript": true,
-   "note": "Derived: $19,280,474 / 6.5 miles = ~$2.97M/mile. The total was verified separately on page 49's counterpart, page 12, with the excerpt 'Total $19,280,474'. The scope also covers substation work ('will require a new CIP hut'), so this overstates the line-only cost per mile. The project is in progress (in-service 12/01/2026), in the Jasper/Beaufort area near Savannah."
+   "note": "Derived: $19,280,474 / 6.5 miles = ~$2.97M/mile. The total was verified separately on page 12 with the excerpt 'Total $19,280,474'; it equals the previous-years amount ($14,303,648, printed '$14,303648') plus 2026 ($4,976,826). The scope also includes substation work ('This makes Jasper a Medium Impact substation and will require a new CIP Hut'), so this overstates the line-only cost per mile. Status is In Progress, with a planned in-service date of 12/01/2026."
   },
   {
    "key": "lineCostPerMile.230.descRebuildExample",
    "label": "DESC plan example: Wateree-Killian 230 kV rebuild, total cost / stated miles",
    "typical": 1271935,
-   "unit": "USD/mile (derived; DESC budget dollars)",
+   "unit": "USD/mile (derived; DESC nominal budget dollars)",
    "sourceId": "desc-scrtp-2026-2030",
    "page": 45,
    "section": "Project 45 of 54 - Wateree-Killian 230kV: Rebuild (Project ID 6808 R)",
    "exactExcerpt": "Line will be rebuilt SPSC with 1272 ACSR Length - 35 miles",
    "verifiedByScript": true,
-   "note": "Derived: $44,517,719 / 35 miles = ~$1.27M/mile. The total was verified separately with the excerpt 'Total $44,517,719' (FOUND on page 45). The project is planned (in-service 12/31/29)."
+   "note": "Derived: $44,517,719 / 35 miles = ~$1.27M/mile. The total was verified separately with the excerpt 'Total $44,517,719' on page 45; it equals the sum of the yearly amounts. Status is Planned, with a planned in-service date of 12/31/29."
   },
   {
    "key": "costEscalationPerYear",
-   "label": "Annual cost escalation MISO applied for the MTEP26 update",
+   "label": "Cost escalation MISO applied from 2025 to 2026 dollars (MTEP26 guide)",
    "typical": 0.04,
    "unit": "fraction per year",
    "sourceId": "miso-cost-guide-mtep26",
@@ -300,31 +297,31 @@
    "section": "Purpose Statement",
    "exactExcerpt": "Cost data was escalated from 2025 U.S. dollars to 2026 U.S. dollars at a rate of 4% for most cost categories",
    "verifiedByScript": true,
-   "note": "Optional. It can bring the MTEP24 per-mile values (2024 $) to 2026 $ at the user's choice. Carrying 4% across two years is my extrapolation; the source states only the 2025-to-2026 step. The MTEP26 guide (June 10, 2026) says its tables are in the 'Exploratory Cost Estimate Workbook for MTEP26', an xlsx the excerpt checker cannot verify, so I did not quote 2026 $/mile values."
+   "note": "Optional. The rate applies 'for most cost categories'; the same sentence says MISO separately benchmarked certain costs with suppliers and vendors, so it is not a uniform rate. It can move the MTEP24 per-mile values to 2026 dollars at the user's choice, but applying 4% over more than one year is my extrapolation: the source states only the 2025-to-2026 step, and MTEP24's own dollar year is ambiguous (page 2 says 2023 $, escalated 5% to 2024). The MTEP26 guide (June 10, 2026) keeps its tables in the 'Exploratory Cost Estimate Workbook for MTEP26', an xlsx the excerpt checker cannot verify, so I did not quote 2026 $/mile values."
   },
   {
    "key": "rowAcquisitionCostPerAcre",
    "label": "Right-of-way acquisition cost per acre, on top of land value (MISO)",
    "typical": 14247,
-   "unit": "USD/acre (2024 $)",
+   "unit": "USD/acre (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024)",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 8,
    "section": "Table 2.1: Land costs (printed page 7)",
    "exactExcerpt": "Table 2.1: Land costs Right-of-way cost per acre State Acquisition cost per acre Regulatory and permitting cost per acre Pasture Crop Suburban and urban Arkansas $3,045 $9,135 $15,225 $14,247 $2,968",
    "verifiedByScript": true,
-   "note": "The 'Acquisition cost per acre' column is $14,247 for every MISO state (the Mississippi row, 'Mississippi $2,909 $8,726 $14,543 $14,247 $2,968', was also verified on page 8). The MTEP 2018 guide described this item, then $9,225/acre, as covering 'routing analysis, property tracts and mapping, land owner negotiations, land acquisition and condemnation fees', separate from the land value. This is a MISO proxy and applies only to avoided new right-of-way acres."
+   "note": "The values in each row are pasture, crop and suburban/urban right-of-way cost, then acquisition cost, then regulatory and permitting cost. Crop is 3x pasture and urban is 5x pasture ($3,045 x 3 = $9,135, x 5 = $15,225), which confirms the order. Acquisition is $14,247 in every MISO state; the Mississippi row, 'Mississippi $2,909 $8,726 $14,543 $14,247 $2,968', was also verified on page 8. The MTEP 2018 guide (miso-cost-guide-mtep18, page 16, verified) described this item, then $9,225/acre, as covering 'routing analysis, property tracts and mapping, land owner negotiations, land acquisition and condemnation fees', separate from land value. This is a MISO proxy and applies only to avoided new right-of-way acres. It is already inside the MISO new-line $/mile figures."
   },
   {
    "key": "rowPermittingCostPerAcre",
    "label": "Regulatory and permitting cost per acre of new right-of-way (MISO)",
    "typical": 2968,
-   "unit": "USD/acre (2024 $)",
+   "unit": "USD/acre (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024)",
    "sourceId": "miso-cost-guide-mtep24",
    "page": 8,
    "section": "Table 2.1: Land costs (printed page 7)",
    "exactExcerpt": "Table 2.1: Land costs Right-of-way cost per acre State Acquisition cost per acre Regulatory and permitting cost per acre Pasture Crop Suburban and urban Arkansas $3,045 $9,135 $15,225 $14,247 $2,968",
    "verifiedByScript": true,
-   "note": "The last column. It is $2,968 in most MISO states, including Mississippi, and higher in Minnesota and Wisconsin ($9,914), North Dakota ($4,957) and South Dakota ($3,977). This is a MISO proxy."
+   "note": "This is the last column. It is $2,968 in most MISO states, including Mississippi, and higher in Minnesota and Wisconsin ($9,914), North Dakota ($4,957) and South Dakota ($3,977), all read from the same page. This is a MISO proxy."
   },
   {
    "key": "mobilizationCostPerProject.115",
@@ -336,7 +333,7 @@
    "section": "4.1.1.3 Mobilization/Demobilization",
    "exactExcerpt": "Single circuit and double circuit Unit detail 69kV 115kV 138kV 161kV 230kV 345kV 500kV Mobilization/Demobilization $100,000 $100,000 $150,000 $150,000 $200,000 $250,000 $300,000",
    "verifiedByScript": true,
-   "note": "The values follow the voltage columns in order, so 115 kV = $100,000. Page 15 says 'The unit costs below are all in 2018 dollars' and 'do not include overhead and professional services, contingency, or AFUDC' (both verified). The MTEP24 and MTEP26 guides no longer list mobilization separately (no match in their text), so this 2018 figure is the latest separately published value I found. It is a fixed cost per project, not a share of cost. It could stand for one avoided mobilization when two projects are truly built together (see avoidedMobilizations)."
+   "note": "The values follow the voltage columns in order, so 115 kV = $100,000. The section defines this as 'all the costs associated with mobilizing and demobilizing all equipment and people needed for construction of the project'. Page 15 says 'The unit costs below are all in 2018 dollars' and that they 'do not include overhead and professional services, contingency, or AFUDC' (both verified). The MTEP24 and MTEP26 guides contain no 'mobiliz' text, so this 2018 figure is the latest separately published value I found. It is a fixed cost per project, not a share of cost."
   },
   {
    "key": "mobilizationCostPerProject.230",
@@ -360,24 +357,23 @@
    "section": "4.1.1.3 Mobilization/Demobilization",
    "exactExcerpt": "Single circuit and double circuit Unit detail 69kV 115kV 138kV 161kV 230kV 345kV 500kV Mobilization/Demobilization $100,000 $100,000 $150,000 $150,000 $200,000 $250,000 $300,000",
    "verifiedByScript": true,
-   "note": "The seventh value is 500 kV = $300,000 (2018 $). For substations, the same guide lists $262,660 for a new site and $157,590 for an existing site (page 39)."
+   "note": "The seventh value is 500 kV = $300,000 (2018 $). For substations, the same guide lists $262,660 for a new site and $157,590 for an existing-site upgrade, at every voltage (page 39)."
   },
   {
    "key": "avoidedMobilizations",
-   "label": "Crew mobilizations avoided when two lines on shared right-of-way/structures are built together (DESC testimony, SC PSC order)",
+   "label": "Crew mobilizations avoided when two lines on shared right-of-way and structures are built together (SCE&G testimony, summarized in a joint proposed order)",
    "typical": 1,
    "unit": "mobilizations avoided per co-built pair",
    "sourceId": "scpsc-vcs1-killian-order-2011",
    "page": 52,
-   "section": "SC PSC Order, Docket 2011-325-E (Dec. 2011), summary of SCE&G testimony (Tr. II, p. 93)",
+   "section": "Joint Proposed Order (unnumbered 'ORDER NO. 2011-'), SC PSC Docket 2011-325-E, filed Dec. 14, 2011 - proposed-order page 10, summarizing SCE&G testimony (Tr. II, p. 93)",
    "exactExcerpt": "building them at the same time will avoid the need to mobilize construction crews twice to work on the same structures and thereby will reduce construction costs",
    "verifiedByScript": true,
-   "note": "This is qualitative. SCE&G (now DESC) testified that building two lines together avoids mobilizing crews twice, which is one avoided mobilization. The case involved the St. George segment and Lake Murray line, which share right-of-way and structures. No dollar amount or percentage is given. It applies only when the projects share work sites or structures, which no source establishes for any DESC-Georgia Power pair. That limit belongs in the UI."
+   "note": "This is qualitative. The passage is in a Joint Proposed Order that SCE&G, the Town and the County filed for the Commission's consideration (cover letter, page 3: 'Joint Proposed Order for the Commission's consideration'). It is not an issued Commission order; the order number is blank (page 43). It summarizes testimony by SCE&G witness Mr. Young (page 51). The statement concerns two SCE&G lines, the St. George Segment and the Lake Murray Line, which 'will share the same right-of-way and the same structures'. Building both at once avoids mobilizing crews twice, so one mobilization is avoided. No dollar amount or percentage is given. It applies only when projects share work sites or structures, and no source establishes that for any DESC-Georgia Power pair. The UI must say so."
   },
   {
    "key": "context.gaItsNewRowMiles10yr",
    "label": "Georgia ITS new transmission line miles requiring new right-of-way, 2025-2034",
-   "low": 423,
    "typical": 1142,
    "unit": "miles",
    "sourceId": "gpc-irp-2025-vol3",
@@ -385,7 +381,7 @@
    "section": "Table 1 Summary of Georgia ITS Transmission Additions (2024 GA ITS Ten-Year Plan, page 5 of 304)",
    "exactExcerpt": "New Transmission Lines Requiring New Right of Way Voltage (kV) Lines Miles Lines Miles 500 5 163 12 543 230 26 211 37 530 115 7 49 10 69 Total 38 423 59 1142",
    "verifiedByScript": true,
-   "note": "Context for scale only, not an input to the per-pair calculation. The two column pairs are the first 5 years and the 10-year total. Over 10 years: 543 miles at 500 kV, 530 at 230 kV and 69 at 115 kV, for 1,142 miles in total; 423 miles fall in the first 5 years. The same table lists 982 miles to be rebuilt or reconductored on existing right-of-way. Source is the public-disclosure version of the IRP appendix."
+   "note": "Context for scale only, not an input to the per-pair calculation. The two column pairs are First 5 Years and Total 10 Years. Over 10 years there are 543 miles at 500 kV, 530 at 230 kV and 69 at 115 kV, 1,142 miles in all. The first-5-year total (423 miles) was removed from 'low' because it is a subset, not a lower estimate of the 10-year figure. The same table lists 982 miles to be rebuilt or reconductored on existing right-of-way over 10 years. The ITS is owned by four participants, so these miles are not Georgia Power's alone (page 6, verified: facilities 'individually owned and maintained by Georgia Power Company (GPC), Georgia Transmission Corporation (GTC), MEAG Power (MEAG) and Dalton Utilities (DU)'). The source is the public-disclosure version of the IRP appendix."
   }
  ],
  "sources": [
@@ -462,11 +458,11 @@
   },
   {
    "id": "scpsc-vcs1-killian-order-2011",
-   "title": "SCE&G application/order: 230 kV line from V.C. Summer Switchyard #1 to Killian Transmission Substation and two 230 kV lines from V.C. Summer Switchyard #2 to Lake Murray (Docket 2011-325-E, Dec. 2011)",
-   "publisher": "Public Service Commission of South Carolina",
+   "title": "Joint Motion, Settlement Agreements and Joint Proposed Order: SCE&G 230 kV line from V.C. Summer Switchyard #1 to Killian Substation and two 230 kV lines from V.C. Summer Switchyard #2 to Lake Murray (Docket 2011-325-E)",
+   "publisher": "South Carolina Electric & Gas Company, with the Town and the County (filed with the Public Service Commission of South Carolina)",
    "url": "https://dms.psc.sc.gov/attachments/matter/73C1EC9A-155D-2817-10A9698095AE7829",
    "sourceType": "regulator",
-   "publishedAt": "2011-12",
+   "publishedAt": "2011-12-14",
    "cached": true
   },
   {
@@ -486,14 +482,32 @@
    "cached": true
   }
  ],
+ "issuesFixed": [
+  "avoidedMobilizations was mislabelled as an SC PSC order. The cited passage (PDF p52) is in a Joint Proposed Order that SCE&G, the Town and the County filed on Dec 14, 2011 'for the Commission's consideration' (cover letter p3); its order number is blank ('ORDER NO. 2011-', p43). I corrected the label, section, note and the source's title, publisher and publishedAt (2011-12-14). The value (1 avoided mobilization) is unchanged and still supported as SCE&G witness testimony (Mr. Young, p51; Tr. II p.93).",
+  "MISO MTEP24 dollar year: the unit said '2024 $', but page 2 says 'All cost estimate data in this document are in 2023 U.S. dollars' and then 'escalated ... to 2024 U.S. dollars at a rate of 5%' (verified). I changed the unit to 'MTEP24 $' with that wording on lineCostPerMile.115/.230/.500, .115.rebuild, .230.rebuild, rowAcquisitionCostPerAcre and rowPermittingCostPerAcre.",
+  "lineCostPerMile.115/.230/.500: the low and high came from state rows (Montana, Louisiana) outside the quoted Mississippi row. I replaced exactExcerpt with the contiguous Louisiana-to-Montana rows of Table 4.1-1, verified FOUND on page 39, which contain the typical, low and high for all three voltages. All values were re-checked against the full 15-state table and are correct.",
+  "Double-counting risk: MISO's new-line $/mile figures are 'based on the assumptions and cost data shown in this guide' (p39, verified), and MISO assumes new right-of-way for every project except rebuilds (p7, verified). So they already include right-of-way land and acquisition. I added a warning to the lineCostPerMile and rowAcquisitionCostPerAcre notes, and MISO's own caution against using exploratory estimates in the regular planning cycle (p39, verified).",
+  "landValuePerAcre.SC (low 4100) and landValuePerAcre.GA (low 4670, high 5100): I removed the low and high because they come from the cropland (p11) and pasture (p15) tables, not the page-9 excerpt. Those values stay available as separate keys with their own verified excerpts. All USDA numbers were re-read and are correct (GA farm real estate 4,950, SC 4,900; cropland GA 4,670, SC 4,100; pasture GA 5,100, SC 4,500).",
+  "context.gaItsNewRowMiles10yr: I removed low=423. It is the first-5-year total, a subset rather than a lower estimate of the 10-year total. I also added that ITS mileage covers GPC, GTC, MEAG and Dalton Utilities, not Georgia Power alone (p6, verified).",
+  "easementShare.cleanLineMO: the source contradicts itself. The page 2 worked example prices the easement at 100% of the stated $5,000/acre market value ('9.1 acres x $5,000 (price per acre offer) = $45,500', verified), while the text says 110%. I added this to the note and removed the claim that it is a 'merchant HVDC' line, which the cached document does not state.",
+  "easementShare.misoConvention: I replaced the excerpt with a contiguous passage (p7, verified) stating that right-of-way costs 'cover land easements' and are priced from USDA pasture value, which supports the convention directly. The note now says plainly that the 1.0 share is an inference, because MISO states no discount factor.",
+  "costEscalationPerYear: I added that the 4% applies only 'for most cost categories' and that MISO benchmarked certain costs separately, so it is not a uniform rate. I also relabelled it as the 2025-to-2026 step.",
+  "lineCostPerMile.230.descNewExample: I fixed a garbled page reference ('page 49's counterpart') to page 12, removed an unsourced 'near Savannah' location claim, and quoted the substation scope ('will require a new CIP Hut'). I also checked that the total equals the previous-years amount plus 2026.",
+  "lineCostPerMile.115.descExample: I removed an unsourced claim that Graniteville is in Aiken County (not in this source) and checked that the total equals the sum of the yearly amounts. Derived ratios re-computed: 18,200,000/15 = 1,213,333; 19,280,474/6.5 = 2,966,227; 44,517,719/35 = 1,271,935.",
+  "rowAcquisitionCostPerAcre: I added a page citation (MTEP18 p16, verified) for the quoted description of the acquisition cost, and explained how the column order was confirmed (crop = 3x pasture, urban = 5x pasture)."
+ ],
  "unresolved": [
-  "easementShare (plain key) is left out on purpose. No public DESC, Georgia Power, Santee Cooper, Georgia Transmission, or SC/GA state source states a typical easement price as a share of fee value. The Georgia Power ROW brochure (gpc-row-brochure, page 2, verified: 'The majority of our rights-of-way are in the form of easements') and Georgia Power's land-acquisition web page give no ratio; both say compensation is evaluated property by property. Georgia Transmission's 'Private Property, Public Use' brochure refers only to fair market value. Wisconsin PSC and DATCP easement brochures give no ratio either. Instead I supplied two documented conventions under separate keys: easementShare.misoConvention (MISO prices right-of-way at full USDA-based land value, 1.0) and easementShare.cleanLineMO (one developer's 110% offer in Missouri, 2016). Suggested UI default: compute avoided right-of-way land at full USDA value per acre (the MISO convention) and label it that way.",
-  "mobilizationShare is not supplied. I found no credible public utility, regulator, or RTO source that gives mobilization, shared-outage, or crew-coordination savings as a percent of project cost. What does exist: (a) MISO's MTEP 2018 fixed mobilization/demobilization unit cost per line project, $100k at 115 kV, $200k at 230 kV and $300k at 500 kV in 2018 dollars (mobilizationCostPerProject.*); and (b) SCE&G/DESC testimony in SC PSC Docket 2011-325-E that building two lines on shared structures at the same time avoids mobilizing crews twice (avoidedMobilizations = 1, qualitative, no dollar value). Nothing public quantifies shared-outage savings.",
-  "I found no public source stating DESC's 115 kV or 500 kV right-of-way widths. The Dominion Energy SC right-of-way brochure and easement guidelines (dominionenergy.com, SC PDFs) give no voltage-specific widths. The Santee Cooper project pages I checked also gave none. The 115 and 500 kV widths therefore come from Georgia Transmission, with MISO as a cross-check.",
-  "I found no published cost-per-mile guide for the Southeast (SC, GA, or SERTP). The Georgia Power IRP public disclosure and the SERTP plan give no unit costs. The per-mile values here are MISO-footprint values (Mississippi as proxy), plus DESC-derived ratios (project total / stated miles) that include non-line scope and are single-project figures, not unit costs.",
-  "The MISO MTEP26 guide (June 10, 2026) keeps its $/mile and right-of-way tables in a companion xlsx workbook that fetch_source.py and find_excerpt.py cannot verify. I therefore quoted the MTEP24 PDF tables (2024 $) and the MTEP26 statement of 4% escalation. The MTEP25 guide URL now returns 403. MTEP24 page 2 says data are 'in 2023 U.S. dollars' escalated to 2024 at 5%, so the dollar year is slightly ambiguous; I treat it as 2024 $.",
-  "USDA NASS table excerpts are column-ordered runs of numbers, because the default pdftotext output reads each table one column at a time. Each note gives the row order (Southeast, Alabama, Florida, Georgia, South Carolina) and year. The UI should show the section title and page so a judge can see which row each value is.",
-  "Page numbers for the MISO guides are PDF page indexes, which is what find_excerpt and the audit use. The printed page numbers are one lower (e.g. PDF p39 = printed p38) and are given in each section field.",
+  "easementShare (plain key) is left out on purpose. No public DESC, Georgia Power, Santee Cooper, Georgia Transmission or SC/GA state source states a typical easement price as a share of fee value. The Georgia Power right-of-way brochure (gpc-row-brochure p2, verified: 'The majority of our rights-of-way are in the form of easements') gives no ratio. Two documented conventions are supplied under separate keys: easementShare.misoConvention (1.0, inferred) and easementShare.cleanLineMO (1.1 stated, 1.0 in the source's own example). Suggested UI default: price avoided right-of-way land at full USDA value per acre and label it as the MISO convention.",
+  "mobilizationShare is not supplied. I found no public utility, regulator or RTO source that gives mobilization, shared-outage or crew-coordination savings as a percent of project cost. What does exist: MISO MTEP 2018 fixed mobilization unit costs (mobilizationCostPerProject.*, 2018 $) and SCE&G testimony, in a 2011 joint proposed order, that co-building two lines on shared structures avoids one mobilization (avoidedMobilizations, qualitative).",
+  "UI copy to fix, outside this research object: components/Impact.tsx line 124 says 'A South Carolina PSC order notes that building lines at the same time avoids mobilizing crews twice.' The source is SCE&G testimony summarized in a joint proposed order, not a Commission order, and it covers two same-utility lines on shared right-of-way and structures. Suggested wording: 'SCE&G testimony (summarized in a joint proposed order, SC PSC Docket 2011-325-E) says building two lines on the same structures at the same time avoids mobilizing crews twice.'",
+  "lib/impact.ts computeImpact now produces no land-value range for SC and GA, because the low and high were removed from landValuePerAcre.SC/GA. If a range is wanted, read landValuePerAcre.<ST>.cropland and .pasture explicitly and cite each one's own excerpt. For GA, pasture ($5,100) is above farm real estate ($4,950); for SC, both cropland and pasture are below it.",
+  "Do not add lineCostPerMile (new line) and avoided right-of-way land value together in any UI total. MISO's new-line $/mile already includes right-of-way land and acquisition.",
+  "Guidance in the Anh_branch plan.md: the product must not promise 'we measured dollars and days saved', and 'savings claims' are listed as out of scope. Any impact number must be shown as an illustrative scenario from cited assumptions, not a measured or predicted saving. The lib/impact.ts header already says this.",
+  "I found no public source stating DESC's 115 kV or 500 kV right-of-way widths. Those widths come from Georgia Transmission, with MISO as a cross-check.",
+  "I found no published cost-per-mile guide for the Southeast (SC, GA or SERTP). The per-mile values here are MISO-footprint values (Mississippi as proxy), plus DESC-derived ratios (project total / stated miles) that are single-project planning estimates, one of which includes substation scope.",
+  "The MISO MTEP26 guide keeps its $/mile and right-of-way tables in an xlsx workbook that the excerpt checker cannot verify, so the MTEP24 PDF tables are quoted. The MTEP24 dollar year is ambiguous: page 2 says both '2023 U.S. dollars' and escalated to 2024.",
+  "USDA NASS excerpts are column-ordered runs of numbers because pdftotext reads each table one column at a time. Each note gives the row order and year. The UI should show the section title and page so a judge can see which row each value comes from.",
+  "Page numbers for the MISO guides are PDF page indexes. Printed page numbers are one lower and appear in each section field.",
   "Not retrieved: the USDA Rural Development FONSI for the East Central Georgia Reliability Project (rd.usda.gov served an HTML block page instead of the PDF). It might contain Georgia Transmission right-of-way widths or costs for an east-Georgia project."
  ]
 }

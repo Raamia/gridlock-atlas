@@ -17,7 +17,7 @@ function Cite({ a }: { a?: ImpactAssumption }) {
       href={href}
       target="_blank"
       rel="noreferrer"
-      title={e ? `“${e.exactExcerpt}” — ${src?.publisher}${pageLabel(e) ? `, ${pageLabel(e)}` : ""}` : undefined}
+      title={e ? `“${e.exactExcerpt}” — ${src?.publisher}${pageLabel(e) ? `, ${pageLabel(e)}` : ""}${a.note ? `\n\n${a.note}` : ""}` : undefined}
       className="inline-flex max-w-full items-center gap-1 truncate text-[10px] text-text-3 hover:text-a"
     >
       <span className="truncate">{src?.publisher ?? "source"}</span>
@@ -64,7 +64,7 @@ function Slider({
         <Cite a={a} />
         {a && (a.low !== undefined || a.high !== undefined) && (
           <span className="num shrink-0 text-[10px] text-text-3">
-            source range {a.low ?? "—"}–{a.high ?? "—"}
+            source range {(a.low ?? a.typical).toLocaleString("en-US")}–{(a.high ?? a.typical).toLocaleString("en-US")}
           </span>
         )}
       </div>
@@ -121,7 +121,8 @@ export function ImpactEstimate({ m }: { m: Match }) {
           </div>
           <p className="mt-1 text-text-2">
             One avoided crew mobilization at MISO&apos;s {d.voltageKv ? `${d.voltageKv >= 345 ? "500" : d.voltageKv > 161 ? "230" : "115"} kV-class ` : ""}unit cost ({mobil.unit}).
-            {d.avoidedMobilizations && " A South Carolina PSC order notes that building lines at the same time avoids mobilizing crews twice."}
+            {d.avoidedMobilizations &&
+              " A joint proposed order filed in a South Carolina PSC docket (summarizing utility testimony) states that building two lines at the same time avoids mobilizing crews twice."}
           </p>
           <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5">
             <Cite a={mobil} />

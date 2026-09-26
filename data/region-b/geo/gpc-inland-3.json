@@ -1,0 +1,919 @@
+{
+ "batch": "gpc-inland-3",
+ "projects": [
+  {
+   "key": "gpc:20516",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Goat Rock",
+     "lat": 32.60827,
+     "lon": -85.08246,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171967073 power=substation name=Goat Rock Dam Substation voltage=230000;115000 (gazetteer)",
+     "confidence": "confirmed",
+     "validation": "Name matches. The substation is next to Georgia Power's Goat Rock Dam plant (way/425320094) on the Chattahoochee in Harris County, zone 213. It has a 230 kV yard, which fits the Goat Rock - North Opelika 230 kV work."
+    }
+   ],
+   "notes": "Equipment replacement inside Goat Rock substation on the Goat Rock - North Opelika 230 kV line terminal. Page 262."
+  },
+  {
+   "key": "gpc:20482",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Pittman Road",
+     "lat": 32.88344,
+     "lon": -85.16591,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/1058469134 power=substation name=West Point Substation voltage=115000; line topology via Overpass (mail.ru mirror)",
+     "confidence": "lower-confidence",
+     "validation": "No OSM feature is named Pittman Road, and Nominatim finds no Pittman Road in Troup County. The only Georgia Power 115 kV line out of West Point Dam Substation (way/1058469135) runs about 2.8 mi straight to this 115 kV station in West Point, Troup County. The plan says the rebuild is 3 miles from Pittman Road to West Point Dam, so the length fits. The OSM name differs ('West Point Substation'), so this match is lower-confidence."
+    },
+    {
+     "name": "West Point Dam (USA)",
+     "lat": 32.91862,
+     "lon": -85.19039,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1051943826 power=substation name=West Point Dam Substation voltage=115000 (adjacent to way/1058469136 West Point Dam, operator U.S. Corps of Engineers)",
+     "confidence": "confirmed",
+     "validation": "Name matches. It is the 115 kV generation substation of the USACE West Point Dam (the '(USA)' in the plan), in Troup County, zone 213."
+    }
+   ],
+   "notes": "3-mile 115 kV rebuild. Both ends are within about 4.5 km of each other in West Point, GA. Page 332."
+  },
+  {
+   "key": "gpc:13166",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "First Avenue",
+     "lat": 32.48061,
+     "lon": -84.99128,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/979692779 power=substation operator=Georgia Power voltage=115000 (unnamed); Nominatim reverse = 1st Avenue, City Village, Columbus",
+     "confidence": "lower-confidence",
+     "validation": "The substation is unnamed in OSM. It sits on 1st Avenue in Columbus, next to a 230 kV Georgia Power substation (way/186406808). A 115 kV line (way/958269650) of about 0.90 mi runs north from this complex to the next substation, which matches the plan's 0.9-mile First Avenue - North Columbus line."
+    },
+    {
+     "name": "North Columbus",
+     "lat": 32.49535,
+     "lon": -84.99365,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/958269649 power=substation name=Highlands Dam Substation voltage=115000",
+     "confidence": "lower-confidence",
+     "validation": "This is the far end of the 0.90-mi 115 kV line from the 1st Avenue complex, in north Columbus near North Highlands Dam. OSM names it 'Highlands Dam Substation', not North Columbus, so the match rests on line length and position only."
+    }
+   ],
+   "notes": "The two ends are 1.5 km apart, so the project center is robust even if the two names are swapped. Page 339."
+  },
+  {
+   "key": "gpc:16887",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Butler",
+     "lat": 32.57102,
+     "lon": -84.28973,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/170999705 power=substation name=Butler Primary Substation voltage=230000;115000;46000;12000",
+     "confidence": "confirmed",
+     "validation": "Name matches. Located in Butler, Taylor County (Nominatim reverse). It has 115 kV and 230 kV yards, which fits the 115-to-230 kV conversion."
+    },
+    {
+     "name": "Thomaston",
+     "lat": 32.89992,
+     "lon": -84.31252,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/160308061 power=substation name=Thomaston Primary Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Name matches. Georgia Power operator, 230 kV, in Thomaston, Upson County, zone 213."
+    }
+   ],
+   "notes": "The Wesley substation named in the description (Wesley hamlet, Taylor County, 32.659,-84.330 by Nominatim) has no OSM substation within 6 km, so it was not located. The two terminals are about 23 mi apart. Page 344."
+  },
+  {
+   "key": "gpc:21128",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Goat Rock",
+     "lat": 32.60827,
+     "lon": -85.08246,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171967073 power=substation name=Goat Rock Dam Substation voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Name matches, and the substation has a 230 kV yard. The title places the reactor installation at Goat Rock, zone 213."
+    }
+   ],
+   "notes": "Series reactors go on the Fortson - Goat Rock (Black/White) 230 kV lines. The far terminal is Fortson Substation, OSM way/163762708 (32.61017,-84.91563, 500 kV, Harris County), about 16 km east. Page 379."
+  },
+  {
+   "key": "gpc:20160",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Thomaston",
+     "lat": 32.89992,
+     "lon": -84.31252,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/160308061 power=substation name=Thomaston Primary Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Name matches. Georgia Power operator, 230 kV, which fits the plan's 230/115 kV autotransformer replacement and 230 kV bus redesign."
+    }
+   ],
+   "notes": "Page 398."
+  },
+  {
+   "key": "gpc:18800",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "South Warner Robins",
+     "lat": 32.6088,
+     "lon": -83.61434,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1500,
+     "coordinateSource": "OSM way/160308120 power=substation name=South operator=Flint Energies voltage=115000",
+     "confidence": "lower-confidence",
+     "validation": "OSM names it only 'South' (operator Flint Energies). It is a 115 kV station in south-central Warner Robins, Houston County, zone 214. The name is a partial match, so this is lower-confidence."
+    },
+    {
+     "name": "Wellston",
+     "lat": 32.6200973,
+     "lon": -83.606568,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim q='Wellston, Georgia' returns the Warner Robins boundary (Houston County)",
+     "confidence": "lower-confidence",
+     "validation": "Wellston was the original name of Warner Robins, and Nominatim resolves it to the city. No OSM substation carries the name. One candidate is the unnamed 115 kV hub way/160308093 (32.60646,-83.59449), about 1.16 mi from the 'South' substation, which fits the 1.2-mile section. That is not confirmed, so the city centroid is used."
+    }
+   ],
+   "notes": "Only the South Warner Robins - Wellston section (1.2 mi) of the Echeconnee - Wellston line is rebuilt, so the section terminals are used. Page 235."
+  },
+  {
+   "key": "gpc:20466",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Eatonton Primary",
+     "lat": 33.30448,
+     "lon": -83.40252,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/171527955 power=substation name=Eatonton Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "This is the only transmission substation at Eatonton, Putnam County (zone 214). It is Georgia Power, 230/115 kV. The OSM 230 kV lines 'East Social Circle - Eatonton' (two circuits) and the lines toward Plant Branch terminate here, which fits the plan's Branch - Oasis and Eatonton Primary - Oasis 230 kV lines."
+    }
+   ],
+   "notes": "Smart Valve devices inside Eatonton Primary. Page 246."
+  },
+  {
+   "key": "gpc:19618",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Gordon",
+     "lat": 32.88247,
+     "lon": -83.31691,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/170991651 power=substation name=Gordon Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Name matches. Georgia Power, at Gordon, Wilkinson County, zone 214."
+    },
+    {
+     "name": "Engelhard McIntyre J",
+     "lat": 32.84911,
+     "lon": -83.22867,
+     "precision": "named-facility",
+     "uncertaintyMeters": 2000,
+     "coordinateSource": "OSM way/722757825 power=substation name=Engelhard Substation operator=Georgia Power voltage=115000 (proxy for the junction)",
+     "confidence": "lower-confidence",
+     "validation": "The junction serves the Engelhard kaolin plant at McIntyre. The Engelhard 115 kV substation stands in for it. Its straight-line distance from Gordon is about 5.6 mi, versus 2.81 + 3.18 = 5.99 mi rebuilt in the plan. The junction itself is not mapped."
+    }
+   ],
+   "notes": "Only the Gordon - Engelhard McIntyre J section is rebuilt, so the section terminals are used. North Dublin was not located: OSM has only Dublin Primary Substation (32.5406,-82.8946), which does not match. Page 263."
+  },
+  {
+   "key": "gpc:20512",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Kathleen",
+     "lat": 32.48457,
+     "lon": -83.58332,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/177850741 power=substation operator=Georgia Power voltage=230000;115000 (unnamed); topology from Overpass",
+     "confidence": "confirmed",
+     "validation": "The substation is unnamed in OSM but identified by topology. A 230 kV line (way/160308111) of 6.10 mi runs from Bonaire Primary Substation to it, matching the plan's 'Bonaire Primary - Kathleen 230kV line (approximately 6 miles)'. It is 2.8 km from Kathleen hamlet, Houston County (Nominatim), and Georgia Power 230/115 kV."
+    }
+   ],
+   "notes": "Area project covering Kathleen - Big Grocery Creek 230 kV (1.5 mi) and Bonaire Primary - Kathleen 230 kV. Big Grocery Creek (the stream, per Nominatim, at 32.4832,-83.5588) is 2.3 km east of the Kathleen substation, so the work stays within a few miles. Page 272."
+  },
+  {
+   "key": "gpc:19248",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Sandersville #1",
+     "lat": 32.99848,
+     "lon": -82.80194,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/170295993 power=substation name=Sandersville Substation #1 operator=Georgia Power voltage=230000;115000;46000;12000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV yard, in Sandersville, Washington County, zone 214."
+    },
+    {
+     "name": "Wadley Primary",
+     "lat": 32.88466,
+     "lon": -82.41587,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/1005940922 power=substation name=Wadley Substation operator=Georgia Power voltage=500000; OSM line way/170683970 name='Wadley - Sandersville 115kV'",
+     "confidence": "confirmed",
+     "validation": "This is the Wadley 500/230/115 kV hub. An OSM 115 kV line tagged 'Wadley - Sandersville 115kV' leaves it. The straight distance to Sandersville #1 is 23.7 mi, versus 24.3 mi of line in the plan. Wadley #4 (way/170822073) is 26.9 mi straight from Sandersville #1, longer than the line, so it is ruled out."
+    }
+   ],
+   "notes": "Page 312."
+  },
+  {
+   "key": "gpc:18573",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Arkwright",
+     "lat": 32.92722,
+     "lon": -83.69888,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/164024559 power=substation name='Arkwight Substation' (sic) operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Name matches apart from an OSM typo. Georgia Power, 115 kV, on Arkwright Road at the Plant Arkwright site in Macon, Bibb County (Nominatim reverse). A second 'Arkwight Substation' (way/164024562) is 2.5 km west on Bowman Road. The one on Arkwright Road was chosen."
+    },
+    {
+     "name": "Lloyd Shoals",
+     "lat": 33.32084,
+     "lon": -83.84318,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/652954484 power=substation operator=Georgia Power voltage=115000 (unnamed), 0.2 km from way/674159021 Lloyd Shoals Dam (Georgia Power plant)",
+     "confidence": "confirmed",
+     "validation": "This is the 115 kV Georgia Power switchyard beside Lloyd Shoals Dam (Jackson Lake, Butts/Jasper counties), and the voltage matches. The substation itself is unnamed but belongs to the named plant."
+    }
+   ],
+   "notes": "Page 316."
+  },
+  {
+   "key": "gpc:19997",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Aultman Road",
+     "lat": 32.56343,
+     "lon": -83.74007,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/652954546 power=substation name='Altman Road Substation' operator=Flint Energies voltage=115000;12000; Nominatim reverse = Aultman Road, Fort Valley, Peach County",
+     "confidence": "confirmed",
+     "validation": "OSM spells the name 'Altman', but the station sits on Aultman Road and is 115 kV. A 115 kV line (way/700934673) runs south from it toward Perry."
+    },
+    {
+     "name": "Perry",
+     "lat": 32.45538,
+     "lon": -83.70202,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/177850740 power=substation name=Perry Primary Substation voltage=115000;46000;12000",
+     "confidence": "confirmed",
+     "validation": "Name matches. 115 kV, in Perry, Houston County, zone 214."
+    }
+   ],
+   "notes": "The rebuilt section is PPG J2 - Langston Road, which lies between these terminals. Langston Road is in Perry (Nominatim 32.4977,-83.6892). Neither PPG J2 nor a Langston Road substation is mapped. Page 321."
+  },
+  {
+   "key": "gpc:21048",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Fitzgerald",
+     "lat": 31.72933,
+     "lon": -83.29241,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/617660021 power=substation name=Fitzgerald Substation voltage=115000;46000",
+     "confidence": "confirmed",
+     "validation": "Name matches. 115 kV, in Fitzgerald, Ben Hill County."
+    },
+    {
+     "name": "Pitts",
+     "lat": 31.98655,
+     "lon": -83.56298,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/177843299 power=substation voltage=230000;115000 (unnamed); path via Overpass line topology",
+     "confidence": "confirmed",
+     "validation": "The substation is unnamed in OSM. The 115 kV path Fitzgerald Substation -> Whittle Substation (17.42 mi) -> 1.63 + 0.27 mi -> 6.81 mi to this station totals 26.13 mi. The plan says 26.14 mi. The station is 4.7 km north of Pitts, Wilcox County, and also sits on the 230 kV North Tifton - Kathleen corridor."
+    }
+   ],
+   "notes": "Page 324."
+  },
+  {
+   "key": "gpc:20768",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "South Macon",
+     "lat": 32.82035,
+     "lon": -83.6262,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/170991653 power=substation name=South Macon Substation operator=Georgia Power voltage=230000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, in Macon, zone 214. The 115 kV buses are not in the OSM voltage tag, but the location is unambiguous."
+    }
+   ],
+   "notes": "Page 337."
+  },
+  {
+   "key": "gpc:21047",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Griffin Rd",
+     "lat": 32.71597,
+     "lon": -83.65302,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/497740152 power=substation voltage=115000 (unnamed); Nominatim 'Griffin Road, Macon' = 32.7165,-83.6503 (Sofkee)",
+     "confidence": "lower-confidence",
+     "validation": "This unnamed 115 kV substation is about 250 m from Griffin Road in Sofkee, Macon, Bibb County. A direct 115 kV line (way/1050197007, 4.79 mi) connects it to the Echeconnee candidate."
+    },
+    {
+     "name": "Echeconnee",
+     "lat": 32.67611,
+     "lon": -83.70816,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/760429230 power=substation operator=Georgia Power voltage=115000 (unnamed)",
+     "confidence": "lower-confidence",
+     "validation": "Georgia Power 115 kV hub 1.25 km from Echeconnee hamlet, Houston County (Nominatim 32.6851,-83.7005). It is the far end of the 4.79-mi line from Griffin Rd. The name is not in OSM."
+    }
+   ],
+   "notes": "Only the Griffin Rd - Echeconnee section of the Broadway - Echeconnee line is rebuilt, so the section terminals are used. Broadway candidate: unnamed Georgia Power 115/12 kV substation way/158178928 (32.77482,-83.65638) on Broadway, Tharpe Heights, Macon (not used). Page 343."
+  },
+  {
+   "key": "gpc:19627",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Echeconnee",
+     "lat": 32.67611,
+     "lon": -83.70816,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/760429230 power=substation operator=Georgia Power voltage=115000 (unnamed)",
+     "confidence": "lower-confidence",
+     "validation": "Georgia Power 115 kV hub 1.25 km from Echeconnee hamlet, Houston County. It connects by a 4.79-mi 115 kV line to the unnamed substation next to Griffin Road (Broadway - Echeconnee line). The name is not in OSM."
+    },
+    {
+     "name": "Wellston",
+     "lat": 32.6200973,
+     "lon": -83.606568,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim q='Wellston, Georgia' returns the Warner Robins boundary",
+     "confidence": "lower-confidence",
+     "validation": "Wellston is the historic name of Warner Robins, and no OSM substation carries it. The rough OSM route Echeconnee -> Elberta -> North Warner Robins -> South -> hub way/160308093 is about 12 mi, consistent with the plan's 11.8 mi, but OSM is missing segments. The city centroid is used."
+    }
+   ],
+   "notes": "The plan also replaces the bus at North Warner Robins: OSM way/703244135 (32.62667,-83.62154). Page 375."
+  },
+  {
+   "key": "gpc:20298",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Glenwood Springs",
+     "lat": 33.30448,
+     "lon": -83.40252,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1500,
+     "coordinateSource": "OSM way/171527955 power=substation name=Eatonton Substation voltage=230000;115000; Nominatim 'Glenwood Springs Road' 33.3018,-83.4040 (Eatonton)",
+     "confidence": "lower-confidence",
+     "validation": "No substation is named Glenwood Springs. The only transmission substation at Eatonton is on Glenwood Springs Road, and the 115 kV line from Lake Oconee (via Phoenix Substation and a junction north of Eatonton) terminates there. The Glenwood Springs 115 kV station is therefore likely co-located or adjacent, but the OSM name is 'Eatonton'."
+    },
+    {
+     "name": "Lake Oconee",
+     "lat": 33.45953,
+     "lon": -83.24745,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1054868572 power=substation name=Lake Oconee Substation voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Name and 115 kV voltage match. In Putnam/Greene area, zone 214."
+    }
+   ],
+   "notes": "The rebuilt section runs from North Eatonton Junction to Putnam Sawmill Junction. Neither junction is mapped. OSM shows a 115 kV junction near 33.327,-83.373 north of Eatonton. Page 378."
+  },
+  {
+   "key": "gpc:20428",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Deepstep",
+     "lat": 33.01604,
+     "lon": -83.00908,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/840326021 power=substation name=Deepstep Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV, Washington County."
+    },
+    {
+     "name": "Sandersville #6",
+     "lat": 33.00182,
+     "lon": -82.83273,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/484518626 power=substation name=Sandersville Substation #6 voltage=115000;12000",
+     "confidence": "confirmed",
+     "validation": "Exact name match, 115 kV. Robins Spring Substation (way/1011162726) and Kaolin Substation (way/484518633) lie between the two terminals, which fits the section list. The straight distance of about 10.2 mi matches the plan's 10.49 mi."
+    }
+   ],
+   "notes": "The rebuilt sections, Deepstep - Robins Spring - Kaolin J - Sandersville #6, are used as terminals instead of the full Gordon - Sandersville #1 line. Page 381."
+  },
+  {
+   "key": "gpc:21093",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "North Spa (new 230kV switching station north of Oasis)",
+     "lat": 33.6114,
+     "lon": -83.6394,
+     "precision": "locality",
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Anchored on OSM way/1070895973 power=substation operator=Georgia Power voltage=230000;115000 (unnamed; candidate for 'Oasis'), Morgan County; topology via Overpass",
+     "confidence": "lower-confidence",
+     "validation": "North Spa is a new station and does not exist in OSM. Oasis is inferred from topology. The two OSM circuits tagged 'East Social Circle - Eatonton 230kV' are split at this unnamed Georgia Power 230/115 kV station: about 4.95 mi to East Social Circle and about 25.75 mi to Eatonton. That matches the plan's naming of East Social Circle - Oasis, Eatonton Primary - Oasis and Branch - Oasis. North Spa is 'north of Oasis' and loops the East Social Circle - Oasis line, so it lies on the 7.5 km corridor toward East Social Circle Substation (33.674,-83.679). The 8 km uncertainty covers that corridor."
+    }
+   ],
+   "notes": "New 230 kV lines go to Cornish Mountain (the peak is in Newton County, 33.673,-83.814 per Nominatim) and from Rockville 230 kV (Rockville hamlet, Putnam County, 33.328,-83.219). Web searches found no public document that names Oasis or North Spa. Page 395."
+  },
+  {
+   "key": "gpc:19626",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Glenwood Springs",
+     "lat": 33.30448,
+     "lon": -83.40252,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1500,
+     "coordinateSource": "OSM way/171527955 power=substation name=Eatonton Substation voltage=230000;115000; Nominatim 'Glenwood Springs Road' (Eatonton, Putnam County)",
+     "confidence": "lower-confidence",
+     "validation": "This is the only transmission substation on Glenwood Springs Road, Eatonton. It is the 115 kV terminal of the line from Lake Oconee. The OSM name is 'Eatonton Substation', so the Glenwood Springs 115 kV station is inferred to be co-located or adjacent."
+    }
+   ],
+   "notes": "Page 400."
+  },
+  {
+   "key": "gpc:20767",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Arkwright",
+     "lat": 32.92722,
+     "lon": -83.69888,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/164024559 power=substation name='Arkwight Substation' (sic) operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Name matches apart from the OSM typo. Georgia Power, 115 kV, on Arkwright Road, Macon, which fits the 115 kV bus work."
+    }
+   ],
+   "notes": "The jumper is on the Arkwright - Forrest Rd (Macon) 115 kV line. Page 408."
+  },
+  {
+   "key": "gpc:18492",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Mitchell",
+     "lat": 31.44712,
+     "lon": -84.13384,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/656743294 power=substation name='Mitchell Substation (230kV)' operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Name and 230 kV voltage match. At Plant Mitchell, Dougherty County, zone 216."
+    },
+    {
+     "name": "North Tifton",
+     "lat": 31.47809,
+     "lon": -83.54913,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/53154820 power=substation name='North Tifton Substation (500kV)' operator=Georgia Power",
+     "confidence": "confirmed",
+     "validation": "Name matches, and it is the North Tifton transmission complex. The straight distance of about 34.5 mi matches the plan's 35.21-mile line."
+    }
+   ],
+   "notes": "Page 233."
+  },
+  {
+   "key": "gpc:19631",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Pine Grove Primary",
+     "lat": 30.88165,
+     "lon": -83.22799,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/174399121 power=substation name=Pine Grove Primary Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV, Valdosta area, Lowndes County, zone 216. The Satilla EMC 'Pine Grove Substation' in Bacon County is a different facility and was rejected."
+    }
+   ],
+   "notes": "Page 244."
+  },
+  {
+   "key": "gpc:18690",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Palmyra",
+     "lat": 31.6376726,
+     "lon": -84.1943534,
+     "precision": "locality",
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim q='Palmyra, Georgia' returns the hamlet Palmyra, Lee County (place=hamlet)",
+     "confidence": "lower-confidence",
+     "validation": "No OSM substation is named Palmyra. The nearest 115 kV substations (Albany Utilities way/540096826 on Dawson Road, MEAG way/1039823933) are 2.5-4 km away and not Georgia Power. The locality is just north of Albany, which fits zone 216. Palmyra Road in Albany is also within the uncertainty radius."
+    }
+   ],
+   "notes": "Page 276."
+  },
+  {
+   "key": "gpc:20223",
+   "kind": "other",
+   "endpoints": [
+    {
+     "name": "Dothan Road (new 230kV station on Farley - South Bainbridge line)",
+     "lat": 30.9232061,
+     "lon": -84.6103106,
+     "precision": "locality",
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim q='Dothan Road, Bainbridge, Georgia' (trunk road, Decatur County)",
+     "confidence": "lower-confidence",
+     "validation": "This is a new station and is not mapped. The OSM Farley - South Bainbridge 230 kV line (way/164660266) passes about 3.4 km from this road point west of Bainbridge. The exact split point is unknown."
+    },
+    {
+     "name": "Climax",
+     "lat": 30.85624,
+     "lon": -84.44613,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1500,
+     "coordinateSource": "OSM way/1326358629 power=substation operator=Georgia Power voltage=230000 (unnamed)",
+     "confidence": "lower-confidence",
+     "validation": "Unnamed Georgia Power 230 kV station 2.6 km from Climax, Decatur County. The GTC 'South Bainbridge - Thomasville 230kV' line (way/172096007) terminates here, beside the Decatur Solar 230 kV collector. The name is not in OSM."
+    },
+    {
+     "name": "Downrange (new customer substation)",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "none",
+     "confidence": "not-found",
+     "validation": "New customer substation for 'Project Payton' (8.5 mi from Dothan Rd, 10 mi from Climax). No public location was found."
+    }
+   ],
+   "notes": "The project splits the Farley - South Bainbridge 230 kV line and builds two new 230 kV lines to the customer site. The whole project is in the Bainbridge area, Decatur County. Page 281."
+  },
+  {
+   "key": "gpc:10222",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Blakely Primary",
+     "lat": 31.37155,
+     "lon": -84.90598,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/270628470 power=substation name=Blakely Primary Substation operator=Georgia Power voltage=115000;46000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV, Blakely, Early County, zone 216."
+    },
+    {
+     "name": "Huckleberry",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "none (gazetteer, Nominatim, web search: no match)",
+     "confidence": "not-found",
+     "validation": "No OSM feature, place or road named Huckleberry exists in Early or Calhoun County. One topological candidate is the Arlington/Turman cluster (unnamed 115 kV way/1277653348 at 31.46347,-84.72478), 13.1 mi from Blakely Primary via the GTC-tagged line. A competing 13.7-mi path leads to the Lower River switching station, so no coordinate is asserted."
+    }
+   ],
+   "notes": "13.5-mile line; GTC replaces jumpers at Blakely and Huckleberry. Page 342."
+  },
+  {
+   "key": "gpc:20285",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Lower River",
+     "lat": 31.2778,
+     "lon": -85.0986,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1348204007 power=substation substation=switching voltage=115000 (unnamed); Nominatim reverse = Lower River Road, Early County, GA",
+     "confidence": "confirmed",
+     "validation": "This 115 kV switching station is on Lower River Road, Early County, by the Chattahoochee. The Alabama Power 115 kV line way/7717834 runs from Webb Substation to the river opposite it. Both the road name and the topology match the Lower River - Webb 115 kV line."
+    },
+    {
+     "name": "Webb (APC)",
+     "lat": 31.25108,
+     "lon": -85.28863,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/182398214 power=substation name=Webb Substation operator=Alabama Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Name matches, the operator is Alabama Power (APC), and it has a 115 kV yard. It is in Webb, Houston County, Alabama."
+    }
+   ],
+   "notes": "The line crosses the state line (GA-AL). Only 0.97 mi is reconductored, probably the Georgia side near Lower River. Page 356."
+  },
+  {
+   "key": "gpc:13628",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "South Bainbridge",
+     "lat": 30.83961,
+     "lon": -84.48892,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/165831924 power=substation name=South Bainbridge Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV, Decatur County."
+    },
+    {
+     "name": "Sinai (FPL)",
+     "lat": 30.66382,
+     "lon": -84.90079,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/165844042 power=substation name=Sinai Substation operator=Florida Power & Light voltage=230000;161000;115000;12000",
+     "confidence": "confirmed",
+     "validation": "Name matches, the operator is FPL as the plan states, and it has a 115 kV yard. It is in Florida, south of Lake Seminole, which fits the plan's '9.8 miles in FPL'."
+    }
+   ],
+   "notes": "The rebuilt segment is Four Mile tap - Recovery - Sinai, 23.55 mi of a line about 27 mi straight, so the title terminals are used. Recovery hamlet is at 30.7567,-84.7374. A GTC 115 kV substation (way/186851900, 30.74072,-84.69677) 4 km from it is a candidate for Recovery. Page 365."
+  },
+  {
+   "key": "gpc:21063",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Farley (APC)",
+     "lat": 31.22361,
+     "lon": -85.11632,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/164658819 power=substation name=Farley Substation voltage=500000",
+     "confidence": "confirmed",
+     "validation": "Name matches, and the 500 kV substation sits next to Joseph M. Farley Nuclear Plant (Southern Nuclear, way/660021586) in Houston County, Alabama."
+    },
+    {
+     "name": "Tazewell",
+     "lat": 32.36296,
+     "lon": -84.47691,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/163762713 power=substation name='Tazeville Substation' voltage=230000;46000",
+     "confidence": "confirmed",
+     "validation": "OSM spells it 'Tazeville'. It is 3.95 km from Tazewell hamlet in Marion County (Nominatim reverse confirms the county). It has an existing 230 kV yard, which fits the plan's '500/230kV auto transformer to connect to the existing 230kV switchyard'."
+    }
+   ],
+   "notes": "The planned line is about 120 miles long, so the midpoint is only a coarse center. Page 376."
+  },
+  {
+   "key": "gpc:20284",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Pine Grove Primary",
+     "lat": 30.88165,
+     "lon": -83.22799,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/174399121 power=substation name=Pine Grove Primary Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, Lowndes County, zone 216."
+    },
+    {
+     "name": "Pearson tap",
+     "lat": 31.29368,
+     "lon": -82.84217,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "OSM way/1046932986 power=substation name=Pearson Substation operator=Georgia Power voltage=115000 (proxy for the tap point)",
+     "confidence": "lower-confidence",
+     "validation": "The tap point is not mapped, so Pearson Substation (Atkinson County) stands in for it. The straight distance from Pine Grove Primary is about 36.4 mi, which fits the 38.04-mile rebuild. The tap is somewhere on the main line near Pearson."
+    }
+   ],
+   "notes": "The rebuilt section is Pine Grove to Pearson tap, of the Kettle Creek Primary - Pine Grove Primary line. Kettle Creek is near Waycross, Ware County (web search: Wilsonville-Kettle Creek line, Ware/Coffee), but that endpoint is not used. Page 392."
+  },
+  {
+   "key": "gpc:18848",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "East Bainbridge",
+     "lat": 30.91148,
+     "lon": -84.54877,
+     "precision": "named-facility",
+     "uncertaintyMeters": 2000,
+     "coordinateSource": "OSM way/492355206 power=substation name=East Bainbridge Substation operator=Georgia Power voltage=115000;24900;12470",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV, Bainbridge, Decatur County. The uncertainty is widened to 2 km to cover the new East River Road station, about a mile north per the plan."
+    }
+   ],
+   "notes": "The new East River Road 115 kV breaker-and-a-half station is not mapped. Page 399."
+  },
+  {
+   "key": "gpc:10487",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Bemis",
+     "lat": 30.932419,
+     "lon": -83.2403916,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/930769240 power=substation name=Bemiss Substation voltage=115000",
+     "confidence": "confirmed",
+     "validation": "OSM spells it 'Bemiss' (the Bemiss community, Lowndes County). It is 115 kV and about 3.6 mi straight from Pine Grove Primary, matching the plan's 3.7-mile Bemis - Pine Grove Primary section."
+    },
+    {
+     "name": "Pine Grove Primary",
+     "lat": 30.88165,
+     "lon": -83.22799,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/174399121 power=substation name=Pine Grove Primary Substation operator=Georgia Power",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, Lowndes County."
+    }
+   ],
+   "notes": "Only the Bemis - Pine Grove Primary section is rebuilt. West Valdosta substation was not located and is not needed. Page 422."
+  },
+  {
+   "key": "gpc:21046",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Thalmann",
+     "lat": 31.29346,
+     "lon": -81.68078,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/52068570 power=substation name=Thalmann Substation operator=Georgia Power voltage=500000;230000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 230 kV, Glynn County, zone 218."
+    },
+    {
+     "name": "Colerain",
+     "lat": 30.8213311,
+     "lon": -81.7168743,
+     "precision": "locality",
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim q='Colerain Road, Kingsland, Georgia' (secondary road, Camden County)",
+     "confidence": "lower-confidence",
+     "validation": "No OSM substation is named Colerain. The 230 kV line south from Thalmann (way/174697775) ends at an unmapped 3-way junction at 30.826,-81.680 in Kingsland, which branches to Kingsland Primary and Kings Bay. That junction is about 3.5 km from this Colerain Road point. The Colerain hamlet (30.833,-81.901) is 20 km west and was not used."
+    }
+   ],
+   "notes": "Relay work happens at both ends of the Thalmann - Colerain 230 kV line. Page 214."
+  },
+  {
+   "key": "gpc:11821",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Jesup",
+     "lat": 31.60311,
+     "lon": -81.92495,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/103029795 power=substation name=Jesup Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV, Jesup, Wayne County, zone 218."
+    },
+    {
+     "name": "Rayonier",
+     "lat": 31.65742,
+     "lon": -81.84375,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/1028505623 power=substation name=Rayonier Substation operator=Georgia Power voltage=115000;13800",
+     "confidence": "confirmed",
+     "validation": "Name matches. It serves the Rayonier mill at Doctortown, Wayne County (Nominatim reverse), just east of Jesup. North Jesup Substation (way/730172673) lies between the terminals, and the path of about 6.1 mi straight fits the 7.5-mile section. Other OSM 'Rayonier' substations are elsewhere in Georgia and were rejected."
+    }
+   ],
+   "notes": "Only the Jesup - North Jesup - Rayonier section of the Jesup - Ludowici Primary line is rebuilt. Ludowici Primary is OSM way/358894868 (31.72160,-81.74370) and is not used. Page 240."
+  },
+  {
+   "key": "gpc:20684",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Camden Industrial Park (GTC)",
+     "lat": 30.8387263,
+     "lon": -81.6800799,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim q='Camden County Industrial Park' returns 'Industrial Park', Kinlaw, Kingsland, Camden County",
+     "confidence": "lower-confidence",
+     "validation": "The new GTC station is not mapped. The industrial park geocode sits on the Thalmann - Kingsland 230 kV corridor (way/174697775, about lon -81.680). It is 0.3 km from an unnamed Georgia Power 115 kV substation near Kinlaw (way/1346644393), which fits the plan's related Kinlaw work. The exact site is unknown."
+    }
+   ],
+   "notes": "The station loops in the Colerain - Thalmann 230 kV line. Kingsland Primary is OSM way/159061003 (30.79549,-81.67250). Page 248."
+  },
+  {
+   "key": "gpc:18668",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Jesup",
+     "lat": 31.60311,
+     "lon": -81.92495,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/103029795 power=substation name=Jesup Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV, Wayne County."
+    },
+    {
+     "name": "Offerman",
+     "lat": 31.42307,
+     "lon": -82.14366,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/52069715 power=substation name=Offerman Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV yard, Pierce County. The straight distance of about 17.9 mi fits the 20-mile line."
+    }
+   ],
+   "notes": "Page 308."
+  },
+  {
+   "key": "gpc:20346",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "McManus",
+     "lat": 31.21307,
+     "lon": -81.54527,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1030860844 power=substation name=McManus Switchyard voltage=115000 (adjacent to way/31496730 Plant McManus, Georgia Power)",
+     "confidence": "confirmed",
+     "validation": "Name matches, 115 kV, at Georgia Power's Plant McManus near Brunswick, Glynn County."
+    },
+    {
+     "name": "West Brunswick",
+     "lat": 31.27991,
+     "lon": -81.55866,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/174697782 power=substation name=West Brunswick Substation operator=Georgia Power voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "Exact name match. Georgia Power, 115 kV. The straight distance of about 4.7 mi fits the 5.7-mile line."
+    }
+   ],
+   "notes": "Page 358."
+  }
+ ],
+ "unresolved": [
+  "gpc:10222 Huckleberry: not found. No OSM, Nominatim or web match. A topological candidate is the Arlington/Turman 115 kV cluster (~31.463,-84.725), but it is ambiguous, so the project center rests on Blakely Primary alone.",
+  "gpc:20223 Downrange (new customer substation for 'Project Payton'): no public location. Dothan Road (new station) is only a locality on Dothan Road, Bainbridge.",
+  "gpc:21093 North Spa: new station, and Oasis is unnamed in OSM. The location is inferred from topology (Oasis = unnamed Georgia Power 230/115 kV station at 33.6114,-83.6394, Morgan County), so it is a locality with 8 km uncertainty.",
+  "gpc:18800 / gpc:19627 Wellston: no substation identified. Uses the Warner Robins locality, since Wellston is the old name of Warner Robins.",
+  "gpc:18690 Palmyra: no substation identified. Uses the Palmyra hamlet locality, Lee County.",
+  "gpc:21046 Colerain: no substation identified. Uses the Colerain Road, Kingsland locality. The Thalmann 230 kV line ends at an unmapped junction at 30.826,-81.680.",
+  "gpc:20684 Camden Industrial Park (GTC, new): uses the Industrial Park, Kinlaw, Kingsland locality.",
+  "gpc:20284 Pearson tap: the tap point is not mapped. Pearson Substation is used as a locality-level proxy.",
+  "Lower-confidence facility matches (unnamed or differently named OSM features): Pittman Road (OSM 'West Point Substation'), First Avenue, North Columbus (OSM 'Highlands Dam Substation'), South Warner Robins (OSM 'South'), Echeconnee, Griffin Rd, Glenwood Springs (OSM 'Eatonton Substation'), Engelhard McIntyre J (junction proxy), Climax.",
+  "Section junctions not located (only described in notes): PPG J2, Langston Road (gpc:19997); North Eatonton Jct, Putnam Sawmill Jct (gpc:20298); Four Mile tap, Recovery (gpc:13628); Wesley (gpc:16887); North Dublin (gpc:19618)."
+ ]
+}

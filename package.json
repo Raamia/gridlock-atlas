@@ -12,7 +12,8 @@
     "snapshot:build": "python3 scripts/ingest/region_b_to_clusters.py && tsx scripts/build-snapshot.ts",
     "sources:fetch": "python3 scripts/ingest/fetch_all.py",
     "extract:gemini": "python3 scripts/ingest/extract_gemini.py",
-    "check": "tsc --noEmit && eslint . && vitest run && tsx scripts/audit-data.ts"
+    "check": "tsc --noEmit && eslint . && vitest run && tsx scripts/audit-data.ts",
+    "test:ui": "playwright test"
   },
   "dependencies": {
     "@turf/along": "^7.4.0",
