@@ -67,7 +67,8 @@ function DesktopHeader({ wide, compact, legend }: { wide: boolean; compact: bool
         label="Region"
         look="subtle"
         surface="map"
-        size={compact ? "sm" : "md"}
+        // one 40px control height across the header (nav, action capsule, demo pill) at every desktop/tablet width
+        size="md"
         className="shrink-0"
         value={region}
         onChange={setRegion}
@@ -80,7 +81,7 @@ function DesktopHeader({ wide, compact, legend }: { wide: boolean; compact: bool
         }))}
       />
 
-      <div className="ml-auto flex shrink-0 items-center gap-2">
+      <div data-header-actions="" className="ml-auto flex shrink-0 items-center gap-2">
         <div className="chrome flex items-center gap-0.5 rounded-full p-[3px]">
           {compact ? (
             <>
@@ -236,7 +237,7 @@ function DemoToggle({ narrow }: { narrow: boolean }) {
       variant="secondary"
       size="md"
       aria-label={label}
-      className={clsx("h-[38px]! px-4!", on ? "bg-fill-3!" : "bg-surface-chrome! hover:bg-surface-raised!")}
+      className={clsx("h-10! px-4!", on ? "bg-fill-3!" : "bg-surface-chrome! hover:bg-surface-raised!")}
       icon={on ? <X size={16} strokeWidth={1.75} /> : <CirclePlay size={16} strokeWidth={1.75} />}
       onClick={toggle}
     >

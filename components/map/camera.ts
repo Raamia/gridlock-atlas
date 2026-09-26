@@ -91,6 +91,8 @@ export function currentPadding(kind: "pair" | "overview" = "overview", layout: L
     if ((card.top + card.bottom) / 2 < layout.vh / 2) pad.top = Math.max(pad.top, Math.round(card.bottom + 16));
     else pad.bottom = Math.max(pad.bottom, Math.round(layout.vh - card.top + 16));
   }
+  // phones: a region is wider than tall, so the overview uses the full width (dots may run to the gutter)
+  if (kind === "overview" && layout.tier === "phone") pad.left = pad.right = layout.gutter + 4;
   // wide overviews (a region, the flagged pairs) keep their corners clear of the map-controls column at the bottom-right
   if (kind === "overview" && layout.tier !== "phone" && typeof document !== "undefined") {
     const w = Math.min(240, document.querySelector<HTMLElement>("[data-map-controls]")?.offsetWidth ?? 0);
@@ -193,6 +195,7 @@ export class CameraDirector {
     this.lastPadding = padding;
     this.userMoved = false;
     this.pendingSync = false;
+    // dev only, like window.__map: the last 40 camera moves (intent + padding), for probe scripts chasing camera races
     if (process.env.NODE_ENV !== "production") {
       const w = window as unknown as { __camLog?: unknown[] };
       (w.__camLog ??= []).push({ t: Math.round(performance.now()), intent, animate, padding });

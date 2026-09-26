@@ -21,6 +21,7 @@ import {
   ringLabelPoint,
   routeFeatures,
   sharedBorder,
+  borderLabel,
   sharedSite,
   siteLegFeatures,
   type RoleContext,
@@ -71,7 +72,7 @@ function savannahLine(): Promise<FC> {
     .then((r) => r.json())
     .then((states) => {
       const f = sharedBorder(states, "SC", "GA");
-      return f ? ({ type: "FeatureCollection", features: [f] } as FC) : EMPTY;
+      return f ? ({ type: "FeatureCollection", features: [f, borderLabel(f)] } as FC) : EMPTY;
     })
     .catch(() => EMPTY);
   return stateLine;
@@ -150,7 +151,12 @@ export default function MapStage() {
     return ids;
   }, [region, run, selected, hovered]);
 
-  const flaggedProjectIds = useMemo(() => (run ? new Set(regionRun.flatMap((m) => [m.projectAId, m.projectBId])) : null), [run, regionRun]);
+  // after a run, projects in no flagged pair dim; with a focus, everything outside the focus does
+  const flaggedProjectIds = useMemo(() => {
+    if (!run) return null;
+    const pairs = focus ? regionRun.filter((m) => focus.pairIds.includes(m.id)) : regionRun;
+    return new Set(pairs.flatMap((m) => [m.projectAId, m.projectBId]));
+  }, [run, regionRun, focus]);
 
   /* ---------------------------------------------- init ---------------------------------------------- */
   useEffect(() => {
@@ -338,7 +344,10 @@ export default function MapStage() {
         ev.lngLat,
       );
     });
-    map.on("mouseout", () => {
+    map.on("mouseout", (ev) => {
+      // a tap's emulated mouse events leave the canvas for the card itself: keep the card (its button is next)
+      const to = (ev.originalEvent as MouseEvent | undefined)?.relatedTarget as Node | null | undefined;
+      if (isTouchEvent(ev.originalEvent) || (to && popup.current?.getElement()?.contains(to))) return;
       closeCard();
       const st = useAtlas.getState();
       if (st.hoveredProjectId) st.set({ hoveredProjectId: null });
@@ -479,7 +488,7 @@ export default function MapStage() {
     const ranks = run ? queueRank(run, region) : null;
     const ov = overlapFeatures(
       regionRun.filter((m) => visibleProjectIds.has(m.projectAId) && visibleProjectIds.has(m.projectBId)),
-      { selectedId: selected?.id ?? null, hoverId: hovered?.id ?? null, ranks },
+      { selectedId: selected?.id ?? null, hoverId: hovered?.id ?? null, ranks, focusIds: focus ? new Set(focus.pairIds) : null },
     );
     setData(map, "gl-overlaps", ov.lines as FC);
     setData(map, "gl-overlap-dots", ov.dots as FC);
@@ -767,11 +776,11 @@ export default function MapStage() {
       const rank = ranks.get(m.id) ?? 0;
       const a = IDX.project(m.projectAId);
       const b = IDX.project(m.projectBId);
-      const chip = rankChip(rankLabel(rank), `#${rankLabel(rank)} ${a.shortTitle} × ${b.shortTitle}`, () => useAtlas.getState().select(m.id));
+      const { root, chip } = rankChip(rankLabel(rank), `#${rankLabel(rank)} ${a.shortTitle} × ${b.shortTitle}`, () => useAtlas.getState().select(m.id));
       chip.style.opacity = revealing.current ? "0" : "1";
       if (covers.current.chips) chip.style.display = "none";
       const marker = new mapboxgl.Marker({
-        element: chip,
+        element: root,
         anchor: "bottom",
         offset: [0, -6],
       })
@@ -915,16 +924,19 @@ function map3dCovers(map: mapboxgl.Map, mode: "3d" | "flat", standard: boolean):
   if (mode !== "3d") return { arcs: false, ring: false, chips: false, labels: false };
   // the offline style has no glyphs: map-3d's text chips cannot draw there, so the HTML ones stay
   const labels = standard && hasLayer(map, "gl3d-labels");
-  // map-3d's rank chips, if it draws them: read (never touch) its label source
-  let chips = false;
-  try {
-    const src = map.getSource("gl3d-src-labels") as (GeoJSONSource & { serialize?: () => { data?: unknown } }) | undefined;
-    const data = src?.serialize?.().data as FC | undefined;
-    chips = labels && !!data?.features?.some((f) => f.properties?.k === "rank");
-  } catch {
-    chips = false;
-  }
-  return { arcs: hasLayer(map, "gl3d-arcs"), ring: hasLayer(map, "gl3d-ring"), chips, labels };
+  // what map-3d actually draws right now: read (never touch) its sources
+  const features = (id: string): GeoJSON.Feature[] => {
+    try {
+      const src = map.getSource(id) as (GeoJSONSource & { serialize?: () => { data?: unknown } }) | undefined;
+      return (src?.serialize?.().data as FC | undefined)?.features ?? [];
+    } catch {
+      return [];
+    }
+  };
+  const chips = labels && features("gl3d-src-labels").some((f) => f.properties?.k === "rank");
+  // its ring is the selected pair's; a project focus keeps the flat ring when map-3d draws none
+  const ring = hasLayer(map, "gl3d-ring") && features("gl3d-src-ring-line").length > 0;
+  return { arcs: hasLayer(map, "gl3d-arcs"), ring, chips, labels };
 }
 
 function setChipsShown(list: { el: HTMLElement }[], shown: boolean) {

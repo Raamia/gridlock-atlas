@@ -103,6 +103,8 @@ describe("computeLayout tiers", () => {
     expect(layoutCssVars(pre)).toMatchObject({ "--panel-top": "103px", "--focal-t": "103px", "--sheet-h": "166px", "--focal-b": "174px" });
     // the inspector sheet's 64dvh already contains the inset
     expect(computeLayout(390, 844, { ...notch, inspectorOpen: true, pairSelected: true }).sheetH).toBe(540);
+    // the full snap stops under the header (it would otherwise climb over a notched phone's header row)
+    expect(computeLayout(390, 844, { ...notch, sheetSnap: "full" }).sheetH).toBe(741);
     // a short top inset never pulls the header above the 12px gutter
     expect(computeLayout(390, 844, { ...notch, safeTop: 4 }).panelTop).toBe(68);
   });

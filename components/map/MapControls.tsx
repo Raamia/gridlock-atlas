@@ -184,8 +184,22 @@ function PhoneMapControls() {
       <BasemapNotice />
       {open && (
         <div id="map-options" className="popover flex animate-pop-in flex-col items-end gap-2.5 rounded-card p-2.5">
-          <Segmented variant="pressed" label="Map perspective" look="subtle" items={persp.items} value={persp.mapMode} onChange={persp.onChange} />
-          <Segmented variant="pressed" label="Basemap" look="subtle" items={base.items} value={base.basemap} onChange={base.onChange} />
+          <Segmented
+            variant="pressed"
+            label="Map perspective"
+            look="subtle"
+            items={persp.items.map((it) => ({ ...it, className: "h-10! px-4!" }))}
+            value={persp.mapMode}
+            onChange={persp.onChange}
+          />
+          <Segmented
+            variant="pressed"
+            label="Basemap"
+            look="subtle"
+            items={base.items.map((it) => ({ ...it, className: "h-10! px-4!" }))}
+            value={base.basemap}
+            onChange={base.onChange}
+          />
           {persp.mapMode === "3d" && (
             <button type="button" onClick={() => set({ mapKeyOpen: true })} className="inline-flex h-11 items-center gap-1.5 px-1 text-caption text-fg-2">
               3D · symbolic structures <Info aria-hidden className="size-3.5 text-fg-3" strokeWidth={1.75} />

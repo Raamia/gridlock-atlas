@@ -115,7 +115,8 @@ const DOT_GRID: CSSProperties = { backgroundImage: "radial-gradient(var(--fill-2
 
 function MapUnavailable(_props: Record<string, unknown>, { reset }: ErrorInfo) {
   return (
-    <div className="absolute inset-0 bg-canvas">
+    // data-map-unavailable: globals.css then hides the map's own chrome (key chip, 3D/basemap controls) in the focal slot
+    <div data-map-unavailable="" className="absolute inset-0 bg-canvas">
       <div aria-hidden className="absolute inset-0" style={DOT_GRID} />
       <div className="absolute flex items-center justify-center px-4" style={{ left: "var(--focal-l)", top: "var(--focal-t)", right: "var(--focal-r)", bottom: "var(--focal-b)" }}>
         <Notice icon={<MapPinOff />} actionLabel="Retry map" onAction={reset}>
@@ -200,22 +201,28 @@ function Closeup() {
 
 /* ─────────────────────────────────────────────────── slots ─────────────────────────────────────────────────── */
 
+/** Below this focal height the map's own chrome (key chip, control stack) is hidden: there is no map left to operate. */
+const MIN_CHROME_H = 160;
+
 /**
  * The focal hole: a box exactly over the map no panel covers (the --focal-* insets; its top already clears the rail
  * pill). MapOverlays places the key chip top-left and the controls bottom-right inside it; the guided-demo card is
  * fixed and positions itself from the same variables.
  */
 function FocalSlot({ children }: { children: ReactNode }) {
+  const layout = useLayout();
   const uiHidden = useAtlas((s) => s.uiHidden);
   const closeupOpen = useAtlas((s) => s.closeupOpen);
+  // the phone's full sheet leaves a sliver of map: the key chip and the control stack would pile up under the header
+  const cramped = layout.focalH < MIN_CHROME_H;
   return (
     <div
       data-slot="focal"
       className={clsx(
         // no z-index on purpose: a stacking context here would trap the demo card's own z (it must clear the brief's scrim)
         "pointer-events-none absolute transition-[left,top,right,bottom] duration-(--dur-4) ease-enter [&>:not(.pointer-events-none)]:pointer-events-auto",
-        // H, or the 3D close-up over the map: only the guided-demo card stays
-        (uiHidden || closeupOpen) && "[&>:not([role=region])]:hidden!",
+        // H, the 3D close-up over the map, or no room: only the guided-demo card stays
+        (uiHidden || closeupOpen || cramped) && "[&>:not([role=region])]:hidden!",
       )}
       style={{ left: "var(--focal-l)", top: "var(--focal-t)", right: "var(--focal-r)", bottom: "var(--focal-b)" }}
     >
@@ -256,15 +263,18 @@ function RailPill() {
 }
 
 const SNAPS: SheetSnap[] = ["peek", "half", "full"];
+/** Sheet heights, safe-area bottom included (as lib/layout computes them); full stops under the header on notched phones. */
 const SNAP_CSS: Record<SheetSnap, string> = {
-  peek: `${PHONE_SHEET.peek}px`,
-  half: `${PHONE_SHEET.half * 100}dvh`,
-  full: `${PHONE_SHEET.full * 100}dvh`,
+  peek: `calc(${PHONE_SHEET.peek}px + var(--safe-b))`,
+  half: `calc(${PHONE_SHEET.half * 100}dvh + var(--safe-b))`,
+  full: `min(calc(${PHONE_SHEET.full * 100}dvh + var(--safe-b)), calc(100dvh - var(--panel-top)))`,
 };
 
+/** Snap heights without the safe-area inset (the drag works in these; the style adds the inset back). */
 function snapHeights(): Record<SheetSnap, number> {
   const vh = window.innerHeight;
-  return { peek: PHONE_SHEET.peek, half: Math.round(vh * PHONE_SHEET.half), full: Math.round(vh * PHONE_SHEET.full) };
+  const panelTop = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--panel-top")) || 68;
+  return { peek: PHONE_SHEET.peek, half: Math.round(vh * PHONE_SHEET.half), full: Math.round(Math.min(vh * PHONE_SHEET.full, vh - panelTop)) };
 }
 
 /** Phone bottom sheet: drag the handle between peek / half / full (flicks go one snap further); a tap calls `onTap`. */
@@ -350,7 +360,7 @@ function RailSlot({ children }: { children: ReactNode }) {
   };
 
   const style: CSSProperties = sheet
-    ? { left: 0, right: 0, bottom: 0, height: `calc(${dragH !== null ? `${Math.round(dragH)}px` : SNAP_CSS[snap]} + var(--safe-b))` }
+    ? { left: 0, right: 0, bottom: 0, height: dragH !== null ? `calc(${Math.round(dragH)}px + var(--safe-b))` : SNAP_CSS[snap] }
     : // the overlay opens under its pill: --focal-t already clears it
       { left: "var(--gutter)", top: overlay ? "var(--focal-t)" : "var(--panel-top)", bottom: "var(--gutter)", width: "var(--rail-w)" };
 
@@ -516,8 +526,15 @@ function DockSlot({ children }: { children: ReactNode }) {
 
 /** The H key's "Press H to show panels" notice (the only one that times out). */
 const HIDDEN_NOTICE_ID = "ui-hidden";
+/** The focal area's top row (the 32px map-key chip + 12): notices start below it. */
+const KEY_ROW = 44;
 
-/** Glass pills bottom-centre of the focal area, above the dock. Neither the link notice nor the others hide by themselves. */
+/**
+ * Glass pills centred in the focal area, just under the key-chip row (and under the guided-demo card while it runs).
+ * Not at the bottom: the map controls, the Mapbox logo and the phone sheet own that edge, and a wide notice collided
+ * with the basemap switch whenever the focal hole narrowed (a pair open at 1024–1440). Neither the link notice nor the
+ * others hide by themselves (only "Press H to show panels" times out).
+ */
 function Notices() {
   const notice = useAtlas((s) => s.notice);
   const linkNotice = useAtlas((s) => s.linkNotice);
@@ -525,8 +542,8 @@ function Notices() {
   const dismissNotice = useAtlas((s) => s.dismissNotice);
   return (
     <div
-      className="pointer-events-none absolute z-(--z-toast) flex flex-col items-center justify-end gap-2 px-3 pb-3 transition-[left,right,bottom] duration-(--dur-4) ease-enter [&>*]:pointer-events-auto"
-      style={{ left: "var(--focal-l)", right: "var(--focal-r)", bottom: "var(--focal-b)" }}
+      className="pointer-events-none absolute z-(--z-toast) flex flex-col items-center gap-2 px-3 transition-[left,right,top] duration-(--dur-4) ease-enter [&>*]:pointer-events-auto"
+      style={{ left: "var(--focal-l)", right: "var(--focal-r)", top: `max(calc(var(--focal-t) + ${KEY_ROW}px), calc(var(--demo-card-bottom, 0px) + 12px))` }}
     >
       {linkNotice && (
         <Notice {...mapUi()} icon={<Link2Off />} onDismiss={() => set({ linkNotice: null })} className="animate-pop-in">

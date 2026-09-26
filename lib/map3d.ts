@@ -6,7 +6,7 @@ import type { Match, MatchRun, Place, Project, ReviewStatus } from "@/lib/domain
 import { workKind, voltageOf } from "@/lib/impact";
 import { centerOf } from "@/lib/matching/geo";
 import { REVIEW_TABS, inRegion, rankLabel, rankOf } from "@/lib/rank";
-import { MODEL_HEIGHTS, towerConductorHeights } from "@/lib/models/structures";
+import { MAP_BAKE, MODEL_HEIGHTS, towerConductorHeights } from "@/lib/models/structures";
 
 /**
  * 3D map scene (SPEC §6). Owner: map-3d, which owns every `gl3d-*` layer and source; map-core (MapStage) calls
@@ -22,6 +22,18 @@ import { MODEL_HEIGHTS, towerConductorHeights } from "@/lib/models/structures";
  *
  * Every map call is guarded (getLayer / getSource + try/catch) and nothing runs until install3D ran for the current
  * style, so a style swap can never raise "layer does not exist" errors into MapStage's basemap-failure handler.
+ *
+ * mapbox-gl 3.31 model-layer behaviour this file works around (each one tested by screenshot):
+ * - An array-valued `model-scale` under `interpolate` over zoom does not interpolate: it sticks at its first stop (a
+ *   z5 stop = a 100 km model that blanks the whole map — the "tall models blank the map" effect). `step` works, so
+ *   scales are sampled every 1/8 zoom (steppedScale).
+ * - A zoom curve whose outputs read feature properties (`get`) renders nothing; per-feature size therefore comes from
+ *   one layer per voltage class (and relative model sizes are baked into the GLBs, see MAP_BAKE).
+ * - Data-driven `model-opacity` and `model-emissive-strength` are ignored: opacity groups (full / dim / selected)
+ *   are separate layers, emissive is a constant.
+ * - Model layers render only in Standard's "top" slot, and a model layer with both a filter and a maxzoom renders
+ *   nothing (zoom visibility is toggled here instead).
+ * - Raised lines need lineMetrics + tolerance 0 (geojson-vt otherwise simplifies the densified arc to a triangle).
  */
 
 export type Map3DInput = {
@@ -130,28 +142,30 @@ const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v
 // level of detail: model scales (tuned by screenshot; see the report)
 
 /**
- * Structures keep a constant on-screen size (exponential base-2 interpolation over zoom): `S10` is the uniform scale at
- * zoom 10 for a 1.0 voltage factor. Below z6.5 they stop growing (only the selected pair is shown there).
+ * Structure scale at zoom 10 for a 1.0 voltage factor (every structure model shares one curve; relative sizes are
+ * baked into the map GLBs by scripts/build-models.ts, see MAP_BAKE in lib/models/structures.ts). Each voltage class is
+ * its own layer with a zoom-only stepped curve (see the file header for why). Structures are symbolic, exaggerated
+ * for legibility (a 115 kV substation reads ~1 km wide at pair zoom); the map key and the 3D caption say so.
  */
-const S10 = 20;
-/**
- * Every structure model shares one scale curve; their relative sizes are baked into the map GLBs by
- * scripts/build-models.ts (substation without its pad and ×1.9 taller, pylon ×1.7), so one layer per voltage class
- * is enough. Mapbox-gl 3.31 ignores zoom in a model-scale that also reads feature data (tested: it sticks at the first
- * stop), so each voltage class gets its own layer with a zoom-only curve.
- */
+const S10 = 56;
 export function structureScale(cls: VoltageClass, zoom: number): [number, number, number] {
-  const s = S10 * Math.pow(2, 10 - Math.max(6.5, zoom)) * VOLTAGE_FACTOR[cls];
+  const z = Math.max(6.5, zoom);
+  // constant on-screen size from z10 in; zooming out they shrink on screen (a quarter as fast as the map) so a framed
+  // 80-mile route reads as a line of small towers, not a fence
+  const s = S10 * Math.pow(2, z >= 10 ? 10 - z : 0.75 * (10 - z)) * VOLTAGE_FACTOR[cls];
   return [s, s, s];
 }
 
-/** Spire stops for the 40 m spire (SPEC §6.2: z5 700 · z6 400 · z7 190 · z8 90), footprint ×0.4, height × voltage. */
+/**
+ * Spire stops for the 40 m spire: SPEC §6.2's tested curve (z5 700 · z6 400 · z7 190 · z8 90) ×1.25, footprint ×0.75
+ * (this spire tapers to a needle, so it needs a wider foot than the reviewer's probe column), height × voltage class.
+ */
 const SPIRE_STOPS: [number, number][] = [
-  [5, 700],
-  [6, 400],
-  [7, 190],
-  [8, 90],
-  [8.5, 64],
+  [5, 880],
+  [6, 500],
+  [7, 240],
+  [8, 112],
+  [8.5, 80],
 ];
 const SPIRE_FOOTPRINT = 0.75;
 function spireScale(cls: VoltageClass, s: number): [number, number, number] {
@@ -162,14 +176,17 @@ function spireScale(cls: VoltageClass, s: number): [number, number, number] {
 /** Towers every TOWER_SPACING metres along official-GIS routes; thinned by zoom band. */
 const TOWER_SPACING = 400;
 export function towerStep(zoom: number): number {
-  if (zoom < 9) return 10;
-  if (zoom < 10) return 4;
-  if (zoom < 11) return 2;
+  if (zoom < 8.5) return 24;
+  if (zoom < 9) return 16;
+  if (zoom < 10) return 8;
+  if (zoom < 11) return 4;
+  if (zoom < 12) return 2;
   return 1;
 }
 
-const TOWER_REACH = 7; // middle cross-arm half-span (model metres, default 14 m arm span)
-const [, TOWER_CONDUCTOR] = towerConductorHeights(40);
+// middle cross-arm half-span and conductor height of the map's tower.glb (default 40 m tower, baked ×0.6)
+const TOWER_REACH = 7 * MAP_BAKE.tower[0];
+const TOWER_CONDUCTOR = towerConductorHeights(40)[1] * MAP_BAKE.tower[1];
 
 // ---------------------------------------------------------------------------------------------------------------
 // state
@@ -231,8 +248,11 @@ export interface Map3DArc {
   b: LonLat;
   /** Draw-in order (1-based): engine priority order within the region among the arcs drawn. */
   rank: number;
-  /** Apex height in metres. */
+  /** Apex height in metres (of the longer leg for a via arc). */
   h: number;
+  /** Shared-site / shared-endpoint pairs: the arc runs center → site → center (the site is the evidence), never a
+   *  bare center-to-center link. */
+  via?: LonLat;
   /** Place signal only possible (B1): drawn at 50% opacity. */
   possible: boolean;
   hovered: boolean;
@@ -267,7 +287,9 @@ export interface Map3DHotspot {
 export interface Map3DLabel {
   lonlat: LonLat;
   text: string;
-  kind: "ring" | "beyond" | "rank" | "hotspot";
+  kind: "ring" | "beyond" | "rank" | "hotspot" | "chord";
+  /** Text colour for "chord" labels (the line's utility hue). */
+  hue?: string;
   /** Elevation of the label in metres (rank chips sit at their arc's apex). */
   z: number;
   /** Rank chips that would overlap an earlier chip stack upward (0 = no shift). */
@@ -322,6 +344,11 @@ export function sharedSiteOf(m: Match): { label: string; lonlat: LonLat; stated:
     places.find((pl) => rel.siteLabel && pl.label.toLowerCase().includes(rel.siteLabel.toLowerCase().split(" ")[0]));
   if (!place) return null;
   return { label: rel.siteLabel ?? place.label, lonlat: [place.lon, place.lat], stated: rel.basis !== "inferred" };
+}
+
+/** Overview arcs stay lower than the selected pair's (a fan of 100+ links) but visibly raised: 0.2 × chord, 200 m – 4 km. */
+export function overviewArcHeight(chordMeters: number): number {
+  return clamp(0.2 * chordMeters, 200, 4000);
 }
 
 function selectedArcHeight(chordMeters: number): number {
@@ -409,6 +436,7 @@ export function build3DState(input: Map3DInput): Map3DState {
   const discs: Map3DDisc[] = [];
   const chords: Map3DChord[] = [];
   const taken: LonLat[] = [];
+  const labels: Map3DLabel[] = [];
 
   // selected pair first so its structures win de-duplication at shared facilities
   const ordered = [...visible].sort((x, y) => Number(!!pairIds?.includes(y.id)) - Number(!!pairIds?.includes(x.id)));
@@ -453,6 +481,16 @@ export function build3DState(input: Map3DInput): Map3DState {
     }
   }
 
+  // a line drawn terminal to terminal says so, on the line, away from its center (where the project callout sits)
+  for (const ch of chords)
+    labels.push({
+      lonlat: [ch.a[0] + (ch.b[0] - ch.a[0]) * 0.86, ch.a[1] + (ch.b[1] - ch.a[1]) * 0.86],
+      text: "route not published\ndrawn terminal to terminal",
+      kind: "chord",
+      hue: ch.hue,
+      z: 0,
+    });
+
   // region-zoom spires stand exactly where the z8+ structures will be (same honest places), so the level of detail
   // cross-fades in place; locality-only projects keep only their 2D halo
   for (const st of structures) spires.push({ projectId: st.projectId, lonlat: st.lonlat, hue: st.hue, cls: st.cls, opacity: st.opacity, selected: st.selected });
@@ -464,17 +502,19 @@ export function build3DState(input: Map3DInput): Map3DState {
     const c = m.geoDetail.center;
     if (!c || !visibleIds.has(m.projectAId) || !visibleIds.has(m.projectBId)) return;
     if (selectedMatch && m.id === selectedMatch.id) return;
-    const chord = metersBetween(c.a, c.b);
+    const site = m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint" ? sharedSiteOf(m) : null;
+    const legs = site ? [metersBetween(c.a, site.lonlat), metersBetween(site.lonlat, c.b)] : [metersBetween(c.a, c.b)];
     arcs.push({
       id: m.id,
       a: c.a,
       b: c.b,
+      via: site?.lonlat,
       rank: arcs.length + 1,
-      h: Math.max(120, 0.08 * chord),
+      h: overviewArcHeight(Math.max(...legs)),
       possible: m.geo !== "confirmed",
       hovered: hoveredMatch?.id === m.id,
       dim: selectedMatch
-        ? 0.16
+        ? 0.07
         : focus && !(focus.has(m.projectAId) || focus.has(m.projectBId))
           ? 0.16
           : hoveredMatch && hoveredMatch.id !== m.id
@@ -485,7 +525,6 @@ export function build3DState(input: Map3DInput): Map3DState {
 
   // the selected pair: arcs, ring, beacon
   let selected: Map3DSelected | null = null;
-  const labels: Map3DLabel[] = [];
   if (selectedMatch?.geoDetail.center) {
     const c = selectedMatch.geoDetail.center;
     const a = PROJECTS.get(selectedMatch.projectAId)!;
@@ -519,7 +558,10 @@ export function build3DState(input: Map3DInput): Map3DState {
     };
     const toB = bearingDeg(c.a, c.b);
     const r = radiusMiles * MI;
-    labels.push({ lonlat: destination(c.a, r, toB + (inside ? 0 : 28)), text: `${radiusMiles} mi from ${a.shortTitle}`, kind: "ring", z: 0 });
+    // inside: the label sits on the ring just past B; outside: B's side of the ring holds the "Beyond" chip, so the
+    // ring label moves round to the side away from the shared site
+    const away = site ? (bearingDeg(c.a, site.lonlat) - toB > 0 ? -1 : 1) : -1;
+    labels.push({ lonlat: destination(c.a, r, inside ? toB : toB + away * 55), text: `${radiusMiles} mi from ${a.shortTitle}`, kind: "ring", z: 0 });
     if (!inside && basis !== "measured") labels.push({ lonlat: destination(c.a, r, toB), text: `Beyond ${radiusMiles} mi · shared site`, kind: "beyond", z: 0 });
     if (site) {
       structures.push({
@@ -550,7 +592,9 @@ export function build3DState(input: Map3DInput): Map3DState {
         const rank = rankOf(run, region, m.id);
         const arc = arcs.find((x) => x.id === m.id);
         if (!rank || rank > 3 || !arc) continue;
-        const at: LonLat = [(arc.a[0] + arc.b[0]) / 2, (arc.a[1] + arc.b[1]) / 2];
+        // the chip rides the apex of the (longer) leg
+        const [x, y] = arcLegs(arc).sort((p, q) => metersBetween(q[0], q[1]) - metersBetween(p[0], p[1]))[0] ?? [arc.a, arc.b];
+        const at: LonLat = [(x[0] + y[0]) / 2, (x[1] + y[1]) / 2];
         const stack = labels.filter((l) => l.kind === "rank" && metersBetween(l.lonlat, at) < 15000).length;
         labels.push({ lonlat: at, text: rankLabel(rank), kind: "rank", z: arc.h, stack });
       }
@@ -590,14 +634,32 @@ type LayerClass = (typeof LAYER_CLASSES)[number];
 const spireClass = (cls: VoltageClass): LayerClass => (cls === "u" ? "v1" : cls);
 const structureClass = (cls: VoltageClass): LayerClass => (cls === "u" ? "v2" : cls);
 
+/**
+ * mapbox-gl 3.31 does not interpolate an array-valued model-scale over zoom (an `interpolate` sticks at its first stop
+ * — the "giant model blanks the map" effect), but `step` works: sample the curve every 1/8 zoom (≤9% size ticks).
+ */
+function steppedScale(from: number, to: number, f: (z: number) => [number, number, number]): Expr {
+  const out: unknown[] = ["step", ["zoom"], ["literal", f(from)]];
+  for (let z = from + 0.125; z <= to + 1e-9; z += 0.125) out.push(Math.round(z * 1000) / 1000, ["literal", f(z + 0.0625)]);
+  return out;
+}
+
+function spireStopAt(z: number): number {
+  if (z <= SPIRE_STOPS[0][0]) return SPIRE_STOPS[0][1];
+  for (let i = 0; i < SPIRE_STOPS.length - 1; i++) {
+    const [z0, v0] = SPIRE_STOPS[i];
+    const [z1, v1] = SPIRE_STOPS[i + 1];
+    if (z <= z1) return v0 + ((v1 - v0) * (z - z0)) / (z1 - z0);
+  }
+  return SPIRE_STOPS[SPIRE_STOPS.length - 1][1];
+}
+
 function spireScaleExpr(cls: LayerClass): Expr {
-  const stops: unknown[] = [];
-  for (const [z, v] of SPIRE_STOPS) stops.push(z, ["literal", spireScale(cls, v)]);
-  return ["interpolate", ["linear"], ["zoom"], ...stops];
+  return steppedScale(4, 8.75, (z) => spireScale(cls, spireStopAt(z)));
 }
 
 function structureScaleExpr(cls: LayerClass): Expr {
-  return ["interpolate", ["exponential", 2], ["zoom"], 5, ["literal", structureScale(cls, 6.5)], 6.5, ["literal", structureScale(cls, 6.5)], 16, ["literal", structureScale(cls, 16)]];
+  return steppedScale(6.5, 16, (z) => structureScale(cls, z));
 }
 
 /** Dimmed spires darken toward the canvas (model opacity is per layer, and spires are too thin to need translucency). */
@@ -625,24 +687,31 @@ function structureProps(model: ModelKey, cls: VoltageClass, extra: Props): Props
 
 function structureFeatures(s: Map3DState, zoom: number) {
   const out: Feature<Point, Props>[] = s.structures.map((st) =>
-    pt(st.lonlat, structureProps(st.model, st.cls, { c: st.hue, g: group(st.selected, st.opacity), r: [0, 0, 0], e: st.model === "beacon" ? 0.9 : 0.35 })),
+    pt(st.lonlat, structureProps(st.model, st.cls, { c: st.hue, g: st.model === "beacon" ? "beacon" : group(st.selected, st.opacity), r: [0, 0, 0] })),
   );
   const step = towerStep(zoom);
   for (const r of s.routes)
     r.towers.forEach((t, i) => {
       if (i % step !== 0 && i !== r.towers.length - 1) return;
-      out.push(pt(t.lonlat, structureProps("tower", r.cls, { c: r.hue, g: group(r.selected, r.opacity), r: [0, 0, t.bearing], e: 0.35 })));
+      out.push(pt(t.lonlat, structureProps("tower", r.cls, { c: r.hue, g: group(r.selected, r.opacity), r: [0, 0, t.bearing] })));
     });
   return fc(out);
 }
 
 /** Two conductors per span (the middle arm's tips), sagging between towers: z = hz − sag·sin(π·progress). */
+/** The zoom the stepped tower scale is evaluated at for `zoom` (mirrors steppedScale's 1/8 grid, +1/16). */
+function wireZoomOf(zoom: number): number {
+  const q = Math.floor(zoom * 8) / 8;
+  return q < 6.625 ? 6.5 : q + 0.0625;
+}
+
 function wireFeatures(s: Map3DState, zoom: number) {
   const out: Feature<LineString, Props>[] = [];
   const step = towerStep(zoom);
   for (const r of s.routes) {
     const shown = r.towers.filter((_, i) => i % step === 0 || i === r.towers.length - 1);
-    const [sx, , sz] = structureScale(structureClass(r.cls), zoom);
+    // the tower layers step their scale every 1/8 zoom (see steppedScale): wires use the same quantized zoom
+    const [sx, , sz] = structureScale(structureClass(r.cls), wireZoomOf(zoom));
     const hz = TOWER_CONDUCTOR * sz;
     const reach = TOWER_REACH * sx;
     for (let i = 0; i < shown.length - 1; i++) {
@@ -660,8 +729,20 @@ function wireFeatures(s: Map3DState, zoom: number) {
   return fc(out);
 }
 
+/** The drawn legs of an overview arc: [a, b], or [a, via] + [via, b] (legs shorter than 150 m are dropped). */
+export function arcLegs(a: Pick<Map3DArc, "a" | "b" | "via">): [LonLat, LonLat][] {
+  if (!a.via) return [[a.a, a.b]];
+  return ([[a.a, a.via], [a.via, a.b]] as [LonLat, LonLat][]).filter(([x, y]) => metersBetween(x, y) > 150);
+}
+
 function arcFeatures(s: Map3DState) {
-  return fc(s.arcs.map((a) => ln(densify(a.a, a.b, 64), { id: a.id, rank: a.rank, h: a.h, op: a.possible ? 0.5 : 1, hov: a.hovered, dim: a.dim })));
+  return fc(
+    s.arcs.flatMap((a) =>
+      arcLegs(a).map(([x, y]) =>
+        ln(densify(x, y, 64), { id: a.id, rank: a.rank, h: overviewArcHeight(metersBetween(x, y)), op: a.possible ? 0.5 : 1, hov: a.hovered, dim: a.dim }),
+      ),
+    ),
+  );
 }
 
 function selectedArcFeatures(s: Map3DState) {
@@ -686,22 +767,23 @@ function discFeatures(s: Map3DState) {
 }
 
 function chordFeatures(s: Map3DState) {
-  return fc(s.chords.map((c) => ln(densify(c.a, c.b, 16), { c: c.hue, t: "route not published · drawn terminal to terminal" })));
+  return fc(s.chords.map((c) => ln(densify(c.a, c.b, 16), { c: c.hue })));
 }
 
 function beaconFeatures(s: Map3DState) {
   return fc(s.selected?.site ? [pt(s.selected.site, {})] : []);
 }
 
-function labelFeatures(s: Map3DState) {
+function labelFeatures(s: Map3DState, narrow = false) {
   return fc(
-    s.labels.map((l) =>
+    s.labels.filter((l) => !(narrow && l.kind === "chord")).map((l) =>
       pt(l.lonlat, {
         t: l.text,
         k: l.kind,
         z: l.z,
         si: l.stack ?? 0,
-        chip: l.kind === "rank" || l.kind === "beyond",
+        c: l.hue ?? HUE.overlap,
+        chip: l.kind === "rank" || l.kind === "beyond" ? "gl3d-chip" : l.kind === "chord" ? "gl3d-chip-quiet" : "",
       }),
     ),
   );
@@ -846,7 +928,7 @@ function layerSpecs(standard: boolean): LayerDef[] {
         layout: { ...lineRound, "line-z-offset": Z_WIRE, "line-elevation-reference": "ground" },
         paint: {
           "line-color": ["get", "c"],
-          "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.7, 12, 1.4],
+          "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.8, 12, 1.6],
           "line-opacity": ["interpolate", ["linear"], ["zoom"], 7.9, ["*", 0.9, ["get", "o"]], 8.5, ["*", 0.9, ["get", "o"]]],
           "line-emissive-strength": 0.6,
         },
@@ -896,7 +978,7 @@ function layerSpecs(standard: boolean): LayerDef[] {
         paint: {
           "model-scale": spireScaleExpr(cls),
           "model-color": ["get", "c"],
-          "model-color-mix-intensity": 0.85,
+          "model-color-mix-intensity": 1,
           "model-emissive-strength": 0.35,
           // the crown glows brighter than the shaft (0.35 × 1.2 at the foot → × 2.8 at the tip)
           "model-height-based-emissive-strength-multiplier": [0, 40, 1.2, 2.8, 0],
@@ -919,9 +1001,11 @@ function layerSpecs(standard: boolean): LayerDef[] {
           "model-scale": structureScaleExpr(cls),
           "model-rotation": arr3("r"),
           "model-color": ["get", "c"],
-          "model-color-mix-intensity": 0.85,
-          "model-emissive-strength": ["get", "e"],
-          "model-height-based-emissive-strength-multiplier": [0, 45, 0.85, 1.9, 0],
+          "model-color-mix-intensity": 1,
+          // constant: a data-driven emissive strength is ignored for model layers in 3.31 (tested). Under the night
+          // preset an unlit lattice reads black; 0.35 × (2.0 → 2.6 up the height) keeps the utility hue legible
+          "model-emissive-strength": 0.35,
+          "model-height-based-emissive-strength-multiplier": [0, 30, 2, 2.6, 0],
           // the selected pair's structures show at every zoom; the rest cross-fade in as the spires fade out
           "model-opacity": g === "sel" ? op : ["interpolate", ["linear"], ["zoom"], 7.9, 0, 8.5, op],
           "model-cast-shadows": false,
@@ -930,22 +1014,21 @@ function layerSpecs(standard: boolean): LayerDef[] {
       },
     })),
     {
-      symbol: true,
       spec: {
-        id: "gl3d-chord-labels",
-        type: "symbol",
-        source: SRC.chords,
-        minzoom: 8,
-        layout: {
-          "symbol-placement": "line-center",
-          "text-field": ["get", "t"],
-          "text-font": FONT,
-          "text-size": 11,
-          "text-offset": [0, -0.9],
-          "text-max-angle": 30,
-          "text-allow-overlap": false,
+        id: "gl3d-beacon",
+        type: "model",
+        source: SRC.structures,
+        filter: ["==", ["get", "g"], "beacon"],
+        layout: { "model-id": MODEL_ID.beacon, "model-allow-density-reduction": false },
+        paint: {
+          "model-scale": structureScaleExpr("v2"),
+          "model-color": HUE.overlap,
+          "model-color-mix-intensity": 1,
+          "model-emissive-strength": 0.6,
+          "model-height-based-emissive-strength-multiplier": [0, 30, 1.2, 1.8, 0],
+          "model-cast-shadows": false,
+          "model-receive-shadows": false,
         },
-        paint: { "text-color": ["get", "c"], "text-opacity": 0.85, "text-halo-color": HUE.canvas, "text-halo-width": 1.4, "text-emissive-strength": 1 },
       },
     },
     {
@@ -958,22 +1041,30 @@ function layerSpecs(standard: boolean): LayerDef[] {
           "text-field": ["get", "t"],
           "text-font": FONT,
           "text-size": ["match", ["get", "k"], "rank", 11, 11.5],
+          "text-max-width": 24,
           "text-letter-spacing": ["match", ["get", "k"], "rank", 0.06, 0.01],
           "text-allow-overlap": true,
           "text-ignore-placement": true,
-          "icon-image": ["case", ["get", "chip"], "gl3d-chip", ""],
+          "icon-image": ["get", "chip"],
           "icon-text-fit": "both",
           "icon-text-fit-padding": [3, 7, 3, 7],
           "icon-allow-overlap": true,
           "icon-ignore-placement": true,
-          "text-anchor": "center",
-          "text-offset": ["match", ["get", "si"], 1, ["literal", [0, -2]], 2, ["literal", [0, -4]], ["literal", [0, 0]]],
+          "text-anchor": ["match", ["get", "k"], "chord", "right", "center"],
+          "text-justify": ["match", ["get", "k"], "chord", "right", "center"],
+          "text-offset": [
+            "match",
+            ["get", "k"],
+            "chord",
+            ["literal", [-1.2, -0.6]],
+            ["match", ["get", "si"], 1, ["literal", [0, -2]], 2, ["literal", [0, -4]], ["literal", [0, 0]]],
+          ],
         },
         paint: {
-          "text-color": ["match", ["get", "k"], "rank", HUE.fg1, "hotspot", HUE.overlap, HUE.overlap],
+          "text-color": ["match", ["get", "k"], "rank", HUE.fg1, ["get", "c"]],
           "text-opacity": ["match", ["get", "k"], "hotspot", 0.75, 1],
           "text-halo-color": HUE.canvas,
-          "text-halo-width": ["case", ["get", "chip"], 0, 1.4],
+          "text-halo-width": ["match", ["get", "chip"], "", 1.4, 0],
           "icon-opacity": 1,
           "symbol-z-offset": ["get", "z"],
           "text-emissive-strength": 1,
@@ -1004,6 +1095,7 @@ interface Runtime {
   band: number;
   wireZoom: number;
   lastReveal: number;
+  revealPending: boolean;
   lastRunning: boolean;
   lastSelected: string | null;
   anim: Anim;
@@ -1029,6 +1121,7 @@ function runtime(map: MapboxMap): Runtime {
       band: -1,
       wireZoom: -1,
       lastReveal: 0,
+      revealPending: false,
       lastRunning: false,
       lastSelected: null,
       anim: { revealStart: null, trimStart: null, sweepStart: null, hotPulseStart: null },
@@ -1087,9 +1180,14 @@ function allLayerIds(rt: Runtime): string[] {
   return layerSpecs(rt.standard).map((l) => l.spec.id as string);
 }
 
-/** A rounded glass chip (stretchable) for rank chips and the "Beyond 25 mi" chip. */
-function addChipImage(map: MapboxMap): void {
-  if (safe(() => map.hasImage("gl3d-chip"))) return;
+/** Rounded glass chips (stretchable): amber rim for rank chips and "Beyond 25 mi", a quiet rim for caveats. */
+function addChipImages(map: MapboxMap): void {
+  addChipImage(map, "gl3d-chip", "rgba(245,184,61,0.7)");
+  addChipImage(map, "gl3d-chip-quiet", "rgba(255,255,255,0.12)");
+}
+
+function addChipImage(map: MapboxMap, id: string, rim: string): void {
+  if (safe(() => map.hasImage(id))) return;
   if (typeof document === "undefined") return;
   const pr = 2;
   const w = 28 * pr;
@@ -1110,11 +1208,11 @@ function addChipImage(map: MapboxMap): void {
   ctx.fillStyle = "rgba(11,16,25,0.9)";
   ctx.fill();
   ctx.lineWidth = 1.5 * pr * 0.75;
-  ctx.strokeStyle = "rgba(245,184,61,0.7)";
+  ctx.strokeStyle = rim;
   ctx.stroke();
   const img = ctx.getImageData(0, 0, w, h);
   safe(() =>
-    map.addImage("gl3d-chip", { width: w, height: h, data: new Uint8Array(img.data.buffer) }, {
+    map.addImage(id, { width: w, height: h, data: new Uint8Array(img.data.buffer) }, {
       pixelRatio: pr,
       stretchX: [[r + 2, w - r - 2]],
       stretchY: [[r + 2, h - r - 2]],
@@ -1145,7 +1243,7 @@ export function install3D(map: MapboxMap, opts: { standard: boolean }): void {
     // (line-z-offset is evaluated per vertex, so a simplified arc would draw as a triangle)
     safe(() => map.addSource(id, { type: "geojson", data: empty, ...(LINE_METRICS.has(id) ? { lineMetrics: true, tolerance: 0 } : {}) } as never));
   }
-  if (opts.standard) addChipImage(map);
+  if (opts.standard) addChipImages(map);
   // same slot as map-core's data layers (beforeId only works within a slot); labels always on top
   const before = GROUND_BEFORE.find((id) => safe(() => map.getLayer(id)));
   const dataSlot = (before && (safe(() => map.getLayer(before))?.slot as string | undefined)) || "top";
@@ -1228,7 +1326,7 @@ function apply(map: MapboxMap, rt: Runtime, input: Map3DInput, fresh: boolean): 
   }
   const zoom = safe(() => map.getZoom()) ?? 8;
   rt.band = towerStep(zoom);
-  rt.wireZoom = zoom;
+  rt.wireZoom = wireZoomOf(zoom);
   setData(map, rt, SRC.spires, spireFeatures(s));
   setData(map, rt, SRC.structures, structureFeatures(s, zoom));
   setData(map, rt, SRC.wires, wireFeatures(s, zoom));
@@ -1243,17 +1341,28 @@ function apply(map: MapboxMap, rt: Runtime, input: Map3DInput, fresh: boolean): 
   setData(map, rt, SRC.discs, discFeatures(s));
   setData(map, rt, SRC.chords, chordFeatures(s));
   setData(map, rt, SRC.beacon, beaconFeatures(s));
-  setData(map, rt, SRC.labels, labelFeatures(s));
+  // on a phone-width canvas a two-line caveat chip would run off the edge: the dashed chord alone carries it there,
+  // and the inspector's "Where they meet" says the route is not published
+  const narrow = (safe(() => map.getCanvas().clientWidth) ?? 1000) < 640;
+  setData(map, rt, SRC.labels, labelFeatures(s, narrow));
 
   const now = performance.now();
   const reduced = input.reducedMotion;
-  // reveal: only for an explicit Compare (revealNonce bump) with a result and no selection
+  // reveal: only for an explicit Compare (revealNonce bump). The bump may land before the result does (the engine
+  // runs ≥900 ms), so it stays pending until a finished run is on screen; a selection cancels it
   if (input.revealNonce !== rt.lastReveal) {
     rt.lastReveal = input.revealNonce;
-    if (input.run && !input.selectedMatchId && !reduced) {
-      rt.anim.revealStart = now;
-      rt.anim.hotPulseStart = now + 500;
-    }
+    rt.revealPending = !reduced;
+  }
+  if (rt.revealPending && input.selectedMatchId) rt.revealPending = false;
+  if (rt.revealPending && input.run && !input.running) {
+    rt.revealPending = false;
+    rt.anim.revealStart = now;
+    rt.anim.hotPulseStart = now + 500;
+    // hide the arcs now, not on the first animation frame, so the full fan never flashes before the draw-in
+    setFilter(map, "gl3d-arcs", ["<=", ["get", "rank"], 0]);
+    setPaint(map, "gl3d-labels", "text-opacity", LABEL_OPACITY(0));
+    setPaint(map, "gl3d-labels", "icon-opacity", LABEL_ICON_OPACITY(0));
   }
   // sweep: once, when a first comparison starts
   if (input.running && !rt.lastRunning && !input.run && s.sweep && !reduced) rt.anim.sweepStart = now;
@@ -1308,8 +1417,8 @@ function refreshZoomDependent(map: MapboxMap, rt: Runtime): void {
     rt.band = band;
     setData(map, rt, SRC.structures, structureFeatures(rt.state, zoom));
   }
-  if (Math.abs(zoom - rt.wireZoom) > 0.02) {
-    rt.wireZoom = zoom;
+  if (wireZoomOf(zoom) !== rt.wireZoom) {
+    rt.wireZoom = wireZoomOf(zoom);
     setData(map, rt, SRC.wires, wireFeatures(rt.state, zoom));
   }
 }
@@ -1318,6 +1427,12 @@ function stopAnimations(rt: Runtime): void {
   if (rt.raf !== null) cancelAnimationFrame(rt.raf);
   rt.raf = null;
   rt.anim = { revealStart: null, trimStart: null, sweepStart: null, hotPulseStart: null };
+}
+
+function hiddenByCss(el: HTMLElement): boolean {
+  const check = (el as HTMLElement & { checkVisibility?: (o: object) => boolean }).checkVisibility;
+  if (check) return !check.call(el, { visibilityProperty: true, checkVisibilityCSS: true });
+  return typeof getComputedStyle === "function" && getComputedStyle(el).visibility === "hidden";
 }
 
 const easeOut = (t: number) => 1 - Math.pow(1 - clamp(t, 0, 1), 3);
@@ -1329,7 +1444,8 @@ function kick(map: MapboxMap, rt: Runtime): void {
     rt.raf = null;
     if (!live(map, rt) || !rt.input || rt.input.mapMode !== "3d") return;
     const canvas = safe(() => map.getCanvas());
-    const paused = (typeof document !== "undefined" && document.hidden) || canvas?.style.visibility === "hidden";
+    // the close-up hides the map (visibility:hidden on an ancestor): pause instead of drawing frames nobody sees
+    const paused = (typeof document !== "undefined" && document.hidden) || (!!canvas && hiddenByCss(canvas));
     const now = performance.now();
     const a = rt.anim;
     let active = false;

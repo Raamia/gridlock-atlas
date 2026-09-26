@@ -1160,6 +1160,7 @@ function StatsSection() {
 
 function OverlaysSection() {
   const [picked, setPicked] = useState<string | null>(null);
+  const [reviewer, setReviewer] = useState(false);
   const [why, setWhy] = useState(false);
   return (
     <Section
@@ -1211,9 +1212,21 @@ function OverlaysSection() {
               </IconButton>
             }
           >
-            <MenuItem onSelect={() => setPicked("Sources")}>Sources</MenuItem>
+            <MenuItem onSelect={() => setPicked("Sources")} hint="103 public documents · 19 utilities">
+              Sources
+            </MenuItem>
             <MenuItem onSelect={() => setPicked("Method")}>Method</MenuItem>
-            <MenuItem onSelect={() => setPicked("Reviewer mode")}>Reviewer mode</MenuItem>
+            {/* checked → role=menuitemcheckbox + aria-checked; the hint is a description (aria-describedby), not part of the name */}
+            <MenuItem
+              checked={reviewer}
+              hint="Label pairs as you review"
+              onSelect={() => {
+                setReviewer((v) => !v);
+                setPicked("Reviewer mode");
+              }}
+            >
+              Reviewer mode
+            </MenuItem>
             <MenuItem onSelect={() => setPicked("Reset view")}>Reset view</MenuItem>
           </Menu>
           <span className="text-caption text-fg-3">{picked ? `Selected: ${picked}` : "Try the keyboard: ↓ opens, ↑↓ move, Esc closes"}</span>

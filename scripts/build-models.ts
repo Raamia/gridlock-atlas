@@ -14,7 +14,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import * as THREE from "three";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
-import { buildLatticeTower, buildMarkerPylon, buildSpire, buildSubstation } from "../lib/models/structures";
+import { MAP_BAKE, buildLatticeTower, buildMarkerPylon, buildSpire, buildSubstation } from "../lib/models/structures";
 
 type ReaderEvent = { target: FileReaderShim };
 
@@ -56,7 +56,7 @@ const outDir = path.join(process.cwd(), "public", "models");
  * Bakes a uniform or per-axis scale into the geometry (normals are re-derived by applyMatrix4), so the map can use
  * one model-scale curve for every structure: mapbox-gl 3.31 cannot vary a zoom-dependent model-scale per feature.
  */
-function baked(object: THREE.Object3D, sx: number, sy: number, sz: number): THREE.Object3D {
+function baked(object: THREE.Object3D, [sx, sy, sz]: readonly [number, number, number]): THREE.Object3D {
   const m = new THREE.Matrix4().makeScale(sx, sy, sz);
   object.traverse((o) => {
     const mesh = o as THREE.Mesh;
@@ -66,13 +66,12 @@ function baked(object: THREE.Object3D, sx: number, sy: number, sz: number): THRE
 }
 
 // Map variants (the 3D close-up builds its structures live from lib/models/structures.ts and never loads these):
-//   substation: no gravel pad (a 1 km slab at map scale) and ×1.9 taller so gantries read at pair zoom
-//   pylon:      ×1.7 so the unknown-voltage marker (and the amber shared-site beacon) matches a substation's presence
+// MAP_BAKE scales them relative to each other; the substation also drops its gravel pad (a 2 km slab at map scale).
 const models: Record<string, () => THREE.Object3D> = {
   spire: buildSpire,
-  tower: () => buildLatticeTower(),
-  substation: () => baked(buildSubstation({ pad: false }), 1, 1.9, 1),
-  pylon: () => baked(buildMarkerPylon(), 1.7, 1.7, 1.7),
+  tower: () => baked(buildLatticeTower(), MAP_BAKE.tower),
+  substation: () => baked(buildSubstation({ pad: false }), MAP_BAKE.substation),
+  pylon: () => baked(buildMarkerPylon(), MAP_BAKE.pylon),
 };
 
 async function exportGlb(object: THREE.Object3D): Promise<ArrayBuffer> {

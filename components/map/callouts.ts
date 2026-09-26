@@ -8,6 +8,16 @@ import { hasLayer } from "./layers";
  * Glass pills with a utility-colour left bar; titles wrap to two lines instead of truncating.
  */
 
+/**
+ * Popups and markers live inside Mapbox's canvas container, whose handlers turn a tap on them into a map tap (which
+ * would close a card before its button's click fires). Stop pointer/touch events at the element's root.
+ */
+export function shieldFromMap(el: HTMLElement) {
+  for (const type of ["touchstart", "touchend", "touchmove", "mousedown", "mouseup", "pointerdown", "pointerup", "click", "dblclick", "wheel"]) {
+    el.addEventListener(type, (e) => e.stopPropagation(), { passive: true });
+  }
+}
+
 export function escapeHtml(s: string) {
   return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 }
@@ -59,19 +69,27 @@ export function siteDot() {
 }
 
 /** "01" "02" "03": mono map chips on the top-ranked links after a run (click selects the pair). */
-export function rankChip(label: string, name: string, onClick: () => void) {
+/**
+ * Returns `{ root, chip }`: the marker gets `root` (Mapbox owns a marker element's own opacity for terrain occlusion),
+ * the reveal fades `chip`.
+ */
+export function rankChip(label: string, name: string, onClick: () => void): { root: HTMLElement; chip: HTMLElement } {
+  const root = document.createElement("div");
+  root.className = "pointer-events-none";
   const el = document.createElement("button");
+  root.appendChild(el);
   el.type = "button";
   el.setAttribute("aria-label", name);
   el.title = name;
   el.className =
-    "num chrome grid h-6 min-w-8 cursor-pointer place-items-center rounded-full px-2 text-[11px] font-medium text-overlap transition-[transform,opacity,background-color] duration-200 ease-enter hover:bg-surface-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-1 active:scale-95";
+    "num chrome pointer-events-auto grid h-6 min-w-8 cursor-pointer place-items-center rounded-full px-2 text-[11px] font-medium text-overlap transition-[transform,opacity,background-color] duration-200 ease-enter hover:bg-surface-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-1 active:scale-95";
   el.textContent = label;
   el.addEventListener("click", (e) => {
     e.stopPropagation();
     onClick();
   });
-  return el;
+  shieldFromMap(root);
+  return { root, chip: el };
 }
 
 /* ------------------------------------------------ layout ------------------------------------------------ */
@@ -242,12 +260,16 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
     };
     walk(0, [], 0);
   }
+  const drawn: Box[] = [];
   items.forEach((c, i) => {
     const k = pick[i];
     const s = cands[i][Math.max(0, k)].s;
     const r = cands[i][Math.max(0, k)].r;
-    // a callout whose box would end up outside the focal hole altogether is hidden, never drawn under a panel
-    const off = overlapArea(r, view) < r.w * r.h * 0.5;
+    // a callout whose box would end up outside the focal hole altogether is hidden, never drawn under a panel; one that
+    // would sit mostly on top of a higher-ranked callout (a cramped phone strip) steps aside instead of stacking
+    const buried = drawn.some((t) => overlapArea(r, t) > r.w * r.h * 0.2);
+    const off = overlapArea(r, view) < r.w * r.h * 0.5 || (k >= 0 && buried);
+    if (k >= 0 && !off) drawn.push(r);
     const shown = c.box.dataset.spot !== undefined;
     c.box.style.transition = shown ? "transform .2s var(--ease-enter), opacity .2s" : "none";
     c.box.style.transform = `translate(${Math.round(s.x)}px,${Math.round(s.y)}px)`;

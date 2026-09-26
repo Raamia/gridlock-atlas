@@ -31,6 +31,18 @@
 @custom-variant coarse (@media (pointer: coarse));
 @custom-variant fine (@media (pointer: fine));
 
+/* registered as lengths so their computed value is px: lib/layout.ts reads the safe-area insets from them */
+@property --safe-t {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+@property --safe-b {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
 :root {
   color-scheme: dark;
 
@@ -180,6 +192,11 @@
     --rail-w: 336px;
     --inspector-w: 384px;
     --dock-h: 44px;
+  }
+  /* the server renders the xl header actions (text buttons) and the open dock face: wait for hydration */
+  .atlas-shell:not([data-tier]) [data-header-actions],
+  .atlas-shell:not([data-tier]) > [data-slot="dock"] {
+    visibility: hidden;
   }
 }
 @media (max-width: 1023.98px) {
@@ -727,6 +744,10 @@
 }
 .mapboxgl-popup-tip {
   display: none !important;
+}
+/* no map (WebGL off, map crashed): its key and 3D/basemap controls mean nothing; the guided-demo card stays */
+.atlas-shell:has([data-map-unavailable]) > [data-slot="focal"] > :not([role="region"]) {
+  display: none;
 }
 /* keyboard focus on the map (arrow keys pan it): the canvas itself runs under the panels, so the ring outlines the
    focal hole — the part of the map the reader can see — as an inset hairline in the panel radius */

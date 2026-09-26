@@ -126,9 +126,14 @@ export function computeLayout(vw: number, vh: number, o: LayoutOptions): Layout 
   if (phone) {
     const snap = o.sheetSnap ?? "peek";
     const safeB = Math.max(0, o.safeBottom ?? 0);
-    // the rail sheet is its snap height + the safe-area bottom; the inspector sheet's 64dvh already contains it
+    // the rail sheet is its snap height + the safe-area bottom (full never climbs over the header); the inspector
+    // sheet's 64dvh already contains the inset
     const sheetH = Math.round(
-      o.inspectorOpen ? vh * PHONE_SHEET.inspector : (snap === "full" ? vh * PHONE_SHEET.full : snap === "half" ? vh * PHONE_SHEET.half : PHONE_SHEET.peek) + safeB,
+      o.inspectorOpen
+        ? vh * PHONE_SHEET.inspector
+        : snap === "full"
+          ? Math.min(vh * PHONE_SHEET.full + safeB, vh - panelTop)
+          : (snap === "half" ? vh * PHONE_SHEET.half : PHONE_SHEET.peek) + safeB,
     );
     const focal = { l: gutter, t: panelTop, r: gutter, b: hidden ? gutter + safeB : sheetH + 8 };
     const focalW = Math.max(0, vw - focal.l - focal.r);
@@ -285,18 +290,13 @@ export interface Viewport {
 const SERVER_VIEWPORT: Viewport = { vw: 1440, vh: 900, safeTop: 0, safeBottom: 0 };
 let viewport: Viewport = SERVER_VIEWPORT;
 
-/** A hidden fixed probe whose padding is the safe-area insets (env() is only readable through layout). */
-let safeProbe: HTMLDivElement | null = null;
+/**
+ * The safe-area insets in px. globals.css registers --safe-t / --safe-b as <length> (@property), so their computed
+ * value on <html> is env(safe-area-inset-*) resolved to px — read without touching the DOM (this runs during render).
+ */
 function readSafeArea(): { t: number; b: number } {
-  if (!safeProbe || !safeProbe.isConnected) {
-    safeProbe = document.createElement("div");
-    safeProbe.setAttribute("aria-hidden", "true");
-    safeProbe.style.cssText =
-      "position:fixed;left:0;top:0;width:0;height:0;visibility:hidden;pointer-events:none;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)";
-    document.body.appendChild(safeProbe);
-  }
-  const cs = getComputedStyle(safeProbe);
-  return { t: Math.round(parseFloat(cs.paddingTop) || 0), b: Math.round(parseFloat(cs.paddingBottom) || 0) };
+  const cs = getComputedStyle(document.documentElement);
+  return { t: Math.round(parseFloat(cs.getPropertyValue("--safe-t")) || 0), b: Math.round(parseFloat(cs.getPropertyValue("--safe-b")) || 0) };
 }
 
 /** The live viewport; stable identity until the size changes (the safe area is re-read only then: rotation). */
@@ -305,7 +305,7 @@ function readViewport(): Viewport {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   if (viewport === SERVER_VIEWPORT || vw !== viewport.vw || vh !== viewport.vh) {
-    const safe = document.body ? readSafeArea() : { t: 0, b: 0 };
+    const safe = readSafeArea();
     if (viewport === SERVER_VIEWPORT || vw !== viewport.vw || vh !== viewport.vh || safe.t !== viewport.safeTop || safe.b !== viewport.safeBottom)
       viewport = { vw, vh, safeTop: safe.t, safeBottom: safe.b };
   }

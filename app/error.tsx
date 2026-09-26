@@ -30,9 +30,15 @@ export default function AtlasError({ error, retry }: { error: Error & { digest?:
           Something went wrong drawing the atlas.
         </h1>
         <p className="mt-2 text-body text-pretty text-fg-2">Your plans and sources are bundled with the app — nothing was lost.</p>
-        <Button variant="primary" size="lg" className="mt-6" icon={<RotateCw size={16} strokeWidth={1.75} />} onClick={() => retry()}>
-          Retry
-        </Button>
+        <div className="mt-6 flex items-center gap-2">
+          <Button variant="primary" size="lg" icon={<RotateCw size={16} strokeWidth={1.75} />} onClick={() => retry()}>
+            Retry
+          </Button>
+          {/* if re-rendering the view is not enough, a fresh load keeps the link (?pair=… survives in the address bar) */}
+          <Button variant="ghost" size="lg" onClick={() => window.location.reload()}>
+            Reload page
+          </Button>
+        </div>
         {error.digest && <p className="num mt-5 text-caption text-fg-3">ref {error.digest}</p>}
       </section>
     </main>

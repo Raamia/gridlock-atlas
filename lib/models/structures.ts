@@ -48,6 +48,17 @@ export function towerTotalHeight(height = 40): number {
   return height * PEAK;
 }
 
+/**
+ * Scale factors baked into the map GLBs by scripts/build-models.ts ([x, y-up, z]). lib/map3d.ts drives every structure
+ * with one zoom curve (mapbox-gl 3.31 cannot vary it per feature), so relative sizes live in the files:
+ * substation ×1.9 taller (and no gravel pad), pylon ×1.7, tower ×0.6 (towers repeat every few hundred metres).
+ */
+export const MAP_BAKE = {
+  substation: [1, 1.9, 1],
+  pylon: [1.7, 1.7, 1.7],
+  tower: [0.6, 0.6, 0.6],
+} as const satisfies Record<string, readonly [number, number, number]>;
+
 /** Native heights (metres) of the fixed-size models. */
 export const MODEL_HEIGHTS = { spire: 40, pylon: 20, substation: 16.2, tower: 40 * 1.13 } as const;
 
@@ -279,6 +290,8 @@ function assemble(name: string, parts: Partial<Record<Part, Builder>>): THREE.Gr
 const ARM_LEVELS = [0.64, 0.82, 1] as const;
 /** Half-length of each arm as a fraction of the arm span (middle arm is the widest). */
 const ARM_REACH = [0.43, 0.5, 0.41] as const;
+/** Arm-tip reach per conductor level (lower, middle, top) as fractions of `armSpan`: tip x = ±reach × armSpan. */
+export const TOWER_ARM_REACH = ARM_REACH;
 const PEAK = 1.13;
 const insulatorLength = (h: number) => 0.075 * h;
 

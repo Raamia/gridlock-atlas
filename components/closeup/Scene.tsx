@@ -4,7 +4,7 @@ import { ContactShadows, Environment, Lightformer, Line, OrbitControls } from "@
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { Bloom, EffectComposer, SMAA, ToneMapping, Vignette } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, type RefObject } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, type ReactNode, type RefObject } from "react";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import type { Precision } from "@/lib/domain/types";
@@ -109,16 +109,14 @@ export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, l
       camera={{ fov: FOV, near: 1.5, far: 420, position: [0, 30, 50] }}
       style={{ position: "absolute", inset: 0 }}
       onCreated={({ gl }) => {
-        gl.setClearColor(COLOR.canvas, 1);
+        // clear alpha 0: ContactShadows renders into a target cleared with it (an opaque clear paints a dark square);
+        // the canvas itself is opaque (alpha:false) and scene.background covers every pixel anyway
+        gl.setClearColor(COLOR.canvas, 0);
         if (!gl.capabilities.isWebGL2) onFail();
         gl.domElement.addEventListener("webglcontextlost", (e) => {
           e.preventDefault();
           if (alive.current) onFail();
         });
-      }}
-      onPointerMissed={() => {
-        onHover(null);
-        focusOn(null);
       }}
     >
       <Backdrop frame={frame} />
@@ -132,10 +130,11 @@ export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, l
         <Lightformer form="ring" intensity={0.7} position={[0, 5, 14]} scale={7} />
       </Environment>
       <Floor />
-      <Plinth model={model} />
+      <Plinth model={model} onClick={() => focusOn(null)} />
       <ContactShadows key={model.id} position={[0, Y.shadows, 0]} scale={PLINTH_R * 2} resolution={1024} blur={1.6} far={1.6} opacity={0.8} frames={1} color="#000000" />
-      <Structures model={model} onHover={onHover} onPick={focusOn} />
-      <Links model={model} boost={post ? 1.7 : 1} />
+      <Structures model={model} onHover={onHover} onPick={focusOn}>
+        <Links model={model} boost={post ? 1.7 : 1} />
+      </Structures>
       <LabelSync labels={labels} els={labelEls} frame={frame} />
       <OrbitControls
         makeDefault
@@ -174,7 +173,9 @@ function fitDistance(frame: Frame, w: number, h: number, polar: number): number 
   const fw = Math.max(120, w - frame.l - frame.r);
   const fh = Math.max(120, h - frame.t - frame.b);
   const k = h / (2 * Math.tan((FOV * DEG) / 2)); // px per unit at distance 1
-  const spanW = 2 * PLINTH_R * (frame.compact ? 0.8 : 1.0);
+  // phone / tall holes: let the plinth run a little past the sides rather than float small in a tall column
+  const tall = THREE.MathUtils.clamp((fh / fw - 0.8) / 0.5, 0, 1);
+  const spanW = 2 * PLINTH_R * (frame.compact ? 0.8 : THREE.MathUtils.lerp(1.0, 0.88, tall));
   const spanH = (2 * PLINTH_R * Math.cos(polar) + 2.2 * Math.sin(polar)) * 1.08;
   return Math.max((spanW * k) / fw, (spanH * k) / fh);
 }
@@ -201,7 +202,10 @@ function Rig({ frame, homeRef, focusRef }: { frame: Frame; homeRef: RefObject<nu
     const cy = t + fh / 2;
     camera.setViewOffset(w, h, w / 2 - cx, h / 2 - cy, w, h);
     camera.updateProjectionMatrix();
-    const dir = placed.current ? camera.position.clone().sub(TARGET).normalize() : new THREE.Vector3().setFromSphericalCoords(1, compact ? POLAR0_COMPACT : POLAR0, AZIMUTH0);
+    // first view: a tall frame hole (tablet portrait, phone) looks down more steeply so the plinth fills its height
+    const tall = THREE.MathUtils.clamp((fh / fw - 0.8) / 0.5, 0, 1);
+    const polar0 = compact ? POLAR0_COMPACT : THREE.MathUtils.lerp(POLAR0, 0.2 * Math.PI, tall);
+    const dir = placed.current ? camera.position.clone().sub(TARGET).normalize() : new THREE.Vector3().setFromSphericalCoords(1, polar0, AZIMUTH0);
     const polar = Math.acos(THREE.MathUtils.clamp(dir.y, -1, 1));
     const d = fitDistance({ l, t, r, b, compact }, w, h, Math.max(polar, 0.15 * Math.PI));
     camera.position.copy(TARGET).addScaledVector(dir, d);
@@ -326,7 +330,7 @@ function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<strin
     const maxX = size.width - Math.max(8, f.r - 16);
     const minY = f.t - 20;
     const maxY = size.height - f.b + 20;
-    const band: Band = { minX, maxX, top: Math.max(8, f.t - 14) };
+    const band: Band = { minX, maxX, top: Math.max(8, f.compact ? f.t : f.t - 14) };
     const clampX = (l: number, w: number) => Math.min(Math.max(l, minX), Math.max(minX, maxX - w));
     const clampY = (t: number, h: number) => Math.min(Math.max(t, minY), Math.max(minY, maxY - h));
     const hideLeader = (id: string) => {
@@ -448,7 +452,8 @@ function Floor() {
   );
 }
 
-function Plinth({ model }: { model: CloseupModel }) {
+function Plinth({ model, onClick }: { model: CloseupModel; onClick: () => void }) {
+  const get = useThree((s) => s.get);
   const grid = useMemo(() => gridSegments(PLINTH_R - 0.04, model.gridMiles * model.unitsPerMile, Y.grid), [model.gridMiles, model.unitsPerMile]);
   const rings = useMemo(() => [0.25, 0.5, 0.75].map((k) => circlePoints(0, 0, PLINTH_R * k, Y.grid, 160)), []);
   const materials = useMemo(
@@ -462,7 +467,16 @@ function Plinth({ model }: { model: CloseupModel }) {
   useEffect(() => () => materials.forEach((m) => m.dispose()), [materials]);
   return (
     <group>
-      <mesh position={[0, -PLINTH_H / 2, 0]} material={materials}>
+      <mesh
+        position={[0, -PLINTH_H / 2, 0]}
+        material={materials}
+        onClick={(e) => {
+          // empty plinth: back to the whole view (not at the end of an orbit drag)
+          if (e.delta > 4) return;
+          onClick();
+          get().invalidate();
+        }}
+      >
         <cylinderGeometry args={[PLINTH_R, PLINTH_R * 0.985, PLINTH_H, 192, 1]} />
       </mesh>
       {/* the crisp top edge that catches the key light */}
@@ -599,7 +613,18 @@ function hoverTarget(o: THREE.Object3D | null): THREE.Object3D | null {
   return null;
 }
 
-function Structures({ model, onHover, onPick }: { model: CloseupModel; onHover: (h: HoverInfo | null) => void; onPick: (at: [number, number, number] | null) => void }) {
+function Structures({
+  model,
+  onHover,
+  onPick,
+  children,
+}: {
+  model: CloseupModel;
+  onHover: (h: HoverInfo | null) => void;
+  onPick: (at: [number, number, number] | null) => void;
+  /** More hoverable scene parts (links, beacon) that share the hover/click handling. */
+  children?: ReactNode;
+}) {
   const get = useThree((s) => s.get);
   const built = useMemo(() => {
     const bag = new Bag();
@@ -622,15 +647,23 @@ function Structures({ model, onHover, onPick }: { model: CloseupModel; onHover: 
     [get],
   );
 
+  /** The nearest intersection that explains itself (a ground rule line in front of a yard shouldn't hide the yard). */
+  const pickHit = (e: ThreeEvent<PointerEvent | MouseEvent>) => {
+    for (const hit of e.intersections) {
+      const target = hoverTarget(hit.object);
+      if (target) return { target, h: target.userData.hover as HoverData, point: hit.point };
+    }
+    return null;
+  };
   const move = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
-    const target = hoverTarget(e.object);
-    const h = (target?.userData.hover as HoverData | undefined) ?? null;
-    light(h);
-    if (!target || !h) return onHover(null);
+    const hit = pickHit(e);
+    light(hit?.h ?? null);
+    if (!hit) return onHover(null);
+    const { target, h, point } = hit;
     const wp = new THREE.Vector3();
     target.getWorldPosition(wp);
-    onHover({ text: h.text, sub: h.sub, pos: h.mats.length || h.y > 0.5 ? [wp.x, h.y + 0.08, wp.z] : [e.point.x, 0.05, e.point.z] });
+    onHover({ text: h.text, sub: h.sub, pos: h.mats.length || h.y > 0.5 ? [wp.x, h.y + 0.08, wp.z] : [point.x, point.y + 0.05, point.z] });
   };
   const out = () => {
     light(null);
@@ -638,26 +671,39 @@ function Structures({ model, onHover, onPick }: { model: CloseupModel; onHover: 
   };
   const click = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    const target = hoverTarget(e.object);
-    if (!target) return;
+    if (e.delta > 4) return; // the end of an orbit drag, not a click
+    const hit = pickHit(e);
+    if (!hit) {
+      onPick(null);
+      get().invalidate();
+      return;
+    }
     const wp = new THREE.Vector3();
-    target.getWorldPosition(wp);
-    // flat things (discs, markers) focus where they were clicked; structures and pins on their base
-    const flat = !(target.userData.hover as HoverData).mats.length && (target.userData.hover as HoverData).y < 0.5;
-    onPick(flat ? [e.point.x, 0, e.point.z] : [wp.x, 0, wp.z]);
+    hit.target.getWorldPosition(wp);
+    // flat things (discs, markers, lines) focus where they were clicked; structures and pins on their base
+    const flat = !hit.h.mats.length && hit.h.y < 0.5;
+    onPick(flat ? [hit.point.x, 0, hit.point.z] : [wp.x, 0, wp.z]);
+    get().invalidate();
+  };
+  // a click anywhere else (plinth, backdrop): back to the whole plinth
+  const missed = () => {
+    out();
+    onPick(null);
+    get().invalidate();
   };
 
   return (
     <>
-      <group onPointerMove={move} onPointerOut={out} onClick={click}>
+      <group onPointerMove={move} onPointerOut={out} onClick={click} onPointerMissed={missed}>
         <primitive object={built.root} />
         {[model.a, model.b].map((p) => p.center && <CenterPin key={p.side} p={p} />)}
+        {[model.a, model.b].map((p) => (
+          <Routes key={p.side} p={p} />
+        ))}
+        {children}
       </group>
       {built.wires.map((w) => (
         <Line key={w.key} points={w.pts} color={w.color} lineWidth={w.width} transparent opacity={w.opacity} toneMapped={false} />
-      ))}
-      {[model.a, model.b].map((p) => (
-        <Routes key={p.side} p={p} />
       ))}
     </>
   );
@@ -669,9 +715,30 @@ function Routes({ p }: { p: CuProject }) {
   if (p.route) {
     const pts = p.route.pts.map((v) => [v.x, Y.route, v.z] as [number, number, number]);
     return p.route.precision === "official-gis" ? (
-      <Line points={pts} color={color} lineWidth={1.4} transparent opacity={0.45} depthWrite={false} renderOrder={2} />
+      <Line
+        points={pts}
+        color={color}
+        lineWidth={1.4}
+        transparent
+        opacity={0.45}
+        depthWrite={false}
+        renderOrder={2}
+        userData={{ hover: { text: `Official GIS route · ${p.title}`, sub: "the route is published; towers and spacing are symbolic", y: 0, mats: [] } satisfies HoverData }}
+      />
     ) : (
-      <Line points={pts} color={color} lineWidth={1.5} dashed dashSize={0.16} gapSize={0.1} transparent opacity={0.8} depthWrite={false} renderOrder={2} />
+      <Line
+        points={pts}
+        color={color}
+        lineWidth={1.5}
+        dashed
+        dashSize={0.16}
+        gapSize={0.1}
+        transparent
+        opacity={0.8}
+        depthWrite={false}
+        renderOrder={2}
+        userData={{ hover: { text: `Digitized route · ${p.title}`, sub: "schematic, traced from an official map · not survey accurate", y: 0, mats: [] } satisfies HoverData }}
+      />
     );
   }
   if (p.chord) {
@@ -691,6 +758,7 @@ function Routes({ p }: { p: CuProject }) {
         opacity={0.75}
         depthWrite={false}
         renderOrder={2}
+        userData={{ hover: { text: "Route not published · drawn terminal to terminal", sub: `${p.title} · not the line's real path`, y: 0, mats: [] } satisfies HoverData }}
       />
     );
   }
@@ -760,7 +828,8 @@ function Links({ model, boost }: { model: CloseupModel; boost: number }) {
   const arcs = useMemo(() => {
     const out: [number, number, number][][] = [];
     if (site) {
-      for (const p of [a, b]) if (p.center) out.push(arcPoints(p.center, site.pos, arcHeight(p.center, site.pos, 0.24)));
+      // a center that IS the shared site (a one-terminal project) needs no arc to itself
+      for (const p of [a, b]) if (p.center && Math.hypot(p.center.x - site.pos.x, p.center.z - site.pos.z) > 0.08) out.push(arcPoints(p.center, site.pos, arcHeight(p.center, site.pos, 0.24)));
     } else if (a.center && b.center) out.push(arcPoints(a.center, b.center, arcHeight(a.center, b.center)));
     return out;
   }, [a, b, site]);
@@ -768,7 +837,20 @@ function Links({ model, boost }: { model: CloseupModel; boost: number }) {
   return (
     <>
       {arcs.map((pts, i) => (
-        <Line key={i} points={pts} color={color} lineWidth={2.6} transparent={opacity < 1} opacity={opacity} toneMapped={false} />
+        <Line
+          key={i}
+          points={pts}
+          color={color}
+          lineWidth={2.6}
+          transparent={opacity < 1}
+          opacity={opacity}
+          toneMapped={false}
+          userData={{
+            hover: site
+              ? { text: `Link to the shared site · ${site.label}`, sub: "center to facility · not a route", y: 0, mats: [] }
+              : { text: "Center to center · not a route", sub: model.rulerText ?? undefined, y: 0, mats: [] },
+          }}
+        />
       ))}
       {ruler && (
         <>
@@ -780,7 +862,7 @@ function Links({ model, boost }: { model: CloseupModel; boost: number }) {
         <Line key={`ring-${i}`} points={arc.pts.map((v) => [v.x, Y.ring, v.z] as [number, number, number])} color={COLOR.overlap} lineWidth={1.3} transparent opacity={0.42} depthWrite={false} renderOrder={3} />
       ))}
       {site && (
-        <group position={[site.pos.x, 0, site.pos.z]}>
+        <group position={[site.pos.x, 0, site.pos.z]} userData={{ hover: { text: `Shared site · ${site.label}`, sub: site.basis, y: BEACON_H, mats: [] } satisfies HoverData }}>
           {beam && (
             <mesh position={[0, BEACON_H / 2, 0]}>
               <cylinderGeometry args={[0.075, 0.075, BEACON_H, 24, 1, true]} />

@@ -242,6 +242,8 @@ export function overlapFeatures(
         selectedId: string | null;
         hoverId?: string | null;
         ranks?: Map<string, number> | null;
+        /** A focus (project or hotspot): links outside it dim like an unselected pair. */
+        focusIds?: Set<string> | null;
       }
     | string
     | null,
@@ -261,7 +263,7 @@ export function overlapFeatures(
       status: m.reviewStatus,
       selected: m.id === o.selectedId,
       hover: !!o.hoverId && m.id === o.hoverId && m.id !== o.selectedId,
-      dim: !!o.selectedId && m.id !== o.selectedId,
+      dim: (!!o.selectedId && m.id !== o.selectedId) || (!o.selectedId && !!o.focusIds && !o.focusIds.has(m.id)),
     };
     features.push({
       type: "Feature",
@@ -488,4 +490,35 @@ export function sharedBorder(states: StatesFC, a: string, b: string): Feature<Li
     properties: { label: "Savannah River · state line" },
     geometry: { type: "LineString", coordinates: best },
   };
+}
+
+/**
+ * A straight label for a wiggly border: a point part-way along it, rotated to the border's overall direction (degrees
+ * clockwise from east, kept upright) — line-placed text would follow every river bend.
+ */
+export function borderLabel(line: Feature<LineString, { label: string }>, at = 0.72, span = 0.14): Feature<Point, { label: string; rotate: number }> {
+  // measured from the northern end (`at` = share of the way downstream for a river border)
+  const raw = line.geometry.coordinates as [number, number][];
+  const c = raw[0][1] >= raw[raw.length - 1][1] ? raw : [...raw].reverse();
+  const k0 = Math.cos((c[0][1] * Math.PI) / 180);
+  // the point at a share of the border's length (vertices are uneven), and its direction over a window around it
+  const cum = [0];
+  for (let i = 1; i < c.length; i++) cum.push(cum[i - 1] + Math.hypot((c[i][0] - c[i - 1][0]) * k0, c[i][1] - c[i - 1][1]));
+  const total = cum[cum.length - 1] || 1;
+  const pointAt = (t: number): [number, number] => {
+    const d = Math.min(1, Math.max(0, t)) * total;
+    const i = Math.max(
+      1,
+      cum.findIndex((x) => x >= d),
+    );
+    const f = (d - cum[i - 1]) / (cum[i] - cum[i - 1] || 1);
+    return [c[i - 1][0] + (c[i][0] - c[i - 1][0]) * f, c[i - 1][1] + (c[i][1] - c[i - 1][1]) * f];
+  };
+  const p = pointAt(at);
+  const [a, b] = [pointAt(at - span), pointAt(at + span)];
+  const k = Math.cos((((a[1] + b[1]) / 2) * Math.PI) / 180);
+  let rotate = (-Math.atan2(b[1] - a[1], (b[0] - a[0]) * k) * 180) / Math.PI;
+  if (rotate > 90) rotate -= 180;
+  if (rotate < -90) rotate += 180;
+  return { type: "Feature", properties: { label: line.properties.label, rotate: Math.round(rotate) }, geometry: { type: "Point", coordinates: p } };
 }

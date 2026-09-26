@@ -3,7 +3,7 @@ import type { Match, Project } from "@/lib/domain/types";
 import { geoShort, inServicePhrase } from "@/lib/describe";
 import { displayTitle, formatMilesNear } from "@/lib/format";
 import { ownerNames } from "@/lib/selectors";
-import { escapeHtml } from "./callouts";
+import { escapeHtml, shieldFromMap } from "./callouts";
 
 /** Map hover card (desktop) and tap card (touch): a solid popover, same type scale as the panels. */
 
@@ -81,5 +81,6 @@ export function projectTapCard(p: Project, placeLabel: string, precision: string
     });
     card.appendChild(btn);
   }
+  shieldFromMap(el);
   return el;
 }

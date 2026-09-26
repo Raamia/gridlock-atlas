@@ -89,17 +89,24 @@ export default function PairCloseup() {
   const [hover, setHover] = useState<HoverInfo | null>(null);
   const onHover = useCallback((h: HoverInfo | null) => setHover((prev) => (prev?.text === h?.text && prev?.pos.join() === h?.pos.join() ? prev : h)), []);
   const specs = useMemo<LabelSpec[]>(() => {
-    const base = model ? labelSpecs(model) : [];
-    return hover ? [...base, { id: "hover", at: hover.pos, anchor: "above", alts: ["below", "right", "left"], priority: 1000, always: true, content: <HoverTip info={hover} /> }] : base;
-  }, [model, hover]);
+    // phone: narrower project cards so both fit the callout band side by side
+    const base = model ? labelSpecs(model, { compact: phone }) : [];
+    return hover ? [...base, { id: "hover", at: hover.pos, anchor: "above", alts: ["below", "right", "left"], priority: 50, always: true, content: <HoverTip info={hover} /> }] : base;
+  }, [model, hover, phone]);
 
   // keyboard: focus lands on "Back to map"; closing returns focus to whatever opened the close-up
   const backRef = useRef<HTMLButtonElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const root = rootRef.current;
     backRef.current?.focus({ preventScroll: true });
     return () => {
-      if (opener?.isConnected) opener.focus({ preventScroll: true });
+      // only when focus is still in (or fell out with) the layer — Back / Esc. J/K moving to another pair has already
+      // focused that pair's card, and that focus must stay.
+      const active = document.activeElement;
+      const lost = !active || active === document.body || (!!root && root.contains(active));
+      if (lost && opener?.isConnected) opener.focus({ preventScroll: true });
     };
   }, []);
 
@@ -155,7 +162,7 @@ export default function PairCloseup() {
   const caption = <p className="text-caption text-balance text-fg-2 [text-shadow:0_1px_2px_rgb(0_0_0/0.85)]">{CAPTION}</p>;
 
   return (
-    <div data-closeup role="region" aria-label="3D close-up" className={clsx("fixed inset-0 overflow-hidden bg-canvas", phone ? "z-(--z-scrim)" : "z-(--z-marker)")}>
+    <div ref={rootRef} data-closeup role="region" aria-label="3D close-up" className={clsx("fixed inset-0 overflow-hidden bg-canvas", phone ? "z-(--z-scrim)" : "z-(--z-marker)")}>
       <p className="sr-only">{model.summary}</p>
       <CloseupCanvas
         model={model}
@@ -344,7 +351,7 @@ function Legend({ model, compact }: { model: CloseupModel; compact?: boolean }) 
         Grid {model.gridMiles} mi
       </span>
       {model.beyondRadius && model.site && (
-        <span className="whitespace-nowrap rounded-chip px-1.5 py-0.5 text-fg-1 ring-1 ring-edge-strong">
+        <span className="whitespace-nowrap font-medium text-fg-1">
           Beyond {model.thresholdMiles} mi · shared site
         </span>
       )}

@@ -15,7 +15,7 @@ import type { CloseupModel, CuPlace, CuProject, V2 } from "./model";
  * leader line, so the diorama itself stays clear. When a slot is taken they fall back to sitting beside the pin.
  */
 
-export type Anchor = "above" | "below" | "center" | "left" | "right" | "above-left" | "above-right" | "callout-left" | "callout-right" | "callout-top";
+export type Anchor = "above" | "below" | "center" | "left" | "right" | "above-left" | "above-right" | "callout-left" | "callout-right" | "callout-top" | "callout-mid";
 /**
  * Resolved per frame: "outward" = above-left/right of the pin, away from the other project; "callout" = the top-band
  * slot on this project's side of the screen (the shared site: centred).
@@ -69,6 +69,9 @@ export function anchorBox(anchor: Anchor, x: number, y: number, w: number, h: nu
       return [band.maxX - w - 4, band.top];
     case "callout-top":
       return [Math.min(Math.max(x - w / 2, band.minX + 4), band.maxX - w - 4), band.top];
+    case "callout-mid":
+      // the band's second row, for the shared-site card when the project cards hold the first
+      return [Math.min(Math.max(x - w / 2, band.minX + 4), band.maxX - w - 4), band.top + 52];
   }
 }
 
@@ -80,7 +83,7 @@ export const arcHeight = (a: V2, b: V2, k = 0.28) => Math.min(2.6, Math.max(0.7,
 const UTIL = { a: "var(--util-a)", b: "var(--util-b)" } as const;
 const SHADOW: CSSProperties = { textShadow: "0 1px 2px rgb(0 0 0 / 0.9), 0 0 12px rgb(5 8 14 / 0.95)" };
 
-export function labelSpecs(model: CloseupModel): LabelSpec[] {
+export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}): LabelSpec[] {
   const { a, b, site, ring } = model;
   const out: LabelSpec[] = [];
 
@@ -145,16 +148,19 @@ export function labelSpecs(model: CloseupModel): LabelSpec[] {
       id: "site",
       at: [site.pos.x, BEACON_H + 0.04, site.pos.z],
       anchor: "callout",
-      alts: ["above", "right", "left", "below"],
+      alts: ["callout-mid", "above", "right", "left", "below"],
       priority: 90,
       always: true,
       side: "site",
       leader: "var(--overlap)",
       content: (
-        <div className="chrome max-w-[250px] rounded-card px-2.5 py-2">
-          <div className="eyebrow text-overlap!">Shared site · {site.basis}</div>
+        <div className="chrome max-w-[260px] rounded-card px-2.5 py-2">
+          <div className="eyebrow text-overlap!">Shared site</div>
           <div className="mt-1 text-ui font-medium text-fg-1">{site.label}</div>
-          {model.rulerText && <div className="num mt-1 text-caption text-fg-3">Centers {model.rulerText}</div>}
+          <div className="mt-0.5 text-caption text-fg-3">
+            {site.basis.charAt(0).toUpperCase() + site.basis.slice(1)}
+            {model.rulerText && <span className="num whitespace-nowrap"> · centers {model.rulerText}</span>}
+          </div>
         </div>
       ),
     });
@@ -172,7 +178,7 @@ export function labelSpecs(model: CloseupModel): LabelSpec[] {
       always: true,
       side: p.side,
       leader: UTIL[p.side],
-      content: <ProjectCard p={p} />,
+      content: <ProjectCard p={p} compact={opts.compact} />,
     });
   }
   return out;
@@ -187,14 +193,16 @@ function FacilityLabel({ pl }: { pl: CuPlace }) {
   );
 }
 
-function ProjectCard({ p }: { p: CuProject }) {
+function ProjectCard({ p, compact }: { p: CuProject; compact?: boolean }) {
   const color = UTIL[p.side];
   return (
-    <div className="chrome flex max-w-[220px] items-stretch gap-2 rounded-control py-1.5 pl-1.5 pr-2.5">
+    <div className={clsx("chrome flex items-stretch gap-2 rounded-control py-1.5 pl-1.5 pr-2.5", compact ? "max-w-[166px]" : "max-w-[220px]")}>
       <span aria-hidden className="w-0.5 shrink-0 rounded-pill" style={{ background: color }} />
       <div className="min-w-0">
-        <div className="eyebrow truncate" style={{ color }}>
-          {p.owner} · center
+        {/* "center" says what the pin marks; the narrow phone card keeps the owner whole instead */}
+        <div className="eyebrow flex min-w-0" style={{ color }}>
+          <span className="truncate">{p.owner}</span>
+          {!compact && <span className="shrink-0 whitespace-pre"> · center</span>}
         </div>
         <div className="mt-1 truncate text-ui font-medium text-fg-1">{p.title}</div>
       </div>
