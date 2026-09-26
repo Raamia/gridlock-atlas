@@ -6,9 +6,13 @@ import { useEffect, useState } from "react";
 import { IDX } from "@/lib/data";
 import type { Match } from "@/lib/domain/types";
 import { download, LABELS, labelsCsv, useReview } from "@/lib/review";
-import { Button } from "./ui";
+import { Button, Eyebrow } from "./ui";
 
-/** Label + timer strip shown at the top of the inspector in reviewer mode. */
+/**
+ * Reviewer label block (reviewer mode only): four labels, a live timer and a note that is saved as it is typed.
+ * Hooks the tests use: "Reviewer label", aria-label "Time on this pair", the label buttons (aria-pressed),
+ * textbox "Reviewer note" (after a label is saved), "Saved in this browser".
+ */
 export function ReviewPanel({ m }: { m: Match }) {
   const enabled = useReview((s) => s.enabled);
   const saved = useReview((s) => s.labels[m.id]);
@@ -22,31 +26,39 @@ export function ReviewPanel({ m }: { m: Match }) {
     return () => clearInterval(t);
   }, [enabled]);
   if (!enabled) return null;
-  const seconds = Math.round((now - openedAt) / 1000);
+  const seconds = Math.max(0, Math.round((now - openedAt) / 1000));
   return (
-    <div className="rounded-xl border border-a/30 bg-a/5 p-3">
-      <div className="flex items-center justify-between">
-        <span className="eyebrow flex items-center gap-1.5 text-a">
-          <ClipboardCheck size={12} /> Reviewer label
-        </span>
-        <span className="num flex items-center gap-1 text-[11px] text-text-2" aria-label="Time on this pair">
-          <Timer size={11} /> {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
+    <div className="rounded-card bg-fill-1 p-3" data-review-panel="">
+      <div className="flex items-center justify-between gap-2">
+        <Eyebrow className="flex items-center gap-1.5">
+          <ClipboardCheck aria-hidden size={12} strokeWidth={1.75} /> Reviewer label
+        </Eyebrow>
+        <span className="num flex items-center gap-1 text-caption text-fg-2" aria-label="Time on this pair">
+          <Timer aria-hidden size={12} strokeWidth={1.75} className="text-fg-3" /> {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
         </span>
       </div>
-      <div className="mt-2 grid grid-cols-2 gap-1.5">
-        {LABELS.map((l) => (
-          <button
-            key={l.id}
-            onClick={() => setLabel(m.id, l.id, seconds)}
-            aria-pressed={saved?.label === l.id}
-            className={clsx(
-              "h-7 rounded-md px-2 text-[11.5px] ring-1 transition-colors",
-              saved?.label === l.id ? "bg-a/15 text-text-0 ring-a/60" : "bg-bg-2 text-text-2 ring-line hover:text-text-0",
-            )}
-          >
-            {l.text}
-          </button>
-        ))}
+      <div className="mt-2.5 grid grid-cols-2 gap-1.5">
+        {LABELS.map((l) => {
+          const on = saved?.label === l.id;
+          return (
+            <button
+              key={l.id}
+              type="button"
+              onClick={() => setLabel(m.id, l.id, seconds)}
+              aria-pressed={on}
+              className={clsx(
+                "h-8 truncate rounded-control px-2.5 text-caption font-medium transition-colors duration-150 coarse:h-11",
+                on
+                  ? l.id === "worth-review"
+                    ? "bg-ok/12 text-ok shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--ok)_40%,transparent)]"
+                    : "bg-fill-3 text-fg-1 shadow-[inset_0_0_0_1px_var(--edge-strong)]"
+                  : "bg-fill-1 text-fg-2 hover:bg-fill-2 hover:text-fg-1",
+              )}
+            >
+              {l.text}
+            </button>
+          );
+        })}
       </div>
       {saved && (
         <input
@@ -56,15 +68,19 @@ export function ReviewPanel({ m }: { m: Match }) {
           onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
           placeholder="Optional note"
           aria-label="Reviewer note"
-          className="mt-2 h-7 w-full rounded-md border border-line-2 bg-bg-1 px-2 text-[11.5px] text-text-0 outline-none placeholder:text-text-3 focus:border-a"
+          className="mt-2 h-8 w-full rounded-control bg-fill-1 px-3 text-ui text-fg-1 ring-1 ring-edge ring-inset transition-[background-color,box-shadow] duration-150 placeholder:text-fg-4 hover:bg-fill-2 focus-visible:bg-fill-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg-1/80 coarse:h-11"
         />
       )}
-      {saved && <div className="mt-1.5 text-[10.5px] text-text-3">Saved in this browser after {saved.seconds}s · export from the Method drawer</div>}
+      {saved && (
+        <p className="mt-2 text-caption text-fg-3">
+          Saved in this browser after <span className="num">{saved.seconds}s</span> · export from the Method drawer
+        </p>
+      )}
     </div>
   );
 }
 
-/** Export controls (Method drawer). */
+/** Reviewer exports (Method drawer): counts, the mode toggle, "Labels CSV", "review-log.json", Clear. */
 export function ReviewExports() {
   const labels = useReview((s) => s.labels);
   const checked = useReview((s) => s.checked);
@@ -78,33 +94,40 @@ export function ReviewExports() {
     return { project_a: IDX.project(a)?.title ?? a, project_b: IDX.project(b)?.title ?? b };
   };
   return (
-    <div className="rounded-xl bg-bg-2 p-3 ring-1 ring-line">
-      <div className="flex items-center justify-between gap-2">
-        <div className="text-[12px] text-text-1">
-          <span className="num text-text-0">{n}</span> {n === 1 ? "pair" : "pairs"} labeled · <span className="num text-text-0">{c}</span>{" "}
-          {c === 1 ? "excerpt" : "excerpts"} human-checked
-        </div>
-        <Button size="sm" variant={enabled ? "subtle" : "outline"} onClick={toggle}>
-          <ClipboardCheck size={12} /> {enabled ? "Reviewer mode on" : "Turn on reviewer mode"}
+    <div className="rounded-card bg-fill-1 p-3.5">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-ui text-fg-2">
+          <span className="num text-fg-1">{n}</span> {n === 1 ? "pair" : "pairs"} labeled · <span className="num text-fg-1">{c}</span> {c === 1 ? "excerpt" : "excerpts"}{" "}
+          human-checked
+        </p>
+        <Button size="sm" variant={enabled ? "subtle" : "secondary"} onClick={toggle} icon={<ClipboardCheck size={14} strokeWidth={1.75} />}>
+          {enabled ? "Reviewer mode on" : "Turn on reviewer mode"}
         </Button>
       </div>
-      <div className="mt-2.5 flex flex-wrap gap-1.5">
-        <Button size="sm" variant="outline" disabled={!n} onClick={() => download("gridlock-labels.csv", labelsCsv(labels, meta), "text/csv")}>
-          <Download size={12} /> Labels CSV
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        <Button
+          size="sm"
+          variant="secondary"
+          disabled={!n}
+          onClick={() => download("gridlock-labels.csv", labelsCsv(labels, meta), "text/csv")}
+          icon={<Download size={14} strokeWidth={1.75} />}
+        >
+          Labels CSV
         </Button>
         <Button
           size="sm"
-          variant="outline"
+          variant="secondary"
           disabled={!c}
           onClick={() => download("review-log.json", JSON.stringify({ reviewedEvidenceIds: Object.keys(checked).sort(), exportedAt: new Date().toISOString() }, null, 1), "application/json")}
+          icon={<Download size={14} strokeWidth={1.75} />}
         >
-          <Download size={12} /> review-log.json
+          review-log.json
         </Button>
         <Button size="sm" variant="ghost" disabled={!n && !c} onClick={clear}>
           Clear
         </Button>
       </div>
-      <p className="mt-2 text-[10.5px] leading-snug text-text-3">
+      <p className="mt-2.5 text-caption text-fg-3">
         Labels stay in this browser. Commit review-log.json to data/ and rebuild the snapshot to publish excerpts as human-checked.
       </p>
     </div>

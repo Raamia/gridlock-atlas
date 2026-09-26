@@ -85,9 +85,11 @@
   --dur-4: 480ms; /* sheet / drawer */
   --dur-camera: 1400ms;
 
-  /* ── z-order (fixed layers; popovers/tooltips are portalled so they clear dialogs) ─ */
-  --z-map: 0;
-  --z-vignette: 1;
+  /* ── z-order (fixed layers; popovers/tooltips are portalled so they clear dialogs) ─
+     The map and its vignettes sit BELOW zero inside the isolated .atlas-shell: they come last in the DOM (so Tab starts
+     in the header) yet still paint under the z-less focal slot (key chip, map controls). */
+  --z-map: -2;
+  --z-vignette: -1;
   --z-marker: 5;
   --z-chrome: 20;
   --z-panel: 30;
@@ -146,7 +148,64 @@
 }
 @media (max-width: 767.98px) {
   :root {
+    --gutter: 12px;
     --panel-pad: 12px;
+  }
+}
+
+/*
+ * Layout variables before hydration (SPEC §3). lib/layout.ts writes the live values inline on <html> and .atlas-shell
+ * as soon as it knows the real viewport; until then these per-breakpoint defaults describe the pre-run layout, so a
+ * tablet or phone never paints the desktop geometry first. Keep them in step with computeLayout().
+ */
+:root,
+.atlas-shell {
+  --panel-top: calc(var(--gutter) + var(--header-h) + 12px);
+  --rail-w: clamp(336px, 25vw, 392px);
+  --inspector-w: clamp(384px, 29vw, 440px);
+  --dock-h: 96px;
+  --sheet-h: 0px;
+  --focal-l: calc(var(--gutter) + var(--rail-w) + 12px);
+  --focal-t: var(--panel-top);
+  --focal-r: var(--gutter);
+  --focal-b: calc(var(--gutter) + var(--dock-h) + 12px);
+  --focal-w: calc(100vw - var(--focal-l) - var(--focal-r));
+  --focal-h: calc(100dvh - var(--focal-t) - var(--focal-b));
+  --demo-card-w: min(520px, calc(var(--focal-w) - 24px));
+}
+/* lg and md: minimum widths, the dock starts collapsed */
+@media (max-width: 1279.98px) {
+  :root,
+  .atlas-shell {
+    --rail-w: 336px;
+    --inspector-w: 384px;
+    --dock-h: 44px;
+  }
+}
+@media (max-width: 1023.98px) {
+  :root,
+  .atlas-shell {
+    --inspector-w: 360px;
+  }
+}
+/* phone: the header row sits at max(12px, safe-area top); the peek sheet (132px + home indicator) at the bottom */
+@media (max-width: 767.98px) {
+  :root,
+  .atlas-shell {
+    --panel-top: calc(max(12px, env(safe-area-inset-top, 0px)) + 56px);
+    --rail-w: 100vw;
+    --inspector-w: 100vw;
+    --dock-h: 0px;
+    --sheet-h: calc(132px + env(safe-area-inset-bottom, 0px));
+    --focal-l: var(--gutter);
+    --focal-b: calc(var(--sheet-h) + 8px);
+    --demo-card-w: calc(100vw - 2 * var(--gutter));
+  }
+  /* the server renders the desktop header and rail; on a phone they wait for hydration (the map shows meanwhile) */
+  .atlas-shell:not([data-tier]) > [role="banner"],
+  .atlas-shell:not([data-tier]) > [data-slot],
+  .atlas-shell:not([data-tier]) > [data-rail-pill] {
+    visibility: hidden;
   }
 }
 
@@ -644,8 +703,8 @@
 .mapboxgl-ctrl-logo {
   opacity: 0.5;
 }
-/* logo + attribution stay inside the focal area (the map region no panel covers).
-   --focal-l/r/b are the px insets lib/layout.ts writes on .atlas-shell; the fallbacks are the old grid layout. */
+/* logo + attribution stay inside the focal area (the map region no panel covers): --focal-l/r/b are the insets
+   lib/layout.ts writes (CSS defaults above until hydration) */
 .mapboxgl-ctrl-bottom-left,
 .mapboxgl-ctrl-bottom-right {
   transition:
@@ -654,27 +713,12 @@
     bottom var(--dur-4) var(--ease-enter);
 }
 .mapboxgl-ctrl-bottom-left {
-  left: var(--focal-l, 0px);
-  bottom: var(--focal-b, 0px);
+  left: var(--focal-l);
+  bottom: var(--focal-b);
 }
 .mapboxgl-ctrl-bottom-right {
-  right: var(--focal-r, 0px);
-  bottom: var(--focal-b, 0px);
-}
-@media (min-width: 640px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    right: var(--focal-r, 376px);
-  }
-}
-@media (min-width: 1280px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    right: var(--focal-r, 424px);
-  }
-}
-@media (min-width: 640px) and (max-width: 767px), (min-width: 1024px) and (max-width: 1099px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    bottom: var(--focal-b, 48px);
-  }
+  right: var(--focal-r);
+  bottom: var(--focal-b);
 }
 .mapboxgl-popup-content {
   background: transparent !important;
@@ -684,8 +728,23 @@
 .mapboxgl-popup-tip {
   display: none !important;
 }
+/* keyboard focus on the map (arrow keys pan it): the canvas itself runs under the panels, so the ring outlines the
+   focal hole — the part of the map the reader can see — as an inset hairline in the panel radius */
 .mapboxgl-canvas:focus-visible {
   outline: none;
+}
+.mapboxgl-canvas-container:has(> .mapboxgl-canvas:focus-visible)::after {
+  content: "";
+  position: fixed;
+  left: var(--focal-l);
+  top: var(--focal-t);
+  right: var(--focal-r);
+  bottom: var(--focal-b);
+  border-radius: var(--radius-panel);
+  box-shadow:
+    inset 0 0 0 2px var(--fg-1),
+    inset 0 0 0 4px color-mix(in srgb, var(--canvas) 50%, transparent);
+  pointer-events: none;
 }
 
 /* ── reduced motion: nothing animates, fades collapse to instant ─ */

@@ -68,8 +68,9 @@ describe("computeLayout tiers", () => {
     expect(pre.focalW).toBe(644);
 
     const sel = computeLayout(1024, 768, { ...pair, timelineCollapsed: true });
-    expect(sel).toMatchObject({ railMode: "pill", railDocked: false, pillVisible: true, dockH: 44 });
-    expect(sel.focal).toEqual({ l: 16, t: 76, r: 412, b: 72 });
+    expect(sel).toMatchObject({ railMode: "pill", railDocked: false, pillVisible: true, dockH: 44, panelTop: 76 });
+    // the focal top clears the 36px pill + 8 (so the key chip and demo card sit below it, and camera padding knows)
+    expect(sel.focal).toEqual({ l: 16, t: 120, r: 412, b: 72 });
     expect(sel.focalW).toBe(596);
     expect(sel.demoCardW).toBe(520);
     // the pill's overlay floats over the map: the focal hole does not move
@@ -81,10 +82,29 @@ describe("computeLayout tiers", () => {
     expect(demo).toMatchObject({ dockH: 44, keyCollapsed: true });
   });
 
-  it("768–1023: drawer rail, 360 inspector, dock summary only", () => {
+  it("768–1023 behaves like lg: docked rail before a pair (hero + Compare visible), pill with it; 360 inspector, dock summary only", () => {
+    const pre = computeLayout(800, 1100, base);
+    expect(pre).toMatchObject({ tier: "md", railMode: "panel", railDocked: true, pillVisible: false, railW: 336, dockH: 44, dockForced: true });
+    expect(pre.focal).toEqual({ l: 364, t: 76, r: 16, b: 72 });
+    expect(pre.focalW).toBe(420);
+
     const md = computeLayout(900, 700, pair);
-    expect(md).toMatchObject({ tier: "md", railMode: "drawer", pillVisible: true, inspectorW: 360, dockH: 44, dockForced: true });
-    expect(md.focal).toEqual({ l: 16, t: 76, r: 388, b: 72 });
+    expect(md).toMatchObject({ tier: "md", railMode: "pill", railDocked: false, pillVisible: true, inspectorW: 360, dockH: 44, dockForced: true });
+    expect(md.focal).toEqual({ l: 16, t: 120, r: 388, b: 72 });
+    // never the legacy drawer
+    for (const o of [base, pair, demoPair]) expect(computeLayout(800, 1100, o).railMode).not.toBe("drawer");
+  });
+
+  it("phone safe areas: a notch moves the panels down, the home indicator lifts the focal bottom", () => {
+    const notch = { ...base, isPhone: true, safeTop: 47, safeBottom: 34 };
+    const pre = computeLayout(390, 844, notch);
+    expect(pre).toMatchObject({ panelTop: 103, sheetH: 166 });
+    expect(pre.focal).toEqual({ l: 12, t: 103, r: 12, b: 174 });
+    expect(layoutCssVars(pre)).toMatchObject({ "--panel-top": "103px", "--focal-t": "103px", "--sheet-h": "166px", "--focal-b": "174px" });
+    // the inspector sheet's 64dvh already contains the inset
+    expect(computeLayout(390, 844, { ...notch, inspectorOpen: true, pairSelected: true }).sheetH).toBe(540);
+    // a short top inset never pulls the header above the 12px gutter
+    expect(computeLayout(390, 844, { ...notch, safeTop: 4 }).panelTop).toBe(68);
   });
 
   it("375×812 phone: sheets, no dock", () => {

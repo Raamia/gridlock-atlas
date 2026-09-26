@@ -1,329 +1,112 @@
 "use client";
 
-import mapboxgl, { type GeoJSONSource, type LngLatBoundsLike, type StyleSpecification } from "mapbox-gl";
+import mapboxgl, { type GeoJSONSource, type LngLatBoundsLike } from "mapbox-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
-import type { Project } from "@/lib/domain/types";
-import { geoShort, inServicePhrase } from "@/lib/describe";
-import { formatMilesNear } from "@/lib/format";
-import { usePreviewPair, useReducedMotion, useSelectedPair } from "@/lib/hooks";
+import type { Match } from "@/lib/domain/types";
+import { useReducedMotion } from "@/lib/hooks";
+import { install3D, update3D, type Map3DInput } from "@/lib/map3d";
 import {
   anchorOf,
   boundsOf,
   centerFeatures,
   connectorFeature,
-  overlapFeatures,
   haloFeatures,
+  overlapFeatures,
   pointFeatures,
+  projectCenter,
   projectCoords,
   projectCounties,
+  ringFeature,
+  ringLabelPoint,
   routeFeatures,
+  sharedBorder,
   sharedSite,
+  siteLegFeatures,
   type RoleContext,
 } from "@/lib/mapdata";
+import { queueRank, rankLabel, regionMatches } from "@/lib/rank";
 import { ownerNames } from "@/lib/selectors";
 import { useAtlas, type Basemap } from "@/lib/store";
+import { CameraDirector, type CameraIntent } from "./map/camera";
+import { distanceLabel, layoutCallouts, projectLabel, rankChip, siteDot, siteMarker, type Callout, type Dot } from "./map/callouts";
+import { pairCardHtml, projectCardHtml, projectTapCard } from "./map/cards";
+import { canDrift, startDrift } from "./map/drift";
+import { addDataLayers, applyAnimated, FIRST_WAVE, hasLayer, PAIR_HIT_LAYERS, PROJECT_HIT_LAYERS, visibility, type Animated } from "./map/layers";
+import { applyTerrain, configureStandard, isBasemapFailure, isStandard, styleFor, TOKEN } from "./map/style";
 
-const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
+/* ------------------------------------------------ helpers ------------------------------------------------ */
 
-const COLORS = {
-  a: "#2fd6f2",
-  b: "#a78bfa",
-  u1: "#56c7de",
-  u2: "#9d8cf0",
-  hover: "#eef3fc",
-  all: "#8fa2c7",
-  other: "#5d6a87",
-  amber: "#fbbf24",
-};
+type FC = GeoJSON.FeatureCollection;
+const EMPTY: FC = { type: "FeatureCollection", features: [] };
 
-const roleColor: mapboxgl.ExpressionSpecification = [
-  "match",
-  ["get", "role"],
-  "a",
-  COLORS.a,
-  "b",
-  COLORS.b,
-  "u1",
-  COLORS.u1,
-  "u2",
-  COLORS.u2,
-  "hover",
-  COLORS.hover,
-  "other",
-  COLORS.other,
-  COLORS.all,
-];
+/** Guarded: a source can be missing mid style-swap, and a removed map (dev remount) throws on any style access. */
+function setData(map: mapboxgl.Map, id: string, data: FC) {
+  try {
+    (map.getSource(id) as GeoJSONSource | undefined)?.setData(data);
+  } catch {
+    /* presentation-only */
+  }
+}
 
-const roleOpacity = (base: number, dim: number): mapboxgl.ExpressionSpecification => ["match", ["get", "role"], "other", dim, base];
-
-/** 3D mode tilts the region overview too, so the toggle always does something visible. */
-const OVERVIEW_PITCH = 45;
-
-/* ---------------------------------- styles ---------------------------------- */
-
-function offlineStyle(): StyleSpecification {
-  return {
-    version: 8,
-    name: "GridLock offline",
-    sources: {
-      "ctx-states": { type: "geojson", data: "/geo/states.json" },
-    },
-    layers: [
-      { id: "bg", type: "background", paint: { "background-color": "#060d1c" } },
-      { id: "ctx-states-fill", type: "fill", source: "ctx-states", paint: { "fill-emissive-strength": 1, "fill-color": "#0b1528", "fill-opacity": 1 } },
-      { id: "ctx-states-line", type: "line", source: "ctx-states", paint: { "line-emissive-strength": 1, "line-color": "#2a3a5c", "line-width": 1.1 } },
-    ],
+/** requestAnimationFrame tween; returns a cancel function. */
+function tween(duration: number, frame: (t: number) => void, done?: () => void): () => void {
+  let raf = 0;
+  const start = performance.now();
+  const step = (now: number) => {
+    const t = Math.min(1, (now - start) / duration);
+    frame(t);
+    if (t < 1) raf = requestAnimationFrame(step);
+    else done?.();
   };
+  raf = requestAnimationFrame(step);
+  return () => cancelAnimationFrame(raf);
+}
+const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+/** The SC–GA border from the bundled Census states (fetched once, shared by every style). */
+let stateLine: Promise<FC> | null = null;
+function savannahLine(): Promise<FC> {
+  stateLine ??= fetch("/geo/states.json")
+    .then((r) => r.json())
+    .then((states) => {
+      const f = sharedBorder(states, "SC", "GA");
+      return f ? ({ type: "FeatureCollection", features: [f] } as FC) : EMPTY;
+    })
+    .catch(() => EMPTY);
+  return stateLine;
 }
 
-function styleFor(basemap: Basemap): string | StyleSpecification {
-  if (basemap === "offline" || !TOKEN) return offlineStyle();
-  return basemap === "satellite" ? "mapbox://styles/mapbox/standard-satellite" : "mapbox://styles/mapbox/standard";
-}
+const isTouchEvent = (oe: Event | undefined) =>
+  !!(oe as (MouseEvent & { sourceCapabilities?: { firesTouchEvents?: boolean } }) | undefined)?.sourceCapabilities?.firesTouchEvents ||
+  (typeof window !== "undefined" && !!window.matchMedia?.("(hover: none)").matches);
 
-function isStandard(basemap: Basemap) {
-  return basemap !== "offline" && !!TOKEN;
-}
+const DEMO_CARD = '[data-demo-card], [role="region"][aria-label="Guided demo"]';
 
-/* ---------------------------------- layers ---------------------------------- */
-
-function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
-  const slot = isStandard(basemap) ? { slot: "top" as const } : {};
-  const empty = { type: "FeatureCollection" as const, features: [] };
-
-  if (!map.getSource("ctx-counties")) map.addSource("ctx-counties", { type: "geojson", data: "/geo/counties.json" });
-  for (const id of ["gl-halos", "gl-routes", "gl-points", "gl-connector", "gl-overlaps", "gl-overlap-dots", "gl-centers"]) {
-    if (!map.getSource(id)) map.addSource(id, { type: "geojson", data: empty });
-  }
-
-  // county context: faint everywhere offline; highlighted for the counties the visible projects name
-  map.addLayer({
-    id: "ctx-counties-line",
-    type: "line",
-    source: "ctx-counties",
-    paint: { "line-emissive-strength": 1, "line-color": "#8aa0ce", "line-opacity": basemap === "offline" ? 0.13 : 0.0, "line-width": 0.6 },
-    ...slot,
-  });
-  map.addLayer({
-    id: "ctx-counties-hl-fill",
-    type: "fill",
-    source: "ctx-counties",
-    filter: ["==", ["get", "fips"], "__none__"],
-    paint: { "fill-emissive-strength": 1, "fill-color": "#8aa0ce", "fill-opacity": 0.05 },
-    ...slot,
-  });
-  map.addLayer({
-    id: "ctx-counties-hl-line",
-    type: "line",
-    source: "ctx-counties",
-    filter: ["==", ["get", "fips"], "__none__"],
-    paint: { "line-emissive-strength": 1, "line-color": "#8aa0ce", "line-opacity": 0.4, "line-width": 1, "line-dasharray": [2, 2] },
-    ...slot,
-  });
-
-  map.addLayer({
-    id: "gl-halos-fill",
-    type: "fill",
-    source: "gl-halos",
-    paint: { "fill-emissive-strength": 1, "fill-color": roleColor, "fill-opacity": roleOpacity(0.1, 0.03) },
-    ...slot,
-  });
-  map.addLayer({
-    id: "gl-halos-line",
-    type: "line",
-    source: "gl-halos",
-    paint: { "line-emissive-strength": 1, "line-color": roleColor, "line-opacity": roleOpacity(0.55, 0.15), "line-width": 1, "line-dasharray": [1.5, 1.5] },
-    ...slot,
-  });
-
-  map.addLayer({
-    id: "gl-routes-glow",
-    type: "line",
-    source: "gl-routes",
-    layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-emissive-strength": 1, "line-color": roleColor, "line-width": ["interpolate", ["linear"], ["zoom"], 5, 6, 10, 14], "line-blur": 8, "line-opacity": roleOpacity(0.35, 0.05) },
-    ...slot,
-  });
-  map.addLayer({
-    id: "gl-routes",
-    type: "line",
-    source: "gl-routes",
-    layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-emissive-strength": 1,
-      "line-color": roleColor,
-      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2, 10, 3.5],
-      "line-opacity": roleOpacity(0.95, 0.3),
-      "line-dasharray": ["case", ["==", ["get", "precision"], "official-map-digitized"], ["literal", [2.2, 1.6]], ["literal", [1, 0]]],
-    },
-    ...slot,
-  });
-
-  // every flagged pair: amber link between project centers (drawn under the project geometry)
-  map.addLayer({
-    id: "gl-overlaps-glow",
-    type: "line",
-    source: "gl-overlaps",
-    layout: { "line-cap": "round" },
-    paint: { "line-emissive-strength": 1,
-      "line-color": COLORS.amber,
-      "line-width": ["interpolate", ["linear"], ["get", "priority"], 20, 4, 100, 12],
-      "line-blur": 6,
-      "line-opacity": ["case", ["get", "selected"], 0.5, ["get", "dim"], 0, 0.22],
-    },
-    ...slot,
-  });
-  map.addLayer({
-    id: "gl-overlaps",
-    type: "line",
-    source: "gl-overlaps",
-    layout: { "line-cap": "round" },
-    paint: { "line-emissive-strength": 1,
-      "line-color": COLORS.amber,
-      "line-width": ["interpolate", ["linear"], ["get", "priority"], 20, 1.2, 100, 2.6],
-      "line-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.05, 0.75],
-      "line-dasharray": [1, 1.6],
-    },
-    ...slot,
-  });
-
-  map.addLayer({
-    id: "gl-connector",
-    type: "line",
-    source: "gl-connector",
-    paint: { "line-emissive-strength": 1, "line-color": COLORS.amber, "line-width": 1.6, "line-dasharray": [0.5, 2], "line-opacity": 0.9 },
-    layout: { "line-cap": "round" },
-    ...slot,
-  });
-
-  map.addLayer({
-    id: "gl-points-halo",
-    type: "circle",
-    source: "gl-points",
-    paint: { "circle-emissive-strength": 1,
-      "circle-radius": ["match", ["get", "precision"], "named-facility", 9, 6],
-      "circle-color": roleColor,
-      "circle-opacity": roleOpacity(0.18, 0.04),
-      "circle-blur": 0.4,
-    },
-    ...slot,
-  });
-  map.addLayer({
-    id: "gl-points",
-    type: "circle",
-    source: "gl-points",
-    paint: { "circle-emissive-strength": 1,
-      "circle-radius": ["case", ["==", ["get", "context"], true], 3.5, ["match", ["get", "precision"], "named-facility", 4.5, 3.5]],
-      "circle-color": ["case", ["==", ["get", "context"], true], "rgba(12,21,40,0.9)", ["match", ["get", "precision"], "named-facility", roleColor, "rgba(12,21,40,0.9)"]],
-      "circle-stroke-color": ["case", ["==", ["get", "context"], true], roleColor, ["match", ["get", "precision"], "named-facility", "rgba(4,9,20,0.9)", roleColor]],
-      "circle-stroke-width": ["case", ["==", ["get", "context"], true], 1.4, ["match", ["get", "precision"], "named-facility", 1.2, 1.8]],
-      "circle-opacity": roleOpacity(1, 0.35),
-      "circle-stroke-opacity": roleOpacity(1, 0.35),
-    },
-    ...slot,
-  });
-
-  map.addLayer({
-    id: "gl-overlap-dots",
-    type: "circle",
-    source: "gl-overlap-dots",
-    paint: { "circle-emissive-strength": 1,
-      "circle-radius": ["interpolate", ["linear"], ["get", "priority"], 20, 3.5, 100, 7],
-      "circle-color": COLORS.amber,
-      "circle-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.12, 0.95],
-      "circle-stroke-color": "rgba(4,9,20,0.9)",
-      "circle-stroke-width": 1.5,
-      "circle-stroke-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.1, 1],
-    },
-    ...slot,
-  });
-
-  map.addLayer({
-    id: "gl-centers",
-    type: "circle",
-    source: "gl-centers",
-    paint: { "circle-emissive-strength": 1,
-      "circle-radius": 5,
-      "circle-color": "rgba(4,9,20,0.6)",
-      "circle-stroke-color": ["match", ["get", "role"], "a", COLORS.a, COLORS.b],
-      "circle-stroke-width": 1.5,
-      "circle-pitch-alignment": "map",
-    },
-    ...slot,
-  });
-
-  if (isStandard(basemap)) {
-    map.addLayer({
-      id: "gl-point-labels",
-      type: "symbol",
-      source: "gl-points",
-      filter: ["all", ["match", ["get", "role"], ["a", "b", "hover"], true, false], ["!=", ["get", "onSite"], true]],
-      layout: {
-        "text-field": ["get", "label"],
-        "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
-        "text-size": 11,
-        "text-offset": [0, 1.1],
-        "text-anchor": "top",
-        "text-optional": true,
-        "text-max-width": 10,
-      },
-      paint: { "text-emissive-strength": 1, "text-color": "#c1cbe0", "text-halo-color": "#040914", "text-halo-width": 1.4 },
-      ...slot,
-    });
-  }
-}
-
-function applyTerrain(map: mapboxgl.Map, mode: "3d" | "flat", basemap: Basemap) {
-  // a style swap may still be loading; "style.load" re-applies terrain once it is ready
-  if (!map.isStyleLoaded()) return;
-  if (!isStandard(basemap)) {
-    map.setTerrain(null);
-    return;
-  }
-  if (!map.getSource("mapbox-dem")) {
-    map.addSource("mapbox-dem", { type: "raster-dem", url: "mapbox://mapbox.mapbox-terrain-dem-v1", tileSize: 512, maxzoom: 14 });
-  }
-  map.setTerrain(mode === "3d" ? { source: "mapbox-dem", exaggeration: 1.8 } : null);
-}
-
-function configureStandard(map: mapboxgl.Map, basemap: Basemap) {
-  if (!isStandard(basemap)) return;
-  const set = (k: string, v: unknown) => {
-    try {
-      map.setConfigProperty("basemap", k, v);
-    } catch {
-      /* property not supported by this style version */
-    }
-  };
-  set("lightPreset", "night");
-  set("showPointOfInterestLabels", false);
-  set("showTransitLabels", false);
-  set("show3dObjects", false);
-  set("showPedestrianRoads", false);
-  set("showLandmarkIcons", false);
-  if (basemap === "night") {
-    set("theme", "default");
-    set("showRoadLabels", false);
-    set("roadsBrightness", 0.55);
-    set("colorPlaceLabels", "#9aa8c6");
-  }
-  map.setFog({
-    color: "rgb(8, 15, 31)",
-    "high-color": "rgb(14, 24, 48)",
-    "horizon-blend": 0.08,
-    "space-color": "rgb(4, 9, 20)",
-    "star-intensity": 0.25,
-  });
-}
-
-/* --------------------------------- component --------------------------------- */
+/* ------------------------------------------------ component ------------------------------------------------ */
 
 export default function MapStage() {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
+  const director = useRef<CameraDirector | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
-  const callouts = useRef<{ items: Callout[]; dots: Dot[] }>({ items: [], dots: [] });
+  const chips = useRef<{ marker: mapboxgl.Marker; at: [number, number]; el: HTMLElement }[]>([]);
+  const callouts = useRef<{ items: Callout[]; dots: Dot[] }>({
+    items: [],
+    dots: [],
+  });
   const popup = useRef<mapboxgl.Popup | null>(null);
+  const anim = useRef<Animated>({
+    unflagged: 1,
+    revealK: Infinity,
+    restFade: 1,
+    arcs2D: true,
+    raised: false,
+    trim: 1,
+  });
+  const revealing = useRef(false);
+  /** What map-3d draws in the current mode (so the flat equivalents stay hidden instead of doubling up). */
+  const covers = useRef<Covers>({ arcs: false, ring: false, chips: false, labels: false });
   const [styleReady, setStyleReady] = useState(0);
   const [mapReady, setMapReady] = useState(false);
   const reduced = useReducedMotion();
@@ -331,37 +114,54 @@ export default function MapStage() {
   const basemap = useAtlas((s) => s.basemap);
   const mapMode = useAtlas((s) => s.mapMode);
   const region = useAtlas((s) => s.region);
-  const hoveredProjectId = useAtlas((s) => s.hoveredProjectId);
-  const cameraNonce = useAtlas((s) => s.cameraNonce);
-  const inspectorOpen = useAtlas((s) => s.inspectorOpen);
-  const demoOn = useAtlas((s) => s.demoStep !== null);
   const run = useAtlas((s) => s.run);
-  const set = useAtlas((s) => s.set);
-  const preview = usePreviewPair();
-  const selected = useSelectedPair();
-  const previewId = preview?.match.id ?? null;
+  const running = useAtlas((s) => s.running);
+  const tab = useAtlas((s) => s.tab);
+  const selectedMatchId = useAtlas((s) => s.selectedMatchId);
+  const hoveredMatchId = useAtlas((s) => s.hoveredMatchId);
+  const hoveredProjectId = useAtlas((s) => s.hoveredProjectId);
+  const focus = useAtlas((s) => s.focus);
+  const cameraNonce = useAtlas((s) => s.cameraNonce);
+  const revealNonce = useAtlas((s) => s.revealNonce);
+  const demoOn = useAtlas((s) => s.demoStep !== null);
+  const closeupOpen = useAtlas((s) => s.closeupOpen);
+  const inspectorOpen = useAtlas((s) => s.inspectorOpen);
+
+  const selected: Match | null = useMemo(() => run?.matches.find((m) => m.id === selectedMatchId) ?? null, [run, selectedMatchId]);
+  const hovered: Match | null = useMemo(() => (hoveredMatchId ? (run?.matches.find((m) => m.id === hoveredMatchId) ?? null) : null), [run, hoveredMatchId]);
+  /** What the connector / centers show: the selected pair, else the hovered row's pair. */
+  const preview = selected ?? hovered;
+
+  const regionRun = useMemo(() => (run ? regionMatches(run, region) : []), [run, region]);
 
   const visibleProjectIds = useMemo(() => {
     const ids = new Set<string>();
+    const excluded = new Set(run?.excludedProjects.map((x) => x.projectId) ?? []);
     for (const p of SNAPSHOT.projects) {
       if (region !== "all" && p.region !== region) continue;
-      if (run && run.excludedProjects.some((x) => x.projectId === p.id) && preview?.a.id !== p.id && preview?.b.id !== p.id) continue;
+      if (excluded.has(p.id)) continue;
       ids.add(p.id);
     }
-    if (preview) {
-      ids.add(preview.a.id);
-      ids.add(preview.b.id);
+    for (const m of [selected, hovered]) {
+      if (!m) continue;
+      ids.add(m.projectAId);
+      ids.add(m.projectBId);
     }
     return ids;
-  }, [region, run, preview]);
+  }, [region, run, selected, hovered]);
 
-  /* init */
+  const flaggedProjectIds = useMemo(() => (run ? new Set(regionRun.flatMap((m) => [m.projectAId, m.projectBId])) : null), [run, regionRun]);
+
+  /* ---------------------------------------------- init ---------------------------------------------- */
   useEffect(() => {
     if (!el.current || mapRef.current) return;
+    const set = useAtlas.getState().set;
     mapboxgl.accessToken = TOKEN;
     const startOffline = typeof navigator !== "undefined" && !navigator.onLine;
-    const initialBasemap: Basemap = startOffline ? "offline" : useAtlas.getState().basemap;
+    // no token: say so on the switcher (Offline pressed) instead of showing Night over the bundled style
+    if (!TOKEN && useAtlas.getState().basemap !== "offline") set({ basemap: "offline", basemapFailed: false });
     if (startOffline) set({ basemap: "offline", basemapFailed: true });
+    const initialBasemap: Basemap = useAtlas.getState().basemap;
     const all = boundsOf(SNAPSHOT.projects.flatMap(projectCoords));
     const map = new mapboxgl.Map({
       container: el.current,
@@ -374,20 +174,33 @@ export default function MapStage() {
       pitch: 0,
       // globe + terrain fails to draw on some GPUs; mercator is also the honest reading projection
       projection: "mercator",
+      antialias: true,
       attributionControl: false,
-      logoPosition: "bottom-right",
+      // logo bottom-left, attribution (i) bottom-right: the map-controls column sits just above the (i)
+      logoPosition: "bottom-left",
       maxPitch: 70,
     });
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), "bottom-right");
     mapRef.current = map;
+    const cam = new CameraDirector(map);
+    director.current = cam;
     if (process.env.NODE_ENV !== "production") (window as unknown as { __map: mapboxgl.Map }).__map = map;
-    const ro = new ResizeObserver(() => map.resize());
+    const ro = new ResizeObserver(() => {
+      map.resize();
+      cam.scheduleSync(120);
+    });
     ro.observe(el.current);
 
     map.on("style.load", () => {
       const bm = useAtlas.getState().basemap;
       configureStandard(map, bm);
-      addDataLayers(map, bm);
+      addDataLayers(map, isStandard(bm));
+      try {
+        install3D(map, { standard: isStandard(bm) });
+      } catch {
+        /* the 3D scene is presentation-only */
+      }
+      applyAnimated(map, anim.current);
       // enabling terrain during the first style load can stall the first frame on some GPUs; wait for idle
       map.once("idle", () => {
         try {
@@ -397,107 +210,147 @@ export default function MapStage() {
         }
       });
       setStyleReady((n) => n + 1);
+      // the camera only needs the transform: ready at the first style, never waiting on "load" (which a slow model or
+      // tile can hold back indefinitely)
+      setMapReady(true);
     });
 
     map.once("load", () => setMapReady(true));
+    // only a basemap that cannot load (401/403, network failure on a Mapbox request) drops to Offline (SPEC §5.8)
     map.on("error", (e) => {
-      const status = (e.error as { status?: number } | undefined)?.status;
-      const msg = String(e.error?.message ?? "");
-      const tileOrStyleFailure = status === 401 || status === 403 || /Failed to fetch|NetworkError|style/i.test(msg);
-      if (tileOrStyleFailure && useAtlas.getState().basemap !== "offline") {
-        set({ basemap: "offline", basemapFailed: true });
+      if (useAtlas.getState().basemap === "offline") return;
+      if (isBasemapFailure(e as { error?: unknown; sourceId?: string })) set({ basemap: "offline", basemapFailed: true });
+    });
+
+    /* hover / click / tap */
+    const layersOf = (ids: string[]) => ids.filter((l) => map.getLayer(l));
+    const showCard = (content: string | HTMLElement, at: mapboxgl.LngLat, touch = false) => {
+      if (!popup.current)
+        popup.current = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false,
+          offset: 14,
+          maxWidth: "none",
+          className: "gl-card",
+        });
+      if (typeof content === "string") popup.current.setHTML(content);
+      else popup.current.setDOMContent(content);
+      popup.current.setLngLat(at).addTo(map);
+      popup.current.getElement()?.classList.toggle("gl-card-touch", touch);
+    };
+    const closeCard = () => popup.current?.remove();
+    const pairAt = (point: mapboxgl.Point) => {
+      const f = map.queryRenderedFeatures(
+        [
+          [point.x - 4, point.y - 4],
+          [point.x + 4, point.y + 4],
+        ],
+        { layers: layersOf(PAIR_HIT_LAYERS) },
+      )[0];
+      return (f?.properties?.id as string | undefined) ?? null;
+    };
+    const projectAt = (point: mapboxgl.Point, r: number) =>
+      map
+        .queryRenderedFeatures(
+          [
+            [point.x - r, point.y - r],
+            [point.x + r, point.y + r],
+          ],
+          { layers: layersOf(PROJECT_HIT_LAYERS) },
+        )
+        .find((x) => x.properties?.projectId);
+
+    map.on("click", (ev) => {
+      const st = useAtlas.getState();
+      const touch = isTouchEvent(ev.originalEvent);
+      const f = projectAt(ev.point, touch ? 10 : 4);
+      // a dot wins over a link under it (links meet at dots)
+      if (!f) {
+        const id = pairAt(ev.point);
+        if (id) {
+          // a tap also fires an emulated mousemove that opened the hover card; it would ride along with the camera
+          closeCard();
+          st.select(id);
+          return;
+        }
+      }
+      const pid = f?.properties?.projectId as string | undefined;
+      const p = pid ? IDX.project(pid) : undefined;
+      if (!f || !p) {
+        if (touch) closeCard();
+        return;
+      }
+      const pairs = st.run ? st.run.matches.filter((m) => m.projectAId === p.id || m.projectBId === p.id).length : 0;
+      if (touch) {
+        const label = (f.properties?.label as string | undefined) ?? p.shortTitle;
+        const precision = (f.properties?.precision as string | undefined) ?? "";
+        showCard(
+          projectTapCard(p, label, precision, pairs, () => {
+            closeCard();
+            useAtlas.getState().focusProject(p.id);
+          }),
+          ev.lngLat,
+          true,
+        );
+        return;
+      }
+      // desktop: a dot click focuses the list on that project's pairs (and flies to it)
+      if (pairs > 0) {
+        closeCard();
+        st.focusProject(p.id);
       }
     });
 
-    const hoverLayers = ["gl-overlap-dots", "gl-overlaps", "gl-routes", "gl-points", "gl-halos-fill"];
-    // touch: no hover and no mouseout to ever close a hover card, so a tap shows the project card instead
-    const isTouch = (oe: Event) =>
-      !!(oe as MouseEvent & { sourceCapabilities?: { firesTouchEvents?: boolean } }).sourceCapabilities?.firesTouchEvents || !!window.matchMedia?.("(hover: none)").matches;
-    const showCard = (html: string, at: mapboxgl.LngLat) => {
-      if (!popup.current) popup.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 14, maxWidth: "300px" });
-      popup.current.setLngLat(at).setHTML(html).addTo(map);
-    };
-    const projectCard = (f: mapboxgl.MapboxGeoJSONFeature, p: Project) => {
-      const label = (f.properties?.label as string | undefined) ?? p.shortTitle;
-      const precision = (f.properties?.precision as string | undefined) ?? "";
-      return `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:260px">
-        <div class="font-medium text-text-0">${escapeHtml(p.title)}</div>
-        <div class="text-text-2">${escapeHtml(ownerNames(p, IDX))}</div>
-        <div class="mono mt-1 text-[10.5px] text-text-3">${escapeHtml(label)}${precision ? ` · ${escapeHtml(precisionText(precision))}` : ""}</div>
-      </div>`;
-    };
-    map.on("click", (ev) => {
-      const layers = ["gl-overlap-dots", "gl-overlaps"].filter((l) => map.getLayer(l));
-      const id = map.queryRenderedFeatures(ev.point, { layers })[0]?.properties?.id as string | undefined;
-      if (id) {
-        // a tap also fires an emulated mousemove that opened the hover card; it would ride along with the camera
-        popup.current?.remove();
-        useAtlas.getState().select(id);
-        return;
-      }
-      if (!isTouch(ev.originalEvent)) return;
-      const { x, y } = ev.point;
-      const box: [mapboxgl.PointLike, mapboxgl.PointLike] = [
-        [x - 10, y - 10],
-        [x + 10, y + 10],
-      ];
-      const f = map.queryRenderedFeatures(box, { layers: hoverLayers.filter((l) => map.getLayer(l)) }).find((x) => x.properties?.projectId);
-      const p = f ? IDX.project(f.properties!.projectId as string) : undefined;
-      if (f && p) showCard(projectCard(f, p), ev.lngLat);
-      else popup.current?.remove();
-    });
-    const onMove = (ev: mapboxgl.MapMouseEvent) => {
-      if (isTouch(ev.originalEvent)) return;
-      const layers = hoverLayers.filter((l) => map.getLayer(l));
-      const all = map.queryRenderedFeatures(ev.point, { layers });
-      const ov = all.find((x) => x.layer?.id === "gl-overlap-dots" || x.layer?.id === "gl-overlaps");
-      if (ov && ov.properties?.id) {
+    // hover state the map set itself (so leaving the canvas clears only what the map started)
+    let mapHoverPair = false;
+    map.on("mousemove", (ev) => {
+      if (isTouchEvent(ev.originalEvent)) return;
+      const st = useAtlas.getState();
+      const f = projectAt(ev.point, 4);
+      const pairId = f ? null : pairAt(ev.point);
+      if (pairId) {
         map.getCanvas().style.cursor = "pointer";
-        const m = useAtlas.getState().run?.matches.find((x) => x.id === ov.properties!.id);
+        if (st.hoveredProjectId) st.set({ hoveredProjectId: null });
+        if (st.hoveredMatchId !== pairId) st.set({ hoveredMatchId: pairId });
+        mapHoverPair = true;
+        const m = st.run?.matches.find((x) => x.id === pairId);
         if (m) {
-          const pa = IDX.project(m.projectAId);
-          const pb = IDX.project(m.projectBId);
-          const c = m.geoDetail.center;
-          const thr = m.geoDetail.thresholdMiles;
-          // flagged for a shared facility, not for distance: name the facility, never a bare "105 mi apart"
-          const byFacility = m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint";
-          const place = byFacility
-            ? `${geoShort(m).title}${c && c.miles > thr ? ` (centers ${formatMilesNear(c.miles, thr)} apart)` : ""}`
-            : c
-              ? `${formatMilesNear(c.miles, thr)} apart`
-              : geoShort(m).text;
-          showCard(
-            `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:280px">
-            <div class="mono text-[10px] uppercase tracking-[0.08em]" style="color:#fbbf24">Flagged pair · P${m.priority}</div>
-            <div class="mt-0.5 font-medium" style="color:#2fd6f2">${escapeHtml(pa.shortTitle)}</div>
-            <div class="font-medium" style="color:#a78bfa">${escapeHtml(pb.shortTitle)}</div>
-            <div class="mono mt-1 text-[10.5px] text-text-2">${escapeHtml(place)}</div>
-            ${m.timeDetail.inService ? `<div class="mono text-[10.5px] text-text-2">${escapeHtml(inServicePhrase(m))}</div>` : ""}
-            <div class="mt-1 text-[10.5px] text-text-3">Click to inspect</div>
-          </div>`,
-            ev.lngLat,
-          );
+          const rank = st.run ? queueRank(st.run, st.region).get(m.id) : undefined;
+          showCard(pairCardHtml(m, rank ? rankLabel(rank) : null), ev.lngLat);
         }
         return;
       }
-      const f = all[0];
-      map.getCanvas().style.cursor = f ? "pointer" : "";
+      if (mapHoverPair) {
+        mapHoverPair = false;
+        if (st.hoveredMatchId) st.set({ hoveredMatchId: null });
+      }
       const pid = f?.properties?.projectId as string | undefined;
-      if (!pid) {
-        popup.current?.remove();
-        if (useAtlas.getState().hoveredProjectId) set({ hoveredProjectId: null });
+      const p = pid ? IDX.project(pid) : undefined;
+      map.getCanvas().style.cursor = p ? "pointer" : "";
+      if (!p || !f) {
+        closeCard();
+        if (st.hoveredProjectId) st.set({ hoveredProjectId: null });
         return;
       }
-      const p = IDX.project(pid);
-      if (!p) return;
-      if (useAtlas.getState().hoveredProjectId !== pid && !useAtlas.getState().selectedMatchId) set({ hoveredProjectId: pid });
-      showCard(projectCard(f, p), ev.lngLat);
-    };
-    map.on("mousemove", onMove);
-    map.on("mouseout", () => popup.current?.remove());
-    map.on("touchstart", () => popup.current?.remove());
+      if (st.hoveredProjectId !== p.id && !st.selectedMatchId) st.set({ hoveredProjectId: p.id });
+      showCard(
+        projectCardHtml(p, (f.properties?.label as string | undefined) ?? p.shortTitle, (f.properties?.precision as string | undefined) ?? ""),
+        ev.lngLat,
+      );
+    });
+    map.on("mouseout", () => {
+      closeCard();
+      const st = useAtlas.getState();
+      if (st.hoveredProjectId) st.set({ hoveredProjectId: null });
+      if (mapHoverPair && st.hoveredMatchId) st.set({ hoveredMatchId: null });
+      mapHoverPair = false;
+      map.getCanvas().style.cursor = "";
+    });
 
-    const relayout = (ev?: { type: string }) => layoutCallouts(map, callouts.current.items, callouts.current.dots, ev?.type === "move");
+    const relayout = (ev?: { type: string }) => {
+      layoutCallouts(map, callouts.current.items, callouts.current.dots, ev?.type === "move");
+      if (ev?.type !== "move") spreadChips(map, chips.current);
+    };
     map.on("move", relayout);
     map.on("moveend", relayout);
     map.on("resize", relayout);
@@ -509,11 +362,15 @@ export default function MapStage() {
       ro.disconnect();
       map.remove();
       mapRef.current = null;
+      director.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /* basemap switch */
+  useEffect(() => {
+    if (director.current) director.current.reduced = reduced;
+  }, [reduced, mapReady]);
+
+  /* ---------------------------------------------- basemap ---------------------------------------------- */
   const lastBasemap = useRef<Basemap | null>(null);
   useEffect(() => {
     const map = mapRef.current;
@@ -528,7 +385,7 @@ export default function MapStage() {
     map.setStyle(styleFor(basemap), { diff: false } as Parameters<typeof map.setStyle>[1]);
   }, [basemap]);
 
-  /* terrain / pitch */
+  /* ---------------------------------------------- 3D / Flat ---------------------------------------------- */
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !styleReady) return;
@@ -537,70 +394,277 @@ export default function MapStage() {
     } catch {
       /* terrain is presentation-only; never let it break the map */
     }
-    if (mapMode === "flat") map.easeTo({ pitch: 0, bearing: 0, duration: reduced ? 0 : 700 });
-    else if (useAtlas.getState().selectedMatchId) map.easeTo({ pitch: 52, bearing: -14, duration: reduced ? 0 : 900 });
-    else map.easeTo({ pitch: OVERVIEW_PITCH, duration: reduced ? 0 : 900 });
-  }, [mapMode, styleReady, reduced]);
+  }, [mapMode, styleReady]);
 
-  /* data */
+  const lastMode = useRef(mapMode);
+  useEffect(() => {
+    if (lastMode.current === mapMode) return;
+    lastMode.current = mapMode;
+    if (mapReady) director.current?.modeChanged();
+  }, [mapMode, mapReady]);
+
+  /* ---------------------------------------------- data ---------------------------------------------- */
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !styleReady) return;
     const ctx: RoleContext = {
-      pair: preview ? { a: preview.a.id, b: preview.b.id } : null,
-      hoveredProjectId,
+      pair: selected ? { a: selected.projectAId, b: selected.projectBId } : null,
+      hoveredProjectId: selected ? null : hoveredProjectId,
       visibleProjectIds,
+      flaggedProjectIds,
+      hotProjectIds: hovered && hovered.id !== selected?.id ? new Set([hovered.projectAId, hovered.projectBId]) : null,
     };
-    (map.getSource("gl-routes") as GeoJSONSource | undefined)?.setData(routeFeatures(ctx));
-    (map.getSource("gl-halos") as GeoJSONSource | undefined)?.setData(haloFeatures(ctx));
+    setData(map, "gl-routes", routeFeatures(ctx));
+    setData(map, "gl-halos", haloFeatures(ctx));
     // the shared-site callout names the meeting point, so the map's own place names there are not repeated under it
-    const site = sharedSite(preview?.match ?? null);
+    const site = sharedSite(selected);
     const points = pointFeatures(ctx);
     if (site)
       for (const f of points.features) {
         const [lon, lat] = f.geometry.coordinates;
         if (Math.hypot((lon - site.lon) * Math.cos((lat * Math.PI) / 180), lat - site.lat) * 69 < 0.6) f.properties.onSite = true;
       }
-    (map.getSource("gl-points") as GeoJSONSource | undefined)?.setData(points);
-    (map.getSource("gl-connector") as GeoJSONSource | undefined)?.setData(connectorFeature(preview?.match ?? null));
-    (map.getSource("gl-centers") as GeoJSONSource | undefined)?.setData(centerFeatures(preview?.match ?? null));
-    const visibleMatches = (run?.matches ?? []).filter((m) => visibleProjectIds.has(m.projectAId) && visibleProjectIds.has(m.projectBId));
-    const ov = overlapFeatures(visibleMatches, preview?.match.id ?? null);
-    const dim = (fc: typeof ov.lines | typeof ov.dots) => ({
-      ...fc,
-      features: fc.features.map((f) => ({ ...f, properties: { ...f.properties, dim: !!preview && f.properties.id !== preview.match.id } })),
-    });
-    (map.getSource("gl-overlaps") as GeoJSONSource | undefined)?.setData(dim(ov.lines) as GeoJSON.FeatureCollection);
-    (map.getSource("gl-overlap-dots") as GeoJSONSource | undefined)?.setData(dim(ov.dots) as GeoJSON.FeatureCollection);
+    setData(map, "gl-points", points);
+    setData(map, "gl-connector", connectorFeature(preview));
+    setData(map, "gl-centers", centerFeatures(preview));
+    setData(map, "gl-site-legs", siteLegFeatures(selected));
 
-    const counties = projectCounties({ ...ctx, visibleProjectIds: preview ? new Set([preview.a.id, preview.b.id]) : new Set() });
+    // Sperry's rule: the review radius around A's center (selected pair), or around a focused project's center
+    const thr = useAtlas.getState().thresholdMiles;
+    let ring: FC = EMPTY;
+    let ringLabel: FC = EMPTY;
+    if (selected) {
+      const r = selected.geoDetail.thresholdMiles;
+      ring = ringFeature(selected, r);
+      const at = ringLabelPoint(selected, r);
+      const a = IDX.project(selected.projectAId);
+      if (at)
+        ringLabel = {
+          type: "FeatureCollection",
+          features: [
+            {
+              type: "Feature",
+              properties: { label: `${r} mi from ${a.shortTitle}` },
+              geometry: { type: "Point", coordinates: at },
+            },
+          ],
+        };
+    } else if (focus?.kind === "project" && run) {
+      const c = projectCenter(focus.id, run.matches);
+      if (c) {
+        const around = {
+          projectAId: focus.id,
+          geoDetail: { center: { a: c, b: c, miles: 0 } },
+        } as unknown as Match;
+        ring = ringFeature(around, thr);
+        const p = IDX.project(focus.id);
+        const top: [number, number] = [c[0], c[1] + thr / 69.05];
+        ringLabel = {
+          type: "FeatureCollection",
+          features: [
+            {
+              type: "Feature",
+              properties: {
+                label: `${thr} mi from ${p?.shortTitle ?? "this project"}`,
+              },
+              geometry: { type: "Point", coordinates: top },
+            },
+          ],
+        };
+      }
+    }
+    setData(map, "gl-ring", ring);
+    setData(map, "gl-ring-label", ringLabel);
+
+    const ranks = run ? queueRank(run, region) : null;
+    const ov = overlapFeatures(
+      regionRun.filter((m) => visibleProjectIds.has(m.projectAId) && visibleProjectIds.has(m.projectBId)),
+      { selectedId: selected?.id ?? null, hoverId: hovered?.id ?? null, ranks },
+    );
+    setData(map, "gl-overlaps", ov.lines as FC);
+    setData(map, "gl-overlap-dots", ov.dots as FC);
+
+    const counties = projectCounties({
+      ...ctx,
+      visibleProjectIds: selected ? new Set([selected.projectAId, selected.projectBId]) : new Set(),
+    });
     const names = counties.map((c) => `${c.name}|${c.state}`);
     const filter: mapboxgl.FilterSpecification = names.length
       ? ["in", ["concat", ["get", "name"], "|", ["get", "state"]], ["literal", names]]
       : ["==", ["get", "fips"], "__none__"];
-    if (map.getLayer("ctx-counties-hl-fill")) map.setFilter("ctx-counties-hl-fill", filter);
-    if (map.getLayer("ctx-counties-hl-line")) map.setFilter("ctx-counties-hl-line", filter);
-  }, [styleReady, preview, hoveredProjectId, visibleProjectIds, run]);
+    for (const id of ["ctx-counties-hl-fill", "ctx-counties-hl-line"]) if (hasLayer(map, id)) map.setFilter(id, filter);
 
-  /* HTML callouts for the previewed pair, ranked: shared site > project labels > distance chip */
+    // the Savannah River is the SC–GA state line: a quiet landmark in the region overview
+    const showLine = region === "southeast" && !selected && !focus;
+    if (!showLine) setData(map, "gl-stateline", EMPTY);
+    else
+      void savannahLine().then((fc) => {
+        const st = useAtlas.getState();
+        if (mapRef.current === map && hasLayer(map, "gl-stateline") && st.region === "southeast" && !st.selectedMatchId && !st.focus)
+          setData(map, "gl-stateline", fc);
+      });
+  }, [styleReady, selected, hovered, preview, hoveredProjectId, visibleProjectIds, flaggedProjectIds, regionRun, run, region, focus]);
+
+  /* ---------------------------------------------- 3D scene (lib/map3d.ts owns every gl3d-* layer) ---------------------------------------------- */
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !styleReady) return;
+    const focusProjectIds =
+      focus && run ? [...new Set(run.matches.filter((m) => focus.pairIds.includes(m.id)).flatMap((m) => [m.projectAId, m.projectBId]))] : null;
+    const input: Map3DInput = {
+      run,
+      region,
+      selectedMatchId,
+      hoveredMatchId,
+      focusProjectIds,
+      mapMode,
+      basemap,
+      reducedMotion: reduced,
+      revealNonce,
+      running,
+    };
+    try {
+      update3D(map, input);
+    } catch {
+      /* presentation-only */
+    }
+    // in 3D, map-3d draws the raised links, the review ring and the rank chips: the flat versions step aside (no
+    // doubles); in Flat map (gl3d-* hidden) or without map-3d they are the map's own
+    covers.current = map3dCovers(map, mapMode, isStandard(basemap));
+    anim.current = {
+      ...anim.current,
+      arcs2D: !covers.current.arcs,
+      raised: covers.current.arcs,
+    };
+    applyAnimated(map, anim.current);
+    for (const id of ["gl-ring-fill", "gl-ring-glow", "gl-ring", "gl-ring-label"]) visibility(map, id, !covers.current.ring);
+    setChipsHidden(chips.current, covers.current.chips);
+  }, [styleReady, run, region, selectedMatchId, hoveredMatchId, focus, mapMode, basemap, reduced, revealNonce, running]);
+
+  /* ---------------------------------------------- reveal choreography (2D) ---------------------------------------------- */
+  const lastReveal = useRef(revealNonce);
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !styleReady) return;
+    const fresh = revealNonce !== lastReveal.current;
+    lastReveal.current = revealNonce;
+    const final = () => {
+      revealing.current = false;
+      anim.current = {
+        ...anim.current,
+        revealK: Infinity,
+        restFade: 1,
+        unflagged: run ? 0.35 : 1,
+      };
+      applyAnimated(map, anim.current);
+      setChipsShown(chips.current, true);
+    };
+    const st = useAtlas.getState();
+    if (!fresh || !run || st.selectedMatchId || reduced || st.closeupOpen) return final();
+    // arcs 1–12 draw in 60 ms apart, then the rest fade in; unflagged dots dim; rank chips land last (≤ 1.2 s)
+    revealing.current = true;
+    setChipsShown(chips.current, false);
+    anim.current = { ...anim.current, revealK: 0, restFade: 0, unflagged: 1 };
+    applyAnimated(map, anim.current);
+    let stepK = -1;
+    const cancel = tween(
+      1150,
+      (t) => {
+        const ms = t * 1150;
+        const k = Math.min(FIRST_WAVE, Math.floor(ms / 60));
+        const rest = ms < FIRST_WAVE * 60 ? 0 : easeOut(Math.min(1, (ms - FIRST_WAVE * 60) / 380));
+        const u = 1 - 0.65 * easeOut(Math.min(1, Math.max(0, (ms - 150) / 700)));
+        const allIn = rest > 0;
+        if (k === stepK && !allIn && Math.abs(anim.current.unflagged - u) < 0.02) return;
+        stepK = k;
+        anim.current = {
+          ...anim.current,
+          revealK: allIn ? Infinity : k,
+          restFade: rest,
+          unflagged: u,
+        };
+        applyAnimated(map, anim.current);
+        if (ms > 880) setChipsShown(chips.current, true);
+      },
+      final,
+    );
+    return () => {
+      cancel();
+      if (revealing.current) final();
+    };
+    // the selection / close-up are read at bump time only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [revealNonce, styleReady, run]);
+
+  /* the selected link draws on from A's center (600 ms) */
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !styleReady) return;
+    if (!selectedMatchId || reduced) {
+      anim.current = { ...anim.current, trim: 1 };
+      applyAnimated(map, anim.current);
+      return;
+    }
+    anim.current = { ...anim.current, trim: 0 };
+    applyAnimated(map, anim.current);
+    // start once the camera is under way, so the link grows in view
+    let cancel = () => {};
+    const timer = setTimeout(() => {
+      cancel = tween(
+        600,
+        (t) => {
+          anim.current = { ...anim.current, trim: easeOut(t) };
+          applyAnimated(map, anim.current);
+        },
+        () => {
+          anim.current = { ...anim.current, trim: 1 };
+          applyAnimated(map, anim.current);
+        },
+      );
+    }, 450);
+    return () => {
+      clearTimeout(timer);
+      cancel();
+      anim.current = { ...anim.current, trim: 1 };
+      applyAnimated(map, anim.current);
+    };
+  }, [selectedMatchId, styleReady, reduced]);
+
+  /* ---------------------------------------------- callouts: the selected pair ---------------------------------------------- */
   useEffect(() => {
     const map = mapRef.current;
     markers.current.forEach((mk) => mk.remove());
     markers.current = [];
     callouts.current = { items: [], dots: [] };
-    const m = previewId ? useAtlas.getState().run?.matches.find((x) => x.id === previewId) : undefined;
+    const m = selected;
     if (!map || !styleReady || !m) return;
     const items: Callout[] = [];
     const dots: Dot[] = [];
     const add = (root: HTMLElement, at: [number, number], rank: number, spots: Callout["spots"], optional = false) => {
       root.style.zIndex = String(rank);
       markers.current.push(new mapboxgl.Marker({ element: root, anchor: "center" }).setLngLat(at).addTo(map));
-      items.push({ box: root.querySelector<HTMLElement>("[data-callout]")!, at, spots, optional });
+      items.push({
+        box: root.querySelector<HTMLElement>("[data-callout]")!,
+        at,
+        spots,
+        optional,
+      });
     };
     const c = m.geoDetail.center;
+    const thr = m.geoDetail.thresholdMiles;
     const site = sharedSite(m);
     if (site) {
-      const caption = site.stated ? "Shared site stated in source" : site.implied ? "Shared site implied by sources" : "Both projects end here";
+      // phones: the same claim on one line, so the site callout fits the strip of map above the inspector sheet
+      const compact = window.innerWidth < 768;
+      const caption = site.stated
+        ? compact
+          ? "Shared site · stated"
+          : "Shared site stated in source"
+        : site.implied
+          ? compact
+            ? "Shared site · implied"
+            : "Shared site implied by sources"
+          : "Both projects end here";
       // first choice: the side facing away from the pair, where the project labels are not
       const left = !!c && site.lon < (c.a[0] + c.b[0]) / 2;
       // the dot sits below the project labels (2): a label that has to touch the site hides the dot, never its own text
@@ -642,14 +706,14 @@ export default function MapStage() {
       const above = role === "a" ? aAbove : !aAbove;
       add(projectLabel(p.shortTitle, ownerNames(p, IDX, true), role), at, 2, (w, h) => {
         const up = [
-          { x: -w / 2, y: -12 - h },
-          { x: -14, y: -12 - h },
-          { x: 14 - w, y: -12 - h },
+          { x: -w / 2, y: -14 - h },
+          { x: -16, y: -14 - h },
+          { x: 16 - w, y: -14 - h },
         ];
-        const down = up.map((s) => ({ x: s.x, y: 12 }));
+        const down = up.map((s) => ({ x: s.x, y: 14 }));
         const side = [
-          { x: 14, y: -h / 2 },
-          { x: -14 - w, y: -h / 2 },
+          { x: 16, y: -h / 2 },
+          { x: -16 - w, y: -h / 2 },
         ];
         return above ? [...up, ...side, ...down] : [...down, ...side, ...up];
       });
@@ -658,124 +722,160 @@ export default function MapStage() {
     if (conn) {
       const [[x1, y1], [x2, y2]] = conn.geometry.coordinates as [number, number][];
       const along = (t: number): [number, number] => [x1 + (x2 - x1) * t, y1 + (y2 - y1) * t];
+      // beyond the radius (flagged through a shared facility): say why, never a bare "37 mi apart" (in 3D map-3d's
+      // ring carries that chip, so the callout is not repeated)
+      const text = conn.properties.beyond ? `Beyond ${thr} mi · shared site` : conn.properties.label;
       // slides along the connector (then flips above it) to stay clear of the site and the project labels
-      add(distanceLabel(conn.properties.label), along(0.5), 1, (w, h) => {
-        const p0 = map.project(along(0.5));
-        return [0.5, 0.35, 0.65, 0.2, 0.8].flatMap((t) => {
-          const p = map.project(along(t));
-          const [x, y] = [p.x - p0.x - w / 2, p.y - p0.y];
-          return [
-            { x, y: y + 8 },
-            { x, y: y - 8 - h },
-          ];
-        });
-      }, true);
+      if (!(conn.properties.beyond && covers.current.labels))
+        add(
+          distanceLabel(text, conn.properties.beyond),
+          along(0.5),
+          1,
+          (w, h) => {
+            const p0 = map.project(along(0.5));
+            return [0.5, 0.35, 0.65, 0.2, 0.8].flatMap((t) => {
+              const p = map.project(along(t));
+              const [x, y] = [p.x - p0.x - w / 2, p.y - p0.y];
+              return [
+                { x, y: y + 8 },
+                { x, y: y - 8 - h },
+              ];
+            });
+          },
+          true,
+        );
     }
     callouts.current = { items, dots };
     layoutCallouts(map, items, dots);
-  }, [styleReady, previewId]);
+  }, [styleReady, selected, mapMode]);
 
-  /* camera */
+  /* ---------------------------------------------- rank chips 01–03 (post-run overview) ---------------------------------------------- */
+  useEffect(() => {
+    const map = mapRef.current;
+    chips.current.forEach((c) => c.marker.remove());
+    chips.current = [];
+    if (!map || !styleReady || !run || selectedMatchId) return;
+    const status = tab === "conflicts" ? "needs-review" : tab;
+    const ranks = queueRank(run, region);
+    const top = regionRun
+      .filter((m) => m.reviewStatus === status && m.geoDetail.center && (!focus || focus.pairIds.includes(m.id)))
+      .sort((x, y) => (ranks.get(x.id) ?? 0) - (ranks.get(y.id) ?? 0))
+      .slice(0, 3);
+    for (const m of top) {
+      const c = m.geoDetail.center!;
+      const at: [number, number] = [(c.a[0] + c.b[0]) / 2, (c.a[1] + c.b[1]) / 2];
+      const rank = ranks.get(m.id) ?? 0;
+      const a = IDX.project(m.projectAId);
+      const b = IDX.project(m.projectBId);
+      const chip = rankChip(rankLabel(rank), `#${rankLabel(rank)} ${a.shortTitle} × ${b.shortTitle}`, () => useAtlas.getState().select(m.id));
+      chip.style.opacity = revealing.current ? "0" : "1";
+      if (covers.current.chips) chip.style.display = "none";
+      const marker = new mapboxgl.Marker({
+        element: chip,
+        anchor: "bottom",
+        offset: [0, -6],
+      })
+        .setLngLat(at)
+        .addTo(map);
+      chips.current.push({ marker, at, el: chip });
+    }
+    spreadChips(map, chips.current);
+  }, [styleReady, run, region, regionRun, tab, selectedMatchId, focus]);
+
+  /* ---------------------------------------------- camera ---------------------------------------------- */
+  const cameraRegion = useRef(region);
   const firstCamera = useRef(true);
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-    const apply = (animate: boolean) => {
-      const st = useAtlas.getState();
-      const duration = animate && !reduced ? 1600 : 0;
-      // padding from the real canvas: desktop leaves room for the inspector column; phones leave room for
-      // the bottom sheet. Clamped so fitBounds can always succeed.
-      const cw = map.getContainer().clientWidth;
-      const ch = map.getContainer().clientHeight;
-      const rect = map.getContainer().getBoundingClientRect();
-      const mobile = cw < 640;
-      // the phone sheet moves down to clear a tall demo card: read where it really starts
-      const sheetTop = document.querySelector('aside[aria-label="Evidence inspector"]')?.getBoundingClientRect().top ?? window.innerHeight * 0.46;
-      // the guided-demo card sits over the map (top on phones, bottom-left on desktop): keep the pair clear of it
-      const demo = st.demoStep !== null && !st.briefOpen ? document.querySelector('[aria-label="Guided demo"]')?.getBoundingClientRect() : undefined;
-      const pad = mobile
-        ? {
-            top: demo ? Math.max(64, demo.bottom - rect.top + 16) : 64,
-            left: 24,
-            right: 24,
-            bottom: st.inspectorOpen ? Math.max(24, rect.bottom - sheetTop + 24) : 32,
-          }
-        : {
-            top: 90,
-            left: 70,
-            // leave room for the inspector column at whatever width the layout gives it
-            right: st.inspectorOpen ? (document.querySelector('[aria-label="Evidence inspector"]')?.getBoundingClientRect().width ?? 408) + 32 : 64,
-            bottom: demo ? Math.max(70, rect.bottom - demo.top + 24) : 70,
-          };
-      const fit = (a: number, b: number, total: number) => {
-        const max = Math.max(0, total - 80);
-        const k = a + b > max ? max / (a + b) : 1;
-        return [Math.floor(a * k), Math.floor(b * k)];
-      };
-      [pad.left, pad.right] = fit(pad.left, pad.right, cw);
-      [pad.top, pad.bottom] = fit(pad.top, pad.bottom, ch);
-      const right = pad.right;
-      if (selected) {
-        const b = boundsOf([...projectCoords(selected.a), ...projectCoords(selected.b)]);
-        if (b) {
-          const threeD = st.mapMode === "3d";
-          map.fitBounds(b as LngLatBoundsLike, {
-            padding: pad,
-            pitch: threeD ? 52 : 0,
-            bearing: threeD ? -14 : 0,
-            maxZoom: 10.5,
-            duration,
-            essential: true,
-          });
-        }
-        return;
-      }
-      const r = SNAPSHOT.regions.find((x) => x.id === st.region);
-      const target = r
-        ? ([
-            [r.bbox[0], r.bbox[1]],
-            [r.bbox[2], r.bbox[3]],
-          ] as LngLatBoundsLike)
-        : (boundsOf(SNAPSHOT.projects.flatMap(projectCoords)) as LngLatBoundsLike | null);
-      const ovPad = { ...pad, right: mobile ? pad.right : Math.min(right, 64) };
-      // the expanded legend fills the bottom-left corner: frame the overview to its right (collapsed, it is a ~34px header)
-      const legend = mobile ? undefined : document.querySelector("[data-map-legend]")?.getBoundingClientRect();
-      if (legend && legend.height > 60) [ovPad.left, ovPad.right] = fit(Math.max(ovPad.left, Math.round(legend.right - rect.left + 16)), ovPad.right, cw);
-      if (target)
-        map.fitBounds(target, {
-          padding: ovPad,
-          pitch: st.mapMode === "3d" ? OVERVIEW_PITCH : 0,
-          bearing: 0,
-          duration,
-          essential: true,
-        });
-    };
-    // first placement after load is instant; later moves animate
-    if (!mapReady) return;
-    apply(firstCamera.current ? false : true);
+    const cam = director.current;
+    if (!cam || !mapReady) return;
+    const st = useAtlas.getState();
+    const crossRegion = cameraRegion.current !== st.region;
+    cameraRegion.current = st.region;
+    const intent: CameraIntent = st.selectedMatchId ? { kind: "pair", matchId: st.selectedMatchId, crossRegion } : { kind: "overview" };
+    cam.move(intent, {
+      animate: !firstCamera.current,
+      ...(crossRegion && !st.selectedMatchId ? { duration: 2000 } : {}),
+    });
     firstCamera.current = false;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cameraNonce, selected?.match.id, inspectorOpen, demoOn, mapReady]);
+  }, [cameraNonce, mapReady]);
 
-  // phones: the demo card sits over the top of the map and changes height from step to step (steps 3-5 keep
-  // the same pair, so nothing else refits), and the inspector sheet's top follows the card down; refit when it grows
-  // or shrinks (the camera reads the sheet's new top), and the callouts relayout after the move
+  // an explicit Compare eases to the region's flagged pairs (never when a pair is selected)
+  const lastCameraReveal = useRef(revealNonce);
+  useEffect(() => {
+    const cam = director.current;
+    if (!cam || !mapReady) return;
+    if (lastCameraReveal.current === revealNonce) return;
+    lastCameraReveal.current = revealNonce;
+    const st = useAtlas.getState();
+    if (st.selectedMatchId || !st.run) return;
+    cam.move({ kind: "reveal" });
+  }, [revealNonce, mapReady]);
+
+  // anything that changes the focal hole re-frames once the map is still (never mid-flight)
+  useEffect(() => {
+    const cam = director.current;
+    if (!cam || !mapReady) return;
+    const unsub = useAtlas.subscribe((s, prev) => {
+      if (
+        s.inspectorOpen !== prev.inspectorOpen ||
+        s.demoStep !== prev.demoStep ||
+        s.briefOpen !== prev.briefOpen ||
+        s.timelineCollapsed !== prev.timelineCollapsed ||
+        (s.selectedMatchId === null) !== (prev.selectedMatchId === null) ||
+        s.railOpen !== prev.railOpen ||
+        s.sheetSnap !== prev.sheetSnap ||
+        s.uiHidden !== prev.uiHidden
+      )
+        cam.scheduleSync();
+    });
+    // the guided-demo card can change height between steps (phones), and it mounts after its step starts
+    let card: HTMLElement | null = null;
+    const ro = new ResizeObserver(() => cam.scheduleSync(80));
+    const watchCard = () => {
+      const next = document.querySelector<HTMLElement>(DEMO_CARD);
+      if (next === card) return;
+      if (card) ro.unobserve(card);
+      card = next;
+      if (card) ro.observe(card);
+      cam.scheduleSync(80);
+    };
+    const mo = new MutationObserver(watchCard);
+    mo.observe(document.body, { childList: true, subtree: true });
+    watchCard();
+    return () => {
+      unsub();
+      ro.disconnect();
+      mo.disconnect();
+    };
+  }, [mapReady]);
+
+  /* ---------------------------------------------- idle drift (desktop, pre-run) ---------------------------------------------- */
   useEffect(() => {
     const map = mapRef.current;
-    const card = document.querySelector<HTMLElement>('[aria-label="Guided demo"]');
-    if (!map || !mapReady || !demoOn || !card) return;
-    let last = card.offsetHeight;
-    const ro = new ResizeObserver(() => {
-      const h = card.offsetHeight;
-      if (h === last) return;
-      last = h;
+    if (!map || !mapReady || !canDrift()) return;
+    const startRegion = useAtlas.getState().region;
+    const keepGoing = () => {
       const st = useAtlas.getState();
-      if (st.briefOpen || map.getContainer().clientWidth >= 640) return;
-      set({ cameraNonce: st.cameraNonce + 1 });
-    });
-    ro.observe(card);
-    return () => ro.disconnect();
-  }, [demoOn, mapReady, set]);
+      return (
+        !st.run &&
+        !st.running &&
+        st.demoStep === null &&
+        !st.selectedMatchId &&
+        st.mapMode === "3d" &&
+        st.region === startRegion &&
+        !st.closeupOpen &&
+        !st.focus
+      );
+    };
+    let stop = () => {};
+    const timer = setTimeout(() => {
+      if (keepGoing()) stop = startDrift(map, keepGoing);
+    }, 2500);
+    return () => {
+      clearTimeout(timer);
+      stop();
+    };
+  }, [mapReady]);
 
   // the guided demo owns ← / → while it runs; Mapbox's keyboard pan would also shift the framed pair on every step
   useEffect(() => {
@@ -785,204 +885,64 @@ export default function MapStage() {
     else map.keyboard.enable();
   }, [demoOn, mapReady]);
 
-  // mapbox-gl.css is unlayered and sets .mapboxgl-map{position:relative}, so size the map through a wrapper
+  // mapbox-gl.css is unlayered and sets .mapboxgl-map{position:relative}, so size the map through a wrapper.
+  // While the 3D close-up covers the stage, the map is hidden (its canvas stops compositing; SPEC §6.5).
   return (
-    <div className="absolute inset-0" data-inspector={inspectorOpen && !!selected}>
+    <div className="group/map absolute inset-0" data-inspector={inspectorOpen && !!selected} style={closeupOpen ? { visibility: "hidden" } : undefined}>
       <div ref={el} style={{ width: "100%", height: "100%" }} aria-label="Map of public construction plans" role="region" />
+      {/* keyboard focus on the map: an inset ring around the part of the map no panel covers */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute hidden rounded-panel shadow-[inset_0_0_0_2px_var(--fg-1)] group-has-[.mapboxgl-canvas:focus-visible]/map:block"
+        style={{
+          left: "var(--focal-l)",
+          top: "var(--focal-t)",
+          right: "var(--focal-r)",
+          bottom: "var(--focal-b)",
+        }}
+      />
     </div>
   );
 }
 
-/* ------------------------------ marker elements ------------------------------ */
+/* ------------------------------------------------ small map helpers ------------------------------------------------ */
 
-function escapeHtml(s: string) {
-  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
-}
+/** arcs / ring: map-3d's raised links and review ring · chips: its rank chips · labels: its text chips can render (glyphs). */
+type Covers = { arcs: boolean; ring: boolean; chips: boolean; labels: boolean };
 
-function precisionText(p: string) {
-  return (
-    {
-      "official-gis": "official GIS",
-      "official-map-digitized": "schematic · not survey accurate",
-      "named-facility": "named facility",
-      locality: "approximate locality",
-      county: "county-level",
-    } as Record<string, string>
-  )[p] ?? p;
-}
-
-function siteDot() {
-  const root = document.createElement("div");
-  root.className = "pointer-events-none relative";
-  root.innerHTML = `
-    <span class="site-pulse absolute left-1/2 top-1/2 block h-10 w-10 rounded-full" style="border:1.5px solid #fbbf24"></span>
-    <span class="absolute left-1/2 top-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.25),0 0 18px #fbbf24"></span>`;
-  return root;
-}
-
-function siteMarker(label: string, caption: string) {
-  const root = document.createElement("div");
-  root.className = "pointer-events-none relative";
-  root.innerHTML = `
-    <div data-callout class="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.94);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
-      <div class="mono text-[9.5px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${escapeHtml(caption)}</div>
-      ${escapeHtml(label)}
-    </div>`;
-  return root;
-}
-
-function projectLabel(title: string, owner: string, role: "a" | "b") {
-  const color = role === "a" ? "#2fd6f2" : "#a78bfa";
-  const el = document.createElement("div");
-  el.className = "pointer-events-none relative";
-  // phones: title only, narrower, so the pair's three callouts fit in the strip of map above the inspector sheet
-  el.innerHTML = `<div data-callout class="glass glass-solid pointer-events-none absolute left-0 top-0 max-w-[168px] whitespace-nowrap rounded-lg px-2 py-1 sm:max-w-[240px] sm:px-2.5 sm:py-1.5" style="box-shadow: inset 3px 0 0 ${color}, 0 10px 30px -10px rgba(0,0,0,.7)">
-    <div class="truncate text-[11.5px] font-semibold leading-tight sm:text-[12px]" style="color:${color}">${escapeHtml(title)}</div>
-    <div class="hidden truncate text-[10.5px] leading-tight text-text-2 sm:block">${escapeHtml(owner)}</div>
-  </div>`;
-  return el;
-}
-
-function distanceLabel(label: string) {
-  const el = document.createElement("div");
-  el.className = "pointer-events-none relative";
-  el.innerHTML = `<div data-callout class="mono pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded px-1.5 py-0.5 text-[10.5px] leading-[1.4]" style="background:rgba(4,9,20,.9);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.4)">${escapeHtml(label)}</div>`;
-  return el;
-}
-
-/* ------------------------------ callout layout ------------------------------ */
-
-interface Callout {
-  /** the label box, absolutely placed inside a 0×0 marker root that sits on `at` */
-  box: HTMLElement;
-  at: [number, number];
-  /** candidate top-left offsets from the marker point, best first */
-  spots: (w: number, h: number) => { x: number; y: number }[];
-  /** hide instead of drawing over something */
-  optional: boolean;
-}
-
-type Box = { x: number; y: number; w: number; h: number };
-type Dot = { at: [number, number]; weight: number; site?: boolean };
-
-function overlapArea(a: Box, b: Box) {
-  const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
-  const h = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
-  return w > 0 && h > 0 ? w * h : 0;
-}
-
-/**
- * Label placement, in rank order: each callout wants a spot that stays on screen and clear of the map panels,
- * the pair's dots and every higher-ranked callout. At rest, a small branch-and-bound search takes the combination
- * with the least covered area, ties going to the preferred spots; an optional callout that cannot sit clear is
- * hidden. While the camera moves, a callout keeps its spot as long as that spot stays clear, so labels do not hop
- * between equally good spots mid-flight.
- */
-function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[], moving = false) {
-  if (!items.length) return;
-  const host = map.getContainer().getBoundingClientRect();
-  // the map under the inspector (a side column, or a bottom sheet on phones) and under a full-width phone demo card is
-  // hidden outright: take it out of the usable view rather than weighing it as a panel
-  let [top, bottom, right] = [4, host.height - 4, host.width - 4];
-  for (const q of ['[aria-label="Evidence inspector"]', '[aria-label="Guided demo"]']) {
-    const r = document.querySelector(q)?.getBoundingClientRect();
-    if (!r || !r.width || !r.height) continue;
-    const [t, b, l] = [r.top - host.top, r.bottom - host.top, r.left - host.left];
-    if (r.width >= host.width * 0.9) {
-      if (t + b < host.height) top = Math.max(top, b + 4);
-      else bottom = Math.min(bottom, t - 4);
-    } else if (Math.min(b, host.height) - Math.max(t, 0) >= host.height / 2 && l > host.width / 4) right = Math.min(right, l - 4);
+/** Which flat elements map-3d replaces right now: only in 3D, and only once its layers exist in the current style. */
+function map3dCovers(map: mapboxgl.Map, mode: "3d" | "flat", standard: boolean): Covers {
+  if (mode !== "3d") return { arcs: false, ring: false, chips: false, labels: false };
+  // the offline style has no glyphs: map-3d's text chips cannot draw there, so the HTML ones stay
+  const labels = standard && hasLayer(map, "gl3d-labels");
+  // map-3d's rank chips, if it draws them: read (never touch) its label source
+  let chips = false;
+  try {
+    const src = map.getSource("gl3d-src-labels") as (GeoJSONSource & { serialize?: () => { data?: unknown } }) | undefined;
+    const data = src?.serialize?.().data as FC | undefined;
+    chips = labels && !!data?.features?.some((f) => f.properties?.k === "rank");
+  } catch {
+    chips = false;
   }
-  const view: Box = { x: 4, y: top, w: Math.max(80, right - 4), h: Math.max(40, bottom - top) };
-  const panels: Box[] = [...document.querySelectorAll<HTMLElement>("[data-map-ui]")]
-    .map((el) => el.getBoundingClientRect())
-    .filter((r) => r.width > 0 && r.height > 0)
-    .map((r) => ({ x: r.left - host.left, y: r.top - host.top, w: r.width, h: r.height }));
-  const dotBoxes = dots.map((d) => {
-    const p = map.project(d.at);
-    return { x: p.x - 9, y: p.y - 9, w: 18, h: 18, weight: d.weight, site: !!d.site };
-  });
-  const sites = dotBoxes.filter((d) => d.site).map((d) => ({ x: d.x + 9, y: d.y + 9 }));
-  // the pair's place names (gl-point-labels: 11px, anchored top 1.1em below the dot, wrapped at 10em); the one on the
-  // shared site is left out, since the site callout already names that place
-  const names: Box[] = [];
-  const labels = map.getLayer("gl-point-labels") ? map.queryRenderedFeatures({ layers: ["gl-point-labels"] }) : [];
-  for (const f of labels) {
-    if (f.geometry.type !== "Point") continue;
-    const p = map.project(f.geometry.coordinates as [number, number]);
-    if (sites.some((s) => Math.hypot(s.x - p.x, s.y - p.y) < 2)) continue;
-    const text = String(f.properties?.label ?? "");
-    const w = Math.min(text.length * 6, 116);
-    const h = Math.ceil((text.length * 6) / 116) * 13;
-    names.push({ x: p.x - w / 2, y: p.y + 10, w, h });
-  }
-  const clamp = (v: number, lo: number, hi: number) => Math.min(Math.max(v, lo), Math.max(lo, hi));
-  const cands = items.map((c) => {
+  return { arcs: hasLayer(map, "gl3d-arcs"), ring: hasLayer(map, "gl3d-ring"), chips, labels };
+}
+
+function setChipsShown(list: { el: HTMLElement }[], shown: boolean) {
+  for (const c of list) c.el.style.opacity = shown ? "1" : "0";
+}
+
+function setChipsHidden(list: { el: HTMLElement }[], hidden: boolean) {
+  for (const c of list) c.el.style.display = hidden ? "none" : "";
+}
+
+/** Rank chips on nearby links would stack: nudge later ones up so each number stays readable. */
+function spreadChips(map: mapboxgl.Map, list: { marker: mapboxgl.Marker; at: [number, number] }[]) {
+  const placed: { x: number; y: number }[] = [];
+  for (const c of list) {
     const p = map.project(c.at);
-    const [w, h] = [c.box.offsetWidth, c.box.offsetHeight];
-    const base = c.spots(w, h).map((s) => ({ s, r: { x: p.x + s.x, y: p.y + s.y, w, h } }));
-    // each spot again, slid back inside the view by at most half the box so it stays attached to its point; the
-    // originals keep indices 0..n-1, so a callout's remembered spot stays stable and ties go to the preferred spots
-    const slid = base.map(({ s, r }) => {
-      const sx = clamp(clamp(r.x, view.x, view.x + view.w - w) - r.x, -w / 2, w / 2);
-      const sy = clamp(clamp(r.y, view.y, view.y + view.h - h) - r.y, -h / 2, h / 2);
-      return { s: { x: s.x + sx, y: s.y + sy }, r: { x: r.x + sx, y: r.y + sy, w, h } };
-    });
-    return [...base, ...slid];
-  });
-  const grow = (r: Box): Box => ({ x: r.x - 4, y: r.y - 4, w: r.w + 8, h: r.h + 8 });
-  // clipped or hidden text is lost outright; covering map UI costs as much as covering another callout; the shared
-  // site's dot is weighted near a hard rule; a pair's own place names cost least
-  const cost = (r: Box, placed: Box[]) =>
-    (r.w * r.h - overlapArea(r, view)) * 4 +
-    panels.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0) +
-    names.reduce((sum, t) => sum + overlapArea(r, t), 0) +
-    dotBoxes.reduce((sum, t) => sum + t.weight * overlapArea(r, t), 0) +
-    placed.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0);
-
-  // -1 = hidden (optional callouts only)
-  let pick: number[] = [];
-  if (moving) {
-    const placed: Box[] = [];
-    items.forEach((c, i) => {
-      const prev = Number(c.box.dataset.spot ?? -1);
-      const order = cands[i].map((_, k) => k).sort((x, y) => Number(y === prev) - Number(x === prev));
-      let [best, low] = [order[0], Infinity];
-      for (const k of order) {
-        const v = cost(cands[i][k].r, placed);
-        if (v < low) [best, low] = [k, v];
-        if (v === 0) break;
-      }
-      pick[i] = low > 0 && c.optional ? -1 : best;
-      if (pick[i] >= 0) placed.push(grow(cands[i][best].r));
-    });
-  } else {
-    let bound = Infinity;
-    const cur: number[] = [];
-    const walk = (i: number, placed: Box[], total: number) => {
-      if (total >= bound) return;
-      if (i === items.length) {
-        [bound, pick] = [total, [...cur]];
-        return;
-      }
-      if (items[i].optional) {
-        cur[i] = cands[i].findIndex((c) => cost(c.r, placed) === 0);
-        return walk(i + 1, cur[i] >= 0 ? [...placed, grow(cands[i][cur[i]].r)] : placed, total);
-      }
-      cands[i].forEach((c, k) => {
-        cur[i] = k;
-        walk(i + 1, [...placed, grow(c.r)], total + cost(c.r, placed));
-      });
-    };
-    walk(0, [], 0);
+    let dy = -6;
+    while (placed.some((q) => Math.abs(q.x - p.x) < 34 && Math.abs(q.y - (p.y + dy)) < 26) && dy > -120) dy -= 28;
+    c.marker.setOffset([0, dy]);
+    placed.push({ x: p.x, y: p.y + dy });
   }
-  items.forEach((c, i) => {
-    const k = pick[i];
-    const s = cands[i][Math.max(0, k)].s;
-    const shown = c.box.dataset.spot !== undefined;
-    c.box.style.transition = shown ? "transform .2s var(--ease-out), opacity .2s" : "none";
-    c.box.style.transform = `translate(${Math.round(s.x)}px,${Math.round(s.y)}px)`;
-    c.box.style.opacity = k < 0 ? "0" : "";
-    if (k >= 0 || !shown) c.box.dataset.spot = String(Math.max(0, k));
-  });
 }

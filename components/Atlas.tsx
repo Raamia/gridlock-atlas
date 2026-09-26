@@ -8,7 +8,7 @@ import { catchError, type ErrorInfo } from "next/error";
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { SNAPSHOT } from "@/lib/data";
 import type { MatchRun } from "@/lib/domain/types";
-import { computeLayout, layoutCssVars, PHONE_SHEET, useLayout } from "@/lib/layout";
+import { PHONE_SHEET, PILL, useLayout } from "@/lib/layout";
 import { regionMatches } from "@/lib/rank";
 import { useReview } from "@/lib/review";
 import { useAtlas, type SheetSnap } from "@/lib/store";
@@ -40,25 +40,16 @@ import { mapUi, Notice } from "./ui";
 const MapStage = dynamic(() => import("./MapStage"), { ssr: false, loading: () => <div aria-hidden className="absolute inset-0 bg-canvas" /> });
 const PairCloseup = dynamic(() => import("./PairCloseup"), { ssr: false });
 
-/** Layout variables for the server render and the first paint (the 1440×900 judge layout); useLayout overwrites them. */
-const SSR_VARS = layoutCssVars(
-  computeLayout(1440, 900, { inspectorOpen: false, railOpen: false, demoOn: false, timelineCollapsed: false, isPhone: false, pairSelected: false }),
-) as CSSProperties;
-
-/** The rail pill's height + gap: the rail overlay and the focal box start below it while it shows. */
-const PILL_CLEARANCE = 44;
-
 export function Atlas() {
   return (
     <MotionConfig reducedMotion="user">
-      {/* overflow-clip, not hidden: a hidden box is still a scroll container, and scrollIntoView inside a panel would scroll the whole shell */}
-      <div className="atlas-shell relative h-dvh w-full max-w-[100vw] overflow-clip bg-canvas" style={SSR_VARS}>
+      {/* overflow-clip, not hidden: a hidden box is still a scroll container, and scrollIntoView inside a panel would scroll the whole shell.
+          The layout variables come from globals.css until useLayout knows the real viewport (no desktop flash on phones). */}
+      <div className="atlas-shell relative isolate h-dvh w-full max-w-[100vw] overflow-clip bg-canvas">
         <ShellEffects />
-        <MapLayer />
-        <div aria-hidden className="pointer-events-none fixed inset-0 z-(--z-vignette)" style={{ background: VIGNETTE }} />
-        <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-(--z-vignette)" style={HEADER_SCRIM} />
-        <Closeup />
-        {/* DOM order = tab order: header → opportunities → inspector → timeline → map controls and demo card */}
+        {/* DOM order = tab order: header → opportunities → inspector → timeline → map controls and demo card → notices.
+            The map, its vignettes and the 3D close-up come last: they are fixed and z-indexed (painting is unchanged),
+            so Tab starts in the header, not on the Mapbox attribution. */}
         <TopBar />
         <RailPill />
         <RailSlot>
@@ -76,6 +67,10 @@ export function Atlas() {
         </FocalSlot>
         <Notices />
         <RunAnnouncer />
+        <MapLayer />
+        <div aria-hidden className="pointer-events-none fixed inset-0 z-(--z-vignette)" style={{ background: VIGNETTE }} />
+        <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-(--z-vignette)" style={HEADER_SCRIM} />
+        <Closeup />
         <BriefModal />
         <SourcesDrawer />
         <MethodDrawer />
@@ -116,7 +111,7 @@ const HEADER_SCRIM: CSSProperties = {
   maskImage: "linear-gradient(to bottom, black 50%, transparent)",
 };
 
-const DOT_GRID: CSSProperties = { backgroundImage: "radial-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px)", backgroundSize: "28px 28px" };
+const DOT_GRID: CSSProperties = { backgroundImage: "radial-gradient(var(--fill-2) 1px, transparent 1px)", backgroundSize: "28px 28px" };
 
 function MapUnavailable(_props: Record<string, unknown>, { reset }: ErrorInfo) {
   return (
@@ -206,41 +201,30 @@ function Closeup() {
 /* ─────────────────────────────────────────────────── slots ─────────────────────────────────────────────────── */
 
 /**
- * The focal hole. Old MapOverlays/GuidedDemo position themselves inside it; the shell hides the pieces it now owns
- * (the full-bleed vignette, the link notice) and fits the legacy demo card to the hole.
+ * The focal hole: a box exactly over the map no panel covers (the --focal-* insets; its top already clears the rail
+ * pill). MapOverlays places the key chip top-left and the controls bottom-right inside it; the guided-demo card is
+ * fixed and positions itself from the same variables.
  */
 function FocalSlot({ children }: { children: ReactNode }) {
-  const layout = useLayout();
   const uiHidden = useAtlas((s) => s.uiHidden);
-  const briefOpen = useAtlas((s) => s.briefOpen);
   const closeupOpen = useAtlas((s) => s.closeupOpen);
   return (
     <div
       data-slot="focal"
       className={clsx(
+        // no z-index on purpose: a stacking context here would trap the demo card's own z (it must clear the brief's scrim)
         "pointer-events-none absolute transition-[left,top,right,bottom] duration-(--dur-4) ease-enter [&>:not(.pointer-events-none)]:pointer-events-auto",
-        "[&>.stage-vignette]:hidden [&>[role=status]]:hidden",
-        // legacy MapOverlays: the old stage held the inspector, so the controls offset themselves by its width and the
-        // overview chip shrank by it; inside the focal hole neither applies
-        "[&>div:has(>[aria-label='Map_perspective'])]:right-3! [&>.pointer-events-none]:max-w-[calc(100%-300px)]!",
-        "sm:[&>[role=region]]:max-w-[calc(100%-24px)]!",
-        !briefOpen && "max-sm:[&>[role=region]]:top-(--panel-top)!",
         // H, or the 3D close-up over the map: only the guided-demo card stays
         (uiHidden || closeupOpen) && "[&>:not([role=region])]:hidden!",
       )}
-      style={{
-        left: "var(--focal-l)",
-        top: layout.pillVisible ? `calc(var(--focal-t) + ${PILL_CLEARANCE}px)` : "var(--focal-t)",
-        right: "var(--focal-r)",
-        bottom: "var(--focal-b)",
-      }}
+      style={{ left: "var(--focal-l)", top: "var(--focal-t)", right: "var(--focal-r)", bottom: "var(--focal-b)" }}
     >
       {children}
     </div>
   );
 }
 
-/** lg (inspector open) / md: the rail collapses to this glass pill at the focal top-left; it opens the rail as an overlay. */
+/** lg/md with the inspector open: the rail collapses to this glass pill at the panel top-left (--focal-t clears it); it opens the rail as an overlay. */
 function RailPill() {
   const layout = useLayout();
   const run = useAtlas((s) => s.run);
@@ -258,10 +242,10 @@ function RailPill() {
       aria-controls="opportunities-rail"
       onClick={() => set({ railOpen: !railOpen })}
       className={clsx(
-        "chrome absolute z-(--z-panel) inline-flex h-9 animate-fade-in items-center gap-2 rounded-full pr-2.5 pl-3 text-ui font-medium whitespace-nowrap text-fg-1 transition-colors duration-150 hover:bg-surface-raised",
+        "chrome absolute z-(--z-panel) inline-flex animate-fade-in items-center gap-2 rounded-full pr-2.5 pl-3 text-ui font-medium whitespace-nowrap text-fg-1 transition-colors duration-150 hover:bg-surface-raised",
         railOpen && "bg-surface-raised",
       )}
-      style={{ left: "var(--gutter)", top: "var(--panel-top)" }}
+      style={{ left: "var(--gutter)", top: "var(--panel-top)", height: PILL.h }}
     >
       <ListOrdered size={16} strokeWidth={1.75} className="text-fg-2" />
       Opportunities
@@ -329,7 +313,7 @@ function useSheetDrag(onTap: () => void) {
   return { dragH, handlers: { onPointerDown, onPointerMove, onPointerUp: onPointerEnd, onPointerCancel: onPointerEnd } };
 }
 
-/** The Opportunities rail: docked panel (xl, lg without inspector), overlay behind the pill (lg/md), bottom sheet (phone). */
+/** The Opportunities rail: docked panel (xl; lg/md without the inspector), overlay behind the pill (lg/md with it), bottom sheet (phone). */
 function RailSlot({ children }: { children: ReactNode }) {
   const layout = useLayout();
   const railOpen = useAtlas((s) => s.railOpen);
@@ -342,7 +326,7 @@ function RailSlot({ children }: { children: ReactNode }) {
   const { dragH, handlers } = useSheetDrag(cycle);
 
   const sheet = layout.railMode === "sheet";
-  const overlay = layout.railMode === "pill" || layout.railMode === "drawer";
+  const overlay = layout.railMode === "pill";
   const shown = !uiHidden && (sheet ? !inspectorOpen : !overlay || railOpen);
 
   // the overlay rail closes on a click anywhere else (selecting a row closes it too, in the store)
@@ -367,7 +351,8 @@ function RailSlot({ children }: { children: ReactNode }) {
 
   const style: CSSProperties = sheet
     ? { left: 0, right: 0, bottom: 0, height: `calc(${dragH !== null ? `${Math.round(dragH)}px` : SNAP_CSS[snap]} + var(--safe-b))` }
-    : { left: "var(--gutter)", top: overlay ? `calc(var(--panel-top) + ${PILL_CLEARANCE}px)` : "var(--panel-top)", bottom: "var(--gutter)", width: "var(--rail-w)" };
+    : // the overlay opens under its pill: --focal-t already clears it
+      { left: "var(--gutter)", top: overlay ? "var(--focal-t)" : "var(--panel-top)", bottom: "var(--gutter)", width: "var(--rail-w)" };
 
   return (
     <div
@@ -387,7 +372,11 @@ function RailSlot({ children }: { children: ReactNode }) {
       style={style}
     >
       {sheet && (
-        <div className="flex h-6 shrink-0 cursor-grab touch-none items-center justify-center active:cursor-grabbing" {...handlers}>
+        // a 24px strip that grabs like a 36px one (it reaches 12px up over the map); the button in it is 64×44
+        <div
+          className="relative z-10 flex h-6 shrink-0 cursor-grab touch-none items-center justify-center before:absolute before:inset-x-0 before:-top-3 before:bottom-0 active:cursor-grabbing"
+          {...handlers}
+        >
           <button
             type="button"
             // pointer taps arrive through the strip's pointerup (it captures the pointer); this is Enter / Space
@@ -396,7 +385,7 @@ function RailSlot({ children }: { children: ReactNode }) {
             aria-expanded={snap !== "peek"}
             aria-controls="opportunities-rail"
             aria-label={snap === "full" ? "Collapse opportunities" : "Expand opportunities"}
-            className="grid h-6 w-16 place-items-center rounded-full"
+            className="relative -my-2.5 grid h-11 w-16 place-items-center rounded-full focus-visible:outline-offset-[-4px]"
           >
             <span aria-hidden className="h-1 w-9 rounded-full bg-fg-4" />
           </button>
@@ -407,8 +396,8 @@ function RailSlot({ children }: { children: ReactNode }) {
           "min-h-0 flex-1",
           sheet
             ? "overflow-y-auto overscroll-contain pb-(--safe-b) [&>aside]:min-h-full [&>aside]:border-0 [&>aside]:bg-transparent"
-            : "[&>aside]:h-full [&>aside]:overflow-hidden [&>aside]:rounded-panel [&>aside]:border [&>aside]:border-edge",
-          !sheet && (overlay ? "[&>aside]:shadow-pop" : "[&>aside]:shadow-float"),
+            : // the Opportunities panel brings its own surface; the slot clips it to the panel radius and lifts the overlay
+              clsx("[&>aside]:max-h-full [&>aside]:overflow-hidden", overlay && "[&>aside]:shadow-pop"),
         )}
       >
         {children}
@@ -461,10 +450,9 @@ function InspectorSlot({ children }: { children: ReactNode }) {
       {...(shown ? mapUi(phone ? "bottom" : "right") : {})}
       className={clsx(
         "pointer-events-none absolute z-(--z-panel) [&>*]:pointer-events-auto",
-        "[&>aside]:absolute! [&>aside]:inset-0! [&>aside]:h-auto! [&>aside]:w-auto! [&>aside]:border-edge",
-        phone
-          ? "transition-[top] duration-(--dur-4) ease-enter [&>aside]:rounded-t-dialog! [&>aside]:rounded-b-none! [&>aside]:border-t"
-          : "[&>aside]:rounded-panel! [&>aside]:border [&>aside]:shadow-float",
+        // the inspector brings its own surface; the slot sizes it (and squares the sheet's bottom corners on phones)
+        "[&>aside]:absolute! [&>aside]:inset-0! [&>aside]:h-auto! [&>aside]:w-auto!",
+        phone && "transition-[top] duration-(--dur-4) ease-enter [&>aside]:rounded-t-dialog! [&>aside]:rounded-b-none! [&>aside]:border-x-0 [&>aside]:border-b-0",
         uiHidden && "invisible",
       )}
       style={style}
@@ -475,8 +463,9 @@ function InspectorSlot({ children }: { children: ReactNode }) {
           type="button"
           aria-label={tall ? "Shrink evidence inspector" : "Expand evidence inspector"}
           aria-expanded={tall}
-          // above the legacy aside's own z-40
-          className="absolute top-0 left-1/2 z-50 grid h-5 w-16 -translate-x-1/2 touch-none place-items-center"
+          // a 64×44 target whose visible grabber sits 6px into the sheet: it reaches 14px up over the map and 30px
+          // down over the sheet's first row, where only the status text lives (the row's buttons are at the right)
+          className="absolute -top-3.5 left-1/2 z-10 flex h-11 w-16 -translate-x-1/2 touch-none justify-center pt-5 focus-visible:outline-offset-[-4px]"
           onPointerDown={(e) => {
             swiped.current = false;
             grab.current = { id: e.pointerId, y: e.clientY };
@@ -496,7 +485,11 @@ function InspectorSlot({ children }: { children: ReactNode }) {
   );
 }
 
-/** Timeline dock: bottom of the focal width (rail right + 12 → inspector left − 12). Not on phones. */
+/**
+ * Timeline dock: bottom of the focal width (rail right + 12 → inspector left − 12). Not on phones. `data-collapsed`
+ * mirrors the layout (the timeline renders its own 44px summary face); the panel is clipped to the slot while the
+ * height animates between 96 / 196 / 44, so a face never spills out mid-transition.
+ */
 function DockSlot({ children }: { children: ReactNode }) {
   const layout = useLayout();
   if (layout.tier === "phone") return null;
@@ -506,10 +499,11 @@ function DockSlot({ children }: { children: ReactNode }) {
       data-slot="dock"
       data-collapsed={layout.dockCollapsed || undefined}
       {...(shown ? mapUi("bottom") : {})}
+      inert={!shown}
       className={clsx(
-        "absolute z-(--z-panel) transition-[left,right,height] duration-(--dur-4) ease-enter",
-        "[&>section]:block! [&>section]:h-full! [&>section]:overflow-hidden [&>section]:rounded-panel [&>section]:border [&>section]:border-edge [&>section]:shadow-float",
-        !shown && "invisible",
+        "absolute z-(--z-panel) transition-[left,right,height,opacity] duration-(--dur-4) ease-enter",
+        "[&>section]:h-full [&>section]:max-h-full [&>section]:overflow-hidden",
+        !shown && "invisible opacity-0",
       )}
       style={{ left: "var(--focal-l)", right: "var(--focal-r)", bottom: "var(--gutter)", height: "var(--dock-h)" }}
     >

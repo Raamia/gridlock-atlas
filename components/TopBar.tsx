@@ -123,11 +123,16 @@ function DesktopHeader({ wide, compact, legend }: { wide: boolean; compact: bool
   );
 }
 
+/**
+ * Logo + wordmark (the page's h1) + the colour legend. With the legend the block has a FIXED width (the legend
+ * truncates inside it), so a long pair legend never pushes the Region nav sideways.
+ */
 function Brand({ legend }: { legend: boolean }) {
   return (
-    <div className="flex min-w-0 shrink-0 items-center gap-2.5">
+    // 292px fits the widest region legend ("● Dominion Energy SC × ● Georgia Power", 236px + the mark); pair legends truncate to it
+    <div className={clsx("flex min-w-0 shrink-0 items-center gap-2.5", legend && "w-[292px]")}>
       <LogoMark size={30} />
-      <div className="min-w-0">
+      <div className="min-w-0 flex-1">
         <h1 className="flex items-baseline gap-[5px] leading-none whitespace-nowrap text-fg-1">
           <span className="text-heading leading-none font-semibold tracking-[-0.02em]">GridLock</span>{" "}
           <span className="font-display text-title leading-none tracking-normal italic">Atlas</span>
@@ -137,7 +142,6 @@ function Brand({ legend }: { legend: boolean }) {
     </div>
   );
 }
-
 /**
  * The colour key for whatever is on screen: the region's focal pair, the "All" rule, or the selected pair's two owners
  * (A = --util-a, B = --util-b: the hues the map, inspector, timeline and close-up use for them).
@@ -147,10 +151,15 @@ function HeaderLegend() {
   const pair = useSelectedPair();
 
   let key: string;
+  let title: string | undefined;
   let body: React.ReactNode;
   if (pair) {
-    const a = pair.a.owners.map((o) => legendName(o.utilityId)).join(" · ");
-    const b = pair.b.owners.map((o) => legendName(o.utilityId)).join(" · ");
+    // lead owner + "+N" (the rows' convention); every owner's full name is in the title
+    const owners = (p: typeof pair.a) => `${legendName(p.owners[0]?.utilityId ?? "")}${p.owners.length > 1 ? ` +${p.owners.length - 1}` : ""}`;
+    const a = owners(pair.a);
+    const b = owners(pair.b);
+    const full = (p: typeof pair.a) => p.owners.map((o) => IDX.utility(o.utilityId)?.name ?? o.utilityId).join(" · ");
+    title = `${full(pair.a)} × ${full(pair.b)}`;
     key = `pair:${pair.match.id}`;
     body = (
       <>
@@ -184,7 +193,7 @@ function HeaderLegend() {
     );
   }
   return (
-    <p key={key} className="mt-[5px] flex animate-fade-in items-center gap-1.5 text-caption leading-none whitespace-nowrap text-fg-3">
+    <p key={key} title={title} className="mt-[5px] flex min-w-0 animate-fade-in items-center gap-1.5 overflow-hidden text-caption leading-none whitespace-nowrap text-fg-3">
       {body}
     </p>
   );
@@ -192,9 +201,10 @@ function HeaderLegend() {
 
 function LegendEntry({ utility, name }: { utility: "a" | "b"; name: string }) {
   return (
-    <span className="inline-flex min-w-0 items-center gap-1.5">
+    <span className="inline-flex min-w-0 shrink items-center gap-1.5">
       <UtilityDot utility={utility} />
-      <span className="truncate text-fg-2">{name}</span>
+      {/* leading-[1.2] keeps descenders inside the truncation box */}
+      <span className="min-w-0 truncate leading-[1.2] text-fg-2">{name}</span>
     </span>
   );
 }
@@ -300,7 +310,8 @@ function PhoneHeader() {
         <MenuItem icon={<BookOpenText />} hint="Rules, proof, evaluation" onSelect={() => openMethod()}>
           Method
         </MenuItem>
-        <MenuItem icon={<ClipboardCheck className={reviewOn ? "text-ok" : undefined} />} hint={reviewOn ? "On · label pairs as you review" : "Off"} onSelect={toggleReview}>
+        {/* a menuitemcheckbox: the on/off state is aria-checked (and the check at the end), not part of the name */}
+        <MenuItem icon={<ClipboardCheck className={reviewOn ? "text-ok" : undefined} />} hint="Label pairs as you review" checked={reviewOn} onSelect={toggleReview}>
           Reviewer mode
         </MenuItem>
         <MenuSeparator />
