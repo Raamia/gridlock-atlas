@@ -24,14 +24,14 @@ export const SPONSOR_PROJECT_HEAD = ["project_id", "utility", "state", "project_
 /**
  * The overlap table in the sponsor's columns, followed by GridLock's own.
  *
- * sponsorOnly: exactly the sponsor's rule — pairs whose project centers are under 25 mi apart, closest first, numbered
+ * sponsorOnly: exactly the challenge rule — pairs whose closest project points are under 25 mi apart, closest first, numbered
  * OVL_1… in that order (as in the starter file). Otherwise every flagged pair in priority order: rows inside the rule keep
  * their OVL id, the others are EXT_n with the reason they were flagged anyway (sponsor_rule, beyond_rule_reason).
  *
  * priority_rank is the pair's place in the given (priority) order; queue_rank is its card number within its review_status
  * tab when no queue filters are active. project_id_* are the app's unique ids; pair_id opens the pair at /?pair=… (plus
  * &r=<review_radius_mi> when the radius is not 25); docket_* keep the plan's own labels. location_confidence is the weakest
- * point behind the two centers. time_gap (day) is exact only when time_gap_basis is "exact": "at-least" is the gap between
+ * point behind the two project geometries. time_gap (day) is exact only when time_gap_basis is "exact": "at-least" is the gap between
  * the nearest edges of coarse (year/half-year/quarter/month) dates, and "ranges-overlap" means the stated ranges overlap (0).
  * in_service_a/b are each project's current in-service claim whenever one is published, even when the other side's is not
  * (then time_gap and time_gap_basis are blank).
@@ -44,6 +44,11 @@ export function overlapTableCsv(matches: Match[], opts: { sponsorOnly?: boolean 
     "priority",
     "geo_signal",
     "geo_method",
+    "coordination_tier",
+    "distance_basis_a",
+    "distance_basis_b",
+    "distance_estimated",
+    "legacy_center_distance_mi",
     "location_confidence",
     "review_radius_mi",
     "time_signal",
@@ -66,7 +71,7 @@ export function overlapTableCsv(matches: Match[], opts: { sponsorOnly?: boolean 
     const a = IDX.project(m.projectAId);
     const b = IDX.project(m.projectBId);
     const g = m.timeDetail.inService;
-    const c = m.geoDetail.center;
+    const c = m.geoDetail.closest;
     const weakest = !c ? "" : c.anyLocality ? "town-level" : c.lowConfidence ? "lower-confidence" : "confirmed";
     return [
       ovl.get(m.id) ?? `EXT_${++ext}`,
@@ -83,6 +88,11 @@ export function overlapTableCsv(matches: Match[], opts: { sponsorOnly?: boolean 
       m.priority,
       m.geo,
       m.geoDetail.method,
+      c?.tier ?? "",
+      c?.basisA ?? "",
+      c?.basisB ?? "",
+      c?.approximate ? "yes" : "no",
+      m.geoDetail.center?.miles.toFixed(2) ?? "",
       weakest,
       m.geoDetail.thresholdMiles,
       m.time,

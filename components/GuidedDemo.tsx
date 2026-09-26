@@ -86,7 +86,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Compare public plans",
-    body: `The deterministic engine measures every cross-utility pair center-to-center and keeps those within ${DEMO_RADIUS} miles — or that share a facility — then ranks them by closeness and timing. Amber links mark every flagged pair.`,
+    body: `The deterministic engine measures the closest points of every cross-utility pair and keeps those within ${DEMO_RADIUS} miles, then ranks them by closeness and timing. Amber links mark every flagged pair.`,
     run: async () => {
       const token = stepToken;
       await useAtlas.getState().compare({ thresholdMiles: DEMO_RADIUS });
@@ -96,7 +96,7 @@ const STEPS: Step[] = [
   },
   {
     title: "The top coordination opportunity",
-    body: "The highest-ranked Savannah River pair: where each project's terminals are, how far apart the centers are, and how precise each location is.",
+    body: "The highest-ranked Savannah River pair: its nearest project points, coordination tier, geometry provenance, and location precision.",
     run: open(topSoutheast, "place"),
   },
   {

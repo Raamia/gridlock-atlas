@@ -88,12 +88,12 @@ export function conflictMatches(c: Conflict, key: string): boolean {
 /**
  * Pair totals for the region on screen. The API returns only run-wide exclusion counts, so a region's are
  * recounted here the way the engine forms pairs: eligible projects, same region, no shared owner.
- * `beyond` counts pairs left unflagged (farther than the radius, no shared facility); `viaFacility` counts
- * flagged pairs whose centers are beyond the radius but that share a stated or implied facility or terminal.
+ * `beyond` counts pairs left unflagged because their closest points are farther than the radius.
+ * `viaFacility` is retained for the audit shape; a shared facility now has a zero-mile closest approach.
  */
 export function regionPairCounts(run: MatchRun, projects: Project[], region: string) {
   const farViaFacility = (m: Match) =>
-    (m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint") && (m.geoDetail.center?.miles ?? 0) > run.thresholdMiles;
+    (m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint") && (m.geoDetail.closest?.miles ?? 0) > run.thresholdMiles;
   if (region === "all") {
     return {
       evaluated: run.pairsEvaluated,

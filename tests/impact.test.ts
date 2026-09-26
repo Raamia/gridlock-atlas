@@ -154,7 +154,7 @@ describe("region portfolio", () => {
     const ids = pf.pairs.flatMap((p) => p.id.split("__"));
     expect(new Set(ids).size).toBe(ids.length);
     expect(pf.pairs[0].id).toBe(eligible.sort((x, y) => y.priority - x.priority || x.id.localeCompare(y.id))[0].id);
-    expect(pf.pairs[0].id).toBe("desc-6888__gpc-20065");
+    expect(pf.pairs[0].id).toBe("desc-06367-d-g__gpc-20065");
     // greedy: every eligible pair left out shares a project with a higher-ranked counted pair
     for (const m of eligible.filter((x) => !pf.pairs.some((p) => p.id === x.id))) expect(ids.includes(m.projectAId) || ids.includes(m.projectBId)).toBe(true);
     expect(pf.stagingUsd).toBe(pf.pairs.reduce((t, p) => t + p.stagingUsd, 0));

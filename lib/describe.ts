@@ -13,7 +13,7 @@ export function geoShort(m: Match): { text: string; title: string } {
     return site ? { text: site, title: `Shared site · ${site}` } : { text: "Shared site stated", title: "Shared site stated in a source" };
   }
   if (d.method === "shared-endpoint" && d.sharedEndpoint) return { text: d.sharedEndpoint.labelA, title: `Same terminal · ${d.sharedEndpoint.labelA}` };
-  const text = d.method === "measured" && d.center ? `${formatMilesNear(d.center.miles, d.thresholdMiles)} apart` : d.method === "coarse" ? "County-level only" : "Location unknown";
+  const text = d.method === "measured" && d.closest ? `${formatMilesNear(d.closest.miles, d.thresholdMiles)} closest` : d.method === "coarse" ? "County-level only" : "Location unknown";
   return { text, title: text };
 }
 
@@ -33,16 +33,16 @@ export function timeShort(m: Match): string {
 /** One-sentence explanation shown at the top of the inspector and in the brief. */
 export function whyFlagged(m: Match): string {
   const parts: string[] = [];
-  const d = m.geoDetail.center?.miles;
+  const d = m.geoDetail.closest?.miles;
   const rels = SNAPSHOT.relations.filter((r) => m.geoDetail.relationIds.includes(r.id));
   // measured (not town-only): "possible" only because the location uncertainty straddles the radius; named = no town-level point at all
-  const edge = m.geoDetail.method === "measured" && !m.geoDetail.center?.localityOnly;
-  const named = edge && !m.geoDetail.center?.anyLocality;
-  const beyond = m.beyondRadius ? `, although the centers are ${d !== undefined ? `≈${formatMilesNear(d, m.geoDetail.thresholdMiles)} apart, beyond` : "not measurable against"} the ${m.geoDetail.thresholdMiles} mi radius` : "";
+  const edge = m.geoDetail.method === "measured" && !m.geoDetail.closest?.localityOnly;
+  const named = edge && !m.geoDetail.closest?.anyLocality;
+  const beyond = m.beyondRadius ? `, although the closest points are ${d !== undefined ? `≈${formatMilesNear(d, m.geoDetail.thresholdMiles)} apart, beyond` : "not measurable against"} the ${m.geoDetail.thresholdMiles} mi radius` : "";
   if (m.geoDetail.method === "shared-site") parts.push(`${rels.some((r) => r.basis !== "inferred") ? "a source-stated shared facility" : "a shared facility implied by the sources"}${beyond}`);
   else if (m.geoDetail.method === "shared-endpoint") parts.push(`terminals at the same facility (${m.geoDetail.sharedEndpoint?.labelA})${beyond}`);
-  else if (m.geo === "confirmed") parts.push(`centers ${d !== undefined ? formatMilesNear(d, m.geoDetail.thresholdMiles) : ""} apart, inside the ${m.geoDetail.thresholdMiles} mi radius`);
-  else if (edge && d !== undefined) parts.push(`centers ≈${d.toFixed(1)} mi apart, at the edge of the ${m.geoDetail.thresholdMiles} mi radius`);
+  else if (m.geo === "confirmed") parts.push(`closest points ${d !== undefined ? formatMilesNear(d, m.geoDetail.thresholdMiles) : ""} apart, inside the ${m.geoDetail.thresholdMiles} mi radius`);
+  else if (edge && d !== undefined) parts.push(`closest points ≈${d.toFixed(1)} mi apart, estimated or at the edge of the ${m.geoDetail.thresholdMiles} mi radius`);
   else parts.push("possible proximity");
   if (m.time === "confirmed" && m.timeDetail.basis === "schedule") parts.push("published schedules (start → in-service) that overlap; field-work dates are not published");
   else if (m.time === "confirmed") parts.push("overlapping published construction windows");

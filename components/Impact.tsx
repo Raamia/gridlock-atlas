@@ -216,7 +216,7 @@ export function ImpactEstimate({ m }: { m: Match }) {
   const channels = useMemo(() => impactChannels(m).filter((c) => c.key !== "corridor"), [m]);
   // staging is "≈" rather than "up to" only when the user sets a shared corridor for two line jobs (the cited co-building case)
   const coBuilt = miles > 0 && [m.projectAId, m.projectBId].every((id) => workKind(IDX.project(id)).startsWith("line"));
-  const maxMiles = Math.max(5, Math.ceil(Math.max(d.lengthA ?? 0, d.lengthB ?? 0, m.geoDetail.center?.miles ?? 0, 10)));
+  const maxMiles = Math.max(5, Math.ceil(Math.max(d.lengthA ?? 0, d.lengthB ?? 0, m.geoDetail.closest?.miles ?? 0, 10)));
 
   return (
     <div className="space-y-3">

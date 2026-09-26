@@ -133,7 +133,7 @@ export const ABLATIONS: { id: string; name: string; how: string; transform: (s: 
   },
   {
     id: "A4",
-    name: "A1 + A2 + A3b (naive center rule with uncertainty ignored)",
+    name: "A1 + A2 + A3b (closest-point rule with uncertainty ignored)",
     how: "all three transforms",
     transform: (s) => ["A1", "A2", "A3b"].forEach((id) => ABLATIONS.find((x) => x.id === id)!.transform(s)),
   },
@@ -156,7 +156,7 @@ export const ABLATIONS: { id: string; name: string; how: string; transform: (s: 
 export const NOT_RUN = [
   "Priority weights (place ≤ 60, time ≤ 30, evidence ≤ 10, −5 lower confidence, −15 past due): constants inside evaluatePair",
   "Same-site tolerance (SAME_SITE_MILES = 0.6) and the 30-day minimum schedule overlap: module constants",
-  "In-service-gap ranking horizon (1,460 days) and the beyond-radius ranking floor",
+  "In-service-gap ranking horizon (1,460 days)",
 ];
 
 export function evaluate(S: Snapshot, counties: County[]) {
@@ -195,13 +195,15 @@ export function evaluate(S: Snapshot, counties: County[]) {
   const windowYears = (p: Project) => new Set([...activeWindows(p), ...scheduleWindows(p)].flatMap((w) => yearsOf(w.start.earliest, w.end.latest)));
 
   // per-pair signals that do not depend on the radius
-  const sig = new Map<string, { d: number | null; time: string; sameCounty: boolean; b1: boolean; b1w: boolean; name: string | null }>();
+  const sig = new Map<string, { d: number | null; closest: number | null; time: string; sameCounty: boolean; b1: boolean; b1w: boolean; name: string | null }>();
   const signal = (x: Pair) => {
     if (!sig.has(x.id)) {
       const [ca, cb] = [centerOf(x.a), centerOf(x.b)];
       const sameCounty = meets(countiesOf(x.a), countiesOf(x.b));
+      const closest = evaluateGeo(x.a, x.b, S.relations, R0).detail.closest?.miles ?? null;
       sig.set(x.id, {
         d: ca && cb ? distance(point(ca.lonlat), point(cb.lonlat), { units: "miles" }) : null,
+        closest,
         time: evaluateTime(x.a, x.b).level,
         sameCounty,
         b1: sameCounty && meets(isdYears(x.a), isdYears(x.b)),
@@ -231,7 +233,7 @@ export function evaluate(S: Snapshot, counties: County[]) {
   const METHOD_NAMES: Record<string, string> = {
     B1: "same county + same in-service year",
     B1w: "same county + overlapping window years",
-    B2: `sponsor rule alone: exact centers < ${R0} mi`,
+    B2: `legacy starter-file baseline: exact centers < ${R0} mi`,
     B3: "either place or time (literal OR)",
     B3time: "time alone (construction or schedule overlap possible)",
     B5: "B2 AND time possible or confirmed",
@@ -253,7 +255,7 @@ export function evaluate(S: Snapshot, counties: County[]) {
   const NR = (xs: Match[]) => xs.filter((m) => m.reviewStatus === "needs-review" && region(m) === FOCUS);
   const topLead = NR(ms)[0]?.id;
   const top10 = NR(ms).slice(0, 10).map((m) => m.id);
-  const miles = (m: Match) => (m.geoDetail.center ? round(m.geoDetail.center.miles) : null);
+  const miles = (m: Match) => (m.geoDetail.closest ? round(m.geoDetail.closest.miles) : null);
   const queue = {
     universePairs: U.length,
     descGpcPairs: U.filter((x) => isDescGpc(x.id)).length,
@@ -266,7 +268,7 @@ export function evaluate(S: Snapshot, counties: County[]) {
     byTime: count(ms.map((m) => m.time)),
     timeBasisSchedule: ms.filter((m) => m.time === "confirmed" && m.timeDetail.basis === "schedule").length,
     byBadge: count(ms.map((m) => m.badge)),
-    withinSponsorRule: ms.filter((m) => m.geoDetail.center && m.geoDetail.center.miles < R0).length,
+    withinSponsorRule: ms.filter((m) => m.geoDetail.closest && m.geoDetail.closest.miles < R0).length,
     beyondRadius: ms.filter((m) => m.beyondRadius).length,
     pastDueFlagged: ms.filter((m) => m.pastDue?.length).length,
     inServiceGap: {
@@ -351,7 +353,7 @@ export function evaluate(S: Snapshot, counties: County[]) {
   const nc1 = methods(archivedPairs, R0, new Set());
   const duePairs = U.filter((x) => dueIds.has(x.a.id) || dueIds.has(x.b.id));
   const dueMatches = ms.filter((m) => dueIds.has(m.projectAId) || dueIds.has(m.projectBId));
-  const far = new Set(U.filter((x) => (sig.get(x.id)!.d ?? 0) > FAR_MILES).map((x) => x.id));
+  const far = new Set(U.filter((x) => (sig.get(x.id)!.closest ?? 0) > FAR_MILES).map((x) => x.id));
   const cross = pairsOf(eligible, false);
   const starterByRadius = [5, 10, 15, 20, 25, 30, 40, 50].map((R) => {
     const c = sponsorCheck(R);
@@ -376,7 +378,7 @@ export function evaluate(S: Snapshot, counties: County[]) {
       B3flagged: duePairs.filter((x) => M.B3.has(x.id)).length,
     },
     far: {
-      what: `pairs whose exact centers are more than ${FAR_MILES} mi apart`,
+      what: `pairs whose measured closest points are more than ${FAR_MILES} mi apart`,
       pairs: far.size,
       flaggedBy: Object.fromEntries(Object.entries(M).map(([k, s]) => [k, [...s].filter((id) => far.has(id)).length])),
       B4notSharedFacility: ms.filter((m) => far.has(m.id) && m.geoDetail.method !== "shared-site" && m.geoDetail.method !== "shared-endpoint").length,

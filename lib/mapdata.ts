@@ -104,22 +104,22 @@ export function projectCounties(ctx: RoleContext): { name: string; state: string
   return out;
 }
 
-/** Center-to-center connector for a pair (the sponsor's distance metric; never drawn as a physical route). */
+/** Connector between the pair's closest mapped points; never drawn as a physical route. */
 export function connectorFeature(m: Match | null): FeatureCollection<LineString, { label: string }> {
-  const c = m?.geoDetail.center;
-  if (!m || !c || c.miles < 0.3) return { type: "FeatureCollection", features: [] };
+  const c = m?.geoDetail.closest;
+  if (!m || !c?.a || !c.b || c.miles < 0.03) return { type: "FeatureCollection", features: [] };
   // one decimal near the review radius, so 24.89 mi never reads as "25 mi"
   const mi = c.miles < 10 || Math.abs(c.miles - m.geoDetail.thresholdMiles) < 1.5 ? c.miles.toFixed(1) : String(Math.round(c.miles));
   return {
     type: "FeatureCollection",
-    features: [{ type: "Feature", properties: { label: `${mi} mi center to center` }, geometry: { type: "LineString", coordinates: [c.a, c.b] } }],
+    features: [{ type: "Feature", properties: { label: `${mi} mi closest approach` }, geometry: { type: "LineString", coordinates: [c.a, c.b] } }],
   };
 }
 
-/** Center points of a pair (small crosshair markers). */
+/** Closest points of a pair (small crosshair markers). */
 export function centerFeatures(m: Match | null): FeatureCollection<Point, { role: string }> {
-  const c = m?.geoDetail.center;
-  if (!c) return { type: "FeatureCollection", features: [] };
+  const c = m?.geoDetail.closest;
+  if (!c?.a || !c.b) return { type: "FeatureCollection", features: [] };
   return {
     type: "FeatureCollection",
     features: [
@@ -129,13 +129,13 @@ export function centerFeatures(m: Match | null): FeatureCollection<Point, { role
   };
 }
 
-/** Every flagged pair as an amber link between centers — "where overlaps occur" at a glance. */
+/** Every flagged pair as an amber link between closest points — "where overlaps occur" at a glance. */
 export function overlapFeatures(matches: Match[], selectedId: string | null) {
   const features: Feature<LineString, { id: string; priority: number; selected: boolean; status: string }>[] = [];
   const dots: Feature<Point, { id: string; priority: number; selected: boolean; status: string }>[] = [];
   for (const m of matches) {
-    const c = m.geoDetail.center;
-    if (!c) continue;
+    const c = m.geoDetail.closest;
+    if (!c?.a || !c.b) continue;
     const props = { id: m.id, priority: m.priority, selected: m.id === selectedId, status: m.reviewStatus };
     features.push({ type: "Feature", properties: props, geometry: { type: "LineString", coordinates: [c.a, c.b] } });
     dots.push({ type: "Feature", properties: props, geometry: { type: "Point", coordinates: [(c.a[0] + c.b[0]) / 2, (c.a[1] + c.b[1]) / 2] } });

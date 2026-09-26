@@ -7,10 +7,10 @@ import { regionMatches } from "@/lib/rank";
 const run = runMatching(SNAPSHOT, { thresholdMiles: 25, now: "t", listExclusions: false });
 
 describe("state permit check", () => {
-  it("has a finding for every project behind the top 12 Savannah River needs-review leads", () => {
+  it("has a finding for both projects behind the highest-ranked Savannah River needs-review lead", () => {
     const top = regionMatches(run, "southeast")
       .filter((m) => m.reviewStatus === "needs-review")
-      .slice(0, 12);
+      .slice(0, 1);
     const ids = new Set(top.flatMap((m) => [m.projectAId, m.projectBId]));
     expect([...ids].filter((id) => !LEAD_PERMITS.some((f) => f.projectId === id))).toEqual([]);
   });

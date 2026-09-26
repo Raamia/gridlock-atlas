@@ -115,7 +115,7 @@ function PreRun() {
           </span>
         </Button>
         <p className="mt-2.5 text-[11.5px] leading-snug text-text-3">
-          Runs the deterministic engine over the frozen snapshot: distinct owners only, project centers within 25 mi (or a shared facility), then timing — documented coordination kept
+          Runs the deterministic engine over the frozen snapshot: distinct owners only, closest project points within 25 mi, then timing — documented coordination kept
           separate.
         </p>
       </div>
@@ -490,7 +490,7 @@ function ExcludedFooter() {
         <button
           onClick={() => exportCsv("overlaps")}
           className="rounded-md px-1 py-1 transition-colors hover:bg-bg-3 hover:text-text-0"
-          title="Download the sponsor's overlap table (CSV): pairs whose centers are under 25 mi apart, closest first. Every flagged pair, with reasons, is in the Method drawer."
+          title="Download the overlap table (CSV): pairs whose closest points are under 25 mi apart, nearest first. Every flagged pair, with reasons, is in the Method drawer."
           aria-label="Export overlap table as CSV"
         >
           Overlaps

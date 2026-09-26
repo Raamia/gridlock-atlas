@@ -168,7 +168,7 @@ function Legend() {
             />
             <LegendRow
               swatch={<svg width="28" height="10"><line x1="3" y1="5" x2="25" y2="5" stroke="#fbbf24" strokeWidth="1.6" strokeDasharray="1.5 2.5" strokeLinecap="round" /><circle cx="14" cy="5" r="3" fill="#fbbf24" stroke="#040914" /></svg>}
-              label="Flagged pair · center to center, not a route"
+              label="Flagged pair · closest approach, not a route"
             />
           </div>
         )}

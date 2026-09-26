@@ -242,13 +242,20 @@ function EvidenceList({ ids, a, b, tone, limit = 3 }: { ids: string[]; a: Projec
   );
 }
 
+const tierLabel = (tier: NonNullable<Match["geoDetail"]["closest"]>["tier"]) =>
+  ({
+    "touching-crossing": "Touching / crossing",
+    "shared-land": "Shared land potential (<1.6 km)",
+    "site-logistics": "Shared site logistics (<8 km)",
+    "crews-equipment": "Shared crews / equipment (<40 km)",
+    outside: "Outside review radius",
+  })[tier];
+
 function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; active: boolean }) {
   const rels = IDX.relations(m.geoDetail.relationIds);
-  const c = m.geoDetail.center;
+  const c = m.geoDetail.closest;
   const radius = m.geoDetail.thresholdMiles;
   const method = m.geoDetail.method;
-  // a stated or source-implied shared site or terminal confirms place however far apart the centers are; a meter would read as a failed test
-  const byFacility = !!c && c.miles > radius && (method === "shared-site" || method === "shared-endpoint");
   const statedRel = rels.find((r) => r.basis !== "inferred");
   const implied = method === "shared-site" && rels.length > 0 && !statedRel;
   const facility = method === "shared-site" ? (statedRel?.siteLabel ?? rels.find((x) => x.siteLabel)?.siteLabel) : m.geoDetail.sharedEndpoint?.labelA;
@@ -261,25 +268,21 @@ function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; a
         <div className="flex items-center gap-3 rounded-lg bg-bg-2/70 px-3 py-2 ring-1 ring-line">
           <div className="shrink-0">
             <div className="num text-[20px] leading-none text-text-0">{mi(c.miles)}</div>
-            <div className="mt-1 text-[10.5px] text-text-3">center to center</div>
+            <div className="mt-1 text-[10.5px] text-text-3">closest approach</div>
           </div>
           <div className="h-8 w-px shrink-0 bg-line-2" />
-          {byFacility ? (
-            <p className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
-              Beyond the <span className="num text-text-1">{radius} mi</span> review radius. Place is confirmed by the{" "}
-              {method === "shared-site" ? (implied ? "shared site the sources imply" : "stated shared site") : "shared terminal"}
-              {facility ? ` (${facility})` : ""}, so center distance is not the signal here.
-            </p>
-          ) : (
-            <div className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
-              {mi(c.lowMiles) === mi(c.highMiles) ? "±<1 mi location uncertainty" : `Range ${mi(c.lowMiles)}–${mi(c.highMiles)} with location uncertainty`} · review
-              radius <span className="num text-text-1">{radius} mi</span>
-              <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-bg-4">
-                <div className="h-full rounded-full bg-gradient-to-r from-amber to-amber/40" style={{ width: `${Math.max(3, Math.min(100, (1 - c.miles / radius) * 100))}%` }} />
-              </div>
-            </div>
-          )}
+          <div className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
+            <b className="font-medium text-text-1">{tierLabel(c.tier)}</b>
+            {c.approximate ? " · estimated from mapped/digitized geometry" : " · measured from located work geometry"}
+            {facility ? ` · ${method === "shared-site" ? (implied ? "source-implied" : "source-stated") : "shared terminal"}: ${facility}` : ""}
+            <div className="mt-1">{mi(c.lowMiles) === mi(c.highMiles) ? "±<1 mi location uncertainty" : `Range ${mi(c.lowMiles)}–${mi(c.highMiles)} with location uncertainty`} · radius <span className="num text-text-1">{radius} mi</span></div>
+          </div>
         </div>
+      )}
+      {m.geoDetail.center && (
+        <p className="text-[10.5px] text-text-3">
+          Legacy starter-file center distance: <span className="num text-text-2">{mi(m.geoDetail.center.miles)}</span>. Shown for benchmark comparison; it does not control the flag.
+        </p>
       )}
       <div className="space-y-1.5">
         {[
@@ -291,7 +294,7 @@ function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; a
       </div>
       {(a.route || b.route) && (
         <p className="text-[11px] leading-snug text-text-3">
-          Dashed routes are schematic traces of official route-options maps — not survey-accurate and never used to measure distance.
+          Dashed routes are digitized from official route-options maps. They are used for closest approach only as an explicitly labeled estimate.
         </p>
       )}
       <EvidenceList ids={evidence} a={a} b={b} tone={rels.length ? "amber" : undefined} limit={2} />
@@ -302,11 +305,11 @@ function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; a
 function EndpointList({ p, color }: { p: Project; color: string }) {
   const eps = p.places.filter((pl) => pl.role === "endpoint");
   const list = eps.length ? eps : p.places.filter((pl) => pl.precision !== "county").slice(0, 2);
-  // the points the center is computed from (the first two located terminals), named when the list shows more
+  // Keep the starter-workbook center visible as a secondary benchmark.
   const used = centerOf(p)?.places ?? [];
   const extra = list.some((pl) => !used.some((u) => u.id === pl.id));
   const center =
-    used.length === 2 ? (extra ? `center = midpoint of ${used[0].label} & ${used[1].label}` : "center = midpoint") : used.length === 1 ? (extra ? `center = ${used[0].label}` : "center = this point") : "";
+    used.length === 2 ? (extra ? `legacy center = midpoint of ${used[0].label} & ${used[1].label}` : "legacy center = midpoint") : used.length === 1 ? (extra ? `legacy center = ${used[0].label}` : "legacy center = this point") : "";
   return (
     <div className="rounded-lg bg-bg-2/60 px-3 py-2 ring-1 ring-line">
       <div className="flex items-center gap-2 text-[11px] text-text-2">

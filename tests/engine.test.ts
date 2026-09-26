@@ -207,7 +207,7 @@ describe("spatial signal", () => {
     expect(g.detail.center).toBeUndefined();
   });
 
-  it("does not measure from a digitized schematic route", () => {
+  it("uses a digitized route only as an explicitly approximate closest-point measurement", () => {
     const a = project("a", "u1", {
       route: {
         precision: "official-map-digitized",
@@ -222,7 +222,9 @@ describe("spatial signal", () => {
       },
     });
     const b = project("b", "u2", { places: [place("Blair", BLAIR[0], BLAIR[1])] });
-    expect(evaluateGeo(a, b, []).level).toBe("unknown");
+    const g = evaluateGeo(a, b, []);
+    expect(g.level).toBe("possible");
+    expect(g.detail.closest).toMatchObject({ basisA: "digitized-route", approximate: true });
   });
 });
 
@@ -671,13 +673,13 @@ describe("snapshot data regressions", () => {
     expect(c.sides.map((x) => x.value).sort()).toEqual(["2033", "2034"]);
   });
 
-  it("measured named-facility centers inside the radius are not called coarse or 'near edge only'", () => {
+  it("uses the scoped equipment site rather than the legacy project center", () => {
     const m = pair("desc-6888", "gpc-20787")!;
     expect(m.geo).toBe("possible");
-    expect(m.geoDetail.center!.localityOnly).toBe(false);
-    expect(m.geoReason).toMatch(/≈24\.9 mi apart — inside the 25 mi radius/);
-    expect(m.geoReason).not.toMatch(/only at the near edge/);
-    expect(m.priorityReasons).toContain("Near the radius edge (location uncertainty)");
+    expect(m.geoDetail.closest).toMatchObject({ basisA: "work-sites", localityOnly: true, tier: "outside" });
+    expect(m.geoDetail.closest!.miles).toBeCloseTo(27.5, 1);
+    expect(m.geoDetail.center!.miles).toBeCloseTo(24.9, 1);
+    expect(m.geoReason).toMatch(/closest mapped areas are roughly 28 mi apart and could be within 25 mi/);
     expect(formatMilesNear(24.89, 25)).toBe("24.9 mi");
     expect(formatMilesNear(30.2, 25)).toBe("30 mi");
     expect(formatMilesNear(6.72, 25)).toBe("6.7 mi");
@@ -891,12 +893,11 @@ describe("snapshot data regressions", () => {
     expect(pair("grid-forward-atc", "transource-beci")!.geoDetail.center!.miles).toBeCloseTo(80, 0);
   });
 
-  it("near-edge wording: one decimal beside the radius, and 'named facilities' only when no point is town-level", () => {
-    expect(pair("atc-wwtc-jump-river", "xcel-wwtc")!.geoReason).toContain("≈25.8 mi apart");
+  it("shared sites are zero-mile contacts and estimated line interiors stay possible", () => {
+    expect(pair("atc-wwtc-jump-river", "xcel-wwtc")!.geoDetail.closest).toMatchObject({ miles: 0, tier: "touching-crossing" });
     const at10 = runMatching(SNAPSHOT, { now: "t", thresholdMiles: 10 }).matches.find((m) => m.id === "desc-6367-d__gpc-20785")!;
-    expect(at10.geoDetail.center!.anyLocality).toBe(true);
-    expect(whyFlagged(at10)).toMatch(/centers ≈9\.7 mi apart, at the edge of the 10 mi radius.*A location is approximate \(town-level\)/);
-    expect(whyFlagged(pair("desc-6888", "gpc-20787")!)).toMatch(/Located at named facilities/);
+    expect(at10.geoDetail.closest).toMatchObject({ anyLocality: true, approximate: true });
+    expect(whyFlagged(at10)).toMatch(/closest points ≈5\.8 mi apart, estimated or at the edge of the 10 mi radius.*A location is approximate \(town-level\)/);
   });
 
   it("WWTC and Grid Forward NSPW start at Tremval North (Larkin Valley), not the existing Tremval substation", () => {
@@ -1131,8 +1132,8 @@ describe("published schedules (start → in-service) as a TIME basis", () => {
       const m = pair(x, y);
       expect([m.id, m.time, m.timeDetail.schedule?.confirmed]).toEqual([m.id, "possible", false]);
     }
-    // the top lead keeps its rank; schedule evidence (the plan's own definition of its Start Date) is cited
-    expect(run.matches[0].id).toBe("desc-6888__gpc-20065");
+    // The first needs-review lead and schedule evidence use the new closest-point ranking.
+    expect(run.matches.find((m) => m.reviewStatus === "needs-review")!.id).toBe("desc-06367-d-g__gpc-20065");
     expect(two.evidenceIds.map((id) => SNAPSHOT.evidence[id].exactExcerpt).join(" ")).toContain("2) schedule for implementation (start date)");
     // a DESC schedule starts from spending, never from an in-service date alone
     for (const p of SNAPSHOT.projects.filter((p) => p.owners.some((o) => o.utilityId === "desc")))
@@ -1155,7 +1156,7 @@ describe("distinct facilities and the sponsor's 25-mile rule", () => {
     expect([ovl2.geoDetail.method, ovl2.geoDetail.center!.miles.toFixed(1)]).toEqual(["measured", "4.2"]);
   });
 
-  it("a shared facility beyond the radius ranks after every within-radius needs-review pair and says why", () => {
+  it("a sourced shared facility is a zero-mile touching contact even when legacy centers are far apart", () => {
     const pscSrc = { id: "psc", publisher: "Fixture PSC", title: "", url: "", sourceType: "regulator" as const, retrievedAt: "", sha256: "", mimeType: "" };
     const far1 = project("far1", "u1", { places: [place("West end", 44.3, -92.3)], constructionWindows: [win(2026, 2027)] });
     const far2 = project("far2", "u2", { places: [place("East end", 44.3, -91.3)], constructionWindows: [win(2026, 2027)] });
@@ -1167,19 +1168,15 @@ describe("distinct facilities and the sponsor's 25-mile rule", () => {
     snap.evidence.evp = { ...snap.evidence.ev1, id: "evp", sourceId: "psc" };
     const run = runMatching(snap, { now: "t" });
     const far = run.matches.find((m) => m.id === "far1__far2")!;
-    const near = run.matches.find((m) => m.id === "n1__n2")!;
-    expect(far.beyondRadius).toBe(true);
-    expect(far.geoReason).toMatch(/^Beyond the 25 mi radius \(centers ≈\d+ mi apart\); flagged because Fixture PSC states a shared facility \(Midpoint Substation\)\.$/);
-    expect(far.priority).toBeLessThan(near.priority);
-    expect(run.matches.indexOf(far)).toBeGreaterThan(run.matches.indexOf(near));
-    expect(far.priorityReasons).toContain("Outside the 25 mi rule: ranked after every within-radius needs-review pair");
-    // on the snapshot: Dairyland × Xcel at Tremval North stays known coordination, below every Savannah needs-review pair
+    expect(far.beyondRadius).toBeUndefined();
+    expect(far.geoDetail.closest).toMatchObject({ miles: 0, tier: "touching-crossing" });
+    expect(far.geoDetail.center!.miles).toBeGreaterThan(25);
+    expect(far.geoReason).toBe("Sources state both projects connect at Midpoint Substation; closest approach is touching/shared-site.");
+    // On the snapshot, Dairyland × Xcel at Tremval North remains known coordination at a shared site.
     const snapRun = runMatching(SNAPSHOT, { now: "t" });
     const ab = snapRun.matches.find((m) => m.id === "dpc-alma-blair__xcel-wwtc")!;
     expect(ab.reviewStatus).toBe("known-coordination");
-    expect(ab.geoReason).toMatch(/^Beyond the 25 mi radius \(centers ≈37 mi apart\); flagged because Public Service Commission of Wisconsin states a shared facility/);
-    const floor = Math.min(...snapRun.matches.filter((m) => m.reviewStatus === "needs-review" && !m.beyondRadius).map((m) => m.priority));
-    for (const m of snapRun.matches.filter((x) => x.beyondRadius)) expect(m.priority).toBeLessThan(floor);
+    expect(ab.geoDetail.closest).toMatchObject({ miles: 0, tier: "touching-crossing" });
   });
 
   it("past-due projects stay visible: the sponsor's OVL_2 pair is in the queue, flagged, below comparable current leads", () => {
