@@ -74,9 +74,9 @@ npm run audit        # every fact has evidence; every excerpt re-found verbatim 
 npm run test:ui      # Playwright smoke tests in Chrome (starts the dev server if needed)
 ```
 
-What the UI tests cover: comparing plans; the featured pair agreeing across queue, map, timeline and inspector; every evidence link being a public URL; brief export and copy; keyboard paths (Escape, focus trap, no shortcuts behind modals); reduced motion; the offline fallback with all Mapbox requests blocked; the sponsor-format CSV export; and a phone viewport (camera, bottom sheet, demo controls, no horizontal scroll). `node scripts/visual/shoot.mjs` captures full-page screenshots of each view for visual review.
+What the 30 UI tests cover: comparing plans; the featured pair agreeing across queue, map, timeline and inspector; every evidence link being a public URL; brief export, copy and print (only the brief, paginated); keyboard paths (Escape, focus trap, no shortcuts behind modals or drawers); reduced motion; the offline fallback with all Mapbox requests blocked; the sponsor-format CSV export; the review-radius slider (a slow reply never overwrites a newer radius); filters and their empty states; engine errors with Retry; reviewer mode and notes; basemap, 3D and region switching; deep links; all eight guided-demo steps (narration matches the screen, controls stay clear of the inspector and the brief); and phone and laptop viewports (camera, bottom sheet, no horizontal scroll). `node scripts/visual/shoot.mjs` captures screenshots of each view for visual review.
 
-The code was also put through a four-lens adversarial review (engine correctness, honesty of claims, UI/accessibility, data pipeline); 46 verified findings were fixed and are covered by regression tests.
+The app also went through several rounds of adversarial review: engine correctness, honesty of claims, UI and accessibility, the data pipeline, phone and tablet layouts, the guided-demo narrative, and the exported brief and CSV. Each finding was independently re-verified before it was fixed. About 120 verified issues were fixed, most with regression tests.
 
 Rebuilding data (optional — the snapshot is committed):
 
