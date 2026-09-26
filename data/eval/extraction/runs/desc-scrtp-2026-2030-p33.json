@@ -1,0 +1,80 @@
+{
+ "id": "desc-scrtp-2026-2030-p33",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 33,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:36Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Jackson 115kV: Construct 115 – 12kV Distribution Substation",
+   "excerpt": "Jackson 115kV: Construct 115 – 12kV Distribution Substation\nProject ID\n6854 C",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6854 C",
+   "excerpt": "Project ID\n6854 C\nProject Description\nConstruct 115 – 12kV distribution substation",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2028",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Jackson 115kV: Construct 115 – 12kV Distribution Substation\nProject ID\n6854 C",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$3,003,760",
+   "excerpt": "2027\n$3,000,000\n\n2028\n$0\n\n2029\n$0\n\n2030\n$0\n\nTotal\n$3,003,760",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Jackson 46kV Substation",
+   "excerpt": "Construct 115 – 12kV distribution substation to replace Jackson 46kV Substation.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 757,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 345,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1102
+ }
+}

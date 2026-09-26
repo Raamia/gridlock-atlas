@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2026-2030-p16",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 16,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:16Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Church Creek – Faber Place – Charleston Transmission: Add 230kV Line",
+   "excerpt": "Church Creek – Faber Place – Charleston Transmission: Add 230kV Line\nProject ID",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6847",
+   "excerpt": "Project ID\n6847\nProject Description\nConstruct a 230 kV transmission line from Church Creek to Charleston Transmission.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n5/1/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "5/1/2027",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n5/1/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Construct a 230 kV transmission line from Church Creek to Charleston Transmission.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$22,788,174",
+   "excerpt": "Estimated Project Cost\nPrevious\n2026\n$9,586,174\n$9,867,000\n\n2027\n$3,335,000\n\n2028\n$5,617,468\n\n2029\n$0\n\n2030\n$0\n\nTotal\n$22,788,174",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Church Creek",
+   "excerpt": "Church Creek – Faber Place – Charleston Transmission: Add 230kV Line\nProject ID",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Faber Place",
+   "excerpt": "Church Creek – Faber Place – Charleston Transmission: Add 230kV Line\nProject ID",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Charleston Transmission",
+   "excerpt": "Construct a 230 kV transmission line from Church Creek to Charleston Transmission.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 809,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 859,
+  "output_tokens_details": {
+   "reasoning_tokens": 446
+  },
+  "total_tokens": 1668
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2026-2030-p50",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 50,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:56Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Calhoun County - North 46 kV Rebuild",
+   "excerpt": "5 Year Budget\nCalhoun County - North 46 kV Rebuild\nProject ID\n6810 N",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6810 N",
+   "excerpt": "Calhoun County - North 46 kV Rebuild\nProject ID\n6810 N\nProject Description",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Need\nSystem Hardening\nProject Status\nPlanned\nPlanned In-Service Date\n12/31/2029",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2029",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2029\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "9.5",
+   "excerpt": "System Hardening project – Rebuilding the 46 kV line between North and Calhoun County. 9.5 miles",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "46",
+   "excerpt": "System Hardening project – Rebuilding the 46 kV line between North and Calhoun County. 9.5 miles",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$10,200,000",
+   "excerpt": "Estimated Project Cost\nPrevious\n2026\n$0\n$0\n\n2027\n$100,000\n\n2028\n$200,000\n\n2029\n$9,900,000\n\n2030\n$0\n\nTotal\n$10,200,000",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "North",
+   "excerpt": "System Hardening project – Rebuilding the 46 kV line between North and Calhoun County. 9.5 miles",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Calhoun County",
+   "excerpt": "System Hardening project – Rebuilding the 46 kV line between North and Calhoun County. 9.5 miles",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 724,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 927,
+  "output_tokens_details": {
+   "reasoning_tokens": 483
+  },
+  "total_tokens": 1651
+ }
+}

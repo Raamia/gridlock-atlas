@@ -1,0 +1,101 @@
+{
+ "id": "gpc-irp-2025-vol3-p255",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 255,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:11Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "GA ITS",
+   "excerpt": "2024 GA ITS Ten-Year Plan (2025-2034)",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "CC - QTS Fayetteville Transmission Needs",
+   "excerpt": "CC - QTS FAYETTEVILLE TRANSMISSION NEEDS\nTeams # 20018\nNeed Date 04/01/2026 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20018",
+   "excerpt": "CC - QTS FAYETTEVILLE TRANSMISSION NEEDS\nTeams # 20018\nNeed Date 04/01/2026 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2023",
+   "excerpt": "Need Date 04/01/2026 Start Date 06/01/2023\nDescription\nBuild a new 500/230kV substation",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "~6 miles each",
+   "excerpt": "Build\ntwo new 230kV lines (~6 miles each) from Ashley Park to the high side of customer substations.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "500/230 kV; 500 kV; 230 kV",
+   "excerpt": "Build a new 500/230kV substation (Ashley Park) splitting the Ohara - Union City 500kV line.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Ashley Park",
+   "excerpt": "Build a new 500/230kV substation (Ashley Park) splitting the Ohara - Union City 500kV line.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Ohara",
+   "excerpt": "Build a new 500/230kV substation (Ashley Park) splitting the Ohara - Union City 500kV line.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Union City",
+   "excerpt": "Build a new 500/230kV substation (Ashley Park) splitting the Ohara - Union City 500kV line.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 953,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1012,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1965
+ }
+}

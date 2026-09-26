@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p395",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 395,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:57Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "NORTH SPA 230KV STRATEGIC PROJECT",
+   "excerpt": "NORTH SPA 230KV STRATEGIC PROJECT\nTeams # 21093\nNeed Date 06/01/2030 Start Date 01/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21093",
+   "excerpt": "NORTH SPA 230KV STRATEGIC PROJECT\nTeams # 21093\nNeed Date 06/01/2030 Start Date 01/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2025",
+   "excerpt": "NORTH SPA 230KV STRATEGIC PROJECT\nTeams # 21093\nNeed Date 06/01/2030 Start Date 01/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2030",
+   "excerpt": "NORTH SPA 230KV STRATEGIC PROJECT\nTeams # 21093\nNeed Date 06/01/2030 Start Date 01/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Build a new 230kV switching station north of Oasis in a ring bus configuration with 4 - breakers.\nLoop in the East Social Circle - Oasis (White) 230kV line.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Oasis",
+   "excerpt": "Build a new 230kV switching station north of Oasis in a ring bus configuration with 4 - breakers.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "East Social Circle",
+   "excerpt": "Loop in the East Social Circle - Oasis (White) 230kV line.\nBuild a new 230kV line to Cornish Mountain from North Spa.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Cornish Mountain",
+   "excerpt": "Build a new 230kV line to Cornish Mountain from North Spa. New 230kV line from Rockville 230kV\nwill terminate in this station.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "North Spa",
+   "excerpt": "Build a new 230kV line to Cornish Mountain from North Spa. New 230kV line from Rockville 230kV\nwill terminate in this station.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[4]",
+   "value": "Rockville",
+   "excerpt": "Build a new 230kV line to Cornish Mountain from North Spa. New 230kV line from Rockville 230kV\nwill terminate in this station.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 902,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 508,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1410
+ }
+}

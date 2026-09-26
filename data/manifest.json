@@ -126,6 +126,15 @@
   "sha256": "e98bfeb86f2263f790f95f3510a9ab1e1b128c47e4ae633b8ccd27bedfea9b26"
  },
  {
+  "id": "doe-lpt-2014",
+  "url": "https://www.energy.gov/sites/prod/files/2014/04/f15/LPTStudyUpdate-040914.pdf",
+  "publisher": "U.S. Department of Energy, Office of Electricity Delivery and Energy Reliability",
+  "title": "Large Power Transformers and the U.S. Electric Grid (April 2014 update)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T15:25:04Z",
+  "sha256": "d0483687f6fc547c053e8cba45ba8c36cd5427fb447ed6e169d910bfd3c49880"
+ },
+ {
   "id": "dpc-alma-blair-cpcn-2024",
   "url": "https://dairylandpower.com/sites/default/files/PDFs/Power%20Delivery/Dairyland%20Alma-Blair%20CPCN%20Application_2024-07-01.pdf",
   "publisher": "Dairyland Power Cooperative",
@@ -153,6 +162,15 @@
   "sha256": "2a939693d1f6a48742cc9d3ea8e5d09aac08949459d9da61bae158eaef8095d7"
  },
  {
+  "id": "ferc-order-1920-fr",
+  "url": "https://www.govinfo.gov/content/pkg/FR-2024-06-11/pdf/2024-10872.pdf",
+  "publisher": "Federal Energy Regulatory Commission (Federal Register)",
+  "title": "Building for the Future Through Electric Regional Transmission Planning and Cost Allocation, Order No. 1920 (final rule, 89 FR 49280)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T15:24:41Z",
+  "sha256": "61abefc28a90f381766c2dc0740b2dc6a52b5003a3964c070d783ea12c8e639a"
+ },
+ {
   "id": "g2b-home",
   "url": "https://www.gophertobadgerlink.com/",
   "publisher": "Xcel Energy and Dairyland Power Cooperative (Gopher to Badger Link project site)",
@@ -178,6 +196,15 @@
   "sourceType": "utility",
   "retrievedAt": "2026-09-26T05:28:05Z",
   "sha256": "cecb7d1dabd7a63b06b95c2e6e628f9a2cd9397781e9d1457a826f85965975fd"
+ },
+ {
+  "id": "ga-epd-noi-big-ogeechee-little-ogeechee",
+  "url": "https://geos.epd.georgia.gov/GA/GEOS/Public/EnSuite/Shared/Pages/Util/ServerRptViewer.aspx?sr=%2FGovOnline_LG%2FRPT_GOVf1152&SUBMISSION_RID=976366&SUB_FORM_RID=950724",
+  "publisher": "Georgia Environmental Protection Division (GEOS)",
+  "title": "NPDES Infrastructure NOI - Big Ogeechee to Little Ogeechee (Georgia Power), Chatham County (submission 976366)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T15:47:38Z",
+  "sha256": "42f2dbd8001a970a76672e5c416854b622d1425b53a62f10c61dc7ae3d34d25b"
  },
  {
   "id": "gpc-callaway-thomson-page",
@@ -424,6 +451,15 @@
   "sha256": "21f60d074edbbad108cecc2784cb2daf39e28c5ec82b85b7e259397276114e44"
  },
  {
+  "id": "nerc-iro-017-1",
+  "url": "https://www.nerc.com/pa/Stand/Reliability%20Standards/IRO-017-1.pdf",
+  "publisher": "North American Electric Reliability Corporation (NERC)",
+  "title": "Reliability Standard IRO-017-1: Outage Coordination",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T15:25:32Z",
+  "sha256": "36142f723e6f8cd042680390ca5ac2560ea1b556050ed0b276d7b6589643fd33"
+ },
+ {
   "id": "otp-bssa-route-permit-news",
   "url": "https://www.otpco.com/newsroom/posts/we-filed-a-transmission-line-route-permit-application-in-minnesota/",
   "publisher": "Otter Tail Power Company",
@@ -605,6 +641,42 @@
   "localCopy": true
  },
  {
+  "id": "scpsc-2023-115-e-application",
+  "url": "https://dms.psc.sc.gov/Attachments/Matter/106e010f-4861-4bcc-a731-410e48b4383a",
+  "publisher": "Public Service Commission of South Carolina (Docket 2023-115-E)",
+  "title": "DESC application for a Certificate: Jasper-Okatie 230 kV Line No. 2, Okatie-Riverport 230 kV Line, Riverport 230 kV Substation",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T15:38:29Z",
+  "sha256": "78f2076aaca5f066144db6f3483b560fef74805220afc82687e0d4c83ad6450a"
+ },
+ {
+  "id": "scpsc-2023-115-e-letter-2024-05",
+  "url": "https://dms.psc.sc.gov/Attachments/Matter/6ec50f04-9300-41f0-b38e-1d946792565f",
+  "publisher": "Public Service Commission of South Carolina (Docket 2023-115-E)",
+  "title": "DESC letter: revised commercial operation date (May 15, 2024)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T15:38:31Z",
+  "sha256": "e082d9f06df4ac2ac724bbdca3f375a8902effeaed33a309772f5d1a1d842c3c"
+ },
+ {
+  "id": "scpsc-2023-115-e-letter-2025-03",
+  "url": "https://dms.psc.sc.gov/Attachments/Matter/f3487fd5-e4cd-46a6-b02f-205db35134aa",
+  "publisher": "Public Service Commission of South Carolina (Docket 2023-115-E)",
+  "title": "DESC letter: permits status and commercial operation date December 1, 2026 (March 7, 2025)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T15:38:32Z",
+  "sha256": "943fa214aef14538b92ddc8a315544c9b1ee3c9aa85a9b6ce54690c591298ee2"
+ },
+ {
+  "id": "scpsc-2023-115-e-order-2023-649",
+  "url": "https://dms.psc.sc.gov/Attachments/Order/5b993685-7507-4678-89a6-4a37390f8f28",
+  "publisher": "Public Service Commission of South Carolina (Docket 2023-115-E)",
+  "title": "Order No. 2023-649 granting Certificate (Jasper-Okatie 230 kV No. 2, Okatie-Riverport 230 kV, Riverport Substation)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T15:38:31Z",
+  "sha256": "3f4b693fdcc1186afa9acb0a8b31af329336f29c6eaf83f8d0776c01dc7b8362"
+ },
+ {
   "id": "scpsc-vcs1-killian-order-2011",
   "url": "https://dms.psc.sc.gov/attachments/matter/73C1EC9A-155D-2817-10A9698095AE7829",
   "publisher": "South Carolina Electric & Gas Company, with the Town and the County (filed with the Public Service Commission of South Carolina)",
@@ -614,6 +686,15 @@
   "sha256": "e9454d0818883942a210f99786ef0edec03e7c4fb89a1388d97a4300a1fd50c5"
  },
  {
+  "id": "scrtp-home",
+  "url": "https://www.scrtp.com/",
+  "publisher": "South Carolina Regional Transmission Planning (SCRTP; Dominion Energy South Carolina and Santee Cooper)",
+  "title": "South Carolina Regional Transmission Planning — home page (FERC Order 1920 notice: DESC and Santee Cooper to join SERTP)",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:07:03Z",
+  "sha256": "43680a028c50377a65b12f191080b04a5d0d4e8403a8ceb37098decfcbb34b49"
+ },
+ {
   "id": "sertp-2025-plan",
   "url": "https://www.southeasternrtp.com/docs/general/2025/2025%20Regional%20Transmission%20Plan%20and%20Input%20Assumptions.pdf",
   "publisher": "Southeastern Regional Transmission Planning (SERTP)",
@@ -621,6 +702,24 @@
   "sourceType": "rto",
   "retrievedAt": "2026-09-26T06:04:12Z",
   "sha256": "9183e3ffcb4fc06e46db2afc50510948b6c0f950312440b6272aaa862bc9da6b"
+ },
+ {
+  "id": "sertp-2026-prelim-plan",
+  "url": "https://www.southeasternrtp.com/docs/general/2026/2026_SERTP_Preliminary_Expansion_Plan_Report_(Non-CEII).pdf",
+  "publisher": "Southeastern Regional Transmission Planning (SERTP)",
+  "title": "2026 SERTP Preliminary Expansion Plan Report (Non-CEII)",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T15:38:07Z",
+  "sha256": "d3785576bb2f558f558931b7fea22503deaafc6d1f81cec25b8d471deb32cb2c"
+ },
+ {
+  "id": "sertp-2026-q3-presentation",
+  "url": "https://www.southeasternrtp.com/docs/general/2026/2026_SERTP_3rd_Quarter_Meeting_Presentation.pdf",
+  "publisher": "Southeastern Regional Transmission Planning (SERTP)",
+  "title": "2026 SERTP 3rd Quarter Meeting presentation",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T15:38:09Z",
+  "sha256": "91e8d72594ed751b1a70503b13c9372544f987c09b27b734d6aad620cddc649e"
  },
  {
   "id": "spp-beckham-potter-iep-report",

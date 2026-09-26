@@ -8,7 +8,7 @@ const METERS_PER_MILE = 1609.344;
 /** Sponsor rule: "Closer than 25 mi, we flag it. Farther, we ignore it." Adjustable in the UI. */
 export const DEFAULT_THRESHOLD_MILES = 25;
 
-/** Two named facilities this close are treated as the same site (e.g. both lines end at Thurmond). */
+/** Two named facilities this close, with the same name, are treated as the same site (e.g. both lines end at Thurmond). */
 export const SAME_SITE_MILES = 0.6;
 
 /** Relations that state, in a source, that two projects physically meet. */
@@ -70,6 +70,23 @@ export function centerOf(p: Project): Center | null {
   };
 }
 
+const GENERIC_FACILITY_WORDS = new Set(["substation", "sub", "station", "switching", "switchyard", "dam", "plant", "primary", "tap", "generating", "line", "terminal", "the", "new", "kv"]);
+
+/** The distinctive words of a facility name: "Thurmond Sub" and "Thurmond Dam" → thurmond; "West McIntosh" → west, mcintosh. */
+export function facilityWords(label: string): string {
+  return label
+    .toLowerCase()
+    .replace(/\([^)]*\)/g, " ")
+    .split(/[^a-z]+/)
+    .filter((w) => w.length > 1 && !GENERIC_FACILITY_WORDS.has(w))
+    .sort()
+    .join(" ");
+}
+
+/** Within SAME_SITE_MILES, two named facilities are one site when they are one geocode or carry the same name; distinct
+ *  neighbors (McIntosh and West McIntosh, 0.46 mi; Jasper and Purrysburg, 0.57 mi) are measured, never equated. */
+const sameFacility = (x: Place, y: Place, d: number) => d < 0.05 || facilityWords(x.label) === facilityWords(y.label);
+
 function sharedEndpoint(a: Project, b: Project): GeoDetail["sharedEndpoint"] | undefined {
   // context places (e.g. the far terminal of a line whose rebuild stops short of it) are not the project's work sites
   const sites = (p: Project) => p.places.filter((pl) => pl.precision === "named-facility" && pl.role !== "context");
@@ -77,7 +94,7 @@ function sharedEndpoint(a: Project, b: Project): GeoDetail["sharedEndpoint"] | u
   for (const x of sites(a)) {
     for (const y of sites(b)) {
       const d = miles([x.lon, x.lat], [y.lon, y.lat]);
-      if (d <= SAME_SITE_MILES && (!best || d < best.milesApart)) best = { labelA: x.label, labelB: y.label, milesApart: d };
+      if (d <= SAME_SITE_MILES && sameFacility(x, y, d) && (!best || d < best.milesApart)) best = { labelA: x.label, labelB: y.label, milesApart: d };
     }
   }
   return best;

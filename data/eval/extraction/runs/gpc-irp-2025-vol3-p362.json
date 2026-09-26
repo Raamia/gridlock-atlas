@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p362",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 362,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:32Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "SAV: BOULEVARD - MAGNOLIA 115 KV LINE REBUILD",
+   "excerpt": "SAV: BOULEVARD - MAGNOLIA 115 KV LINE REBUILD\nTeams # 21006\nNeed Date 06/01/2029 Start Date 01/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21006",
+   "excerpt": "SAV: BOULEVARD - MAGNOLIA 115 KV LINE REBUILD\nTeams # 21006\nNeed Date 06/01/2029 Start Date 01/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2027",
+   "excerpt": "Teams # 21006\nNeed Date 06/01/2029 Start Date 01/01/2027\nDescription\nRebuild the entire line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2029",
+   "excerpt": "Teams # 21006\nNeed Date 06/01/2029 Start Date 01/01/2027\nDescription\nRebuild the entire line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "4.56 miles",
+   "excerpt": "Rebuild the entire line from Boulevard to Magnolia (4.56 miles) from 100C 795 ACSR Drake to 200C\n1351 ACSS Martin",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "SAV: BOULEVARD - MAGNOLIA 115 KV LINE REBUILD\nTeams # 21006\nNeed Date 06/01/2029 Start Date 01/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Boulevard",
+   "excerpt": "Rebuild the entire line from Boulevard to Magnolia (4.56 miles) from 100C 795 ACSR Drake to 200C",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Magnolia",
+   "excerpt": "Rebuild the entire line from Boulevard to Magnolia (4.56 miles) from 100C 795 ACSR Drake to 200C",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 860,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 470,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1330
+ }
+}

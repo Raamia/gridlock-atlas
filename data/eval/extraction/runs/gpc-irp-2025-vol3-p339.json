@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p339",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 339,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:15Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "FIRST AVENUE - NORTH COLUMBUS 115KV LINE REBUILD",
+   "excerpt": "FIRST AVENUE - NORTH COLUMBUS 115KV LINE REBUILD\nTeams # 13166\nNeed Date 12/01/2028 Start Date 01/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "13166",
+   "excerpt": "FIRST AVENUE - NORTH COLUMBUS 115KV LINE REBUILD\nTeams # 13166\nNeed Date 12/01/2028 Start Date 01/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2028",
+   "excerpt": "Teams # 13166\nNeed Date 12/01/2028 Start Date 01/01/2028\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/01/2028",
+   "excerpt": "Teams # 13166\nNeed Date 12/01/2028 Start Date 01/01/2028\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "0.9 miles",
+   "excerpt": "Rebuild the 0.9 miles North Columbus - First Avenue 115kV line (currently 75C 657 ACAR) with 200C\n1351 ACSS conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Rebuild the 0.9 miles North Columbus - First Avenue 115kV line (currently 75C 657 ACAR) with 200C\n1351 ACSS conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "North Columbus",
+   "excerpt": "Rebuild the 0.9 miles North Columbus - First Avenue 115kV line (currently 75C 657 ACAR) with 200C\n1351 ACSS conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "First Avenue",
+   "excerpt": "Rebuild the 0.9 miles North Columbus - First Avenue 115kV line (currently 75C 657 ACAR) with 200C\n1351 ACSS conductor.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 861,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 464,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1325
+ }
+}

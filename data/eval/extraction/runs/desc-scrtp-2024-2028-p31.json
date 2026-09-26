@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2024-2028-p31",
+ "sourceId": "desc-scrtp-2024-2028",
+ "page": 31,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T16:59:50Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Hooks - Thurmond 115kV Tie: Rebuild",
+   "excerpt": "5 Year Budget\nHooks - Thurmond 115kV Tie: Rebuild\nProject ID\n6810 A",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6810 A",
+   "excerpt": "Hooks - Thurmond 115kV Tie: Rebuild\nProject ID\n6810 A\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "This project is required to address end of life and reliability issues on these lines.\nProject Status\nIn Progress",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2024",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/2024\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "lengthMiles",
+   "value": "2.3",
+   "excerpt": "Rebuilding section of line between Hooks and Thurmond. Approximately 2.3 miles. The line will be\nrebuilt on existing R/W",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "The line will be\nrebuilt on existing R/W using steel poles, 115 kV insulation, and 1272 ACSR conductor.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$2,200,080",
+   "excerpt": "2027\n$0\n\n2028\n$0\n\nTotal*\n$2,200,080",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Hooks",
+   "excerpt": "Rebuilding section of line between Hooks and Thurmond. Approximately 2.3 miles. The line will be\nrebuilt on existing R/W",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Thurmond",
+   "excerpt": "Rebuilding section of line between Hooks and Thurmond. Approximately 2.3 miles. The line will be\nrebuilt on existing R/W",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 767,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 731,
+  "output_tokens_details": {
+   "reasoning_tokens": 317
+  },
+  "total_tokens": 1498
+ }
+}

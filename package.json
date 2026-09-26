@@ -14,6 +14,8 @@
     "extract": "python3 scripts/ingest/extract.py",
     "extract:openai": "python3 scripts/ingest/extract.py --provider openai",
     "extract:gemini": "python3 scripts/ingest/extract.py --provider gemini",
+    "extract:eval": "python3 scripts/ingest/extract_eval.py",
+    "eval": "tsx scripts/evaluate.ts",
     "check": "tsc --noEmit && eslint . && vitest run && tsx scripts/audit-data.ts",
     "test:ui": "playwright test"
   },

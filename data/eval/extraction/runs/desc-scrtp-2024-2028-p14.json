@@ -1,0 +1,101 @@
+{
+ "id": "desc-scrtp-2024-2028-p14",
+ "sourceId": "desc-scrtp-2024-2028",
+ "page": 14,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:10Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Stevens Creek - Hooks 115kV/LR Plumb Branch 46kV Rebuilds",
+   "excerpt": "Stevens Creek - Hooks 115kV/LR Plumb Branch 46kV Rebuilds\nProject ID\n6809 E",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6809 E",
+   "excerpt": "Project ID\n6809 E\nProject Description\n9.5 miles. Scope includes rebuilding the 115 and 46 kV lines",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/24\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/24",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/24\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "lengthMiles",
+   "value": "9.5 miles",
+   "excerpt": "Project Description\n9.5 miles. Scope includes rebuilding the 115 and 46 kV lines in this corridor SPDC.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV and 46 kV",
+   "excerpt": "Project Description\n9.5 miles. Scope includes rebuilding the 115 and 46 kV lines in this corridor SPDC.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$11,745,543",
+   "excerpt": "*Total Estimated Amount applied to the 2024 Rate Base Calculation\n\n2027\n$0\n\n2028\n$0\n\nTotal\n$11,745,543",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Stevens Creek",
+   "excerpt": "Stevens Creek - Hooks 115kV/LR Plumb Branch 46kV Rebuilds\nProject ID\n6809 E",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Hooks",
+   "excerpt": "Stevens Creek - Hooks 115kV/LR Plumb Branch 46kV Rebuilds\nProject ID\n6809 E",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Plumb Branch",
+   "excerpt": "Stevens Creek - Hooks 115kV/LR Plumb Branch 46kV Rebuilds\nProject ID\n6809 E",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 754,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 996,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1750
+ }
+}

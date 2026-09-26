@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2024-2028-p30",
+ "sourceId": "desc-scrtp-2024-2028",
+ "page": 30,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:25Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Coit – Gills Creek 115kV: Construct",
+   "excerpt": "Coit – Gills Creek 115kV: Construct\nProject ID\n5392 A-C",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "5392 A-C",
+   "excerpt": "Coit – Gills Creek 115kV: Construct\nProject ID\n5392 A-C",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2024",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "1.25",
+   "excerpt": "Convert the existing Coit - Gills Creek 33 kV Line to 115 kV. Approximately 1.25 miles.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Convert the existing Coit - Gills Creek 33 kV Line to 115 kV. Approximately 1.25 miles.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$2,509,602",
+   "excerpt": "Estimated Project Cost\nPrevious\n2024\n$330,954\n$2,178,648\n\n2025\n$0\n\n2026\n$0\n\n*Total Estimated Amount applied to 2024 Rate Base Calculation\n\n2027\n$0\n\n2028\n$0\n\nTotal*\n$2,509,602",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Coit",
+   "excerpt": "Convert the existing Coit - Gills Creek 33 kV Line to 115 kV.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Gills Creek",
+   "excerpt": "Convert the existing Coit - Gills Creek 33 kV Line to 115 kV.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 749,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1395,
+  "output_tokens_details": {
+   "reasoning_tokens": 965
+  },
+  "total_tokens": 2144
+ }
+}

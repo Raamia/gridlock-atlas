@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2025-2029-p29",
+ "sourceId": "desc-scrtp-2025-2029",
+ "page": 29,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:01:38Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Urquhart – Toolebeck 115kV line: Rebuild",
+   "excerpt": "Urquhart – Toolebeck 115kV line: Rebuild\nProject ID\n6852\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6852",
+   "excerpt": "Urquhart – Toolebeck 115kV line: Rebuild\nProject ID\n6852\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n8/12/2026",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "8/12/2026",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n8/12/2026",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "lengthMiles",
+   "value": "12.5 miles",
+   "excerpt": "Replace existing\nstructures with Single Pole Double Circuit Structures. Approximately 12.5 miles.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Upgrade the 477 ACSR portions of the Urquhart – Toolebeck 115 kV line to 1272 ACSR.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$17,520,000",
+   "excerpt": "2029\n$0\n\nTotal*\n$17,520,000",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Urquhart",
+   "excerpt": "Urquhart – Toolebeck 115kV line: Rebuild\nProject ID\n6852\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Toolebeck",
+   "excerpt": "Urquhart – Toolebeck 115kV line: Rebuild\nProject ID\n6852\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 780,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 384,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1164
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p336",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 336,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:12Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "SMART VALVES AT EAST VILLA RICA SWITCHING STATION",
+   "excerpt": "SMART VALVES AT EAST VILLA RICA SWITCHING STATION\nTeams # 21069\nNeed Date 06/01/2028 Start Date 06/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21069",
+   "excerpt": "SMART VALVES AT EAST VILLA RICA SWITCHING STATION\nTeams # 21069\nNeed Date 06/01/2028 Start Date 06/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2028",
+   "excerpt": "Teams # 21069\nNeed Date 06/01/2028 Start Date 06/01/2028\nDescription\nInstallation of Power Flow Controllers",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230kV",
+   "excerpt": "Installation of Power Flow Controllers at the new East Villa Rica Switching Station on the Douglasville\n- Villa Rica 230kV and Summer Lake - Villa Rica 230kV lines.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "East Villa Rica Switching Station",
+   "excerpt": "Installation of Power Flow Controllers at the new East Villa Rica Switching Station on the Douglasville\n- Villa Rica 230kV and Summer Lake - Villa Rica 230kV lines.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Douglasville",
+   "excerpt": "Installation of Power Flow Controllers at the new East Villa Rica Switching Station on the Douglasville\n- Villa Rica 230kV and Summer Lake - Villa Rica 230kV lines.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Villa Rica",
+   "excerpt": "Installation of Power Flow Controllers at the new East Villa Rica Switching Station on the Douglasville\n- Villa Rica 230kV and Summer Lake - Villa Rica 230kV lines.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "Summer Lake",
+   "excerpt": "Installation of Power Flow Controllers at the new East Villa Rica Switching Station on the Douglasville\n- Villa Rica 230kV and Summer Lake - Villa Rica 230kV lines.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 879,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1031,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1910
+ }
+}

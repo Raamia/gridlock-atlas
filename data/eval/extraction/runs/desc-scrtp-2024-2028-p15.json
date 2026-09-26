@@ -1,0 +1,101 @@
+{
+ "id": "desc-scrtp-2024-2028-p15",
+ "sourceId": "desc-scrtp-2024-2028",
+ "page": 15,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:11Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Stevens Creek - Hooks 115kV/LR Plumb Branch 46kV",
+   "excerpt": "5 Year Budget\nStevens Creek - Hooks 115kV/LR Plumb Branch 46kV\nProject ID",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6809 G",
+   "excerpt": "Stevens Creek - Hooks 115kV/LR Plumb Branch 46kV\nProject ID\n6809 G\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "This project is required to address end of life and reliability issues on these lines.\nProject Status\nPlanned\nPlanned In-Service Date",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/25",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/25\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "6.5 miles",
+   "excerpt": "Project Description\nUpgrade 6.5 miles of aging conductor with 1272 ACSR and rebuild with SPDC.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115kV; 46kV",
+   "excerpt": "5 Year Budget\nStevens Creek - Hooks 115kV/LR Plumb Branch 46kV\nProject ID",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$7,800,000",
+   "excerpt": "2028\n$0\n\nTotal\n$7,800,000",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Stevens Creek",
+   "excerpt": "5 Year Budget\nStevens Creek - Hooks 115kV/LR Plumb Branch 46kV\nProject ID",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Hooks",
+   "excerpt": "5 Year Budget\nStevens Creek - Hooks 115kV/LR Plumb Branch 46kV\nProject ID",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Plumb Branch",
+   "excerpt": "5 Year Budget\nStevens Creek - Hooks 115kV/LR Plumb Branch 46kV\nProject ID",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 749,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 447,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1196
+ }
+}

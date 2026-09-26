@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p373",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 373,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:40Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "EAST POINT - TRIBUTARY 230KV REBUILD",
+   "excerpt": "EAST POINT - TRIBUTARY 230KV REBUILD\nTeams # 21097\nNeed Date 06/01/2030 Start Date 06/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21097",
+   "excerpt": "EAST POINT - TRIBUTARY 230KV REBUILD\nTeams # 21097\nNeed Date 06/01/2030 Start Date 06/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2027",
+   "excerpt": "Teams # 21097\nNeed Date 06/01/2030 Start Date 06/01/2027\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "2.9 miles",
+   "excerpt": "Rebuild the 2.9 mile section from Cavender Drive to Marietta 25 with 200C 1351 ACSS conductor",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230 kV",
+   "excerpt": "the East Point - Tributary 230kV line.\nSupporting Statement\nREDACTED",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "East Point",
+   "excerpt": "Rebuild the 2.9 mile section from Cavender Drive to Marietta 25 with 200C 1351 ACSS conductor on\nthe East Point - Tributary 230kV line.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Tributary",
+   "excerpt": "Rebuild the 2.9 mile section from Cavender Drive to Marietta 25 with 200C 1351 ACSS conductor on\nthe East Point - Tributary 230kV line.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 861,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 950,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1811
+ }
+}

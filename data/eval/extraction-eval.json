@@ -1,0 +1,1065 @@
+{
+ "meta": {
+  "promptVersion": "gridlock-extract/1.1",
+  "promptSha256": "9810cb893eca915d038c4cbedda4cc535b063758752ab886617f7888f13c5f32",
+  "schemaSha256": "1bfc480ab37aaf46572fd1d197816057926445d9c121b0b5e0921e8dc305a32e",
+  "scope": "in-scope",
+  "pagesInScope": 283,
+  "reference": "data/region-b/parsed.json (deterministic parse; not human labels)",
+  "runs": "data/eval/extraction/runs/"
+ },
+ "pagesScored": 283,
+ "errors": [],
+ "models": {
+  "gpt-5.5-2026-04-23": 283
+ },
+ "promptVersions": {
+  "gridlock-extract/1.1": 283
+ },
+ "tokens": {
+  "input": 230200,
+  "output": 214779,
+  "reasoning": 94332,
+  "cachedInput": 0
+ },
+ "estimatedCostUsd": 7.5944,
+ "price": {
+  "model": "gpt-5.5",
+  "url": "https://developers.openai.com/api/docs/models/gpt-5.5",
+  "retrievedAt": "2026-09-26",
+  "excerpt": "Price $5 • $30 Input • Output",
+  "inputPerM": 5.0,
+  "outputPerM": 30.0
+ },
+ "verbatimQuote": {
+  "all": {
+   "k": 2578,
+   "n": 2579,
+   "rate": 1.0,
+   "ci95": [
+    0.998,
+    1.0
+   ]
+  },
+  "desc": {
+   "k": 1382,
+   "n": 1383,
+   "rate": 0.999,
+   "ci95": [
+    0.996,
+    1.0
+   ]
+  },
+  "gpc": {
+   "k": 1196,
+   "n": 1196,
+   "rate": 1.0,
+   "ci95": [
+    0.997,
+    1.0
+   ]
+  }
+ },
+ "quotesSnapshotPassage": {
+  "all": {
+   "k": 1405,
+   "n": 2578,
+   "rate": 0.545,
+   "ci95": [
+    0.526,
+    0.564
+   ]
+  },
+  "desc": {
+   "k": 450,
+   "n": 1382,
+   "rate": 0.326,
+   "ci95": [
+    0.301,
+    0.351
+   ]
+  },
+  "gpc": {
+   "k": 955,
+   "n": 1196,
+   "rate": 0.798,
+   "ci95": [
+    0.775,
+    0.82
+   ]
+  }
+ },
+ "overall": {
+  "exact": {
+   "k": 1642,
+   "n": 1667,
+   "rate": 0.985,
+   "ci95": [
+    0.978,
+    0.99
+   ]
+  },
+  "lenient": {
+   "k": 1659,
+   "n": 1667,
+   "rate": 0.995,
+   "ci95": [
+    0.991,
+    0.998
+   ]
+  },
+  "recallWhenStated": {
+   "k": 1659,
+   "n": 1756,
+   "rate": 0.945,
+   "ci95": [
+    0.933,
+    0.955
+   ]
+  },
+  "missed": 89,
+  "disagreeWithVerbatimQuote": 8,
+  "disagreeUnlocatedQuote": 0,
+  "extraWithVerbatimQuote": 8,
+  "extraUnlocatedQuote": 0,
+  "abstention": {
+   "k": 853,
+   "n": 861,
+   "rate": 0.991,
+   "ci95": [
+    0.982,
+    0.995
+   ]
+  }
+ },
+ "fields": {
+  "desc.constructionEnd": {
+   "utility": "desc",
+   "field": "constructionEnd",
+   "counts": {
+    "both-null": 145
+   },
+   "stated": 0,
+   "exact": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "lenient": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "recallWhenStated": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "abstention": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   }
+  },
+  "desc.constructionStart": {
+   "utility": "desc",
+   "field": "constructionStart",
+   "counts": {
+    "both-null": 145
+   },
+   "stated": 0,
+   "exact": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "lenient": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "recallWhenStated": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "abstention": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   }
+  },
+  "desc.coordinationMention": {
+   "utility": "desc",
+   "field": "coordinationMention",
+   "counts": {
+    "both-null": 145
+   },
+   "stated": 0,
+   "exact": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "lenient": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "recallWhenStated": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "abstention": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   }
+  },
+  "desc.estimatedCost": {
+   "utility": "desc",
+   "field": "estimatedCost",
+   "counts": {
+    "agree": 145
+   },
+   "stated": 145,
+   "exact": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "lenient": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "desc.inServiceDate": {
+   "utility": "desc",
+   "field": "inServiceDate",
+   "counts": {
+    "agree": 142,
+    "near": 3
+   },
+   "stated": 145,
+   "exact": {
+    "k": 142,
+    "n": 145,
+    "rate": 0.979,
+    "ci95": [
+     0.941,
+     0.993
+    ]
+   },
+   "lenient": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "desc.lengthMiles": {
+   "utility": "desc",
+   "field": "lengthMiles",
+   "counts": {
+    "both-null": 84,
+    "agree": 55,
+    "extra-located": 5,
+    "near": 1
+   },
+   "stated": 56,
+   "exact": {
+    "k": 55,
+    "n": 56,
+    "rate": 0.982,
+    "ci95": [
+     0.906,
+     0.997
+    ]
+   },
+   "lenient": {
+    "k": 56,
+    "n": 56,
+    "rate": 1.0,
+    "ci95": [
+     0.936,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 56,
+    "n": 56,
+    "rate": 1.0,
+    "ci95": [
+     0.936,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 84,
+    "n": 89,
+    "rate": 0.944,
+    "ci95": [
+     0.875,
+     0.976
+    ]
+   }
+  },
+  "desc.projectId": {
+   "utility": "desc",
+   "field": "projectId",
+   "counts": {
+    "agree": 145
+   },
+   "stated": 145,
+   "exact": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "lenient": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "desc.projectTitle": {
+   "utility": "desc",
+   "field": "projectTitle",
+   "counts": {
+    "agree": 144,
+    "near": 1
+   },
+   "stated": 145,
+   "exact": {
+    "k": 144,
+    "n": 145,
+    "rate": 0.993,
+    "ci95": [
+     0.962,
+     0.999
+    ]
+   },
+   "lenient": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "desc.status": {
+   "utility": "desc",
+   "field": "status",
+   "counts": {
+    "agree": 145
+   },
+   "stated": 145,
+   "exact": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "lenient": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 145,
+    "n": 145,
+    "rate": 1.0,
+    "ci95": [
+     0.974,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "desc.voltageKv": {
+   "utility": "desc",
+   "field": "voltageKv",
+   "counts": {
+    "agree": 134,
+    "both-null": 3,
+    "near": 3,
+    "disagree": 5
+   },
+   "stated": 142,
+   "exact": {
+    "k": 134,
+    "n": 142,
+    "rate": 0.944,
+    "ci95": [
+     0.893,
+     0.971
+    ]
+   },
+   "lenient": {
+    "k": 137,
+    "n": 142,
+    "rate": 0.965,
+    "ci95": [
+     0.92,
+     0.985
+    ]
+   },
+   "recallWhenStated": {
+    "k": 137,
+    "n": 142,
+    "rate": 0.965,
+    "ci95": [
+     0.92,
+     0.985
+    ]
+   },
+   "abstention": {
+    "k": 3,
+    "n": 3,
+    "rate": 1.0,
+    "ci95": [
+     0.438,
+     1.0
+    ]
+   }
+  },
+  "gpc.constructionEnd": {
+   "utility": "gpc",
+   "field": "constructionEnd",
+   "counts": {
+    "both-null": 138
+   },
+   "stated": 0,
+   "exact": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "lenient": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "recallWhenStated": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "abstention": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   }
+  },
+  "gpc.constructionStart": {
+   "utility": "gpc",
+   "field": "constructionStart",
+   "counts": {
+    "agree": 138
+   },
+   "stated": 138,
+   "exact": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   },
+   "lenient": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "gpc.coordinationMention": {
+   "utility": "gpc",
+   "field": "coordinationMention",
+   "counts": {
+    "both-null": 137,
+    "extra-located": 1
+   },
+   "stated": 0,
+   "exact": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "lenient": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "recallWhenStated": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "abstention": {
+    "k": 137,
+    "n": 138,
+    "rate": 0.993,
+    "ci95": [
+     0.96,
+     0.999
+    ]
+   }
+  },
+  "gpc.estimatedCost": {
+   "utility": "gpc",
+   "field": "estimatedCost",
+   "counts": {
+    "agree": 63,
+    "abstained-redacted": 75
+   },
+   "stated": 138,
+   "exact": {
+    "k": 63,
+    "n": 63,
+    "rate": 1.0,
+    "ci95": [
+     0.943,
+     1.0
+    ]
+   },
+   "lenient": {
+    "k": 63,
+    "n": 63,
+    "rate": 1.0,
+    "ci95": [
+     0.943,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 63,
+    "n": 63,
+    "rate": 1.0,
+    "ci95": [
+     0.943,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "gpc.inServiceDate": {
+   "utility": "gpc",
+   "field": "inServiceDate",
+   "counts": {
+    "missed": 88,
+    "agree": 50
+   },
+   "stated": 138,
+   "exact": {
+    "k": 50,
+    "n": 50,
+    "rate": 1.0,
+    "ci95": [
+     0.929,
+     1.0
+    ]
+   },
+   "lenient": {
+    "k": 50,
+    "n": 50,
+    "rate": 1.0,
+    "ci95": [
+     0.929,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 50,
+    "n": 138,
+    "rate": 0.362,
+    "ci95": [
+     0.287,
+     0.445
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "gpc.lengthMiles": {
+   "utility": "gpc",
+   "field": "lengthMiles",
+   "counts": {
+    "both-null": 53,
+    "agree": 80,
+    "extra-located": 2,
+    "disagree": 2,
+    "missed": 1
+   },
+   "stated": 83,
+   "exact": {
+    "k": 80,
+    "n": 82,
+    "rate": 0.976,
+    "ci95": [
+     0.915,
+     0.993
+    ]
+   },
+   "lenient": {
+    "k": 80,
+    "n": 82,
+    "rate": 0.976,
+    "ci95": [
+     0.915,
+     0.993
+    ]
+   },
+   "recallWhenStated": {
+    "k": 80,
+    "n": 83,
+    "rate": 0.964,
+    "ci95": [
+     0.899,
+     0.988
+    ]
+   },
+   "abstention": {
+    "k": 53,
+    "n": 55,
+    "rate": 0.964,
+    "ci95": [
+     0.877,
+     0.99
+    ]
+   }
+  },
+  "gpc.projectId": {
+   "utility": "gpc",
+   "field": "projectId",
+   "counts": {
+    "agree": 138
+   },
+   "stated": 138,
+   "exact": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   },
+   "lenient": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "gpc.projectTitle": {
+   "utility": "gpc",
+   "field": "projectTitle",
+   "counts": {
+    "agree": 130,
+    "near": 8
+   },
+   "stated": 138,
+   "exact": {
+    "k": 130,
+    "n": 138,
+    "rate": 0.942,
+    "ci95": [
+     0.89,
+     0.97
+    ]
+   },
+   "lenient": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   },
+   "recallWhenStated": {
+    "k": 138,
+    "n": 138,
+    "rate": 1.0,
+    "ci95": [
+     0.973,
+     1.0
+    ]
+   },
+   "abstention": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "gpc.voltageKv": {
+   "utility": "gpc",
+   "field": "voltageKv",
+   "counts": {
+    "agree": 133,
+    "both-null": 3,
+    "disagree": 1,
+    "near": 1
+   },
+   "stated": 135,
+   "exact": {
+    "k": 133,
+    "n": 135,
+    "rate": 0.985,
+    "ci95": [
+     0.948,
+     0.996
+    ]
+   },
+   "lenient": {
+    "k": 134,
+    "n": 135,
+    "rate": 0.993,
+    "ci95": [
+     0.959,
+     0.999
+    ]
+   },
+   "recallWhenStated": {
+    "k": 134,
+    "n": 135,
+    "rate": 0.993,
+    "ci95": [
+     0.959,
+     0.999
+    ]
+   },
+   "abstention": {
+    "k": 3,
+    "n": 3,
+    "rate": 1.0,
+    "ci95": [
+     0.438,
+     1.0
+    ]
+   }
+  }
+ },
+ "namedFacilities": {
+  "desc.geocode-batch": {
+   "pages": 26,
+   "model": 60,
+   "reference": 57,
+   "modelMatched": 50,
+   "referenceMatched": 51,
+   "modelUnlocated": 0,
+   "modelInReference": {
+    "k": 50,
+    "n": 60,
+    "rate": 0.833,
+    "ci95": [
+     0.72,
+     0.907
+    ]
+   },
+   "referenceNamed": {
+    "k": 51,
+    "n": 57,
+    "rate": 0.895,
+    "ci95": [
+     0.789,
+     0.951
+    ]
+   }
+  },
+  "desc.snapshot": {
+   "pages": 96,
+   "model": 200,
+   "reference": 187,
+   "modelMatched": 156,
+   "referenceMatched": 156,
+   "modelUnlocated": 0,
+   "modelInReference": {
+    "k": 156,
+    "n": 200,
+    "rate": 0.78,
+    "ci95": [
+     0.718,
+     0.832
+    ]
+   },
+   "referenceNamed": {
+    "k": 156,
+    "n": 187,
+    "rate": 0.834,
+    "ci95": [
+     0.774,
+     0.881
+    ]
+   }
+  },
+  "desc.title-split": {
+   "pages": 23,
+   "model": 50,
+   "reference": 12,
+   "modelMatched": 12,
+   "referenceMatched": 12,
+   "modelUnlocated": 0,
+   "modelInReference": {
+    "k": 12,
+    "n": 50,
+    "rate": 0.24,
+    "ci95": [
+     0.143,
+     0.374
+    ]
+   },
+   "referenceNamed": {
+    "k": 12,
+    "n": 12,
+    "rate": 1.0,
+    "ci95": [
+     0.757,
+     1.0
+    ]
+   }
+  },
+  "gpc.snapshot": {
+   "pages": 138,
+   "model": 307,
+   "reference": 228,
+   "modelMatched": 210,
+   "referenceMatched": 208,
+   "modelUnlocated": 0,
+   "modelInReference": {
+    "k": 210,
+    "n": 307,
+    "rate": 0.684,
+    "ci95": [
+     0.63,
+     0.733
+    ]
+   },
+   "referenceNamed": {
+    "k": 208,
+    "n": 228,
+    "rate": 0.912,
+    "ci95": [
+     0.868,
+     0.942
+    ]
+   }
+  }
+ },
+ "adjudication": {
+  "reviewer": "The evaluating agent (Claude), reading the cached page text; not a human label. Every pageExcerpt is re-found verbatim on its page by the scorer.",
+  "verdicts": {
+   "model-supported": "the page supports the model's value; the parse lacks it or read another number",
+   "parse-supported": "the page supports the parse; the model's value is not what the field asks for",
+   "both-supported": "the page states both values (phases, sections, or the reference counts every kV class the text names)",
+   "page-inconsistent": "the page itself states two different values"
+  },
+  "rules": [
+   {
+    "utility": "gpc",
+    "field": "inServiceDate",
+    "outcome": "missed",
+    "verdict": "prompt-semantics",
+    "note": "Ten-Year Plan pages label the date \"Need Date\"; the frozen prompt asks for an in-service date, and the model often leaves it null. Not changed mid-evaluation (a v1.2 prompt would add needDate and be evaluated separately)."
+   },
+   {
+    "field": "projectTitle",
+    "outcome": "near",
+    "verdict": "format",
+    "note": "planning-area prefix (\"SAV:\") or a parenthetical dropped"
+   }
+  ],
+  "counts": {
+   "format": 9,
+   "model-supported": 11,
+   "both-supported": 12,
+   "page-inconsistent": 1,
+   "prompt-semantics": 88,
+   "parse-supported": 1
+  },
+  "excerptsVerified": 25,
+  "excerptsNotFound": [],
+  "stale": []
+ },
+ "gpcCost": {
+  "pages": 138,
+  "agree": 63,
+  "abstained-redacted": 75,
+  "disagree": 0,
+  "disagree-unlocated": 0
+ }
+}

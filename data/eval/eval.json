@@ -1,0 +1,1825 @@
+{
+ "meta": {
+  "snapshot": "snap-2026-09-26-339ecf7b",
+  "snapshotDate": "2026-09-26",
+  "engine": "gridlock-engine/1.2.0",
+  "radiusMiles": 25,
+  "focusRegion": "southeast",
+  "projects": 219,
+  "eligible": 217,
+  "archived": {
+   "complete": 2
+  },
+  "pastDue": 48,
+  "universe": "eligible projects × eligible projects, same region, no shared owner: exactly the engine's candidate pairs",
+  "counties": "US Census Bureau cb_2023_us_county_20m (data/eval/counties.json) + counties listed in the sources",
+  "evidence": {
+   "total": 1786,
+   "verifiedInSource": 1786,
+   "reviewedByHuman": 0,
+   "sources": 103
+  }
+ },
+ "sponsor": {
+  "overlapTable": {
+   "rows": [
+    {
+     "id": "OVL_1",
+     "pair": "DESC_2 × GPC_1",
+     "sponsorMiles": 4.09,
+     "ourMiles": 4.09,
+     "sponsorDays": 3074,
+     "ourDays": 3074,
+     "ok": true
+    },
+    {
+     "id": "OVL_2",
+     "pair": "DESC_3 × GPC_2",
+     "sponsorMiles": 5.65,
+     "ourMiles": 5.65,
+     "sponsorDays": 152,
+     "ourDays": 152,
+     "ok": true
+    },
+    {
+     "id": "OVL_3",
+     "pair": "DESC_3 × GPC_3",
+     "sponsorMiles": 7.55,
+     "ourMiles": 7.55,
+     "sponsorDays": 517,
+     "ourDays": 517,
+     "ok": true
+    },
+    {
+     "id": "OVL_4",
+     "pair": "DESC_1 × GPC_1",
+     "sponsorMiles": 8.01,
+     "ourMiles": 8.01,
+     "sponsorDays": 3074,
+     "ourDays": 3074,
+     "ok": true
+    },
+    {
+     "id": "OVL_5",
+     "pair": "DESC_5 × GPC_2",
+     "sponsorMiles": 14.34,
+     "ourMiles": 14.34,
+     "sponsorDays": 365,
+     "ourDays": 365,
+     "ok": true
+    },
+    {
+     "id": "OVL_6",
+     "pair": "DESC_5 × GPC_3",
+     "sponsorMiles": 14.81,
+     "ourMiles": 14.81,
+     "sponsorDays": 730,
+     "ourDays": 730,
+     "ok": true
+    }
+   ],
+   "matched": 6,
+   "of": 6,
+   "extra": [],
+   "allOk": true
+  },
+  "projectSheet": {
+   "matched": 10,
+   "of": 10
+  },
+  "replay": [
+   {
+    "id": "OVL_1",
+    "status": "not-listed",
+    "tab": null,
+    "rank": null,
+    "miles": null,
+    "days": null,
+    "pastDue": false,
+    "related": null
+   },
+   {
+    "id": "OVL_2",
+    "status": "in-queue",
+    "tab": "needs-review",
+    "rank": 20,
+    "miles": 4.23,
+    "days": 183,
+    "pastDue": true,
+    "related": null
+   },
+   {
+    "id": "OVL_3",
+    "status": "in-queue",
+    "tab": "needs-review",
+    "rank": 2,
+    "miles": 8.13,
+    "days": 396,
+    "pastDue": false,
+    "related": null
+   },
+   {
+    "id": "OVL_4",
+    "status": "not-listed",
+    "tab": null,
+    "rank": null,
+    "miles": null,
+    "days": null,
+    "pastDue": false,
+    "related": "desc-6809-g__gpc-20793"
+   },
+   {
+    "id": "OVL_5",
+    "status": "not-listed",
+    "tab": null,
+    "rank": null,
+    "miles": null,
+    "days": null,
+    "pastDue": false,
+    "related": null
+   },
+   {
+    "id": "OVL_6",
+    "status": "not-listed",
+    "tab": null,
+    "rank": null,
+    "miles": null,
+    "days": null,
+    "pastDue": false,
+    "related": null
+   }
+  ]
+ },
+ "queue": {
+  "universePairs": 7929,
+  "descGpcPairs": 7830,
+  "flagged": {
+   "k": 133,
+   "n": 7929,
+   "pct": 1.7
+  },
+  "descGpcFlagged": {
+   "k": 123,
+   "n": 7830,
+   "pct": 1.6
+  },
+  "byStatus": {
+   "needs-review": 97,
+   "known-coordination": 8,
+   "possible": 28
+  },
+  "byRegion": {
+   "southeast": 123,
+   "upper-midwest": 9,
+   "southern-plains": 1
+  },
+  "byGeo": {
+   "confirmed": 105,
+   "possible": 28
+  },
+  "byGeoMethod": {
+   "measured": 115,
+   "shared-endpoint": 2,
+   "coarse": 6,
+   "shared-site": 10
+  },
+  "byTime": {
+   "possible": 31,
+   "confirmed": 33,
+   "unknown": 26,
+   "no-match": 43
+  },
+  "timeBasisSchedule": 33,
+  "byBadge": {
+   "GEO": 79,
+   "BOTH": 26,
+   "POSSIBLE": 28
+  },
+  "withinSponsorRule": 111,
+  "beyondRadius": 10,
+  "pastDueFlagged": 28,
+  "inServiceGap": {
+   "known": 122,
+   "zeroAtStatedPrecision": 8,
+   "within365": 33
+  },
+  "allEvidenceVerified": 133,
+  "needsReviewTop10": [
+   {
+    "rank": 1,
+    "id": "desc-6888__gpc-20065",
+    "priority": 92,
+    "geo": "confirmed",
+    "time": "possible",
+    "badge": "GEO",
+    "basis": null,
+    "miles": 6.71,
+    "gapDays": 0,
+    "pastDue": false
+   },
+   {
+    "rank": 2,
+    "id": "desc-06367-d-g__gpc-20065",
+    "priority": 89,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 8.13,
+    "gapDays": 396,
+    "pastDue": false
+   },
+   {
+    "rank": 3,
+    "id": "desc-0139-m-n__gpc-20065",
+    "priority": 87,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 10.27,
+    "gapDays": 366,
+    "pastDue": false
+   },
+   {
+    "rank": 4,
+    "id": "desc-6888__gpc-20989",
+    "priority": 87,
+    "geo": "confirmed",
+    "time": "possible",
+    "badge": "GEO",
+    "basis": null,
+    "miles": 11.17,
+    "gapDays": 0,
+    "pastDue": false
+   },
+   {
+    "rank": 5,
+    "id": "desc-6888__sertp26-mcintosh-relays",
+    "priority": 85,
+    "geo": "confirmed",
+    "time": "unknown",
+    "badge": "GEO",
+    "basis": null,
+    "miles": 4.23,
+    "gapDays": 0,
+    "pastDue": false
+   },
+   {
+    "rank": 6,
+    "id": "desc-06367-d-g__gpc-20785",
+    "priority": 84,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 13.09,
+    "gapDays": 182,
+    "pastDue": false
+   },
+   {
+    "rank": 7,
+    "id": "desc-06367-d-g__gpc-20989",
+    "priority": 84,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 12.28,
+    "gapDays": 396,
+    "pastDue": false
+   },
+   {
+    "rank": 8,
+    "id": "desc-6367-d__gpc-20065",
+    "priority": 84,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 8,
+    "gapDays": 396,
+    "pastDue": false
+   },
+   {
+    "rank": 9,
+    "id": "desc-0139-m-n__gpc-20785",
+    "priority": 83,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 13.8,
+    "gapDays": 152,
+    "pastDue": false
+   },
+   {
+    "rank": 10,
+    "id": "desc-0139-m-n__gpc-20989",
+    "priority": 83,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 13.55,
+    "gapDays": 366,
+    "pastDue": false
+   }
+  ]
+ },
+ "baselines": [
+  {
+   "id": "B1",
+   "name": "same county + same in-service year",
+   "flagged": 12,
+   "pctOfUniverse": 0.2,
+   "descGpc": 8
+  },
+  {
+   "id": "B1w",
+   "name": "same county + overlapping window years",
+   "flagged": 22,
+   "pctOfUniverse": 0.3,
+   "descGpc": 12
+  },
+  {
+   "id": "B2",
+   "name": "sponsor rule alone: exact centers < 25 mi",
+   "flagged": 111,
+   "pctOfUniverse": 1.4,
+   "descGpc": 111
+  },
+  {
+   "id": "B3",
+   "name": "either place or time (literal OR)",
+   "flagged": 4622,
+   "pctOfUniverse": 58.3,
+   "descGpc": 4563
+  },
+  {
+   "id": "B3time",
+   "name": "time alone (construction or schedule overlap possible)",
+   "flagged": 4553,
+   "pctOfUniverse": 57.4,
+   "descGpc": 4497
+  },
+  {
+   "id": "B5",
+   "name": "B2 AND time possible or confirmed",
+   "flagged": 50,
+   "pctOfUniverse": 0.6,
+   "descGpc": 50
+  },
+  {
+   "id": "B5c",
+   "name": "B2 AND time confirmed",
+   "flagged": 42,
+   "pctOfUniverse": 0.5,
+   "descGpc": 42
+  },
+  {
+   "id": "B6",
+   "name": "shared facility name in both plan texts",
+   "flagged": 24,
+   "pctOfUniverse": 0.3,
+   "descGpc": 15
+  },
+  {
+   "id": "B4",
+   "name": "GridLock engine",
+   "flagged": 133,
+   "pctOfUniverse": 1.7,
+   "descGpc": 123
+  }
+ ],
+ "overlap": {
+  "B1": {
+   "B1": 12,
+   "B1w": 10,
+   "B2": 8,
+   "B3": 12,
+   "B3time": 10,
+   "B5": 6,
+   "B5c": 5,
+   "B6": 5,
+   "B4": 12
+  },
+  "B1w": {
+   "B1": 10,
+   "B1w": 22,
+   "B2": 10,
+   "B3": 21,
+   "B3time": 18,
+   "B5": 7,
+   "B5c": 6,
+   "B6": 6,
+   "B4": 18
+  },
+  "B2": {
+   "B1": 8,
+   "B1w": 10,
+   "B2": 111,
+   "B3": 111,
+   "B3time": 50,
+   "B5": 50,
+   "B5c": 42,
+   "B6": 7,
+   "B4": 111
+  },
+  "B3": {
+   "B1": 12,
+   "B1w": 21,
+   "B2": 111,
+   "B3": 4622,
+   "B3time": 4553,
+   "B5": 50,
+   "B5c": 42,
+   "B6": 18,
+   "B4": 133
+  },
+  "B3time": {
+   "B1": 10,
+   "B1w": 18,
+   "B2": 50,
+   "B3": 4553,
+   "B3time": 4553,
+   "B5": 50,
+   "B5c": 42,
+   "B6": 10,
+   "B4": 64
+  },
+  "B5": {
+   "B1": 6,
+   "B1w": 7,
+   "B2": 50,
+   "B3": 50,
+   "B3time": 50,
+   "B5": 50,
+   "B5c": 42,
+   "B6": 2,
+   "B4": 50
+  },
+  "B5c": {
+   "B1": 5,
+   "B1w": 6,
+   "B2": 42,
+   "B3": 42,
+   "B3time": 42,
+   "B5": 42,
+   "B5c": 42,
+   "B6": 0,
+   "B4": 42
+  },
+  "B6": {
+   "B1": 5,
+   "B1w": 6,
+   "B2": 7,
+   "B3": 18,
+   "B3time": 10,
+   "B5": 2,
+   "B5c": 0,
+   "B6": 24,
+   "B4": 15
+  },
+  "B4": {
+   "B1": 12,
+   "B1w": 18,
+   "B2": 111,
+   "B3": 133,
+   "B3time": 64,
+   "B5": 50,
+   "B5c": 42,
+   "B6": 15,
+   "B4": 133
+  }
+ },
+ "b4notB2": {
+  "summary": {
+   "location uncertainty (possible)": 6,
+   "county-level (possible)": 6,
+   "shared facility": 10
+  },
+  "pairs": [
+   {
+    "id": "desc-0139-m-n__gpc-19966",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 25.92,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-06367-d-g__gpc-19966",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 25.09,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-7956b__gpc-14222",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 32.18,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-0139-m-n__gpc-effingham-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "coarse",
+    "miles": null,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6808-l__gpc-effingham-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "coarse",
+    "miles": null,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6888__gpc-effingham-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "coarse",
+    "miles": null,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-7956b__gpc-callaway-thomson-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 32.18,
+    "beyondRadius": false
+   },
+   {
+    "id": "atc-wwtc-jump-river__xcel-wwtc",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 25.81,
+    "beyondRadius": true
+   },
+   {
+    "id": "dpc-alma-blair__xcel-wwtc",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 37.29,
+    "beyondRadius": true
+   },
+   {
+    "id": "dpc-glh-maribell__xcel-g2b-north-rochester-marion",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 55.84,
+    "beyondRadius": true
+   },
+   {
+    "id": "grid-forward-atc__grid-forward-nspw",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 53.52,
+    "beyondRadius": true
+   },
+   {
+    "id": "sps-potter-beckham-tx__transource-potter-beckham-ok",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 122.29,
+    "beyondRadius": true
+   },
+   {
+    "id": "grid-forward-atc__transource-beci",
+    "status": "needs-review",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 79.91,
+    "beyondRadius": true
+   },
+   {
+    "id": "dpc-alma-blair__grid-forward-nspw",
+    "status": "needs-review",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 32.36,
+    "beyondRadius": true
+   },
+   {
+    "id": "atc-columbia-beci-work__transource-beci",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 34.71,
+    "beyondRadius": true
+   },
+   {
+    "id": "atc-sugar-creek-beci-work__transource-beci",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 34.8,
+    "beyondRadius": true
+   },
+   {
+    "id": "dpc-genoa-bell-center-765-beci-related__transource-beci",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 105.24,
+    "beyondRadius": true
+   },
+   {
+    "id": "desc-06367-d-g__gpc-effingham-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "coarse",
+    "miles": null,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6238-h__gpc-effingham-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "coarse",
+    "miles": null,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6367-d__gpc-effingham-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "coarse",
+    "miles": null,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-7956b__gpc-17993",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 25.78,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6809-m-p48__gpc-20326",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 25.56,
+    "beyondRadius": false
+   }
+  ]
+ },
+ "b2notB4": [],
+ "descGpc": {
+  "pairs": 7830,
+  "sharingACounty": 25,
+  "sponsorRulePairs": 111,
+  "sponsorRulePairsSharingACounty": 23,
+  "sponsorRulePairsDescInSC": 90,
+  "b1Pairs": [
+   "desc-6852__gpc-16007",
+   "desc-0139-m-n__gpc-20277",
+   "desc-06367-d-g__gpc-20277",
+   "desc-6367-d__gpc-20277",
+   "desc-6381__gpc-16007",
+   "desc-6888__gpc-20065",
+   "desc-6888__sertp26-mcintosh-relays",
+   "desc-6888__sertp26-west-mcintosh-breakers"
+  ]
+ },
+ "interfaces": {
+  "documented": 22,
+  "inUniverse": 13,
+  "byTier": {
+   "A-physical": 9,
+   "B-joint": 2,
+   "C-portfolio": 2
+  },
+  "outOfScope": {
+   "shared owner (internal context by design)": 9
+  },
+  "inferredRelations": 3,
+  "inFocusRegion": 0,
+  "recall": {
+   "B1": {
+    "all": {
+     "hit": 4,
+     "of": 13
+    },
+    "physical": {
+     "hit": 3,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "B1w": {
+    "all": {
+     "hit": 8,
+     "of": 13
+    },
+    "physical": {
+     "hit": 6,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 1,
+     "of": 2
+    }
+   },
+   "B2": {
+    "all": {
+     "hit": 0,
+     "of": 13
+    },
+    "physical": {
+     "hit": 0,
+     "of": 9
+    },
+    "joint": {
+     "hit": 0,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "B3": {
+    "all": {
+     "hit": 13,
+     "of": 13
+    },
+    "physical": {
+     "hit": 9,
+     "of": 9
+    },
+    "joint": {
+     "hit": 2,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 2,
+     "of": 2
+    }
+   },
+   "B3time": {
+    "all": {
+     "hit": 10,
+     "of": 13
+    },
+    "physical": {
+     "hit": 6,
+     "of": 9
+    },
+    "joint": {
+     "hit": 2,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 2,
+     "of": 2
+    }
+   },
+   "B5": {
+    "all": {
+     "hit": 0,
+     "of": 13
+    },
+    "physical": {
+     "hit": 0,
+     "of": 9
+    },
+    "joint": {
+     "hit": 0,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "B5c": {
+    "all": {
+     "hit": 0,
+     "of": 13
+    },
+    "physical": {
+     "hit": 0,
+     "of": 9
+    },
+    "joint": {
+     "hit": 0,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "B6": {
+    "all": {
+     "hit": 8,
+     "of": 13
+    },
+    "physical": {
+     "hit": 8,
+     "of": 9
+    },
+    "joint": {
+     "hit": 0,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "B4": {
+    "all": {
+     "hit": 10,
+     "of": 13
+    },
+    "physical": {
+     "hit": 9,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   }
+  },
+  "detail": [
+   {
+    "id": "atc-columbia-beci-work__transource-beci",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-1:interconnects/stated",
+     "rel-2:same-initiative/stated",
+     "coordination:reported-coordination"
+    ],
+    "exactMiles": 34.7,
+    "flaggedBy": [
+     "B3",
+     "B6",
+     "B4"
+    ],
+    "ours": {
+     "status": "known-coordination",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "atc-sugar-creek-beci-work__transource-beci",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-3:interconnects/stated",
+     "coordination:reported-coordination"
+    ],
+    "exactMiles": 34.8,
+    "flaggedBy": [
+     "B3",
+     "B6",
+     "B4"
+    ],
+    "ours": {
+     "status": "known-coordination",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "dpc-genoa-bell-center-765-beci-related__transource-beci",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-4:interconnects/stated",
+     "coordination:reported-coordination"
+    ],
+    "exactMiles": 105.2,
+    "flaggedBy": [
+     "B3",
+     "B6",
+     "B4"
+    ],
+    "ours": {
+     "status": "known-coordination",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "grid-forward-atc__transource-beci",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-5:shared-site/inferred"
+    ],
+    "exactMiles": 79.9,
+    "flaggedBy": [
+     "B1w",
+     "B3",
+     "B3time",
+     "B6",
+     "B4"
+    ],
+    "ours": {
+     "status": "needs-review",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "dpc-glh-maribell__xcel-g2b-north-rochester-marion",
+    "tier": "B-joint",
+    "kinds": [
+     "rel-8:same-initiative/stated",
+     "coordination:known-joint",
+     "coordination:known-joint"
+    ],
+    "exactMiles": 55.8,
+    "flaggedBy": [
+     "B1",
+     "B1w",
+     "B3",
+     "B3time",
+     "B4"
+    ],
+    "ours": {
+     "status": "known-coordination",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "dpc-alma-blair__xcel-wwtc",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-9:shared-site/stated",
+     "rel-10:other/stated",
+     "coordination:reported-coordination",
+     "coordination:reported-coordination",
+     "coordination:reported-coordination"
+    ],
+    "exactMiles": 37.3,
+    "flaggedBy": [
+     "B1w",
+     "B3",
+     "B3time",
+     "B6",
+     "B4"
+    ],
+    "ours": {
+     "status": "known-coordination",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "dpc-alma-blair__grid-forward-nspw",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-11:other/stated",
+     "rel-15:shared-site/inferred"
+    ],
+    "exactMiles": 32.4,
+    "flaggedBy": [
+     "B1w",
+     "B3",
+     "B3time",
+     "B6",
+     "B4"
+    ],
+    "ours": {
+     "status": "needs-review",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "grid-forward-atc__grid-forward-nspw",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-12:interconnects/stated",
+     "rel-13:same-initiative/stated",
+     "coordination:known-joint",
+     "coordination:known-joint",
+     "coordination:known-joint",
+     "coordination:known-joint",
+     "coordination:known-joint",
+     "coordination:known-joint"
+    ],
+    "exactMiles": 53.5,
+    "flaggedBy": [
+     "B1",
+     "B1w",
+     "B3",
+     "B3time",
+     "B4"
+    ],
+    "ours": {
+     "status": "known-coordination",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "dpc-alma-blair__grid-forward-atc",
+    "tier": "C-portfolio",
+    "kinds": [
+     "rel-16:other/stated"
+    ],
+    "exactMiles": 80.8,
+    "flaggedBy": [
+     "B3",
+     "B3time"
+    ],
+    "ours": null
+   },
+   {
+    "id": "grid-forward-atc__xcel-wwtc",
+    "tier": "C-portfolio",
+    "kinds": [
+     "rel-17:other/stated"
+    ],
+    "exactMiles": 64,
+    "flaggedBy": [
+     "B1w",
+     "B3",
+     "B3time"
+    ],
+    "ours": null
+   },
+   {
+    "id": "dpc-alma-blair__xcel-mmrt-wilmarth-north-rochester",
+    "tier": "B-joint",
+    "kinds": [
+     "rel-23:same-initiative/stated",
+     "coordination:known-joint"
+    ],
+    "exactMiles": 86.9,
+    "flaggedBy": [
+     "B3",
+     "B3time"
+    ],
+    "ours": null
+   },
+   {
+    "id": "sps-potter-beckham-tx__transource-potter-beckham-ok",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-24:same-initiative/stated",
+     "rel-25:interconnects/inferred",
+     "coordination:known-joint",
+     "coordination:known-joint",
+     "coordination:known-joint",
+     "coordination:known-joint"
+    ],
+    "exactMiles": 122.3,
+    "flaggedBy": [
+     "B1",
+     "B1w",
+     "B3",
+     "B3time",
+     "B6",
+     "B4"
+    ],
+    "ours": {
+     "status": "known-coordination",
+     "method": "shared-site"
+    }
+   },
+   {
+    "id": "atc-wwtc-jump-river__xcel-wwtc",
+    "tier": "A-physical",
+    "kinds": [
+     "rel-29:same-initiative/stated",
+     "rel-30:interconnects/stated",
+     "coordination:known-joint",
+     "coordination:known-joint"
+    ],
+    "exactMiles": 25.8,
+    "flaggedBy": [
+     "B1",
+     "B1w",
+     "B3",
+     "B3time",
+     "B6",
+     "B4"
+    ],
+    "ours": {
+     "status": "known-coordination",
+     "method": "shared-site"
+    }
+   }
+  ],
+  "caveat": "Circular by construction: the engine's shared-site rule reads the same relations used as positives. Ablations A3a/A3b separate the two effects. A design justification, not an accuracy estimate; no precision is claimed because unflagged pairs are not labeled negatives."
+ },
+ "negativeControls": {
+  "archived": {
+   "what": "pairs with a project a source says is complete or cancelled (or a duplicate / unknown-status record): archived before pairing",
+   "projects": {
+    "complete": 2
+   },
+   "pairs": 14,
+   "flaggedBy": {
+    "B1": 0,
+    "B1w": 0,
+    "B2": 0,
+    "B3": 1,
+    "B5": 0
+   },
+   "B4": 0
+  },
+  "pastDue": {
+   "what": "pairs with a plan whose in-service date passed without a completion source: kept (engine 1.2), TIME at most possible, −15 points",
+   "projects": 48,
+   "pairs": 2942,
+   "B4flagged": 28,
+   "B4timeConfirmed": 0,
+   "B4badgeBoth": 0,
+   "B4missingFlag": 0,
+   "B3flagged": 1391
+  },
+  "far": {
+   "what": "pairs whose exact centers are more than 50 mi apart",
+   "pairs": 7674,
+   "flaggedBy": {
+    "B1": 3,
+    "B1w": 6,
+    "B2": 0,
+    "B3": 4414,
+    "B3time": 4413,
+    "B5": 0,
+    "B5c": 0,
+    "B6": 12,
+    "B4": 5
+   },
+   "B4notSharedFacility": 0,
+   "B4detail": [
+    {
+     "id": "dpc-glh-maribell__xcel-g2b-north-rochester-marion",
+     "method": "shared-site",
+     "miles": 55.84,
+     "status": "known-coordination"
+    },
+    {
+     "id": "grid-forward-atc__grid-forward-nspw",
+     "method": "shared-site",
+     "miles": 53.52,
+     "status": "known-coordination"
+    },
+    {
+     "id": "sps-potter-beckham-tx__transource-potter-beckham-ok",
+     "method": "shared-site",
+     "miles": 122.29,
+     "status": "known-coordination"
+    },
+    {
+     "id": "grid-forward-atc__transource-beci",
+     "method": "shared-site",
+     "miles": 79.91,
+     "status": "needs-review"
+    },
+    {
+     "id": "dpc-genoa-bell-center-765-beci-related__transource-beci",
+     "method": "shared-site",
+     "miles": 105.24,
+     "status": "known-coordination"
+    }
+   ]
+  },
+  "crossRegion": {
+   "what": "pairs from different regions (e.g. Georgia × Wisconsin)",
+   "pairs": 3614,
+   "timeAloneWouldFlag": 1837,
+   "B4": 0
+  },
+  "starterFile": {
+   "what": "sponsor starter file: pairs flagged that are not rows of its overlap table",
+   "byRadius": [
+    {
+     "R": 5,
+     "rowsFound": 1,
+     "extra": 0
+    },
+    {
+     "R": 10,
+     "rowsFound": 4,
+     "extra": 0
+    },
+    {
+     "R": 15,
+     "rowsFound": 6,
+     "extra": 0
+    },
+    {
+     "R": 20,
+     "rowsFound": 6,
+     "extra": 0
+    },
+    {
+     "R": 25,
+     "rowsFound": 6,
+     "extra": 0
+    },
+    {
+     "R": 30,
+     "rowsFound": 6,
+     "extra": 0
+    },
+    {
+     "R": 40,
+     "rowsFound": 6,
+     "extra": 0
+    },
+    {
+     "R": 50,
+     "rowsFound": 6,
+     "extra": 0
+    }
+   ]
+  }
+ },
+ "sweep": [
+  {
+   "R": 5,
+   "flagged": 27,
+   "needs-review": 6,
+   "known-coordination": 8,
+   "possible": 13,
+   "descGpc": 17,
+   "both": 0,
+   "B2": 7,
+   "B5": 1,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 10,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 0,
+    "of": 13
+   },
+   "top10KeptFrom25": 1,
+   "topLeadRank": null,
+   "needsReviewTop1": "desc-6888__sertp26-mcintosh-relays"
+  },
+  {
+   "R": 10,
+   "flagged": 51,
+   "needs-review": 25,
+   "known-coordination": 8,
+   "possible": 18,
+   "descGpc": 41,
+   "both": 2,
+   "B2": 33,
+   "B5": 11,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 10,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 0,
+    "of": 13
+   },
+   "top10KeptFrom25": 4,
+   "topLeadRank": 2,
+   "needsReviewTop1": "desc-6888__sertp26-mcintosh-relays"
+  },
+  {
+   "R": 15,
+   "flagged": 67,
+   "needs-review": 38,
+   "known-coordination": 8,
+   "possible": 21,
+   "descGpc": 57,
+   "both": 9,
+   "B2": 45,
+   "B5": 20,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 10,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 0,
+    "of": 13
+   },
+   "top10KeptFrom25": 6,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-6888__gpc-20065"
+  },
+  {
+   "R": 20,
+   "flagged": 95,
+   "needs-review": 59,
+   "known-coordination": 8,
+   "possible": 28,
+   "descGpc": 85,
+   "both": 17,
+   "B2": 70,
+   "B5": 33,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 10,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 0,
+    "of": 13
+   },
+   "top10KeptFrom25": 9,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-6888__gpc-20065"
+  },
+  {
+   "R": 25,
+   "flagged": 133,
+   "needs-review": 97,
+   "known-coordination": 8,
+   "possible": 28,
+   "descGpc": 123,
+   "both": 26,
+   "B2": 111,
+   "B5": 50,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 10,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 0,
+    "of": 13
+   },
+   "top10KeptFrom25": 10,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-6888__gpc-20065"
+  },
+  {
+   "R": 30,
+   "flagged": 155,
+   "needs-review": 114,
+   "known-coordination": 8,
+   "possible": 33,
+   "descGpc": 145,
+   "both": 29,
+   "B2": 131,
+   "B5": 63,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 10,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 1,
+    "of": 13
+   },
+   "top10KeptFrom25": 9,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-6888__gpc-20065"
+  },
+  {
+   "R": 40,
+   "flagged": 190,
+   "needs-review": 142,
+   "known-coordination": 8,
+   "possible": 40,
+   "descGpc": 179,
+   "both": 33,
+   "B2": 175,
+   "B5": 84,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 10,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 5,
+    "of": 13
+   },
+   "top10KeptFrom25": 9,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-6888__gpc-20065"
+  },
+  {
+   "R": 50,
+   "flagged": 223,
+   "needs-review": 168,
+   "known-coordination": 8,
+   "possible": 47,
+   "descGpc": 211,
+   "both": 43,
+   "B2": 201,
+   "B5": 98,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 10,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 5,
+    "of": 13
+   },
+   "top10KeptFrom25": 9,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-6888__gpc-20065"
+  },
+  {
+   "R": 75,
+   "flagged": 495,
+   "needs-review": 363,
+   "known-coordination": 8,
+   "possible": 124,
+   "descGpc": 476,
+   "both": 92,
+   "B2": 424,
+   "B5": 200,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 11,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 8,
+    "of": 13
+   },
+   "top10KeptFrom25": 8,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-6888__gpc-20065"
+  },
+  {
+   "R": 100,
+   "flagged": 1101,
+   "needs-review": 863,
+   "known-coordination": 9,
+   "possible": 229,
+   "descGpc": 1070,
+   "both": 228,
+   "B2": 1023,
+   "B5": 474,
+   "B2notInB4": 0,
+   "recallB4": {
+    "hit": 13,
+    "of": 13
+   },
+   "recallB2": {
+    "hit": 11,
+    "of": 13
+   },
+   "top10KeptFrom25": 8,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-6888__gpc-20065"
+  }
+ ],
+ "ablations": [
+  {
+   "id": "A0",
+   "name": "full engine",
+   "how": "no change",
+   "flagged": 133,
+   "pairsEvaluated": 7929,
+   "geoConfirmed": 105,
+   "geoPossible": 28,
+   "needs-review": 97,
+   "known-coordination": 8,
+   "possible": 28,
+   "both": 26,
+   "lost": 0,
+   "gained": 0,
+   "statusChanged": [],
+   "recall": {
+    "all": {
+     "hit": 10,
+     "of": 13
+    },
+    "physical": {
+     "hit": 9,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 10,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 2
+  },
+  {
+   "id": "A1",
+   "name": "no location uncertainty",
+   "how": "every place's uncertaintyMeters set to 0 (d_low = d_high = d)",
+   "flagged": 125,
+   "pairsEvaluated": 7929,
+   "geoConfirmed": 108,
+   "geoPossible": 17,
+   "needs-review": 100,
+   "known-coordination": 8,
+   "possible": 17,
+   "both": 26,
+   "lost": 8,
+   "gained": 0,
+   "statusChanged": [
+    "desc-6888__gpc-20787: possible → needs-review",
+    "desc-06367-d-g__gpc-19523: possible → needs-review",
+    "desc-6888__gpc-17075: possible → needs-review"
+   ],
+   "recall": {
+    "all": {
+     "hit": 10,
+     "of": 13
+    },
+    "physical": {
+     "hit": 9,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 10,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 2
+  },
+  {
+   "id": "A2",
+   "name": "no locality cap",
+   "how": "town-level places re-labeled official-gis: still located, no longer capped at possible (this also drops their −5 lower-confidence points)",
+   "flagged": 133,
+   "pairsEvaluated": 7929,
+   "geoConfirmed": 114,
+   "geoPossible": 19,
+   "needs-review": 106,
+   "known-coordination": 8,
+   "possible": 19,
+   "both": 30,
+   "lost": 0,
+   "gained": 0,
+   "statusChanged": [
+    "desc-6854-c__gpc-21116: possible → needs-review",
+    "desc-7956b__gpc-21116: possible → needs-review",
+    "desc-6381__gpc-21116: possible → needs-review",
+    "desc-6367-d__gpc-19966: possible → needs-review",
+    "desc-6381__gpc-16007: possible → needs-review",
+    "desc-6381__gpc-20793: possible → needs-review",
+    "desc-6381__gpc-20794: possible → needs-review",
+    "desc-7956b__gpc-16007: possible → needs-review",
+    "desc-6854-c__gpc-16007: possible → needs-review"
+   ],
+   "recall": {
+    "all": {
+     "hit": 10,
+     "of": 13
+    },
+    "physical": {
+     "hit": 9,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 9,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 2
+  },
+  {
+   "id": "A3a",
+   "name": "no source-stated shared sites",
+   "how": "shared-site/interconnects relations re-labeled other; same-initiative relations lose their site (known-coordination status logic untouched)",
+   "flagged": 126,
+   "pairsEvaluated": 7929,
+   "geoConfirmed": 98,
+   "geoPossible": 28,
+   "needs-review": 96,
+   "known-coordination": 2,
+   "possible": 28,
+   "both": 26,
+   "lost": 7,
+   "gained": 0,
+   "statusChanged": [],
+   "recall": {
+    "all": {
+     "hit": 3,
+     "of": 13
+    },
+    "physical": {
+     "hit": 3,
+     "of": 9
+    },
+    "joint": {
+     "hit": 0,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 10,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 2
+  },
+  {
+   "id": "A3b",
+   "name": "no shared-site rule at all",
+   "how": "A3a, and named facilities re-labeled official-gis so no terminals are equated by name (centers unchanged)",
+   "flagged": 123,
+   "pairsEvaluated": 7929,
+   "geoConfirmed": 95,
+   "geoPossible": 28,
+   "needs-review": 95,
+   "known-coordination": 0,
+   "possible": 28,
+   "both": 26,
+   "lost": 10,
+   "gained": 0,
+   "statusChanged": [],
+   "recall": {
+    "all": {
+     "hit": 0,
+     "of": 13
+    },
+    "physical": {
+     "hit": 0,
+     "of": 9
+    },
+    "joint": {
+     "hit": 0,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 9,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 2
+  },
+  {
+   "id": "A4",
+   "name": "A1 + A2 + A3b (naive center rule with uncertainty ignored)",
+   "how": "all three transforms",
+   "flagged": 115,
+   "pairsEvaluated": 7929,
+   "geoConfirmed": 111,
+   "geoPossible": 4,
+   "needs-review": 111,
+   "known-coordination": 0,
+   "possible": 4,
+   "both": 30,
+   "lost": 18,
+   "gained": 0,
+   "statusChanged": [
+    "desc-6854-c__gpc-21116: possible → needs-review",
+    "desc-7956b__gpc-21116: possible → needs-review",
+    "desc-6381__gpc-21116: possible → needs-review",
+    "desc-6367-d__gpc-19966: possible → needs-review",
+    "desc-6381__gpc-16007: possible → needs-review",
+    "desc-6888__gpc-20787: possible → needs-review",
+    "desc-06367-d-g__gpc-19523: possible → needs-review",
+    "desc-6381__gpc-20793: possible → needs-review",
+    "desc-6381__gpc-20794: possible → needs-review",
+    "desc-7956b__gpc-16007: possible → needs-review",
+    "desc-6381__gpc-17993: possible → needs-review",
+    "desc-7956b__gpc-20793: possible → needs-review",
+    "desc-7956b__gpc-20794: possible → needs-review",
+    "desc-6888__gpc-19966: possible → needs-review",
+    "desc-6854-c__gpc-16007: possible → needs-review",
+    "desc-6888__gpc-17075: possible → needs-review"
+   ],
+   "recall": {
+    "all": {
+     "hit": 0,
+     "of": 13
+    },
+    "physical": {
+     "hit": 0,
+     "of": 9
+    },
+    "joint": {
+     "hit": 0,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 9,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 2
+  },
+  {
+   "id": "A5",
+   "name": "no schedule basis",
+   "how": "published schedules (start → in-service) removed: TIME from construction windows only",
+   "flagged": 133,
+   "pairsEvaluated": 7929,
+   "geoConfirmed": 105,
+   "geoPossible": 28,
+   "needs-review": 97,
+   "known-coordination": 8,
+   "possible": 28,
+   "both": 0,
+   "lost": 0,
+   "gained": 0,
+   "statusChanged": [],
+   "recall": {
+    "all": {
+     "hit": 10,
+     "of": 13
+    },
+    "physical": {
+     "hit": 9,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 9,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 2
+  },
+  {
+   "id": "A6",
+   "name": "drop past-due plans (engine 1.1 rule)",
+   "how": "projects whose planned date passed without a completion source are excluded before pairing",
+   "flagged": 105,
+   "pairsEvaluated": 4987,
+   "geoConfirmed": 83,
+   "geoPossible": 22,
+   "needs-review": 75,
+   "known-coordination": 8,
+   "possible": 22,
+   "both": 26,
+   "lost": 28,
+   "gained": 0,
+   "statusChanged": [],
+   "recall": {
+    "all": {
+     "hit": 10,
+     "of": 13
+    },
+    "physical": {
+     "hit": 9,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 10,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 2
+  }
+ ],
+ "notRun": [
+  "Priority weights (place ≤ 60, time ≤ 30, evidence ≤ 10, −5 lower confidence, −15 past due): constants inside evaluatePair",
+  "Same-site tolerance (SAME_SITE_MILES = 0.6) and the 30-day minimum schedule overlap: module constants",
+  "In-service-gap ranking horizon (1,460 days) and the beyond-radius ranking floor"
+ ]
+}

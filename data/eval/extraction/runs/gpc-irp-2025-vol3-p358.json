@@ -1,0 +1,80 @@
+{
+ "id": "gpc-irp-2025-vol3-p358",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 358,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:28Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "MCMANUS - WEST BRUNSWICK 115KV REBUILD",
+   "excerpt": "MCMANUS - WEST BRUNSWICK 115KV REBUILD\nTeams # 20346\nNeed Date 06/01/2029 Start Date 01/01/2026",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20346",
+   "excerpt": "MCMANUS - WEST BRUNSWICK 115KV REBUILD\nTeams # 20346\nNeed Date 06/01/2029 Start Date 01/01/2026",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2026",
+   "excerpt": "Teams # 20346\nNeed Date 06/01/2029 Start Date 01/01/2026\nDescription\nRebuild the McManus",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2029",
+   "excerpt": "Teams # 20346\nNeed Date 06/01/2029 Start Date 01/01/2026\nDescription\nRebuild the McManus",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "5.7 miles",
+   "excerpt": "Rebuild the McManus - West Brunswick 115kV line, approximately 5.7 miles, with 200C 1351 ACSS\nMartin conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115kV",
+   "excerpt": "Rebuild the McManus - West Brunswick 115kV line, approximately 5.7 miles, with 200C 1351 ACSS\nMartin conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "McManus",
+   "excerpt": "Rebuild the McManus - West Brunswick 115kV line, approximately 5.7 miles, with 200C 1351 ACSS\nMartin conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "West Brunswick",
+   "excerpt": "Rebuild the McManus - West Brunswick 115kV line, approximately 5.7 miles, with 200C 1351 ACSS\nMartin conductor.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 857,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 438,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1295
+ }
+}

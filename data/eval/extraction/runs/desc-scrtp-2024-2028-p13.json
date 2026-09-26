@@ -1,0 +1,87 @@
+{
+ "id": "desc-scrtp-2024-2028-p13",
+ "sourceId": "desc-scrtp-2024-2028",
+ "page": 13,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:08Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Square D - Hopkins 115kV: Rebuild",
+   "excerpt": "5 Year Budget\nSquare D - Hopkins 115kV: Rebuild\nProject ID\n6808 W",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6808 W",
+   "excerpt": "Square D - Hopkins 115kV: Rebuild\nProject ID\n6808 W\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Need\nThis project is required to address end of life and reliability issues on these lines.\nProject Status\nIn Progress",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "9/30/2024",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n9/30/2024\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115kV",
+   "excerpt": "5 Year Budget\nSquare D - Hopkins 115kV: Rebuild\nProject ID\n6808 W",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$4,300,000",
+   "excerpt": "2027\n$0\n\n2028\n$0\n\nTotal*\n$4,300,000",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Square D",
+   "excerpt": "5 Year Budget\nSquare D - Hopkins 115kV: Rebuild\nProject ID\n6808 W",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Hopkins",
+   "excerpt": "5 Year Budget\nSquare D - Hopkins 115kV: Rebuild\nProject ID\n6808 W",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 744,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 357,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1101
+ }
+}

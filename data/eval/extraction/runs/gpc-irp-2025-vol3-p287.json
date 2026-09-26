@@ -1,0 +1,80 @@
+{
+ "id": "gpc-irp-2025-vol3-p287",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 287,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:38Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "MORROW - MOUNTAIN VIEW 115 KV REBUILD",
+   "excerpt": "MORROW - MOUNTAIN VIEW 115 KV REBUILD\nTeams # 19363\nNeed Date 12/31/2026 Start Date 01/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19363",
+   "excerpt": "MORROW - MOUNTAIN VIEW 115 KV REBUILD\nTeams # 19363\nNeed Date 12/31/2026 Start Date 01/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2024",
+   "excerpt": "Teams # 19363\nNeed Date 12/31/2026 Start Date 01/01/2024\nDescription\nRebuild the Mountain View",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2026",
+   "excerpt": "MORROW - MOUNTAIN VIEW 115 KV REBUILD\nTeams # 19363\nNeed Date 12/31/2026 Start Date 01/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "MORROW - MOUNTAIN VIEW 115 KV REBUILD\nTeams # 19363\nNeed Date 12/31/2026 Start Date 01/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Mountain View",
+   "excerpt": "Rebuild the Mountain View - Barnett Road section of the Morrow - Mountain View 115kV line with\n200C 1351 ACSS Martin conductor.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Barnett Road",
+   "excerpt": "Rebuild the Mountain View - Barnett Road section of the Morrow - Mountain View 115kV line with\n200C 1351 ACSS Martin conductor.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Morrow",
+   "excerpt": "Rebuild the Mountain View - Barnett Road section of the Morrow - Mountain View 115kV line with\n200C 1351 ACSS Martin conductor.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 854,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 435,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1289
+ }
+}

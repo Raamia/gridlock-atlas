@@ -1,0 +1,73 @@
+{
+ "id": "gpc-irp-2025-vol3-p315",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 315,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:55Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "CC - TOMOCHICHI 500/230KV SOLUTION (CC NETWORK IMPROVEMENTS)",
+   "excerpt": "CC - TOMOCHICHI 500/230KV SOLUTION (CC NETWORK IMPROVEMENTS)\nTeams # 20717\nNeed Date 07/15/2027 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20717",
+   "excerpt": "CC - TOMOCHICHI 500/230KV SOLUTION (CC NETWORK IMPROVEMENTS)\nTeams # 20717\nNeed Date 07/15/2027 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2024",
+   "excerpt": "Teams # 20717\nNeed Date 07/15/2027 Start Date 06/01/2024\nDescription\nBuild the new Tomochichi 500/230kV switching station",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "500/230kV; 230kV",
+   "excerpt": "Build the new Tomochichi 500/230kV switching station (four element ring bus 500kV high side, four\nelement breaker and a half 230kV low side)",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Tomochichi 500/230kV switching station",
+   "excerpt": "Build the new Tomochichi 500/230kV switching station (four element ring bus 500kV high side, four\nelement breaker and a half 230kV low side)",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Towaliga River 230kV substation",
+   "excerpt": "Build two new\n230kV lines from the new Tomochichi substation to the new Towaliga River 230kV substation.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 911,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 960,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1871
+ }
+}

@@ -15,6 +15,7 @@ import path from "node:path";
 import type {
   CompletionClaim,
   ConstructionWindow,
+  ContextNote,
   CoordinationClaim,
   Evidence,
   ExtractionRun,
@@ -286,6 +287,18 @@ for (const c of clusters) {
       completionClaims: completion,
       knownCoordination: [],
       caveats: p.caveats ?? [],
+      ...(p.disagreements?.length
+        ? {
+            disagreements: p.disagreements.map((d: R) => ({
+              field: d.field,
+              description: d.description,
+              sides: d.sides.map((side: R) => {
+                const evidenceIds = ev(side.evidence);
+                return { value: side.value, sourceIds: [...new Set(evidenceIds.map((id) => evidence[id].sourceId))], evidenceIds };
+              }),
+            })),
+          }
+        : {}),
       sourceIds: [],
       region: p.region ?? REGION_OF[states[0]] ?? "other",
       ...(overrides.projectPatches?.[id] ?? {}),
@@ -404,6 +417,7 @@ for (const p of projects.values()) {
     ...(p.route?.evidenceIds ?? []),
     ...p.facts.flatMap((f) => f.evidenceIds),
     ...p.counties.flatMap((f) => f.evidenceIds),
+    ...(p.disagreements ?? []).flatMap((d) => d.sides.flatMap((side) => side.evidenceIds)),
   ];
   for (const id of all) ids.add(evidence[id].sourceId);
   for (const w of p.constructionWindows) ids.add(w.claimSourceId);
@@ -428,6 +442,13 @@ const um = [...projects.values()].filter((p) => p.region === "upper-midwest");
 const sp = [...projects.values()].filter((p) => p.region === "southern-plains");
 if (um.length) regions.push({ id: "upper-midwest", label: "Upper Midwest", bbox: bbox(um) });
 if (sp.length) regions.push({ id: "southern-plains", label: "Southern Plains", bbox: bbox(sp) });
+
+/* -------------------------------- context notes -------------------------------- */
+
+const contextNotes: ContextNote[] = clusters.flatMap((c) =>
+  (c.contextNotes ?? []).map((n: R) => ({ id: n.id, region: n.region, title: n.title, text: n.text, evidenceIds: ev(n.evidence) })),
+);
+for (const n of contextNotes) if (!n.evidenceIds.every((id) => evidence[id].verifiedInSource)) warn(`context note ${n.id}: an excerpt was not located`);
 
 /* ------------------------------- extraction runs ------------------------------- */
 
@@ -482,6 +503,7 @@ const body = {
   extractionRuns,
   assumptions,
   unresolved: clusters.flatMap((c) => (c.unresolved ?? []).map((note: string) => ({ cluster: c.cluster, note }))),
+  contextNotes,
 };
 const version = `snap-${SNAPSHOT_DATE}-${crypto.createHash("sha1").update(JSON.stringify(body)).digest("hex").slice(0, 8)}`;
 const snapshot: Snapshot = { version, generatedAt: new Date().toISOString(), ...body };

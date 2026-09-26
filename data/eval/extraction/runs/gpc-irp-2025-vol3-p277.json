@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p277",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 277,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:29Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "SAV",
+   "excerpt": "SAV: BOULEVARD - DEPTFORD 115KV RECONDUCTOR\nTeams # 20066\nNeed Date 06/01/2026 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectTitle",
+   "value": "BOULEVARD - DEPTFORD 115KV RECONDUCTOR",
+   "excerpt": "SAV: BOULEVARD - DEPTFORD 115KV RECONDUCTOR\nTeams # 20066\nNeed Date 06/01/2026 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20066",
+   "excerpt": "SAV: BOULEVARD - DEPTFORD 115KV RECONDUCTOR\nTeams # 20066\nNeed Date 06/01/2026 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2025",
+   "excerpt": "Teams # 20066\nNeed Date 06/01/2026 Start Date 06/01/2025\nDescription\nReconductor the Boulevard - Deptford 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "approximately 8 miles",
+   "excerpt": "Reconductor the Boulevard - Deptford 115kV line (approximately 8 miles) using 973.1 C7 ACCS\n(Everglades) conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115kV",
+   "excerpt": "Reconductor the Boulevard - Deptford 115kV line (approximately 8 miles) using 973.1 C7 ACCS\n(Everglades) conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Boulevard",
+   "excerpt": "Reconductor the Boulevard - Deptford 115kV line (approximately 8 miles) using 973.1 C7 ACCS\n(Everglades) conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Deptford",
+   "excerpt": "Reconductor the Boulevard - Deptford 115kV line (approximately 8 miles) using 973.1 C7 ACCS\n(Everglades) conductor.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 898,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1004,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1902
+ }
+}

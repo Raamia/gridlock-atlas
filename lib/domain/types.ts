@@ -97,7 +97,9 @@ export interface DateBound {
 export interface ConstructionWindow {
   id: string;
   claimSourceId: string;
-  phase: "preconstruction" | "general-construction" | "unknown";
+  /** scheduled: a published schedule from implementation start to in-service (Georgia Power's Start Date "schedule for implementation",
+   *  DESC's first evidenced spending) — never field-work dates; evaluated separately from construction windows. */
+  phase: "preconstruction" | "general-construction" | "scheduled" | "unknown";
   start: DateBound;
   end: DateBound;
   /** Source implies one continuous phase between start and end. */
@@ -174,10 +176,18 @@ export interface Route {
 }
 
 export interface ProjectFact {
-  key: "voltageKv" | "lengthMiles" | "costUsd" | "other";
+  /** rowWidthFt: a right-of-way width the owner filed for this project (e.g. a siting application). */
+  key: "voltageKv" | "lengthMiles" | "costUsd" | "rowWidthFt" | "other";
   label: string;
   value: string;
   evidenceIds: string[];
+}
+
+/** A preserved disagreement that is not a date (who owns the work, what it installs): every side keeps its excerpt. */
+export interface Disagreement {
+  field: "owner" | "scope";
+  description: string;
+  sides: { value: string; sourceIds: string[]; evidenceIds: string[] }[];
 }
 
 export interface Project {
@@ -200,6 +210,7 @@ export interface Project {
   completionClaims: CompletionClaim[];
   knownCoordination: CoordinationClaim[];
   caveats: string[];
+  disagreements?: Disagreement[];
   sourceIds: string[];
   /** Set when this record is a repeated mention of another work package. */
   duplicateOf?: string;
@@ -256,6 +267,15 @@ export interface ImpactAssumption {
   note: string;
 }
 
+/** A cited planning-context note (e.g. a newest-source check); context only, never coordination on a project. */
+export interface ContextNote {
+  id: string;
+  region: string;
+  title: string;
+  text: string;
+  evidenceIds: string[];
+}
+
 export interface Snapshot {
   version: string;
   snapshotDate: string;
@@ -269,6 +289,7 @@ export interface Snapshot {
   extractionRuns: ExtractionRun[];
   assumptions: ImpactAssumption[];
   unresolved: { cluster: string; note: string }[];
+  contextNotes?: ContextNote[];
 }
 
 /* ------------------------------ Matching output ------------------------------ */
@@ -309,6 +330,10 @@ export interface TimeDetail {
   confirmedOverlap?: { start: string; end: string };
   precision: DateBound["precision"];
   continuityCaveat: boolean;
+  /** construction: construction windows decide TIME; schedule: published schedules (start → in-service) overlap with certainty. */
+  basis?: "construction" | "schedule";
+  /** Published schedules (phase "scheduled"): the span both certainly cover, and whether it is long enough to confirm TIME. */
+  schedule?: { windowIdsA: string[]; windowIdsB: string[]; overlap?: { start: string; end: string }; days: number; confirmed: boolean };
   /** Sponsor's secondary signal: days between the two current in-service / need dates. */
   inService?: { a: string; b: string; gapDays: number; labelA: string; labelB: string; boundA: DateBound; boundB: DateBound; coarse: boolean };
 }
@@ -365,6 +390,10 @@ export interface Match {
   relevance: "high" | "medium" | "low";
   priority: number;
   priorityReasons: string[];
+  /** Flagged only because of a shared facility while the centers are beyond the review radius: ranked after every within-radius needs-review pair. */
+  beyondRadius?: boolean;
+  /** Projects whose planned in-service date has passed without a source confirming completion (kept, ranked lower, TIME at most possible). */
+  pastDue?: PastDueProject[];
   evidenceIds: string[];
   engineVersion: string;
 }
@@ -372,6 +401,11 @@ export interface Match {
 export interface ExcludedProject {
   projectId: string;
   reason: "complete" | "cancelled" | "duplicate" | "unknown-status" | "past-in-service";
+  detail: string;
+}
+
+export interface PastDueProject {
+  projectId: string;
   detail: string;
 }
 
@@ -392,6 +426,8 @@ export interface MatchRun {
   pairsEvaluated: number;
   matches: Match[];
   excludedProjects: ExcludedProject[];
+  /** Kept in the queue with a flag: planned date passed, completion not confirmed. */
+  pastDueProjects: PastDueProject[];
   /** Listed individually only for shared-owner pairs unless the caller asks for every exclusion. */
   excludedPairs: ExcludedPair[];
   excludedCounts: Record<ExcludedPair["reason"], number>;

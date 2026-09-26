@@ -101,12 +101,12 @@ const STEPS: Step[] = [
   },
   {
     title: "When they build",
-    body: "Windows are compared source by source. Where a plan gives only a start and need date, or budget years, the overlap can only be “possible”; the gap between in-service dates is the secondary signal.",
+    body: "Windows are compared source by source. Where published schedules (start → in-service) overlap by 30 days or more, the timeline signal is confirmed and the pair earns BOTH; where they barely touch, or a plan gives only budget years, it stays “possible”. Field-work dates are not published; the in-service gap is the secondary signal.",
     run: open(topSoutheast, "schedule"),
   },
   {
     title: "A rough, sourced impact estimate",
-    body: "What one shared corridor could avoid encumbering twice. Equipment work, rebuilds on existing right-of-way and lines that only meet at a substation start at 0 mi; defaults cite public sources where one exists, anything unsourced is marked, and every input is editable — a scenario, not a saving.",
+    body: "Each way the two jobs could share resources is estimated separately — staging crews once, a shared terminal or spare transformer, coordinated outages, a shared corridor — priced from cited public cost tables and labeled stated, conditional or context, beside the capital a joint review would cover. A scenario, not a saving.",
     run: open(topSoutheast, "impact"),
   },
   {

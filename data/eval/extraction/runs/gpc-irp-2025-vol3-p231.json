@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p231",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 231,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:53Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "SAV: CC - HYUNDAI MOTORS SAVANNAH AKA. PROJECT EA",
+   "excerpt": "SAV: CC - HYUNDAI MOTORS SAVANNAH AKA. PROJECT EA\nTeams # 19523\nNeed Date 04/25/2025 Start Date 06/01/2022",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19523",
+   "excerpt": "SAV: CC - HYUNDAI MOTORS SAVANNAH AKA. PROJECT EA\nTeams # 19523\nNeed Date 04/25/2025 Start Date 06/01/2022",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Supporting Statement\nREDACTED\nChange From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2022",
+   "excerpt": "Teams # 19523\nNeed Date 04/25/2025 Start Date 06/01/2022\nDescription\nConstruct a new Hyundai 230kV substation",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "12 miles; 10 miles; 2.3 miles",
+   "excerpt": "Build two new 230kV lines\nconnecting from Hyundai - Newton Rd (12 miles) and Hyundai - Meldrim (10 miles). At Meldrim, add\na breaker",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230kV; 115kV; 25kV",
+   "excerpt": "Construct a new Hyundai 230kV substation with an eight element 230kV ring bus and four 230/25kV\nbanks. Construct a new Newton Rd",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Hyundai 230kV substation",
+   "excerpt": "Construct a new Hyundai 230kV substation with an eight element 230kV ring bus and four 230/25kV\nbanks.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Newton Rd 230kV substation",
+   "excerpt": "Construct a new Newton Rd 230kV substation with a five element 230kV ring bus and loop\nthrough the Little Ogeechee - Meldrim",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Meldrim",
+   "excerpt": "Build two new 230kV lines\nconnecting from Hyundai - Newton Rd (12 miles) and Hyundai - Meldrim (10 miles). At Meldrim",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "Interstate Centre",
+   "excerpt": "Install a 115/25kV bank at Interstate Centre\nand build a new 115kV line from Interstate Centre - Hyundai (2.3 miles)",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 980,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1070,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 2050
+ }
+}

@@ -1,0 +1,175 @@
+utility,sourceId,page,field,outcome,adjudication,reference,model,excerpt,located
+gpc,gpc-irp-2025-vol3,296,coordinationMention,extra-located,model-supported,null,coordinated with the East Walton Project (TEAMS #09662),"line. This is coordinated with the East Walton Project (TEAMS #09662).
+Supporting Statement
+REDACTED",True
+desc,desc-scrtp-2024-2028,34,inServiceDate,near,both-supported,"""2026-10-01""",10/1/2025 (phase 1) and 10/1/2026 (phase 2),"Planned In-Service Date
+10/1/2025 (phase 1) and 10/1/2026 (phase 2)",True
+desc,desc-scrtp-2025-2029,28,inServiceDate,near,both-supported,"""2026-10-01""",10/1/2025 (phase 1) and 10/1/2026 (phase 2),"Project Status
+In Progress
+Planned In-Service Date
+10/1/2025 (phase 1) and 10/1/2026 (phase 2)
+Estimated Project Cost",True
+desc,desc-scrtp-2026-2030,8,inServiceDate,near,both-supported,"""2026-10-01""",10/1/2025 (phase 1) and 10/1/2026 (phase 2),"Project Status
+In Progress
+Planned In-Service Date
+10/1/2025 (phase 1) and 10/1/2026 (phase 2)
+Estimated Project Cost",True
+gpc,gpc-irp-2025-vol3,214,inServiceDate,missed,prompt-semantics,"""2025-06-01""",,,False
+gpc,gpc-irp-2025-vol3,216,inServiceDate,missed,prompt-semantics,"""2025-12-31""",,,False
+gpc,gpc-irp-2025-vol3,218,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,219,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,220,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,222,inServiceDate,missed,prompt-semantics,"""2026-12-01""",,,False
+gpc,gpc-irp-2025-vol3,225,inServiceDate,missed,prompt-semantics,"""2026-10-01""",,,False
+gpc,gpc-irp-2025-vol3,231,inServiceDate,missed,prompt-semantics,"""2025-04-25""",,,False
+gpc,gpc-irp-2025-vol3,233,inServiceDate,missed,prompt-semantics,"""2025-05-01""",,,False
+gpc,gpc-irp-2025-vol3,236,inServiceDate,missed,prompt-semantics,"""2025-06-01""",,,False
+gpc,gpc-irp-2025-vol3,240,inServiceDate,missed,prompt-semantics,"""2025-06-01""",,,False
+gpc,gpc-irp-2025-vol3,243,inServiceDate,missed,prompt-semantics,"""2025-06-01""",,,False
+gpc,gpc-irp-2025-vol3,245,inServiceDate,missed,prompt-semantics,"""2025-06-01""",,,False
+gpc,gpc-irp-2025-vol3,247,inServiceDate,missed,prompt-semantics,"""2025-06-01""",,,False
+gpc,gpc-irp-2025-vol3,248,inServiceDate,missed,prompt-semantics,"""2025-06-30""",,,False
+gpc,gpc-irp-2025-vol3,250,inServiceDate,missed,prompt-semantics,"""2025-12-01""",,,False
+gpc,gpc-irp-2025-vol3,251,inServiceDate,missed,prompt-semantics,"""2025-12-31""",,,False
+gpc,gpc-irp-2025-vol3,252,inServiceDate,missed,prompt-semantics,"""2025-12-31""",,,False
+gpc,gpc-irp-2025-vol3,255,inServiceDate,missed,prompt-semantics,"""2026-04-01""",,,False
+gpc,gpc-irp-2025-vol3,256,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,259,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,262,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,263,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,264,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,265,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,271,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,272,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,276,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,277,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,278,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,280,inServiceDate,missed,prompt-semantics,"""2026-06-01""",,,False
+gpc,gpc-irp-2025-vol3,281,inServiceDate,missed,prompt-semantics,"""2026-06-30""",,,False
+gpc,gpc-irp-2025-vol3,286,inServiceDate,missed,prompt-semantics,"""2026-12-31""",,,False
+gpc,gpc-irp-2025-vol3,288,inServiceDate,missed,prompt-semantics,"""2027-03-01""",,,False
+gpc,gpc-irp-2025-vol3,293,inServiceDate,missed,prompt-semantics,"""2027-06-01""",,,False
+gpc,gpc-irp-2025-vol3,294,inServiceDate,missed,prompt-semantics,"""2027-06-01""",,,False
+gpc,gpc-irp-2025-vol3,308,inServiceDate,missed,prompt-semantics,"""2027-06-01""",,,False
+gpc,gpc-irp-2025-vol3,309,inServiceDate,missed,prompt-semantics,"""2027-06-01""",,,False
+gpc,gpc-irp-2025-vol3,310,inServiceDate,missed,prompt-semantics,"""2027-06-01""",,,False
+gpc,gpc-irp-2025-vol3,312,inServiceDate,missed,prompt-semantics,"""2027-06-01""",,,False
+gpc,gpc-irp-2025-vol3,313,inServiceDate,missed,prompt-semantics,"""2027-06-01""",,,False
+gpc,gpc-irp-2025-vol3,314,inServiceDate,missed,prompt-semantics,"""2027-06-01""",,,False
+gpc,gpc-irp-2025-vol3,315,inServiceDate,missed,prompt-semantics,"""2027-07-15""",,,False
+gpc,gpc-irp-2025-vol3,316,inServiceDate,missed,prompt-semantics,"""2027-07-30""",,,False
+gpc,gpc-irp-2025-vol3,318,inServiceDate,missed,prompt-semantics,"""2027-12-31""",,,False
+gpc,gpc-irp-2025-vol3,319,inServiceDate,missed,prompt-semantics,"""2027-12-31""",,,False
+gpc,gpc-irp-2025-vol3,321,inServiceDate,missed,prompt-semantics,"""2028-06-01""",,,False
+gpc,gpc-irp-2025-vol3,322,inServiceDate,missed,prompt-semantics,"""2028-06-01""",,,False
+gpc,gpc-irp-2025-vol3,323,inServiceDate,missed,prompt-semantics,"""2028-06-01""",,,False
+gpc,gpc-irp-2025-vol3,333,inServiceDate,missed,prompt-semantics,"""2028-06-01""",,,False
+gpc,gpc-irp-2025-vol3,334,inServiceDate,missed,prompt-semantics,"""2028-06-01""",,,False
+gpc,gpc-irp-2025-vol3,336,inServiceDate,missed,prompt-semantics,"""2028-06-01""",,,False
+gpc,gpc-irp-2025-vol3,338,inServiceDate,missed,prompt-semantics,"""2028-06-01""",,,False
+gpc,gpc-irp-2025-vol3,342,inServiceDate,missed,prompt-semantics,"""2029-06-01""",,,False
+gpc,gpc-irp-2025-vol3,343,inServiceDate,missed,prompt-semantics,"""2029-06-01""",,,False
+gpc,gpc-irp-2025-vol3,345,inServiceDate,missed,prompt-semantics,"""2029-06-01""",,,False
+gpc,gpc-irp-2025-vol3,347,inServiceDate,missed,prompt-semantics,"""2029-06-01""",,,False
+gpc,gpc-irp-2025-vol3,355,inServiceDate,missed,prompt-semantics,"""2029-06-01""",,,False
+gpc,gpc-irp-2025-vol3,357,inServiceDate,missed,prompt-semantics,"""2029-06-01""",,,False
+gpc,gpc-irp-2025-vol3,361,inServiceDate,missed,prompt-semantics,"""2029-06-01""",,,False
+gpc,gpc-irp-2025-vol3,365,inServiceDate,missed,prompt-semantics,"""2029-06-01""",,,False
+gpc,gpc-irp-2025-vol3,366,inServiceDate,missed,prompt-semantics,"""2029-12-31""",,,False
+gpc,gpc-irp-2025-vol3,368,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,369,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,370,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,373,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,374,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,375,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,376,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,377,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,378,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,380,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,381,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,391,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,392,inServiceDate,missed,prompt-semantics,"""2030-06-01""",,,False
+gpc,gpc-irp-2025-vol3,398,inServiceDate,missed,prompt-semantics,"""2030-11-01""",,,False
+gpc,gpc-irp-2025-vol3,401,inServiceDate,missed,prompt-semantics,"""2031-05-01""",,,False
+gpc,gpc-irp-2025-vol3,402,inServiceDate,missed,prompt-semantics,"""2031-06-01""",,,False
+gpc,gpc-irp-2025-vol3,407,inServiceDate,missed,prompt-semantics,"""2032-06-01""",,,False
+gpc,gpc-irp-2025-vol3,408,inServiceDate,missed,prompt-semantics,"""2033-06-01""",,,False
+gpc,gpc-irp-2025-vol3,409,inServiceDate,missed,prompt-semantics,"""2033-06-01""",,,False
+gpc,gpc-irp-2025-vol3,417,inServiceDate,missed,prompt-semantics,"""2033-06-01""",,,False
+gpc,gpc-irp-2025-vol3,418,inServiceDate,missed,prompt-semantics,"""2033-06-01""",,,False
+gpc,gpc-irp-2025-vol3,420,inServiceDate,missed,prompt-semantics,"""2033-06-01""",,,False
+gpc,gpc-irp-2025-vol3,421,inServiceDate,missed,prompt-semantics,"""2033-06-01""",,,False
+gpc,gpc-irp-2025-vol3,422,inServiceDate,missed,prompt-semantics,"""2033-12-31""",,,False
+gpc,gpc-irp-2025-vol3,423,inServiceDate,missed,prompt-semantics,"""2034-06-01""",,,False
+gpc,gpc-irp-2025-vol3,424,inServiceDate,missed,prompt-semantics,"""2034-06-01""",,,False
+desc,desc-scrtp-2024-2028,18,lengthMiles,extra-located,model-supported,null,1.4,"Harleyville 115KV Transmission Tap – Construct (1.4 miles)
+Project ID
+06005 B",True
+desc,desc-scrtp-2024-2028,20,lengthMiles,extra-located,model-supported,null,Approx 18 Miles,"5 Year Budget
+Canadys-Ritter 115KV-Rebld SPDC 230/115KV 1272 (Approx 18 Miles)
+Project ID",True
+desc,desc-scrtp-2025-2029,14,lengthMiles,extra-located,model-supported,null,1.4 miles,"Harleyville 115KV Transmission Tap – Construct (1.4 miles)
+Project ID
+06005 B
+Project Description",True
+desc,desc-scrtp-2025-2029,15,lengthMiles,extra-located,model-supported,null,Approx 18 Miles,"Canadys-Ritter 115KV-Rebld SPDC 230/115KV 1272 (Approx 18 Miles)
+Project ID
+06076A",True
+desc,desc-scrtp-2025-2029,43,lengthMiles,near,both-supported,8.5,13.5 additional miles; 8.5 mile section,"needs to be rebuilt with B1272 ACSR
+(approximately 13.5 additional miles). The 8.5 mile section of Dawson – Faber Place 230 kV",True
+desc,desc-scrtp-2026-2030,34,lengthMiles,extra-located,model-supported,null,1.4,"Harleyville 115KV Transmission Tap – Construct (1.4 miles)
+Project ID
+06005 B",True
+gpc,gpc-irp-2025-vol3,295,lengthMiles,extra-located,model-supported,null,14.9,Rebuild the ~14.9mi Austin Drive - Morrow 115kV with 200C 1351.5 ACSS Martin.,True
+gpc,gpc-irp-2025-vol3,319,lengthMiles,disagree,model-supported,8.5,10.1 miles,"Build two new 230kV lines: Cass Pine - Great Valley and
+Great Valley - Grassy Hollow (total 10.1 miles)",True
+gpc,gpc-irp-2025-vol3,322,lengthMiles,missed,model-supported,2.5,,,False
+gpc,gpc-irp-2025-vol3,381,lengthMiles,disagree,model-supported,7.6,10.49 miles,"Kaolin J Sandersville #6 (0.66 miles) line sections of the Gordon - Sandersville #1 115kV line. Rebuild a total of
+10.49 miles",True
+gpc,gpc-irp-2025-vol3,399,lengthMiles,extra-located,parse-supported,null,a mile,"This project will construct a new 115kV breaker and a half substation a mile north of the East
+Bainbridge substation.",True
+desc,desc-scrtp-2024-2028,18,projectTitle,near,format,"""Harleyville 115KV Transmission Tap – Construct (1.4 miles)""",Harleyville 115KV Transmission Tap – Construct,"Harleyville 115KV Transmission Tap – Construct (1.4 miles)
+Project ID
+06005 B",True
+gpc,gpc-irp-2025-vol3,227,projectTitle,near,format,"""SAV: MCINTOSH - PURRYSBURG 230KV REACTORS""",MCINTOSH - PURRYSBURG 230KV REACTORS,"SAV: MCINTOSH - PURRYSBURG 230KV REACTORS
+Teams # 20277
+Need Date 06/01/2026 Start Date 01/01/2024",True
+gpc,gpc-irp-2025-vol3,245,projectTitle,near,format,"""SAV: DEPTFORD - MAGNOLIA 115KV RECONDUCTOR""",DEPTFORD - MAGNOLIA 115KV RECONDUCTOR,"SAV: DEPTFORD - MAGNOLIA 115KV RECONDUCTOR
+Teams # 20067
+Need Date 06/01/2025 Start Date 01/01/2023",True
+gpc,gpc-irp-2025-vol3,248,projectTitle,near,format,"""CAMDEN INDUSTRIAL PARK (GPC)""",CAMDEN INDUSTRIAL PARK,"CAMDEN INDUSTRIAL PARK (GPC)
+Teams # 20684
+Need Date 06/30/2025 Start Date 01/01/2024",True
+gpc,gpc-irp-2025-vol3,277,projectTitle,near,format,"""SAV: BOULEVARD - DEPTFORD 115KV RECONDUCTOR""",BOULEVARD - DEPTFORD 115KV RECONDUCTOR,"SAV: BOULEVARD - DEPTFORD 115KV RECONDUCTOR
+Teams # 20066
+Need Date 06/01/2026 Start Date 06/01/2025",True
+gpc,gpc-irp-2025-vol3,313,projectTitle,near,format,"""SAV: GOSHEN (SAV) - KRAFT 115KV LINE REBUILD""",GOSHEN (SAV) - KRAFT 115KV LINE REBUILD,"SAV: GOSHEN (SAV) - KRAFT 115KV LINE REBUILD
+Teams # 20785",True
+gpc,gpc-irp-2025-vol3,314,projectTitle,near,format,"""SAV: GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD""",GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD,"SAV: GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD
+Teams # 20065",True
+gpc,gpc-irp-2025-vol3,334,projectTitle,near,format,"""SAV: COLEMAN - DEAN FOREST 115KV LINE REBUILD""",COLEMAN - DEAN FOREST 115KV LINE REBUILD,"SAV: COLEMAN - DEAN FOREST 115KV LINE REBUILD
+Teams # 20783",True
+gpc,gpc-irp-2025-vol3,407,projectTitle,near,format,"""SAV: COLEMAN - MELDRIM 115KV LINE REBUILD""",COLEMAN - MELDRIM 115KV LINE REBUILD,"SAV: COLEMAN - MELDRIM 115KV LINE REBUILD
+Teams # 20784
+Need Date 06/01/2032 Start Date",True
+desc,desc-scrtp-2024-2028,21,voltageKv,near,both-supported,[230],230 kV and 115 kV,"Convert the existing
+Ritter – Yemassee 230 kV to 115 kV operation. Convert and add terminals at Ritter and Yemassee.",True
+desc,desc-scrtp-2025-2029,15,voltageKv,disagree,both-supported,"[115, 230]",115 kV,"Project Description
+Rebuild Canadys-Ritter 115 kV line as SPDC with 1272 ACSR.",True
+desc,desc-scrtp-2025-2029,16,voltageKv,near,both-supported,[230],230 kV; 115 kV,"Construct Ritter – Yemassee 230 kV #1 and #2 SPDC with B1272 ACSR on both sides. Convert the existing
+Ritter – Yemassee 230 kV to 115 kV operation.",False
+desc,desc-scrtp-2025-2029,47,voltageKv,disagree,both-supported,[115],115 kV; 230 kV,"Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek. Include Long Savannah
+115kV Tap SPDC",True
+desc,desc-scrtp-2026-2030,13,voltageKv,disagree,page-inconsistent,[115],230 kV,"Project Description
+Constructing a 230 kV Tap from Okatie to Riverport
+Project Need",True
+desc,desc-scrtp-2026-2030,33,voltageKv,near,both-supported,"[12, 115]",115,"Jackson 115kV: Construct 115 – 12kV Distribution Substation
+Project ID
+6854 C",True
+desc,desc-scrtp-2026-2030,44,voltageKv,disagree,model-supported,"[115, 230]",115 kV,"Project Description
+Rebuild Canadys-Ritter 115 kV line as SPDC with 1272 ACSR.",True
+desc,desc-scrtp-2026-2030,47,voltageKv,disagree,both-supported,[115],115 kV; 230 kV,"Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek. Include Long Savannah
+115kV Tap",True
+gpc,gpc-irp-2025-vol3,295,voltageKv,disagree,both-supported,"[115, 230]",115,Rebuild the ~14.9mi Austin Drive - Morrow 115kV with 200C 1351.5 ACSS Martin.,True
+gpc,gpc-irp-2025-vol3,370,voltageKv,near,both-supported,"[46, 115]",115kV,"Construct approximately 7 miles of 115kV line with minimum 170C 1351 ACSS conductor from
+Gillsville Tap Junction to Midway.",True

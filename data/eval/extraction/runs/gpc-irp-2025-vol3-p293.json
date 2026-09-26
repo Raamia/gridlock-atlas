@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p293",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 293,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:42Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "GPC",
+   "excerpt": "GPC will rebuild the Line Creek 230kV substation as breaker and a half configuration and connect the",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectTitle",
+   "value": "CC - MICROSOFT - SHUGART (CCO06)",
+   "excerpt": "CC - MICROSOFT - SHUGART (CCO06)\nTeams # 18736\nNeed Date 06/01/2027 Start Date 12/31/2022",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "18736",
+   "excerpt": "CC - MICROSOFT - SHUGART (CCO06)\nTeams # 18736\nNeed Date 06/01/2027 Start Date 12/31/2022",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Project delayed from 2024 to 2027",
+   "excerpt": "Change From Previous Ten Year Plan\nProject delayed from 2024 to 2027\n\nChange From Previous IRP\nNew project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "12/31/2022",
+   "excerpt": "Teams # 18736\nNeed Date 06/01/2027 Start Date 12/31/2022\nDescription\nGPC will rebuild",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "0.3 miles each",
+   "excerpt": "Build two short lines from Line Creek to Shugart\nFarms (0.3 miles each) with 100C 1351 ACSR Martin conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230kV",
+   "excerpt": "GPC will rebuild the Line Creek 230kV substation as breaker and a half configuration and connect the",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Line Creek 230kV substation",
+   "excerpt": "GPC will rebuild the Line Creek 230kV substation as breaker and a half configuration and connect the",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Shugart Farms",
+   "excerpt": "Build two short lines from Line Creek to Shugart\nFarms (0.3 miles each) with 100C 1351 ACSR Martin conductor.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 951,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 955,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1906
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "id": "desc-scrtp-2025-2029-p8",
+ "sourceId": "desc-scrtp-2025-2029",
+ "page": 8,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:01:12Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Project 8 of 47\n\nDominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Okatie-Bluffton 115kV: Rebuild",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget\nOkatie-Bluffton 115kV: Rebuild",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6808 S",
+   "excerpt": "5 Year Budget\nOkatie-Bluffton 115kV: Rebuild\nProject ID\n6808 S\n\nProject Description\nReplace wooden H-Frame structures",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "This project is required to address end of life and reliability issues on these lines.\nProject Status\nIn Progress",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "6/1/2025",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n6/1/2025\nEstimated Project Cost\nPrevious\n2025",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget\nOkatie-Bluffton 115kV: Rebuild",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$40,674,739",
+   "excerpt": "2026\n$0\n\n2027\n$0\n\n*Total Estimated Amount applied to 2025 Rate Base Calculation\n\n2028\n$0\n\n2029\n$0\n\nTotal*\n$40,674,739",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Okatie",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget\nOkatie-Bluffton 115kV: Rebuild",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Bluffton",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget\nOkatie-Bluffton 115kV: Rebuild",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 744,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 970,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1714
+ }
+}

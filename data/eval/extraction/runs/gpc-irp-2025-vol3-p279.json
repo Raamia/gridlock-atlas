@@ -1,0 +1,80 @@
+{
+ "id": "gpc-irp-2025-vol3-p279",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 279,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:32Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "UNION CITY - YATES 230 KV WHITE LINE REBUILD",
+   "excerpt": "UNION CITY - YATES 230 KV WHITE LINE REBUILD\nTeams # 17900\nNeed Date 06/01/2026 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "Teams # 17900",
+   "excerpt": "UNION CITY - YATES 230 KV WHITE LINE REBUILD\nTeams # 17900\nNeed Date 06/01/2026 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2023",
+   "excerpt": "Teams # 17900\nNeed Date 06/01/2026 Start Date 06/01/2023\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2026",
+   "excerpt": "Teams # 17900\nNeed Date 06/01/2026 Start Date 06/01/2023\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "23.4 miles",
+   "excerpt": "Rebuild 23.4 miles of the Union City - Yates 230kV White line with bundled 1351 ACSS Martin\nconductor at 200C.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230 kV",
+   "excerpt": "Rebuild 23.4 miles of the Union City - Yates 230kV White line with bundled 1351 ACSS Martin\nconductor at 200C.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Union City",
+   "excerpt": "Rebuild 23.4 miles of the Union City - Yates 230kV White line with bundled 1351 ACSS Martin\nconductor at 200C.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Yates",
+   "excerpt": "Rebuild 23.4 miles of the Union City - Yates 230kV White line with bundled 1351 ACSS Martin\nconductor at 200C.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 859,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 424,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1283
+ }
+}

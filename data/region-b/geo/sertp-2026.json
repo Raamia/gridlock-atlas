@@ -1,0 +1,99 @@
+{
+ "batch": "sertp-2026",
+ "note": "Places for Savannah-area projects first listed in the SERTP 2026 Preliminary Expansion Plan (OSM export data/region-b/osm-power-sc-ga.json).",
+ "projects": [
+  {
+   "key": "sertp26:mcintosh-relays",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "McIntosh",
+     "lat": 32.35212,
+     "lon": -81.17511,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/121624352 power=substation name=McIntosh Substation operator=Georgia Power voltage=230000 (same feature as gpc:20277 and desc:6888)",
+     "confidence": "confirmed",
+     "validation": "The plan names McIntosh's 230 kV breaker-and-a-half bus; this is the Georgia Power McIntosh substation next to Plant McIntosh in Effingham County, the same feature used for TEAMS 20277."
+    }
+   ]
+  },
+  {
+   "key": "sertp26:west-mcintosh-breakers",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "West McIntosh",
+     "label": "West McIntosh",
+     "lat": 32.35437,
+     "lon": -81.18245,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/121624371 power=substation name='West McIntosh Substation' operator=Georgia Power voltage=500000 (mapper-supplied tags)",
+     "confidence": "confirmed",
+     "validation": "Exact name match, operator Georgia Power. A distinct substation about 0.46 mi west of McIntosh (way/121624352); it is not treated as the same facility as McIntosh."
+    }
+   ],
+   "notes": "West McIntosh is a distinct Georgia Power substation about 0.46 mi from McIntosh (OSM way/121624371 vs way/121624352); it is measured as its own place, never equated with McIntosh."
+  },
+  {
+   "key": "sertp26:calvert-west-mcintosh",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "West McIntosh",
+     "label": "West McIntosh",
+     "lat": 32.35437,
+     "lon": -81.18245,
+     "precision": "named-facility",
+     "uncertaintyMeters": 9700,
+     "coordinateSource": "OSM way/121624371 power=substation name='West McIntosh Substation' operator=Georgia Power voltage=500000 (mapper-supplied tags)",
+     "confidence": "confirmed",
+     "validation": "Exact name match, operator Georgia Power. A distinct substation about 0.46 mi west of McIntosh (way/121624352); it is not treated as the same facility as McIntosh. Calvert, the far terminal of the 12-mile line, is not located, so the center sits at West McIntosh with a 6-mile uncertainty."
+    },
+    {
+     "name": "Calvert",
+     "precision": "unknown",
+     "lat": null,
+     "lon": null,
+     "validation": "No substation named Calvert is in the OSM export or Nominatim near McIntosh; the plan gives only the line name. Not plotted."
+    }
+   ],
+   "notes": "West McIntosh is a distinct Georgia Power substation about 0.46 mi from McIntosh (OSM way/121624371 vs way/121624352); it is measured as its own place, never equated with McIntosh."
+  },
+  {
+   "key": "sertp26:west-mcintosh-autobank",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "West McIntosh",
+     "label": "West McIntosh",
+     "lat": 32.35437,
+     "lon": -81.18245,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/121624371 power=substation name='West McIntosh Substation' operator=Georgia Power voltage=500000 (mapper-supplied tags)",
+     "confidence": "confirmed",
+     "validation": "Exact name match, operator Georgia Power. A distinct substation about 0.46 mi west of McIntosh (way/121624352); it is not treated as the same facility as McIntosh."
+    }
+   ],
+   "notes": "West McIntosh is a distinct Georgia Power substation about 0.46 mi from McIntosh (OSM way/121624371 vs way/121624352); it is measured as its own place, never equated with McIntosh."
+  },
+  {
+   "key": "sertp26:meldrim-auto",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Meldrim",
+     "lat": 32.15528,
+     "lon": -81.36838,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/121624363 power=substation name=Meldrim Substation operator=Georgia Power voltage=230000;115000;46000",
+     "confidence": "confirmed",
+     "validation": "The only Meldrim in the export; Georgia Power, 230/115 kV, which matches a 230/115 kV autotransformer. Same feature as TEAMS 20796."
+    }
+   ]
+  }
+ ]
+}

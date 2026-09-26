@@ -1,0 +1,80 @@
+{
+ "id": "gpc-irp-2025-vol3-p312",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 312,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:50Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "SANDERSVILLE #1 - WADLEY PRI. 115KV REBUILD/RECONDUCTOR",
+   "excerpt": "SANDERSVILLE #1 - WADLEY PRI. 115KV REBUILD/RECONDUCTOR\nTeams # 19248\nNeed Date 06/01/2027 Start Date 02/15/2022",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19248",
+   "excerpt": "SANDERSVILLE #1 - WADLEY PRI. 115KV REBUILD/RECONDUCTOR\nTeams # 19248\nNeed Date 06/01/2027 Start Date 02/15/2022",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "02/15/2022",
+   "excerpt": "Teams # 19248\nNeed Date 06/01/2027 Start Date 02/15/2022\nDescription\nRebuild approximately 24.3 miles",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "24.3 miles",
+   "excerpt": "Rebuild approximately 24.3 miles of the Sandersville #1 - Wadley Primary 115kV line from 100C 336",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Rebuild approximately 24.3 miles of the Sandersville #1 - Wadley Primary 115kV line from 100C 336",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Sandersville #1",
+   "excerpt": "Rebuild approximately 24.3 miles of the Sandersville #1 - Wadley Primary 115kV line from 100C 336",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Wadley Primary",
+   "excerpt": "Rebuild approximately 24.3 miles of the Sandersville #1 - Wadley Primary 115kV line from 100C 336",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 887,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 963,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1850
+ }
+}

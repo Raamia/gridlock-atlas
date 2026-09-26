@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2024-2028-p37",
+ "sourceId": "desc-scrtp-2024-2028",
+ "page": 37,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:33Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Cainhoy 115 kV Tap: Construct",
+   "excerpt": "Cainhoy 115 kV Tap: Construct\nProject ID\n0147 C, K\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "0147 C, K",
+   "excerpt": "Cainhoy 115 kV Tap: Construct\nProject ID\n0147 C, K\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Need\nLoad growth.\nProject Status\nPlanned\nPlanned In-Service Date\n12/31/2027",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2027",
+   "excerpt": "Project Need\nLoad growth.\nProject Status\nPlanned\nPlanned In-Service Date\n12/31/2027",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "lengthMiles",
+   "value": "2.8",
+   "excerpt": "Construct a 115 kV tap from Cainhoy to Clements Ferry. Approximately 2.8 miles. Construct terminal at\nCainhoy.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Construct a 115 kV tap from Cainhoy to Clements Ferry. Approximately 2.8 miles. Construct terminal at\nCainhoy.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$21,850,000",
+   "excerpt": "*Total Estimated Amount applied to 2027 Rate Base Calculation\n\n2027\n2028\n$10,650,000 $0\n\nTotal*\n$21,850,000",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Cainhoy",
+   "excerpt": "Construct a 115 kV tap from Cainhoy to Clements Ferry. Approximately 2.8 miles. Construct terminal at\nCainhoy.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Clements Ferry",
+   "excerpt": "Construct a 115 kV tap from Cainhoy to Clements Ferry. Approximately 2.8 miles. Construct terminal at\nCainhoy.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 743,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 960,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1703
+ }
+}

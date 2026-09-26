@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p396",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 396,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:05:00Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "TALLULAH LODGE - TOCCOA 115 KV REBUILD",
+   "excerpt": "TALLULAH LODGE - TOCCOA 115 KV REBUILD\nTeams # 19995\nNeed Date 06/01/2030 Start Date 12/31/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19995",
+   "excerpt": "TALLULAH LODGE - TOCCOA 115 KV REBUILD\nTeams # 19995\nNeed Date 06/01/2030 Start Date 12/31/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "12/31/2025",
+   "excerpt": "Teams # 19995\nNeed Date 06/01/2030 Start Date 12/31/2025\nDescription\nRebuild the Tallulah Lodge - Toccoa 115kV Line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2030",
+   "excerpt": "Teams # 19995\nNeed Date 06/01/2030 Start Date 12/31/2025\nDescription\nRebuild the Tallulah Lodge - Toccoa 115kV Line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "10.3 miles",
+   "excerpt": "Rebuild the Tallulah Lodge - Toccoa 115kV Line with 100C 795 ACSR conductor (total of 10.3 miles).",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Rebuild the Tallulah Lodge - Toccoa 115kV Line with 100C 795 ACSR conductor (total of 10.3 miles).",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Tallulah Lodge",
+   "excerpt": "Rebuild the Tallulah Lodge - Toccoa 115kV Line with 100C 795 ACSR conductor (total of 10.3 miles).",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Toccoa",
+   "excerpt": "Rebuild the Tallulah Lodge - Toccoa 115kV Line with 100C 795 ACSR conductor (total of 10.3 miles).",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 868,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1003,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1871
+ }
+}
