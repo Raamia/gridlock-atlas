@@ -526,9 +526,18 @@ export default function MapStage() {
     markers.current = [];
     if (preview) {
       const site = sharedSite(preview.match);
+      const cMid = preview.match.geoDetail.center ? (preview.match.geoDetail.center.a[0] + preview.match.geoDetail.center.b[0]) / 2 : null;
       if (site)
         markers.current.push(
-          new mapboxgl.Marker({ element: siteMarker(site.label, site.stated ? "Shared site stated in source" : site.implied ? "Shared site implied by sources" : "Both projects end here"), anchor: "center" })
+          new mapboxgl.Marker({
+            element: siteMarker(
+              site.label,
+              site.stated ? "Shared site stated in source" : site.implied ? "Shared site implied by sources" : "Both projects end here",
+              // put the caption on the side facing away from the pair, where the project labels are not
+              cMid !== null && site.lon < cMid ? "left" : "right",
+            ),
+            anchor: "center",
+          })
             .setLngLat([site.lon, site.lat])
             .addTo(map),
         );
@@ -647,13 +656,13 @@ function precisionText(p: string) {
   )[p] ?? p;
 }
 
-function siteMarker(label: string, caption: string) {
+function siteMarker(label: string, caption: string, side: "left" | "right" = "right") {
   const root = document.createElement("div");
   root.className = "pointer-events-none relative";
   root.innerHTML = `
     <span class="site-pulse absolute left-1/2 top-1/2 block h-10 w-10 rounded-full" style="border:1.5px solid #fbbf24"></span>
     <span class="absolute left-1/2 top-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.25),0 0 18px #fbbf24"></span>
-    <div class="absolute bottom-3 left-4 whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.86);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
+    <div class="absolute bottom-3 ${side === "left" ? "right-4 text-right" : "left-4"} whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.86);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
       <div class="mono text-[9.5px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${escapeHtml(caption)}</div>
       ${escapeHtml(label)}
     </div>`;

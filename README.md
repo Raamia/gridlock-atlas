@@ -6,6 +6,14 @@ GridLock Atlas is our ShellHacks 2026 entry for the **Sperry Tech GridLock Chall
 
 > A match is a **review lead**, not a finding that crews or equipment can be shared. Absence of a coordination statement is shown as *unknown*, never as "uncoordinated."
 
+![Top lead: DESC's Okatie–McIntosh 115 kV tie and Georgia Power's Goshen–McIntosh rebuild both end at the McIntosh substation](docs/screenshots/top-lead.jpg)
+
+| Where plans meet (Savannah River) | Known coordination (Wisconsin) |
+| --- | --- |
+| ![Amber links mark every DESC × Georgia Power pair within 25 miles](docs/screenshots/overlaps.jpg) | ![Dairyland Alma–Blair and Xcel WWTC at Tremval North](docs/screenshots/known-coordination.jpg) |
+| **Cited review brief** | **Rough impact estimate** |
+| ![Brief with numbered, verbatim citations](docs/screenshots/brief.jpg) | ![Sourced, editable impact scenario](docs/screenshots/impact.jpg) |
+
 ## What's in the box
 
 | | |
@@ -84,7 +92,7 @@ API: `GET /api/snapshot`, `GET /api/matches?threshold=25&utilityA=&utilityB=&reg
 
 1. **Two plans, one map** — Savannah River region: DESC in cyan, Georgia Power in violet.
 2. **Compare public plans** — thousands of pairs measured; a few dozen within 25 miles light up in amber.
-3. **Top opportunity** — open #1: centers apart, terminals and their provenance, published windows, in-service gap.
+3. **Top opportunity** — open #1: DESC's Okatie–McIntosh 115 kV tie and Georgia Power's Goshen–McIntosh rebuild both end at McIntosh (6 mi center to center); terminals and their provenance, windows, in-service timing.
 4. **Rough impact** — acres and one avoided mobilization, with cited, editable assumptions.
 5. **Known coordination** — Upper Midwest: Dairyland × Xcel at Tremval North, filed as a known interface.
 6. **Sources disagree** — Xcel's page vs the Wisconsin PSC on completion; DESC's in-service date across plan editions.
