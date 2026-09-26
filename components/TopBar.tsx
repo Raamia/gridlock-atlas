@@ -8,7 +8,6 @@ import { tierOf, useViewport } from "@/lib/layout";
 import { FOCAL_UTILITIES } from "@/lib/mapdata";
 import { useReview } from "@/lib/review";
 import { useAtlas } from "@/lib/store";
-import { PermitSearch } from "./PermitSearch";
 import { Button, IconButton, LogoMark, Menu, MenuItem, MenuSeparator, Segmented, Select, Tooltip, UtilityDot } from "./ui";
 
 // the mark lives in ui.tsx (also app/icon.svg); re-exported for anything that still imports it from here
@@ -82,7 +81,6 @@ function DesktopHeader({ wide, compact, legend }: { wide: boolean; compact: bool
       />
 
       <div className="ml-auto flex shrink-0 items-center gap-2">
-        <PermitSearch compact={compact} />
         <div className="chrome flex items-center gap-0.5 rounded-full p-[3px]">
           {compact ? (
             <>

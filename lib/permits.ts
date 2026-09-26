@@ -64,17 +64,6 @@ export interface CarolinaBoundary {
   boundaryFiled: string | null;
   acres: number;
 }
-export interface PermitSearch {
-  query: string;
-  checkedAt: string;
-  georgia: GeorgiaFiling[];
-  southCarolina: CarolinaBoundary[];
-}
-/** A name search: letters, digits, spaces and - & . ' / only, 2–60 characters. */
-export const cleanQuery = (q: string) => {
-  const s = q.replace(/[^\p{L}\p{N} \-&.'/]/gu, "").replace(/\s+/g, " ").trim();
-  return s.length >= 2 && s.length <= 60 ? s : null;
-};
 export interface LiveCheck {
   checkedAt: string;
   since: string;
