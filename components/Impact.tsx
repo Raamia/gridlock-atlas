@@ -10,7 +10,7 @@ import { evidenceHref, pageLabel } from "@/lib/selectors";
 import { useAtlas } from "@/lib/store";
 
 function Cite({ a, id, page }: { a?: ImpactAssumption; id?: string; page?: boolean }) {
-  if (!a && !id) return <span className="text-[10px] text-text-3">no sourced default</span>;
+  if (!a && !id) return <span className="text-[12px] text-text-3">no sourced default</span>;
   const e = IDX.evidence(id ?? a!.evidenceIds[0]);
   const src = e ? IDX.source(e.sourceId) : undefined;
   const href = e ? evidenceHref(e, src) : undefined;
@@ -20,7 +20,7 @@ function Cite({ a, id, page }: { a?: ImpactAssumption; id?: string; page?: boole
       target="_blank"
       rel="noreferrer"
       title={e ? `“${e.exactExcerpt}” — ${src?.publisher}${pageLabel(e) ? `, ${pageLabel(e)}` : ""}${a?.note ? `\n\n${a.note}` : ""}` : undefined}
-      className="inline-flex max-w-full items-center gap-1 truncate text-[10px] text-text-3 hover:text-a"
+      className="inline-flex max-w-full items-center gap-1 truncate text-[12px] text-text-3 hover:text-a"
     >
       <span className="truncate">
         {src?.publisher ?? "source"}
@@ -39,7 +39,7 @@ const BASIS: Record<ChannelBasis, string> = {
 
 function BasisTag({ basis, text }: { basis: ChannelBasis; text?: string }) {
   return (
-    <span className="mono inline-flex h-[18px] shrink-0 items-center rounded-[5px] bg-bg-3 px-1.5 text-[10px] text-text-2 ring-1 ring-line" title={BASIS[basis]}>
+    <span className="mono inline-flex h-[18px] shrink-0 items-center rounded-[5px] bg-bg-3 px-1.5 text-[12px] text-text-2 ring-1 ring-line" title={BASIS[basis]}>
       {text ?? basis}
     </span>
   );
@@ -57,17 +57,17 @@ function channelValue(c: ImpactChannel, coBuilt: boolean): string {
 
 function ChannelRow({ c, coBuilt }: { c: ImpactChannel; coBuilt: boolean }) {
   return (
-    <div className="rounded-lg bg-bg-2/60 p-3 text-[11.5px] leading-snug text-text-1 ring-1 ring-line" data-channel={c.key}>
+    <div className="rounded-lg bg-bg-2/60 p-3 text-[13px] leading-snug text-text-1 ring-1 ring-line" data-channel={c.key}>
       <div className="flex items-start justify-between gap-2">
         <span className="font-medium text-text-0">{c.label}</span>
-        <span className={clsx("num shrink-0 text-right text-[13px]", c.basis === "stated" ? "text-text-0" : "text-text-2")}>
+        <span className={clsx("num shrink-0 text-right text-[14px]", c.basis === "stated" ? "text-text-0" : "text-text-2")}>
           {channelValue(c, coBuilt)}
-          {c.acres && c.key !== "corridor" && <span className="block text-[10.5px] text-text-3">{c.acres[0] === c.acres[1] ? c.acres[0] : `${c.acres[0]}–${c.acres[1]}`} acres</span>}
+          {c.acres && c.key !== "corridor" && <span className="block text-[12px] text-text-3">{c.acres[0] === c.acres[1] ? c.acres[0] : `${c.acres[0]}–${c.acres[1]}`} acres</span>}
         </span>
       </div>
       <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5">
         <BasisTag basis={c.basis} />
-        {c.dollars && c.usd && <span className="text-[10px] text-text-3">{c.dollars}</span>}
+        {c.dollars && c.usd && <span className="text-[12px] text-text-3">{c.dollars}</span>}
       </div>
       {c.parts && (
         <ul className="mt-1.5 space-y-1">
@@ -87,7 +87,7 @@ function ChannelRow({ c, coBuilt }: { c: ImpactChannel; coBuilt: boolean }) {
         </ul>
       )}
       <p className="mt-1 text-text-2">{c.note}</p>
-      {c.key !== "outage" && <p className="mt-1 text-[10.5px] text-text-3">{c.formula}</p>}
+      {c.key !== "outage" && <p className="mt-1 text-[12px] text-text-3">{c.formula}</p>}
       <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5">
         {c.evidenceIds.map((id) => (
           <Cite key={id} id={id} />
@@ -108,7 +108,7 @@ function Portfolio({ m }: { m: Match }) {
   if (!run || !pf?.eligiblePairs) return null;
   const counted = pf.pairs.some((p) => p.id === m.id);
   return (
-    <div className="rounded-lg bg-bg-2/60 p-3 text-[11.5px] leading-snug text-text-1 ring-1 ring-line" data-testid="impact-portfolio">
+    <div className="rounded-lg bg-bg-2/60 p-3 text-[13px] leading-snug text-text-1 ring-1 ring-line" data-testid="impact-portfolio">
       <div className="flex items-start justify-between gap-2">
         <span className="font-medium text-text-0">
           Region portfolio · {SNAPSHOT.regions.find((r) => r.id === region)?.label ?? region} · {run.thresholdMiles} mi
@@ -143,7 +143,7 @@ function Portfolio({ m }: { m: Match }) {
           ))}
         </dd>
       </dl>
-      <p className="mt-1.5 text-[10.5px] text-text-3">
+      <p className="mt-1.5 text-[12px] text-text-3">
         {counted
           ? "This pair's staging ceiling is one of those counted."
           : m.reviewStatus === "needs-review" && m.time !== "no-match"
@@ -182,19 +182,19 @@ function Slider({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-2">
-        <label htmlFor={id} className="text-[11px] text-text-2">
+        <label htmlFor={id} className="text-[12px] text-text-2">
           {label}
         </label>
-        <span className="num text-[12px] text-text-0">
+        <span className="num text-[13px] text-text-0">
           {format ? format(value) : value}
           <span className="text-text-3"> {unit}</span>
         </span>
       </div>
       <input id={id} type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(Number(e.target.value))} className="mt-1 w-full accent-[var(--text-1)]" />
       <div className="-mt-0.5 flex justify-between gap-2">
-        {note ? <span className="text-[10px] leading-snug text-text-3">{note}</span> : <Cite a={a} />}
+        {note ? <span className="text-[12px] leading-snug text-text-3">{note}</span> : <Cite a={a} />}
         {a && (a.low !== undefined || a.high !== undefined) && (
-          <span className="num shrink-0 text-[10px] text-text-3">
+          <span className="num shrink-0 text-[12px] text-text-3">
             source range {(a.low ?? a.typical).toLocaleString("en-US")}–{(a.high ?? a.typical).toLocaleString("en-US")}
           </span>
         )}
@@ -226,26 +226,26 @@ export function ImpactEstimate({ m }: { m: Match }) {
       ))}
 
       <div className="flex items-center justify-between gap-2 pt-1">
-        <span className="text-[11.5px] font-medium text-text-0">Shared new right-of-way</span>
+        <span className="text-[13px] font-medium text-text-0">Shared new right-of-way</span>
         <BasisTag basis="conditional" />
       </div>
       <div className="grid grid-cols-2 gap-2">
         <div className="rounded-lg bg-bg-2 p-3 ring-1 ring-line">
           <div className="num text-[22px] leading-none text-text-0">{r.acres < 10 ? r.acres.toFixed(1) : Math.round(r.acres)}</div>
-          <div className="mt-1 text-[10.5px] leading-tight text-text-2">acres of right-of-way not encumbered twice</div>
+          <div className="mt-1 text-[12px] leading-tight text-text-2">acres of right-of-way not encumbered twice</div>
           {r.acresRange && (
-            <div className="num mt-1 text-[10px] text-text-3">
+            <div className="num mt-1 text-[12px] text-text-3">
               range {Math.round(r.acresRange[0])}–{Math.round(r.acresRange[1])}
             </div>
           )}
         </div>
         <div className="rounded-lg bg-bg-2 p-3 ring-1 ring-line">
           <div className="num text-[22px] leading-none text-text-0">{valueSourced ? formatUsd(r.landValueUsd) : "—"}</div>
-          <div className="mt-1 text-[10.5px] leading-tight text-text-2">
+          <div className="mt-1 text-[12px] leading-tight text-text-2">
             {valueSourced ? (d.landValue ? "right-of-way value at those assumptions" : "right-of-way value at your land value") : `no sourced land value for ${d.state || "this state"} — set one below`}
           </div>
           {valueSourced && d.landValue && r.landValueRange && (
-            <div className="num mt-1 text-[10px] text-text-3">
+            <div className="num mt-1 text-[12px] text-text-3">
               range {formatUsd(r.landValueRange[0])}–{formatUsd(r.landValueRange[1])}
             </div>
           )}
@@ -274,7 +274,7 @@ export function ImpactEstimate({ m }: { m: Match }) {
 
       <Portfolio m={m} />
 
-      <p className="flex items-start gap-1.5 text-[10.5px] leading-snug text-text-3">
+      <p className="flex items-start gap-1.5 text-[12px] leading-snug text-text-3">
         <Calculator size={11} className="mt-0.5 shrink-0" />
         Illustrative scenario, one row per channel: stated = a source states the sharing (the dollar comparison is our assumption); conditional = an upper bound that needs
         something no source shows; context = scale, not a saving. Rows are never added together: they use different dollar years. Defaults are cited public numbers (links

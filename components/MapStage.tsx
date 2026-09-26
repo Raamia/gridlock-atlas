@@ -27,13 +27,13 @@ import { useAtlas, type Basemap } from "@/lib/store";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
 
 const COLORS = {
-  a: "#2fd6f2",
-  b: "#a78bfa",
-  u1: "#56c7de",
-  u2: "#9d8cf0",
+  a: "#6abce6",
+  b: "#c996d0",
+  u1: "#69a8c8",
+  u2: "#b088b6",
   hover: "#eef3fc",
-  all: "#8fa2c7",
-  other: "#5d6a87",
+  all: "#95a7ba",
+  other: "#5c6b7a",
   amber: "#fbbf24",
 };
 
@@ -420,10 +420,10 @@ export default function MapStage() {
     const projectCard = (f: mapboxgl.MapboxGeoJSONFeature, p: Project) => {
       const label = (f.properties?.label as string | undefined) ?? p.shortTitle;
       const precision = (f.properties?.precision as string | undefined) ?? "";
-      return `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:260px">
+      return `<div class="glass glass-solid rounded-lg px-3 py-2 text-[13px] leading-snug" style="max-width:260px">
         <div class="font-medium text-text-0">${escapeHtml(p.title)}</div>
         <div class="text-text-2">${escapeHtml(ownerNames(p, IDX))}</div>
-        <div class="mono mt-1 text-[10.5px] text-text-3">${escapeHtml(label)}${precision ? ` · ${escapeHtml(precisionText(precision))}` : ""}</div>
+        <div class="mono mt-1 text-[12px] text-text-3">${escapeHtml(label)}${precision ? ` · ${escapeHtml(precisionText(precision))}` : ""}</div>
       </div>`;
     };
     map.on("click", (ev) => {
@@ -467,13 +467,13 @@ export default function MapStage() {
               ? `${formatMilesNear(c.miles, thr)} apart`
               : geoShort(m).text;
           showCard(
-            `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:280px">
-            <div class="mono text-[10px] uppercase tracking-[0.08em]" style="color:#fbbf24">Flagged pair · P${m.priority}</div>
-            <div class="mt-0.5 font-medium" style="color:#2fd6f2">${escapeHtml(pa.shortTitle)}</div>
-            <div class="font-medium" style="color:#a78bfa">${escapeHtml(pb.shortTitle)}</div>
-            <div class="mono mt-1 text-[10.5px] text-text-2">${escapeHtml(place)}</div>
-            ${m.timeDetail.inService ? `<div class="mono text-[10.5px] text-text-2">${escapeHtml(inServicePhrase(m))}</div>` : ""}
-            <div class="mt-1 text-[10.5px] text-text-3">Click to inspect</div>
+            `<div class="glass glass-solid rounded-lg px-3 py-2 text-[13px] leading-snug" style="max-width:280px">
+            <div class="mono text-[12px] uppercase tracking-[0.08em]" style="color:#fbbf24">Flagged pair · P${m.priority}</div>
+            <div class="mt-0.5 font-medium" style="color:#6abce6">${escapeHtml(pa.shortTitle)}</div>
+            <div class="font-medium" style="color:#c996d0">${escapeHtml(pb.shortTitle)}</div>
+            <div class="mono mt-1 text-[12px] text-text-2">${escapeHtml(place)}</div>
+            ${m.timeDetail.inService ? `<div class="mono text-[12px] text-text-2">${escapeHtml(inServicePhrase(m))}</div>` : ""}
+            <div class="mt-1 text-[12px] text-text-3">Click to inspect</div>
           </div>`,
             ev.lngLat,
           );
@@ -824,21 +824,21 @@ function siteMarker(label: string, caption: string) {
   const root = document.createElement("div");
   root.className = "pointer-events-none relative";
   root.innerHTML = `
-    <div data-callout class="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.94);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
-      <div class="mono text-[9.5px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${escapeHtml(caption)}</div>
+    <div data-callout class="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-md px-2 py-1 text-[12px] font-medium" style="background:rgba(4,9,20,.94);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
+      <div class="mono text-[12px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${escapeHtml(caption)}</div>
       ${escapeHtml(label)}
     </div>`;
   return root;
 }
 
 function projectLabel(title: string, owner: string, role: "a" | "b") {
-  const color = role === "a" ? "#2fd6f2" : "#a78bfa";
+  const color = role === "a" ? "#6abce6" : "#c996d0";
   const el = document.createElement("div");
   el.className = "pointer-events-none relative";
   // phones: title only, narrower, so the pair's three callouts fit in the strip of map above the inspector sheet
   el.innerHTML = `<div data-callout class="glass glass-solid pointer-events-none absolute left-0 top-0 max-w-[168px] whitespace-nowrap rounded-lg px-2 py-1 sm:max-w-[240px] sm:px-2.5 sm:py-1.5" style="box-shadow: inset 3px 0 0 ${color}, 0 10px 30px -10px rgba(0,0,0,.7)">
-    <div class="truncate text-[11.5px] font-semibold leading-tight sm:text-[12px]" style="color:${color}">${escapeHtml(title)}</div>
-    <div class="hidden truncate text-[10.5px] leading-tight text-text-2 sm:block">${escapeHtml(owner)}</div>
+    <div class="truncate text-[13px] font-semibold leading-tight sm:text-[13px]" style="color:${color}">${escapeHtml(title)}</div>
+    <div class="hidden truncate text-[12px] leading-tight text-text-2 sm:block">${escapeHtml(owner)}</div>
   </div>`;
   return el;
 }
@@ -846,7 +846,7 @@ function projectLabel(title: string, owner: string, role: "a" | "b") {
 function distanceLabel(label: string) {
   const el = document.createElement("div");
   el.className = "pointer-events-none relative";
-  el.innerHTML = `<div data-callout class="mono pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded px-1.5 py-0.5 text-[10.5px] leading-[1.4]" style="background:rgba(4,9,20,.9);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.4)">${escapeHtml(label)}</div>`;
+  el.innerHTML = `<div data-callout class="mono pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded px-1.5 py-0.5 text-[12px] leading-[1.4]" style="background:rgba(4,9,20,.9);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.4)">${escapeHtml(label)}</div>`;
   return el;
 }
 

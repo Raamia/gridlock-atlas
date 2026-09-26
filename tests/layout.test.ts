@@ -23,16 +23,16 @@ describe("computeLayout tiers", () => {
 
   it("1440×900: rail and overview dock, then inspector + pair dock, then demo", () => {
     const pre = computeLayout(1440, 900, base);
-    expect(pre).toMatchObject({ tier: "xl", railMode: "panel", railDocked: true, gutter: 16, panelTop: 76, railW: 360, inspectorW: 418, dockH: 96 });
-    expect(pre.focal).toEqual({ l: 388, t: 76, r: 16, b: 124 });
-    expect([pre.focalW, pre.focalH]).toEqual([1036, 700]);
+    expect(pre).toMatchObject({ tier: "xl", railMode: "panel", railDocked: true, gutter: 16, panelTop: 76, railW: 360, inspectorW: 418, dockH: 150 });
+    expect(pre.focal).toEqual({ l: 388, t: 76, r: 16, b: 178 });
+    expect([pre.focalW, pre.focalH]).toEqual([1036, 646]);
     expect(pre.keyCollapsed).toBe(false);
     expect(pre.demoCardW).toBe(520);
 
     const sel = computeLayout(1440, 900, pair);
-    expect(sel.dockH).toBe(196);
-    expect(sel.focal).toEqual({ l: 388, t: 76, r: 446, b: 224 });
-    expect([sel.focalW, sel.focalH]).toEqual([606, 600]);
+    expect(sel.dockH).toBe(244);
+    expect(sel.focal).toEqual({ l: 388, t: 76, r: 446, b: 272 });
+    expect([sel.focalW, sel.focalH]).toEqual([606, 552]);
     expect(sel.keyCollapsed).toBe(true);
 
     const demo = computeLayout(1440, 900, demoPair);
@@ -40,20 +40,20 @@ describe("computeLayout tiers", () => {
     expect(demo.focal.b).toBe(72);
     expect(demo.focalH).toBe(752);
     // steps 1 and 4 keep the dock open
-    expect(computeLayout(1440, 900, { ...demoPair, demoStep: 3 }).dockH).toBe(196);
-    expect(computeLayout(1440, 900, { ...base, demoOn: true, demoStep: 0 }).dockH).toBe(96);
+    expect(computeLayout(1440, 900, { ...demoPair, demoStep: 3 }).dockH).toBe(244);
+    expect(computeLayout(1440, 900, { ...base, demoOn: true, demoStep: 0 }).dockH).toBe(150);
   });
 
   it("1280×800: minimum panel widths; the demo card shrinks to the focal hole", () => {
     const pre = computeLayout(1280, 800, base);
-    expect(pre).toMatchObject({ tier: "xl", railW: 336, inspectorW: 384, dockH: 96 });
-    expect(pre.focal).toEqual({ l: 364, t: 76, r: 16, b: 124 });
+    expect(pre).toMatchObject({ tier: "xl", railW: 336, inspectorW: 384, dockH: 150 });
+    expect(pre.focal).toEqual({ l: 364, t: 76, r: 16, b: 178 });
     expect(pre.focalW).toBe(900);
     expect(pre.keyCollapsed).toBe(false);
 
     const sel = computeLayout(1280, 800, pair);
-    expect(sel.focal).toEqual({ l: 364, t: 76, r: 412, b: 224 });
-    expect([sel.focalW, sel.focalH]).toEqual([504, 500]);
+    expect(sel.focal).toEqual({ l: 364, t: 76, r: 412, b: 272 });
+    expect([sel.focalW, sel.focalH]).toEqual([504, 452]);
     expect(sel.demoCardW).toBe(480);
 
     const demo = computeLayout(1280, 800, demoPair);
@@ -75,7 +75,7 @@ describe("computeLayout tiers", () => {
     // the pill's overlay floats over the map: the focal hole does not move
     expect(computeLayout(1024, 768, { ...pair, timelineCollapsed: true, railOpen: true }).focal).toEqual(sel.focal);
     // expanded by the user, the pair dock fits (focal height stays ≥ 300)
-    expect(computeLayout(1024, 768, pair)).toMatchObject({ dockH: 196, dockForced: false });
+    expect(computeLayout(1024, 768, pair)).toMatchObject({ dockH: 244, dockForced: false });
 
     const demo = computeLayout(1024, 768, demoPair);
     expect(demo).toMatchObject({ dockH: 44, keyCollapsed: true });
@@ -123,16 +123,29 @@ describe("computeLayout tiers", () => {
       }
   });
 
+  it("applies dragged sizes, clamped so the map keeps a usable focal hole", () => {
+    const l = computeLayout(1440, 900, { ...pair, railWidth: 480, inspectorWidth: 520, dockHeight: 320 });
+    expect(l).toMatchObject({ railW: 480, inspectorW: 520, dockH: 320 });
+    expect(l.focalW).toBeGreaterThanOrEqual(360);
+    // too wide for both: each panel yields (never below its minimum) until the focal hole is 360px again
+    const wide = computeLayout(1280, 800, { ...pair, railWidth: 540, inspectorWidth: 620 });
+    expect(wide).toMatchObject({ railW: 336, inspectorW: 528, focalW: 360 });
+    // a tall dock stops where the focal hole would drop under 300px
+    expect(computeLayout(1440, 900, { ...pair, dockHeight: 900 }).focalH).toBe(300);
+    // phones ignore dragged sizes
+    expect(computeLayout(375, 812, { ...pair, isPhone: true, railWidth: 500 }).railW).toBe(375);
+  });
+
   it("writes px custom properties", () => {
     const vars = layoutCssVars(computeLayout(1440, 900, pair));
-    expect(vars).toMatchObject({ "--rail-w": "360px", "--inspector-w": "418px", "--dock-h": "196px", "--focal-l": "388px", "--focal-r": "446px", "--focal-b": "224px", "--panel-top": "76px", "--gutter": "16px" });
+    expect(vars).toMatchObject({ "--rail-w": "360px", "--inspector-w": "418px", "--dock-h": "244px", "--focal-l": "388px", "--focal-r": "446px", "--focal-b": "272px", "--panel-top": "76px", "--gutter": "16px" });
   });
 });
 
 describe("cameraPadding", () => {
   it("pads the focal hole plus breathing room (top clears the key chip)", () => {
-    expect(cameraPadding(computeLayout(1440, 900, pair))).toEqual({ top: 120, right: 470, bottom: 248, left: 412 });
-    expect(cameraPadding(computeLayout(1440, 900, base))).toEqual({ top: 120, right: 40, bottom: 148, left: 412 });
+    expect(cameraPadding(computeLayout(1440, 900, pair))).toEqual({ top: 120, right: 470, bottom: 296, left: 412 });
+    expect(cameraPadding(computeLayout(1440, 900, base))).toEqual({ top: 120, right: 40, bottom: 202, left: 412 });
   });
 
   it("clears a guided-demo card at the top, or pinned at the bottom", () => {

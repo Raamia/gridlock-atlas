@@ -29,7 +29,7 @@ export function ReviewPanel({ m }: { m: Match }) {
         <span className="eyebrow flex items-center gap-1.5 text-a">
           <ClipboardCheck size={12} /> Reviewer label
         </span>
-        <span className="num flex items-center gap-1 text-[11px] text-text-2" aria-label="Time on this pair">
+        <span className="num flex items-center gap-1 text-[12px] text-text-2" aria-label="Time on this pair">
           <Timer size={11} /> {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
         </span>
       </div>
@@ -40,7 +40,7 @@ export function ReviewPanel({ m }: { m: Match }) {
             onClick={() => setLabel(m.id, l.id, seconds)}
             aria-pressed={saved?.label === l.id}
             className={clsx(
-              "h-7 rounded-md px-2 text-[11.5px] ring-1 transition-colors",
+              "h-7 rounded-md px-2 text-[13px] ring-1 transition-colors",
               saved?.label === l.id ? "bg-a/15 text-text-0 ring-a/60" : "bg-bg-2 text-text-2 ring-line hover:text-text-0",
             )}
           >
@@ -56,10 +56,10 @@ export function ReviewPanel({ m }: { m: Match }) {
           onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
           placeholder="Optional note"
           aria-label="Reviewer note"
-          className="mt-2 h-7 w-full rounded-md border border-line-2 bg-bg-1 px-2 text-[11.5px] text-text-0 outline-none placeholder:text-text-3 focus:border-a"
+          className="mt-2 h-7 w-full rounded-md border border-line-2 bg-bg-1 px-2 text-[13px] text-text-0 outline-none placeholder:text-text-3 focus:border-a"
         />
       )}
-      {saved && <div className="mt-1.5 text-[10.5px] text-text-3">Saved in this browser after {saved.seconds}s · export from the Method drawer</div>}
+      {saved && <div className="mt-1.5 text-[12px] text-text-3">Saved in this browser after {saved.seconds}s · export from the Method drawer</div>}
     </div>
   );
 }
@@ -80,7 +80,7 @@ export function ReviewExports() {
   return (
     <div className="rounded-xl bg-bg-2 p-3 ring-1 ring-line">
       <div className="flex items-center justify-between gap-2">
-        <div className="text-[12px] text-text-1">
+        <div className="text-[13px] text-text-1">
           <span className="num text-text-0">{n}</span> {n === 1 ? "pair" : "pairs"} labeled · <span className="num text-text-0">{c}</span>{" "}
           {c === 1 ? "excerpt" : "excerpts"} human-checked
         </div>
@@ -104,7 +104,7 @@ export function ReviewExports() {
           Clear
         </Button>
       </div>
-      <p className="mt-2 text-[10.5px] leading-snug text-text-3">
+      <p className="mt-2 text-[12px] leading-snug text-text-3">
         Labels stay in this browser. Commit review-log.json to data/ and rebuild the snapshot to publish excerpts as human-checked.
       </p>
     </div>

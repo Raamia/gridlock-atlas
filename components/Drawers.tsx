@@ -60,7 +60,7 @@ function Drawer({ open, onClose, title, eyebrow, children, width = 540 }: { open
             <header className="flex items-start justify-between border-b border-line px-6 py-5">
               <div>
                 <div className="eyebrow">{eyebrow}</div>
-                <h2 className="mt-1 font-serif text-[26px] leading-none text-text-0">{title}</h2>
+                <h2 className="mt-1 font-display text-[26px] leading-none text-text-0">{title}</h2>
               </div>
               <IconButton label="Close" onClick={onClose}>
                 <X size={16} />
@@ -102,7 +102,7 @@ export function SourcesDrawer() {
         <Metric n={total} label="short excerpts" />
         <Metric n={total ? Math.round((verified / total) * 100) : 0} suffix="%" label="located verbatim" />
       </div>
-      <p className="mt-3 text-[12px] leading-snug text-text-2">
+      <p className="mt-3 text-[13px] leading-snug text-text-2">
         Every source was fetched, hashed (SHA-256) and cached on {formatDate(SNAPSHOT.snapshotDate)}. The app reads this frozen snapshot, so it works when publisher sites or APIs are down. Only short
         excerpts with page anchors are stored.
       </p>
@@ -113,7 +113,7 @@ export function SourcesDrawer() {
           onChange={(e) => setQ(e.target.value)}
           placeholder="Filter sources"
           aria-label="Filter sources"
-          className="h-8 w-full rounded-lg border border-line-2 bg-bg-2 pl-8 pr-3 text-[12.5px] text-text-0 outline-none placeholder:text-text-3 focus:border-a"
+          className="h-8 w-full rounded-lg border border-line-2 bg-bg-2 pl-8 pr-3 text-[14px] text-text-0 outline-none placeholder:text-text-3 focus:border-a"
         />
       </div>
       {groups.map(([type, label]) => {
@@ -132,7 +132,7 @@ export function SourcesDrawer() {
           </div>
         );
       })}
-      {filtered.length === 0 && <p className="mt-6 text-center text-[12px] text-text-3">No sources match “{q.trim()}”.</p>}
+      {filtered.length === 0 && <p className="mt-6 text-center text-[13px] text-text-3">No sources match “{q.trim()}”.</p>}
     </Drawer>
   );
 }
@@ -142,9 +142,9 @@ function Metric({ n, label, suffix }: { n: number; label: string; suffix?: strin
     <div className="rounded-xl border border-line bg-bg-2 p-3">
       <div className="num text-[24px] leading-none text-text-0">
         {n}
-        {suffix && <span className="text-[15px] text-text-2">{suffix}</span>}
+        {suffix && <span className="text-[16px] text-text-2">{suffix}</span>}
       </div>
-      <div className="mt-1.5 text-[11px] leading-tight text-text-2">{label}</div>
+      <div className="mt-1.5 text-[12px] leading-tight text-text-2">{label}</div>
     </div>
   );
 }
@@ -203,7 +203,7 @@ export function MethodDrawer() {
       <Pipeline />
 
       <H>Matching rules</H>
-      <ul className="space-y-2 text-[12.5px] leading-[1.55] text-text-1">
+      <ul className="space-y-2 text-[14px] leading-[1.55] text-text-1">
         <Rule k="Eligible">
           Distinct work packages in the same region whose owner sets do not overlap, with status proposed, approved or under construction. Completed (a source says so), cancelled and
           duplicate records are archived. A plan whose in-service date has passed without a source confirming completion stays in the queue, flagged “planned date passed; completion
@@ -273,32 +273,32 @@ export function MethodDrawer() {
           <H>What the engine excluded</H>
           <div className="space-y-1.5">
             {excludedProjects.map((x) => (
-              <div key={x.projectId} className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[12px] ring-1 ring-line">
-                <span className="mono mt-0.5 rounded bg-bg-3 px-1.5 text-[10px] uppercase text-text-2">{x.reason}</span>
+              <div key={x.projectId} className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[13px] ring-1 ring-line">
+                <span className="mono mt-0.5 rounded bg-bg-3 px-1.5 text-[12px] uppercase text-text-2">{x.reason}</span>
                 <span>
                   <span className="text-text-0">{IDX.project(x.projectId)?.title}</span>
-                  <span className="block text-[11px] text-text-3">{x.detail}</span>
+                  <span className="block text-[12px] text-text-3">{x.detail}</span>
                 </span>
               </div>
             ))}
             {sharedOwner.slice(0, 8).map((p) => (
-              <div key={`${p.projectAId}-${p.projectBId}`} className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[12px] ring-1 ring-line">
-                <span className="mono mt-0.5 rounded bg-bg-3 px-1.5 text-[10px] uppercase text-text-2">shared owner</span>
+              <div key={`${p.projectAId}-${p.projectBId}`} className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[13px] ring-1 ring-line">
+                <span className="mono mt-0.5 rounded bg-bg-3 px-1.5 text-[12px] uppercase text-text-2">shared owner</span>
                 <span>
                   <span className="text-text-0">
                     {IDX.project(p.projectAId)?.shortTitle} × {IDX.project(p.projectBId)?.shortTitle}
                   </span>
-                  <span className="block text-[11px] text-text-3">{p.detail}</span>
+                  <span className="block text-[12px] text-text-3">{p.detail}</span>
                 </span>
               </div>
             ))}
             {regionCounts && (
-              <p className="pt-1 text-[11px] leading-snug text-text-2">
+              <p className="pt-1 text-[12px] leading-snug text-text-2">
                 {regionName}: {regionCounts.beyond.toLocaleString("en-US")} {regionCounts.beyond === 1 ? "pair" : "pairs"} not flagged (farther than {run.thresholdMiles} mi, no shared
                 facility) · {regionCounts.unlocated.toLocaleString("en-US")} with a location not yet established.
               </p>
             )}
-            <p className="pt-1 text-[11px] leading-snug text-text-3">
+            <p className="pt-1 text-[12px] leading-snug text-text-3">
               Pair totals, all regions: {run.excludedCounts["shared-owner"].toLocaleString("en-US")} shared-owner (internal context; {Math.min(8, sharedOwner.length)} nearby{" "}
               {regionCounts ? "ones in this region" : "ones"} shown) ·{" "}
               {(run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"]).toLocaleString("en-US")} farther than {run.thresholdMiles} mi ·{" "}
@@ -317,18 +317,18 @@ export function MethodDrawer() {
       {openQs.length > 0 && (
         <>
           <H>Open research questions</H>
-          <p className="mb-2 text-[12px] text-text-2">Gaps recorded during source review. They are shown, not hidden.</p>
+          <p className="mb-2 text-[13px] text-text-2">Gaps recorded during source review. They are shown, not hidden.</p>
           <ul className="space-y-1.5">
             {openQs.map((u, i) => (
-              <li key={i} className="rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug text-text-1 ring-1 ring-line [overflow-wrap:anywhere]">
-                <span className="mono mr-1.5 text-[10px] uppercase text-text-3">{CLUSTER_LABEL[u.cluster] ?? u.cluster}</span>
+              <li key={i} className="rounded-lg bg-bg-2 px-3 py-2 text-[13px] leading-snug text-text-1 ring-1 ring-line [overflow-wrap:anywhere]">
+                <span className="mono mr-1.5 text-[12px] uppercase text-text-3">{CLUSTER_LABEL[u.cluster] ?? u.cluster}</span>
                 {u.note}
               </li>
             ))}
           </ul>
         </>
       )}
-      <p className="mt-6 text-[11px] text-text-3">
+      <p className="mt-6 text-[12px] text-text-3">
         {ENGINE_VERSION} · snapshot {SNAPSHOT.version} · {formatDate(SNAPSHOT.snapshotDate)}
       </p>
     </Drawer>
@@ -336,10 +336,10 @@ export function MethodDrawer() {
 }
 
 function H({ children }: { children: ReactNode }) {
-  return <h3 className="mb-2.5 mt-7 text-[13px] font-semibold text-text-0">{children}</h3>;
+  return <h3 className="mb-2.5 mt-7 text-[14px] font-semibold text-text-0">{children}</h3>;
 }
 function Code({ children }: { children: ReactNode }) {
-  return <code className="mono rounded bg-bg-3 px-1 py-0.5 text-[11px] text-text-0">{children}</code>;
+  return <code className="mono rounded bg-bg-3 px-1 py-0.5 text-[12px] text-text-0">{children}</code>;
 }
 function Rule({ k, children }: { k: string; children: ReactNode }) {
   return (
@@ -356,7 +356,7 @@ function Pipeline() {
     <div className="flex flex-wrap items-center gap-1.5">
       {steps.map((s, i) => (
         <span key={s} className="flex items-center gap-1.5">
-          <span className={clsx("rounded-md px-2 py-1 text-[11px] ring-1", i === 6 ? "bg-bg-3 text-text-0 ring-line-3" : "bg-bg-2 text-text-1 ring-line")}>{s}</span>
+          <span className={clsx("rounded-md px-2 py-1 text-[12px] ring-1", i === 6 ? "bg-bg-3 text-text-0 ring-line-3" : "bg-bg-2 text-text-1 ring-line")}>{s}</span>
           {i < steps.length - 1 && <ArrowRight size={11} className="text-text-3" />}
         </span>
       ))}
@@ -391,17 +391,17 @@ function CorpusChecks() {
     }
     return out;
   }, [run]);
-  if (!run) return <p className="text-[12px] text-text-3">Run the comparison to see live checks against the real corpus.</p>;
+  if (!run) return <p className="text-[13px] text-text-3">Run the comparison to see live checks against the real corpus.</p>;
   return (
     <div className="overflow-hidden rounded-xl ring-1 ring-line">
       {checks.map((c) => (
         <div key={c.label} className="grid grid-cols-[18px_1fr_auto] items-start gap-2 border-b border-line bg-bg-2/60 px-3 py-2 last:border-b-0">
           {c.ok === null ? <CircleDashed size={14} className="mt-0.5 text-text-3" /> : c.ok ? <CheckCircle2 size={14} className="mt-0.5 text-known" /> : <XCircle size={14} className="mt-0.5 text-danger" />}
           <div>
-            <div className="text-[12px] text-text-0">{c.label}</div>
-            <div className="text-[11px] text-text-3">expected: {c.expect}</div>
+            <div className="text-[13px] text-text-0">{c.label}</div>
+            <div className="text-[12px] text-text-3">expected: {c.expect}</div>
           </div>
-          <div className="mono text-right text-[10.5px] text-text-2">{c.got}</div>
+          <div className="mono text-right text-[12px] text-text-2">{c.got}</div>
         </div>
       ))}
     </div>
@@ -431,7 +431,7 @@ function Evaluation() {
   const pct = (r: number) => `${(r * 100).toFixed(1)}%`;
   return (
     <div>
-      <p className="mb-2 text-[12px] leading-snug text-text-2">
+      <p className="mb-2 text-[13px] leading-snug text-text-2">
         No human labels. “Documented interfaces” are the {e.interfaces.inUniverse} cross-utility links the filings state or imply (none in the Savannah River region); the engine&apos;s
         shared-facility rule reads the same statements, so its score there is a design check, not accuracy
         {noSite && ` (without that rule it keeps ${noSite.recall.all.hit}/${noSite.recall.all.of})`}. Unflagged pairs are not labeled negatives, so no precision is claimed.
@@ -440,7 +440,7 @@ function Evaluation() {
           : ` Computed on ${e.meta.snapshot}; this app runs ${SNAPSHOT.version} — re-run npm run eval.`}
       </p>
       <div className="overflow-hidden rounded-xl ring-1 ring-line">
-        <div className="mono grid grid-cols-[1fr_58px_62px_62px] gap-2 border-b border-line bg-bg-3/60 px-3 py-1.5 text-[10px] uppercase tracking-wide text-text-3">
+        <div className="mono grid grid-cols-[1fr_58px_62px_62px] gap-2 border-b border-line bg-bg-3/60 px-3 py-1.5 text-[12px] uppercase tracking-wide text-text-3">
           <span>Method · {n(e.queue.universePairs)} pairs</span>
           <span className="text-right">Flagged</span>
           <span className="text-right">DESC×GPC</span>
@@ -450,7 +450,7 @@ function Evaluation() {
           const b = e.baselines.find((x) => x.id === id);
           if (!b) return null;
           return (
-            <div key={id} className={clsx("grid grid-cols-[1fr_58px_62px_62px] items-center gap-2 border-b border-line px-3 py-1.5 text-[11.5px] last:border-b-0", id === "B4" ? "bg-bg-3/40" : "bg-bg-2/60")}>
+            <div key={id} className={clsx("grid grid-cols-[1fr_58px_62px_62px] items-center gap-2 border-b border-line px-3 py-1.5 text-[13px] last:border-b-0", id === "B4" ? "bg-bg-3/40" : "bg-bg-2/60")}>
               <span className={id === "B4" ? "font-medium text-text-0" : "text-text-1"}>{label}</span>
               <span className="num text-right text-text-0">{n(b.flagged)}</span>
               <span className="num text-right text-text-0">{n(b.descGpc)}</span>
@@ -459,7 +459,7 @@ function Evaluation() {
           );
         })}
       </div>
-      <ul className="mt-2 space-y-1 text-[11.5px] leading-snug text-text-1">
+      <ul className="mt-2 space-y-1 text-[13px] leading-snug text-text-1">
         <li>
           Sperry&apos;s example: overlap table {e.sponsor.overlapTable.matched}/{e.sponsor.overlapTable.of} rows exact, 0 extra pairs at every radius up to{" "}
           {Math.max(...nc.starterFile.byRadius.filter((r) => r.extra === 0).map((r) => r.R))} mi; project table {e.sponsor.projectSheet.matched}/{e.sponsor.projectSheet.of}.
@@ -488,13 +488,13 @@ function ExtractionRuns() {
   const runs = SNAPSHOT.extractionRuns;
   if (!runs.length)
     return (
-      <div className="rounded-xl bg-bg-2 p-3 text-[12px] leading-snug text-text-2 ring-1 ring-line">
+      <div className="rounded-xl bg-bg-2 p-3 text-[13px] leading-snug text-text-2 ring-1 ring-line">
         <div className="flex items-center gap-2 text-text-1">
           <Bot size={14} className="text-text-3" /> No model extraction run is recorded in this snapshot.
         </div>
         <p className="mt-1.5">
           Plan fields were parsed deterministically from the DESC and Georgia Power documents; other facts were located by AI research agents and checked by adversarial agents.
-          Every excerpt is then re-found verbatim by script. The structured model-extraction job (<code className="mono text-[11px]">npm run extract</code>, OpenAI or Gemini) records
+          Every excerpt is then re-found verbatim by script. The structured model-extraction job (<code className="mono text-[12px]">npm run extract</code>, OpenAI or Gemini) records
           provider, model, prompt version and span checks here when run with an API key.
         </p>
       </div>
@@ -504,7 +504,7 @@ function ExtractionRuns() {
   const cited = runs.reduce((n, r) => n + r.fields.filter((f) => f.inSnapshot).length, 0);
   return (
     <div className="space-y-2">
-      <p className="text-[12px] leading-snug text-text-2">
+      <p className="text-[13px] leading-snug text-text-2">
         {runs[0].model} independently re-read {runs.length} source {runs.length === 1 ? "page" : "pages"}:{" "}
         <span className="num text-text-0">{located}</span> of <span className="num text-text-0">{total}</span> quoted spans were re-found verbatim (the rest are rejected), and{" "}
         <span className="num text-text-0">{cited}</span> quote a passage the snapshot already cites. Runs are a cross-check; they never add facts.
@@ -513,20 +513,20 @@ function ExtractionRuns() {
         <div key={r.id} className="rounded-xl bg-bg-2 p-3 ring-1 ring-line">
           <div className="flex items-center gap-2">
             <Bot size={14} className={r.status === "completed" ? "text-known" : "text-text-3"} />
-            <span className="text-[12.5px] font-medium text-text-0">{IDX.source(r.sourceId)?.title ?? r.sourceId}</span>
-            <span className={clsx("mono ml-auto rounded px-1.5 text-[10px] uppercase", r.status === "completed" ? "bg-known/10 text-known" : "bg-bg-3 text-text-3")}>{r.status}</span>
+            <span className="text-[14px] font-medium text-text-0">{IDX.source(r.sourceId)?.title ?? r.sourceId}</span>
+            <span className={clsx("mono ml-auto rounded px-1.5 text-[12px] uppercase", r.status === "completed" ? "bg-known/10 text-known" : "bg-bg-3 text-text-3")}>{r.status}</span>
           </div>
-          <div className="mono mt-1 text-[10.5px] text-text-3">
+          <div className="mono mt-1 text-[12px] text-text-3">
             {r.provider ? `${r.provider} · ` : ""}
             {r.model}
             {r.page ? ` · p. ${r.page}` : ""} · prompt {r.promptVersion}
             {r.runAt && ` · ${formatDate(r.runAt)}`}
           </div>
-          {r.note && <p className="mt-1.5 text-[11.5px] leading-snug text-text-2">{r.note}</p>}
+          {r.note && <p className="mt-1.5 text-[13px] leading-snug text-text-2">{r.note}</p>}
           {r.fields.length > 0 && (
             <div className="mt-2 overflow-hidden rounded-lg ring-1 ring-line">
               {r.fields.map((f) => (
-                <div key={f.field} className="grid grid-cols-[110px_minmax(0,1fr)_auto] gap-2 border-b border-line px-2.5 py-1.5 text-[11px] last:border-b-0">
+                <div key={f.field} className="grid grid-cols-[110px_minmax(0,1fr)_auto] gap-2 border-b border-line px-2.5 py-1.5 text-[12px] last:border-b-0">
                   <span className="mono truncate text-text-3">{f.field}</span>
                   <span className="truncate text-text-1" title={f.excerpt ? `${f.value}\n“${f.excerpt}”` : f.value}>
                     {f.value}
@@ -552,11 +552,11 @@ function SponsorExample() {
   const same = PACKET.filter((f) => IDX.source(f.sourceId)?.sha256 === f.sha256);
   return (
     <div>
-      <p className="mb-2 text-[12px] leading-snug text-text-2">
+      <p className="mb-2 text-[13px] leading-snug text-text-2">
         The engine re-runs on the ten projects in Sperry&apos;s starter file (their coordinates and in-service dates) and must reproduce both of the guide&apos;s tables.
       </p>
       <div className="overflow-hidden rounded-xl ring-1 ring-line">
-        <div className="mono grid grid-cols-[52px_1fr_78px_78px_18px] gap-2 border-b border-line bg-bg-3/60 px-3 py-1.5 text-[10px] uppercase tracking-wide text-text-3">
+        <div className="mono grid grid-cols-[52px_1fr_78px_78px_18px] gap-2 border-b border-line bg-bg-3/60 px-3 py-1.5 text-[12px] uppercase tracking-wide text-text-3">
           <span>Row</span>
           <span>Pair</span>
           <span className="text-right">Miles</span>
@@ -564,7 +564,7 @@ function SponsorExample() {
           <span />
         </div>
         {r.rows.map((row) => (
-          <div key={row.id} className="grid grid-cols-[52px_1fr_78px_78px_18px] items-center gap-2 border-b border-line bg-bg-2/60 px-3 py-1.5 text-[11.5px] last:border-b-0">
+          <div key={row.id} className="grid grid-cols-[52px_1fr_78px_78px_18px] items-center gap-2 border-b border-line bg-bg-2/60 px-3 py-1.5 text-[13px] last:border-b-0">
             <span className="mono text-text-3">{row.id}</span>
             <span className="text-text-1">{row.pair}</span>
             <span className="num text-right text-text-0" title={`sponsor ${row.sponsorMiles}`}>
@@ -577,7 +577,7 @@ function SponsorExample() {
           </div>
         ))}
       </div>
-      <p className="mt-2 text-[11px] text-text-3">
+      <p className="mt-2 text-[12px] text-text-3">
         {r.allOk
           ? "All rows match the sponsor's table (±0.01 mi, exact days) and no extra pairs are flagged."
           : `Overlap table mismatch: ${bad} row(s) differ, ${r.extra.length} extra pair(s).`}{" "}
@@ -602,9 +602,9 @@ function Quote({ c }: { c: Cite }) {
   const src = sourceOf(c.sourceId);
   const href = src && c.page && /\.pdf($|[?#])/i.test(src.url) ? `${src.url}#page=${c.page}` : src?.url;
   return (
-    <blockquote className="mt-1.5 rounded-lg bg-bg-2/80 px-3 py-1.5 text-[11.5px] leading-snug text-text-1 ring-1 ring-line" title={c.supports}>
+    <blockquote className="mt-1.5 rounded-lg bg-bg-2/80 px-3 py-1.5 text-[13px] leading-snug text-text-1 ring-1 ring-line" title={c.supports}>
       <span className="italic text-text-0">“{c.excerpt}”</span>{" "}
-      <span className="text-[10.5px] text-text-3">
+      <span className="text-[12px] text-text-3">
         — {src ? shortPublisher(src.publisher) : c.sourceId}
         {c.page ? `, p. ${c.page}` : ""}
         {href && (
@@ -631,7 +631,7 @@ function SponsorReplay() {
   const days = (n?: number, atLeast?: boolean) => (n === undefined ? "no gap" : `${atLeast && n > 0 ? "≥" : ""}${n.toLocaleString("en-US")} d`);
   return (
     <div>
-      <p className="mb-2 text-[12px] leading-snug text-text-2">
+      <p className="mb-2 text-[13px] leading-snug text-text-2">
         What became of each overlap row in the starter file, on today&apos;s plans. Starter projects are matched to plan records by title and in-service date; a project missing
         from the current list is “no longer listed,” never “completed.”
       </p>
@@ -639,13 +639,13 @@ function SponsorReplay() {
         {rows.map((r) => {
           const gone = [r.a, r.b].filter((s) => s.notListed);
           return (
-            <div key={r.id} className="rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug ring-1 ring-line">
+            <div key={r.id} className="rounded-lg bg-bg-2 px-3 py-2 text-[13px] leading-snug ring-1 ring-line">
               <div className="flex items-baseline gap-2">
-                <span className="mono shrink-0 text-[10.5px] text-text-3">{r.id}</span>
+                <span className="mono shrink-0 text-[12px] text-text-3">{r.id}</span>
                 <span className="min-w-0 flex-1 text-text-0">
                   {r.a.name} × {r.b.name}
                 </span>
-                <span className="num shrink-0 text-[10.5px] text-text-3" title="Sperry's starter table">
+                <span className="num shrink-0 text-[12px] text-text-3" title="Sperry's starter table">
                   Sperry {r.sponsorMiles.toFixed(2)} mi · {r.sponsorDays.toLocaleString("en-US")} d
                 </span>
               </div>
@@ -656,7 +656,7 @@ function SponsorReplay() {
                     In our queue: <b className="font-medium text-text-0">#{r.rank}</b> · {tabLabel(r.tab)} · {regionLabel(r.matchId!.split("__")[0])} — today {r.miles?.toFixed(2)} mi ·{" "}
                     {days(r.days, r.daysAtLeast)} on current plan dates.{r.pastDue && ` Kept although a planned date has passed — ${r.pastDue.join(" ")}`}
                   </span>
-                  <button onClick={() => open(r.matchId!)} className="shrink-0 text-[10.5px] text-text-2 underline-offset-2 hover:text-a hover:underline">
+                  <button onClick={() => open(r.matchId!)} className="shrink-0 text-[12px] text-text-2 underline-offset-2 hover:text-a hover:underline">
                     Open pair
                   </button>
                 </div>
@@ -689,7 +689,7 @@ function SponsorReplay() {
                     ? ` Its pair with ${r.b.sponsorId} is #${r.related.rank} · ${tabLabel(r.related.tab)} (${r.related.miles?.toFixed(2)} mi).`
                     : ` Its pair with ${r.b.sponsorId} is not flagged in this run.`}
                   {r.related.matchId && (
-                    <button onClick={() => open(r.related!.matchId!)} className="ml-1.5 text-[10.5px] text-text-2 underline-offset-2 hover:text-a hover:underline">
+                    <button onClick={() => open(r.related!.matchId!)} className="ml-1.5 text-[12px] text-text-2 underline-offset-2 hover:text-a hover:underline">
                       Open pair
                     </button>
                   )}
@@ -709,7 +709,7 @@ function SponsorReplay() {
 function SponsorExports() {
   const run = useAtlas((s) => s.run);
   const region = useAtlas((s) => s.region);
-  if (!run) return <p className="text-[12px] text-text-3">Run the comparison to export the region on screen.</p>;
+  if (!run) return <p className="text-[13px] text-text-3">Run the comparison to export the region on screen.</p>;
   const x = regionExports(run, region);
   const files = [
     [x.overlaps, "Overlap table", `sponsor format: ${pluralize(x.overlaps.rows, "pair")} under ${SPONSOR_RADIUS_MILES} mi, closest first`],
@@ -720,7 +720,7 @@ function SponsorExports() {
     <div className="space-y-1.5">
       {files.map(([f, label, hint]) => (
         <div key={f.name} className="flex items-center gap-2 rounded-lg bg-bg-2 px-3 py-1.5 ring-1 ring-line">
-          <span className="min-w-0 flex-1 text-[11.5px] leading-snug">
+          <span className="min-w-0 flex-1 text-[13px] leading-snug">
             <span className="text-text-0">{label}</span> <span className="text-text-3">· {hint}</span>
           </span>
           <Button size="sm" variant="outline" onClick={() => download(f.name, f.csv(), "text/csv")} aria-label={`Download ${label} CSV`}>
@@ -746,7 +746,7 @@ function LocationWorkflow({ region, where }: { region: string; where: string }) 
   const missing = blanks.filter((b) => !b.found);
   return (
     <div>
-      <ul className="space-y-2 text-[12.5px] leading-[1.55] text-text-1">
+      <ul className="space-y-2 text-[14px] leading-[1.55] text-text-1">
         <Rule k="1 · Find">
           Terminal names are matched to OpenStreetMap power features (an Overpass export of SC and GA that includes features with no operator tag, then matched by name and line
           topology) and Nominatim, as the guide suggests.
@@ -764,7 +764,7 @@ function LocationWorkflow({ region, where }: { region: string; where: string }) 
           the worked example above checks both tables.
         </Rule>
       </ul>
-      <div className="mt-3 rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug text-text-1 ring-1 ring-line">
+      <div className="mt-3 rounded-lg bg-bg-2 px-3 py-2 text-[13px] leading-snug text-text-1 ring-1 ring-line">
         <div className="flex items-center gap-1.5 text-text-0">
           {names.spread.every((s) => GOSHEN_KEYS.has(s.key)) ? <CheckCircle2 size={12} className="text-known" /> : <XCircle size={12} className="text-danger" />}
           One facility name, one location (live audit)
@@ -812,7 +812,7 @@ function ChallengeContext() {
   const q2 = CONTEXT_SOURCES["sertp-2026-q2-prelim"];
   const gpc = PACKET.find((f) => f.sourceId === "gpc-irp-2025-vol3" && IDX.source(f.sourceId)?.sha256 === f.sha256);
   return (
-    <ul className="space-y-3 text-[12.5px] leading-[1.55] text-text-1">
+    <ul className="space-y-3 text-[14px] leading-[1.55] text-text-1">
       <Rule k="Order 1920">
         FERC&apos;s 2024 final rule on regional transmission planning and cost allocation, effective August 12, 2024. Each transmission provider must include in its in-kind replacement
         estimates the facilities it owns at or above 200 kV (or a lower proposed threshold) that it expects to replace.

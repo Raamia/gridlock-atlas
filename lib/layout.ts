@@ -12,7 +12,7 @@ import { useAtlas, type AtlasState, type SheetSnap } from "@/lib/store";
  *   --panel-top     top of the rail, inspector, key chip, demo card (gutter + header + 12; phone + 8)
  *   --rail-w        Opportunities panel width (also the lg pill overlay / md drawer width; phone = viewport width)
  *   --inspector-w   inspector width, written even while it is closed so it can animate in (phone = viewport width)
- *   --dock-h        timeline dock height (overview 96 · pair 196 · collapsed 44 · 0 on phones / hidden UI)
+ *   --dock-h        timeline dock height (overview 150 · pair 244 · a dragged height · collapsed 44 · 0 on phones / hidden UI)
  *   --focal-l/t/r/b the focal hole as INSETS from the viewport edges (like CSS `inset`), gaps to the panels included:
  *                   left = gutter + rail + 12 when the rail is docked, right = gutter + inspector + 12 when it is open,
  *                   top = --panel-top, bottom = gutter + dock + 12 (phone: bottom sheet + 8)
@@ -44,6 +44,10 @@ export interface LayoutOptions {
   sheetSnap?: SheetSnap;
   /** H key: panels hidden (the demo card stays); the focal hole grows to the gutters. */
   uiHidden?: boolean;
+  /** User-dragged sizes (px); clamped here so the map always keeps a usable focal hole. */
+  dockHeight?: number | null;
+  railWidth?: number | null;
+  inspectorWidth?: number | null;
 }
 
 export interface Insets {
@@ -85,9 +89,13 @@ export interface Layout {
 export const HEADER_H = 48;
 /** Gap between a panel and the focal hole / between stacked floating elements. */
 export const PANEL_GAP = 12;
-export const RAIL = { min: 336, max: 392, vw: 0.25 } as const;
-export const INSPECTOR = { min: 384, max: 440, vw: 0.29, md: 360 } as const;
-export const DOCK = { overview: 96, pair: 196, collapsed: 44 } as const;
+/** `max` bounds the automatic width; `userMax` bounds a width the user drags to. */
+export const RAIL = { min: 336, max: 400, userMax: 540, vw: 0.25 } as const;
+export const INSPECTOR = { min: 384, max: 460, userMax: 620, vw: 0.29, md: 360 } as const;
+/** Dock heights: the overview and pair defaults, the collapsed header, and the smallest height a drag can leave. */
+export const DOCK = { overview: 150, pair: 244, collapsed: 44, min: 120 } as const;
+/** A drag never shrinks the map's focal hole narrower than this. */
+export const MIN_FOCAL_W = 360;
 /** Below this focal height (with the full dock) the dock collapses to its 44px summary. */
 export const MIN_FOCAL_H = 300;
 export const DEMO_CARD_MAX_W = 520;
@@ -141,17 +149,27 @@ export function computeLayout(vw: number, vh: number, o: LayoutOptions): Layout 
     };
   }
 
-  const railW = tier === "xl" ? clamp(Math.round(vw * RAIL.vw), RAIL.min, RAIL.max) : RAIL.min;
-  const inspectorW = tier === "xl" ? clamp(Math.round(vw * INSPECTOR.vw), INSPECTOR.min, INSPECTOR.max) : tier === "lg" ? INSPECTOR.min : INSPECTOR.md;
   const railMode: RailMode = tier === "xl" ? "panel" : tier === "lg" ? (o.inspectorOpen ? "pill" : "panel") : "drawer";
   const railDocked = railMode === "panel" && !hidden;
   const inspectorShown = o.inspectorOpen && !hidden;
+  const resizable = tier === "xl" || tier === "lg";
+  const autoRailW = tier === "xl" ? clamp(Math.round(vw * RAIL.vw), RAIL.min, RAIL.max) : RAIL.min;
+  const autoInspectorW = tier === "xl" ? clamp(Math.round(vw * INSPECTOR.vw), INSPECTOR.min, INSPECTOR.max) : tier === "lg" ? INSPECTOR.min : INSPECTOR.md;
+  // dragged widths: each keeps the focal hole at least MIN_FOCAL_W wide, given the other panel's current width
+  const room = (other: number) => vw - 2 * gutter - 2 * PANEL_GAP - MIN_FOCAL_W - other;
+  let railW = resizable && o.railWidth ? clamp(o.railWidth, RAIL.min, RAIL.userMax) : autoRailW;
+  let inspectorW = resizable && o.inspectorWidth ? clamp(o.inspectorWidth, INSPECTOR.min, INSPECTOR.userMax) : autoInspectorW;
+  if (resizable && o.railWidth) railW = Math.max(RAIL.min, Math.min(railW, room(inspectorShown ? inspectorW : 0)));
+  if (resizable && o.inspectorWidth) inspectorW = Math.max(INSPECTOR.min, Math.min(inspectorW, room(railDocked ? railW : 0)));
 
   const l = railDocked ? gutter + railW + PANEL_GAP : gutter;
   const r = inspectorShown ? gutter + inspectorW + PANEL_GAP : gutter;
   const t = panelTop;
 
-  const fullDock = o.pairSelected ? DOCK.pair : DOCK.overview;
+  // a dragged height applies to both views; it gives way (down to DOCK.min) before the map drops under MIN_FOCAL_H
+  const maxDock = vh - t - gutter - PANEL_GAP - MIN_FOCAL_H;
+  const wanted = o.dockHeight ?? (o.pairSelected ? DOCK.pair : DOCK.overview);
+  const fullDock = o.dockHeight ? clamp(wanted, DOCK.min, Math.max(DOCK.min, maxDock)) : wanted;
   const step = o.demoStep;
   const demoCollapses = o.demoOn && !(step === 0 || step === 3);
   const tooShort = vh - t - (gutter + fullDock + PANEL_GAP) < MIN_FOCAL_H;
@@ -293,7 +311,8 @@ function writeVars(l: Layout) {
   }
 }
 
-type LayoutInputs = Pick<AtlasState, "inspectorOpen" | "railOpen" | "demoStep" | "timelineCollapsed" | "selectedMatchId" | "sheetSnap" | "uiHidden">;
+type LayoutInputs = Pick<AtlasState, "inspectorOpen" | "railOpen" | "demoStep" | "timelineCollapsed" | "selectedMatchId" | "sheetSnap" | "uiHidden"> &
+  Partial<Pick<AtlasState, "dockHeight" | "railWidth" | "inspectorWidth">>;
 
 /** Layout options from the store fields that drive the layout (shared by useLayout and getLayout, so they always agree). */
 export function layoutOptions(s: LayoutInputs, vw: number): LayoutOptions {
@@ -307,6 +326,9 @@ export function layoutOptions(s: LayoutInputs, vw: number): LayoutOptions {
     pairSelected: s.selectedMatchId !== null,
     sheetSnap: s.sheetSnap,
     uiHidden: s.uiHidden,
+    dockHeight: s.dockHeight,
+    railWidth: s.railWidth,
+    inspectorWidth: s.inspectorWidth,
   };
 }
 
@@ -341,15 +363,21 @@ export function useLayout(): Layout {
   const pairSelected = useAtlas((s) => s.selectedMatchId !== null);
   const sheetSnap = useAtlas((s) => s.sheetSnap);
   const uiHidden = useAtlas((s) => s.uiHidden);
+  const dockHeight = useAtlas((s) => s.dockHeight);
+  const railWidth = useAtlas((s) => s.railWidth);
+  const inspectorWidth = useAtlas((s) => s.inspectorWidth);
 
   const layout = useMemo(
     () =>
       computeLayout(
         vw,
         vh,
-        layoutOptions({ inspectorOpen, railOpen, demoStep, timelineCollapsed, selectedMatchId: pairSelected ? "" : null, sheetSnap, uiHidden }, vw),
+        layoutOptions(
+          { inspectorOpen, railOpen, demoStep, timelineCollapsed, selectedMatchId: pairSelected ? "" : null, sheetSnap, uiHidden, dockHeight, railWidth, inspectorWidth },
+          vw,
+        ),
       ),
-    [vw, vh, inspectorOpen, railOpen, demoStep, timelineCollapsed, pairSelected, sheetSnap, uiHidden],
+    [vw, vh, inspectorOpen, railOpen, demoStep, timelineCollapsed, pairSelected, sheetSnap, uiHidden, dockHeight, railWidth, inspectorWidth],
   );
 
   useLayoutEffect(() => writeVars(layout), [layout]);

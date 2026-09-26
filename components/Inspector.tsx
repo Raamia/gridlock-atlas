@@ -70,13 +70,13 @@ function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
       <header className="flex items-center gap-2 border-b border-line px-4 py-2.5">
         <div className="min-w-0 flex-1">
           <div className="eyebrow">Pair under review</div>
-          <div className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[12px] font-medium">
+          <div className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[13px] font-medium">
             <span className="truncate text-a">{a.shortTitle}</span>
             <span className="shrink-0 text-text-3">×</span>
             <span className="truncate text-b">{b.shortTitle}</span>
           </div>
         </div>
-        <span className="hidden items-center gap-1 text-[10.5px] text-text-3 sm:flex">
+        <span className="hidden items-center gap-1 text-[12px] text-text-3 sm:flex">
           <Kbd>Esc</Kbd>
         </span>
         <IconButton label="Close inspector" onClick={() => select(null)}>
@@ -84,11 +84,12 @@ function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
         </IconButton>
       </header>
 
-      <div ref={scroller} className="scroll-thin min-h-0 flex-1 space-y-3 overflow-y-auto px-4 pb-4">
+      <SectionNav m={m} scroller={scroller} />
+      <div ref={scroller} className="scroll-thin min-h-0 flex-1 space-y-5 overflow-y-auto px-4 pb-4">
         <div className="px-1 pb-1 pt-4">
           <div className="space-y-2.5">
             <PairTitle p={a} color="var(--a)" />
-            <div className="flex items-center gap-2 pl-[18px] text-[11px] text-text-3">
+            <div className="flex items-center gap-2 pl-[18px] text-[12px] text-text-3">
               <span className="h-px w-4 bg-line-3" />×<span className="h-px flex-1 bg-line" />
             </div>
             <PairTitle p={b} color="var(--b)" />
@@ -98,19 +99,19 @@ function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
             <StatusChip status={m.reviewStatus} />
             <ConflictChip count={m.conflicts.length} />
           </div>
-          <p className="mt-3 text-[13px] leading-[1.5] text-text-1">{whyFlagged(m)}</p>
+          <p className="mt-3 text-[14px] leading-[1.5] text-text-1">{whyFlagged(m)}</p>
         </div>
         <ReviewPanel m={m} />
         <PlaceSection m={m} a={a} b={b} active={section === "place"} />
         <ScheduleSection m={m} a={a} b={b} active={section === "schedule"} />
         <CoordinationSection m={m} active={section === "coordination"} />
-        <Section id="impact" icon={<Calculator size={14} />} title="Rough impact estimate" level={<span className="text-[10px] text-text-3">illustrative</span>} active={section === "impact"}>
+        <Section id="impact" icon={<Calculator size={14} />} title="Rough impact estimate" level={<span className="text-[12px] text-text-3">illustrative</span>} active={section === "impact"}>
           <ImpactEstimate m={m} />
         </Section>
         {m.conflicts.length > 0 && <ConflictSection m={m} active={section === "conflicts"} />}
         <NotesSection a={a} b={b} />
         <SourcesSection m={m} a={a} b={b} active={section === "sources"} />
-        <p className="px-1 pb-2 text-[10.5px] leading-snug text-text-3">
+        <p className="px-1 pb-2 text-[12px] leading-snug text-text-3">
           A match is a review lead, not a finding that crews or equipment can be shared. Engine {m.engineVersion}; ordering P{m.priority} is explainable priority, not a
           probability.
         </p>
@@ -130,6 +131,40 @@ function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
   );
 }
 
+const NAV: { id: InspectorSection; label: string }[] = [
+  { id: "place", label: "Where" },
+  { id: "schedule", label: "When" },
+  { id: "coordination", label: "Coordination" },
+  { id: "impact", label: "Impact" },
+  { id: "conflicts", label: "Conflicts" },
+  { id: "sources", label: "Sources" },
+];
+
+/** Jump links under the header, so a first-time reader sees at once what the inspector holds below the fold. */
+function SectionNav({ m, scroller }: { m: Match; scroller: React.RefObject<HTMLDivElement | null> }) {
+  const jump = (id: InspectorSection) =>
+    scroller.current
+      ?.querySelector<HTMLElement>(`[data-section="${id}"]`)
+      ?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  return (
+    <nav aria-label="Inspector sections" className="scroll-thin flex shrink-0 gap-1 overflow-x-auto border-b border-line px-3 py-1.5">
+      {NAV.filter((n) => n.id !== "conflicts" || m.conflicts.length > 0).map((n) => (
+        <button
+          key={n.id}
+          type="button"
+          onClick={() => jump(n.id)}
+          className={clsx(
+            "h-7 shrink-0 rounded-control px-2 text-[13px] font-medium transition-colors hover:bg-fill-2 hover:text-text-0",
+            n.id === "conflicts" ? "text-conflict" : "text-text-2",
+          )}
+        >
+          {n.label}
+        </button>
+      ))}
+    </nav>
+  );
+}
+
 function PairTitle({ p, color }: { p: Project; color: string }) {
   return (
     <div className="flex items-start gap-2.5">
@@ -137,17 +172,17 @@ function PairTitle({ p, color }: { p: Project; color: string }) {
         <Dot color={color} size={8} ring />
       </span>
       <div className="min-w-0">
-        <h3 className="text-[17px] font-semibold leading-[1.22] tracking-[-0.015em] text-text-0" title={p.title}>
+        <h3 className="text-[17px] font-semibold leading-[1.22] text-text-0" title={p.title}>
           {displayTitle(p)}
         </h3>
-        <div className="mt-1 flex flex-wrap items-center gap-x-1.5 text-[11.5px] text-text-2">
+        <div className="mt-1 flex flex-wrap items-center gap-x-1.5 text-[13px] text-text-2">
           <span>{ownerNames(p, IDX)}</span>
           <span className="text-text-3">·</span>
           <span className={p.status.label ? "" : "capitalize"}>{p.status.label ?? p.status.value}</span>
           {p.docketId && (
             <>
               <span className="text-text-3">·</span>
-              <span className="mono text-[10.5px]">{p.docketId}</span>
+              <span className="mono text-[12px]">{p.docketId}</span>
             </>
           )}
         </div>
@@ -177,12 +212,12 @@ function Section({
     <section
       data-section={id}
       className={clsx(
-        "scroll-mt-3 rounded-xl border bg-bg-1/70 p-3.5 transition-[border-color,box-shadow] duration-500",
-        active ? "border-text-2/50 shadow-[0_0_0_3px_rgba(193,203,224,.10)]" : "border-line",
+        "scroll-mt-2 border-t border-line-2 px-1 pt-3.5 transition-colors duration-500",
+        active && "-mx-2 rounded-card bg-fill-2 px-3 pb-3",
       )}
     >
       <div className="flex items-center justify-between gap-2">
-        <h4 className="flex items-center gap-2 text-[12.5px] font-semibold text-text-0">
+        <h4 className="flex items-center gap-2 font-display text-[16px] font-semibold uppercase tracking-[0.02em] text-text-0">
           <span className="text-text-2">{icon}</span>
           {title}
         </h4>
@@ -201,7 +236,7 @@ function LevelPill({ label, level }: { label: string; level: SignalLevel }) {
     unknown: "text-text-3 ring-line-2",
   };
   return (
-    <span className={clsx("mono inline-flex h-5 items-center rounded-md px-1.5 text-[10px] uppercase tracking-wide ring-1", styles[level])}>
+    <span className={clsx("mono inline-flex h-5 items-center rounded-md px-1.5 text-[12px] uppercase tracking-wide ring-1", styles[level])}>
       {label} · {level.replace("-", " ")}
     </span>
   );
@@ -226,7 +261,7 @@ function toneFor(e: Evidence, a: Project, b: Project): EvidenceTone {
 function EvidenceList({ ids, a, b, tone, limit = 3 }: { ids: string[]; a: Project; b: Project; tone?: EvidenceTone; limit?: number }) {
   const [all, setAll] = useState(false);
   const list = [...new Set(ids)].map((id) => IDX.evidence(id)).filter(Boolean) as Evidence[];
-  if (!list.length) return <p className="text-[11.5px] text-text-3">No excerpt attached.</p>;
+  if (!list.length) return <p className="text-[13px] text-text-3">No excerpt attached.</p>;
   const shown = all ? list : list.slice(0, limit);
   return (
     <div className="space-y-2">
@@ -234,7 +269,7 @@ function EvidenceList({ ids, a, b, tone, limit = 3 }: { ids: string[]; a: Projec
         <EvidenceCard key={e.id} e={e} tone={tone ?? toneFor(e, a, b)} compact />
       ))}
       {list.length > limit && (
-        <button onClick={() => setAll((x) => !x)} className="text-[11px] text-text-2 hover:text-text-0">
+        <button onClick={() => setAll((x) => !x)} className="text-[12px] text-text-2 hover:text-text-0">
           {all ? "Show fewer" : `Show ${list.length - limit} more excerpt${list.length - limit > 1 ? "s" : ""}`}
         </button>
       )}
@@ -256,22 +291,22 @@ function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; a
   const evidence = [...rels.flatMap((r) => r.evidenceIds), ...[a, b].flatMap((p) => p.places.filter((pl) => pl.role === "endpoint").flatMap((pl) => pl.evidenceIds))];
   return (
     <Section id="place" icon={<MapPin size={14} />} title="Where they meet" level={<LevelPill label="GEO" level={m.geo} />} active={active}>
-      <p className="text-[12.5px] leading-[1.5] text-text-1">{m.geoReason}</p>
+      <p className="text-[14px] leading-[1.5] text-text-1">{m.geoReason}</p>
       {c && (
         <div className="flex items-center gap-3 rounded-lg bg-bg-2/70 px-3 py-2 ring-1 ring-line">
           <div className="shrink-0">
             <div className="num text-[20px] leading-none text-text-0">{mi(c.miles)}</div>
-            <div className="mt-1 text-[10.5px] text-text-3">center to center</div>
+            <div className="mt-1 text-[12px] text-text-3">center to center</div>
           </div>
           <div className="h-8 w-px shrink-0 bg-line-2" />
           {byFacility ? (
-            <p className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
+            <p className="min-w-0 flex-1 text-[12px] leading-snug text-text-2">
               Beyond the <span className="num text-text-1">{radius} mi</span> review radius. Place is confirmed by the{" "}
               {method === "shared-site" ? (implied ? "shared site the sources imply" : "stated shared site") : "shared terminal"}
               {facility ? ` (${facility})` : ""}, so center distance is not the signal here.
             </p>
           ) : (
-            <div className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
+            <div className="min-w-0 flex-1 text-[12px] leading-snug text-text-2">
               {mi(c.lowMiles) === mi(c.highMiles) ? "±<1 mi location uncertainty" : `Range ${mi(c.lowMiles)}–${mi(c.highMiles)} with location uncertainty`} · review
               radius <span className="num text-text-1">{radius} mi</span>
               <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-bg-4">
@@ -290,7 +325,7 @@ function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; a
         ))}
       </div>
       {(a.route || b.route) && (
-        <p className="text-[11px] leading-snug text-text-3">
+        <p className="text-[12px] leading-snug text-text-3">
           Dashed routes are schematic traces of official route-options maps — not survey-accurate and never used to measure distance.
         </p>
       )}
@@ -309,27 +344,27 @@ function EndpointList({ p, color }: { p: Project; color: string }) {
     used.length === 2 ? (extra ? `center = midpoint of ${used[0].label} & ${used[1].label}` : "center = midpoint") : used.length === 1 ? (extra ? `center = ${used[0].label}` : "center = this point") : "";
   return (
     <div className="rounded-lg bg-bg-2/60 px-3 py-2 ring-1 ring-line">
-      <div className="flex items-center gap-2 text-[11px] text-text-2">
+      <div className="flex items-center gap-2 text-[12px] text-text-2">
         <Dot color={color} size={6} /> <span className="min-w-0 truncate">{p.shortTitle}</span>
-        <span className="ml-auto max-w-[62%] shrink-0 truncate text-[10px] text-text-3" title={center}>
+        <span className="ml-auto max-w-[62%] shrink-0 truncate text-[12px] text-text-3" title={center}>
           {center}
         </span>
       </div>
-      {list.length === 0 && <div className="mt-1 text-[11.5px] text-text-3">No located terminal</div>}
+      {list.length === 0 && <div className="mt-1 text-[13px] text-text-3">No located terminal</div>}
       {list.map((pl) => (
         <div key={pl.id} className="mt-1.5 flex items-start justify-between gap-2">
           <div className="min-w-0">
-            <div className="truncate text-[12px] text-text-0" title={pl.detail ?? pl.label}>
+            <div className="truncate text-[13px] text-text-0" title={pl.detail ?? pl.label}>
               {pl.label}
             </div>
-            <div className="mono truncate text-[9.5px] text-text-3" title={pl.coordinateSource}>
+            <div className="mono truncate text-[12px] text-text-3" title={pl.coordinateSource}>
               {pl.lat.toFixed(4)}, {pl.lon.toFixed(4)} · {pl.coordinateSource}
             </div>
           </div>
           <div className="flex shrink-0 flex-col items-end gap-1">
             <PrecisionTag precision={pl.precision} />
-            {pl.confidence === "lower-confidence" && <span className="text-[10px] text-conflict">lower confidence</span>}
-            {extra && !used.some((u) => u.id === pl.id) && <span className="text-[10px] text-text-3">not used for center</span>}
+            {pl.confidence === "lower-confidence" && <span className="text-[12px] text-conflict">lower confidence</span>}
+            {extra && !used.some((u) => u.id === pl.id) && <span className="text-[12px] text-text-3">not used for center</span>}
           </div>
         </div>
       ))}
@@ -344,7 +379,7 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
   ];
   return (
     <Section id="schedule" icon={<CalendarRange size={14} />} title="When they build" level={<LevelPill label="TIME" level={m.time} />} active={active}>
-      <p className="text-[12.5px] leading-[1.5] text-text-1">{m.timeReason}</p>
+      <p className="text-[14px] leading-[1.5] text-text-1">{m.timeReason}</p>
       <div className="overflow-hidden rounded-lg ring-1 ring-line">
         {rows.map(([p, color]) => {
           const groups = displayWindowGroups(p, (id) => IDX.source(id)?.publisher);
@@ -354,7 +389,7 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
                 <Dot color={color} size={6} />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="truncate text-[11.5px] text-text-2">{p.shortTitle}</div>
+                <div className="truncate text-[13px] text-text-2">{p.shortTitle}</div>
                 {groups.length ? (
                   groups.map(({ ws, sourceIds }) => {
                     const coarse = ws.some((w) => !w.continuous);
@@ -363,8 +398,8 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
                     const notes = ws.map(windowNote).filter(Boolean);
                     return (
                       <div key={ws[0].id} className="mt-1.5">
-                        <div className="num whitespace-nowrap text-[13px] leading-tight text-text-0">{windowGroupText(ws)}</div>
-                        <div className="text-[10.5px] leading-snug text-text-3" title={[...windowDocs(ws, sourceIds), `${src} · ${meta}`, ...notes].join("\n")}>
+                        <div className="num whitespace-nowrap text-[14px] leading-tight text-text-0">{windowGroupText(ws)}</div>
+                        <div className="text-[12px] leading-snug text-text-3" title={[...windowDocs(ws, sourceIds), `${src} · ${meta}`, ...notes].join("\n")}>
                           {src} · {meta}
                         </div>
                         {ws.length === 1 && notes[0] && <ClampedNote text={notes[0]} />}
@@ -372,7 +407,7 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
                     );
                   })
                 ) : (
-                  <div className="text-[12px] text-text-3">No published construction window</div>
+                  <div className="text-[13px] text-text-3">No published construction window</div>
                 )}
               </div>
             </div>
@@ -386,7 +421,7 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
               {m.timeDetail.inService.coarse && m.timeDetail.inService.gapDays > 0 ? "≥" : ""}
               {m.timeDetail.inService.gapDays.toLocaleString("en-US")}
             </div>
-            <div className="mt-1 text-[10.5px] leading-tight text-text-3">
+            <div className="mt-1 text-[12px] leading-tight text-text-3">
               {m.timeDetail.inService.coarse
                 ? m.timeDetail.inService.gapDays === 0
                   ? "days · ranges overlap"
@@ -407,8 +442,8 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
                   <Dot color={color} size={5} />
                 </span>
                 <div className="min-w-0">
-                  <div className="num whitespace-nowrap text-[11.5px] leading-tight text-text-1">{formatBound(bound)}</div>
-                  <div className="truncate text-[10.5px] text-text-3" title={label}>
+                  <div className="num whitespace-nowrap text-[13px] leading-tight text-text-1">{formatBound(bound)}</div>
+                  <div className="truncate text-[12px] text-text-3" title={label}>
                     {label}
                   </div>
                 </div>
@@ -418,7 +453,7 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
         </div>
       )}
       {m.timeDetail.continuityCaveat && (
-        <p className="text-[11px] text-text-3">A source does not describe one continuous construction phase, so overlap is only “possible.”</p>
+        <p className="text-[12px] text-text-3">A source does not describe one continuous construction phase, so overlap is only “possible.”</p>
       )}
       <EvidenceList ids={[...activeWindows(a), ...activeWindows(b)].flatMap((w) => w.evidenceIds)} a={a} b={b} limit={2} />
     </Section>
@@ -434,7 +469,7 @@ function CoordinationSection({ m, active }: { m: Match; active: boolean }) {
       {m.coordination.length ? (
         <>
           <div className="rounded-lg bg-known/8 p-3 ring-1 ring-known/30">
-            <div className="flex items-center gap-1.5 text-[12px] font-medium text-known">
+            <div className="flex items-center gap-1.5 text-[13px] font-medium text-known">
               <Check size={13} /> Documented — this is a known interface, not a new discovery
             </div>
             <ul className="mt-2 space-y-1.5">
@@ -444,7 +479,7 @@ function CoordinationSection({ m, active }: { m: Match; active: boolean }) {
             </ul>
           </div>
           {!hasResourceSharing && (
-            <div className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug text-text-2 ring-1 ring-line">
+            <div className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[13px] leading-snug text-text-2 ring-1 ring-line">
               <span className="mt-0.5 text-text-3">?</span>
               <span>
                 <span className="text-text-1">Shared crews or equipment: not established</span> in the reviewed sources. The existing coordination covers what is quoted — nothing more.
@@ -454,7 +489,7 @@ function CoordinationSection({ m, active }: { m: Match; active: boolean }) {
           <EvidenceList ids={m.coordination.flatMap((c) => c.evidenceIds)} a={a} b={b} tone="known" limit={2} />
         </>
       ) : (
-        <div className="rounded-lg bg-review/8 p-3 text-[12px] leading-snug text-text-1 ring-1 ring-review/25">
+        <div className="rounded-lg bg-review/8 p-3 text-[13px] leading-snug text-text-1 ring-1 ring-review/25">
           <div className="font-medium text-review">No coordination found in reviewed sources</div>
           <p className="mt-1 text-text-2">
             That is an <em>unknown</em> status — not evidence that the utilities are uncoordinated. Planners should check unpublished arrangements before outreach.
@@ -469,11 +504,11 @@ function CoordinationItem({ scope, text }: { scope: string; text: string }) {
   const [more, setMore] = useState(false);
   const short = firstSentence(text, 28);
   return (
-    <li className="text-[12px] leading-snug text-text-1">
-      <span className="mono mr-1.5 rounded bg-bg-3 px-1 py-0.5 text-[10px] uppercase tracking-wide text-text-2">{scope}</span>
+    <li className="text-[13px] leading-snug text-text-1">
+      <span className="mono mr-1.5 rounded bg-bg-3 px-1 py-0.5 text-[12px] uppercase tracking-wide text-text-2">{scope}</span>
       {more ? text : short}
       {short !== text && (
-        <button onClick={() => setMore((x) => !x)} className="ml-1 text-[11px] text-text-3 hover:text-text-1">
+        <button onClick={() => setMore((x) => !x)} className="ml-1 text-[12px] text-text-3 hover:text-text-1">
           {more ? "less" : "more"}
         </button>
       )}
@@ -502,7 +537,7 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
       id="conflicts"
       icon={<AlertTriangle size={14} />}
       title="Sources disagree"
-      level={<span className="text-[10.5px] text-conflict">{m.conflicts.length} preserved</span>}
+      level={<span className="text-[12px] text-conflict">{m.conflicts.length} preserved</span>}
       active={active}
     >
       {list.map((c) => {
@@ -516,7 +551,7 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
             onMouseEnter={() => set({ highlightConflict: true })}
             onMouseLeave={() => set({ highlightConflict: false })}
           >
-            <div className="text-[11.5px] text-text-2">
+            <div className="text-[13px] text-text-2">
               {p.shortTitle} · <span className="text-text-1">{c.field === "completion" ? "completion / in-service date" : "construction window"}</span>
             </div>
             <div className={clsx("mt-1.5 grid gap-2", c.sides.length === 2 ? "grid-cols-2" : "grid-cols-1")}>
@@ -524,7 +559,7 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
                 <SideCard key={side.value + side.sourceIds.join()} p={p} side={side} field={c.field} />
               ))}
             </div>
-            <p className="mt-2 text-[11px] leading-snug text-text-3">
+            <p className="mt-2 text-[12px] leading-snug text-text-3">
               {c.field === "constructionWindow" ? "Windows differ by source; the engine evaluated every source combination before calling the TIME signal." : completionNote(c, p)}
             </p>
           </div>
@@ -566,7 +601,7 @@ function ClampedNote({ text }: { text: string }) {
     if (el && !open) setClipped(el.scrollHeight > el.clientHeight + 1);
   }, [text, open]);
   return (
-    <p className="mt-0.5 text-[10.5px] leading-snug text-text-3">
+    <p className="mt-0.5 text-[12px] leading-snug text-text-3">
       <span ref={ref} className={open ? "block" : "line-clamp-2"}>
         {text}
       </span>
@@ -596,7 +631,7 @@ function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: C
         {[...new Set(srcs.map((s) => s!.publisher))].map((pub) => {
           const docs = srcs.filter((s) => s!.publisher === pub);
           return (
-            <div key={pub} className="mono truncate text-[9.5px] uppercase tracking-[0.05em] text-text-3" title={docs.map((d) => d!.title).join("\n")}>
+            <div key={pub} className="mono truncate text-[12px] uppercase tracking-[0.05em] text-text-3" title={docs.map((d) => d!.title).join("\n")}>
               {pub}
               {docs.length > 1 && ` · ${docs.length} docs`}
               {side.earlier && " · superseded"}
@@ -604,9 +639,9 @@ function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: C
           );
         })}
       </div>
-      {e && <div className="mt-2 text-[11.5px] italic leading-snug text-text-1">“{e.exactExcerpt}”</div>}
+      {e && <div className="mt-2 text-[13px] italic leading-snug text-text-1">“{e.exactExcerpt}”</div>}
       {first && e && (
-        <a href={evidenceHref(e, first)} target="_blank" rel="noreferrer" className="mt-auto pt-2 text-[10.5px] text-text-2 hover:text-a">
+        <a href={evidenceHref(e, first)} target="_blank" rel="noreferrer" className="mt-auto pt-2 text-[12px] text-text-2 hover:text-a">
           Open source{pageLabel(e) ? ` · ${pageLabel(e)}` : ""} ↗
         </a>
       )}
@@ -629,10 +664,10 @@ function NotesSection({ a, b }: { a: Project; b: Project }) {
   return (
     <section className="rounded-xl border border-line bg-bg-1/70 p-3.5">
       <button onClick={() => setOpen((o) => !o)} className="flex w-full items-center justify-between gap-2 text-left" aria-expanded={open}>
-        <span className="flex items-center gap-2 text-[12.5px] font-semibold text-text-0">
+        <span className="flex items-center gap-2 text-[14px] font-semibold text-text-0">
           <FileSearch size={14} className="text-text-2" /> Research notes
         </span>
-        <span className="text-[10.5px] text-text-3">
+        <span className="text-[12px] text-text-3">
           {total} note{total === 1 ? "" : "s"} · {open ? "hide" : "show"}
         </span>
       </button>
@@ -640,19 +675,19 @@ function NotesSection({ a, b }: { a: Project; b: Project }) {
         <div className="mt-2.5 space-y-2.5">
           {rows.map(({ p, color, notes }) => (
             <div key={p.id}>
-              <div className="flex items-center gap-1.5 text-[11px] text-text-2">
+              <div className="flex items-center gap-1.5 text-[12px] text-text-2">
                 <Dot color={color} size={5} /> {p.shortTitle}
               </div>
               <ul className="mt-1 space-y-1">
                 {notes.map((c, i) => (
-                  <li key={i} className="text-[11.5px] leading-snug text-text-2">
+                  <li key={i} className="text-[13px] leading-snug text-text-2">
                     — {c}
                   </li>
                 ))}
               </ul>
             </div>
           ))}
-          <p className="text-[10.5px] text-text-3">Qualifications recorded while reading and geocoding the sources.</p>
+          <p className="text-[12px] text-text-3">Qualifications recorded while reading and geocoding the sources.</p>
         </div>
       )}
     </section>
@@ -665,13 +700,13 @@ function SourcesSection({ m, a, b, active }: { m: Match; a: Project; b: Project;
   const counts = new Map<string, number>();
   for (const e of Object.values(IDX.allEvidence())) counts.set(e.sourceId, (counts.get(e.sourceId) ?? 0) + 1);
   return (
-    <Section id="sources" icon={<Library size={14} />} title="Public sources" level={<span className="num text-[10.5px] text-text-3">{sources.length}</span>} active={active}>
+    <Section id="sources" icon={<Library size={14} />} title="Public sources" level={<span className="num text-[12px] text-text-3">{sources.length}</span>} active={active}>
       <div className="-mx-1.5">
         {sources.map((s) => (
           <SourceRow key={s!.id} s={s!} count={counts.get(s!.id)} />
         ))}
       </div>
-      <p className="text-[10.5px] text-text-3">Snapshot {formatDate(IDX.snapshotDate)} · excerpts are short quotations with page anchors; full documents stay with their publishers.</p>
+      <p className="text-[12px] text-text-3">Snapshot {formatDate(IDX.snapshotDate)} · excerpts are short quotations with page anchors; full documents stay with their publishers.</p>
     </Section>
   );
 }

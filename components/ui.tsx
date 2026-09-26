@@ -262,7 +262,7 @@ export function Kbd({ size = "md", className, children, ...rest }: ComponentProp
     <kbd
       {...rest}
       className={clsx(
-        "num inline-grid shrink-0 place-items-center bg-fill-2 px-1 text-[11px] leading-none font-medium text-fg-2 shadow-[inset_0_-1px_0_rgb(255_255_255/0.06)] ring-1 ring-edge ring-inset coarse:hidden",
+        "num inline-grid shrink-0 place-items-center bg-fill-2 px-1 text-[12px] leading-none font-medium text-fg-2 shadow-[inset_0_-1px_0_rgb(255_255_255/0.06)] ring-1 ring-edge ring-inset coarse:hidden",
         size === "sm" ? "h-[18px] min-w-[18px] rounded-[4px]" : "h-5 min-w-5 rounded-chip",
         className,
       )}
@@ -355,7 +355,7 @@ export type ButtonProps = ComponentProps<"button"> & {
 };
 
 /**
- * Pill button. `primary` = white (one per view) · `secondary` = glass pill · `ghost` = text until hovered.
+ * Button. `primary` = white (one per view) · `secondary` = glass pill · `ghost` = text until hovered.
  * Legacy `outline` ≈ secondary and `subtle` = the pressed/active secondary.
  */
 export function Button({
@@ -389,7 +389,7 @@ export function Button({
       }
       data-variant={variant}
       className={clsx(
-        "relative inline-flex shrink-0 select-none items-center justify-center whitespace-nowrap rounded-full font-medium transition-[background-color,color,box-shadow,transform,opacity] duration-150 ease-enter active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40 aria-busy:cursor-progress aria-busy:active:scale-100 [&_svg]:shrink-0",
+        "relative inline-flex shrink-0 select-none items-center justify-center whitespace-nowrap rounded-control font-medium transition-[background-color,color,box-shadow,transform,opacity] duration-150 ease-enter active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40 aria-busy:cursor-progress aria-busy:active:scale-100 [&_svg]:shrink-0",
         BUTTON_SIZE[size],
         BUTTON_VARIANT[variant],
         block && "w-full",
@@ -444,7 +444,7 @@ export function IconButton({ label, tooltip, tooltipSide = "top", shortcut, size
       {...rest}
       aria-label={label}
       className={clsx(
-        "relative inline-grid shrink-0 place-items-center rounded-full transition-[background-color,color,transform] duration-150 ease-enter active:scale-[0.96] disabled:pointer-events-none disabled:opacity-40 [&_svg]:shrink-0",
+        "relative inline-grid shrink-0 place-items-center rounded-control transition-[background-color,color,transform] duration-150 ease-enter active:scale-[0.96] disabled:pointer-events-none disabled:opacity-40 [&_svg]:shrink-0",
         ICON_SIZE[size],
         ICON_VARIANT[variant],
         className,
@@ -668,7 +668,7 @@ export function Segmented<V extends string>({
       aria-label={label}
       aria-orientation={variant === "tablist" ? "horizontal" : undefined}
       className={clsx(
-        "relative items-center gap-0.5 rounded-full p-[3px]",
+        "relative items-center gap-0.5 rounded-control p-[3px]",
         fill ? "flex w-full" : "inline-flex",
         surface === "map" ? "chrome" : "bg-fill-1",
         className,
@@ -698,7 +698,7 @@ export function Segmented<V extends string>({
             }}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={clsx(
-              "relative inline-flex min-w-0 select-none items-center justify-center whitespace-nowrap rounded-full font-medium transition-[color,background-color,opacity] duration-200 ease-enter disabled:pointer-events-none disabled:opacity-40",
+              "relative inline-flex min-w-0 select-none items-center justify-center whitespace-nowrap rounded-[4px] font-medium transition-[color,background-color,opacity] duration-200 ease-enter disabled:pointer-events-none disabled:opacity-40",
               size === "sm" ? "h-7 px-3 text-caption" : "h-8 px-3.5 text-ui",
               fill && "flex-auto",
               active
@@ -715,7 +715,7 @@ export function Segmented<V extends string>({
                 layoutId={`seg-pill-${uid}`}
                 aria-hidden
                 className={clsx(
-                  "absolute inset-0 rounded-full",
+                  "absolute inset-0 rounded-[4px]",
                   look === "inverse" ? "bg-inverse shadow-[inset_0_1px_0_rgb(255_255_255/0.6),0_1px_2px_rgb(0_0_0/0.35)]" : "bg-fill-3 shadow-[inset_0_0_0_1px_var(--edge)]",
                 )}
                 transition={{ type: "spring", bounce: 0.12, duration: 0.34 }}
@@ -770,7 +770,7 @@ export function Chip({ children, pressed, count, icon, tooltip, size = "md", dis
       aria-pressed={pressed}
       disabled={inert}
       className={clsx(
-        "inline-flex shrink-0 select-none items-center whitespace-nowrap rounded-full font-medium ring-1 ring-inset transition-[background-color,color,box-shadow] duration-200 ease-enter disabled:pointer-events-none disabled:opacity-40 [&_svg]:shrink-0",
+        "inline-flex shrink-0 select-none items-center whitespace-nowrap rounded-control font-medium ring-1 ring-inset transition-[background-color,color,box-shadow] duration-200 ease-enter disabled:pointer-events-none disabled:opacity-40 [&_svg]:shrink-0",
         size === "sm" ? "h-6 gap-1 px-2 text-caption" : "h-7 gap-1.5 px-2.5 text-caption",
         pressed ? "bg-fg-1/[0.13] text-fg-1 ring-fg-1/30 hover:bg-fg-1/[0.17]" : "bg-fill-1 text-fg-2 ring-transparent hover:bg-fill-2 hover:text-fg-1",
         className,
@@ -816,7 +816,7 @@ export interface TagProps {
 export function Tag({ children, tone = "neutral", icon, mono, title, onClick, className, ...rest }: TagProps) {
   const cls = clsx(
     "inline-flex h-5 max-w-full shrink-0 items-center gap-1 whitespace-nowrap rounded-chip px-1.5 ring-1 ring-inset [&_svg]:shrink-0",
-    mono ? "num text-[11px] font-medium tracking-[0.01em]" : "text-caption font-medium",
+    mono ? "num text-[12px] font-medium tracking-[0.01em]" : "text-caption font-medium",
     TAG_TONE[tone],
     onClick && "transition-colors duration-150 hover:bg-fill-2",
     className,
@@ -865,7 +865,7 @@ export function Select({ label, hideLabel, look = "chip", id, className, wrapper
           {...rest}
           className={clsx(
             "min-w-0 appearance-none truncate bg-fill-1 pr-7 font-medium text-fg-1 ring-1 ring-edge ring-inset transition-colors duration-150 hover:bg-fill-2 disabled:opacity-40",
-            look === "chip" ? "h-7 rounded-full pl-2.5 text-caption" : "h-8 rounded-control pl-3 text-ui",
+            look === "chip" ? "h-7 rounded-control pl-2.5 text-caption" : "h-8 rounded-control pl-3 text-ui",
             className,
           )}
         >
@@ -970,7 +970,7 @@ export function StatusTag({ status, size = "sm", label, className }: { status: R
   return (
     <span
       className={clsx(
-        "inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full font-medium",
+        "inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-chip font-medium",
         size === "sm" ? "h-5 px-2 text-caption" : "h-6 px-2.5 text-caption",
         status === "needs-review" && "text-fg-1 ring-1 ring-edge-strong ring-inset",
         status === "known-coordination" && "bg-ok/[0.08] text-ok ring-1 ring-ok/30 ring-inset",
@@ -1373,7 +1373,7 @@ export function Notice({ children, tone = "neutral", icon, actionLabel, onAction
         <button
           type="button"
           onClick={onAction}
-          className="h-7 shrink-0 rounded-full bg-fill-2 px-3 text-caption font-medium text-fg-1 transition-colors duration-150 hover:bg-fill-3"
+          className="h-7 shrink-0 rounded-control bg-fill-2 px-3 text-caption font-medium text-fg-1 transition-colors duration-150 hover:bg-fill-3"
         >
           {actionLabel}
         </button>
@@ -1407,8 +1407,8 @@ export function LogoMark({ size = 28, className, title }: { size?: number; class
     >
       <rect x="0.5" y="0.5" width="31" height="31" rx="8.5" fill="#0b1019" stroke="rgb(255 255 255 / 0.14)" />
       <circle cx="20" cy="16" r="7.5" fill="none" stroke="#f5b83d" strokeOpacity="0.28" strokeWidth="1.25" />
-      <path d="M7 7.5C10 12.6 12.6 15.1 17 15.6" fill="none" stroke="#4cc9f0" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M7 24.5C10 19.4 12.6 16.9 17 16.4" fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M7 7.5C10 12.6 12.6 15.1 17 15.6" fill="none" stroke="#6abce6" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M7 24.5C10 19.4 12.6 16.9 17 16.4" fill="none" stroke="#c996d0" strokeWidth="2.5" strokeLinecap="round" />
       <circle cx="20" cy="16" r="3.5" fill="#f5b83d" />
     </svg>
   );

@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, ChevronDown, CircleHelp } from "lucide-react";
 import { useMemo, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { IDX, SNAPSHOT } from "@/lib/data";
@@ -14,10 +14,10 @@ import { conflictMatches, ownerNames, windowGroupText, windowSourceText } from "
 import { useAtlas } from "@/lib/store";
 import { windowDocs, windowNote } from "./ui";
 
-const LABEL_W = 208;
+const LABEL_W = 232;
 /** Row = bars in the top BAR_H px, then a lane for completion claims so diamonds and dates never sit on bar text. */
-const BAR_H = 34;
-const LANE_H = 12;
+const BAR_H = 42;
+const LANE_H = 16;
 /** A window whose start the source does not publish fades in from the left instead of showing a hard start. */
 const OPEN_START_FADE = "linear-gradient(90deg, transparent 0, #000 18%)";
 
@@ -32,7 +32,7 @@ function FloatingTip({ anchor, width, align, children }: { anchor: DOMRect; widt
   return createPortal(
     <div
       role="tooltip"
-      className="glass glass-solid pointer-events-none fixed z-[45] rounded-lg p-2.5 text-[11.5px]"
+      className="glass glass-solid pointer-events-none fixed z-[45] rounded-lg p-2.5 text-[13px]"
       style={{ left, width: Math.min(width, window.innerWidth - 2 * M), bottom: window.innerHeight - anchor.top + 8 }}
     >
       {children}
@@ -74,6 +74,66 @@ function pairDomain(a: Project, b: Project, full: { y0: number; y1: number }) {
   return hi - lo >= 4 ? { y0: lo, y1: hi } : { y0: lo, y1: lo + 4 };
 }
 
+/** Title, the legend behind a Key button, and the collapse toggle (the dock's top edge resizes it). */
+function TimelineHeader() {
+  const collapsed = useAtlas((s) => s.timelineCollapsed);
+  const set = useAtlas((s) => s.set);
+  const [keyAt, setKeyAt] = useState<DOMRect | null>(null);
+  return (
+    <div className="flex h-11 shrink-0 items-center gap-3 px-4">
+      <div className="min-w-0 truncate">
+        <span className="eyebrow text-text-1">Construction windows</span>
+        <span className="ml-2 text-[13px] text-text-3">as published in each source</span>
+      </div>
+      <button
+        type="button"
+        className="ml-auto flex h-7 shrink-0 items-center gap-1.5 rounded-control px-2 text-[13px] text-text-2 ring-1 ring-line ring-inset hover:bg-bg-3 hover:text-text-0"
+        aria-expanded={!!keyAt}
+        onClick={(e) => setKeyAt(keyAt ? null : e.currentTarget.getBoundingClientRect())}
+        onMouseLeave={() => setKeyAt(null)}
+        onBlur={() => setKeyAt(null)}
+      >
+        <CircleHelp size={14} aria-hidden />
+        Key
+      </button>
+      <button
+        type="button"
+        className="grid h-7 w-7 shrink-0 place-items-center rounded-control text-text-2 hover:bg-bg-3 hover:text-text-0"
+        aria-label={collapsed ? "Expand construction timeline" : "Collapse construction timeline"}
+        aria-expanded={!collapsed}
+        onClick={() => set({ timelineCollapsed: !collapsed })}
+      >
+        <ChevronDown size={16} className={clsx("transition-transform", collapsed && "rotate-180")} />
+      </button>
+      {keyAt && (
+        <FloatingTip anchor={keyAt} width={320} align="start">
+          <ul className="space-y-2 text-text-1">
+            <li className="flex items-center gap-2.5">
+              <span className="h-2.5 w-6 shrink-0 rounded-sm bg-text-2/70" /> Window stated in a source
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span className="h-2.5 w-6 shrink-0 rounded-sm" style={{ background: "linear-gradient(90deg, transparent, rgba(193,203,224,.7))" }} /> Soft edge: the date is only as precise as a month, quarter or year
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span className="h-2.5 w-6 shrink-0 rounded-sm" style={{ background: "repeating-linear-gradient(135deg, rgba(193,203,224,.45) 0 3px, rgba(193,203,224,.12) 3px 6px)" }} /> Hatched: only bounds or budget years are published
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span className="mx-2 block h-2.5 w-2.5 shrink-0 rotate-45 border border-text-2" /> Completion or in-service date a source claims
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span
+                className="h-2.5 w-6 shrink-0 rounded-sm"
+                style={{ background: "repeating-linear-gradient(135deg, rgba(245,184,61,.35) 0 4px, transparent 4px 8px)", boxShadow: "inset 0 0 0 1px rgba(245,184,61,.5)" }}
+              />{" "}
+              Amber band: where the two schedules may overlap
+            </li>
+          </ul>
+        </FloatingTip>
+      )}
+    </div>
+  );
+}
+
 export function Timeline() {
   const preview = usePreviewPair();
   const full = useDomain();
@@ -82,25 +142,9 @@ export function Timeline() {
   const today = pct(SNAPSHOT.snapshotDate, y0, y1);
 
   return (
-    <section aria-label="Construction timeline" className="relative hidden h-[184px] shrink-0 border-t border-line bg-bg-1 lg:block">
-      <div className="flex h-8 items-center justify-between px-4">
-        <div className="eyebrow whitespace-nowrap">Construction windows · from sources</div>
-        <div className="hidden items-center gap-4 text-[10.5px] text-text-3 xl:flex">
-          <span className="flex items-center gap-1.5">
-            <span className="h-2 w-5 rounded-sm bg-text-2/70" /> stated
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="h-2 w-5 rounded-sm" style={{ background: "linear-gradient(90deg, transparent, rgba(193,203,224,.7))" }} /> date precision (fuzzy)
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="h-2 w-5 rounded-sm" style={{ background: "repeating-linear-gradient(135deg, rgba(193,203,224,.45) 0 3px, rgba(193,203,224,.12) 3px 6px)" }} /> bounds / budget years only
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="block h-2.5 w-2.5 rotate-45 border border-text-2" /> completion claim
-          </span>
-        </div>
-      </div>
-      <div className="relative mx-4 h-[140px]">
+    <section aria-label="Construction timeline" className="relative hidden h-full shrink-0 flex-col border-t border-line bg-bg-1 lg:flex">
+      <TimelineHeader />
+      <div className="relative mx-4 mb-3 min-h-0 flex-1">
         {/* axis */}
         <div className="absolute inset-y-0 right-0" style={{ left: LABEL_W }}>
           {years.map((y) => {
@@ -108,16 +152,16 @@ export function Timeline() {
             return (
               <div key={y} className="absolute inset-y-0" style={{ left: `${x}%` }}>
                 <div className="absolute inset-y-0 w-px bg-line" />
-                <div className="mono absolute -top-0.5 left-1.5 text-[10px] text-text-3">{y}</div>
+                <div className="mono absolute -top-0.5 left-1.5 text-[12px] text-text-3">{y}</div>
               </div>
             );
           })}
           <div className="absolute inset-y-0 z-20" style={{ left: `${today}%` }}>
             <div className="absolute inset-y-0 w-px border-l border-dashed border-text-1/60" />
-            <div className="mono absolute right-1 top-[13px] whitespace-nowrap rounded bg-bg-1/90 px-1 text-[10px] text-text-1">Snapshot</div>
+            <div className="mono absolute right-1 top-[13px] whitespace-nowrap rounded bg-bg-1/90 px-1 text-[12px] text-text-1">Snapshot</div>
           </div>
         </div>
-        <div className="absolute inset-x-0 bottom-0 top-4">
+        <div className="absolute inset-x-0 bottom-0 top-5">
           <AnimatePresence mode="wait" initial={false}>
             {preview ? (
               <motion.div key={preview.match.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="absolute inset-0">
@@ -192,7 +236,7 @@ function PairTimeline({ m, a, b, y0, y1 }: { m: Match; a: Project; b: Project; y
             className="absolute bottom-0 flex justify-center"
             style={{ left: `${pct(o.start, y0, y1)}%`, width: `${pct(o.end, y0, y1) - pct(o.start, y0, y1)}%` }}
           >
-            <span className="mono whitespace-nowrap rounded-t-md bg-bg-1 px-1.5 pt-0.5 text-[10px] text-amber">
+            <span className="mono whitespace-nowrap rounded-t-md bg-bg-1 px-1.5 pt-0.5 text-[12px] text-amber">
               {confirmed ? `Overlap guaranteed in ${formatSpan(core ?? o, m.timeDetail.precision)} · possible ${formatSpan(o, m.timeDetail.precision)}` : `Possible overlap ${formatSpan(o, m.timeDetail.precision)}`} ·{" "}
               {precisionLabel(m.timeDetail.precision)} precision
             </span>
@@ -215,7 +259,7 @@ function InServiceGap({ m, y0, y1 }: { m: Match; y0: number; y1: number }) {
       <div className="absolute bottom-0 h-2 w-px bg-a" style={{ left: `${xa}%` }} />
       <div className="absolute bottom-0 h-2 w-px bg-b" style={{ left: `${xb}%` }} />
       <div className="absolute bottom-0.5 flex justify-center" style={{ left: `${l}%`, width: `${Math.max(r - l, 0.3)}%` }}>
-        <span className="mono translate-y-1/2 whitespace-nowrap rounded bg-bg-1 px-1.5 text-[10px] text-text-1">
+        <span className="mono translate-y-1/2 whitespace-nowrap rounded bg-bg-1 px-1.5 text-[12px] text-text-1">
           {g.coarse && g.gapDays === 0
             ? "In-service ranges overlap at stated precision"
             : `Δ ${g.coarse ? "≥" : ""}${dayCount(g.gapDays)} between in-service dates`}
@@ -260,10 +304,12 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
   return (
     <div className="flex items-start">
       <div className="flex shrink-0 items-center gap-2 pr-3" style={{ width: LABEL_W, height: BAR_H }}>
-        <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: color, boxShadow: `0 0 10px ${color}` }} />
+        <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: color }} />
         <div className="min-w-0">
-          <div className="truncate text-[12px] font-medium text-text-0">{p.shortTitle}</div>
-          <div className="truncate text-[10.5px] text-text-2">
+          <div className="truncate text-[15px] font-medium leading-snug text-text-0" title={p.title}>
+            {p.shortTitle}
+          </div>
+          <div className="truncate text-[13px] text-text-2">
             {ownerNames(p, IDX, true)}
             {more > 0 && <span className="text-text-3"> · +{more} more source{more > 1 ? "s" : ""}</span>}
           </div>
@@ -271,12 +317,12 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
       </div>
       <div ref={track} className="relative flex-1" style={{ height: BAR_H + LANE_H }}>
         {groups.length === 0 && (
-          <div className="absolute inset-x-0 top-1 flex h-[26px] items-center rounded-md border border-dashed border-line-2 px-2 text-[10.5px] text-text-3">
+          <div className="absolute inset-x-0 top-2 flex h-[26px] items-center rounded-md border border-dashed border-line-2 px-2 text-[12px] text-text-3">
             No published construction window — overlap unknown
           </div>
         )}
         {groups.slice(0, 2).map((g, i) => (
-          <WindowBar key={g.ws[0].id} ws={g.ws} sourceIds={g.sourceIds} color={color} y0={y0} y1={y1} top={groups.length === 1 ? 7 : 1 + i * 17} height={groups.length === 1 ? 20 : 14} />
+          <WindowBar key={g.ws[0].id} ws={g.ws} sourceIds={g.sourceIds} color={color} y0={y0} y1={y1} top={groups.length === 1 ? 8 : 1 + i * 21} height={groups.length === 1 ? 26 : 19} />
         ))}
         {conflict && <ConflictLink p={p} claimIds={conflict.claimIds} y0={y0} y1={y1} emphasize={emphasize} label={labels.get("conflict")} />}
         {claims.map((c) => (
@@ -358,7 +404,7 @@ function WindowBar({ ws, sourceIds, color, y0, y1, top, height }: { ws: Construc
             );
           })}
       </div>
-      <div className="mono relative flex h-full min-w-0 items-center overflow-hidden whitespace-nowrap px-2 text-[10px] font-medium text-text-0">
+      <div className="mono relative flex h-full min-w-0 items-center overflow-hidden whitespace-nowrap px-2 text-[12px] font-medium text-text-0">
         {/* the source gives up its room before the date does; the date truncates only when it alone overflows the bar */}
         <span className="max-w-full shrink-0 truncate">{label}</span>
         <span className="ml-1.5 min-w-0 truncate font-normal text-text-1/80">
@@ -382,7 +428,7 @@ function WindowBar({ ws, sourceIds, color, y0, y1, top, height }: { ws: Construc
                   {" "}
                   · {w.start.label || w.end.label ? "season" : precisionLabel(coarsest([w]))} precision{w.openStart ? " · start not published" : ""}
                 </span>
-                {windowNote(w) && <div className="text-[10.5px] leading-snug text-text-3">{windowNote(w)}</div>}
+                {windowNote(w) && <div className="text-[12px] leading-snug text-text-3">{windowNote(w)}</div>}
               </li>
             ))}
           </ul>
@@ -434,7 +480,7 @@ function CompletionMark({
       {side && (
         <div
           className={clsx(
-            "mono pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded bg-bg-1/85 px-0.5 text-[9.5px] leading-none",
+            "mono pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded bg-bg-1/85 px-0.5 text-[12px] leading-none",
             side === "r" ? "left-[calc(50%+9px)]" : "right-[calc(50%+9px)]",
           )}
           style={{ color: tone }}
@@ -447,7 +493,7 @@ function CompletionMark({
           <div className="font-medium text-text-0">
             {c.label[0].toUpperCase() + c.label.slice(1)} · {formatBound(c.date)}
           </div>
-          {c.current === false && <div className="text-[10.5px] text-conflict">Superseded by a newer source</div>}
+          {c.current === false && <div className="text-[12px] text-conflict">Superseded by a newer source</div>}
           <div className="text-text-2">{src?.publisher}</div>
           <div className="mt-1 text-text-3">
             {boundsWindow
@@ -474,7 +520,7 @@ function ConflictLink({ p, claimIds, y0, y1, emphasize, label }: { p: Project; c
       {label && (
         <div
           className={clsx(
-            "absolute top-1/2 flex -translate-y-1/2 items-center gap-1 whitespace-nowrap rounded bg-bg-1/85 px-1 text-[9.5px] leading-none text-conflict",
+            "absolute top-1/2 flex -translate-y-1/2 items-center gap-1 whitespace-nowrap rounded bg-bg-1/85 px-1 text-[12px] leading-none text-conflict",
             label === "r" ? "left-[calc(100%+9px)]" : "right-[calc(100%+9px)]",
           )}
         >
@@ -504,11 +550,11 @@ function OverviewTimeline({ y0, y1 }: { y0: number; y1: number }) {
         return (
           <div
             key={p.id}
-            className={clsx("flex h-[17px] items-center rounded transition-colors", hovered === p.id && "bg-bg-3/70")}
+            className={clsx("flex h-[24px] items-center rounded transition-colors", hovered === p.id && "bg-bg-3/70")}
             onMouseEnter={() => set({ hoveredProjectId: p.id })}
             onMouseLeave={() => set({ hoveredProjectId: null })}
           >
-            <div className="truncate pr-3 text-[11px] text-text-2" style={{ width: LABEL_W }}>
+            <div className="truncate pr-3 text-[13px] text-text-2" style={{ width: LABEL_W }}>
               <span className={clsx(hovered === p.id && "text-text-0")}>{p.shortTitle}</span>
               <span className="text-text-3"> · {ownerNames(p, IDX, true)}</span>
             </div>
@@ -516,7 +562,7 @@ function OverviewTimeline({ y0, y1 }: { y0: number; y1: number }) {
               {ws.map((w) => (
                 <div
                   key={w.id}
-                  className="absolute top-1/2 h-[7px] -translate-y-1/2 rounded-full"
+                  className="absolute top-1/2 h-[8px] -translate-y-1/2 rounded-full"
                   style={{
                     left: `${pct(w.start.earliest, y0, y1)}%`,
                     width: `${pct(w.end.latest, y0, y1) - pct(w.start.earliest, y0, y1)}%`,
@@ -525,7 +571,7 @@ function OverviewTimeline({ y0, y1 }: { y0: number; y1: number }) {
                   }}
                 />
               ))}
-              {!ws.length && <div className="mono absolute left-1 top-1/2 -translate-y-1/2 text-[9.5px] text-text-3">no published construction window</div>}
+              {!ws.length && <div className="mono absolute left-1 top-1/2 -translate-y-1/2 text-[12px] text-text-3">no published construction window</div>}
               {p.completionClaims.map((c) => (
                 <div
                   key={c.id}

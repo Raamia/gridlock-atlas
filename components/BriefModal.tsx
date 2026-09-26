@@ -70,7 +70,7 @@ export function BriefModal() {
             <div className="no-print relative flex flex-wrap items-center gap-2 border-b border-line px-5 py-3 pr-14">
               <div className="hidden sm:block">
                 <div className="eyebrow">Cited review brief</div>
-                <div className="text-[12px] text-text-2">Built from snapshot fields only · every fact carries a numbered source · excerpts re-found verbatim, awaiting human check</div>
+                <div className="text-[13px] text-text-2">Built from snapshot fields only · every fact carries a numbered source · excerpts re-found verbatim, awaiting human check</div>
               </div>
               <div className="flex flex-wrap items-center gap-1.5 sm:ml-auto">
                 <Button variant="outline" size="sm" onClick={copy}>
@@ -94,14 +94,14 @@ export function BriefModal() {
                 <MatchBadges m={pair.match} />
                 <StatusChip status={pair.match.reviewStatus} />
               </div>
-              <h2 className="mt-3 text-[26px] font-semibold leading-[1.15] tracking-[-0.02em] text-text-0 print:text-black">
+              <h2 className="mt-3 text-[26px] font-semibold leading-[1.15] text-text-0 print:text-black">
                 {displayTitle(pair.a)} <span className="text-text-3">×</span> {displayTitle(pair.b)}
               </h2>
               <dl className="mt-6 space-y-4">
                 {brief.rows.slice(1).map((r) => (
                   <div key={r.label} className="grid grid-cols-1 gap-1 sm:grid-cols-[140px_1fr] sm:gap-4">
                     <dt className="eyebrow pt-0.5">{r.label}</dt>
-                    <dd className="whitespace-pre-line text-[13.5px] leading-[1.6] text-text-1 print:text-black">{r.text}</dd>
+                    <dd className="whitespace-pre-line text-[14px] leading-[1.6] text-text-1 print:text-black">{r.text}</dd>
                   </div>
                 ))}
                 {brief.unresolved.length > 0 && (
@@ -110,7 +110,7 @@ export function BriefModal() {
                     <dd>
                       <ul className="space-y-1.5">
                         {brief.unresolved.map((u) => (
-                          <li key={u} className="relative pl-3.5 text-[13.5px] leading-[1.55] text-text-1 print:text-black">
+                          <li key={u} className="relative pl-3.5 text-[14px] leading-[1.55] text-text-1 print:text-black">
                             <span className="absolute left-0 top-[9px] h-1 w-1 rounded-full bg-conflict" />
                             {u}
                           </li>
@@ -121,7 +121,7 @@ export function BriefModal() {
                 )}
                 <div className="grid grid-cols-1 gap-1 sm:grid-cols-[140px_1fr] sm:gap-4">
                   <dt className="eyebrow pt-1 text-text-1">Review question</dt>
-                  <dd className="rounded-xl bg-bg-2 p-4 text-[15.5px] font-medium leading-[1.5] text-text-0 ring-1 ring-line-2 print:bg-transparent print:text-black print:ring-black/20">{brief.question}</dd>
+                  <dd className="rounded-xl bg-bg-2 p-4 text-[16px] font-medium leading-[1.5] text-text-0 ring-1 ring-line-2 print:bg-transparent print:text-black print:ring-black/20">{brief.question}</dd>
                 </div>
               </dl>
 
@@ -129,7 +129,7 @@ export function BriefModal() {
                 <div className="eyebrow mb-3">Sources</div>
                 <ol className="space-y-2.5">
                   {brief.citations.map((c) => (
-                    <li key={c.n} className="grid grid-cols-[22px_1fr] gap-1 text-[12px] leading-snug print:break-inside-avoid">
+                    <li key={c.n} className="grid grid-cols-[22px_1fr] gap-1 text-[13px] leading-snug print:break-inside-avoid">
                       <span className="num text-text-3">{c.n}.</span>
                       <span className="text-text-2 print:text-black">
                         <span className="text-text-1">{c.publisher}</span>, <em>{c.title}</em>
@@ -138,13 +138,13 @@ export function BriefModal() {
                           {c.url.replace(/^https?:\/\//, "").slice(0, 80)}
                           {c.url.length > 88 ? "…" : ""}
                         </a>{" "}
-                        <span className="text-[10.5px] text-text-3">({c.provenance})</span>
+                        <span className="text-[12px] text-text-3">({c.provenance})</span>
                       </span>
                     </li>
                   ))}
                 </ol>
               </div>
-              <p className="mt-6 text-[11px] leading-snug text-text-3">{brief.footer}</p>
+              <p className="mt-6 text-[12px] leading-snug text-text-3">{brief.footer}</p>
             </article>
           </motion.div>
         </motion.div>

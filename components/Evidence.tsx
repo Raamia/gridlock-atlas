@@ -31,7 +31,7 @@ export function EvidenceCard({ e, tone = "neutral", compact }: { e: Evidence; to
         <SourceIcon type={src?.sourceType} />
         {/* the publisher gives way first, so the page anchor always shows */}
         <span
-          className="mono flex min-w-0 items-baseline text-[10px] uppercase tracking-[0.06em] text-text-2"
+          className="mono flex min-w-0 items-baseline text-[12px] uppercase tracking-[0.06em] text-text-2"
           title={anchor ? `${src?.publisher ?? e.sourceId} · ${anchor}` : (src?.publisher ?? e.sourceId)}
         >
           <span className="min-w-0 truncate">{src?.publisher ?? e.sourceId}</span>
@@ -42,19 +42,19 @@ export function EvidenceCard({ e, tone = "neutral", compact }: { e: Evidence; to
             href={href}
             target="_blank"
             rel="noreferrer"
-            className="ml-auto inline-flex shrink-0 items-center gap-1 rounded px-1 text-[10.5px] text-text-2 hover:bg-bg-3 hover:text-a"
+            className="ml-auto inline-flex shrink-0 items-center gap-1 rounded px-1 text-[12px] text-text-2 hover:bg-bg-3 hover:text-a"
             aria-label={`Open source: ${src?.title ?? e.sourceId}${ariaAnchor ? `, ${ariaAnchor}` : ""}`}
           >
             Open <ExternalLink size={10} />
           </a>
         )}
       </figcaption>
-      <blockquote className={clsx("px-3 pb-2 pt-1.5 font-sans italic leading-[1.5] text-text-0", compact ? "text-[12.5px]" : "text-[13.5px]")}>
+      <blockquote className={clsx("px-3 pb-2 pt-1.5 font-sans italic leading-[1.5] text-text-0", compact ? "text-[14px]" : "text-[14px]")}>
         <span className="text-text-3">“</span>
         {e.exactExcerpt}
         <span className="text-text-3">”</span>
       </blockquote>
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-line px-3 py-1.5 text-[10.5px] text-text-3">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-line px-3 py-1.5 text-[12px] text-text-3">
         <span className="truncate" title={e.supports}>
           Supports: <span className="text-text-2">{e.supports}</span>
         </span>
@@ -118,12 +118,12 @@ export function SourceRow({ s, count }: { s: SourceDocument; count?: number }) {
         <SourceIcon type={s.sourceType} />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-[12px] font-medium text-text-0 group-hover:text-a">{s.title}</span>
-        <span className="block truncate text-[11px] text-text-2">
+        <span className="block truncate text-[13px] font-medium text-text-0 group-hover:text-a">{s.title}</span>
+        <span className="block truncate text-[12px] text-text-2">
           {s.publisher}
           {s.publishedAt && ` · ${formatDate(s.publishedAt)}`}
         </span>
-        <span className="mono mt-0.5 block text-[10px] text-text-3">
+        <span className="mono mt-0.5 block text-[12px] text-text-3">
           {s.mimeType === "application/pdf" ? `PDF${s.pageCount ? ` · ${s.pageCount} pp` : ""}` : "HTML"} · retrieved {formatDate(s.retrievedAt)} · sha256 {s.sha256.slice(0, 10)}…
           {count !== undefined && ` · ${count} excerpt${count === 1 ? "" : "s"}`}
         </span>

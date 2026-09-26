@@ -81,7 +81,7 @@ function DesktopHeader({ wide, compact, legend }: { wide: boolean; compact: bool
       />
 
       <div className="ml-auto flex shrink-0 items-center gap-2">
-        <div className="chrome flex items-center gap-0.5 rounded-full p-[3px]">
+        <div className="chrome flex items-center gap-0.5 rounded-control p-[3px]">
           {compact ? (
             <>
               <IconButton label={SOURCES_LABEL} tooltipSide="bottom" onClick={() => set({ sourcesOpen: true, methodOpen: false })}>
@@ -129,8 +129,8 @@ function Brand({ legend }: { legend: boolean }) {
       <LogoMark size={30} />
       <div className="min-w-0">
         <h1 className="flex items-baseline gap-[5px] leading-none whitespace-nowrap text-fg-1">
-          <span className="text-heading leading-none font-semibold tracking-[-0.02em]">GridLock</span>{" "}
-          <span className="font-display text-title leading-none tracking-normal italic">Atlas</span>
+          <span className="font-display text-title leading-none font-semibold uppercase tracking-[0.02em]">GridLock</span>{" "}
+          <span className="font-display text-title leading-none font-medium uppercase tracking-[0.02em] text-fg-3">Atlas</span>
         </h1>
         {legend && <HeaderLegend />}
       </div>
@@ -258,7 +258,7 @@ function PhoneHeader() {
     >
       <div className="flex min-w-0 shrink-0 items-center gap-2">
         <LogoMark size={28} />
-        <h1 className="text-heading leading-none font-semibold tracking-[-0.02em] whitespace-nowrap text-fg-1">
+        <h1 className="text-heading leading-none font-semibold whitespace-nowrap text-fg-1">
           GridLock<span className="sr-only"> Atlas</span>
         </h1>
       </div>
@@ -271,7 +271,7 @@ function PhoneHeader() {
         title={REGIONS.find((r) => r.id === region)?.label}
         onChange={(e) => setRegion(e.target.value)}
         wrapperClassName="ml-auto min-w-0"
-        className="h-11! max-w-[36vw] rounded-full! bg-surface-chrome! pl-3.5! text-ui backdrop-blur-chrome"
+        className="h-11! max-w-[36vw] rounded-control! bg-surface-chrome! pl-3.5! text-ui backdrop-blur-chrome"
       >
         {REGIONS.map((r) => (
           <option key={r.id} value={r.id}>

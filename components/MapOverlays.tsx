@@ -47,8 +47,8 @@ function FocusChip() {
     >
       <div className="glass glass-solid rounded-xl px-3.5 py-2.5">
         <div className="eyebrow">{preview ? "Pair in view" : "Overview"}</div>
-        <div className="mt-0.5 truncate text-[14px] font-medium tracking-[-0.01em] text-text-0">{title}</div>
-        <div className="truncate text-[11.5px] text-text-2">{sub}</div>
+        <div className="mt-0.5 truncate text-[15px] font-medium tracking-[-0.01em] text-text-0">{title}</div>
+        <div className="truncate text-[13px] text-text-2">{sub}</div>
       </div>
     </div>
   );
@@ -76,7 +76,7 @@ function MapControls() {
         <button
           onClick={() => set({ mapMode: "3d" })}
           aria-pressed={mapMode === "3d"}
-          className={clsx("flex h-7 items-center gap-1.5 rounded-[8px] px-2.5 text-[11.5px]", mapMode === "3d" ? "bg-bg-4 text-text-0" : "text-text-2 hover:text-text-1")}
+          className={clsx("flex h-7 items-center gap-1.5 rounded-[8px] px-2.5 text-[13px]", mapMode === "3d" ? "bg-bg-4 text-text-0" : "text-text-2 hover:text-text-1")}
           title="Tilted terrain view (presentation only)"
         >
           <Mountain size={13} /> 3D
@@ -84,7 +84,7 @@ function MapControls() {
         <button
           onClick={() => set({ mapMode: "flat" })}
           aria-pressed={mapMode === "flat"}
-          className={clsx("flex h-7 items-center gap-1.5 rounded-[8px] px-2.5 text-[11.5px]", mapMode === "flat" ? "bg-bg-4 text-text-0" : "text-text-2 hover:text-text-1")}
+          className={clsx("flex h-7 items-center gap-1.5 rounded-[8px] px-2.5 text-[13px]", mapMode === "flat" ? "bg-bg-4 text-text-0" : "text-text-2 hover:text-text-1")}
           title="Accurate overhead reading"
         >
           <Square size={12} /> Flat map
@@ -97,7 +97,7 @@ function MapControls() {
             key={o.id}
             onClick={() => set({ basemap: o.id, basemapFailed: false })}
             aria-pressed={basemap === o.id}
-            className={clsx("h-7 rounded-[8px] px-2.5 text-[11.5px]", basemap === o.id ? "bg-bg-4 text-text-0" : "text-text-2 hover:text-text-1")}
+            className={clsx("h-7 rounded-[8px] px-2.5 text-[13px]", basemap === o.id ? "bg-bg-4 text-text-0" : "text-text-2 hover:text-text-1")}
           >
             {o.label}
           </button>
@@ -110,32 +110,31 @@ function MapControls() {
 function Legend() {
   const [pref, setOpen] = useState<boolean | null>(null);
   const preview = usePreviewPair();
-  const inspectorOpen = useAtlas((s) => s.inspectorOpen);
-  // collapse by default while a pair is inspected so the legend never covers its geometry
-  const open = pref ?? !inspectorOpen;
+  // starts collapsed to one "Map key" row so it never covers the map; the reader opens it
+  const open = pref ?? false;
   const region = useAtlas((s) => s.region);
   const demo = useAtlas((s) => s.demoStep);
   const focal = FOCAL_UTILITIES[region];
   if (demo !== null) return null;
   return (
-    <div data-map-ui data-map-legend className="absolute bottom-4 left-4 z-10 hidden w-[252px] sm:block">
-      <div className="glass glass-solid overflow-hidden rounded-xl">
+    <div data-map-ui data-map-legend className="absolute bottom-4 left-4 z-10 hidden w-[272px] sm:block">
+      <div className="glass glass-solid overflow-hidden rounded-card">
         <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between px-3 py-2" aria-expanded={open}>
-          <span className="eyebrow">Map truth rules</span>
+          <span className="eyebrow">Map key</span>
           <ChevronDown size={13} className={clsx("text-text-3 transition-transform", !open && "-rotate-90")} />
         </button>
         {open && (
-          <div className="space-y-1.5 px-3 pb-3 text-[11.5px] text-text-1">
+          <div className="space-y-1.5 px-3 pb-3 text-[13px] text-text-1">
             {!preview && focal && (
               <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line pb-2">
                 <span className="flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full" style={{ background: "#56c7de" }} /> {IDX.utility(focal[0])?.shortName}
+                  <span className="h-2 w-2 rounded-full" style={{ background: "#69a8c8" }} /> {IDX.utility(focal[0])?.shortName}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full" style={{ background: "#9d8cf0" }} /> {IDX.utility(focal[1])?.shortName}
+                  <span className="h-2 w-2 rounded-full" style={{ background: "#b088b6" }} /> {IDX.utility(focal[1])?.shortName}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full" style={{ background: "#8fa2c7" }} /> other
+                  <span className="h-2 w-2 rounded-full" style={{ background: "#95a7ba" }} /> other
                 </span>
               </div>
             )}
@@ -192,7 +191,7 @@ function BasemapNotice() {
   if (!failed || basemap !== "offline") return null;
   return (
     <div data-map-ui className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2">
-      <div className="glass flex items-center gap-2 rounded-full px-3 py-1.5 text-[11.5px] text-text-1">
+      <div className="glass flex items-center gap-2 rounded-control px-3 py-1.5 text-[13px] text-text-1">
         <CloudOff size={13} className="text-conflict" />
         Basemap unavailable — showing bundled Census boundaries. All plan data is local.
       </div>
@@ -207,10 +206,10 @@ function LinkNotice() {
   if (!notice) return null;
   return (
     <div data-map-ui role="status" className="absolute left-1/2 top-[92px] z-20 max-w-[calc(100%-24px)] -translate-x-1/2">
-      <div className="glass glass-solid flex items-center gap-2 rounded-full py-1 pl-3 pr-1 text-[11.5px] text-text-1">
+      <div className="glass glass-solid flex items-center gap-2 rounded-control py-1 pl-3 pr-1 text-[13px] text-text-1">
         <Link2Off size={13} className="shrink-0 text-text-2" />
         <span className="truncate">{notice}</span>
-        <button onClick={() => set({ linkNotice: null })} aria-label="Dismiss notice" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-text-3 hover:bg-bg-3 hover:text-text-0">
+        <button onClick={() => set({ linkNotice: null })} aria-label="Dismiss notice" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-chip text-text-3 hover:bg-bg-3 hover:text-text-0">
           <X size={12} />
         </button>
       </div>

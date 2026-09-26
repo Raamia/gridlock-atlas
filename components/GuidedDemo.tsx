@@ -269,8 +269,8 @@ export function GuidedDemo() {
               </div>
               <AnimatePresence mode="wait">
                 <motion.div key={step} initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.2 }}>
-                  <h3 className={clsx("mt-1 font-serif text-[22px] leading-[1.15] text-text-0", compact && "max-sm:text-[18px]")}>{STEPS[step].title}</h3>
-                  <p id="demo-body" className={clsx("mt-1.5 text-[12.5px] leading-[1.55] text-text-1", compact && !more && "max-sm:line-clamp-2")}>
+                  <h3 className={clsx("mt-1 font-display text-[22px] leading-[1.15] text-text-0", compact && "max-sm:text-[18px]")}>{STEPS[step].title}</h3>
+                  <p id="demo-body" className={clsx("mt-1.5 text-[14px] leading-[1.55] text-text-1", compact && !more && "max-sm:line-clamp-2")}>
                     {STEPS[step].body}
                   </p>
                 </motion.div>
@@ -282,7 +282,7 @@ export function GuidedDemo() {
                     onClick={() => setMore(!more)}
                     aria-expanded={more}
                     aria-controls="demo-body"
-                    className="text-[11.5px] text-text-2 underline underline-offset-2 hover:text-text-0 sm:hidden"
+                    className="text-[13px] text-text-2 underline underline-offset-2 hover:text-text-0 sm:hidden"
                   >
                     {more ? "Less" : "More"}
                   </button>
@@ -298,7 +298,7 @@ export function GuidedDemo() {
                     />
                   ))}
                 </div>
-                <span className={clsx("ml-2 hidden items-center gap-1 text-[10.5px] text-text-3", !inspectorOpen && "sm:flex")}>
+                <span className={clsx("ml-2 hidden items-center gap-1 text-[12px] text-text-3", !inspectorOpen && "sm:flex")}>
                   <Kbd>←</Kbd>
                   <Kbd>→</Kbd>
                 </span>

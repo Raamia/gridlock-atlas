@@ -8,7 +8,7 @@ import { catchError, type ErrorInfo } from "next/error";
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { SNAPSHOT } from "@/lib/data";
 import type { MatchRun } from "@/lib/domain/types";
-import { computeLayout, layoutCssVars, PHONE_SHEET, useLayout } from "@/lib/layout";
+import { computeLayout, DOCK, INSPECTOR, layoutCssVars, PHONE_SHEET, RAIL, useLayout } from "@/lib/layout";
 import { regionMatches } from "@/lib/rank";
 import { useReview } from "@/lib/review";
 import { useAtlas, type SheetSnap } from "@/lib/store";
@@ -17,6 +17,7 @@ import { MethodDrawer, SourcesDrawer } from "./Drawers";
 import { GuidedDemo } from "./GuidedDemo";
 import { Inspector } from "./Inspector";
 import { MapOverlays } from "./MapOverlays";
+import { ResizeHandle, usePanelSizePersistence } from "./ResizeHandle";
 import { Queue } from "./Queue";
 import { Timeline } from "./Timeline";
 import { TopBar } from "./TopBar";
@@ -89,6 +90,12 @@ function ShellEffects() {
   useLayout();
   useKeyboard();
   useUrlSync();
+  usePanelSizePersistence();
+  // while a panel edge is dragged, panels drop their slide transitions so edges track the pointer
+  const resizing = useAtlas((s) => s.resizing);
+  useEffect(() => {
+    document.querySelector(".atlas-shell")?.toggleAttribute("data-resizing", resizing);
+  }, [resizing]);
   useEffect(() => useReview.getState().hydrate(), []);
   // dev only, like window.__map: lets screenshot/probe scripts drive the store (`__atlas.getState().openCloseup()`)
   useEffect(() => {
@@ -386,6 +393,9 @@ function RailSlot({ children }: { children: ReactNode }) {
       )}
       style={style}
     >
+      {layout.railDocked && !sheet && !overlay && (
+        <ResizeHandle edge="right" sizeKey="railWidth" current={layout.railW} min={RAIL.min} max={RAIL.userMax} label="Resize coordination queue" />
+      )}
       {sheet && (
         <div className="flex h-6 shrink-0 cursor-grab touch-none items-center justify-center active:cursor-grabbing" {...handlers}>
           <button
@@ -470,6 +480,9 @@ function InspectorSlot({ children }: { children: ReactNode }) {
       style={style}
     >
       {children}
+      {shown && (layout.tier === "xl" || layout.tier === "lg") && (
+        <ResizeHandle edge="left" sizeKey="inspectorWidth" current={layout.inspectorW} min={INSPECTOR.min} max={INSPECTOR.userMax} label="Resize evidence inspector" />
+      )}
       {phone && open && (
         <button
           type="button"
@@ -508,11 +521,21 @@ function DockSlot({ children }: { children: ReactNode }) {
       {...(shown ? mapUi("bottom") : {})}
       className={clsx(
         "absolute z-(--z-panel) transition-[left,right,height] duration-(--dur-4) ease-enter",
-        "[&>section]:block! [&>section]:h-full! [&>section]:overflow-hidden [&>section]:rounded-panel [&>section]:border [&>section]:border-edge [&>section]:shadow-float",
+        "[&>section]:flex! [&>section]:h-full! [&>section]:overflow-hidden [&>section]:rounded-panel [&>section]:border [&>section]:border-edge [&>section]:shadow-float",
         !shown && "invisible",
       )}
       style={{ left: "var(--focal-l)", right: "var(--focal-r)", bottom: "var(--gutter)", height: "var(--dock-h)" }}
     >
+      {shown && !layout.dockCollapsed && (
+        <ResizeHandle
+          edge="top"
+          sizeKey="dockHeight"
+          current={layout.dockH}
+          min={DOCK.min}
+          max={Math.max(DOCK.min, Math.round(layout.vh * 0.6))}
+          label="Resize construction timeline"
+        />
+      )}
       {children}
     </div>
   );
