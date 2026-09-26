@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p285",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 285,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:34Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "CC - CASS PINE 230/25 NEW SUB - QCELLS - CC IMPROVEMENTS",
+   "excerpt": "CC - CASS PINE 230/25 NEW SUB - QCELLS - CC IMPROVEMENTS\nTeams # 20151\nNeed Date 12/31/2026 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20151",
+   "excerpt": "CC - CASS PINE 230/25 NEW SUB - QCELLS - CC IMPROVEMENTS\nTeams # 20151\nNeed Date 12/31/2026 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2024",
+   "excerpt": "CC - CASS PINE 230/25 NEW SUB - QCELLS - CC IMPROVEMENTS\nTeams # 20151\nNeed Date 12/31/2026 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2026",
+   "excerpt": "CC - CASS PINE 230/25 NEW SUB - QCELLS - CC IMPROVEMENTS\nTeams # 20151\nNeed Date 12/31/2026 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230/25kV",
+   "excerpt": "Build a new 230/25kV 8 element ring bus networked substation named Cass Pine that will\ninterconnect between new Great Valley and Hill View 230kV substations.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Cass Pine",
+   "excerpt": "Build a new 230/25kV 8 element ring bus networked substation named Cass Pine that will\ninterconnect between new Great Valley and Hill View 230kV substations.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Great Valley",
+   "excerpt": "Build a new 230/25kV 8 element ring bus networked substation named Cass Pine that will\ninterconnect between new Great Valley and Hill View 230kV substations.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Hill View",
+   "excerpt": "Build a new 230/25kV 8 element ring bus networked substation named Cass Pine that will\ninterconnect between new Great Valley and Hill View 230kV substations.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 869,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 539,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1408
+ }
+}

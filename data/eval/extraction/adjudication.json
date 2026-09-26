@@ -1,0 +1,40 @@
+{
+ "reviewer": "The evaluating agent (Claude), reading the cached page text; not a human label. Every pageExcerpt is re-found verbatim on its page by the scorer.",
+ "verdicts": {
+  "model-supported": "the page supports the model's value; the parse lacks it or read another number",
+  "parse-supported": "the page supports the parse; the model's value is not what the field asks for",
+  "both-supported": "the page states both values (phases, sections, or the reference counts every kV class the text names)",
+  "page-inconsistent": "the page itself states two different values"
+ },
+ "rules": [
+  {"utility": "gpc", "field": "inServiceDate", "outcome": "missed", "verdict": "prompt-semantics", "note": "Ten-Year Plan pages label the date \"Need Date\"; the frozen prompt asks for an in-service date, and the model often leaves it null. Not changed mid-evaluation (a v1.2 prompt would add needDate and be evaluated separately)."},
+  {"field": "projectTitle", "outcome": "near", "verdict": "format", "note": "planning-area prefix (\"SAV:\") or a parenthetical dropped"}
+ ],
+ "items": [
+  {"sourceId": "desc-scrtp-2024-2028", "page": 34, "field": "inServiceDate", "verdict": "both-supported", "pageExcerpt": "10/1/2025 (phase 1) and 10/1/2026 (phase 2)", "note": "two phase dates; the parse keeps phase 2"},
+  {"sourceId": "desc-scrtp-2025-2029", "page": 28, "field": "inServiceDate", "verdict": "both-supported", "pageExcerpt": "10/1/2025 (phase 1) and 10/1/2026 (phase 2)", "note": "two phase dates; the parse keeps phase 2"},
+  {"sourceId": "desc-scrtp-2026-2030", "page": 8, "field": "inServiceDate", "verdict": "both-supported", "pageExcerpt": "10/1/2025 (phase 1) and 10/1/2026 (phase 2)", "note": "two phase dates; the parse keeps phase 2"},
+  {"sourceId": "desc-scrtp-2024-2028", "page": 18, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "Harleyville 115KV Transmission Tap – Construct (1.4 miles)", "note": "length stated in the title; the parse has none"},
+  {"sourceId": "desc-scrtp-2025-2029", "page": 14, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "Harleyville 115KV Transmission Tap – Construct (1.4 miles)", "note": "length stated in the title; the parse has none"},
+  {"sourceId": "desc-scrtp-2026-2030", "page": 34, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "Harleyville 115KV Transmission Tap – Construct (1.4 miles)", "note": "length stated in the title; the parse has none"},
+  {"sourceId": "desc-scrtp-2024-2028", "page": 20, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "Canadys-Ritter 115KV-Rebld SPDC 230/115KV 1272 (Approx 18 Miles)", "note": "length stated in the title; the parse has none"},
+  {"sourceId": "desc-scrtp-2025-2029", "page": 15, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "Canadys-Ritter 115KV-Rebld SPDC 230/115KV 1272 (Approx 18 Miles)", "note": "length stated in the title; the parse has none"},
+  {"sourceId": "desc-scrtp-2025-2029", "page": 43, "field": "lengthMiles", "verdict": "both-supported", "pageExcerpt": "(approximately 13.5 additional miles). The 8.5 mile section of Dawson – Faber Place 230 kV", "note": "two rebuilt sections; the parse keeps 8.5 mi"},
+  {"sourceId": "gpc-irp-2025-vol3", "page": 295, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "Rebuild the ~14.9mi Austin Drive - Morrow 115kV", "note": "the parse does not read \"~14.9mi\""},
+  {"sourceId": "gpc-irp-2025-vol3", "page": 319, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "Great Valley - Grassy Hollow (total 10.1 miles)", "note": "the parse's 8.5 mi is how far apart the two switching stations are"},
+  {"sourceId": "gpc-irp-2025-vol3", "page": 381, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "Rebuild a total of 10.49 miles", "note": "the parse's 7.6 mi is the first of three sections"},
+  {"sourceId": "gpc-irp-2025-vol3", "page": 322, "field": "lengthMiles", "verdict": "model-supported", "pageExcerpt": "about 2.5 miles East of Villa Rica", "note": "the parse's 2.5 mi locates the new station; no line length is stated, and the model abstains"},
+  {"sourceId": "gpc-irp-2025-vol3", "page": 399, "field": "lengthMiles", "verdict": "parse-supported", "pageExcerpt": "a new 115kV breaker and a half substation a mile north of the East", "note": "\"a mile\" locates the new substation; it is not a line length"},
+  {"sourceId": "gpc-irp-2025-vol3", "page": 296, "field": "coordinationMention", "verdict": "model-supported", "pageExcerpt": "This is coordinated with the East Walton Project (TEAMS #09662)", "note": "the parse extracts no coordination statements; this one is within the joint Georgia ITS plan"},
+  {"sourceId": "desc-scrtp-2025-2029", "page": 15, "field": "voltageKv", "verdict": "both-supported", "pageExcerpt": "Rebuild Canadys-Ritter 115 kV line as SPDC with 1272 ACSR.", "note": "the title names both circuits of the double-circuit structure; the model gives the rebuilt line's 115 kV"},
+  {"sourceId": "desc-scrtp-2026-2030", "page": 44, "field": "voltageKv", "verdict": "model-supported", "pageExcerpt": "No 230kV work associated with this project", "note": "the reference counts the title's 230/115KV; the page says only the 115 kV line is rebuilt"},
+  {"sourceId": "desc-scrtp-2025-2029", "page": 47, "field": "voltageKv", "verdict": "both-supported", "pageExcerpt": "Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek.", "note": "a 115 kV tap (title) that also rebuilds a 230 kV line (description)"},
+  {"sourceId": "desc-scrtp-2026-2030", "page": 47, "field": "voltageKv", "verdict": "both-supported", "pageExcerpt": "Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek.", "note": "a 115 kV tap (title) that also rebuilds a 230 kV line (description)"},
+  {"sourceId": "desc-scrtp-2026-2030", "page": 13, "field": "voltageKv", "verdict": "page-inconsistent", "pageExcerpt": "Constructing a 230 kV Tap from Okatie to Riverport", "note": "the title reads \"Riverport 115kV Tap: Construct Tap\""},
+  {"sourceId": "gpc-irp-2025-vol3", "page": 295, "field": "voltageKv", "verdict": "both-supported", "pageExcerpt": "replace the 115/230kV auto transformer", "note": "the reference counts the transformer's 230 kV; the model gives the rebuilt line's 115 kV"},
+  {"sourceId": "desc-scrtp-2024-2028", "page": 21, "field": "voltageKv", "verdict": "both-supported", "pageExcerpt": "Convert the existing Ritter – Yemassee 230 kV to 115 kV operation.", "note": "the model adds the converted line's 115 kV"},
+  {"sourceId": "desc-scrtp-2025-2029", "page": 16, "field": "voltageKv", "verdict": "both-supported", "pageExcerpt": "Convert the existing Ritter – Yemassee 230 kV to 115 kV operation.", "note": "the model adds the converted line's 115 kV"},
+  {"sourceId": "desc-scrtp-2026-2030", "page": 33, "field": "voltageKv", "verdict": "both-supported", "pageExcerpt": "Construct 115 – 12kV distribution substation", "note": "the reference also counts the 12 kV distribution side"},
+  {"sourceId": "gpc-irp-2025-vol3", "page": 370, "field": "voltageKv", "verdict": "both-supported", "pageExcerpt": "Construct approximately 7 miles of 115kV line", "note": "the reference also counts the 46 kV right-of-way the line reuses"}
+ ]
+}

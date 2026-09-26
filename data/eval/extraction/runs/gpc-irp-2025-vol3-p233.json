@@ -1,0 +1,80 @@
+{
+ "id": "gpc-irp-2025-vol3-p233",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 233,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:53Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "MITCHELL - NORTH TIFTON 230KV RECONDUCTOR",
+   "excerpt": "MITCHELL - NORTH TIFTON 230KV RECONDUCTOR\nTeams # 18492\nNeed Date 05/01/2025 Start Date 12/31/2021",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "18492",
+   "excerpt": "MITCHELL - NORTH TIFTON 230KV RECONDUCTOR\nTeams # 18492\nNeed Date 05/01/2025 Start Date 12/31/2021",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Assigned",
+   "excerpt": "Estimated Cost – ITS\nREDACTED\nAssigned*\n* The ITS Assigned designation is for parity forecast purposes only",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "12/31/2021",
+   "excerpt": "Teams # 18492\nNeed Date 05/01/2025 Start Date 12/31/2021\nDescription\nRebuild 35.21 miles",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "35.21 miles",
+   "excerpt": "Description\nRebuild 35.21 miles of the Mitchell - North Tifton 230kV line from 100C 795 ACSR to 100C 1351\nACSR.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230kV",
+   "excerpt": "Description\nRebuild 35.21 miles of the Mitchell - North Tifton 230kV line from 100C 795 ACSR to 100C 1351\nACSR.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Mitchell",
+   "excerpt": "Rebuild 35.21 miles of the Mitchell - North Tifton 230kV line from 100C 795 ACSR to 100C 1351",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "North Tifton",
+   "excerpt": "Rebuild 35.21 miles of the Mitchell - North Tifton 230kV line from 100C 795 ACSR to 100C 1351",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 872,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 951,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1823
+ }
+}

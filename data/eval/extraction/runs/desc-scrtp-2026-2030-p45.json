@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2026-2030-p45",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 45,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:53Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Wateree-Killian 230kV: Rebuild",
+   "excerpt": "5 Year Budget\nWateree-Killian 230kV: Rebuild\nProject ID\n6808 R",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6808 R",
+   "excerpt": "Wateree-Killian 230kV: Rebuild\nProject ID\n6808 R\nProject Description",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/29",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/29",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/29\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "35 miles",
+   "excerpt": "Rebuilding the Wateree - Killian 230 kV Line. Line will be rebuilt SPSC with 1272 ACSR\nLength - 35 miles",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230 kV",
+   "excerpt": "Project Description\nRebuilding the Wateree - Killian 230 kV Line. Line will be rebuilt SPSC with 1272 ACSR",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$44,517,719",
+   "excerpt": "2029\n$22,328,000\n\n2030\n$0\n\nTotal\n$44,517,719",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Wateree",
+   "excerpt": "Project Description\nRebuilding the Wateree - Killian 230 kV Line. Line will be rebuilt SPSC with 1272 ACSR",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Killian",
+   "excerpt": "Project Description\nRebuilding the Wateree - Killian 230 kV Line. Line will be rebuilt SPSC with 1272 ACSR",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 746,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 410,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1156
+ }
+}

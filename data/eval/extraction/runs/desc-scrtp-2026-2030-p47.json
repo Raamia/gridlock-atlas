@@ -1,0 +1,101 @@
+{
+ "id": "desc-scrtp-2026-2030-p47",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 47,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:55Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Long Savannah 115 kV Tap: Construct",
+   "excerpt": "Long Savannah 115 kV Tap: Construct\nProject ID\n6869 D",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6869 D",
+   "excerpt": "Long Savannah 115 kV Tap: Construct\nProject ID\n6869 D",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Need\nLoad Growth.\nProject Status\nPlanned\nPlanned In-Service Date",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2029",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2029\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV; 230 kV",
+   "excerpt": "Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek. Include Long Savannah\n115kV Tap",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$5,100,000",
+   "excerpt": "2029\n$5,000,000\n\n2030\n$0\n\nTotal\n$5,100,000",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Church Creek",
+   "excerpt": "Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Dawson",
+   "excerpt": "Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Long Savannah",
+   "excerpt": "Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "Ravenel (BEC)",
+   "excerpt": "Long Savannah will be fed from\nChurch Creek – Ravenel (BEC) 115 kV.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 779,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 914,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1693
+ }
+}

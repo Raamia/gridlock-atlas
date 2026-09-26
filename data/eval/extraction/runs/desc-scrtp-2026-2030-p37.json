@@ -1,0 +1,87 @@
+{
+ "id": "desc-scrtp-2026-2030-p37",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 37,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:39Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Coast Guard 115kV Substation and Tap: Construct",
+   "excerpt": "Coast Guard 115kV Substation and Tap: Construct\nProject ID\n6842 C,D\nProject Description",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6842 C,D",
+   "excerpt": "Coast Guard 115kV Substation and Tap: Construct\nProject ID\n6842 C,D\nProject Description",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/27\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/27",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/27\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115-23.9 kV; 115 kV",
+   "excerpt": "Construct a 115-23.9kV substation at the Coast Guard substation site with 37.3MVA transformer and 4\nfeeder bays.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$5,560,000",
+   "excerpt": "2027\n$4,680,000\n\n2028\n$850,000\n\n2029\n$0\n\n2030\n$0\n\nTotal\n$5,560,000",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Clemson Wind Turbine",
+   "excerpt": "Construct a 115kV transmission\nline between Clemson Wind Turbine & Coast Guard Sub.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Coast Guard Substation",
+   "excerpt": "Construct a 115kV transmission\nline between Clemson Wind Turbine & Coast Guard Sub.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 782,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 918,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1700
+ }
+}

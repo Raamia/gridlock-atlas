@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p263",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 263,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:19Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "GORDON-N DUBLIN 115KV (GORDON-ENGL MCI J) REBUILD",
+   "excerpt": "GORDON-N DUBLIN 115KV (GORDON-ENGL MCI J) REBUILD\nTeams # 19618\nNeed Date 06/01/2026 Start Date 10/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19618",
+   "excerpt": "GORDON-N DUBLIN 115KV (GORDON-ENGL MCI J) REBUILD\nTeams # 19618\nNeed Date 06/01/2026 Start Date 10/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "10/01/2023",
+   "excerpt": "Teams # 19618\nNeed Date 06/01/2026 Start Date 10/01/2023\nDescription\nRebuild the Gordon",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "2.81 miles and 3.18 miles",
+   "excerpt": "Rebuild the Gordon - Engelhard McIntyre J of the Gordon - North Dublin 115kV line from 100C 336.4\nACSR (2.81 miles) Linnet and 75C 4/0 F Copper/CW (3.18 miles) to 200C ACSS 795 conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Rebuild the Gordon - Engelhard McIntyre J of the Gordon - North Dublin 115kV line from 100C 336.4\nACSR",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Gordon",
+   "excerpt": "Rebuild the Gordon - Engelhard McIntyre J of the Gordon - North Dublin 115kV line from 100C 336.4",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "North Dublin",
+   "excerpt": "Rebuild the Gordon - Engelhard McIntyre J of the Gordon - North Dublin 115kV line from 100C 336.4",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Engelhard McIntyre J",
+   "excerpt": "Rebuild the Gordon - Engelhard McIntyre J of the Gordon - North Dublin 115kV line from 100C 336.4",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 899,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1598,
+  "output_tokens_details": {
+   "reasoning_tokens": 1034
+  },
+  "total_tokens": 2497
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "id": "gpc-irp-2025-vol3-p409",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 409,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:05:10Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "BAY CREEK - CONYERS 230KV LIMITING ELEMENT REPLACEMENT",
+   "excerpt": "BAY CREEK - CONYERS 230KV LIMITING ELEMENT REPLACEMENT\nTeams # 20758\nNeed Date 06/01/2033 Start Date 06/01/2031",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20758",
+   "excerpt": "BAY CREEK - CONYERS 230KV LIMITING ELEMENT REPLACEMENT\nTeams # 20758\nNeed Date 06/01/2033 Start Date 06/01/2031",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2031",
+   "excerpt": "BAY CREEK - CONYERS 230KV LIMITING ELEMENT REPLACEMENT\nTeams # 20758\nNeed Date 06/01/2033 Start Date 06/01/2031",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "BAY CREEK - CONYERS 230KV LIMITING ELEMENT REPLACEMENT\nTeams # 20758\nNeed Date 06/01/2033 Start Date 06/01/2031",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Bay Creek substation",
+   "excerpt": "Replace equipment such as jumpers, switches, and traps at the Bay Creek, Rockdale, and Conyers\nsubstations with equipment capable of carrying 3000A.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Rockdale substation",
+   "excerpt": "Replace equipment such as jumpers, switches, and traps at the Bay Creek, Rockdale, and Conyers\nsubstations with equipment capable of carrying 3000A.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Conyers substation",
+   "excerpt": "Replace equipment such as jumpers, switches, and traps at the Bay Creek, Rockdale, and Conyers\nsubstations with equipment capable of carrying 3000A.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 860,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 456,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1316
+ }
+}

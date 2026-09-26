@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p347",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 347,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:25Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "GA ITS",
+   "excerpt": "2024 GA ITS Ten-Year Plan (2025-2034)",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "GLENWOOD SPRINGS - PORTERDALE PRIMARY 230KV LINE SWITCH REPL",
+   "excerpt": "GLENWOOD SPRINGS - PORTERDALE PRIMARY 230KV LINE SWITCH REPL\nTeams # 21138\nNeed Date 06/01/2029 Start Date 06/01/2029",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21138",
+   "excerpt": "GLENWOOD SPRINGS - PORTERDALE PRIMARY 230KV LINE SWITCH REPL\nTeams # 21138\nNeed Date 06/01/2029 Start Date 06/01/2029",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2029",
+   "excerpt": "Teams # 21138\nNeed Date 06/01/2029 Start Date 06/01/2029\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Replace the 600A line switch at Porterdale Primary on the Glenwood Springs - Porterdale Primary\n230kV Line with 1200A switch.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Porterdale Primary",
+   "excerpt": "Replace the 600A line switch at Porterdale Primary on the Glenwood Springs - Porterdale Primary\n230kV Line with 1200A switch.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Glenwood Springs",
+   "excerpt": "Replace the 600A line switch at Porterdale Primary on the Glenwood Springs - Porterdale Primary\n230kV Line with 1200A switch.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 857,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 941,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1798
+ }
+}

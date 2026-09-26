@@ -6,9 +6,9 @@ import { whyFlagged } from "@/lib/describe";
 import { overlapTableCsv } from "@/lib/export";
 import { displayTitle, formatBound, formatMilesNear, formatPoint, formatSpan, formatWindow, nameRecordIds, precisionLabel, publicNote, windowStartText, year } from "@/lib/format";
 import { impactDefaults, needsNewCorridor } from "@/lib/impact";
-import { evaluatePair, projectConflicts, runMatching } from "@/lib/matching/engine";
-import { evaluateGeo } from "@/lib/matching/geo";
-import { activeWindows, coarsest, currentInService, dayCount, dayWord, displayWindowGroups, endsWindow, evaluateTime } from "@/lib/matching/time";
+import { evaluatePair, pastDue, projectConflicts, runMatching } from "@/lib/matching/engine";
+import { evaluateGeo, facilityWords } from "@/lib/matching/geo";
+import { activeWindows, coarsest, currentInService, dayCount, dayWord, displayWindowGroups, endsWindow, evaluateTime, scheduleWindows } from "@/lib/matching/time";
 import { readableNote, windowSourceText } from "@/lib/selectors";
 
 /* ------------------------------- fixture builders ------------------------------- */
@@ -471,14 +471,43 @@ describe("review-round regressions", () => {
 });
 
 describe("engine-review regressions", () => {
-  it("archives projects whose planned in-service date has passed, without calling them complete", () => {
-    const past = project("past", "u1", {
-      places: [place("Blair", BLAIR[0], BLAIR[1])],
-      completionClaims: [{ id: "c", claimSourceId: "src", label: "planned in-service", date: { earliest: "2026-04-01", latest: "2026-04-30", precision: "month" }, evidenceIds: [] }],
+  it("keeps projects whose planned in-service date has passed, flagged and ranked lower, without calling them complete", () => {
+    const isd = (iso: string) => [{ id: "c", claimSourceId: "src", label: "planned in-service", date: { earliest: iso, latest: iso, precision: "day" as const }, evidenceIds: [] }];
+    const past = project("past", "u1", { places: [place("Blair", BLAIR[0], BLAIR[1])], completionClaims: isd("2026-04-30") });
+    const live = project("live", "u2", { places: [place("Blair 2", BLAIR[0], BLAIR[1])], completionClaims: isd("2027-04-30") });
+    const same = project("same", "u3", { places: [place("Blair 3", BLAIR[0], BLAIR[1])], completionClaims: isd("2027-04-30") });
+    const run = runMatching(snapshot([past, live, same]), { now: "t" });
+    expect(run.excludedProjects).toEqual([]);
+    expect(run.pastDueProjects).toEqual([{ projectId: "past", detail: expect.stringMatching(/^Planned in-service date \(Apr 30, 2026\) has passed; completion not confirmed/) }]);
+    const due = run.matches.find((m) => m.id === "live__past")!;
+    expect(due.pastDue).toEqual([expect.objectContaining({ projectId: "past" })]);
+    expect(due.priorityReasons).toContain("Planned date passed; completion not confirmed (ranked below current plans)");
+    expect(due.timeReason).toMatch(/past: planned date passed; completion not confirmed, so TIME is at most possible\.$/);
+    // the same pair without the passed date ranks higher
+    const current = run.matches.find((m) => m.id === "live__same")!;
+    expect(current.pastDue).toBeUndefined();
+    expect(run.matches.indexOf(current)).toBeLessThan(run.matches.indexOf(due));
+    // a published schedule overlap cannot confirm TIME when a plan's date has passed
+    const sched = (s: string, e: string): ConstructionWindow => win(2020, 2020, { phase: "scheduled", start: { earliest: s, latest: s, precision: "day" }, end: { earliest: e, latest: e, precision: "day" } });
+    const a = project("a", "u1", { places: [place("Blair", BLAIR[0], BLAIR[1])], completionClaims: isd("2026-04-30"), constructionWindows: [sched("2024-01-01", "2026-04-30")] });
+    const b = project("b", "u2", { places: [place("Blair 2", BLAIR[0], BLAIR[1])], completionClaims: isd("2027-04-30"), constructionWindows: [sched("2024-01-01", "2027-04-30")] });
+    expect(evaluateTime(a, b).level).toBe("confirmed");
+    const m = evaluatePair(a, b, snapshot([a, b]))!;
+    expect([m.time, m.badge, m.timeDetail.basis, m.timeDetail.confirmedOverlap]).toEqual(["possible", "GEO", undefined, undefined]);
+    // completion stated by a source still archives the project
+    const done = project("done", "u4", { places: [place("Blair 4", BLAIR[0], BLAIR[1])], status: { value: "complete", evidenceIds: [] } });
+    expect(runMatching(snapshot([done, live]), { now: "t" }).excludedProjects).toEqual([expect.objectContaining({ projectId: "done", reason: "complete" })]);
+  });
+
+  it("a construction window that runs past the snapshot date keeps a project current even when its need date passed", () => {
+    const p = project("p", "u1", {
+      completionClaims: [{ id: "c", claimSourceId: "src", label: "need date (in-service)", date: { earliest: "2026-06-01", latest: "2026-06-01", precision: "day" }, evidenceIds: [] }],
+      constructionWindows: [win(2026, 2027, { claimSourceId: "permit" })],
     });
-    const live = project("live", "u2", { places: [place("Blair 2", BLAIR[0], BLAIR[1])] });
-    const run = runMatching(snapshot([past, live]), { now: "t" });
-    expect(run.excludedProjects).toEqual([expect.objectContaining({ projectId: "past", reason: "past-in-service" })]);
+    expect(pastDue(p, "2026-09-26")).toBeNull();
+    expect(pastDue({ ...p, constructionWindows: [] }, "2026-09-26")).not.toBeNull();
+    // an undated snapshot (the sponsor starter file) never flags anything
+    expect(pastDue({ ...p, constructionWindows: [] }, undefined)).toBeNull();
   });
 
   it("locality-only centers are at most a possible match (plan §8.4)", () => {
@@ -566,7 +595,8 @@ describe("snapshot data regressions", () => {
   });
 
   it("F3/F8/F9: newer schedules are current, older ones kept as history", () => {
-    expect(currentInService(proj("gpc-20065"))).toMatchObject({ claimSourceId: "sertp-2025-plan", date: { earliest: "2028-01-01", latest: "2028-12-31" } });
+    expect(currentInService(proj("gpc-20065"))).toMatchObject({ claimSourceId: "sertp-2026-prelim-plan", date: { earliest: "2028-01-01", latest: "2028-12-31" } });
+    expect(proj("gpc-20065").completionClaims.find((c) => c.claimSourceId === "sertp-2025-plan")?.current).toBe(false);
     expect(pair("desc-6888", "gpc-20065")!.conflicts.some((c) => c.projectId === "gpc-20065" && c.field === "completion")).toBe(true);
     // DESC 6888's $50,000 2027 line item (0.9% of the total) no longer starts its window
     expect(proj("desc-6888").constructionWindows[0].start.earliest).toBe("2028-01-01");
@@ -626,7 +656,7 @@ describe("snapshot data regressions", () => {
 
   it("'plan editions' only for one publisher's own lists; a later source superseding an earlier one says so", () => {
     const g = pair("desc-6888", "gpc-20065")!.conflicts.find((c) => c.id === "gpc-20065:completion")!;
-    expect(g.description).toBe("Date superseded by a newer source — 2024 Ten-Year Plan: Jun 1, 2027 → SERTP 2025: 2028");
+    expect(g.description).toBe("Date superseded by a newer source — 2024 Ten-Year Plan: Jun 1, 2027 → SERTP 2025, SERTP 2026 preliminary: 2028");
     const desc = projectConflicts(proj("desc-06005-b"), pub, doc).find((c) => c.field === "completion")!;
     // edition names oldest first
     expect(desc.description).toBe("Schedule changed between plan editions — 2024–2028 list, 2025–2029 list: Mar 31, 2027 → current edition: Dec 31, 2028");
@@ -655,6 +685,7 @@ describe("snapshot data regressions", () => {
 
   it("DESC budget windows with 'Previous' spending never show an invented start year", () => {
     const open = SNAPSHOT.projects.flatMap((p) => p.constructionWindows).filter((w) => w.openStart);
+    expect(open.some((w) => w.phase === "scheduled")).toBe(true);
     expect(open.length).toBeGreaterThan(0);
     for (const w of open) {
       expect(formatWindow(w.start, w.end, w.openEnded, w.openStart)).not.toContain(String(year(w.start.earliest)));
@@ -798,8 +829,9 @@ describe("snapshot data regressions", () => {
   it("endsWindow: current forecasts that bound an active window, never earlier editions or deadlines", () => {
     const ends = (pid: string) => Object.fromEntries(proj(pid).completionClaims.map((c) => [c.id.split(":")[1], endsWindow(proj(pid), c)]));
     expect(ends("desc-6888")).toEqual({ c1: true });
-    expect(ends("desc-06367-d-g")).toEqual({ c1: true, c2: false, c3: false });
-    expect(ends("gpc-20065")).toEqual({ c1: true, c2: false });
+    // the SC PSC letters (c4–c6) agree with or precede the SCRTP date; only the SCRTP date ends the page and budget windows
+    expect(ends("desc-06367-d-g")).toEqual({ c1: true, c2: false, c3: false, c4: false, c5: false, c6: false });
+    expect(ends("gpc-20065")).toEqual({ c1: true, c2: false, c3: false });
     expect(ends("xcel-wwtc")).toEqual({ c1: true, c2: false, c3: false, c4: true, c5: true, c6: false, c7: true });
     expect(ends("dpc-alma-blair")).toEqual({ c1: false, c2: true, c3: false });
     expect(ends("transource-beci")).toEqual({ c1: true, c2: false, c3: false, c4: false });
@@ -883,7 +915,7 @@ describe("snapshot data regressions", () => {
 
   it("superseded wording never implies the date moved later (Rice Hope moved earlier)", () => {
     const c = pair("desc-6888", "gpc-20989")!.conflicts.find((x) => x.projectId === "gpc-20989" && x.field === "completion")!;
-    expect(c.description).toMatch(/^Date superseded by a newer source — 2024 Ten-Year Plan: Jun 1, 2029 → SERTP 2025: 2028/);
+    expect(c.description).toMatch(/^Date superseded by a newer source — 2024 Ten-Year Plan: Jun 1, 2029 → SERTP 2025, SERTP 2026 preliminary: 2028/);
   });
 
   it("DESC windows that run past the in-service date say why", () => {
@@ -937,15 +969,23 @@ describe("snapshot data regressions", () => {
     expect(Object.values(SNAPSHOT.evidence).some((e) => e.extractionMethod === "model")).toBe(false);
   });
 
-  it("SERTP 2025 in-service years are current for every Savannah-area project that states one", () => {
+  it("SERTP 2026 in-service years are current for every Savannah-area project that states a different year; SERTP 2025 is history", () => {
     for (const [id, y] of [["gpc-20065", 2028], ["gpc-20989", 2028], ["gpc-20407", 2029], ["gpc-20784", 2029], ["gpc-20787", 2029]] as const) {
       const c = currentInService(proj(id));
-      expect([id, c.claimSourceId, c.date.latest]).toEqual([id, "sertp-2025-plan", `${y}-12-31`]);
+      expect([id, c.claimSourceId, c.date.latest]).toEqual([id, "sertp-2026-prelim-plan", `${y}-12-31`]);
       expect(proj(id).completionClaims.find((k) => k.claimSourceId === "gpc-irp-2025-vol3")?.current).toBe(false);
+      expect(proj(id).completionClaims.find((k) => k.claimSourceId === "sertp-2025-plan")?.current).toBe(false);
     }
-    // Start Date 06/01/2030 is after the SERTP year 2029: no inverted window, and it says why
+    // SERTP 2026 restates the Need Date's year: the more precise Need Date stays current and the year is kept beside it
+    for (const [id, d] of [["gpc-20785", "2027-06-01"], ["gpc-20783", "2028-06-01"], ["gpc-21023", "2029-06-01"], ["gpc-21116", "2030-06-01"], ["gpc-20796", "2033-06-01"]] as const) {
+      expect([id, currentInService(proj(id)).date.latest]).toEqual([id, d]);
+      expect(proj(id).completionClaims.find((k) => k.claimSourceId === "sertp-2026-prelim-plan")).toMatchObject({ label: "in-service year (SERTP 2026 preliminary)" });
+      expect(proj(id).completionClaims.every((k) => k.current !== false)).toBe(true);
+    }
+    expect(proj("gpc-20785").caveats.join(" ")).toMatch(/Phase 2 \(3\.04 miles, Goshen – Rice Hope\) in 2031/);
+    // Start Date 06/01/2030 is after the SERTP year 2029: no inverted window (nor a schedule), and it says why
     expect(proj("gpc-20787").constructionWindows).toEqual([]);
-    expect(proj("gpc-20787").caveats.join(" ")).toMatch(/Start Date \(06\/01\/2030\) is after the SERTP 2025 in-service year \(2029\)/);
+    expect(proj("gpc-20787").caveats.join(" ")).toMatch(/Start Date \(06\/01\/2030\) is after the SERTP 2026 preliminary in-service year \(2029\)/);
     expect(proj("gpc-20784").caveats.join(" ")).toMatch(/approximately 8\.1 miles/);
     for (const p of SNAPSHOT.projects)
       for (const w of p.constructionWindows) {
@@ -959,8 +999,8 @@ describe("snapshot data regressions", () => {
 
   it("windows built from two documents credit both; others credit their publisher", () => {
     const label = (pid: string, wid: string) => windowSourceText([proj(pid).constructionWindows.find((w) => w.id === `${pid}:${wid}`)!], IDX);
-    expect(label("gpc-20065", "w2")).toBe("Georgia Power Ten-Year Plan start → SERTP 2025 in-service year");
-    expect(label("gpc-20989", "w2")).toBe("Georgia Power Ten-Year Plan start → SERTP 2025 in-service year");
+    expect(label("gpc-20065", "w2")).toBe("Georgia Power Ten-Year Plan start → SERTP 2026 preliminary in-service year");
+    expect(label("gpc-20989", "w2")).toBe("Georgia Power Ten-Year Plan start → SERTP 2026 preliminary in-service year");
     expect(label("desc-06367-d-g", "w1")).toBe("Dominion project page start → SCRTP planned in-service");
     expect(label("desc-06367-d-g", "w2")).toBe(IDX.source("desc-scrtp-2026-2030")!.publisher);
     expect(label("transource-beci", "w1")).toBe(IDX.source("mgs-beci-factsheet")!.publisher);
@@ -983,8 +1023,9 @@ describe("snapshot data regressions", () => {
     };
     expect(text("desc-06372-a")).toBe("before 2026 → Dec 31, 2028");
     expect(text("desc-6808-v")).toBe("before 2026 → Dec 31, 2030");
-    for (const w of SNAPSHOT.projects.flatMap((p) => p.constructionWindows).filter((w) => w.openStart)) expect(w.start.latest).toBe("2026-12-31");
-    expect(runMatching(SNAPSHOT, { now: "t", thresholdMiles: 100 }).matches.find((x) => x.id === "desc-6808-v__gpc-20065")!.timeReason).toContain("may overlap (2025–2028)");
+    for (const w of SNAPSHOT.projects.flatMap((p) => p.constructionWindows).filter((w) => w.openStart && w.phase === "unknown")) expect(w.start.latest).toBe("2026-12-31");
+    const far = runMatching(SNAPSHOT, { now: "t", thresholdMiles: 100 }).matches.find((x) => x.id === "desc-6808-v__gpc-20065")!;
+    expect(formatSpan(far.timeDetail.possibleOverlap!, far.timeDetail.precision)).toBe("2025–2028");
   });
 
   it("briefs cite the budget cell that starts a window and never repeat a title as its anchor", () => {
@@ -1018,5 +1059,210 @@ describe("snapshot data regressions", () => {
     for (const id of ids) expect(body.evidence[id], id).toBeDefined();
     const srcs = new Set(body.sources.map((s) => s.id));
     for (const e of Object.values(body.evidence) as { sourceId: string }[]) expect(srcs.has(e.sourceId)).toBe(true);
+  });
+});
+
+/* ---------------- published schedules, beyond-radius ranking, SERTP 2026 / SC PSC / permit data ---------------- */
+
+describe("published schedules (start → in-service) as a TIME basis", () => {
+  const sched = (s: string, e: DateBound): ConstructionWindow => ({
+    id: `s-${s}`,
+    claimSourceId: "src",
+    phase: "scheduled",
+    start: { earliest: s, latest: s, precision: "day" },
+    end: e,
+    continuous: true,
+    evidenceIds: ["ev1"],
+  });
+  const day = (iso: string): DateBound => ({ earliest: iso, latest: iso, precision: "day" });
+  const bounds = (s: string, e: string): ConstructionWindow => ({
+    id: `b-${s}`,
+    claimSourceId: "src",
+    phase: "unknown",
+    start: { earliest: s, latest: e, precision: "day" },
+    end: { earliest: s, latest: e, precision: "day" },
+    continuous: true,
+    boundsOnly: true,
+    evidenceIds: ["ev1"],
+  });
+  const at = (id: string, owner: string, ws: ConstructionWindow[]) => project(id, owner, { places: [place(`${id} site`, BLAIR[0], BLAIR[1])], constructionWindows: ws });
+
+  it("confirms TIME when published schedules certainly overlap for 30+ days, and says field work is undated", () => {
+    const a = at("a", "u1", [bounds("2025-06-01", "2028-12-31"), sched("2025-06-01", yr(2028))]);
+    const b = at("b", "u2", [bounds("2023-01-01", "2026-12-01"), sched("2023-12-31", day("2026-12-01"))]);
+    const t = evaluateTime(a, b);
+    expect([t.level, t.detail.basis, t.detail.confirmedOverlap]).toEqual(["confirmed", "schedule", { start: "2025-06-01", end: "2026-12-01" }]);
+    expect(t.detail.schedule).toMatchObject({ days: 548, confirmed: true });
+    expect(t.reason).toMatch(/^Published schedules overlap \(start → in-service\) for 18 months \(Jun 2025–Dec 2026\); field-work dates are not published\./);
+    expect(t.reason).not.toMatch(/construction/i);
+    const m = evaluatePair(a, b, snapshot([a, b]))!;
+    expect([m.badge, m.time]).toEqual(["BOTH", "confirmed"]);
+    expect(m.priorityReasons).toContain("Published schedules overlap (start → in-service)");
+    expect(whyFlagged(m)).toContain("published schedules (start → in-service) that overlap; field-work dates are not published");
+    // schedules are never construction windows: not shown as windows, not in conflicts, not counted as combinations
+    expect(activeWindows(a).map((w) => w.phase)).toEqual(["unknown"]);
+    expect(t.detail.combinations).toBe(1);
+  });
+
+  it("a sliver of certain overlap (Dec 31 → Jan 1) stays possible", () => {
+    const a = at("a", "u1", [bounds("2025-06-01", "2028-12-31"), sched("2025-06-01", yr(2028))]);
+    const b = at("b", "u2", [win(2028, 2028, { continuous: false }), { ...sched("2027-06-01", day("2028-12-31")), start: yr(2027) }]);
+    const t = evaluateTime(a, b);
+    expect([t.level, t.detail.basis, t.detail.schedule?.confirmed, t.detail.schedule?.days]).toEqual(["possible", undefined, false, 1]);
+  });
+
+  it("never overrides a construction no-match, and keeps a construction confirmation as the more specific basis", () => {
+    const a = at("a", "u1", [win(2026, 2027), sched("2024-01-01", yr(2030))]);
+    const b = at("b", "u2", [win(2029, 2030), sched("2024-01-01", yr(2030))]);
+    expect(evaluateTime(a, b).level).toBe("no-match");
+    const c = at("c", "u3", [win(2026, 2027), sched("2024-01-01", yr(2030))]);
+    const t = evaluateTime(a, c);
+    expect([t.level, t.detail.basis]).toEqual(["confirmed", "construction"]);
+    expect(t.reason).toMatch(/^Reported construction windows overlap/);
+  });
+
+  it("Savannah River: 9 of the top 12 pairs have overlapping published schedules; the 1-day slivers stay possible", () => {
+    const run = runMatching(SNAPSHOT, { now: "t" });
+    const pair = (x: string, y: string) => run.matches.find((m) => m.id === [x, y].sort().join("__"))!;
+    const two = pair("desc-06367-d-g", "gpc-20065");
+    expect([two.badge, two.timeDetail.basis, two.timeDetail.confirmedOverlap]).toEqual(["BOTH", "schedule", { start: "2025-06-01", end: "2026-12-01" }]);
+    expect(two.timeReason).toContain("for 18 months (Jun 2025–Dec 2026)");
+    for (const [x, y] of [["desc-6888", "gpc-20065"], ["desc-6888", "gpc-20989"], ["desc-6810-o", "gpc-21116"]]) {
+      const m = pair(x, y);
+      expect([m.id, m.time, m.timeDetail.schedule?.confirmed]).toEqual([m.id, "possible", false]);
+    }
+    // the top lead keeps its rank; schedule evidence (the plan's own definition of its Start Date) is cited
+    expect(run.matches[0].id).toBe("desc-6888__gpc-20065");
+    expect(two.evidenceIds.map((id) => SNAPSHOT.evidence[id].exactExcerpt).join(" ")).toContain("2) schedule for implementation (start date)");
+    // a DESC schedule starts from spending, never from an in-service date alone
+    for (const p of SNAPSHOT.projects.filter((p) => p.owners.some((o) => o.utilityId === "desc")))
+      for (const w of scheduleWindows(p)) expect(w.evidenceIds.map((id) => SNAPSHOT.evidence[id].exactExcerpt).some((x) => /Previous|\$\d/.test(x))).toBe(true);
+  });
+});
+
+describe("distinct facilities and the sponsor's 25-mile rule", () => {
+  it("distinct named facilities within 0.6 mi are measured, not equated; same names still share a site", () => {
+    const mc = (label: string, lat: number, lon: number) => place(label, lat, lon, { role: "endpoint", uncertaintyMeters: 400 });
+    const a = project("a", "u1", { places: [mc("McIntosh", 32.35212, -81.17511)] });
+    const west = project("b", "u2", { places: [mc("West McIntosh", 32.35437, -81.18245)] });
+    const same = project("c", "u3", { places: [mc("McIntosh Substation", 32.3525, -81.1755)] });
+    expect(facilityWords("West McIntosh")).not.toBe(facilityWords("McIntosh"));
+    expect(evaluateGeo(a, west, []).detail.method).toBe("measured");
+    expect(evaluateGeo(a, same, []).detail.method).toBe("shared-endpoint");
+    // Jasper (DESC) and Purrysburg (Santee Cooper) are 0.57 mi apart: the sponsor's OVL_2 pair is measured (4.2 mi)
+    const run = runMatching(SNAPSHOT, { now: "t" });
+    const ovl2 = run.matches.find((m) => m.id === "desc-06367-d-g__gpc-20277")!;
+    expect([ovl2.geoDetail.method, ovl2.geoDetail.center!.miles.toFixed(1)]).toEqual(["measured", "4.2"]);
+  });
+
+  it("a shared facility beyond the radius ranks after every within-radius needs-review pair and says why", () => {
+    const pscSrc = { id: "psc", publisher: "Fixture PSC", title: "", url: "", sourceType: "regulator" as const, retrievedAt: "", sha256: "", mimeType: "" };
+    const far1 = project("far1", "u1", { places: [place("West end", 44.3, -92.3)], constructionWindows: [win(2026, 2027)] });
+    const far2 = project("far2", "u2", { places: [place("East end", 44.3, -91.3)], constructionWindows: [win(2026, 2027)] });
+    const n1 = project("n1", "u3", { places: [place("Blair", BLAIR[0], BLAIR[1])] });
+    const n2 = project("n2", "u4", { places: [place("Arcadia", ARCADIA[0], ARCADIA[1])] });
+    const rel: Relation = { id: "r", projectA: "far1", projectB: "far2", kind: "shared-site", siteLabel: "Midpoint Substation", basis: "stated", description: "", evidenceIds: ["evp"] };
+    const snap = snapshot([far1, far2, n1, n2], [rel]);
+    snap.sources.push(pscSrc);
+    snap.evidence.evp = { ...snap.evidence.ev1, id: "evp", sourceId: "psc" };
+    const run = runMatching(snap, { now: "t" });
+    const far = run.matches.find((m) => m.id === "far1__far2")!;
+    const near = run.matches.find((m) => m.id === "n1__n2")!;
+    expect(far.beyondRadius).toBe(true);
+    expect(far.geoReason).toMatch(/^Beyond the 25 mi radius \(centers ≈\d+ mi apart\); flagged because Fixture PSC states a shared facility \(Midpoint Substation\)\.$/);
+    expect(far.priority).toBeLessThan(near.priority);
+    expect(run.matches.indexOf(far)).toBeGreaterThan(run.matches.indexOf(near));
+    expect(far.priorityReasons).toContain("Outside the 25 mi rule: ranked after every within-radius needs-review pair");
+    // on the snapshot: Dairyland × Xcel at Tremval North stays known coordination, below every Savannah needs-review pair
+    const snapRun = runMatching(SNAPSHOT, { now: "t" });
+    const ab = snapRun.matches.find((m) => m.id === "dpc-alma-blair__xcel-wwtc")!;
+    expect(ab.reviewStatus).toBe("known-coordination");
+    expect(ab.geoReason).toMatch(/^Beyond the 25 mi radius \(centers ≈37 mi apart\); flagged because Public Service Commission of Wisconsin states a shared facility/);
+    const floor = Math.min(...snapRun.matches.filter((m) => m.reviewStatus === "needs-review" && !m.beyondRadius).map((m) => m.priority));
+    for (const m of snapRun.matches.filter((x) => x.beyondRadius)) expect(m.priority).toBeLessThan(floor);
+  });
+
+  it("past-due projects stay visible: the sponsor's OVL_2 pair is in the queue, flagged, below comparable current leads", () => {
+    const run = runMatching(SNAPSHOT, { now: "t" });
+    const ovl2 = run.matches.find((m) => m.id === "desc-06367-d-g__gpc-20277")!;
+    expect(ovl2.reviewStatus).toBe("needs-review");
+    expect(ovl2.pastDue).toEqual([expect.objectContaining({ projectId: "gpc-20277", detail: expect.stringMatching(/Jun 1, 2026\) has passed; completion not confirmed/) })]);
+    expect(ovl2.time).toBe("possible");
+    expect(ovl2.timeDetail.inService!.gapDays).toBe(183);
+    expect(run.pastDueProjects.map((x) => x.projectId)).toContain("gpc-20277");
+    expect(run.excludedProjects.every((x) => x.reason !== "past-in-service")).toBe(true);
+  });
+});
+
+describe("newest sources: SERTP 2026, SC PSC Docket 2023-115-E, Georgia EPD permits", () => {
+  const proj = (id: string) => SNAPSHOT.projects.find((p) => p.id === id)!;
+  const quotes = (ids: string[]) => ids.map((id) => SNAPSHOT.evidence[id].exactExcerpt);
+
+  it("adds the five Savannah-area projects first listed in SERTP 2026, with the SOCO owner caveat and West McIntosh kept distinct", () => {
+    const ids = ["sertp26-mcintosh-relays", "sertp26-west-mcintosh-breakers", "sertp26-calvert-west-mcintosh", "sertp26-west-mcintosh-autobank", "sertp26-meldrim-auto"];
+    for (const id of ids) {
+      const p = proj(id);
+      expect(p.caveats[0]).toMatch(/lists this project under 'SOCO'.*does not name the owning company\. Georgia Power is inferred/);
+      expect(currentInService(p).claimSourceId).toBe("sertp-2026-prelim-plan");
+      expect(p.constructionWindows).toEqual([]);
+    }
+    const west = proj("sertp26-west-mcintosh-breakers").places[0];
+    expect([west.label, west.id]).toEqual(["West McIntosh", "sertp26-west-mcintosh-breakers-ep1"]);
+    expect(proj("sertp26-west-mcintosh-breakers").caveats.join(" ")).toMatch(/0\.46 mi from McIntosh/);
+    const run = runMatching(SNAPSHOT, { now: "t" });
+    expect(run.matches.find((m) => m.id === "desc-6888__sertp26-mcintosh-relays")!.geoDetail.method).toBe("shared-endpoint");
+    expect(run.matches.find((m) => m.id === "desc-6888__sertp26-west-mcintosh-breakers")!.geoDetail.method).toBe("measured");
+  });
+
+  it("preserves the 21116 owner and 20065 conductor disagreements with an excerpt on every side", () => {
+    const owner = proj("gpc-21116").disagreements!.find((d) => d.field === "owner")!;
+    expect(owner.sides.map((s) => s.sourceIds)).toEqual([["gpc-irp-2025-vol3"], ["sertp-2026-prelim-plan"]]);
+    expect(quotes(owner.sides[1].evidenceIds).join(" ")).toContain("MEAG: Build a new 230 kV line between the switching station and Goshen");
+    expect(proj("gpc-21116").owners.map((o) => o.utilityId)).toEqual(["gpc"]);
+    const scope = proj("gpc-20065").disagreements!.find((d) => d.field === "scope")!;
+    expect(scope.sides.map((s) => s.value)).toEqual(["100C 795 ACSR Drake", "200°C 1351 ACSS"]);
+    for (const d of [owner, scope]) for (const s of d.sides) expect(s.evidenceIds.every((id) => SNAPSHOT.evidence[id].verifiedInSource)).toBe(true);
+  });
+
+  it("records the newest-source check as a cited context note (DESC is not yet in a SERTP plan)", () => {
+    const n = SNAPSHOT.contextNotes!.find((x) => x.id === "newest-source-check-desc")!;
+    expect(n.text).toMatch(/search result/);
+    expect(quotes(n.evidenceIds)).toContain("SUMTER - DESC EASTOVER 115 KV TRANSMISSION LINE");
+    expect(SNAPSHOT.sources.some((s) => s.id === "sertp-2026-prelim-plan" && s.publishedAt === "2026-06-12")).toBe(true);
+  });
+
+  it("SC PSC Docket 2023-115-E: Dec 1, 2026 is current, earlier commercial-operation dates are history, ROW widths are cited", () => {
+    for (const id of ["desc-06367-d-g", "desc-6367-d"]) {
+      const p = proj(id);
+      const psc = p.completionClaims.filter((c) => c.claimSourceId.startsWith("scpsc-"));
+      expect(psc.map((c) => [c.date.earliest, c.current !== false])).toEqual([
+        ["2026-12-01", true],
+        ["2026-05-31", false],
+        ["2025-05-31", false],
+      ]);
+      expect(currentInService(p).date.earliest).toBe("2026-12-01");
+      expect(p.caveats.join(" ")).toMatch(/Coastal Zone Consistency Certification was still pending/);
+    }
+    const width = (id: string) => proj(id).facts.find((f) => f.key === "rowWidthFt")!;
+    expect([width("desc-06367-d-g").value, width("desc-6367-d").value]).toEqual(["100 ft", "150 ft"]);
+    expect(quotes(width("desc-6367-d").evidenceIds)[0]).toMatch(/WIDTH OF RIGHT-OF-WAY: 150 FEET$/);
+    // the Riverport / Sherwood identity is an inference, never a merge
+    expect(proj("desc-6367-d").caveats.join(" ")).toMatch(/^.*Inference, not stated by one source.*not merged/);
+    expect(proj("desc-6367-d").completionClaims.some((c) => c.claimSourceId === "desc-scrtp-2025-2029")).toBe(false);
+    // the Dominion page's start carries the pending-permit caveat
+    const page = proj("desc-06367-d-g").constructionWindows.find((w) => w.claimSourceId === "desc-jasper-okatie-sherwood-page")!;
+    expect(page.note).toMatch(/Coastal Zone Consistency Certification was still pending/);
+    // version history reads oldest document first
+    const c = projectConflicts(proj("desc-6367-d"), (id) => SNAPSHOT.sources.find((s) => s.id === id)!.publisher, undefined, (id) => SNAPSHOT.sources.find((s) => s.id === id)?.publishedAt);
+    expect(c[0].description).toMatch(/Order No\. 2023-649 of Sep 2023: May 31, 2025 → SC PSC letter of May 2024: May 31, 2026 → .*Dec 1, 2026$/);
+  });
+
+  it("Georgia EPD's permit window keeps Big Ogeechee (19966) current: the line is under construction until 06/30/2027", () => {
+    const p = proj("gpc-19966");
+    const w = p.constructionWindows.find((x) => x.claimSourceId === "ga-epd-noi-big-ogeechee-little-ogeechee")!;
+    expect([w.start.earliest, w.end.latest, w.phase, w.continuous]).toEqual(["2026-01-19", "2027-06-30", "general-construction", true]);
+    expect(w.note).toMatch(/permit-coverage dates, not a crew schedule.*inference/);
+    expect(pastDue(p, SNAPSHOT.snapshotDate)).toBeNull();
+    expect(runMatching(SNAPSHOT, { now: "t" }).pastDueProjects.some((x) => x.projectId === "gpc-19966")).toBe(false);
   });
 });

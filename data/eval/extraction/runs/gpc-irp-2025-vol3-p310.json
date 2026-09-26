@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p310",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 310,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:49Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "GA ITS",
+   "excerpt": "Assigned*\n* The ITS Assigned designation is for parity forecast purposes only\n\n2024 GA ITS Ten-Year Plan (2025-2034)",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "LAWRENCEVILLE - WINDER PRIMARY 230KV LINE REBUILD",
+   "excerpt": "LAWRENCEVILLE - WINDER PRIMARY 230KV LINE REBUILD\nTeams # 10481\nNeed Date 06/01/2027 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "10481",
+   "excerpt": "LAWRENCEVILLE - WINDER PRIMARY 230KV LINE REBUILD\nTeams # 10481\nNeed Date 06/01/2027 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nProject advanced from 2029 to 2027\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2024",
+   "excerpt": "Teams # 10481\nNeed Date 06/01/2027 Start Date 06/01/2024\nDescription\nRebuild the entire Lawrenceville",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "15.4",
+   "excerpt": "Rebuild the entire Lawrenceville - Winder Primary 230kV line, approximately 15.4 miles, using 200C\n1351 ACSS \"Martin\" conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Rebuild the entire Lawrenceville - Winder Primary 230kV line, approximately 15.4 miles, using 200C\n1351 ACSS \"Martin\" conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Lawrenceville",
+   "excerpt": "Rebuild the entire Lawrenceville - Winder Primary 230kV line, approximately 15.4 miles, using 200C\n1351 ACSS \"Martin\" conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Winder Primary",
+   "excerpt": "Rebuild the entire Lawrenceville - Winder Primary 230kV line, approximately 15.4 miles, using 200C\n1351 ACSS \"Martin\" conductor.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 866,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1031,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1897
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "id": "desc-scrtp-2025-2029-p3",
+ "sourceId": "desc-scrtp-2025-2029",
+ "page": 3,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:01:04Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Cainhoy - Hamlin 115kV: Rebuild Line and Cainhoy – Hamlin 115 kV #2: Construct New 115 kV Line",
+   "excerpt": "Cainhoy - Hamlin 115kV: Rebuild Line and Cainhoy – Hamlin 115 kV #2:\nConstruct New 115 kV Line",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6341 A-F",
+   "excerpt": "Project ID\n6341 A-F\nProject Description\nUpgrade the 954 ACSR portion of the Cainhoy",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/02/26",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/02/26",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/02/26",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "construct a\nnew Cainhoy – Hamlin 115 kV #2 line, add terminals to Cainhoy and Hamlin sub",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$31,362,092",
+   "excerpt": "2029\n$0\n\nTotal*\n$31,362,092",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Cainhoy",
+   "excerpt": "add terminals to Cainhoy and Hamlin sub to accommodate\nupgrades.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Hamlin",
+   "excerpt": "add terminals to Cainhoy and Hamlin sub to accommodate\nupgrades.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 820,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 372,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1192
+ }
+}

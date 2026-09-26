@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2025-2029-p46",
+ "sourceId": "desc-scrtp-2025-2029",
+ "page": 46,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:01:54Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Millrace 115 kV Tap: Construct",
+   "excerpt": "5 Year Budget\nMillrace 115 kV Tap: Construct\nProject ID\n6864 D, E",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6864 D, E",
+   "excerpt": "Millrace 115 kV Tap: Construct\nProject ID\n6864 D, E\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Need\nLoad Growth.\nProject Status\nPlanned\nPlanned In-Service Date",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2027",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Construct Millrace 115kV tap from the existing Dunbar Road – Lyles 115kV line.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$5,200,000",
+   "excerpt": "2029\n$0\n\nTotal*\n$5,200,000",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Millrace",
+   "excerpt": "Construct Millrace 115kV tap from the existing Dunbar Road – Lyles 115kV line.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Dunbar Road",
+   "excerpt": "Construct Millrace 115kV tap from the existing Dunbar Road – Lyles 115kV line.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Lyles",
+   "excerpt": "Construct Millrace 115kV tap from the existing Dunbar Road – Lyles 115kV line.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 758,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 378,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1136
+ }
+}

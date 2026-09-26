@@ -1,0 +1,80 @@
+{
+ "id": "gpc-irp-2025-vol3-p425",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 425,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:05:26Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "EVANS PRIMARY - THOMSON PRIMARY 115KV REBUILD",
+   "excerpt": "EVANS PRIMARY - THOMSON PRIMARY 115KV REBUILD\nTeams # 17993\nNeed Date 12/31/2034 Start Date 01/01/2031",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "17993",
+   "excerpt": "EVANS PRIMARY - THOMSON PRIMARY 115KV REBUILD\nTeams # 17993\nNeed Date 12/31/2034 Start Date 01/01/2031",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2031",
+   "excerpt": "EVANS PRIMARY - THOMSON PRIMARY 115KV REBUILD\nTeams # 17993\nNeed Date 12/31/2034 Start Date 01/01/2031",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2034",
+   "excerpt": "EVANS PRIMARY - THOMSON PRIMARY 115KV REBUILD\nTeams # 17993\nNeed Date 12/31/2034 Start Date 01/01/2031",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "approximately 5.28 miles",
+   "excerpt": "Rebuild the existing 100C 336 ACSR conductor for the Thomson Primary to Pumpkin Center 115kV\nline section (approximately 5.28 miles), part of the Evans Primary",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Rebuild the existing 100C 336 ACSR conductor for the Thomson Primary to Pumpkin Center 115kV\nline section (approximately 5.28 miles), part of the Evans Primary",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Thomson Primary",
+   "excerpt": "Rebuild the existing 100C 336 ACSR conductor for the Thomson Primary to Pumpkin Center 115kV\nline section (approximately 5.28 miles), part of the Evans Primary",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Pumpkin Center",
+   "excerpt": "Rebuild the existing 100C 336 ACSR conductor for the Thomson Primary to Pumpkin Center 115kV\nline section (approximately 5.28 miles), part of the Evans Primary",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 879,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 462,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1341
+ }
+}

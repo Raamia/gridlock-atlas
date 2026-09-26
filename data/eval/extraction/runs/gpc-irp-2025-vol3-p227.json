@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p227",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 227,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:52Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "SAV",
+   "excerpt": "SAV: MCINTOSH - PURRYSBURG 230KV REACTORS\nTeams # 20277\nNeed Date 06/01/2026 Start Date 01/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectTitle",
+   "value": "MCINTOSH - PURRYSBURG 230KV REACTORS",
+   "excerpt": "SAV: MCINTOSH - PURRYSBURG 230KV REACTORS\nTeams # 20277\nNeed Date 06/01/2026 Start Date 01/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20277",
+   "excerpt": "SAV: MCINTOSH - PURRYSBURG 230KV REACTORS\nTeams # 20277\nNeed Date 06/01/2026 Start Date 01/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2024",
+   "excerpt": "Teams # 20277\nNeed Date 06/01/2026 Start Date 01/01/2024\nDescription\nInstall reactors on the McIntosh",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2026",
+   "excerpt": "Teams # 20277\nNeed Date 06/01/2026 Start Date 01/01/2024\nDescription\nInstall reactors on the McIntosh",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "0.1 miles",
+   "excerpt": "Install reactors on the McIntosh - Purrysburg (Black and White) 230kV tie lines at McIntosh. Rebuild\n0.1 miles",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "230kV",
+   "excerpt": "Install reactors on the McIntosh - Purrysburg (Black and White) 230kV tie lines at McIntosh. Rebuild\n0.1 miles",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "McIntosh",
+   "excerpt": "Install reactors on the McIntosh - Purrysburg (Black and White) 230kV tie lines at McIntosh.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Purrysburg",
+   "excerpt": "Install reactors on the McIntosh - Purrysburg (Black and White) 230kV tie lines at McIntosh.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 881,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 482,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1363
+ }
+}

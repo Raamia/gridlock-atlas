@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p402",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 402,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:05:05Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "AVERY - HOPEWELL 115KV RECONDUCTOR",
+   "excerpt": "AVERY - HOPEWELL 115KV RECONDUCTOR\nTeams # 19632\nNeed Date 06/01/2031 Start Date 01/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19632",
+   "excerpt": "AVERY - HOPEWELL 115KV RECONDUCTOR\nTeams # 19632\nNeed Date 06/01/2031 Start Date 01/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2028",
+   "excerpt": "AVERY - HOPEWELL 115KV RECONDUCTOR\nTeams # 19632\nNeed Date 06/01/2031 Start Date 01/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "approximately 3.3 miles",
+   "excerpt": "Reconductor the Hopewell to Birmingham line section (approximately 3.3 miles) on the Avery Hopewell 115kV line with 100C 1033 ACSR conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115kV",
+   "excerpt": "Reconductor the Hopewell to Birmingham line section (approximately 3.3 miles) on the Avery Hopewell 115kV line with 100C 1033 ACSR conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Hopewell",
+   "excerpt": "Reconductor the Hopewell to Birmingham line section (approximately 3.3 miles) on the Avery Hopewell 115kV line with 100C 1033 ACSR conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Birmingham",
+   "excerpt": "Reconductor the Hopewell to Birmingham line section (approximately 3.3 miles) on the Avery Hopewell 115kV line with 100C 1033 ACSR conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Avery",
+   "excerpt": "Reconductor the Hopewell to Birmingham line section (approximately 3.3 miles) on the Avery Hopewell 115kV line with 100C 1033 ACSR conductor.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 872,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1432,
+  "output_tokens_details": {
+   "reasoning_tokens": 943
+  },
+  "total_tokens": 2304
+ }
+}

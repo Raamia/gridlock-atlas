@@ -10,7 +10,7 @@ import type { Match, Project } from "@/lib/domain/types";
 import { pluralize } from "@/lib/format";
 import { overviewRole } from "@/lib/mapdata";
 import { ownerNames, regionPairCounts } from "@/lib/selectors";
-import { overlapTableCsv } from "@/lib/export";
+import { regionExports } from "@/lib/export";
 import { download } from "@/lib/review";
 import { inTab, useAtlas, type FlagFilter, type QueueTab } from "@/lib/store";
 import { Button, Dot, Kbd, MatchBadges, StatusChip } from "./ui";
@@ -461,9 +461,9 @@ function ExcludedFooter() {
   const compare = useAtlas((s) => s.compare);
   const region = useAtlas((s) => s.region);
   const counts = useRegionCounts()!;
-  const exportCsv = () => {
-    const inRegion = run.matches.filter((m) => region === "all" || IDX.project(m.projectAId).region === region);
-    download(`gridlock-overlaps-${region}${run.thresholdMiles !== 25 ? `-${run.thresholdMiles}mi` : ""}.csv`, overlapTableCsv(inRegion), "text/csv");
+  const exportCsv = (kind: "overlaps" | "projects") => {
+    const f = regionExports(run, region)[kind];
+    download(f.name, f.csv(), "text/csv");
   };
   const archived = run.excludedProjects.filter((x) => region === "all" || IDX.project(x.projectId)?.region === region).length;
   const { beyond, unlocated, viaFacility } = counts;
@@ -484,10 +484,29 @@ function ExcludedFooter() {
           {unlocated > 0 && ` · ${unlocated.toLocaleString("en-US")} unlocated`}
         </span>
       </button>
-      <Button size="sm" variant="ghost" className="ml-auto" onClick={exportCsv} title="Download the flagged pairs in the sponsor's overlap-table format" aria-label="Export overlap table as CSV">
-        <Download size={12} />
-        CSV
-      </Button>
+      {/* one download icon for both of the sponsor's tables (the xlsx sheets are named "overlaps" and "projects") */}
+      <span className="ml-auto flex shrink-0 items-center text-[12px] font-medium text-text-1">
+        <Download size={12} className="mr-0.5 text-text-2" aria-hidden />
+        <button
+          onClick={() => exportCsv("overlaps")}
+          className="rounded-md px-1 py-1 transition-colors hover:bg-bg-3 hover:text-text-0"
+          title="Download the sponsor's overlap table (CSV): pairs whose centers are under 25 mi apart, closest first. Every flagged pair, with reasons, is in the Method drawer."
+          aria-label="Export overlap table as CSV"
+        >
+          Overlaps
+        </button>
+        <span className="text-text-3" aria-hidden>
+          ·
+        </span>
+        <button
+          onClick={() => exportCsv("projects")}
+          className="rounded-md px-1 py-1 transition-colors hover:bg-bg-3 hover:text-text-0"
+          title="Download the sponsor's project table (CSV): centers, in-service dates and overlap_1…n"
+          aria-label="Export project table as CSV"
+        >
+          Projects
+        </button>
+      </span>
       <Button size="sm" variant="ghost" onClick={() => compare()} aria-label="Re-run comparison">
         <RotateCw size={12} />
         Re-run

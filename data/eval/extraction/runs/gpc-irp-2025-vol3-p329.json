@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p329",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 329,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:08Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "JACK MCDONOUGH - NORTHWEST (BLACK) 230KV RECONDUCTOR",
+   "excerpt": "JACK MCDONOUGH - NORTHWEST (BLACK) 230KV RECONDUCTOR\nTeams # 20777\nNeed Date 06/01/2028 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20777",
+   "excerpt": "JACK MCDONOUGH - NORTHWEST (BLACK) 230KV RECONDUCTOR\nTeams # 20777\nNeed Date 06/01/2028 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2025",
+   "excerpt": "Teams # 20777\nNeed Date 06/01/2028 Start Date 06/01/2025\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2028",
+   "excerpt": "Teams # 20777\nNeed Date 06/01/2028 Start Date 06/01/2025\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "4.59 miles",
+   "excerpt": "Rebuild the Jack McDonough - Northwest (Black) 230kV line (4.59 miles) using 200C 1351 Elbrus/TW.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230kV",
+   "excerpt": "Rebuild the Jack McDonough - Northwest (Black) 230kV line (4.59 miles) using 200C 1351 Elbrus/TW.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Jack McDonough",
+   "excerpt": "Rebuild the Jack McDonough - Northwest (Black) 230kV line (4.59 miles) using 200C 1351 Elbrus/TW.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Northwest",
+   "excerpt": "Rebuild the Jack McDonough - Northwest (Black) 230kV line (4.59 miles) using 200C 1351 Elbrus/TW.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 862,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 466,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1328
+ }
+}

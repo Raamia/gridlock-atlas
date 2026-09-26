@@ -1,0 +1,87 @@
+{
+ "id": "desc-scrtp-2026-2030-p28",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 28,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:32Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Adams Run – Red House Road 46 kV: Replace Dawhoo River Crossing and other Structures",
+   "excerpt": "Adams Run – Red House Road 46 kV: Replace Dawhoo River Crossing\nand other Structures",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6809 I2",
+   "excerpt": "Project ID\n6809 I2\nProject Description\nSet the 2 River Crossing structures",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2027",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "46 kV",
+   "excerpt": "Adams Run – Red House Road 46 kV: Replace Dawhoo River Crossing\nand other Structures",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$11,000,000",
+   "excerpt": "2027\n$10,397,209\n\n2028\n$0\n\n2029\n$0\n\n2030\n$0\n\nTotal\n$11,000,000",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Adams Run",
+   "excerpt": "Adams Run – Red House Road 46 kV: Replace Dawhoo River Crossing\nand other Structures",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Red House Road",
+   "excerpt": "Adams Run – Red House Road 46 kV: Replace Dawhoo River Crossing\nand other Structures",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 830,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 368,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1198
+ }
+}

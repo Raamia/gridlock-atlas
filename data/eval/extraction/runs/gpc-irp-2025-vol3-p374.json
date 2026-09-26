@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p374",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 374,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:44Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "EAST POINT - UNION CITY 230KV BLACK LINE RECONDUCTOR",
+   "excerpt": "EAST POINT - UNION CITY 230KV BLACK LINE RECONDUCTOR\nTeams # 20480\nNeed Date 06/01/2030 Start Date 06/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20480",
+   "excerpt": "EAST POINT - UNION CITY 230KV BLACK LINE RECONDUCTOR\nTeams # 20480\nNeed Date 06/01/2030 Start Date 06/01/2028",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous IRP\nNew Project\nEstimated Cost – GPC\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2028",
+   "excerpt": "Teams # 20480\nNeed Date 06/01/2030 Start Date 06/01/2028\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "1.5 miles",
+   "excerpt": "Reconductor the 1.5 mile section from Flat Shoals Road station to the Stonewall Tell loop - in point",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230 kV",
+   "excerpt": "on the East Point - Union City 230kV Black line with 200C 1351 ACSS Martin conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Flat Shoals Road station",
+   "excerpt": "Reconductor the 1.5 mile section from Flat Shoals Road station to the Stonewall Tell loop - in point",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Union City",
+   "excerpt": "Replace limiting elements at Union City\nSupporting Statement\nREDACTED",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 887,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 915,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1802
+ }
+}

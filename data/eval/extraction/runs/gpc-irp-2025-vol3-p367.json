@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p367",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 367,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:37Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "ANNISTON - HAMMOND 230KV LINE",
+   "excerpt": "ANNISTON - HAMMOND 230KV LINE\nTeams # 21129\nNeed Date 06/01/2030 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21129",
+   "excerpt": "ANNISTON - HAMMOND 230KV LINE\nTeams # 21129\nNeed Date 06/01/2030 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2025",
+   "excerpt": "Teams # 21129\nNeed Date 06/01/2030 Start Date 06/01/2025\nDescription\nRebuild the 28.12 miles section",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2030",
+   "excerpt": "ANNISTON - HAMMOND 230KV LINE\nTeams # 21129\nNeed Date 06/01/2030 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "28.12 miles",
+   "excerpt": "Description\nRebuild the 28.12 miles section between Hammond and the Goshen tap with 200C 1351 ACSS Martin\nconductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230KV",
+   "excerpt": "ANNISTON - HAMMOND 230KV LINE\nTeams # 21129\nNeed Date 06/01/2030 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Hammond",
+   "excerpt": "Description\nRebuild the 28.12 miles section between Hammond and the Goshen tap with 200C 1351 ACSS Martin\nconductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Goshen tap",
+   "excerpt": "Description\nRebuild the 28.12 miles section between Hammond and the Goshen tap with 200C 1351 ACSS Martin\nconductor.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 848,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 451,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1299
+ }
+}

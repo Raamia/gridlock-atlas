@@ -6,14 +6,15 @@ import type {
   Match,
   MatchCoordination,
   MatchRun,
+  PastDueProject,
   Project,
   Snapshot,
 } from "@/lib/domain/types";
-import { displayTitle, formatBound } from "@/lib/format";
+import { displayTitle, formatBound, formatMilesNear } from "@/lib/format";
 import { DEFAULT_THRESHOLD_MILES, evaluateGeo } from "./geo";
-import { activeWindows, currentInService, dayCount, DEADLINE, endsWindow, evaluateTime, windowsBySource } from "./time";
+import { activeWindows, currentInService, dayCount, DEADLINE, endsWindow, evaluateTime, scheduleWindows, windowsBySource } from "./time";
 
-export const ENGINE_VERSION = "gridlock-engine/1.1.0";
+export const ENGINE_VERSION = "gridlock-engine/1.2.0";
 
 const ELIGIBLE = new Set(["proposed", "approved", "construction"]);
 
@@ -76,7 +77,12 @@ function lead<T extends Dated>(g: T[]): T[] {
  * Several windows or dates from ONE source are components of the work, not competing claims;
  * sources that agree are grouped, so each disagreement is reported once with who says what.
  */
-export function projectConflicts(p: Project, sourceTitle: (id: string) => string, sourceDoc: (id: string) => string = sourceTitle): Conflict[] {
+export function projectConflicts(
+  p: Project,
+  sourceTitle: (id: string) => string,
+  sourceDoc: (id: string) => string = sourceTitle,
+  sourceDate: (id: string) => string | undefined = () => undefined,
+): Conflict[] {
   const out: Conflict[] = [];
   // groups are led by their representative (lead): g[0] is the value shown, and only members stating exactly that value are named
   const stating = <T extends Dated>(g: T[], fmt: (d: Dated) => string) => g.filter((x) => fmt(x) === fmt(g[0]));
@@ -105,10 +111,17 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
     const name = (x: Dated & { label?: string }) => (x.earlier || !onePublisher ? (edition(x) ?? sourceDoc(x.sourceId)) : "current edition");
     const names = (g: (typeof cGroups)[number]) =>
       [...new Set(stating(g, (d) => formatBound(d.start)).sort((x, y) => (edition(x) ?? "").localeCompare(edition(y) ?? "")).map(name))];
+    // a group's document date: its newest member's; groups without dates fall back to their edition names
+    const dated = (g: (typeof cGroups)[number]) => g.map((x) => sourceDate(x.sourceId) ?? "").sort().at(-1) ?? "";
     const versionText = () =>
       [...cGroups]
-        // earlier editions first (oldest name first), the current one last
-        .sort((g1, g2) => Number(!g1.every((x) => x.earlier)) - Number(!g2.every((x) => x.earlier)) || names(g1)[0].localeCompare(names(g2)[0]))
+        // earlier editions first (oldest document first), the current one last
+        .sort(
+          (g1, g2) =>
+            Number(!g1.every((x) => x.earlier)) - Number(!g2.every((x) => x.earlier)) ||
+            (dated(g1) && dated(g2) ? dated(g1).localeCompare(dated(g2)) : 0) ||
+            names(g1)[0].localeCompare(names(g2)[0]),
+        )
         .map((g) => `${names(g).join(", ")}: ${formatBound(g[0].start)}`)
         .join(" → ");
     // disputed dates that also end a current TIME window (DESC/Dominion windows end at the SCRTP date, GPC's at the SERTP year, PSC/NSPW's at the completion quarter)
@@ -180,21 +193,33 @@ function coordinationBetween(a: Project, b: Project, snapshot: Snapshot): MatchC
   return out;
 }
 
-function exclusionFor(p: Project, snapshotDate: string): ExcludedProject | null {
+function exclusionFor(p: Project): ExcludedProject | null {
   if (p.duplicateOf) {
     return { projectId: p.id, reason: "duplicate", detail: `Repeated mention of ${p.duplicateOf}; merged before pairing.` };
   }
+  // completion stated by a source: archived; a planned date that merely passed is not a completion claim (see pastDue)
   if (p.status.value === "complete") return { projectId: p.id, reason: "complete", detail: "Completed work is archived as a negative example." };
   if (p.status.value === "cancelled") return { projectId: p.id, reason: "cancelled", detail: "Cancelled plans are archived." };
   if (!ELIGIBLE.has(p.status.value)) return { projectId: p.id, reason: "unknown-status", detail: "Status not established in sources." };
+  return null;
+}
+
+export const PAST_DUE_PENALTY = 15;
+
+/**
+ * Planned date passed, completion not confirmed: the project stays in the queue (ranked lower, TIME at most possible) instead of
+ * being dropped. A published construction window that still runs past the snapshot date (e.g. a state permit's completion date)
+ * shows the work continues, so the project is current.
+ */
+export function pastDue(p: Project, snapshotDate: string | undefined): PastDueProject | null {
+  if (!snapshotDate) return null;
   const ws = activeWindows(p);
-  if (ws.length && ws.every((w) => w.end.latest < snapshotDate)) {
-    return { projectId: p.id, reason: "past-in-service", detail: "Every published window ended before the snapshot date; completion is not confirmed by a source." };
-  }
+  if (ws.some((w) => w.phase === "general-construction" && !w.boundsOnly && !w.openEnded && w.end.earliest >= snapshotDate)) return null;
   const isd = currentInService(p);
-  if (isd && isd.date.latest < snapshotDate) {
-    return { projectId: p.id, reason: "past-in-service", detail: `Planned in-service (${formatBound(isd.date)}) is before the snapshot date; completion is not confirmed by a source.` };
-  }
+  if (isd && isd.date.latest < snapshotDate)
+    return { projectId: p.id, detail: `Planned in-service date (${formatBound(isd.date)}) has passed; completion not confirmed by any source reviewed.` };
+  if (ws.length && ws.every((w) => w.end.latest < snapshotDate))
+    return { projectId: p.id, detail: "Every published window ended before the snapshot date; completion not confirmed by any source reviewed." };
   return null;
 }
 
@@ -211,11 +236,24 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   // Sponsor rule: geography is the primary signal — farther than the radius, the pair is ignored.
   if (geo.level !== "confirmed" && geo.level !== "possible") return null;
   const time = evaluateTime(a, b);
+  const due = [a, b].map((p) => pastDue(p, snapshot.snapshotDate)).filter((x): x is PastDueProject => !!x);
+  if (due.length && time.level === "confirmed") {
+    // a schedule that may already be over cannot confirm a shared build window
+    time.level = "possible";
+    delete time.detail.confirmedOverlap;
+    delete time.detail.basis;
+  }
+  if (due.length) {
+    const names = due.map((x) => displayTitle(x.projectId === a.id ? a : b)).join(" and ");
+    time.reason = `${time.reason} ${names}: planned date passed; completion not confirmed, so TIME is at most possible.`;
+  }
 
-  const sourceTitle = (id: string) => snapshot.sources.find((s) => s.id === id)?.publisher ?? id;
-  const sourceDoc = (id: string) => snapshot.sources.find((s) => s.id === id)?.title ?? id;
+  const source = (id: string) => snapshot.sources.find((s) => s.id === id);
+  const sourceTitle = (id: string) => source(id)?.publisher ?? id;
+  const sourceDoc = (id: string) => source(id)?.title ?? id;
+  const sourceDate = (id: string) => source(id)?.publishedAt;
   const coordination = coordinationBetween(a, b, snapshot);
-  const conflicts = [...projectConflicts(a, sourceTitle, sourceDoc), ...projectConflicts(b, sourceTitle, sourceDoc)];
+  const conflicts = [...projectConflicts(a, sourceTitle, sourceDoc, sourceDate), ...projectConflicts(b, sourceTitle, sourceDoc, sourceDate)];
 
   const badge: Match["badge"] =
     geo.level === "confirmed" && time.level === "confirmed" ? "BOTH" : geo.level === "confirmed" ? "GEO" : "POSSIBLE";
@@ -224,6 +262,23 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
 
   const sameSite = geo.detail.method === "shared-site" || geo.detail.method === "shared-endpoint";
   const d = geo.detail.center?.miles;
+  // the sponsor's rule is "under 25 miles": a shared facility keeps a farther pair visible, but never above pairs inside the radius
+  const beyondRadius = sameSite && !(d !== undefined && d < thresholdMiles);
+  let geoReason = geo.reason;
+  if (beyondRadius) {
+    const rels = snapshot.relations.filter((r) => geo.detail.relationIds.includes(r.id));
+    const stated = rels.find((r) => r.basis !== "inferred");
+    const pub = (stated ?? rels[0])?.evidenceIds.map((id) => snapshot.evidence[id]?.sourceId).map((id) => id && source(id)?.publisher).find(Boolean);
+    const site = (stated ?? rels[0])?.siteLabel ?? geo.detail.sharedEndpoint?.labelA ?? "a shared facility";
+    const because =
+      geo.detail.method === "shared-endpoint"
+        ? `both projects have a terminal at ${site} (geocoded to the same facility)`
+        : stated
+          ? `${pub ?? "a source"} states a shared facility (${site})`
+          : `the sources, taken together, imply a shared facility (${site})`;
+    const where = d !== undefined ? `Beyond the ${thresholdMiles} mi radius (centers ≈${formatMilesNear(d, thresholdMiles)} apart)` : `No project center to measure against the ${thresholdMiles} mi radius`;
+    geoReason = `${where}; flagged because ${because}.`;
+  }
   const relevance: Match["relevance"] =
     geo.level !== "confirmed" ? "low" : sameSite || (d !== undefined && d <= 10) ? "high" : "medium";
 
@@ -248,7 +303,8 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   const coarseGap = time.detail.inService?.coarse;
   const gapText =
     gap === undefined ? "" : coarseGap && gap === 0 ? "in-service dates overlap at stated precision" : `in-service dates ${coarseGap ? "≥" : ""}${dayCount(gap)} apart`;
-  if (time.level === "confirmed") add(30, "Construction windows overlap");
+  if (time.level === "confirmed" && time.detail.basis === "schedule") add(28 + 2 * gapFactor, "Published schedules overlap (start → in-service)");
+  else if (time.level === "confirmed") add(30, "Construction windows overlap");
   else if (time.level === "possible") add(18 + 12 * gapFactor, `Construction windows may overlap${gapText ? `; ${gapText}` : ""}`);
   else if (time.level === "unknown" && gap !== undefined) add(15 * gapFactor, gapText[0].toUpperCase() + gapText.slice(1));
   else if (time.level === "no-match") reasons.push("Schedule windows do not overlap");
@@ -257,6 +313,7 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   for (const r of snapshot.relations.filter((r) => geo.detail.relationIds.includes(r.id))) r.evidenceIds.forEach((e) => evidenceIds.add(e));
   for (const p of [a, b]) {
     for (const w of activeWindows(p)) w.evidenceIds.forEach((e) => evidenceIds.add(e));
+    if (time.detail.basis === "schedule") for (const w of scheduleWindows(p)) w.evidenceIds.forEach((e) => evidenceIds.add(e));
     currentInService(p)?.evidenceIds.forEach((e) => evidenceIds.add(e));
   }
   for (const c of coordination) c.evidenceIds.forEach((e) => evidenceIds.add(e));
@@ -268,6 +325,11 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
     priority -= 5;
     reasons.push("A location is approximate or lower-confidence");
   }
+  if (due.length) {
+    priority -= PAST_DUE_PENALTY;
+    reasons.push("Planned date passed; completion not confirmed (ranked below current plans)");
+  }
+  if (beyondRadius) reasons.push(`Outside the ${thresholdMiles} mi rule: ranked after every within-radius needs-review pair`);
   if (coordination.length) reasons.push("Documented coordination on record");
   if (conflicts.length) reasons.push(`${conflicts.length} source conflict${conflicts.length > 1 ? "s" : ""} preserved`);
 
@@ -277,7 +339,7 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
     projectBId: b.id,
     geo: geo.level,
     time: time.level,
-    geoReason: geo.reason,
+    geoReason,
     timeReason: time.reason,
     geoDetail: geo.detail,
     timeDetail: time.detail,
@@ -288,6 +350,8 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
     relevance,
     priority,
     priorityReasons: reasons,
+    ...(beyondRadius ? { beyondRadius } : {}),
+    ...(due.length ? { pastDue: due } : {}),
     evidenceIds: [...evidenceIds],
     engineVersion: ENGINE_VERSION,
   };
@@ -296,11 +360,16 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
 export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun {
   const thresholdMiles = opts.thresholdMiles ?? DEFAULT_THRESHOLD_MILES;
   const excludedProjects: ExcludedProject[] = [];
+  const pastDueProjects: PastDueProject[] = [];
   const eligible: Project[] = [];
   for (const p of snapshot.projects) {
-    const ex = exclusionFor(p, snapshot.snapshotDate);
+    const ex = exclusionFor(p);
     if (ex) excludedProjects.push(ex);
-    else eligible.push(p);
+    else {
+      eligible.push(p);
+      const due = pastDue(p, snapshot.snapshotDate);
+      if (due) pastDueProjects.push(due);
+    }
   }
 
   const matches: Match[] = [];
@@ -357,7 +426,11 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
     }
   }
 
-  matches.sort((x, y) => y.priority - x.priority || x.id.localeCompare(y.id));
+  // beyond-radius shared-facility pairs rank after every within-radius needs-review pair (their own order is kept)
+  const floor = Math.min(...matches.filter((m) => m.reviewStatus === "needs-review" && !m.beyondRadius).map((m) => m.priority));
+  const raw = new Map(matches.map((m) => [m.id, m.priority]));
+  if (Number.isFinite(floor)) for (const m of matches) if (m.beyondRadius && m.priority >= floor) m.priority = Math.max(0, floor - 1);
+  matches.sort((x, y) => y.priority - x.priority || Number(!!x.beyondRadius) - Number(!!y.beyondRadius) || raw.get(y.id)! - raw.get(x.id)! || x.id.localeCompare(y.id));
 
   return {
     engineVersion: ENGINE_VERSION,
@@ -369,6 +442,7 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
     pairsEvaluated,
     matches,
     excludedProjects,
+    pastDueProjects,
     excludedPairs,
     excludedCounts,
   };

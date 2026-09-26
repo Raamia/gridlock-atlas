@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p382",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 382,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:54Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "GOSHEN AREA STRATEGIC SOLUTION",
+   "excerpt": "GOSHEN AREA STRATEGIC SOLUTION\nTeams # 21116\nNeed Date 06/01/2030 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21116",
+   "excerpt": "GOSHEN AREA STRATEGIC SOLUTION\nTeams # 21116\nNeed Date 06/01/2030 Start Date 06/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2025",
+   "excerpt": "Teams # 21116\nNeed Date 06/01/2030 Start Date 06/01/2025\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2030",
+   "excerpt": "Teams # 21116\nNeed Date 06/01/2030 Start Date 06/01/2025\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "12.3",
+   "excerpt": "between the switching station and Goshen, approximately 12.3 miles. Provides an alternate power\nflow path into Goshen",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Construct a 230kV switching station on the Waynesboro - Wilson 230kV line and a new 230kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Waynesboro",
+   "excerpt": "Construct a 230kV switching station on the Waynesboro - Wilson 230kV line and a new 230kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Wilson",
+   "excerpt": "Construct a 230kV switching station on the Waynesboro - Wilson 230kV line and a new 230kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Goshen",
+   "excerpt": "between the switching station and Goshen, approximately 12.3 miles. Provides an alternate power\nflow path into Goshen",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 882,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 432,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1314
+ }
+}

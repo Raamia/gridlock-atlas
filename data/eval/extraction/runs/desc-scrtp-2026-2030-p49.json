@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2026-2030-p49",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 49,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:56Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget\nStevens Creek - Graniteville 115 kV: Rebuild",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectTitle",
+   "value": "Stevens Creek - Graniteville 115 kV: Rebuild",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget\nStevens Creek - Graniteville 115 kV: Rebuild",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6809 T",
+   "excerpt": "Stevens Creek - Graniteville 115 kV: Rebuild\nProject ID\n6809 T\nProject Description",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Need\nSystem Hardening\nProject Status\nPlanned\nPlanned In-Service Date\n12/31/29",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/29",
+   "excerpt": "Project Need\nSystem Hardening\nProject Status\nPlanned\nPlanned In-Service Date\n12/31/29",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "15",
+   "excerpt": "Rebuilding the 15 mile section of 115 kv line between Stevens Creek and Graniteville.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Rebuilding the 15 mile section of 115 kv line between Stevens Creek and Graniteville.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$18,200,000",
+   "excerpt": "Estimated Project Cost\nPrevious\n2026\n$0\n$100,000\n\n2027\n$200,000\n\n2028\n$9,300,000\n\n2029\n2030\n$8,600,000 $0\n\nTotal\n$18,200,000",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Stevens Creek",
+   "excerpt": "Rebuilding the 15 mile section of 115 kv line between Stevens Creek and Graniteville.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Graniteville",
+   "excerpt": "Rebuilding the 15 mile section of 115 kv line between Stevens Creek and Graniteville.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 754,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 958,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1712
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "id": "gpc-irp-2025-vol3-p296",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 296,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:46Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "DOYLE - LG&E MONROE 230KV - JACKS CREEK LOOP IN",
+   "excerpt": "DOYLE - LG&E MONROE 230KV - JACKS CREEK LOOP IN\nTeams # 20234\nNeed Date 06/01/2027 Start Date 01/03/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20234",
+   "excerpt": "DOYLE - LG&E MONROE 230KV - JACKS CREEK LOOP IN\nTeams # 20234\nNeed Date 06/01/2027 Start Date 01/03/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/03/2027",
+   "excerpt": "Teams # 20234\nNeed Date 06/01/2027 Start Date 01/03/2027\nDescription\nLoop in and out the new Jack's Creek",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2027",
+   "excerpt": "Teams # 20234\nNeed Date 06/01/2027 Start Date 01/03/2027\nDescription\nLoop in and out the new Jack's Creek",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Loop in and out the new Jack's Creek 230kV switching station into the Doyle - LG&E Monroe 230kV\nline.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "coordinationMention",
+   "value": "coordinated with the East Walton Project (TEAMS #09662)",
+   "excerpt": "line. This is coordinated with the East Walton Project (TEAMS #09662).\nSupporting Statement\nREDACTED",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Jack's Creek 230kV switching station",
+   "excerpt": "Loop in and out the new Jack's Creek 230kV switching station into the Doyle - LG&E Monroe 230kV\nline.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 870,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 407,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1277
+ }
+}

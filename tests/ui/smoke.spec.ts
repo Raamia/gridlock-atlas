@@ -97,33 +97,52 @@ test.describe("GridLock Atlas smoke path", () => {
     expect(layers).toBeGreaterThan(5);
   });
 
-  test("exports the ranked overlap table in the sponsor's column format", async ({ page }) => {
+  test("exports the sponsor's overlap and project tables", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: /Compare public plans/ }).click();
     await expect(page.locator("[data-match-id]").first()).toBeVisible({ timeout: 15_000 });
-    const [dl] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Export overlap table as CSV" }).click()]);
-    const raw = await (await dl.createReadStream()).toArray().then((c) => Buffer.concat(c).toString("utf8"));
+    const grab = async (name: string) => {
+      const [dl] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name }).click()]);
+      return (await (await dl.createReadStream()).toArray().then((c) => Buffer.concat(c).toString("utf8"))) as string;
+    };
+    const split = (r: string) => r.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map((c) => c.replace(/,$/, ""));
+
+    const raw = await grab("Export overlap table as CSV");
     // UTF-8 byte-order mark, so Excel reads en dashes and accents in project names
-    expect(raw.startsWith("﻿")).toBe(true);
-    const [head, first, ...rest] = raw.replace(/^﻿/, "").trim().split("\n");
-    expect(head.startsWith("overlap_id,distance_mi,time_gap (day),utility_a,project_id_a,project_name_a,utility_b,project_id_b,project_name_b")).toBe(true);
+    expect(raw.startsWith("\uFEFF")).toBe(true);
+    const [head, first, ...rest] = raw.replace(/^\uFEFF/, "").trim().split("\n");
+    expect(head.startsWith("overlap_id,distance_mi,time_gap (day),utility_a,project_id_a,project_name_a,utility_b,project_id_b,project_name_b,")).toBe(true);
     expect(head).toContain(",priority_rank,queue_rank,");
     // the radius each row was flagged at, so geo_signal reads against it
-    expect(head).toContain(",geo_method,review_radius_mi,time_signal,");
-    expect(head).toContain(",time_gap_basis,in_service_a,in_service_b,docket_a,docket_b,pair_id");
+    expect(head).toContain(",geo_method,location_confidence,review_radius_mi,time_signal,");
+    expect(head.endsWith(",time_gap_basis,in_service_a,in_service_b,docket_a,docket_b,pair_id")).toBe(true);
     expect(first).toMatch(/^OVL_1,\d+\.\d{2},/);
-    // project ids are the app's unique ids: never the same on both sides, and each row opens a distinct pair
+    // Sperry's rule exactly: centers under 25 mi, closest first, OVL_n in that order; project ids unique per row
     const cols = head.split(",");
-    const rows = [first, ...rest].map((r) => r.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map((c) => c.replace(/,$/, "")));
+    const rows = [first, ...rest].map(split);
+    const miles = rows.map((r) => Number(r[cols.indexOf("distance_mi")]));
+    expect(rows.map((r) => r[0])).toEqual(rows.map((_, i) => `OVL_${i + 1}`));
+    expect(miles.every((d, i) => d < 25 && (i === 0 || d >= miles[i - 1]))).toBe(true);
     for (const r of rows) {
       expect(r[cols.indexOf("project_id_a")]).not.toBe(r[cols.indexOf("project_id_b")]);
       expect(["exact", "at-least", "ranges-overlap", ""]).toContain(r[cols.indexOf("time_gap_basis")]);
       expect(r[cols.indexOf("review_radius_mi")]).toBe("25");
     }
     expect(new Set(rows.map((r) => r[cols.indexOf("pair_id")])).size).toBe(rows.length);
-    // a published in-service date is filled even when the other side has none
-    const eff = rows.find((r) => r[cols.indexOf("pair_id")] === "desc-6888__gpc-effingham-500");
-    if (eff) expect(eff[cols.indexOf("in_service_a")]).toBe("2028-12-31");
+    // a county-level pair (no project center) is outside the sponsor's rule
+    expect(rows.find((r) => r[cols.indexOf("pair_id")] === "desc-6888__gpc-effingham-500")).toBeUndefined();
+
+    const projects = await grab("Export project table as CSV");
+    expect(projects.startsWith("\uFEFF")).toBe(true);
+    const [pHead, ...pRows] = projects.replace(/^\uFEFF/, "").trim().split("\n");
+    expect(pHead.startsWith("project_id,utility,state,project_name,name_a,lat_a,lon_a,name_b,lat_b,lon_b,lat_center,lon_center,in_service_date,overlap_count,overlap_1,overlap_2,overlap_3")).toBe(true);
+    const pCols = pHead.split(",");
+    const parsed = pRows.map(split);
+    expect(parsed.length).toBeGreaterThan(100);
+    // every overlap row is referenced by both of its projects
+    const refs = parsed.flatMap((r) => r[pCols.indexOf("overlap_ids")].split(" ").filter(Boolean));
+    expect(refs.length).toBe(2 * rows.length);
+    expect(new Set(refs).size).toBe(rows.length);
   });
 
   test("the pair API returns every excerpt its projects cite", async ({ request }) => {

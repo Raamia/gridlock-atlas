@@ -1,0 +1,87 @@
+{
+ "id": "desc-scrtp-2025-2029-p44",
+ "sourceId": "desc-scrtp-2025-2029",
+ "page": 44,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:01:52Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Fairfax-Yemassee 115kV: Upgrade for DESCSQ #1151 Interconnection",
+   "excerpt": "Fairfax-Yemassee 115kV: Upgrade for DESCSQ #1151 Interconnection\nProject ID\n6238 H",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6238 H",
+   "excerpt": "Fairfax-Yemassee 115kV: Upgrade for DESCSQ #1151 Interconnection\nProject ID\n6238 H",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n9/7/2027",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "9/7/2027",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n9/7/2027",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Upgrade 336 ACSR portion of DESCSQ #1151 - Yemassee 115 kV line to 1272 ACSR.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$20,350,000",
+   "excerpt": "Estimated cost of $20,350,000 is to be financed by the interconnection customer.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Fairfax",
+   "excerpt": "Fairfax-Yemassee 115kV: Upgrade for DESCSQ #1151 Interconnection\nProject ID\n6238 H",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Yemassee",
+   "excerpt": "Upgrade 336 ACSR portion of DESCSQ #1151 - Yemassee 115 kV line to 1272 ACSR.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 749,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 625,
+  "output_tokens_details": {
+   "reasoning_tokens": 245
+  },
+  "total_tokens": 1374
+ }
+}

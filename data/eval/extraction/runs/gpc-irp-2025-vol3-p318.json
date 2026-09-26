@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p318",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 318,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:59Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "ATHENA - EAST WATKINSVILLE 115 KV (REBUILD)",
+   "excerpt": "ATHENA - EAST WATKINSVILLE 115 KV (REBUILD)\nTeams # 17977\nNeed Date 12/31/2027 Start Date 08/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "17977",
+   "excerpt": "ATHENA - EAST WATKINSVILLE 115 KV (REBUILD)\nTeams # 17977\nNeed Date 12/31/2027 Start Date 08/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nDelayed from 2026 to 2027\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "08/01/2024",
+   "excerpt": "Teams # 17977\nNeed Date 12/31/2027 Start Date 08/01/2024\nDescription\nRebuild 8.47 miles",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "8.47",
+   "excerpt": "Rebuild 8.47 miles of the University of Georgia - East Watkinsville line sections on the Athena - East\nWatkinsville 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Rebuild 8.47 miles of the University of Georgia - East Watkinsville line sections on the Athena - East\nWatkinsville 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Athena",
+   "excerpt": "Rebuild 8.47 miles of the University of Georgia - East Watkinsville line sections on the Athena - East\nWatkinsville 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "East Watkinsville",
+   "excerpt": "Rebuild 8.47 miles of the University of Georgia - East Watkinsville line sections on the Athena - East\nWatkinsville 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "University of Georgia",
+   "excerpt": "Rebuild 8.47 miles of the University of Georgia - East Watkinsville line sections on the Athena - East\nWatkinsville 115kV line",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 872,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1022,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1894
+ }
+}

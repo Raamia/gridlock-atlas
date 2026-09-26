@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p251",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 251,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:08Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "CC - CASS PINE- HILL VIEW 230 KV LINE- CC IMPROVEMENTS",
+   "excerpt": "CC - CASS PINE- HILL VIEW 230 KV LINE- CC IMPROVEMENTS\nTeams # 20152\nNeed Date 12/31/2025 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20152",
+   "excerpt": "CC - CASS PINE- HILL VIEW 230 KV LINE- CC IMPROVEMENTS\nTeams # 20152\nNeed Date 12/31/2025 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2023",
+   "excerpt": "Teams # 20152\nNeed Date 12/31/2025 Start Date 06/01/2023\nDescription\nBuild a new 7.58 mile",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "7.58",
+   "excerpt": "Build a new 7.58 mile 200C 1351 ACSS conductor 230kV line between new Cass Pine and Hill View\n230kV substations.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Build a new 7.58 mile 200C 1351 ACSS conductor 230kV line between new Cass Pine and Hill View\n230kV substations.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Cass Pine 230kV substation",
+   "excerpt": "Build a new 7.58 mile 200C 1351 ACSS conductor 230kV line between new Cass Pine and Hill View\n230kV substations.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Hill View 230kV substation",
+   "excerpt": "Build a new 7.58 mile 200C 1351 ACSS conductor 230kV line between new Cass Pine and Hill View\n230kV substations.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 863,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1012,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1875
+ }
+}
