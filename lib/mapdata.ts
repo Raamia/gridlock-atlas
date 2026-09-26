@@ -172,7 +172,7 @@ export function anchorOf(p: Project): [number, number] | null {
 }
 
 /** The stated shared site for a pair, if a relation names one and a project carries it as a place. */
-export function sharedSite(m: Match | null): { label: string; lon: number; lat: number; uncertaintyMeters: number; stated: boolean } | null {
+export function sharedSite(m: Match | null): { label: string; lon: number; lat: number; uncertaintyMeters: number; stated: boolean; implied?: boolean } | null {
   if (!m) return null;
   if (m.geoDetail.method === "shared-endpoint" && m.geoDetail.sharedEndpoint) {
     const a = SNAPSHOT.projects.find((p) => p.id === m.projectAId)!;
@@ -189,5 +189,5 @@ export function sharedSite(m: Match | null): { label: string; lon: number; lat: 
       .flatMap((p) => p.places)
       .find((pl) => rel.siteLabel && pl.label.toLowerCase().includes(rel.siteLabel.toLowerCase().split(" ")[0]));
   if (!place) return null;
-  return { label: rel.siteLabel ?? place.label, lon: place.lon, lat: place.lat, uncertaintyMeters: place.uncertaintyMeters, stated: true };
+  return { label: rel.siteLabel ?? place.label, lon: place.lon, lat: place.lat, uncertaintyMeters: place.uncertaintyMeters, stated: rel.basis !== "inferred", implied: rel.basis === "inferred" };
 }

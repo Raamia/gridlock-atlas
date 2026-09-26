@@ -29,12 +29,32 @@ export function currentInService(p: Project) {
 }
 
 const DAY = 86_400_000;
+/**
+ * Sponsor's secondary signal: days between in-service dates. With day-precision dates this is the plain
+ * difference; with coarser claims ("2028", "Q3 2029") it is the gap between the nearest edges of the two
+ * ranges (0 when they overlap), and it is flagged coarse so the UI never shows false day-level precision.
+ */
 function inServiceGap(a: Project, b: Project): TimeDetail["inService"] {
   const x = currentInService(a);
   const y = currentInService(b);
   if (!x || !y) return undefined;
-  const gap = Math.round(Math.abs(Date.parse(x.date.earliest) - Date.parse(y.date.earliest)) / DAY);
-  return { a: x.date.earliest, b: y.date.earliest, gapDays: gap, labelA: x.label, labelB: y.label };
+  const t = (iso: string) => Date.parse(iso);
+  const exact = x.date.precision === "day" && y.date.precision === "day" && x.date.earliest === x.date.latest && y.date.earliest === y.date.latest;
+  let gap: number;
+  if (exact) gap = Math.abs(t(x.date.earliest) - t(y.date.earliest));
+  else if (x.date.latest < y.date.earliest) gap = t(y.date.earliest) - t(x.date.latest);
+  else if (y.date.latest < x.date.earliest) gap = t(x.date.earliest) - t(y.date.latest);
+  else gap = 0;
+  return {
+    a: x.date.earliest,
+    b: y.date.earliest,
+    gapDays: Math.round(gap / DAY),
+    labelA: x.label,
+    labelB: y.label,
+    boundA: x.date,
+    boundB: y.date,
+    coarse: !exact,
+  };
 }
 
 export interface TimeResult {
@@ -77,7 +97,13 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
     continuityCaveat: false,
     inService: inServiceGap(a, b),
   };
-  const gapNote = base.inService ? ` In-service dates are ${base.inService.gapDays.toLocaleString("en-US")} days apart (secondary signal).` : "";
+  const gapNote = base.inService
+    ? base.inService.coarse
+      ? base.inService.gapDays === 0
+        ? " Published in-service dates overlap at their stated precision (secondary signal)."
+        : ` In-service dates are at least ${base.inService.gapDays.toLocaleString("en-US")} days apart at their stated precision (secondary signal).`
+      : ` In-service dates are ${base.inService.gapDays.toLocaleString("en-US")} days apart (secondary signal).`
+    : "";
 
   if (!wa.length || !wb.length) {
     const missing = [!wa.length ? a.shortTitle : null, !wb.length ? b.shortTitle : null].filter(Boolean).join(" and ");
@@ -103,11 +129,12 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
           const he = min(x.end.earliest, y.end.earliest);
           const hard = hs <= he;
           const soft = max(x.start.earliest, y.start.earliest) <= min(x.end.latest, y.end.latest);
+          if (!soft) continue; // hard ⊂ soft for well-formed windows; malformed ones never count
           if (hard && x.continuous && y.continuous) {
             level = "confirmed";
             comboCoreStart = comboCoreStart ? min(comboCoreStart, hs) : hs;
             comboCoreEnd = comboCoreEnd ? max(comboCoreEnd, he) : he;
-          } else if (hard || soft) {
+          } else {
             if (level === "none") level = "possible";
             if (hard) base.continuityCaveat = true;
           }

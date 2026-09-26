@@ -200,7 +200,9 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
     priority += Math.round(points);
     reasons.push(reason);
   };
-  if (sameSite) add(60, geo.detail.method === "shared-site" ? "Shared facility stated in a source" : "Terminals at the same facility");
+  const inferredSite = geo.detail.method === "shared-site" && snapshot.relations.filter((r) => geo.detail.relationIds.includes(r.id)).every((r) => r.basis === "inferred");
+  if (sameSite && inferredSite) add(50, "Shared facility implied by sources");
+  else if (sameSite) add(60, geo.detail.method === "shared-site" ? "Shared facility stated in a source" : "Terminals at the same facility");
   else if (geo.level === "confirmed" && d !== undefined) add(30 + 30 * Math.max(0, 1 - d / thresholdMiles), `Centers ≈${d < 10 ? d.toFixed(1) : Math.round(d)} mi apart`);
   else if (geo.level === "confirmed") add(30, "Within the review radius");
   else add(12, "Proximity possible (coarse location)");
@@ -264,7 +266,7 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
 
   const matches: Match[] = [];
   const excludedPairs: ExcludedPair[] = [];
-  const excludedCounts: MatchRun["excludedCounts"] = { "shared-owner": 0, "no-signal": 0, "beyond-radius": 0, "different-region": 0 };
+  const excludedCounts: MatchRun["excludedCounts"] = { "shared-owner": 0, "no-signal": 0, "beyond-radius": 0, "different-region": 0, "location-unknown": 0 };
   const exclude = (x: ExcludedPair) => {
     excludedCounts[x.reason]++;
     if (x.reason === "shared-owner" || opts.listExclusions !== false) excludedPairs.push(x);
@@ -291,7 +293,15 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
       pairsEvaluated++;
       const m = evaluatePair(a, b, snapshot, thresholdMiles);
       if (m) matches.push(m);
-      else {
+      else if (evaluateGeo(a, b, snapshot.relations, thresholdMiles).level === "unknown") {
+        const missing = [a, b].filter((p) => !p.places.some((pl) => pl.precision !== "unknown")).map((p) => p.shortTitle);
+        exclude({
+          projectAId: a.id,
+          projectBId: b.id,
+          reason: "location-unknown",
+          detail: `No usable location for ${missing.join(" and ") || "one project"}; proximity is unknown, not ruled out.`,
+        });
+      } else {
         const t = evaluateTime(a, b);
         exclude(
           t.level === "confirmed" || t.level === "possible"

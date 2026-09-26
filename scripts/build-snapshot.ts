@@ -206,11 +206,26 @@ for (const c of clusters) {
       end: openEnded ? { earliest: w.start.earliest, latest: "2099-12-31", precision: "year" } : w.end,
       continuous: openEnded ? false : w.continuous !== false,
       ...(openEnded ? { openEnded: true } : {}),
+      ...(w.boundsOnly ? { boundsOnly: true } : {}),
       evidenceIds: ev(w.evidence),
       note: w.note || undefined,
       ...(overrides.windowPatches?.[`${id}:w${i + 1}`] ?? {}),
       };
     });
+    // a window whose start is after its end cannot be used (source inconsistency) — keep the claim out, say so
+    for (let i = windows.length - 1; i >= 0; i--) {
+      const w = windows[i];
+      if (w.start.earliest > w.end.latest) {
+        warn(`${id}: window ${w.id} starts after it ends; dropped`);
+        windows.splice(i, 1);
+      }
+    }
+    // bounds-only windows: the source dates the envelope (start … "by"/need date), not the field work inside it
+    for (const w of windows) {
+      if (!w.boundsOnly) continue;
+      w.start = { earliest: w.start.earliest, latest: w.end.latest, precision: w.start.precision };
+      w.end = { earliest: w.start.earliest, latest: w.end.latest, precision: w.end.precision };
+    }
     const completion: CompletionClaim[] = (p.completionClaims ?? [])
       .map((cc: R, i: number) => ({
         id: `${id}:c${i + 1}`,
@@ -318,6 +333,7 @@ for (const c of clusters) {
       kind: r.kind,
       siteLabel: r.siteLabel ? shortLabel(r.siteLabel) : undefined,
       siteDetail: r.siteLabel && shortLabel(r.siteLabel) !== r.siteLabel ? r.siteLabel : undefined,
+      basis: /\binferr?|\bimpl(y|ies|ied)\b|no single document|no source names/i.test(r.description ?? "") ? "inferred" : "stated",
       sitePlaceId: sitePlace?.id,
       description: r.description,
       evidenceIds: ids,

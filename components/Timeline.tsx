@@ -57,13 +57,16 @@ export function Timeline() {
   return (
     <section aria-label="Construction timeline" className="relative hidden h-[184px] shrink-0 border-t border-line bg-bg-1 md:block">
       <div className="flex h-8 items-center justify-between px-4">
-        <div className="eyebrow">Construction windows · as published</div>
+        <div className="eyebrow">Construction windows · from sources</div>
         <div className="flex items-center gap-4 text-[10.5px] text-text-3">
           <span className="flex items-center gap-1.5">
             <span className="h-2 w-5 rounded-sm bg-text-2/70" /> stated
           </span>
           <span className="flex items-center gap-1.5">
             <span className="h-2 w-5 rounded-sm" style={{ background: "linear-gradient(90deg, transparent, rgba(193,203,224,.7))" }} /> date precision (fuzzy)
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="h-2 w-5 rounded-sm" style={{ background: "repeating-linear-gradient(135deg, rgba(193,203,224,.45) 0 3px, rgba(193,203,224,.12) 3px 6px)" }} /> bounds / budget years only
           </span>
           <span className="flex items-center gap-1.5">
             <span className="block h-2.5 w-2.5 rotate-45 border border-text-2" /> completion claim
@@ -223,12 +226,13 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
   const e1 = pct(endL, y0, y1);
   const width = Math.max(e1 - s0, 0.4);
   const src = IDX.source(ws[0].claimSourceId);
-  const coarse = ws.some((w) => !w.continuous);
+  const coarse = ws.some((w) => !w.continuous || w.boundsOnly);
+  const bounds = ws.every((w) => w.boundsOnly);
   const w0 = ws[0];
   const open = ws.some((w) => w.openEnded);
   const label = open
     ? `from ${formatPoint(startE, w0.start.precision)} →`
-    : ws.length === 1
+    : ws.length === 1 && !w0.boundsOnly
       ? formatWindow(w0.start, w0.end)
       : `${formatPoint(startE, w0.start.precision)}–${formatPoint(endL, ws.at(-1)!.end.precision)}`;
   return (
@@ -276,7 +280,7 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
         <span className="ml-1.5 truncate font-normal text-text-1/80">
           · {src?.publisher ?? w0.claimSourceId}
           {ws.length > 1 && ` · ${ws.length} components`}
-          {coarse && !open && " · coarse"}
+          {coarse && !open && (bounds ? " · bounds only" : " · coarse")}
           {open && " · end not published"}
         </span>
       </div>

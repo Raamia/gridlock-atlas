@@ -1,0 +1,13 @@
+{
+ "windowPatches": {
+  "xcel-wwtc:w3": {
+   "boundsOnly": true
+  },
+  "xcel-wwtc:w4": {
+   "boundsOnly": true
+  },
+  "xcel-wwtc:w5": {
+   "boundsOnly": true
+  }
+ }
+}

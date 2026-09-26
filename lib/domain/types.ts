@@ -105,6 +105,8 @@ export interface ConstructionWindow {
   supersededBy?: string;
   /** Only a start milestone is published ("construction begins Fall 2027"); the end is unknown. */
   openEnded?: boolean;
+  /** The source bounds the work (e.g. start date → need/in-service date) without dating the field work inside it. */
+  boundsOnly?: boolean;
 }
 
 export interface CompletionClaim {
@@ -204,6 +206,8 @@ export interface Relation {
   kind: "shared-site" | "interconnects" | "same-initiative" | "duplicate-mention" | "other";
   siteLabel?: string;
   siteDetail?: string;
+  /** stated: one source says it directly; inferred: follows from several sources (e.g. an ownership split). */
+  basis?: "stated" | "inferred";
   /** Approximate coordinate of the stated shared site, if one of the projects has it as a place. */
   sitePlaceId?: string;
   description: string;
@@ -290,7 +294,7 @@ export interface TimeDetail {
   precision: DateBound["precision"];
   continuityCaveat: boolean;
   /** Sponsor's secondary signal: days between the two current in-service / need dates. */
-  inService?: { a: string; b: string; gapDays: number; labelA: string; labelB: string };
+  inService?: { a: string; b: string; gapDays: number; labelA: string; labelB: string; boundA: DateBound; boundB: DateBound; coarse: boolean };
 }
 
 export interface ConflictSide {
@@ -352,7 +356,7 @@ export interface ExcludedProject {
 export interface ExcludedPair {
   projectAId: string;
   projectBId: string;
-  reason: "shared-owner" | "no-signal" | "beyond-radius" | "different-region";
+  reason: "shared-owner" | "no-signal" | "beyond-radius" | "different-region" | "location-unknown";
   detail: string;
 }
 

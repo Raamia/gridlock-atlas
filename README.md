@@ -40,8 +40,8 @@ Research was agent-assisted: AI research agents located facts and exact quotes, 
 ## Method (short)
 
 1. **Place first.** Each project's center is the midpoint of its two named terminals (or its one located point) — exactly the sponsor's guide. A pair is flagged when centers are within the review radius (default 25 mi), with uncertainty bounds `d_low = max(0, d − e_A − e_B)`, `d_high = d + e_A + e_B` (confirmed when `d_high ≤ 25`, possible when only `d_low ≤ 25`). A source-stated shared facility, or terminals geocoded to the same substation, also confirm place. County-only evidence is at most "possible"; schematic routes are never measured.
-2. **Then time.** Published construction windows are compared for every source combination (confirmed when `max(S_latest) ≤ min(E_earliest)`). Windows are never derived from in-service dates; where only in-service/need dates exist, their gap in days — the sponsor's secondary signal — informs ranking. DESC's yearly budget is kept as a coarse, "possible-only" window.
-3. **Status.** Documented joint work or interface coordination → *Known coordination*. Otherwise within the radius → *Needs review*.
+2. **Then time.** Construction windows are compared for every source combination (confirmed when `max(S_latest) ≤ min(E_earliest)`). No window is invented from an in-service date alone: a start plus a "by"/need date is kept as bounds with the field work undated, and DESC's yearly budget gives a coarse window — both support at most a "possible" overlap. The gap between in-service dates in days — the sponsor's secondary signal — informs ranking.
+3. **Status.** Documented joint work or interface coordination → *Known coordination*. Otherwise within the radius (or sharing a facility stated in, or implied by, the sources) → *Needs review*.
 4. **Rank.** Explainable points: place (≤ 60), timing (≤ 30), evidence completeness (≤ 10), minus 5 for lower-confidence locations.
 
 The engine reproduces the sponsor's starter overlap table exactly (six rows, ±0.01 mi and to the day, no extra pairs) — see `tests/engine.test.ts` and the Method drawer.

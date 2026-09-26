@@ -211,13 +211,15 @@ def gpc_clusters(parsed, geo):
         if r["sponsor"] == "SAV":
             caveats.append("Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table.")
         windows, claims = [], []
-        if r["start"] and r["need"]:
+        if r["start"] and r["need"] and r["start"] > r["need"]:
+            caveats.append(f"The plan lists a Start Date ({r['start']}) after the Need Date ({r['need']}); no project window is used.")
+        elif r["start"] and r["need"]:
             windows.append({
                 "claimSourceId": r["sourceId"], "phase": "unknown",
                 "start": {"earliest": r["start"], "latest": r["start"], "precision": "day"},
                 "end": {"earliest": r["need"], "latest": r["need"], "precision": "day"},
-                "continuous": True, "evidence": [E["dates"]],
-                "note": "Project window as published (Start Date → Need Date); the months of field work within it are not stated.",
+                "continuous": True, "boundsOnly": True, "evidence": [E["dates"]],
+                "note": "Project window as published (Start Date → Need Date); the months of field work within it are not stated, so only the bounds are used.",
             })
         if r["need"]:
             claims.append({"claimSourceId": r["sourceId"], "label": "need date (in-service)", "date": {"earliest": r["need"], "latest": r["need"], "precision": "day"}, "evidence": [E["dates"]], "current": True})

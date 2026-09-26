@@ -103,10 +103,13 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
   const base = { thresholdMiles, relationIds: rels.map((r) => r.id), center, sharedEndpoint: shared };
 
   if (rels.length) {
-    const site = rels[0].siteLabel ?? "a shared facility";
+    const stated = rels.find((r) => r.basis !== "inferred");
+    const rel = stated ?? rels[0];
+    const site = rel.siteLabel ?? "a shared facility";
+    const verb = stated ? "Sources state both projects connect at" : "Taken together, the sources imply both projects meet at";
     return {
       level: "confirmed",
-      reason: `Sources state both projects connect at ${site}${center ? `; project centers are ≈${formatMiles(center.miles)} apart` : ""}.`,
+      reason: `${verb} ${site}${stated ? "" : " (no single document names the handoff point)"}${center ? `; project centers are ≈${formatMiles(center.miles)} apart` : ""}.`,
       detail: { ...base, method: "shared-site" },
       approxMiles: center?.miles ?? 0,
     };

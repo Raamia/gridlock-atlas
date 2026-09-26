@@ -148,8 +148,9 @@ export function MethodDrawer() {
           line length. County-only evidence is never better than “possible.” Schematic route traces are never measured.
         </Rule>
         <Rule k="Then time">
-          Published construction windows are compared for every current claim combination (confirmed when <Code>max(S_latest) ≤ min(E_earliest)</Code>). Windows are never derived from
-          in-service dates; where only in-service/need dates exist, their gap in days (the sponsor&apos;s secondary signal) informs ranking and missing windows stay “unknown.”
+          Construction windows are compared for every source combination (confirmed when <Code>max(S_latest) ≤ min(E_earliest)</Code>). No window is invented from an in-service
+          date alone: when a source gives only a start and a “by”/need date, those dates are kept as bounds with the field work undated, and DESC&apos;s yearly budget gives a coarse
+          window — both can support at most a “possible” overlap. The in-service gap in days (the sponsor&apos;s secondary signal) informs ranking; missing windows stay “unknown.”
         </Rule>
         <Rule k="Status">
           Documented joint work, tie lines or interface coordination file a pair under <i>Known coordination</i>. Anything else within the radius is <i>Needs review</i> — which means the
@@ -264,7 +265,7 @@ function CorpusChecks() {
       const m = find(a, b);
       out.push({ label, expect, ok: m ? test(m) : false, got: m ? `${m.badge} · ${m.reviewStatus}` : "not flagged" });
     };
-    add("Dairyland Alma–Blair × Xcel WWTC", "GEO + TIME · known coordination", "dpc-alma-blair", "xcel-wwtc", (m) => m.geo === "confirmed" && m.time === "confirmed" && m.reviewStatus === "known-coordination");
+    add("Dairyland Alma–Blair × Xcel WWTC", "GEO confirmed · known coordination", "dpc-alma-blair", "xcel-wwtc", (m) => m.geo === "confirmed" && m.time !== "no-match" && m.reviewStatus === "known-coordination");
     add("Potter–Beckham TX × OK segments", "known coordination", "sps-potter-beckham-tx", "transource-potter-beckham-ok", (m) => m.reviewStatus === "known-coordination");
     const archived = run.excludedProjects.filter((x) => x.reason === "complete" || x.reason === "cancelled");
     out.push({ label: "Completed / cancelled plans", expect: "excluded from queue", ok: archived.length > 0, got: `${archived.length} archived` });

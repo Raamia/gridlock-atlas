@@ -526,7 +526,12 @@ export default function MapStage() {
     markers.current = [];
     if (preview) {
       const site = sharedSite(preview.match);
-      if (site) markers.current.push(new mapboxgl.Marker({ element: siteMarker(site.label, site.stated), anchor: "center" }).setLngLat([site.lon, site.lat]).addTo(map));
+      if (site)
+        markers.current.push(
+          new mapboxgl.Marker({ element: siteMarker(site.label, site.stated ? "Shared site stated in source" : site.implied ? "Shared site implied by sources" : "Both projects end here"), anchor: "center" })
+            .setLngLat([site.lon, site.lat])
+            .addTo(map),
+        );
       const c = preview.match.geoDetail.center;
       for (const [p, role] of [
         [preview.a, "a"],
@@ -617,14 +622,14 @@ function precisionText(p: string) {
   )[p] ?? p;
 }
 
-function siteMarker(label: string, stated: boolean) {
+function siteMarker(label: string, caption: string) {
   const root = document.createElement("div");
   root.className = "pointer-events-none relative";
   root.innerHTML = `
     <span class="site-pulse absolute left-1/2 top-1/2 block h-10 w-10 rounded-full" style="border:1.5px solid #fbbf24"></span>
     <span class="absolute left-1/2 top-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.25),0 0 18px #fbbf24"></span>
     <div class="absolute bottom-3 left-4 whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.86);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
-      <div class="mono text-[9.5px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${stated ? "Shared site stated in source" : "Both projects end here"}</div>
+      <div class="mono text-[9.5px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${escapeHtml(caption)}</div>
       ${escapeHtml(label)}
     </div>`;
   return root;

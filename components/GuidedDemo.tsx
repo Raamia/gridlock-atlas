@@ -54,7 +54,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Compare public plans",
-    body: "The deterministic engine measures every cross-utility pair center-to-center, keeps those within 25 miles, then ranks them by closeness and timing. Amber links mark every flagged pair.",
+    body: "The deterministic engine measures every cross-utility pair center-to-center and keeps those within 25 miles — or that share a facility — then ranks them by closeness and timing. Amber links mark every flagged pair.",
     run: async () => {
       await useAtlas.getState().compare();
       useAtlas.setState((s) => ({ tab: "needs-review", selectedMatchId: null, inspectorOpen: false, cameraNonce: s.cameraNonce + 1 }));
@@ -67,7 +67,7 @@ const STEPS: Step[] = [
   },
   {
     title: "When they build",
-    body: "Published windows are compared; where only in-service dates exist, the gap in days is the secondary signal. Nothing is inferred beyond what the sources state.",
+    body: "Windows are compared source by source. Where a plan gives only a start and need date, or budget years, the overlap can only be “possible”; the gap between in-service dates is the secondary signal.",
     run: open(topSoutheast, "schedule"),
   },
   {

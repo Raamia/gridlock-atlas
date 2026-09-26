@@ -7,7 +7,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { IDX } from "@/lib/data";
 import { displayTitle, firstSentence, SCOPE_LABEL, whyFlagged } from "@/lib/describe";
 import type { Conflict, ConflictSide, Evidence, Match, Project, SignalLevel } from "@/lib/domain/types";
-import { formatDate, formatMiles, formatPoint, formatWindow } from "@/lib/format";
+import { formatBound, formatDate, formatMiles, formatPoint, formatWindow } from "@/lib/format";
 import { useSelectedPair } from "@/lib/hooks";
 import { activeWindows, windowsBySource } from "@/lib/matching/time";
 import { evidenceHref, matchSourceIds, ownerNames, pageLabel } from "@/lib/selectors";
@@ -356,16 +356,21 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
       {m.timeDetail.inService && (
         <div className="flex items-center gap-3 rounded-lg bg-bg-2/70 px-3 py-2 ring-1 ring-line">
           <div>
-            <div className="num text-[20px] leading-none text-text-0">{m.timeDetail.inService.gapDays.toLocaleString("en-US")}</div>
-            <div className="mt-1 text-[10.5px] text-text-3">days between in-service dates</div>
+            <div className="num text-[20px] leading-none text-text-0">
+              {m.timeDetail.inService.coarse && m.timeDetail.inService.gapDays > 0 ? "≥" : ""}
+              {m.timeDetail.inService.gapDays.toLocaleString("en-US")}
+            </div>
+            <div className="mt-1 text-[10.5px] text-text-3">
+              {m.timeDetail.inService.coarse ? (m.timeDetail.inService.gapDays === 0 ? "days · ranges overlap" : "days · nearest edges") : "days between in-service dates"}
+            </div>
           </div>
           <div className="h-8 w-px bg-line-2" />
           <div className="num min-w-0 flex-1 space-y-0.5 text-[11px] text-text-2">
             <div className="flex items-center gap-1.5">
-              <Dot color="var(--a)" size={5} /> {formatDate(m.timeDetail.inService.a)} <span className="truncate text-text-3">· {m.timeDetail.inService.labelA}</span>
+              <Dot color="var(--a)" size={5} /> {formatBound(m.timeDetail.inService.boundA)} <span className="truncate text-text-3">· {m.timeDetail.inService.labelA}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Dot color="var(--b)" size={5} /> {formatDate(m.timeDetail.inService.b)} <span className="truncate text-text-3">· {m.timeDetail.inService.labelB}</span>
+              <Dot color="var(--b)" size={5} /> {formatBound(m.timeDetail.inService.boundB)} <span className="truncate text-text-3">· {m.timeDetail.inService.labelB}</span>
             </div>
           </div>
         </div>

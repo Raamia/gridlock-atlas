@@ -403,3 +403,61 @@ describe("sponsor starter file", () => {
     expect(r.extra).toEqual([]);
   });
 });
+
+describe("review-round regressions", () => {
+  const near = (id: string, owner: string, over: Partial<Project> = {}) =>
+    project(id, owner, { places: [place(`${id} site`, BLAIR[0], BLAIR[1])], ...over });
+  it("words an inferred shared site as implied, not stated", () => {
+    const a = project("a", "u1", { places: [place("Texas end", 35.3, -101.9)] });
+    const b = project("b", "u2", { places: [place("Oklahoma end", 35.4, -99.8)] });
+    const rel: Relation = { id: "r", projectA: "a", projectB: "b", kind: "interconnects", siteLabel: "state line", basis: "inferred", description: "", evidenceIds: ["ev1"] };
+    const g = evaluateGeo(a, b, [rel]);
+    expect(g.level).toBe("confirmed");
+    expect(g.reason).toMatch(/imply/);
+    expect(g.reason).not.toMatch(/^Sources state/);
+    const m = evaluatePair(a, b, snapshot([a, b], [rel]))!;
+    expect(m.priorityReasons).toContain("Shared facility implied by sources");
+  });
+
+  it("a bounds-only window (start … need date) can only support a possible overlap", () => {
+    const bounds = (s: string, e: string): ConstructionWindow => ({
+      id: `b-${s}`,
+      claimSourceId: "src",
+      phase: "unknown",
+      start: { earliest: s, latest: e, precision: "day" },
+      end: { earliest: s, latest: e, precision: "day" },
+      continuous: true,
+      boundsOnly: true,
+      evidenceIds: ["ev1"],
+    });
+    const a = project("a", "u1", { constructionWindows: [bounds("2025-06-01", "2027-06-01")] });
+    const b = project("b", "u2", { constructionWindows: [win(2026, 2026)] });
+    expect(evaluateTime(a, b).level).toBe("possible");
+  });
+
+  it("reports in-service gaps at the claims' precision", () => {
+    const claim = (id: string, date: DateBound) => [{ id, claimSourceId: "src", label: "in-service", date, evidenceIds: [] }];
+    const a = project("a", "u1", { completionClaims: claim("x", yr(2028)) });
+    const b = project("b", "u2", { completionClaims: claim("y", { earliest: "2029-07-01", latest: "2029-09-30", precision: "quarter" }) });
+    const c = project("c", "u3", { completionClaims: claim("z", { earliest: "2028-06-01", latest: "2028-06-30", precision: "month" }) });
+    const ab = evaluateTime(a, b).detail.inService!;
+    expect(ab.coarse).toBe(true);
+    expect(ab.gapDays).toBe(182); // Dec 31, 2028 → Jul 1, 2029
+    expect(evaluateTime(a, c).detail.inService!.gapDays).toBe(0); // June 2028 is inside 2028
+  });
+
+  it("counts pairs with no usable location as location-unknown, not 'farther than 25 mi'", () => {
+    const a = project("a", "u1", { places: [place("Blair", BLAIR[0], BLAIR[1])] });
+    const b = project("b", "u2");
+    const run = runMatching(snapshot([a, b]), { now: "t" });
+    expect(run.excludedCounts["location-unknown"]).toBe(1);
+    expect(run.excludedPairs[0].reason).toBe("location-unknown");
+  });
+
+  it("never crashes on a malformed window whose start is after its end", () => {
+    const bad = win(2031, 2029);
+    const a = near("a", "u1", { constructionWindows: [bad] });
+    const b = near("b", "u2", { constructionWindows: [win(2026, 2032)] });
+    expect(() => evaluatePair(a, b, snapshot([a, b]))).not.toThrow();
+  });
+});

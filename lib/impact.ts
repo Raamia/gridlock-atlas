@@ -43,6 +43,9 @@ function stateOf(p: Project): string {
 }
 
 export interface ImpactDefaults {
+  /** Voltage class whose published defaults are used ("230" for a 345 kV line: nearest published class). */
+  voltageClass: "115" | "230" | "500";
+  state: string;
   sharedMiles: number;
   sharedMilesNote: string;
   rowWidthFt: ImpactAssumption | undefined;
@@ -79,6 +82,8 @@ export function impactDefaults(m: Match): ImpactDefaults {
   const b2 = bucket(voltageKv);
   const state = stateOf(a) || stateOf(b);
   return {
+    voltageClass: b2,
+    state,
     sharedMiles,
     sharedMilesNote,
     rowWidthFt: assumption(`rowWidthFt.${b2}`) ?? assumption("rowWidthFt.115"),

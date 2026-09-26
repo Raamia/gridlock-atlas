@@ -59,7 +59,7 @@ export function BriefModal() {
             <div className="no-print flex items-center gap-2 border-b border-line px-5 py-3">
               <div>
                 <div className="eyebrow">Cited review brief</div>
-                <div className="text-[12px] text-text-2">Built only from reviewed snapshot fields · every fact carries a numbered source</div>
+                <div className="text-[12px] text-text-2">Built from snapshot fields only · every fact carries a numbered source · excerpts re-found verbatim, awaiting human check</div>
               </div>
               <div className="ml-auto flex items-center gap-1.5">
                 <Button variant="outline" size="sm" onClick={copy}>
@@ -126,7 +126,8 @@ export function BriefModal() {
                         <a href={c.url} target="_blank" rel="noreferrer" className="break-all text-a hover:underline">
                           {c.url.replace(/^https?:\/\//, "").slice(0, 80)}
                           {c.url.length > 88 ? "…" : ""}
-                        </a>
+                        </a>{" "}
+                        <span className="text-[10.5px] text-text-3">({c.provenance})</span>
                       </span>
                     </li>
                   ))}

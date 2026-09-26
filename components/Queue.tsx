@@ -81,7 +81,8 @@ function PreRun() {
           </span>
         </Button>
         <p className="mt-2.5 text-[11.5px] leading-snug text-text-3">
-          Runs the deterministic engine over the frozen snapshot: distinct owners only, project centers within 25 mi, then timing — documented coordination kept separate.
+          Runs the deterministic engine over the frozen snapshot: distinct owners only, project centers within 25 mi (or a shared facility), then timing — documented coordination kept
+          separate.
         </p>
       </div>
 
@@ -141,7 +142,7 @@ function Scanning() {
   const steps = [
     `Loading ${pluralize(n, "public plan")} from snapshot ${SNAPSHOT.snapshotDate}`,
     "Filtering to active plans with distinct owners",
-    `Evaluating ${pairs} project pairs — place, then construction windows`,
+    `Evaluating up to ${pairs.toLocaleString("en-US")} project pairs — place, then timing`,
     "Checking documented coordination and source conflicts",
   ];
   const [i, setI] = useState(0);
@@ -375,6 +376,7 @@ function ExcludedFooter() {
   };
   const archived = run.excludedProjects.length;
   const beyond = run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"];
+  const unknown = run.excludedCounts["location-unknown"];
   return (
     <div className="flex items-center gap-2 border-t border-line px-3 py-2">
       <button
@@ -383,8 +385,8 @@ function ExcludedFooter() {
         title="See what the engine excluded and why"
       >
         <Archive size={12} />
-        <span className="truncate">
-          {beyond.toLocaleString("en-US")} pairs beyond {run.thresholdMiles} mi · {archived} archived
+        <span className="truncate" title={`${beyond.toLocaleString("en-US")} pairs farther than ${run.thresholdMiles} mi · ${unknown.toLocaleString("en-US")} pairs where a location is unknown · ${archived} archived projects`}>
+          {beyond.toLocaleString("en-US")} beyond {run.thresholdMiles} mi · {unknown.toLocaleString("en-US")} unlocated
         </span>
       </button>
       <Button size="sm" variant="ghost" className="ml-auto" onClick={exportCsv} title="Download the flagged pairs in the sponsor's overlap-table format" aria-label="Export overlap table as CSV">

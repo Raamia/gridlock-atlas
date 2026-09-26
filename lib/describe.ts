@@ -16,7 +16,10 @@ export function geoShort(m: Match): string {
 
 export function timeShort(m: Match): string {
   const t = m.timeDetail;
-  if (m.time === "unknown" && t.inService) return `${t.inService.gapDays.toLocaleString("en-US")} d apart`;
+  if (m.time === "unknown" && t.inService) {
+    if (t.inService.coarse && t.inService.gapDays === 0) return "in-service overlap";
+    return `${t.inService.coarse ? "≥" : ""}${t.inService.gapDays.toLocaleString("en-US")} d apart`;
+  }
   if (m.time === "unknown") return "Schedule unknown";
   if (m.time === "no-match") return "No window overlap";
   if (t.possibleOverlap) return formatSpan(t.possibleOverlap, t.precision);
@@ -27,13 +30,14 @@ export function timeShort(m: Match): string {
 export function whyFlagged(m: Match): string {
   const parts: string[] = [];
   const d = m.geoDetail.center?.miles;
-  if (m.geoDetail.method === "shared-site") parts.push("a source-stated shared facility");
+  const rels = SNAPSHOT.relations.filter((r) => m.geoDetail.relationIds.includes(r.id));
+  if (m.geoDetail.method === "shared-site") parts.push(rels.some((r) => r.basis !== "inferred") ? "a source-stated shared facility" : "a shared facility implied by the sources");
   else if (m.geoDetail.method === "shared-endpoint") parts.push(`terminals at the same facility (${m.geoDetail.sharedEndpoint?.labelA})`);
   else if (m.geo === "confirmed") parts.push(`centers ${d !== undefined ? formatMiles(d) : ""} apart, inside the ${m.geoDetail.thresholdMiles} mi radius`);
   else parts.push("possible proximity");
   if (m.time === "confirmed") parts.push("overlapping published construction windows");
   else if (m.time === "possible") parts.push("possibly overlapping construction windows");
-  else if (m.timeDetail.inService) parts.push(`in-service dates ${m.timeDetail.inService.gapDays.toLocaleString("en-US")} days apart`);
+  else if (m.timeDetail.inService) parts.push(inServicePhrase(m));
   const signals = parts.join(" and ");
   const tail =
     m.reviewStatus === "known-coordination"
@@ -70,4 +74,12 @@ export function firstSentence(text: string, words = 30): string {
   const w = out.split(" ");
   if (w.length > words) out = w.slice(0, words).join(" ") + "…";
   return out;
+}
+
+/** "in-service dates 152 days apart" · "≥ 365 days apart" · "overlapping in-service dates" */
+export function inServicePhrase(m: Match): string {
+  const g = m.timeDetail.inService;
+  if (!g) return "";
+  if (g.coarse && g.gapDays === 0) return "overlapping in-service dates (at stated precision)";
+  return `in-service dates ${g.coarse ? "at least " : ""}${g.gapDays.toLocaleString("en-US")} days apart`;
 }
