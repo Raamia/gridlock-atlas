@@ -1,6 +1,6 @@
 {
- "version": "snap-2026-09-26-3e8db5b0",
- "generatedAt": "2026-09-26T06:40:29.317Z",
+ "version": "snap-2026-09-26-6896e37b",
+ "generatedAt": "2026-09-26T06:50:29.137Z",
  "snapshotDate": "2026-09-26",
  "regions": [
   {
@@ -471,6 +471,19 @@
    "bytes": 293438
   },
   {
+   "id": "gtc-pole-heights-easement-widths",
+   "publisher": "Georgia Transmission Corporation",
+   "title": "GTC Transmission Line Heights and Easement Widths (fact sheet)",
+   "url": "https://www.gatransmission.com/wp-content/uploads/2017/09/GTC_PoleHeightsFactSheet.pdf",
+   "sourceType": "utility",
+   "publishedAt": "2017",
+   "retrievedAt": "2026-09-26T06:23:25Z",
+   "sha256": "646d388b4729564a5a55fcd8cbab5fd124f6b8111efd9f33a527acf9c4ff205f",
+   "mimeType": "application/pdf",
+   "pageCount": 1,
+   "bytes": 475473
+  },
+  {
    "id": "itc-chc-page",
    "publisher": "ITC Holdings Corp.",
    "title": "Cardinal-Hickory Creek Transmission Line Project",
@@ -600,6 +613,45 @@
    "bytes": 1098738
   },
   {
+   "id": "miso-cost-guide-mtep18",
+   "publisher": "Midcontinent Independent System Operator (MISO)",
+   "title": "Transmission and Substation Project Cost Estimation Guide for MTEP 2018",
+   "url": "https://cdn.misoenergy.org/Transmission-and-Substation-Project-Cost-Estimation-Guide-for-MTEP-2018144804.pdf",
+   "sourceType": "rto",
+   "publishedAt": "2018",
+   "retrievedAt": "2026-09-26T06:35:04Z",
+   "sha256": "0a89f559966902b9c31e9855e14788b225bb1d40b5a8fadde55be2e3e5b57842",
+   "mimeType": "application/pdf",
+   "pageCount": 56,
+   "bytes": 1063141
+  },
+  {
+   "id": "miso-cost-guide-mtep24",
+   "publisher": "Midcontinent Independent System Operator (MISO)",
+   "title": "Transmission Cost Estimation Guide for MTEP24 (May 1, 2024)",
+   "url": "https://cdn.misoenergy.org/20240501%20PSC%20Item%2004%20MISO%20Transmission%20Cost%20Estimation%20Guide%20for%20MTEP24632680.pdf",
+   "sourceType": "rto",
+   "publishedAt": "2024-05-01",
+   "retrievedAt": "2026-09-26T06:30:37Z",
+   "sha256": "708b0103f8ea2ff458a09aa46334a537817a833814c8300a04fd07e4a74de167",
+   "mimeType": "application/pdf",
+   "pageCount": 48,
+   "bytes": 1424167
+  },
+  {
+   "id": "miso-cost-guide-mtep26",
+   "publisher": "Midcontinent Independent System Operator (MISO)",
+   "title": "Transmission Cost Estimation Guide for MTEP26 (June 10, 2026)",
+   "url": "https://cdn.misoenergy.org/MISO%20Transmission%20Cost%20Estimation%20Guide%20for%20MTEP26337433.pdf",
+   "sourceType": "rto",
+   "publishedAt": "2026-06-10",
+   "retrievedAt": "2026-09-26T06:30:38Z",
+   "sha256": "7d98dc46067e6b467c2cecbad7bf6830558bb2414c8347a47e1b27a301f9eded",
+   "mimeType": "application/pdf",
+   "pageCount": 23,
+   "bytes": 939975
+  },
+  {
    "id": "miso-wi-selection-news-2026",
    "publisher": "MISO",
    "title": "MISO announces Selected Developers for competitive transmission projects in Wisconsin",
@@ -639,6 +691,20 @@
    "bytes": 1943175
   },
   {
+   "id": "mnpuc-bssa-order-2026-06",
+   "publisher": "Minnesota Public Utilities Commission",
+   "title": "Order Issuing Route Permit, Big Stone South to Alexandria 345 kV (Docket TL-23-160)",
+   "url": "https://bigstonesouthtoalexandria.com/documents/BSSA_Order_June_25_2026.pdf",
+   "sourceType": "regulator",
+   "publishedAt": "2026-06-25",
+   "documentDateNote": "'SERVICE DATE: June 25, 2026'; PUC document hosted on the project website",
+   "retrievedAt": "2026-09-26T05:30:47Z",
+   "sha256": "be230e8a1c1d2e9698b8537173f444363f2f5d8cea239455d1836dbd6879a4d0",
+   "mimeType": "application/pdf",
+   "pageCount": 5,
+   "bytes": 26983481
+  },
+  {
    "id": "mnpuc-bssa-route-permit-2026-06",
    "publisher": "Minnesota Public Utilities Commission",
    "title": "Route Permit, Big Stone South to Alexandria 345 kV Transmission Line (MPUC Docket E017,ET10/TL-23-160)",
@@ -651,6 +717,19 @@
    "mimeType": "application/pdf",
    "pageCount": 62,
    "bytes": 27324938
+  },
+  {
+   "id": "mopsc-grainbelt-landowner-compensation-2016",
+   "publisher": "Grain Belt Express Clean Line LLC (filed with the Missouri Public Service Commission, Schedule DKL-3)",
+   "title": "Missouri Landowner Compensation Fact Sheet (June 2016)",
+   "url": "https://efis.psc.mo.gov/Document/Display/286460",
+   "sourceType": "utility",
+   "publishedAt": "2016-06",
+   "retrievedAt": "2026-09-26T06:35:05Z",
+   "sha256": "d80ac0ab9bd02eb87b1a04101205f23f4e923139a915720083260b657a7a1fa9",
+   "mimeType": "application/pdf",
+   "pageCount": 2,
+   "bytes": 1242266
   },
   {
    "id": "mres-bssa-approval-news",
@@ -917,6 +996,32 @@
    "bytes": 139197
   },
   {
+   "id": "scpsc-2010-238-e-pineland-application",
+   "publisher": "South Carolina Electric & Gas Company (filed with Public Service Commission of South Carolina)",
+   "title": "Application for a Certificate of Environmental Compatibility and Public Convenience and Necessity: Denny Terrace-Pineland 230 kV Transmission Line (Docket 2010-238-E)",
+   "url": "https://dms.psc.sc.gov/Attachments/Matter/b270073b-edf6-5dca-7d64a28b1810c18a",
+   "sourceType": "regulator",
+   "publishedAt": "2010-07-07",
+   "retrievedAt": "2026-09-26T06:20:19Z",
+   "sha256": "0fb268bf68ffd82bd7049d4919f3fbb37d3e8db79d00bf78a8197ca54f5c3db8",
+   "mimeType": "application/pdf",
+   "pageCount": 15,
+   "bytes": 339561
+  },
+  {
+   "id": "scpsc-vcs1-killian-order-2011",
+   "publisher": "Public Service Commission of South Carolina",
+   "title": "SCE&G application/order: 230 kV line from V.C. Summer Switchyard #1 to Killian Transmission Substation and two 230 kV lines from V.C. Summer Switchyard #2 to Lake Murray (Docket 2011-325-E, Dec. 2011)",
+   "url": "https://dms.psc.sc.gov/attachments/matter/73C1EC9A-155D-2817-10A9698095AE7829",
+   "sourceType": "regulator",
+   "publishedAt": "2011-12",
+   "retrievedAt": "2026-09-26T06:29:09Z",
+   "sha256": "e9454d0818883942a210f99786ef0edec03e7c4fb89a1388d97a4300a1fd50c5",
+   "mimeType": "application/pdf",
+   "pageCount": 69,
+   "bytes": 14962722
+  },
+  {
    "id": "spp-beckham-potter-iep-report",
    "publisher": "Southwest Power Pool",
    "title": "Industry Expert Panel Transmission Provider Internal Report - Public Version, RFP-000009 Beckham County-Potter 345 kV",
@@ -994,6 +1099,19 @@
    "sha256": "acacf8cf1b7c0d9231679626a212d301ca594bc6822cb627d971888164530b10",
    "mimeType": "text/html",
    "bytes": 19846
+  },
+  {
+   "id": "usda-nass-land-values-2026",
+   "publisher": "USDA National Agricultural Statistics Service",
+   "title": "Land Values 2026 Summary (July 2026)",
+   "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/land0726.pdf",
+   "sourceType": "regulator",
+   "publishedAt": "2026-07-31",
+   "retrievedAt": "2026-09-26T06:24:35Z",
+   "sha256": "2cfec88843c42cf93c3dddb0b7bade16666b249e6c6505ad5a4b2be79d4f9d61",
+   "mimeType": "application/pdf",
+   "pageCount": 22,
+   "bytes": 1347863
   },
   {
    "id": "xcel-abo-route-permit-app-2023",
@@ -1092,7 +1210,7 @@
    "title": "Mankato-Mississippi River Transmission Project - Library & FAQs",
    "url": "https://mmrtproject.com/library",
    "sourceType": "utility",
-   "documentDateNote": "undated FAQ; anticipates MPUC decision in early 2026 (pre-decision text)",
+   "documentDateNote": "undated FAQ with pre-decision text: 'We anticipate the MPUC will issue its final decision ... in the 4th quarter of 2025'",
    "retrievedAt": "2026-09-26T05:29:22Z",
    "sha256": "b3fa0a9d6e0aeabb1c58e359c96977d1fdc76effa73a4545def09ddacaca035a",
    "mimeType": "text/html",
@@ -1104,7 +1222,7 @@
    "title": "Mankato-Mississippi River Transmission Project",
    "url": "https://mmrtproject.com/",
    "sourceType": "utility",
-   "documentDateNote": "undated; references Feb. 5, 2026 approval",
+   "documentDateNote": "undated; header references Feb. 5, 2026 approval but footer is (c) 2025 and the Schedule section still carries pre-approval wording ('if approved, build this project')",
    "retrievedAt": "2026-09-26T05:28:37Z",
    "sha256": "16d2eb6797a169a5a36bf567088b938c2f63332c1524233c4e92971d2e698de8",
    "mimeType": "text/html",
@@ -1116,7 +1234,7 @@
    "title": "Mankato-Mississippi River Transmission Project - Project Segments",
    "url": "https://mmrtproject.com/segments/",
    "sourceType": "utility",
-   "documentDateNote": "undated; footer copyright 2024",
+   "documentDateNote": "undated; footer (c) 2024 but text references a May 5, 2025 alignment-change filing, so page content is from mid-2025 or later (pre-decision)",
    "retrievedAt": "2026-09-26T05:29:21Z",
    "sha256": "62c9ef58ef2ba068a5f0033e42adcea9e8c3b7971f418e1a8c9b5bc28b8c8999",
    "mimeType": "text/html",
@@ -4001,12 +4119,12 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-a21313f10b2c": {
-   "id": "ev-a21313f10b2c",
+  "ev-d70f57839d03": {
+   "id": "ev-d70f57839d03",
    "sourceId": "gre-northland-page",
    "section": "Quick facts - Schedule",
-   "exactExcerpt": "Permitting, engineering, environmental surveys, real estate and public engagement 2027-2030 Construction 2030 Anticipated in-service",
-   "supports": "construction 2027-2030; in-service 2030",
+   "exactExcerpt": "2024-2026 Permitting, engineering, environmental surveys, real estate and public engagement 2027-2030 Construction 2030 Anticipated in-service",
+   "supports": "schedule table rows: 2024-2026 permitting etc.; 2027-2030 Construction; 2030 Anticipated in-service",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -4101,12 +4219,34 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-e1c668a3b1ca": {
+   "id": "ev-e1c668a3b1ca",
+   "sourceId": "mn-biennial-2025-pdf",
+   "page": 85,
+   "printedPage": "81",
+   "section": "Chapter 6: Needs - Northland Reliability Project",
+   "exactExcerpt": "Minnesota Power (MP) and Great River Energy (GRE) are jointly developing the Northland Reliability Project (Project), located in northern and central Minnesota.",
+   "supports": "MP and GRE jointly develop the project (Biennial Report)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-97b11ac5c10b": {
    "id": "ev-97b11ac5c10b",
    "sourceId": "gre-northland-first-structures-news",
    "section": "First structures set for Northland Reliability Project",
    "exactExcerpt": "A major milestone was reached when the first transmission structure was successfully set on July 17 near St. Cloud.",
    "supports": "construction under way (first structure set; article published 2026-08-13)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-c3e081a48088": {
+   "id": "ev-c3e081a48088",
+   "sourceId": "gre-northland-groundbreaking-news",
+   "section": "Minnesota Power, Great River Energy break ground on transformative transmission line",
+   "exactExcerpt": "The Minnesota Public Utilities Commission approved the Certificate of Need and Route Permit for the high-voltage transmission line in January.",
+   "supports": "approval month per GRE (conflicts with Biennial 'February 2025')",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -4167,6 +4307,28 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-12aa0d6ba1be": {
+   "id": "ev-12aa0d6ba1be",
+   "sourceId": "xcel-abo-route-permit-app-2023",
+   "page": 16,
+   "printedPage": "1",
+   "section": "1 Introduction",
+   "exactExcerpt": "the new Big Oaks Substation that will be constructed on the north side of the Mississippi River in Becker, Sherburne County",
+   "supports": "Big Oaks on the north side of the Mississippi in Becker",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-7f7e4f0b9258": {
+   "id": "ev-7f7e4f0b9258",
+   "sourceId": "abo-project-page",
+   "section": "Project overview",
+   "exactExcerpt": "a new substation to be located on Xcel Energy property near the Sherco power plant in Becker, Minn.",
+   "supports": "Big Oaks near the Sherco power plant",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-51c5a9024576": {
    "id": "ev-51c5a9024576",
    "sourceId": "xcel-abo-route-permit-app-2023",
@@ -4175,6 +4337,18 @@
    "section": "2.7 Project Schedule",
    "exactExcerpt": "Construction for the Project is expected to begin in the fourth quarter of 2024 or first quarter of 2025. The Applicants anticipate Project construction to be completed in the fourth quarter of 2027.",
    "supports": "construction Q4 2024/Q1 2025 to Q4 2027",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-86d481427fea": {
+   "id": "ev-86d481427fea",
+   "sourceId": "xcel-abo-route-permit-app-2023",
+   "page": 41,
+   "printedPage": "26",
+   "section": "Table 2.7-1 Anticipated Project Schedule",
+   "exactExcerpt": "Start Right-of-Way Clearing Second Quarter 2025 Start Project Construction Second Quarter 2025",
+   "supports": "Table 2.7-1 in the same application gives a later start (Q2 2025) than the narrative (Q4 2024/Q1 2025)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -4195,6 +4369,16 @@
    "section": "Big Stone South to Alexandria to Big Oaks",
    "exactExcerpt": "Construction will begin in 2025 on the Alexandria-Big Oaks eastern segment that will add a new transmission circuit to the existing 345 kV transmission structures that run mainly along Interstate 94",
    "supports": "construction begins 2025",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-211825974663": {
+   "id": "ev-211825974663",
+   "sourceId": "mres-bssa-approval-news",
+   "section": "New transmission line approved in Minnesota",
+   "exactExcerpt": "paves the way for construction between Alexandria and the Big Oaks substation to begin in 2025.",
+   "supports": "line construction (not just the substation) expected to begin 2025",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -4353,6 +4537,28 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-4e46fa6e2c28": {
+   "id": "ev-4e46fa6e2c28",
+   "sourceId": "xcel-abo-route-permit-app-2023",
+   "page": 42,
+   "printedPage": "27",
+   "section": "2.8 Project Costs",
+   "exactExcerpt": "Table 2.8-1 summarizes the Project will cost between $209.5 million and $238.2 million (in 2022 dollars) depending on the alignment selected.",
+   "supports": "cost estimate",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-937ad615d6d1": {
+   "id": "ev-937ad615d6d1",
+   "sourceId": "bssa-library-page",
+   "section": "Related Projects",
+   "exactExcerpt": "Along with the Certificate of Need, the Minnesota Public Utilities Commission also granted the Route Permit for this segment on October 3, 2024.",
+   "supports": "ABO route permit date",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-333e1cf31911": {
    "id": "ev-333e1cf31911",
    "sourceId": "bssa-project-page",
@@ -4480,6 +4686,17 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-deace4bae52e": {
+   "id": "ev-deace4bae52e",
+   "sourceId": "mnpuc-bssa-order-2026-06",
+   "page": 1,
+   "section": "Order - disposition item 4",
+   "exactExcerpt": "Issued a Route Permit to Otter Tail Power and Western Minnesota Municipal Power Agency for the Big Stone South to Alexandria 345 kV Transmission Line Project",
+   "supports": "MPUC order issuing the route permit (service date June 25, 2026)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-0a6c38cfebf5": {
    "id": "ev-0a6c38cfebf5",
    "sourceId": "bssa-regulatory-page",
@@ -4508,6 +4725,16 @@
    "section": "Typical monopole structures",
    "exactExcerpt": "Otter Tail Power Company and Missouri River Energy Services will only install one circuit at this time.",
    "supports": "one circuit initially",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-d16248809832": {
+   "id": "ev-d16248809832",
+   "sourceId": "bssa-regulatory-page",
+   "section": "Regulatory Process",
+   "exactExcerpt": "On January 30, 2025, the SD PUC approved the Facility Permit Application for the South Dakota portion of the project.",
+   "supports": "SD permit approval",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -4712,6 +4939,18 @@
    "section": "Chapter 1 Executive Summary",
    "exactExcerpt": "It is anticipated that portions of the Project will either be individually or jointly owned by Xcel Energy, Dairyland Power Cooperative (Dairyland), Southern Minnesota Municipal Power Agency (Southern Minnesota), and the City of Rochester, Minnesota, acting through its Public Utility Board (City of Rochester)",
    "supports": "individual/joint ownership by four utilities",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-9ffa07cf365f": {
+   "id": "ev-9ffa07cf365f",
+   "sourceId": "xcel-mmrt-application-2024",
+   "page": 30,
+   "printedPage": "11",
+   "section": "1.9 Project Ownership and Permittee",
+   "exactExcerpt": "Segments of the Project will either be individually or jointly owned by Xcel Energy, Dairyland, Southern Minnesota, and the City of Rochester.",
+   "supports": "segment ownership by the four joint utilities",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -15002,6 +15241,18 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-180c846ed8d5": {
+   "id": "ev-180c846ed8d5",
+   "sourceId": "xcel-mmrt-application-2024",
+   "page": 23,
+   "printedPage": "4",
+   "section": "Chapter 1 Executive Summary (footnote 4)",
+   "exactExcerpt": "This Project is the Minnesota portion of LRTP4. The overall LRTP4 project involves the construction of a 345 kV transmission line from the existing Wilmarth Substation in Mankato, Minnesota to the existing Tremval Substation located in west central Wisconsin near the town of Blair.",
+   "supports": "MMRT is the Minnesota portion of LRTP4, which continues in Wisconsin toward Tremval near Blair",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-6a0e571601ed": {
    "id": "ev-6a0e571601ed",
    "sourceId": "dpc-alma-blair-cpcn-2024",
@@ -15409,6 +15660,204 @@
    "section": "Caption",
    "exactExcerpt": "Construct and Operate Long Range Transmission Planning Tranche 1 Project 5, which consists of Expanding the Tremval and Eau Claire Substations, a New Jump River Substation",
    "supports": "LRTP Tranche 1 Project 5; docket title lists Tremval and Eau Claire expansions and new Jump River Substation",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-80859b5e0cc4": {
+   "id": "ev-80859b5e0cc4",
+   "sourceId": "gtc-pole-heights-easement-widths",
+   "page": 1,
+   "section": "Typical Transmission Line Easement Widths (approximates) - Roadside | Cross Country",
+   "exactExcerpt": "115 kV Line Single pole 25-42.5 feet + 100 feet",
+   "supports": "Typical easement (right-of-way) width, 115 kV line (Georgia Transmission)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-66c4b24d9d9e": {
+   "id": "ev-66c4b24d9d9e",
+   "sourceId": "scpsc-2010-238-e-pineland-application",
+   "page": 5,
+   "section": "Application, SC PSC Docket 2010-238-E - line description (Denny Terrace-Pineland 230 kV)",
+   "exactExcerpt": "WIDTH OF RIGHT-OF-WAY: 100 FEET (Typical) DESIGN VOLTAGE: 230 kV",
+   "supports": "Typical right-of-way width, 230 kV line (DESC / SCE&G certificate application)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-40f72a0f592b": {
+   "id": "ev-40f72a0f592b",
+   "sourceId": "gtc-pole-heights-easement-widths",
+   "page": 1,
+   "section": "Typical Transmission Line Easement Widths (approximates)",
+   "exactExcerpt": "230 kV Line Single pole 25-42.5 feet + 100 feet 230 kV Line H-frame n/a + 125 feet",
+   "supports": "Easement width, 230 kV line, Georgia Transmission range (roadside / single pole / H-frame)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-0cba7df0d0a7": {
+   "id": "ev-0cba7df0d0a7",
+   "sourceId": "gtc-pole-heights-easement-widths",
+   "page": 1,
+   "section": "Typical Transmission Line Easement Widths (approximates) - Cross Country",
+   "exactExcerpt": "500 kV Steel Lattice Structure n/a 150-180 feet",
+   "supports": "Easement width, 500 kV steel lattice line (Georgia Transmission)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-c8ca107bf721": {
+   "id": "ev-c8ca107bf721",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 32,
+   "section": "Table 3.1-1: Right-of-way width (printed page 31)",
+   "exactExcerpt": "Table 3.1-1: Right-of-way width AC Transmission (single and double circuit) Voltage class 69 kV 115 kV 138 kV 161 kV 230 kV 345 kV 500 kV 765 kV Feet 80 90 95 100 125 175 200 225",
+   "supports": "MISO indicative right-of-way width, 115 kV (cross-check)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-61005ae7f774": {
+   "id": "ev-61005ae7f774",
+   "sourceId": "usda-nass-land-values-2026",
+   "page": 9,
+   "section": "Farm Real Estate Average Value per Acre - Regions, States, and United States: 2022-2026 (continued)",
+   "exactExcerpt": "6,000 4,250 9,150 4,950 4,900",
+   "supports": "South Carolina average farm real estate value, 2026",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-69002d67728f": {
+   "id": "ev-69002d67728f",
+   "sourceId": "usda-nass-land-values-2026",
+   "page": 11,
+   "section": "Cropland Average Value per Acre - Regions, States, and United States: 2022-2026 (continued)",
+   "exactExcerpt": "6,080 4,650 11,100 4,670 4,100",
+   "supports": "South Carolina average cropland value, 2026",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-901968d0664a": {
+   "id": "ev-901968d0664a",
+   "sourceId": "usda-nass-land-values-2026",
+   "page": 15,
+   "section": "Pasture Average Value per Acre - Regions, States, and United States: 2022-2026 (continued)",
+   "exactExcerpt": "5,920 3,500 7,650 5,100 4,500",
+   "supports": "South Carolina average pasture value, 2026",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-7898f02c4cf5": {
+   "id": "ev-7898f02c4cf5",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 7,
+   "section": "2. Right-of-Way, Land Acquisition, and Regulatory and Permitting (printed page 6)",
+   "exactExcerpt": "MISO utilizes the annual USDA Land Values summary to estimate the value of pastureland",
+   "supports": "Right-of-way land priced at full USDA-based land value (MISO planning convention)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-67482bda65c1": {
+   "id": "ev-67482bda65c1",
+   "sourceId": "mopsc-grainbelt-landowner-compensation-2016",
+   "page": 1,
+   "section": "Compensation Calculation - Easement Payment",
+   "exactExcerpt": "Clean Line will pay 110% of the average value of the land, based on recent sales in the county",
+   "supports": "Example easement payment as a share of land value (Grain Belt Express, Missouri 2016)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-3af358436684": {
+   "id": "ev-3af358436684",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 39,
+   "section": "Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
+   "exactExcerpt": "Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M",
+   "supports": "New single-circuit 115 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-05deff8f1016": {
+   "id": "ev-05deff8f1016",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 40,
+   "section": "Table 4.1-3: Exploratory cost estimate - AC transmission, rebuild and reconductor transmission line $/mile (printed page 39)",
+   "exactExcerpt": "Rebuild – single circuit $1.5M $1.7M $1.8M $1.8M $1.9M N/A N/A N/A",
+   "supports": "Single-circuit 115 kV rebuild, exploratory cost per mile (MISO)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-870da39551d1": {
+   "id": "ev-870da39551d1",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 12,
+   "section": "Project 12 of 54 - Jasper - Okatie 230 kV #2: Construct (Project ID 06367 D-G)",
+   "exactExcerpt": "Construct a 230 kV line with B1272 ACSR from Jasper to Okatie 230/115kV Substation. The line is estimated to be 6.5 miles long.",
+   "supports": "DESC plan example: Jasper-Okatie 230 kV #2 new line, total cost / stated miles",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-181465be2da6": {
+   "id": "ev-181465be2da6",
+   "sourceId": "miso-cost-guide-mtep26",
+   "page": 2,
+   "section": "Purpose Statement",
+   "exactExcerpt": "Cost data was escalated from 2025 U.S. dollars to 2026 U.S. dollars at a rate of 4% for most cost categories",
+   "supports": "Annual cost escalation MISO applied for the MTEP26 update",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-a405599298c1": {
+   "id": "ev-a405599298c1",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 8,
+   "section": "Table 2.1: Land costs (printed page 7)",
+   "exactExcerpt": "Table 2.1: Land costs Right-of-way cost per acre State Acquisition cost per acre Regulatory and permitting cost per acre Pasture Crop Suburban and urban Arkansas $3,045 $9,135 $15,225 $14,247 $2,968",
+   "supports": "Right-of-way acquisition cost per acre, on top of land value (MISO)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-ed7a221eddf6": {
+   "id": "ev-ed7a221eddf6",
+   "sourceId": "miso-cost-guide-mtep18",
+   "page": 16,
+   "section": "4.1.1.3 Mobilization/Demobilization",
+   "exactExcerpt": "Single circuit and double circuit Unit detail 69kV 115kV 138kV 161kV 230kV 345kV 500kV Mobilization/Demobilization $100,000 $100,000 $150,000 $150,000 $200,000 $250,000 $300,000",
+   "supports": "Mobilization/demobilization unit cost per line project, 115 kV (MISO 2018)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-39a3e5cb945c": {
+   "id": "ev-39a3e5cb945c",
+   "sourceId": "scpsc-vcs1-killian-order-2011",
+   "page": 52,
+   "section": "SC PSC Order, Docket 2011-325-E (Dec. 2011), summary of SCE&G testimony (Tr. II, p. 93)",
+   "exactExcerpt": "building them at the same time will avoid the need to mobilize construction crews twice to work on the same structures and thereby will reduce construction costs",
+   "supports": "Crew mobilizations avoided when two lines on shared right-of-way/structures are built together (DESC testimony, SC PSC order)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-18bd6984d371": {
+   "id": "ev-18bd6984d371",
+   "sourceId": "gpc-irp-2025-vol3",
+   "page": 175,
+   "section": "Table 1 Summary of Georgia ITS Transmission Additions (2024 GA ITS Ten-Year Plan, page 5 of 304)",
+   "exactExcerpt": "New Transmission Lines Requiring New Right of Way Voltage (kV) Lines Miles Lines Miles 500 5 163 12 543 230 26 211 37 530 115 7 49 10 69 Total 38 423 59 1142",
+   "supports": "Georgia ITS new transmission line miles requiring new right-of-way, 2025-2034",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -18907,18 +19356,20 @@
    ],
    "parentInitiative": "MISO LRTP Tranche 1 (approved July 2022)",
    "docketId": "MPUC CN-22-416; TL-22-415",
-   "summary": "Minnesota Power and Great River Energy jointly own the Northland Reliability Project, an approximately 180-mile double-circuit 345 kV line from the Iron Range Substation near Grand Rapids via a new Cuyuna series compensation station and the Benton County Substation to the new Big Oaks Substation near Becker; construction on the first segment began in Q3 2025 and in-service is planned by June 1, 2030.",
+   "summary": "Minnesota Power and Great River Energy jointly own the Northland Reliability Project, an approximately 180-mile double-circuit 345 kV line from the Iron Range Substation near Grand Rapids via a new Cuyuna series compensation station (near Riverton) and the Benton County Substation to the new Big Oaks Substation near Becker; construction began in Q3/fall 2025 in Benton and Sherburne counties, and in-service is planned by June 1, 2030.",
    "owners": [
     {
      "utilityId": "minnesota-power",
      "evidenceIds": [
-      "ev-c57e44d3293b"
+      "ev-c57e44d3293b",
+      "ev-e1c668a3b1ca"
      ]
     },
     {
      "utilityId": "gre",
      "evidenceIds": [
-      "ev-c57e44d3293b"
+      "ev-c57e44d3293b",
+      "ev-e1c668a3b1ca"
      ]
     }
    ],
@@ -18927,7 +19378,8 @@
     "asOf": "2026-08-13",
     "evidenceIds": [
      "ev-97b11ac5c10b",
-     "ev-212bbab5450b"
+     "ev-212bbab5450b",
+     "ev-c3e081a48088"
     ]
    },
    "states": [
@@ -19034,8 +19486,8 @@
      "precision": "locality",
      "lat": 46.4621002,
      "lon": -94.0467397,
-     "uncertaintyMeters": 6000,
-     "coordinateSource": "Nominatim: Riverton, Crow Wing County, MN (OSM relation 137570) town centroid; Cuyuna station not in OSM",
+     "uncertaintyMeters": 8000,
+     "coordinateSource": "Nominatim: Riverton, Crow Wing County, MN (OSM relation 137570) city centroid, re-checked 2026-09-26; no OSM feature named Cuyuna (Overpass 8 km search 2026-09-26 found only the Riverton 115/34 and 230/115 kV substations and an unnamed substation, way 1306669958)",
      "evidenceIds": [
       "ev-65b08c9c1efd"
      ]
@@ -19063,7 +19515,7 @@
      "lat": 45.3931821,
      "lon": -93.8768904,
      "uncertaintyMeters": 5000,
-     "coordinateSource": "Nominatim: Becker, Sherburne County, MN (OSM relation 137501) city centroid; Big Oaks Substation not found in OSM (Overpass name search 2026-09-26)",
+     "coordinateSource": "Nominatim: Becker, Sherburne County, MN (OSM relation 137501) city centroid, re-checked 2026-09-26. No OSM feature named Big Oaks; an unnamed OSM substation (way 1315833909, 45.3716,-93.8684) exists near Sherco but is not identified as Big Oaks, so not used",
      "evidenceIds": [
       "ev-d6fa27a7a7de"
      ]
@@ -19136,7 +19588,7 @@
       "ev-212bbab5450b",
       "ev-62426fb4450e"
      ],
-     "note": "Start is stated (Q3 2025, first segment). End is DERIVED from the same section's statement that construction is expected to be completed over 3 years (Q3 2025 + ~3 years); not derived from the June 1, 2030 in-service date. Flag end bound for human review."
+     "note": "Start is stated (construction 'on the first segment' began Q3 2025; GRE says this first work was in Benton and Sherburne counties). END IS NOT STATED: it is arithmetic on the same report's sentence 'Construction is expected to be completed over 3 years' (Q3 2025 + ~3 years -> 2028). Not derived from the June 1, 2030 in-service date. The '3 years' sentence may be carried over from the pre-2025 plan (GRE's 2024 page showed 2027-2030 construction, also ~3 years), and a 2028 end sits awkwardly with June 2030 in-service and with GRE's report that the first transmission structure was set only on July 17, 2026 (near St. Cloud). Human review required before this end bound is displayed as a fact."
     },
     {
      "id": "mp-gre-northland:w2",
@@ -19154,9 +19606,9 @@
      },
      "continuous": true,
      "evidenceIds": [
-      "ev-a21313f10b2c"
+      "ev-d70f57839d03"
      ],
-     "note": "GRE project-page schedule table (page metadata modified 2024-01-04); predates the reported 2025 construction start; kept as a disagreeing published claim."
+     "note": "GRE project-page schedule table (article:modified_time 2024-01-04). Table layout is 'year, then activity', so '2027-2030' pairs with 'Construction'. Superseded in fact by the 2025 construction start reported by the Biennial Report and GRE's Oct 2025 release, but kept as a disagreeing published claim per the version policy."
     }
    ],
    "completionClaims": [
@@ -19209,7 +19661,7 @@
       "precision": "year"
      },
      "evidenceIds": [
-      "ev-a21313f10b2c"
+      "ev-d70f57839d03"
      ]
     }
    ],
@@ -19223,11 +19675,12 @@
     }
    ],
    "caveats": [
-    "End of the Biennial Report construction window (2028) is derived from a '3 years' duration statement, not a stated end date.",
-    "The GRE project page's '2027-2030 Construction' schedule predates the Q3/fall 2025 construction start reported by the Biennial Report and GRE news; both kept side by side.",
-    "A January 2026 phased-construction map on northlandreliabilityproject.com (image only, not text-verifiable) shows work into 2029 on the Cuyuna-Iron Range portion; not used as evidence.",
-    "Big Oaks Substation and the Cuyuna station are not in OSM; plotted at Becker and Riverton town centroids.",
-    "Big Oaks Substation itself is Xcel Energy scope (separate project), not Northland scope."
+    "End of the Biennial Report construction window (2028) is arithmetic on a '3 years' duration sentence, not a stated end date; it may predate the 2025 start and needs human review.",
+    "The GRE project page's '2027-2030 Construction' schedule (modified 2024-01-04) predates the Q3/fall 2025 construction start reported by the Biennial Report and GRE news; both kept side by side.",
+    "A January 2026 phased-construction map on northlandreliabilityproject.com (image only, not text-verifiable) was reported by the researcher to show work into 2029 on the Cuyuna-Iron Range portion; not used as evidence and not re-verified.",
+    "Big Oaks Substation and the Cuyuna station are not named in OSM; plotted at Becker and Riverton city centroids (locality precision).",
+    "Big Oaks Substation itself is Xcel Energy scope (separate project), not Northland scope.",
+    "Approval month differs: the Biennial Report says the Commission's decision was in February 2025; GRE's Oct 2025 release says the MPUC approved the CN and Route Permit 'in January'."
    ],
    "sourceIds": [
     "mn-biennial-2025-pdf",
@@ -19247,7 +19700,7 @@
    ],
    "parentInitiative": "MISO LRTP Tranche 1 - Big Stone South-Alexandria-Big Oaks ('MISO LRTP 2 Project' in the 2025 MN Biennial Report)",
    "docketId": "MPUC CN-22-538; TL-23-159",
-   "summary": "Xcel Energy, on behalf of co-owners Great River Energy, Minnesota Power, Otter Tail Power and Missouri River Energy Services (for WMMPA), is adding a second 345 kV circuit on existing CapX2020 structures for about 105-108 miles from the Alexandria Substation to a new Big Oaks Substation in Becker, with construction begun in 2025 and completion claims from late 2026 (line) to late 2027 (Big Oaks Substation).",
+   "summary": "Xcel Energy is developing the Alexandria to Big Oaks segment on behalf of its co-owners (Xcel Energy, Great River Energy, Minnesota Power, Otter Tail Power and Missouri River Energy Services for WMMPA): a second 345 kV circuit on existing CapX2020 structures for about 105-108 miles from the Alexandria Substation to a new Big Oaks Substation in Becker. The MPUC granted the route permit on Oct. 3, 2024; construction began in 2025, with completion claims ranging from late 2026 (line) to late 2027 (Big Oaks Substation).",
    "owners": [
     {
      "utilityId": "xcel-nspm",
@@ -19352,6 +19805,22 @@
      "evidenceIds": [
       "ev-0620a6b59eea"
      ]
+    },
+    {
+     "key": "costUsd",
+     "label": "Estimated cost (2022 dollars, Sept 2023 application)",
+     "value": "$209.5 million - $238.2 million",
+     "evidenceIds": [
+      "ev-4e46fa6e2c28"
+     ]
+    },
+    {
+     "key": "other",
+     "label": "MN route permit granted",
+     "value": "October 3, 2024 (with the Certificate of Need)",
+     "evidenceIds": [
+      "ev-937ad615d6d1"
+     ]
     }
    ],
    "places": [
@@ -19406,9 +19875,11 @@
      "lat": 45.3931821,
      "lon": -93.8768904,
      "uncertaintyMeters": 5000,
-     "coordinateSource": "Nominatim: Becker, Sherburne County, MN (OSM relation 137501) city centroid; Big Oaks Substation not found in OSM (Overpass name search 2026-09-26)",
+     "coordinateSource": "Nominatim: Becker, Sherburne County, MN (OSM relation 137501) city centroid, re-checked 2026-09-26. No OSM feature named Big Oaks; an unnamed OSM substation (way 1315833909, 45.3716,-93.8684) exists near Sherco but is not identified as Big Oaks, so not used",
      "evidenceIds": [
-      "ev-e6429fb50102"
+      "ev-e6429fb50102",
+      "ev-12aa0d6ba1be",
+      "ev-7f7e4f0b9258"
      ]
     }
    ],
@@ -19453,7 +19924,7 @@
      "phase": "general-construction",
      "start": {
       "earliest": "2024-10-01",
-      "latest": "2025-03-31",
+      "latest": "2025-06-30",
       "precision": "quarter"
      },
      "end": {
@@ -19463,9 +19934,10 @@
      },
      "continuous": true,
      "evidenceIds": [
-      "ev-51c5a9024576"
+      "ev-51c5a9024576",
+      "ev-86d481427fea"
      ],
-     "note": "Route Permit Application dated September 29, 2023 (pre-approval): start Q4 2024 or Q1 2025, construction completed Q4 2027."
+     "note": "Route Permit Application dated September 29, 2023 (pre-approval). The narrative says construction begins Q4 2024 or Q1 2025, but Table 2.7-1 in the same section says 'Start Project Construction: Second Quarter 2025'; start bound widened to cover both (2024-10-01..2025-06-30). End: construction completed Q4 2027."
     },
     {
      "id": "abo-alexandria-big-oaks:w2",
@@ -19504,9 +19976,10 @@
      },
      "continuous": true,
      "evidenceIds": [
+      "ev-211825974663",
       "ev-4438a3a796ec"
      ],
-     "note": "MRES news dated 2024-10-03; start refers to Big Oaks substation work, end to eastern segment completion ('by the end of 2027' mapped to Q4 2027)."
+     "note": "MRES news dated 2024-10-03 (pre-construction). Start: construction between Alexandria and Big Oaks, and Big Oaks substation work, to begin in 2025. End: 'eastern segment being complete by the end of 2027' mapped to Q4 2027."
     },
     {
      "id": "abo-alexandria-big-oaks:w4",
@@ -19621,9 +20094,10 @@
    ],
    "caveats": [
     "alexandriatobigoaks.com still carries a pre-approval conditional sentence ('construction could begin in late 2024 and be complete in 2026'); treated as superseded and not modelled as a window.",
-    "Five co-owners overlap with Northland (MP, GRE) and BSSA (OTP, MRES) owner sets; pairs with those projects are shared-owner context.",
-    "Big Oaks Substation not in OSM; plotted at Becker city centroid.",
-    "Status asOf is the Biennial Report date; the undated ABO project page also reports construction under way."
+    "Owner set overlaps with Northland (MP, GRE), BSSA (OTP, MRES) and both MMRT packages (Xcel); pairs with those projects are shared-owner context.",
+    "Big Oaks Substation not named in OSM; plotted at Becker city centroid (locality).",
+    "Status asOf is the Biennial Report date; the undated ABO project page (written before late January 2026) also reports construction under way.",
+    "The Sept 2023 application is internally inconsistent on construction start (narrative Q4 2024/Q1 2025 vs Table 2.7-1 Q2 2025)."
    ],
    "sourceIds": [
     "xcel-abo-route-permit-app-2023",
@@ -19664,6 +20138,7 @@
     "value": "approved",
     "asOf": "2026-06-25",
     "evidenceIds": [
+     "ev-deace4bae52e",
      "ev-0a6c38cfebf5",
      "ev-b45d8a26542d"
     ]
@@ -19741,6 +20216,14 @@
      "evidenceIds": [
       "ev-890d29a08275"
      ]
+    },
+    {
+     "key": "other",
+     "label": "South Dakota Facility Permit",
+     "value": "approved by SD PUC on January 30, 2025",
+     "evidenceIds": [
+      "ev-d16248809832"
+     ]
     }
    ],
    "places": [
@@ -19767,7 +20250,7 @@
      "lat": 45.304687,
      "lon": -96.444779,
      "uncertaintyMeters": 5000,
-     "coordinateSource": "Nominatim: Ortonville, Big Stone County, MN (OSM relation 136864) city centroid; border crossing described as about one mile south of Ortonville, not digitized",
+     "coordinateSource": "Nominatim: Ortonville, Big Stone County, MN (OSM relation 136864) city centroid, re-checked 2026-09-26; the permit places the border crossing about one mile south of Ortonville (not digitized)",
      "evidenceIds": [
       "ev-f987b2fdf60f"
      ]
@@ -19778,10 +20261,10 @@
      "detail": "Point in Tara Township, Swift County (South/Central region break)",
      "kind": "route-endpoint",
      "precision": "locality",
-     "lat": 45.368797,
-     "lon": -95.808945,
-     "uncertaintyMeters": 6000,
-     "coordinateSource": "Mapbox geocoding v6: 'Tara Township, Swift County, Minnesota' -> locality 'Tara Township, Minnesota' (Nominatim returned no match)",
+     "lat": 45.3690105,
+     "lon": -95.8090211,
+     "uncertaintyMeters": 7000,
+     "coordinateSource": "US Census TIGER county subdivision 'Tara township' (GEOID 2715164228) centroid via Census geocoder, 2026-09-26; matches researcher's Mapbox locality within ~30 m. Nominatim has no township boundary. Centroid, not the permit's transition point",
      "evidenceIds": [
       "ev-c6e34ac2188b"
      ]
@@ -19792,10 +20275,10 @@
      "detail": "Point in Ben Wade Township, Pope County (Central/North region break)",
      "kind": "route-endpoint",
      "precision": "locality",
-     "lat": 45.701283,
-     "lon": -95.566696,
-     "uncertaintyMeters": 6000,
-     "coordinateSource": "Mapbox geocoding v6: 'Ben Wade Township, Pope County, Minnesota' -> locality 'Ben Wade Township, Minnesota' (Nominatim returned no match)",
+     "lat": 45.7156922,
+     "lon": -95.5726707,
+     "uncertaintyMeters": 7000,
+     "coordinateSource": "US Census TIGER county subdivision 'Ben Wade township' (GEOID 2712105302) centroid via Census geocoder, 2026-09-26 (researcher's Mapbox point was ~1.7 km from this centroid). Centroid, not the permit's transition point",
      "evidenceIds": [
       "ev-825717b4f752"
      ]
@@ -19828,12 +20311,12 @@
       45.304687
      ],
      [
-      -95.808945,
-      45.368797
+      -95.8090211,
+      45.3690105
      ],
      [
-      -95.566696,
-      45.701283
+      -95.5726707,
+      45.7156922
      ],
      [
       -95.40596,
@@ -19852,7 +20335,7 @@
      "ev-c6e34ac2188b",
      "ev-825717b4f752"
     ],
-    "caveat": "schematic / not survey accurate; township points are township centroids, not the permitted alignment; SD portion not reviewed"
+    "caveat": "schematic / not survey accurate; township points are township centroids, not the permitted transition points; the permit's township table (PDF p.6) also lists Moore and Hodges townships (Stevens County) and Walden, New Prairie and White Bear Lake townships (Pope County) between Tara and Ben Wade, so the straight Tara-Ben Wade segment omits that routing; the 20 detailed route maps (PDF pp.38-57) were not digitized; SD portion not reviewed"
    },
    "constructionWindows": [
     {
@@ -19956,12 +20439,14 @@
     }
    ],
    "caveats": [
-    "Completion claims conflict: end of 2030 (project site, Biennial Report) vs end of 2031 (OTP and MRES, both October 2024).",
-    "South Dakota portion permitted by SD PUC on January 30, 2025; SD county and SD route not captured from cached sources.",
-    "Township waypoints are centroids of the townships named in the permit, not the permitted alignment."
+    "Completion claims conflict: end of 2030 (project site, landowner page, Biennial Report) vs end of 2031 (OTP and MRES, both October 2024).",
+    "South Dakota portion permitted by SD PUC on January 30, 2025; SD counties and SD route not captured from cached sources.",
+    "Township waypoints are Census centroids of the townships named in the permit, not the permitted alignment.",
+    "Co-owner of record is Western Minnesota Municipal Power Agency (permittee), represented by MRES; modelled under utility id 'mres'."
    ],
    "sourceIds": [
     "mnpuc-bssa-route-permit-2026-06",
+    "mnpuc-bssa-order-2026-06",
     "bssa-regulatory-page",
     "bssa-landowners-page",
     "otp-bssa-route-permit-news",
@@ -19982,7 +20467,7 @@
    ],
    "parentInitiative": "MISO LRTP Tranche 1 Project 4 (LRTP4), Wilmarth-North Rochester-Tremval",
    "docketId": "MPUC E002/CN-22-532; E002/TL-23-157",
-   "summary": "Xcel Energy will develop and own Segments 1 and 2 of the Mankato-Mississippi River Transmission Project, new 345 kV line of about 40 plus 35-40 miles from the Wilmarth Substation near Mankato past the West Faribault Substation to the North Rochester Substation near Pine Island; the MPUC approved the Certificate of Need and Route Permit on Feb. 5, 2026, and project materials describe construction in 2026-2028.",
+   "summary": "Xcel Energy will develop and own Segments 1 and 2 of the Mankato-Mississippi River Transmission Project: about 40 miles of new 345 kV line from the Wilmarth Substation near Mankato to near the West Faribault Substation plus about 35-40 miles on to the North Rochester Substation near Pine Island. The MPUC approved the Certificate of Need and Route Permit on Feb. 5, 2026. Pre-decision project materials anticipated construction in 2026-2028; after approval, Xcel said construction begins once remaining approvals are complete.",
    "owners": [
     {
      "utilityId": "xcel-nspm",
@@ -20107,7 +20592,7 @@
      "ev-4ced49c904a5",
      "ev-82906b57cd6a"
     ],
-    "caveat": "schematic / not survey accurate; only named substations used as waypoints; the route approved Feb. 5, 2026 (North vs South options in the 2024 application) was not reviewed"
+    "caveat": "schematic / not survey accurate; only named substations used as waypoints; the route approved Feb. 5, 2026 (North vs South options in the 2024 application; a May 5, 2025 alignment-change request near Segment 2) was not reviewed"
    },
    "constructionWindows": [
     {
@@ -20128,7 +20613,7 @@
      "evidenceIds": [
       "ev-37d667ff1221"
      ],
-     "note": "Whole-project schedule from pre-decision FAQ (says specific construction schedules would follow the MPUC decision); not segment-specific."
+     "note": "Whole-project schedule from a pre-decision FAQ (it anticipates the MPUC decision in Q4 2025 and says specific construction schedules will follow the decision); not segment-specific. Xcel's Feb. 6, 2026 release says construction begins after remaining approvals, with timing still to be finalized, so this 2026-2028 claim is stale-at-risk."
     },
     {
      "id": "xcel-mmrt-wilmarth-north-rochester:w2",
@@ -20136,11 +20621,11 @@
      "phase": "general-construction",
      "start": {
       "earliest": "2026-01-01",
-      "latest": "2026-12-31",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
-      "earliest": "2028-01-01",
+      "earliest": "2026-01-01",
       "latest": "2028-12-31",
       "precision": "year"
      },
@@ -20148,14 +20633,14 @@
      "evidenceIds": [
       "ev-abf3a7b98cf7"
      ],
-     "note": "Timeline bucket '2026-2028' combines detailed design and engineering with construction; construction likely occupies only part of it. Whole-project, not segment-specific."
+     "note": "Homepage timeline bucket '2026-2028' lists 'Detailed design and engineering' and 'Construction' together, so it only says construction falls somewhere within 2026-2028; it does not say construction starts in 2026. Both bounds span the whole bucket. Whole-project, not segment-specific; page still carries pre-approval wording."
     }
    ],
    "completionClaims": [
     {
      "id": "xcel-mmrt-wilmarth-north-rochester:c1",
      "claimSourceId": "xcel-mmrt-page",
-     "label": "anticipated in-service",
+     "label": "anticipated in-service (pre-approval wording 'if approved' still on page)",
      "date": {
       "earliest": "2028-01-01",
       "latest": "2028-12-31",
@@ -20206,9 +20691,10 @@
      "partnerProjectId": "dpc-alma-blair",
      "status": "known-joint",
      "scope": "joint-initiative",
-     "description": "MMRT is MISO LRTP4; Dairyland's Alma-Blair line is the Wisconsin portion of the same LRTP Tranche 1 Project 4 (Wilmarth-North Rochester-Tremval). Same initiative only; no resource sharing documented.",
+     "description": "MMRT is the Minnesota portion of MISO LRTP Tranche 1 Project 4; Dairyland's Alma-Blair line is the Wisconsin portion of the same project (Wilmarth-North Rochester-Tremval). Same initiative only: Segments 1-2 do not physically meet Alma-Blair, and no shared resources are documented.",
      "evidenceIds": [
       "ev-54fc5ab4d76b",
+      "ev-180c846ed8d5",
       "ev-fde287f7f2bc"
      ]
     }
@@ -20217,7 +20703,8 @@
     "Construction windows and completion claims are published for the whole MMRT project, not per segment.",
     "Feb. 6, 2026 Xcel release: construction begins after remaining approvals; in-service timing to be shared later. No source reviewed confirms construction start as of 2026-09-26.",
     "Whole-project county list (Blue Earth, Le Sueur, Waseca, Rice, Dodge, Olmsted, Goodhue, Winona, Wabasha; 'may traverse') is not split by segment, so no counties attached.",
-    "West Faribault Substation not found by name in OSM; plotted at Faribault city centroid."
+    "West Faribault Substation not found by name in OSM; plotted at Faribault city centroid (an unnamed 161 kV OSM substation, way 684476537, lies ~3.4 km SW of the centroid; not used).",
+    "The cost fact is the whole four-segment MMRT estimate, not a Segments 1-2 figure."
    ],
    "sourceIds": [
     "xcel-mmrt-library-page",
@@ -20232,7 +20719,7 @@
   },
   {
    "id": "mmrt-north-rochester-mississippi",
-   "title": "Mankato-Mississippi River Transmission Project, Segments 3-4 (North Rochester-Mississippi River 345 kV; North Rochester-Chester 161 kV)",
+   "title": "Mankato-Mississippi River Transmission Project, Segments 3-4 (North Rochester-Mississippi River 345 kV; North Rochester-Chester Junction 161 kV)",
    "shortTitle": "MMRT N. Rochester-Mississippi",
    "titleEvidenceIds": [
     "ev-399da4ad7100",
@@ -20251,19 +20738,22 @@
     {
      "utilityId": "dairyland",
      "evidenceIds": [
-      "ev-399da4ad7100"
+      "ev-399da4ad7100",
+      "ev-9ffa07cf365f"
      ]
     },
     {
      "utilityId": "smmpa",
      "evidenceIds": [
-      "ev-62c7fd97bdca"
+      "ev-62c7fd97bdca",
+      "ev-9ffa07cf365f"
      ]
     },
     {
      "utilityId": "rpu",
      "evidenceIds": [
-      "ev-62c7fd97bdca"
+      "ev-62c7fd97bdca",
+      "ev-9ffa07cf365f"
      ]
     }
    ],
@@ -20427,7 +20917,7 @@
      "evidenceIds": [
       "ev-37d667ff1221"
      ],
-     "note": "Whole-project schedule from pre-decision FAQ (says specific construction schedules would follow the MPUC decision); not segment-specific."
+     "note": "Whole-project schedule from a pre-decision FAQ (it anticipates the MPUC decision in Q4 2025 and says specific construction schedules will follow the decision); not segment-specific. Xcel's Feb. 6, 2026 release says construction begins after remaining approvals, with timing still to be finalized, so this 2026-2028 claim is stale-at-risk."
     },
     {
      "id": "mmrt-north-rochester-mississippi:w2",
@@ -20435,11 +20925,11 @@
      "phase": "general-construction",
      "start": {
       "earliest": "2026-01-01",
-      "latest": "2026-12-31",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
-      "earliest": "2028-01-01",
+      "earliest": "2026-01-01",
       "latest": "2028-12-31",
       "precision": "year"
      },
@@ -20447,14 +20937,14 @@
      "evidenceIds": [
       "ev-abf3a7b98cf7"
      ],
-     "note": "Timeline bucket '2026-2028' combines detailed design and engineering with construction. Whole-project, not segment-specific."
+     "note": "Homepage timeline bucket '2026-2028' lists 'Detailed design and engineering' and 'Construction' together, so it only says construction falls somewhere within 2026-2028; it does not say construction starts in 2026. Both bounds span the whole bucket. Whole-project, not segment-specific; page still carries pre-approval wording."
     }
    ],
    "completionClaims": [
     {
      "id": "mmrt-north-rochester-mississippi:c1",
      "claimSourceId": "xcel-mmrt-page",
-     "label": "anticipated in-service",
+     "label": "anticipated in-service (pre-approval wording 'if approved' still on page)",
      "date": {
       "earliest": "2028-01-01",
       "latest": "2028-12-31",
@@ -20499,7 +20989,9 @@
      "description": "Segment 3 brings the new 345 kV circuit on Hampton-Rochester-La Crosse structures to the western bank of the Mississippi; Dairyland's Alma-Blair line (Wisconsin portion of LRTP Tranche 1 Project 4) starts at structure LQ-34-3 on the east bank near the Alma Substation. Interface and same initiative only; no resource sharing documented.",
      "evidenceIds": [
       "ev-d9d6235397be",
-      "ev-6a0e571601ed"
+      "ev-6a0e571601ed",
+      "ev-e08ce36591a5",
+      "ev-180c846ed8d5"
      ]
     },
     {
@@ -20513,10 +21005,11 @@
     }
    ],
    "caveats": [
-    "'All project partners will participate' in Segments 3-4; exact ownership shares of each asset are not stated.",
+    "'All project partners will participate' in Segments 3-4 and the application says segments will be individually or jointly owned by the four utilities; exact ownership of each asset is not stated.",
     "Construction windows and completion claims are published for the whole MMRT project, not per segment.",
     "No source reviewed confirms construction start as of 2026-09-26.",
-    "Segment 3 conversion length conflicts: about 26 miles (website) vs about 27 miles (April 2024 application)."
+    "Segment 3 conversion length conflicts: about 26 miles (website) vs about 27 miles (April 2024 application).",
+    "Dairyland is both a Segments 3-4 owner and the separate developer of the Q-3 relocation it depends on."
    ],
    "sourceIds": [
     "xcel-mmrt-library-page",
@@ -20524,6 +21017,7 @@
     "xcel-mmrt-approval-news",
     "xcel-mmrt-application-2024",
     "dpc-alma-blair-cpcn-2024",
+    "psc-1515-ce-103-final",
     "xcel-mmrt-segments-page"
    ],
    "region": "upper-midwest"
@@ -43971,10 +44465,12 @@
    "siteLabel": "Big Oaks Substation",
    "siteDetail": "Big Oaks Substation (Becker)",
    "sitePlaceId": "abo-big-oaks",
-   "description": "Northland terminates at the new Big Oaks Substation, which is built by Xcel Energy as part of the Alexandria-Big Oaks work (outside Northland's scope). Owner sets overlap (MP, GRE).",
+   "description": "Northland terminates at the new Big Oaks Substation; Xcel Energy builds Big Oaks as part of the Alexandria-Big Oaks project (outside Northland's scope per the Biennial Report). Shared-owner context: MP and GRE own both packages.",
    "evidenceIds": [
     "ev-d6fa27a7a7de",
-    "ev-760ba4f6c51b"
+    "ev-7cd7b90f745d",
+    "ev-760ba4f6c51b",
+    "ev-36eab9869fc7"
    ]
   },
   {
@@ -44026,10 +44522,11 @@
    "siteLabel": "Mississippi River crossing",
    "siteDetail": "Mississippi River crossing (Kellogg MN / Alma WI)",
    "sitePlaceId": "mmrt34-mississippi-kellogg",
-   "description": "MMRT Segment 3 reaches the western bank of the Mississippi on Hampton-Rochester-La Crosse structures; Alma-Blair starts at structure LQ-34-3 on the east bank near Alma; both are parts of MISO LRTP Tranche 1 Project 4. Owner sets overlap (Dairyland).",
+   "description": "MMRT Segment 3 reaches the western bank of the Mississippi on Hampton-Rochester-La Crosse structures; Alma-Blair begins at existing structure LQ-34-3 on the east bank just south of the Alma Substation (2024 CPCN application and 2026 PSC final decision); both are portions of MISO LRTP Tranche 1 Project 4. The river-crossing facilities between them are existing lines to be reconfigured. Owner sets overlap (Dairyland).",
    "evidenceIds": [
     "ev-d9d6235397be",
-    "ev-6a0e571601ed"
+    "ev-6a0e571601ed",
+    "ev-e08ce36591a5"
    ]
   },
   {
@@ -44040,8 +44537,9 @@
    "siteLabel": "MISO LRTP Tranche 1 Project 4",
    "siteDetail": "MISO LRTP Tranche 1 Project 4 (Wilmarth-North Rochester-Tremval)",
    "sitePlaceId": "mmrt12-north-rochester",
-   "description": "MMRT (LRTP4, Minnesota) and Alma-Blair (Wisconsin portion of Project 4) belong to the same MISO initiative; disjoint owners (Xcel NSPM vs Dairyland).",
+   "description": "MMRT (Minnesota portion of LRTP4) and Alma-Blair (Wisconsin portion of LRTP Tranche 1 Project 4) belong to the same MISO project; Segments 1-2 do not physically meet Alma-Blair. Disjoint owners (Xcel NSPM vs Dairyland).",
    "evidenceIds": [
+    "ev-180c846ed8d5",
     "ev-fde287f7f2bc",
     "ev-b16ed279c8fe"
    ]
@@ -44132,7 +44630,333 @@
   }
  ],
  "extractionRuns": [],
- "assumptions": [],
+ "assumptions": [
+  {
+   "key": "rowWidthFt.115",
+   "label": "Typical easement (right-of-way) width, 115 kV line (Georgia Transmission)",
+   "low": 25,
+   "typical": 100,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-80859b5e0cc4"
+   ],
+   "note": "Georgia Transmission Corp. fact sheet (2017). The two values are the Roadside and Cross Country columns. Typical is the cross-country width, which the sheet prints as '+ 100 feet'; I read that as 100 ft or more. Low is the roadside easement (25-42.5 ft), used where the line runs next to a road right-of-way. The H-frame row also says '+ 100 feet' cross-country. No source gives a high value. As a cross-check, MISO's indicative width is 90 ft (rowWidthFt.115.miso). I found no public DESC or Georgia Power statement of a 115 kV width."
+  },
+  {
+   "key": "rowWidthFt.230",
+   "label": "Typical right-of-way width, 230 kV line (DESC / SCE&G certificate application)",
+   "typical": 100,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-66c4b24d9d9e"
+   ],
+   "note": "South Carolina Electric & Gas (now Dominion Energy South Carolina) filed this Siting Act application for an 8.0-mile 230 kV line in northeast Columbia in 2010. It gives 100 ft as the typical width. Georgia Transmission gives 100 ft (single pole) to 125 ft (H-frame) cross-country (rowWidthFt.230.gtc). MISO's indicative width is 125 ft (rowWidthFt.230.miso)."
+  },
+  {
+   "key": "rowWidthFt.230.gtc",
+   "label": "Easement width, 230 kV line, Georgia Transmission range (roadside / single pole / H-frame)",
+   "low": 25,
+   "typical": 100,
+   "high": 125,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-40f72a0f592b"
+   ],
+   "note": "Low is the roadside single-pole easement (25-42.5 ft). Typical is the cross-country single-pole width ('+ 100 feet'). High is the cross-country H-frame width ('+ 125 feet'). The sheet says these values are approximate."
+  },
+  {
+   "key": "rowWidthFt.500",
+   "label": "Easement width, 500 kV steel lattice line (Georgia Transmission)",
+   "low": 150,
+   "typical": 150,
+   "high": 180,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-0cba7df0d0a7"
+   ],
+   "note": "The sheet gives a range of 150-180 ft cross-country and no roadside value. Typical is set to the low end of the published range (150 ft) so the estimate stays conservative; I did not compute a midpoint. The 100-150 ft figure in the structure-height table on the same page is a pole height, not a width. MISO's indicative width is 200 ft (rowWidthFt.500.miso). I found no DESC 500 kV width in public sources."
+  },
+  {
+   "key": "rowWidthFt.115.miso",
+   "label": "MISO indicative right-of-way width, 115 kV (cross-check)",
+   "typical": 90,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-c8ca107bf721"
+   ],
+   "note": "The feet values line up with the voltage-class columns in order, so 115 kV = 90 ft. MISO says these widths are indicative and not tied to any project. Use as a cross-check only; SC and GA are outside MISO."
+  },
+  {
+   "key": "rowWidthFt.230.miso",
+   "label": "MISO indicative right-of-way width, 230 kV (cross-check)",
+   "typical": 125,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-c8ca107bf721"
+   ],
+   "note": "230 kV = 125 ft, which matches Georgia Transmission's H-frame cross-country width. Cross-check only."
+  },
+  {
+   "key": "rowWidthFt.500.miso",
+   "label": "MISO indicative right-of-way width, 500 kV (cross-check)",
+   "typical": 200,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-c8ca107bf721"
+   ],
+   "note": "500 kV = 200 ft, wider than Georgia Transmission's 150-180 ft. MISO assumes steel-pole designs. Cross-check only."
+  },
+  {
+   "key": "landValuePerAcre.SC",
+   "label": "South Carolina average farm real estate value, 2026",
+   "low": 4100,
+   "typical": 4900,
+   "unit": "USD/acre",
+   "evidenceIds": [
+    "ev-61005ae7f774"
+   ],
+   "note": "pdftotext reads this table one column at a time. This run is the 2026 column, rows in page order: Southeast, Alabama, Florida, Georgia, South Carolina. So SC = $4,900 and GA = $4,950. The layout rendering of the South Carolina row confirms it: 4,070 / 4,360 / 4,500 / 4,740 / 4,900 for 2022-2026, +3.4% from 2025. Farm real estate covers land and buildings. Low is SC cropland, $4,100 (landValuePerAcre.SC.cropland). The report was released July 31, 2026 (page 22). These are statewide averages, not values along a specific corridor."
+  },
+  {
+   "key": "landValuePerAcre.GA",
+   "label": "Georgia average farm real estate value, 2026",
+   "low": 4670,
+   "typical": 4950,
+   "high": 5100,
+   "unit": "USD/acre",
+   "evidenceIds": [
+    "ev-61005ae7f774"
+   ],
+   "note": "Same 2026 column as the SC entry (Southeast, Alabama, Florida, Georgia, South Carolina), so GA = $4,950. The layout rendering of the Georgia row reads 3,900 / 4,270 / 4,500 / 4,720 / 4,950, +4.9%. Low is GA cropland, $4,670 (landValuePerAcre.GA.cropland). High is GA pasture, $5,100 (landValuePerAcre.GA.pasture)."
+  },
+  {
+   "key": "landValuePerAcre.SC.cropland",
+   "label": "South Carolina average cropland value, 2026",
+   "typical": 4100,
+   "unit": "USD/acre",
+   "evidenceIds": [
+    "ev-69002d67728f"
+   ],
+   "note": "This is the 2026 column in row order Southeast, Alabama, Florida, Georgia, South Carolina, so SC cropland = $4,100 (+2.5%). Layout mode confirms it."
+  },
+  {
+   "key": "landValuePerAcre.GA.cropland",
+   "label": "Georgia average cropland value, 2026",
+   "typical": 4670,
+   "unit": "USD/acre",
+   "evidenceIds": [
+    "ev-69002d67728f"
+   ],
+   "note": "This is the 2026 column in row order Southeast, Alabama, Florida, Georgia, South Carolina, so GA cropland = $4,670 (+3.3%)."
+  },
+  {
+   "key": "landValuePerAcre.SC.pasture",
+   "label": "South Carolina average pasture value, 2026",
+   "typical": 4500,
+   "unit": "USD/acre",
+   "evidenceIds": [
+    "ev-901968d0664a"
+   ],
+   "note": "This is the 2026 column in row order Southeast, Alabama, Florida, Georgia, South Carolina, so SC pasture = $4,500 (+4.7%). MISO's guide uses the USDA pasture value as its base land cost."
+  },
+  {
+   "key": "landValuePerAcre.GA.pasture",
+   "label": "Georgia average pasture value, 2026",
+   "typical": 5100,
+   "unit": "USD/acre",
+   "evidenceIds": [
+    "ev-901968d0664a"
+   ],
+   "note": "This is the 2026 column in row order Southeast, Alabama, Florida, Georgia, South Carolina, so GA pasture = $5,100 (+4.1%)."
+  },
+  {
+   "key": "easementShare.misoConvention",
+   "label": "Right-of-way land priced at full USDA-based land value (MISO planning convention)",
+   "typical": 1,
+   "unit": "fraction of land value per acre",
+   "evidenceIds": [
+    "ev-7898f02c4cf5"
+   ],
+   "note": "This is a planning convention, not an observed ratio of easement price to fee value. On the same page MISO says 'All land costs are based upon the acreage of land that the new transmission line would traverse' (also verified, page 7). Table 2.1 on page 8 then prices right-of-way per acre at the land value (pasture; crop = 3x pasture; urban = 5x pasture), with no easement discount, so the implied share is 1.0. A separate right-of-way acquisition cost per acre is added on top (rowAcquisitionCostPerAcre). Use as a default only with that explanation. No SC or GA source states a typical share."
+  },
+  {
+   "key": "easementShare.cleanLineMO",
+   "label": "Example easement payment as a share of land value (Grain Belt Express, Missouri 2016)",
+   "typical": 1.1,
+   "unit": "fraction of average fee value per acre",
+   "evidenceIds": [
+    "ev-67482bda65c1"
+   ],
+   "note": "This is one developer's landowner offer, filed with the Missouri PSC as Schedule DKL-3 in June 2016, for a merchant HVDC line with an easement about 150-200 ft wide. It is not SC or GA and not a typical utility share. It is only evidence that easement payments can match or exceed fee value, so use it only as a high sensitivity case."
+  },
+  {
+   "key": "lineCostPerMile.115",
+   "label": "New single-circuit 115 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "low": 1800000,
+   "typical": 2200000,
+   "high": 2200000,
+   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "evidenceIds": [
+    "ev-3af358436684"
+   ],
+   "note": "The columns are 69 / 115 / 138 / 161 / 230 / 345 / 500 / 765 kV (header verified on the same page), so Mississippi 115 kV = $2.2M/mile. SC and GA are not MISO states; I used Mississippi as the closest Southeast proxy, and that choice is mine, not the source's. Low and high span all 15 states in the table: $1.8M (Montana, North Dakota, South Dakota) to $2.2M (Louisiana, Mississippi, Texas). The table footnote reads 'Includes contingency (30%) and AFUDC (7.5%)'. Page 2 says data are in 2023 dollars 'escalated ... to 2024 U.S. dollars at a rate of 5%'. MTEP24 is the latest edition I could verify that prints the $/mile tables in the PDF; the MTEP26 guide moves its tables to a separate workbook (see costEscalationPerYear)."
+  },
+  {
+   "key": "lineCostPerMile.230",
+   "label": "New single-circuit 230 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "low": 2000000,
+   "typical": 2600000,
+   "high": 2600000,
+   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "evidenceIds": [
+    "ev-3af358436684"
+   ],
+   "note": "The fifth value is 230 kV = $2.6M/mile. Across the 15 states the range is $2.0M (Montana, North Dakota, South Dakota) to $2.6M (Louisiana, Mississippi). This is a MISO-footprint proxy, not a DESC or Georgia Power figure. Compare the DESC-derived examples: lineCostPerMile.230.descNewExample (~$2.97M/mile, including substation work) and lineCostPerMile.230.descRebuildExample (~$1.27M/mile)."
+  },
+  {
+   "key": "lineCostPerMile.500",
+   "label": "New single-circuit 500 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "low": 4100000,
+   "typical": 5000000,
+   "high": 5100000,
+   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "evidenceIds": [
+    "ev-3af358436684"
+   ],
+   "note": "The seventh value is 500 kV = $5.0M/mile. Across the 15 states the range is $4.1M (Montana, North Dakota, South Dakota) to $5.1M (Louisiana). This is a MISO proxy."
+  },
+  {
+   "key": "lineCostPerMile.115.rebuild",
+   "label": "Single-circuit 115 kV rebuild, exploratory cost per mile (MISO)",
+   "typical": 1700000,
+   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "evidenceIds": [
+    "ev-05deff8f1016"
+   ],
+   "note": "The columns are 69 / 115 / 138 / 161 / 230 / 345 / 500 / 765 kV, so 115 kV = $1.7M/mile. This table is not broken out by state. MISO assumes rebuilds need no new right-of-way. Many DESC and Georgia Power plan items are rebuilds, so this may suit rebuild-vs-rebuild pairs better. The DESC-derived Stevens Creek-Graniteville rebuild is about $1.21M/mile."
+  },
+  {
+   "key": "lineCostPerMile.230.rebuild",
+   "label": "Single-circuit 230 kV rebuild, exploratory cost per mile (MISO)",
+   "typical": 1900000,
+   "unit": "USD/mile (2024 $, incl. 30% contingency + 7.5% AFUDC)",
+   "evidenceIds": [
+    "ev-05deff8f1016"
+   ],
+   "note": "The fifth value is 230 kV = $1.9M/mile. MISO lists no 500 kV rebuild value (N/A)."
+  },
+  {
+   "key": "lineCostPerMile.115.descExample",
+   "label": "DESC plan example: Stevens Creek-Graniteville 115 kV rebuild, total cost / stated miles",
+   "typical": 1213333,
+   "unit": "USD/mile (derived; DESC budget dollars)",
+   "evidenceIds": [
+    "ev-33c140367d38"
+   ],
+   "note": "Derived: $18,200,000 / 15 miles = ~$1.21M/mile. The total comes from the same page, verified separately with the excerpt 'Total $18,200,000' (FOUND on page 49). The project is planned (in-service 12/31/29). Graniteville is in Aiken County, SC. This is DESC's own planning figure for one project, not a unit cost."
+  },
+  {
+   "key": "lineCostPerMile.230.descNewExample",
+   "label": "DESC plan example: Jasper-Okatie 230 kV #2 new line, total cost / stated miles",
+   "typical": 2966227,
+   "unit": "USD/mile (derived; DESC budget dollars)",
+   "evidenceIds": [
+    "ev-870da39551d1"
+   ],
+   "note": "Derived: $19,280,474 / 6.5 miles = ~$2.97M/mile. The total was verified separately on page 49's counterpart, page 12, with the excerpt 'Total $19,280,474'. The scope also covers substation work ('will require a new CIP hut'), so this overstates the line-only cost per mile. The project is in progress (in-service 12/01/2026), in the Jasper/Beaufort area near Savannah."
+  },
+  {
+   "key": "lineCostPerMile.230.descRebuildExample",
+   "label": "DESC plan example: Wateree-Killian 230 kV rebuild, total cost / stated miles",
+   "typical": 1271935,
+   "unit": "USD/mile (derived; DESC budget dollars)",
+   "evidenceIds": [
+    "ev-9b03f0c3fe80"
+   ],
+   "note": "Derived: $44,517,719 / 35 miles = ~$1.27M/mile. The total was verified separately with the excerpt 'Total $44,517,719' (FOUND on page 45). The project is planned (in-service 12/31/29)."
+  },
+  {
+   "key": "costEscalationPerYear",
+   "label": "Annual cost escalation MISO applied for the MTEP26 update",
+   "typical": 0.04,
+   "unit": "fraction per year",
+   "evidenceIds": [
+    "ev-181465be2da6"
+   ],
+   "note": "Optional. It can bring the MTEP24 per-mile values (2024 $) to 2026 $ at the user's choice. Carrying 4% across two years is my extrapolation; the source states only the 2025-to-2026 step. The MTEP26 guide (June 10, 2026) says its tables are in the 'Exploratory Cost Estimate Workbook for MTEP26', an xlsx the excerpt checker cannot verify, so I did not quote 2026 $/mile values."
+  },
+  {
+   "key": "rowAcquisitionCostPerAcre",
+   "label": "Right-of-way acquisition cost per acre, on top of land value (MISO)",
+   "typical": 14247,
+   "unit": "USD/acre (2024 $)",
+   "evidenceIds": [
+    "ev-a405599298c1"
+   ],
+   "note": "The 'Acquisition cost per acre' column is $14,247 for every MISO state (the Mississippi row, 'Mississippi $2,909 $8,726 $14,543 $14,247 $2,968', was also verified on page 8). The MTEP 2018 guide described this item, then $9,225/acre, as covering 'routing analysis, property tracts and mapping, land owner negotiations, land acquisition and condemnation fees', separate from the land value. This is a MISO proxy and applies only to avoided new right-of-way acres."
+  },
+  {
+   "key": "rowPermittingCostPerAcre",
+   "label": "Regulatory and permitting cost per acre of new right-of-way (MISO)",
+   "typical": 2968,
+   "unit": "USD/acre (2024 $)",
+   "evidenceIds": [
+    "ev-a405599298c1"
+   ],
+   "note": "The last column. It is $2,968 in most MISO states, including Mississippi, and higher in Minnesota and Wisconsin ($9,914), North Dakota ($4,957) and South Dakota ($3,977). This is a MISO proxy."
+  },
+  {
+   "key": "mobilizationCostPerProject.115",
+   "label": "Mobilization/demobilization unit cost per line project, 115 kV (MISO 2018)",
+   "typical": 100000,
+   "unit": "USD per project (2018 $, excl. overhead, contingency, AFUDC)",
+   "evidenceIds": [
+    "ev-ed7a221eddf6"
+   ],
+   "note": "The values follow the voltage columns in order, so 115 kV = $100,000. Page 15 says 'The unit costs below are all in 2018 dollars' and 'do not include overhead and professional services, contingency, or AFUDC' (both verified). The MTEP24 and MTEP26 guides no longer list mobilization separately (no match in their text), so this 2018 figure is the latest separately published value I found. It is a fixed cost per project, not a share of cost. It could stand for one avoided mobilization when two projects are truly built together (see avoidedMobilizations)."
+  },
+  {
+   "key": "mobilizationCostPerProject.230",
+   "label": "Mobilization/demobilization unit cost per line project, 230 kV (MISO 2018)",
+   "typical": 200000,
+   "unit": "USD per project (2018 $, excl. overhead, contingency, AFUDC)",
+   "evidenceIds": [
+    "ev-ed7a221eddf6"
+   ],
+   "note": "The fifth value is 230 kV = $200,000 (2018 $). The same caveats apply as for the 115 kV entry."
+  },
+  {
+   "key": "mobilizationCostPerProject.500",
+   "label": "Mobilization/demobilization unit cost per line project, 500 kV (MISO 2018)",
+   "typical": 300000,
+   "unit": "USD per project (2018 $, excl. overhead, contingency, AFUDC)",
+   "evidenceIds": [
+    "ev-ed7a221eddf6"
+   ],
+   "note": "The seventh value is 500 kV = $300,000 (2018 $). For substations, the same guide lists $262,660 for a new site and $157,590 for an existing site (page 39)."
+  },
+  {
+   "key": "avoidedMobilizations",
+   "label": "Crew mobilizations avoided when two lines on shared right-of-way/structures are built together (DESC testimony, SC PSC order)",
+   "typical": 1,
+   "unit": "mobilizations avoided per co-built pair",
+   "evidenceIds": [
+    "ev-39a3e5cb945c"
+   ],
+   "note": "This is qualitative. SCE&G (now DESC) testified that building two lines together avoids mobilizing crews twice, which is one avoided mobilization. The case involved the St. George segment and Lake Murray line, which share right-of-way and structures. No dollar amount or percentage is given. It applies only when the projects share work sites or structures, which no source establishes for any DESC-Georgia Power pair. That limit belongs in the UI."
+  },
+  {
+   "key": "context.gaItsNewRowMiles10yr",
+   "label": "Georgia ITS new transmission line miles requiring new right-of-way, 2025-2034",
+   "low": 423,
+   "typical": 1142,
+   "unit": "miles",
+   "evidenceIds": [
+    "ev-18bd6984d371"
+   ],
+   "note": "Context for scale only, not an input to the per-pair calculation. The two column pairs are the first 5 years and the 10-year total. Over 10 years: 543 miles at 500 kV, 530 at 230 kV and 69 at 115 kV, for 1,142 miles in total; 423 miles fall in the first 5 years. The same table lists 982 miles to be rebuilt or reconductored on existing right-of-way. Source is the public-disclosure version of the IRP appendix."
+  }
+ ],
  "unresolved": [
   {
    "cluster": "beci-columbia",
@@ -44428,7 +45252,7 @@
   },
   {
    "cluster": "mn-lrtp",
-   "note": "xcel-wwtc relation NOT recorded: the Wisconsin portion of MISO LRTP Tranche 1 Project 4 is Dairyland's Alma-Blair line (PSC 1515-CE-103 final decision p.1), while the Western Wisconsin Transmission Connection (PSC 5-CE-158 final decision p.1) is LRTP Tranche 1 Project 5 (Tremval-Eau Claire-Jump River). MMRT interconnects with dpc-alma-blair at the Mississippi River; any MMRT-WWTC link is only indirect (via Alma-Blair's Tremval-area terminus) and is not stated in a source."
+   "note": "xcel-wwtc relation NOT recorded: the Wisconsin portion of MISO LRTP Tranche 1 Project 4 is Dairyland's Alma-Blair line (PSC 1515-CE-103 final decision p.1), while the Western Wisconsin Transmission Connection (PSC 5-CE-158 final decision p.1) is LRTP Tranche 1 Project 5 (Tremval-Eau Claire-Jump River). The PSC Alma-Blair decision (p.13) says Alma-Blair ends at the new Tremval North substation approved in 5-CE-158, and the MMRT application (p.23 fn.4) says LRTP4 runs to the Tremval Substation near Blair. That is a chain MMRT -> Alma-Blair -> Tremval North (WWTC). No source states a direct MMRT-WWTC relation."
   },
   {
    "cluster": "mn-lrtp",
@@ -44436,7 +45260,7 @@
   },
   {
    "cluster": "mn-lrtp",
-   "note": "MMRT construction start: the April 2024 application Table 2-3 appears to list 'Start Project Construction' Fourth Quarter 2026 and 'Project In-Service' First Quarter 2030 (PDF p.46 / printed 27), but pdftotext separates table labels from dates, so the pairing was not used as verified evidence. The Feb. 6, 2026 Xcel release says construction begins after remaining approvals, with in-service timing to be shared later. No source reviewed confirms MMRT construction has started as of 2026-09-26 (status kept 'approved')."
+   "note": "MMRT construction start: visual check of the April 2024 application Table 2-3 (PDF p.46 / printed 27) confirms 'Start Project Construction: Fourth Quarter 2026' and 'Project In-Service: First Quarter 2030', but the text layer separates labels from dates, so no contiguous verifiable excerpt exists and the pairing was not used as evidence. The Feb. 6, 2026 Xcel release says construction begins after remaining approvals, with in-service timing to be shared later. A trade-press report of a 'late 2026 or early 2027' start (non-utility source) was not used. No utility or regulator source reviewed confirms MMRT construction has started as of 2026-09-26 (status kept 'approved')."
   },
   {
    "cluster": "mn-lrtp",
@@ -44452,15 +45276,15 @@
   },
   {
    "cluster": "mn-lrtp",
-   "note": "Dairyland Minnesota work packages tied to LRTP4 not modelled for lack of a construction window: relocation of Dairyland's Q-3 161 kV line east of Plainview (MN dockets CN-23-504 / TL-23-388) and the Kellogg 161 kV substation + 9-mile 161 kV line (Biennial tracking 2023-SE-N9, in-service late 2027 to early 2028; PDF p.202-203)."
+   "note": "Dairyland Minnesota work packages tied to LRTP4 not modelled for lack of a construction window: the Wabasha Relocation of Dairyland's Q-3 161 kV line (about 13.3 miles in Wabasha County; MN dockets ET3/CN-23-504 and TL-23-388, filed March 27, 2024 per the Alma-Blair CPCN pp.21-22), and the Kellogg 161 kV transmission substation plus 9 miles of new 161 kV line (Biennial PDF pp.202-203; in-service 'late-2027 to early-2028'). The Biennial prints tracking number 2023-SE-N9 for both the Kellogg entry (p.202) and Xcel's 'Minnesota Valley TR11 ELR' (p.185), which is a source error."
   },
   {
    "cluster": "mn-lrtp",
-   "note": "Northland construction timing: the Biennial Report says construction began Q3 2025 and 'is expected to be completed over 3 years' (end bound 2028 is derived arithmetic - needs human review); the GRE project page (modified 2024-01-04) says '2027-2030 Construction'; a January 2026 phased-construction map on northlandreliabilityproject.com (image only, alt text 'Study area map') shows 2025-2026 Segment 2 and realignments, 2026-2027 Benton County-Cuyuna, 2027-2029 Cuyuna-Iron Range - not text-verifiable, so not used. A text source for the phased schedule would allow per-phase windows."
+   "note": "Northland construction timing: the Biennial Report says construction began Q3 2025 and 'is expected to be completed over 3 years'. The 2028 end bound is arithmetic, not a stated date. The sentence may be carried over from the earlier plan (GRE's 2024 page: 2027-2030 construction, also ~3 years), and it sits awkwardly with June 1, 2030 in-service and with GRE's Aug 2026 report that the first transmission structure was set only on July 17, 2026 (near St. Cloud). The GRE project page (modified 2024-01-04) says '2027-2030 Construction'. The researcher reported a January 2026 phased-construction image on northlandreliabilityproject.com (2025-2026 Segment 2, 2026-2027 Benton County-Cuyuna, 2027-2029 Cuyuna-Iron Range); it is not text-verifiable and was not re-checked, so not used. No utility or regulator text source with a construction end date was found."
   },
   {
    "cluster": "mn-lrtp",
-   "note": "Alexandria-Big Oaks: alexandriatobigoaks.com still contains a conditional pre-approval sentence ('construction could begin in late 2024 and be complete in 2026') - not modelled. Xcel's project-page bucket '2025 - 2030' is far longer than other ABO claims (late 2026 line / late 2027 substation) and may include Alexandria substation expansion work tied to the western segment (MRES Alexandria Substation Expansion, Biennial 2023-WC-N14: part complete by Q2 2027, fully in service by Q2 2030)."
+   "note": "Alexandria-Big Oaks: alexandriatobigoaks.com still contains a conditional pre-approval sentence ('construction could begin in late 2024 and be complete in 2026') - not modelled. Xcel's project-page bucket '2025 - 2030' is far longer than other ABO claims (late 2026 line / late 2027 substation) and may include Alexandria substation expansion work tied to the western segment (MRES Alexandria Substation Expansion, Biennial 2023-WC-N14: part complete by Q2 2027, fully in service by Q2 2030). Separately, the Sept 2023 Route Permit Application contradicts itself on start (narrative Q4 2024/Q1 2025 vs Table 2.7-1 Q2 2025); the window's start bound now spans both."
   },
   {
    "cluster": "mn-lrtp",
@@ -44468,7 +45292,7 @@
   },
   {
    "cluster": "mn-lrtp",
-   "note": "Geocoding gaps: Big Oaks Substation and Cuyuna Series Compensation Station are new and absent from OSM (placed at Becker and Riverton centroids); West Faribault Substation not found by name in OSM (Faribault centroid); Tara and Ben Wade townships geocoded via Mapbox locality (Nominatim returned nothing). Alexandria Substation matched to OSM 'Alexandria Switching Substation' (operator WMMPA, 345/115 kV) and Sherco to OSM 'Sherburne County Substation' (operator Xcel Energy) - name variants."
+   "note": "Geocoding gaps: Big Oaks Substation and the Cuyuna Series Compensation Station are not named in OSM (placed at Becker and Riverton centroids); unnamed recent OSM substations exist near Sherco (way 1315833909, 45.3716,-93.8684) and east of Riverton (way 1306669958, 46.4859,-93.9582) but nothing identifies them as Big Oaks or Cuyuna. West Faribault Substation is not named in OSM (Faribault centroid; an unnamed 161 kV OSM substation, way 684476537 at 44.2685,-93.2937, may be it but is not identified). Tara and Ben Wade townships now use US Census TIGER county-subdivision centroids (Nominatim has no township boundaries). All nine named-facility coordinates were re-checked against the cited OSM element IDs via the OSM API on 2026-09-26 (all within 35 m). Name variants: Alexandria Substation = OSM 'Alexandria Switching Substation' (operator WMMPA, 345/115 kV; a separate 115 kV 'MRES Alexandria Substation' lies 3.1 km east and was not used); Sherco Substation = OSM 'Sherburne County Substation' (operator Xcel Energy)."
   },
   {
    "cluster": "mn-lrtp",
@@ -44485,6 +45309,26 @@
   {
    "cluster": "mn-lrtp",
    "note": "New canonical utility ids introduced: 'smmpa' (Southern Minnesota Municipal Power Agency) and 'rpu' (Rochester Public Utilities / City of Rochester Public Utility Board). 'mres' is used for Missouri River Energy Services acting for Western Minnesota Municipal Power Agency (the permittee/co-owner named by the MN PUC is WMMPA)."
+  },
+  {
+   "cluster": "mn-lrtp",
+   "note": "Approval-month discrepancy for Northland: the Biennial Report says the Commission's CN/RP decision was in February 2025; GRE's Oct 8, 2025 release says the MPUC approved both 'in January'. The written order was not reviewed (eDockets blocked)."
+  },
+  {
+   "cluster": "mn-lrtp",
+   "note": "Alma-Blair start structure label: the PSC 1515-CE-103 final decision says 'existing LQ-43 transmission line' on pp.1, 5 and 13 but 'LQ-34-3'/'LQ-34-4' on pp.14 and 28 (the 2024 CPCN also says LQ-34-3). Relations use LQ-34-3. The Biennial Kellogg entry (p.203) describes freeing the Alma-Weaver 69 kV Mississippi River crossing for the 'North Rochester to Tremval 345 kV' line, while the CPCN describes reconfiguring the existing LQ-34 crossing. The exact river-crossing configuration was not reconciled."
+  },
+  {
+   "cluster": "mn-lrtp",
+   "note": "North Rochester Substation is also named for MISO LRTP Tranche 2.1 work (PowerOn Midwest / Gopher to Badger 765 kV; a second North Rochester-Hampton 345 kV circuit; Pleasant Valley-North Rochester 345 kV rebuild) in the Biennial Report (PDF pp.43, 45, 194). These are not modelled here but are potential future shared-site leads with the MMRT packages."
+  },
+  {
+   "cluster": "mn-lrtp",
+   "note": "BSSA route geometry: the permit's township table (PDF p.6) lists Moore and Hodges townships (Stevens County) and Walden, New Prairie and White Bear Lake townships (Pope County) between Tara and Ben Wade. The 20 detailed route maps (PDF pp.38-57) were not digitized, so the drawn route is a coarse schematic."
+  },
+  {
+   "cluster": "mn-lrtp",
+   "note": "plan.md check: plan.md has no cluster-specific hypothesis for Minnesota LRTP beyond naming the 2025 Minnesota Biennial Report as a multi-utility expansion source. That is supported: this cluster yields five work packages across eight utilities (Xcel NSPM, MP, GRE, OTP, MRES/WMMPA, Dairyland, SMMPA, RPU). The researcher-brief hypotheses that are NOT supported by sources: NSPM as a Northland co-owner (only MP and GRE are named); an MMRT-WWTC direct relation (only indirect via Alma-Blair); Huntley-Wilmarth as a future project (it was completed in 2021)."
   },
   {
    "cluster": "potter-beckham",

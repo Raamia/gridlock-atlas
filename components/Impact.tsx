@@ -77,11 +77,10 @@ export function ImpactEstimate({ m }: { m: Match }) {
   const [miles, setMiles] = useState(Math.round(d.sharedMiles * 10) / 10);
   const [width, setWidth] = useState(d.rowWidthFt?.typical ?? 100);
   const [value, setValue] = useState(d.landValue?.typical ?? 5000);
-  const [easement, setEasement] = useState(d.easement?.typical ?? 0.5);
+  const [easement, setEasement] = useState(d.easement?.typical ?? 1);
   const r = computeImpact({ sharedMiles: miles, rowWidthFt: width, landValuePerAcre: value, easementShare: easement }, d);
   const maxMiles = Math.max(5, Math.ceil(Math.max(d.lengthA ?? 0, d.lengthB ?? 0, m.geoDetail.center?.miles ?? 0, 10)));
   const mobil = d.mobilization;
-  const smaller = [d.costA, d.costB].filter((x): x is number => x !== null);
 
   return (
     <div className="space-y-3">
@@ -97,7 +96,7 @@ export function ImpactEstimate({ m }: { m: Match }) {
         </div>
         <div className="rounded-lg bg-bg-2 p-3 ring-1 ring-line">
           <div className="num text-[22px] leading-none text-text-0">{formatUsd(r.landValueUsd)}</div>
-          <div className="mt-1 text-[10.5px] leading-tight text-text-2">easement value at those assumptions</div>
+          <div className="mt-1 text-[10.5px] leading-tight text-text-2">right-of-way value at those assumptions</div>
           {r.landValueRange && (
             <div className="num mt-1 text-[10px] text-text-3">
               range {formatUsd(r.landValueRange[0])}–{formatUsd(r.landValueRange[1])}
@@ -111,30 +110,30 @@ export function ImpactEstimate({ m }: { m: Match }) {
         <p className="-mt-1 text-[10px] leading-snug text-text-3">{d.sharedMilesNote}</p>
         <Slider label={`Right-of-way width${d.voltageKv ? ` (${d.voltageKv} kV)` : ""}`} value={width} min={50} max={250} step={5} unit="ft" onChange={setWidth} a={d.rowWidthFt} />
         <Slider label="Land value" value={value} min={500} max={20000} step={100} unit="$/acre" onChange={setValue} a={d.landValue} format={(v) => v.toLocaleString("en-US")} />
-        <Slider label="Easement share of land value" value={easement} min={0.1} max={1} step={0.05} unit="" onChange={setEasement} a={d.easement} format={(v) => `${Math.round(v * 100)}%`} />
+        <Slider label="Right-of-way cost as share of land value" value={easement} min={0.1} max={1.2} step={0.05} unit="" onChange={setEasement} a={d.easement} format={(v) => `${Math.round(v * 100)}%`} />
       </div>
 
-      {mobil && smaller.length > 0 && (
+      {mobil && (
         <div className="rounded-lg bg-bg-2/60 p-3 text-[11.5px] leading-snug text-text-1 ring-1 ring-line">
-          <div className="flex items-center justify-between">
-            <span className="font-medium text-text-0">Shared mobilization</span>
-            <Cite a={mobil} />
+          <div className="flex items-center justify-between gap-2">
+            <span className="font-medium text-text-0">Staging both jobs together</span>
+            <span className="num text-[13px] text-amber">≈{formatUsd(mobil.typical * (d.avoidedMobilizations?.typical ?? 1))}</span>
           </div>
           <p className="mt-1 text-text-2">
-            If one crew mobilization served both jobs, the avoided cost is roughly {Math.round((mobil.low ?? mobil.typical) * 100)}–{Math.round((mobil.high ?? mobil.typical) * 100)}% of the
-            smaller published project cost ({formatUsd(Math.min(...smaller))}):{" "}
-            <span className="num text-text-0">
-              {formatUsd(Math.min(...smaller) * (mobil.low ?? mobil.typical))}–{formatUsd(Math.min(...smaller) * (mobil.high ?? mobil.typical))}
-            </span>
-            .
+            One avoided crew mobilization at MISO&apos;s {d.voltageKv ? `${d.voltageKv >= 345 ? "500" : d.voltageKv > 161 ? "230" : "115"} kV-class ` : ""}unit cost ({mobil.unit}).
+            {d.avoidedMobilizations && " A South Carolina PSC order notes that building lines at the same time avoids mobilizing crews twice."}
           </p>
+          <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5">
+            <Cite a={mobil} />
+            {d.avoidedMobilizations && <Cite a={d.avoidedMobilizations} />}
+          </div>
         </div>
       )}
 
       <p className="flex items-start gap-1.5 text-[10.5px] leading-snug text-text-3">
         <Calculator size={11} className="mt-0.5 shrink-0" />
-        Illustrative scenario: acres = miles × 5,280 × width ÷ 43,560; value = acres × $/acre × easement share. Assumptions are editable and sourced; this is not a measured or
-        promised saving, and most listed projects are rebuilds on existing right-of-way.
+        Illustrative scenario: acres = miles × 5,280 × width ÷ 43,560; value = acres × $/acre × share. Every default is a cited public number and every input is editable. This is
+        not a measured or promised saving — most listed projects are rebuilds on existing right-of-way, and cost guides from other regions are only indicative.
       </p>
     </div>
   );

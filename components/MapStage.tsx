@@ -268,6 +268,8 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
 }
 
 function applyTerrain(map: mapboxgl.Map, mode: "3d" | "flat", basemap: Basemap) {
+  // a style swap may still be loading; "style.load" re-applies terrain once it is ready
+  if (!map.isStyleLoaded()) return;
   if (!isStandard(basemap)) {
     map.setTerrain(null);
     return;
@@ -378,7 +380,13 @@ export default function MapStage() {
       configureStandard(map, bm);
       addDataLayers(map, bm);
       // enabling terrain during the first style load can stall the first frame on some GPUs; wait for idle
-      map.once("idle", () => applyTerrain(map, useAtlas.getState().mapMode, useAtlas.getState().basemap));
+      map.once("idle", () => {
+        try {
+          applyTerrain(map, useAtlas.getState().mapMode, useAtlas.getState().basemap);
+        } catch {
+          /* presentation-only */
+        }
+      });
       setStyleReady((n) => n + 1);
     });
 
@@ -465,17 +473,22 @@ export default function MapStage() {
     }
     if (lastBasemap.current === basemap) return;
     lastBasemap.current = basemap;
-    map.setStyle(styleFor(basemap));
+    // diff:false forces a full reload so "style.load" fires and our layers are re-added
+    map.setStyle(styleFor(basemap), { diff: false } as Parameters<typeof map.setStyle>[1]);
   }, [basemap]);
 
   /* terrain / pitch */
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !styleReady) return;
-    applyTerrain(map, mapMode, basemap);
+    try {
+      applyTerrain(map, mapMode, useAtlas.getState().basemap);
+    } catch {
+      /* terrain is presentation-only; never let it break the map */
+    }
     if (mapMode === "flat") map.easeTo({ pitch: 0, bearing: 0, duration: reduced ? 0 : 700 });
     else if (useAtlas.getState().selectedMatchId) map.easeTo({ pitch: 52, bearing: -14, duration: reduced ? 0 : 900 });
-  }, [mapMode, styleReady, basemap, reduced]);
+  }, [mapMode, styleReady, reduced]);
 
   /* data */
   useEffect(() => {

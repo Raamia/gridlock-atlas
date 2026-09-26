@@ -296,7 +296,18 @@ function CorpusChecks() {
 function ExtractionRuns() {
   const runs = SNAPSHOT.extractionRuns;
   if (!runs.length)
-    return <p className="text-[12px] text-text-3">No extraction runs recorded in this snapshot.</p>;
+    return (
+      <div className="rounded-xl bg-bg-2 p-3 text-[12px] leading-snug text-text-2 ring-1 ring-line">
+        <div className="flex items-center gap-2 text-text-1">
+          <Bot size={14} className="text-text-3" /> No model extraction run is recorded in this snapshot.
+        </div>
+        <p className="mt-1.5">
+          Plan fields were parsed deterministically from the DESC and Georgia Power documents; other facts were located by AI research agents and checked by adversarial agents.
+          Every excerpt is then re-found verbatim by script. The Gemini structured-extraction job (<code className="mono text-[11px]">npm run extract:gemini</code>) records model,
+          prompt version and span checks here when run with an API key.
+        </p>
+      </div>
+    );
   return (
     <div className="space-y-2">
       {runs.map((r) => (

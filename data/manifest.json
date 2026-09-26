@@ -226,6 +226,15 @@
   "sha256": "7f000bc31b29d7f235362cfee8294d7709f30144dd8234afcd2b050b5d79fa40"
  },
  {
+  "id": "gtc-pole-heights-easement-widths",
+  "url": "https://www.gatransmission.com/wp-content/uploads/2017/09/GTC_PoleHeightsFactSheet.pdf",
+  "publisher": "Georgia Transmission Corporation",
+  "title": "GTC Transmission Line Heights and Easement Widths (fact sheet)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:23:25Z",
+  "sha256": "646d388b4729564a5a55fcd8cbab5fd124f6b8111efd9f33a527acf9c4ff205f"
+ },
+ {
   "id": "itc-chc-page",
   "url": "https://www.itc-holdings.com/projects/cardinal-hickory-creek-transmission-line-project/",
   "publisher": "ITC Holdings Corp.",
@@ -316,6 +325,33 @@
   "sha256": "60b454ac34ead7b7ec19ea121eb59cd74eaae41f00dd63183cccc15ac7d3d683"
  },
  {
+  "id": "miso-cost-guide-mtep18",
+  "url": "https://cdn.misoenergy.org/Transmission-and-Substation-Project-Cost-Estimation-Guide-for-MTEP-2018144804.pdf",
+  "publisher": "Midcontinent Independent System Operator (MISO)",
+  "title": "Transmission and Substation Project Cost Estimation Guide for MTEP 2018",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:35:04Z",
+  "sha256": "0a89f559966902b9c31e9855e14788b225bb1d40b5a8fadde55be2e3e5b57842"
+ },
+ {
+  "id": "miso-cost-guide-mtep24",
+  "url": "https://cdn.misoenergy.org/20240501%20PSC%20Item%2004%20MISO%20Transmission%20Cost%20Estimation%20Guide%20for%20MTEP24632680.pdf",
+  "publisher": "Midcontinent Independent System Operator (MISO)",
+  "title": "Transmission Cost Estimation Guide for MTEP24 (May 1, 2024)",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:30:37Z",
+  "sha256": "708b0103f8ea2ff458a09aa46334a537817a833814c8300a04fd07e4a74de167"
+ },
+ {
+  "id": "miso-cost-guide-mtep26",
+  "url": "https://cdn.misoenergy.org/MISO%20Transmission%20Cost%20Estimation%20Guide%20for%20MTEP26337433.pdf",
+  "publisher": "Midcontinent Independent System Operator (MISO)",
+  "title": "Transmission Cost Estimation Guide for MTEP26 (June 10, 2026)",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:30:38Z",
+  "sha256": "7d98dc46067e6b467c2cecbad7bf6830558bb2414c8347a47e1b27a301f9eded"
+ },
+ {
   "id": "miso-wi-selection-news-2026",
   "url": "https://www.misoenergy.org/meet-miso/media-center/2026---news-releases/miso-announces-selected-developers-for-competitive-transmission-projects-in-wisconsin",
   "publisher": "MISO",
@@ -343,6 +379,15 @@
   "sha256": "aa42be6485a1e5598d89084bd3aa0a47716a957ab6558bd64efba75baffd7587"
  },
  {
+  "id": "mnpuc-bssa-order-2026-06",
+  "url": "https://bigstonesouthtoalexandria.com/documents/BSSA_Order_June_25_2026.pdf",
+  "publisher": "Minnesota Public Utilities Commission",
+  "title": "Order Issuing Route Permit, Big Stone South to Alexandria 345 kV (Docket TL-23-160)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T05:30:47Z",
+  "sha256": "be230e8a1c1d2e9698b8537173f444363f2f5d8cea239455d1836dbd6879a4d0"
+ },
+ {
   "id": "mnpuc-bssa-route-permit-2026-06",
   "url": "https://bigstonesouthtoalexandria.com/documents/BSSA_Final_Route_Permit_June_25_2026.pdf",
   "publisher": "Minnesota Public Utilities Commission",
@@ -350,6 +395,15 @@
   "sourceType": "regulator",
   "retrievedAt": "2026-09-26T05:30:54Z",
   "sha256": "ae4f0bb6f4a0e830bb96b741a80f6328055ddb6de01c4bcc17e584c806c8031a"
+ },
+ {
+  "id": "mopsc-grainbelt-landowner-compensation-2016",
+  "url": "https://efis.psc.mo.gov/Document/Display/286460",
+  "publisher": "Grain Belt Express Clean Line LLC (filed with the Missouri Public Service Commission, Schedule DKL-3)",
+  "title": "Missouri Landowner Compensation Fact Sheet (June 2016)",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:35:05Z",
+  "sha256": "d80ac0ab9bd02eb87b1a04101205f23f4e923139a915720083260b657a7a1fa9"
  },
  {
   "id": "mres-bssa-approval-news",
@@ -532,6 +586,25 @@
   "sha256": "079ee9c18f0b90eef7f64fd522fe377defe34421508dca133092fad2a8c689c8"
  },
  {
+  "id": "scpsc-2010-238-e-pineland-application",
+  "url": "https://dms.psc.sc.gov/Attachments/Matter/b270073b-edf6-5dca-7d64a28b1810c18a",
+  "publisher": "South Carolina Electric & Gas Company (filed with Public Service Commission of South Carolina)",
+  "title": "Application for a Certificate of Environmental Compatibility and Public Convenience and Necessity: Denny Terrace-Pineland 230 kV Transmission Line (Docket 2010-238-E)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T06:20:19Z",
+  "sha256": "0fb268bf68ffd82bd7049d4919f3fbb37d3e8db79d00bf78a8197ca54f5c3db8",
+  "localCopy": true
+ },
+ {
+  "id": "scpsc-vcs1-killian-order-2011",
+  "url": "https://dms.psc.sc.gov/attachments/matter/73C1EC9A-155D-2817-10A9698095AE7829",
+  "publisher": "Public Service Commission of South Carolina",
+  "title": "SCE&G application/order: 230 kV line from V.C. Summer Switchyard #1 to Killian Transmission Substation and two 230 kV lines from V.C. Summer Switchyard #2 to Lake Murray (Docket 2011-325-E, Dec. 2011)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T06:29:09Z",
+  "sha256": "e9454d0818883942a210f99786ef0edec03e7c4fb89a1388d97a4300a1fd50c5"
+ },
+ {
   "id": "spp-beckham-potter-iep-report",
   "url": "https://www.spp.org/documents/75024/beckham%20county-potter%20345kv%20%20rfp_iep%20recommendation%20report%20-%20public%20version.pdf",
   "publisher": "Southwest Power Pool",
@@ -584,6 +657,15 @@
   "sourceType": "utility",
   "retrievedAt": "2026-09-26T05:25:08Z",
   "sha256": "acacf8cf1b7c0d9231679626a212d301ca594bc6822cb627d971888164530b10"
+ },
+ {
+  "id": "usda-nass-land-values-2026",
+  "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/land0726.pdf",
+  "publisher": "USDA National Agricultural Statistics Service",
+  "title": "Land Values 2026 Summary (July 2026)",
+  "sourceType": "regulator",
+  "retrievedAt": "2026-09-26T06:24:35Z",
+  "sha256": "2cfec88843c42cf93c3dddb0b7bade16666b249e6c6505ad5a4b2be79d4f9d61"
  },
  {
   "id": "xcel-abo-route-permit-app-2023",

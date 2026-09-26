@@ -48,7 +48,10 @@ export interface ImpactDefaults {
   rowWidthFt: ImpactAssumption | undefined;
   landValue: ImpactAssumption | undefined;
   easement: ImpactAssumption | undefined;
+  /** Cost of one crew/equipment mobilization for this voltage class (MISO cost guide). */
   mobilization: ImpactAssumption | undefined;
+  /** Regulator statement that co-building avoids a second mobilization. */
+  avoidedMobilizations: ImpactAssumption | undefined;
   lineCost: ImpactAssumption | undefined;
   voltageKv: number | null;
   lengthA: number | null;
@@ -80,8 +83,9 @@ export function impactDefaults(m: Match): ImpactDefaults {
     sharedMilesNote,
     rowWidthFt: assumption(`rowWidthFt.${b2}`) ?? assumption("rowWidthFt.115"),
     landValue: assumption(`landValuePerAcre.${state}`) ?? assumption(`landValuePerAcre.${stateOf(b)}`),
-    easement: assumption("easementShare"),
-    mobilization: assumption("mobilizationShare"),
+    easement: assumption("easementShare") ?? assumption("easementShare.misoConvention"),
+    mobilization: assumption(`mobilizationCostPerProject.${b2}`) ?? assumption("mobilizationCostPerProject.230"),
+    avoidedMobilizations: assumption("avoidedMobilizations"),
     lineCost: assumption(`lineCostPerMile.${b2}`) ?? assumption("lineCostPerMile.230"),
     voltageKv,
     lengthA,
@@ -118,8 +122,8 @@ export function computeImpact(i: ImpactInputs, d?: ImpactDefaults): ImpactResult
     out.acresRange = [lo, hi];
     const vLo = d.landValue?.low ?? i.landValuePerAcre;
     const vHi = d.landValue?.high ?? i.landValuePerAcre;
-    const eLo = d.easement?.low ?? i.easementShare;
-    const eHi = d.easement?.high ?? i.easementShare;
+    const eLo = i.easementShare;
+    const eHi = i.easementShare;
     out.landValueRange = [lo * vLo * eLo, hi * vHi * eHi];
   }
   return out;
