@@ -1,6 +1,6 @@
 {
- "version": "snap-2026-09-26-6c81e4ac",
- "generatedAt": "2026-09-26T14:17:10.766Z",
+ "version": "snap-2026-09-26-552257b2",
+ "generatedAt": "2026-09-26T14:50:20.339Z",
  "snapshotDate": "2026-09-26",
  "regions": [
   {
@@ -51132,7 +51132,752 @@
    ]
   }
  ],
- "extractionRuns": [],
+ "extractionRuns": [
+  {
+   "id": "desc-scrtp-2026-2030-p12",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 12,
+   "provider": "openai",
+   "model": "gpt-5.5-2026-04-23",
+   "promptVersion": "gridlock-extract/1.1",
+   "runAt": "2026-09-26T14:48:26Z",
+   "status": "completed",
+   "fields": [
+    {
+     "field": "utility",
+     "value": "Dominion Energy South Carolina",
+     "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "projectTitle",
+     "value": "Jasper – Okatie 230 kV #2: Construct",
+     "excerpt": "Jasper – Okatie 230 kV #2: Construct\nProject ID\n06367 D - G",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "projectId",
+     "value": "06367 D - G",
+     "excerpt": "Jasper – Okatie 230 kV #2: Construct\nProject ID\n06367 D - G\nProject Description",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "status",
+     "value": "In Progress",
+     "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/01/2026",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "inServiceDate",
+     "value": "12/01/2026",
+     "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/01/2026\nEstimated Project Cost",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "lengthMiles",
+     "value": "6.5 miles",
+     "excerpt": "Construct a 230 kV line with B1272 ACSR from Jasper to Okatie 230/115kV Substation. The line is\nestimated to be 6.5 miles long.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "voltageKv",
+     "value": "230 kV",
+     "excerpt": "Construct a 230 kV line with B1272 ACSR from Jasper to Okatie 230/115kV Substation.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "estimatedCost",
+     "value": "$19,280,474",
+     "excerpt": "2029\n$0\n\n2030\n$0\n\nTotal\n$19,280,474",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[0]",
+     "value": "Jasper",
+     "excerpt": "Construct a 230 kV line with B1272 ACSR from Jasper to Okatie 230/115kV Substation.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[1]",
+     "value": "Okatie 230/115kV Substation",
+     "excerpt": "Construct a 230 kV line with B1272 ACSR from Jasper to Okatie 230/115kV Substation.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    }
+   ],
+   "usage": {
+    "input_tokens": 778,
+    "input_tokens_details": {
+     "cache_write_tokens": 0,
+     "cached_tokens": 0
+    },
+    "output_tokens": 428,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 1206
+   },
+   "note": "Page 12. 10/10 excerpts located verbatim (unlocated fields are rejected); 9 of the located excerpts quote a passage the snapshot already cites on this page."
+  },
+  {
+   "id": "desc-scrtp-2026-2030-p41",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 41,
+   "provider": "openai",
+   "model": "gpt-5.5-2026-04-23",
+   "promptVersion": "gridlock-extract/1.1",
+   "runAt": "2026-09-26T14:47:37Z",
+   "status": "completed",
+   "fields": [
+    {
+     "field": "utility",
+     "value": "Dominion Energy South Carolina",
+     "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "projectTitle",
+     "value": "Okatie – McIntosh 115kV Tie: Add Series Reactor",
+     "excerpt": "Okatie – McIntosh 115kV Tie: Add Series Reactor\nProject ID\n6888",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "projectId",
+     "value": "6888",
+     "excerpt": "Okatie – McIntosh 115kV Tie: Add Series Reactor\nProject ID\n6888\nProject Description",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "status",
+     "value": "Planned",
+     "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2028\nEstimated Project Cost",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "inServiceDate",
+     "value": "12/31/2028",
+     "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/2028\nEstimated Project Cost",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "voltageKv",
+     "value": "115",
+     "excerpt": "Construct Deerfield Switching Station and Install a 9% series reactor on the Okatie – McIntosh\n115kV Tie Line.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "estimatedCost",
+     "value": "$5,376,418",
+     "excerpt": "2028\n$5,326,418\n\n2029\n$0\n\n2030\n$0\n\nTotal\n$5,376,418",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[0]",
+     "value": "Deerfield Switching Station",
+     "excerpt": "Construct Deerfield Switching Station and Install a 9% series reactor on the Okatie – McIntosh\n115kV Tie Line.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[1]",
+     "value": "Okatie",
+     "excerpt": "Construct Deerfield Switching Station and Install a 9% series reactor on the Okatie – McIntosh\n115kV Tie Line.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[2]",
+     "value": "McIntosh",
+     "excerpt": "Construct Deerfield Switching Station and Install a 9% series reactor on the Okatie – McIntosh\n115kV Tie Line.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    }
+   ],
+   "usage": {
+    "input_tokens": 745,
+    "input_tokens_details": {
+     "cache_write_tokens": 0,
+     "cached_tokens": 0
+    },
+    "output_tokens": 942,
+    "output_tokens_details": {
+     "reasoning_tokens": 516
+    },
+    "total_tokens": 1687
+   },
+   "note": "Page 41. 10/10 excerpts located verbatim (unlocated fields are rejected); 9 of the located excerpts quote a passage the snapshot already cites on this page."
+  },
+  {
+   "id": "gpc-irp-2025-vol3-p314",
+   "sourceId": "gpc-irp-2025-vol3",
+   "page": 314,
+   "provider": "openai",
+   "model": "gpt-5.5-2026-04-23",
+   "promptVersion": "gridlock-extract/1.1",
+   "runAt": "2026-09-26T14:48:18Z",
+   "status": "completed",
+   "fields": [
+    {
+     "field": "utility",
+     "value": "SAV",
+     "excerpt": "SAV: GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD\nTeams # 20065\nNeed Date 06/01/2027 Start Date 06/01/2025",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "projectTitle",
+     "value": "GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD",
+     "excerpt": "SAV: GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD\nTeams # 20065\nNeed Date 06/01/2027 Start Date 06/01/2025",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "projectId",
+     "value": "20065",
+     "excerpt": "SAV: GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD\nTeams # 20065\nNeed Date 06/01/2027 Start Date 06/01/2025",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "status",
+     "value": "New Project",
+     "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "constructionStart",
+     "value": "06/01/2025",
+     "excerpt": "Teams # 20065\nNeed Date 06/01/2027 Start Date 06/01/2025\nDescription\nRebuild the Goshen",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "lengthMiles",
+     "value": "6.7",
+     "excerpt": "Rebuild the Goshen (Savannah) - Georgia Pacific (Rincon) section, approximately 6.7 miles, of the\nGoshen (Sav) - McIntosh 115kV line",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "voltageKv",
+     "value": "115",
+     "excerpt": "Rebuild the Goshen (Savannah) - Georgia Pacific (Rincon) section, approximately 6.7 miles, of the\nGoshen (Sav) - McIntosh 115kV line",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "estimatedCost",
+     "value": "REDACTED",
+     "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[0]",
+     "value": "Goshen (Savannah)",
+     "excerpt": "Rebuild the Goshen (Savannah) - Georgia Pacific (Rincon) section, approximately 6.7 miles, of the\nGoshen (Sav) - McIntosh 115kV line",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[1]",
+     "value": "Georgia Pacific (Rincon)",
+     "excerpt": "Rebuild the Goshen (Savannah) - Georgia Pacific (Rincon) section, approximately 6.7 miles, of the\nGoshen (Sav) - McIntosh 115kV line",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[2]",
+     "value": "McIntosh",
+     "excerpt": "SAV: GOSHEN (SAV) - MCINTOSH 115KV LINE REBUILD\nTeams # 20065\nNeed Date 06/01/2027 Start Date 06/01/2025",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    }
+   ],
+   "usage": {
+    "input_tokens": 882,
+    "input_tokens_details": {
+     "cache_write_tokens": 0,
+     "cached_tokens": 0
+    },
+    "output_tokens": 1150,
+    "output_tokens_details": {
+     "reasoning_tokens": 516
+    },
+    "total_tokens": 2032
+   },
+   "note": "Page 314. 11/11 excerpts located verbatim (unlocated fields are rejected); 10 of the located excerpts quote a passage the snapshot already cites on this page."
+  },
+  {
+   "id": "gpc-irp-2025-vol3-p364",
+   "sourceId": "gpc-irp-2025-vol3",
+   "page": 364,
+   "provider": "openai",
+   "model": "gpt-5.5-2026-04-23",
+   "promptVersion": "gridlock-extract/1.1",
+   "runAt": "2026-09-26T14:48:21Z",
+   "status": "completed",
+   "fields": [
+    {
+     "field": "projectTitle",
+     "value": "SAV: RICE HOPE NEW AUTO TRANSFORMER",
+     "excerpt": "SAV: RICE HOPE NEW AUTO TRANSFORMER\nTeams # 20989\nNeed Date 06/01/2029 Start Date 06/01/2025",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "projectId",
+     "value": "20989",
+     "excerpt": "SAV: RICE HOPE NEW AUTO TRANSFORMER\nTeams # 20989\nNeed Date 06/01/2029 Start Date 06/01/2025",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "status",
+     "value": "New Project",
+     "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "constructionStart",
+     "value": "06/01/2025",
+     "excerpt": "Teams # 20989\nNeed Date 06/01/2029 Start Date 06/01/2025\nDescription",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "inServiceDate",
+     "value": "06/01/2029",
+     "excerpt": "Teams # 20989\nNeed Date 06/01/2029 Start Date 06/01/2025\nDescription",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "voltageKv",
+     "value": "230/115kV; 230kV",
+     "excerpt": "Install a new 230/115kV 400MVA auto transformer at Rice Hope and loop in the Crossgate McIntosh 230kV line.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[0]",
+     "value": "Rice Hope",
+     "excerpt": "Install a new 230/115kV 400MVA auto transformer at Rice Hope and loop in the Crossgate McIntosh 230kV line.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    }
+   ],
+   "usage": {
+    "input_tokens": 852,
+    "input_tokens_details": {
+     "cache_write_tokens": 0,
+     "cached_tokens": 0
+    },
+    "output_tokens": 356,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 1208
+   },
+   "note": "Page 364. 7/7 excerpts located verbatim (unlocated fields are rejected); 6 of the located excerpts quote a passage the snapshot already cites on this page."
+  },
+  {
+   "id": "psc-1515-ce-103-final-p41",
+   "sourceId": "psc-1515-ce-103-final",
+   "page": 41,
+   "provider": "openai",
+   "model": "gpt-5.5-2026-04-23",
+   "promptVersion": "gridlock-extract/1.1",
+   "runAt": "2026-09-26T14:48:29Z",
+   "status": "completed",
+   "fields": [
+    {
+     "field": "utility",
+     "value": "DPC",
+     "excerpt": "DPC Transmission Line Costs\nLess than 345 kV Transmission Lines",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "projectId",
+     "value": "Docket 1515-CE-103",
+     "excerpt": "Docket 1515-CE-103\nDPC Transmission Line Costs\nLess than 345 kV Transmission Lines",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "constructionStart",
+     "value": "fourth quarter of 2026",
+     "excerpt": "Construction is expected to begin in the fourth quarter of 2026 with an anticipated\nin-service date of September 2028.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "inServiceDate",
+     "value": "September 2028",
+     "excerpt": "Construction is expected to begin in the fourth quarter of 2026 with an anticipated\nin-service date of September 2028.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "estimatedCost",
+     "value": "$188,796,752",
+     "excerpt": "Subtotal Other Project Costs\nTotal Project Cost\n\n$4,763,753\n$490,000\n$466,991\n$28,019\n$5,748,764\n$188,796,752",
+     "located": false,
+     "inSnapshot": false,
+     "humanChecked": false
+    }
+   ],
+   "usage": {
+    "input_tokens": 940,
+    "input_tokens_details": {
+     "cache_write_tokens": 0,
+     "cached_tokens": 0
+    },
+    "output_tokens": 256,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 1196
+   },
+   "note": "Page 41. 4/5 excerpts located verbatim (unlocated fields are rejected); 2 of the located excerpts quote a passage the snapshot already cites on this page."
+  },
+  {
+   "id": "psc-wwtc-q2-2026-atc-p1",
+   "sourceId": "psc-wwtc-q2-2026-atc",
+   "page": 1,
+   "provider": "openai",
+   "model": "gpt-5.5-2026-04-23",
+   "promptVersion": "gridlock-extract/1.1",
+   "runAt": "2026-09-26T14:48:45Z",
+   "status": "completed",
+   "fields": [
+    {
+     "field": "utility",
+     "value": "American Transmission Company LLC (ATC)",
+     "excerpt": "American Transmission Company LLC and its corporate manager, ATC Management Inc. (collectively ATC), submits this quarterly progress report",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "projectTitle",
+     "value": "Western Wisconsin Transmission Connection Project",
+     "excerpt": "Western Wisconsin Transmission Connection Project\nDocket No. 5-CE-158\nQuarterly Progress Report\nDear Mr. Stubley:",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "projectId",
+     "value": "Docket No. 5-CE-158",
+     "excerpt": "Western Wisconsin Transmission Connection Project\nDocket No. 5-CE-158\nQuarterly Progress Report\nDear Mr. Stubley:",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "status",
+     "value": "Approximately 4% complete",
+     "excerpt": "Jump River Substation will begin arriving on site in early 2028.\nThe Project is approximately 4% complete.",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "constructionStart",
+     "value": "Q3 2027",
+     "excerpt": "ATC anticipates beginning substation\nconstruction in Q3 2027.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "inServiceDate",
+     "value": "Q3 2029",
+     "excerpt": "The planned Project in-service date is Q3 2029. ATC anticipates beginning substation\nconstruction in Q3 2027.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[0]",
+     "value": "Jump River Substation",
+     "excerpt": "Design is in the early stages for the Jump River Substation. The project remains on schedule",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    }
+   ],
+   "usage": {
+    "input_tokens": 886,
+    "input_tokens_details": {
+     "cache_write_tokens": 0,
+     "cached_tokens": 0
+    },
+    "output_tokens": 792,
+    "output_tokens_details": {
+     "reasoning_tokens": 477
+    },
+    "total_tokens": 1678
+   },
+   "note": "Page 1. 7/7 excerpts located verbatim (unlocated fields are rejected); 4 of the located excerpts quote a passage the snapshot already cites on this page."
+  },
+  {
+   "id": "psc-wwtc-q2-2026-nspw-p2",
+   "sourceId": "psc-wwtc-q2-2026-nspw",
+   "page": 2,
+   "provider": "openai",
+   "model": "gpt-5.5-2026-04-23",
+   "promptVersion": "gridlock-extract/1.1",
+   "runAt": "2026-09-26T14:48:38Z",
+   "status": "completed",
+   "fields": [
+    {
+     "field": "utility",
+     "value": "NSPW",
+     "excerpt": "Western Wisconsin Transmission Connection Project which will be constructed, owned and operated by NSPW, during the Second Quarter 2026.",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "projectTitle",
+     "value": "Western Wisconsin Transmission Connection Project",
+     "excerpt": "Quarterly Progress Report for the Western Wisconsin Transmission Connection Project\nDocket # 5-CE-158",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "projectId",
+     "value": "5-CE-158",
+     "excerpt": "Quarterly Progress Report for the Western Wisconsin Transmission Connection Project\nDocket # 5-CE-158",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "constructionStart",
+     "value": "fourth quarter 2026",
+     "excerpt": "At this time construction of the Project is anticipated to start in the fourth quarter 2026 with an\nin-service date of third quarter 2029.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "inServiceDate",
+     "value": "third quarter 2029",
+     "excerpt": "At this time construction of the Project is anticipated to start in the fourth quarter 2026 with an\nin-service date of third quarter 2029.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[0]",
+     "value": "Larkin Valley Substation",
+     "excerpt": "permissions soil\nboring, cadastral and environmental survey for the Larkin Valley Substation to Elk Farm\nSubstation portion of the route",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[1]",
+     "value": "Elk Farm Substation",
+     "excerpt": "Elk Farm Substation to Jump River Substation – 8 easements acquired.",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[2]",
+     "value": "Jump River Substation",
+     "excerpt": "Elk Farm Substation to Jump River Substation – 8 easements acquired.",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    }
+   ],
+   "usage": {
+    "input_tokens": 934,
+    "input_tokens_details": {
+     "cache_write_tokens": 0,
+     "cached_tokens": 0
+    },
+    "output_tokens": 857,
+    "output_tokens_details": {
+     "reasoning_tokens": 516
+    },
+    "total_tokens": 1791
+   },
+   "note": "Page 2. 8/8 excerpts located verbatim (unlocated fields are rejected); 2 of the located excerpts quote a passage the snapshot already cites on this page."
+  },
+  {
+   "id": "transource-potter-beckham-factsheet-p1",
+   "sourceId": "transource-potter-beckham-factsheet",
+   "page": 1,
+   "provider": "openai",
+   "model": "gpt-5.5-2026-04-23",
+   "promptVersion": "gridlock-extract/1.1",
+   "runAt": "2026-09-26T14:48:58Z",
+   "status": "completed",
+   "fields": [
+    {
+     "field": "utility",
+     "value": "Transource and Southwestern Public Service Company (SPS)",
+     "excerpt": "SPP awarded this project to Transource and Southwestern Public Service Company (SPS).",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "projectTitle",
+     "value": "Potter - Beckham Transmission Line Project",
+     "excerpt": "Potter - Beckham Transmission Line Project\nOklahoma\n\nWorking With the Community",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "status",
+     "value": "Proposed",
+     "excerpt": "The project involves a proposed 15‑mile, 345‑kV electric\ntransmission line extending from the Oklahoma state line",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "constructionStart",
+     "value": "Spring 2028",
+     "excerpt": "Construction\n\nOCC Approval\n\n2027\nSPRING 2026 SUMMER 2026\n\nFALL - WINTER\n2027\n\nSPRING 2028LATE 2028",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "constructionEnd",
+     "value": "Late 2028",
+     "excerpt": "Construction\n\nOCC Approval\n\n2027\nSPRING 2026 SUMMER 2026\n\nFALL - WINTER\n2027\n\nSPRING 2028LATE 2028",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "inServiceDate",
+     "value": "Late 2029",
+     "excerpt": "To learn more about this project visit: transourceenergyprojects.com/potter-beckham\n\nLATE 2029\nProject\nPlaced In\nService",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "lengthMiles",
+     "value": "15 miles",
+     "excerpt": "The project involves a proposed 15‑mile, 345‑kV electric\ntransmission line extending from the Oklahoma state line to the\nBeckham Substation",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "voltageKv",
+     "value": "345 kV",
+     "excerpt": "This new 345-kilovolt (kV) line is\nalso a key piece to support the continued development of extra\nhigh voltage transmission",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    },
+    {
+     "field": "coordinationMention",
+     "value": "Joint initiative between SPS and Transource",
+     "excerpt": "The project is a joint initiative between SPS and Transource, with\nTransource owning and operating the Oklahoma portion and SPS\nowning and operating the Texas portion.",
+     "located": true,
+     "inSnapshot": true,
+     "humanChecked": false
+    },
+    {
+     "field": "namedFacilities[0]",
+     "value": "Beckham Substation",
+     "excerpt": "transmission line extending from the Oklahoma state line to the\nBeckham Substation in Beckham County, Oklahoma.",
+     "located": true,
+     "inSnapshot": false,
+     "humanChecked": false
+    }
+   ],
+   "usage": {
+    "input_tokens": 1170,
+    "input_tokens_details": {
+     "cache_write_tokens": 0,
+     "cached_tokens": 0
+    },
+    "output_tokens": 1504,
+    "output_tokens_details": {
+     "reasoning_tokens": 1034
+    },
+    "total_tokens": 2674
+   },
+   "note": "Page 1. 10/10 excerpts located verbatim (unlocated fields are rejected); 4 of the located excerpts quote a passage the snapshot already cites on this page."
+  }
+ ],
  "assumptions": [
   {
    "key": "rowWidthFt.115",

@@ -75,10 +75,10 @@ export interface Evidence {
   /** What this excerpt supports, in plain words. */
   supports: string;
   /**
-   * manual: typed by a person from the source; gemini: structured extraction run;
+   * manual: typed by a person from the source; model: a structured model-extraction run (scripts/ingest/extract.py);
    * agent-assisted: located by an AI research agent and verified verbatim by script.
    */
-  extractionMethod: "manual" | "gemini" | "agent-assisted";
+  extractionMethod: "manual" | "model" | "agent-assisted";
   reviewedByHuman: boolean;
   /** Excerpt was located verbatim (after normalization) in the cached source text. */
   verifiedInSource: boolean;
@@ -225,11 +225,16 @@ export interface Relation {
 export interface ExtractionRun {
   id: string;
   sourceId: string;
+  page?: number;
+  /** "openai" or "gemini" (scripts/ingest/extract.py --provider) */
+  provider?: string;
+  /** the model version the provider reported, e.g. "gpt-5.5-2026-04-23" */
   model: string;
   promptVersion: string;
   runAt?: string;
   status: "completed" | "not-run" | "failed";
-  fields: { field: string; value: string; located: boolean; humanChecked: boolean }[];
+  /** located: the excerpt was re-found verbatim on the page; inSnapshot: it quotes a passage the snapshot already cites there */
+  fields: { field: string; value: string; excerpt?: string; located: boolean; inSnapshot?: boolean; humanChecked: boolean }[];
   note?: string;
 }
 

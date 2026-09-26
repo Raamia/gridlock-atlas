@@ -1,0 +1,65 @@
+{
+ "id": "psc-1515-ce-103-final-p41",
+ "sourceId": "psc-1515-ce-103-final",
+ "page": 41,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "runAt": "2026-09-26T14:48:29Z",
+ "status": "completed",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "DPC",
+   "excerpt": "DPC Transmission Line Costs\nLess than 345 kV Transmission Lines",
+   "located": true,
+   "inSnapshot": false,
+   "humanChecked": false
+  },
+  {
+   "field": "projectId",
+   "value": "Docket 1515-CE-103",
+   "excerpt": "Docket 1515-CE-103\nDPC Transmission Line Costs\nLess than 345 kV Transmission Lines",
+   "located": true,
+   "inSnapshot": false,
+   "humanChecked": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "fourth quarter of 2026",
+   "excerpt": "Construction is expected to begin in the fourth quarter of 2026 with an anticipated\nin-service date of September 2028.",
+   "located": true,
+   "inSnapshot": true,
+   "humanChecked": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "September 2028",
+   "excerpt": "Construction is expected to begin in the fourth quarter of 2026 with an anticipated\nin-service date of September 2028.",
+   "located": true,
+   "inSnapshot": true,
+   "humanChecked": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$188,796,752",
+   "excerpt": "Subtotal Other Project Costs\nTotal Project Cost\n\n$4,763,753\n$490,000\n$466,991\n$28,019\n$5,748,764\n$188,796,752",
+   "located": false,
+   "inSnapshot": false,
+   "humanChecked": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 940,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 256,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1196
+ },
+ "note": "Page 41. 4/5 excerpts located verbatim (unlocated fields are rejected); 2 of the located excerpts quote a passage the snapshot already cites on this page."
+}

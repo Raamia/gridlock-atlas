@@ -34,6 +34,17 @@ for (const e of Object.values(snap.evidence)) {
   else if (!e.verifiedInSource) warn.push(`evidence ${e.id}: located now but flagged unverified in snapshot (rebuild)`);
 }
 
+// model-extraction runs: a field marked "located" must still be found verbatim in its source; runs never add facts
+let extractionFields = 0;
+for (const r of snap.extractionRuns) {
+  if (!sources.has(r.sourceId)) warn.push(`extraction ${r.id}: source ${r.sourceId} is not in the registry`);
+  for (const f of r.fields.filter((f) => f.located)) {
+    extractionFields++;
+    const loc = f.excerpt ? locate(r.sourceId, f.excerpt) : { status: "not-found" as const };
+    if (loc.status === "not-found") fail.push(`extraction ${r.id}: ${f.field} is marked located but its excerpt is not in ${r.sourceId}`);
+  }
+}
+
 const has = (ids: string[] | undefined) => (ids ?? []).some((id) => snap.evidence[id]);
 for (const p of snap.projects) {
   if (!has(p.titleEvidenceIds)) fail.push(`${p.id}: title has no evidence`);
@@ -79,6 +90,7 @@ const verified = Object.values(snap.evidence).filter((e) => e.verifiedInSource).
 const total = Object.keys(snap.evidence).length;
 console.log(`snapshot ${snap.version}: ${snap.projects.length} projects, ${snap.sources.length} sources, ${total} excerpts (${verified} verbatim-verified)`);
 console.log(`engine: ${run.pairsEvaluated} pairs evaluated → ${run.matches.length} candidates`);
+if (snap.extractionRuns.length) console.log(`extraction: ${snap.extractionRuns.length} model runs, ${extractionFields} located fields re-checked`);
 if (cacheMissing)
   console.log(`note: source cache absent for ${cacheMissing} excerpts — relied on build-time verification (run npm run sources:fetch for a full re-check)`);
 for (const w of warn.slice(0, 20)) console.log(`warn  ${w}`);
