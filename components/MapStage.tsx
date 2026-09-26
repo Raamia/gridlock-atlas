@@ -551,7 +551,9 @@ export default function MapStage() {
       const conn = connectorFeature(preview.match).features[0];
       if (conn) {
         const [[x1, y1], [x2, y2]] = conn.geometry.coordinates as [number, number][];
-        markers.current.push(new mapboxgl.Marker({ element: distanceLabel(conn.properties.label) }).setLngLat([(x1 + x2) / 2, (y1 + y2) / 2]).addTo(map));
+        // a third of the way from A keeps the label clear of a shared-site marker near the middle
+        const t = site ? 0.3 : 0.5;
+        markers.current.push(new mapboxgl.Marker({ element: distanceLabel(conn.properties.label) }).setLngLat([x1 + (x2 - x1) * t, y1 + (y2 - y1) * t]).addTo(map));
       }
     }
   }, [styleReady, preview, hoveredProjectId, visibleProjectIds, run]);
