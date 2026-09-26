@@ -11,9 +11,9 @@
      "lon": -79.9572,
      "precision": "named-facility",
      "uncertaintyMeters": 500,
-     "coordinateSource": "OSM way/1065459660 power=substation substation=industrial voltage=115000 (unnamed, start_date=2020), 13th St / Supply St, former Navy Base, North Charleston",
+     "coordinateSource": "OSM way/1065459660 power=substation substation=industrial voltage=115000 (unnamed, start_date=2020), fed by 115 kV OSM line way/1065459659; about 250 m from 1240 Supply St (Nominatim 32.8551,-79.9597), North Charleston",
      "confidence": "lower-confidence",
-     "validation": "Clemson's wind-turbine drivetrain test facility (Dominion Energy Innovation Center) sits on the Charleston Innovation Campus at 1250 Supply St, on the former Navy Base (clemson.edu visit page). Nominatim puts 1250 Supply St at 32.8567,-79.9590. The only 115 kV industrial customer substation next to the campus is this unnamed OSM feature, about 300 m away. That fits the plan's 115 kV line, but OSM has no name confirming it is the 'Clemson Wind Turbine' substation."
+     "validation": "clemson.edu gives the Dominion Energy Innovation Center (Clemson's wind-turbine drivetrain test facility, Building 69, former Navy Base) as 1240 Supply St, North Charleston. This unnamed 115 kV industrial substation is about 250 m from that address, which fits the plan's 115 kV line. OSM has no name tag, so the match is by location and voltage only."
     },
     {
      "name": "Coast Guard",
@@ -21,12 +21,12 @@
      "lon": -79.94189,
      "precision": "locality",
      "uncertaintyMeters": 1500,
-     "coordinateSource": "Nominatim: 'U.S. Coast Guard - Base Charleston' landuse=military, 1050, North Charleston, Charleston County (site centroid, not a substation)",
+     "coordinateSource": "Nominatim: OSM way/487069141 landuse=military 'U.S. Coast Guard - Base Charleston', North Charleston, Charleston County (site centroid, not a substation)",
      "confidence": "lower-confidence",
-     "validation": "The plan names only 'the Coast Guard substation site'. USCG Base Charleston's new 64-acre campus is on the Cooper River at the former Navy Base in North Charleston (USCG groundbreaking release, Jan 2024). It is about 1.6 km from the Clemson facility, which fits the plan's radial 115 kV line between the two. The substation has no exact position in any public source."
+     "validation": "The plan names only 'the Coast Guard substation site'. Live 5 News (Jan 2024) places the new 64-acre Coast Guard Base Charleston campus at 4500 S Hobson Ave on the Cooper River, and Nominatim puts S Hobson Ave inside this polygon. It is about 1.6 km from the Clemson substation, which fits a short radial 115 kV line. No public source gives the exact substation position."
     }
    ],
-   "notes": "Endpoint order: A = Clemson Wind Turbine, B = Coast Guard (new radial 115 kV line). Both points are within 2 km of each other in North Charleston, Charleston County."
+   "notes": "A = Clemson Wind Turbine, B = Coast Guard (new radial 115 kV line). Both are on the former Navy Base in North Charleston, Charleston County, within 2 km of each other."
   },
   {
    "key": "desc:6864 D, E",
@@ -40,17 +40,17 @@
      "uncertaintyMeters": 400,
      "coordinateSource": "OSM way/185400354 power=substation name=Dunbar Road Substation operator=South Carolina Gas & Electric voltage=115000",
      "confidence": "confirmed",
-     "validation": "Exact name match. Operator is SCE&G (now DESC), voltage is 115 kV as in the plan, and it is in Cayce/West Columbia, Lexington County. OSM topology shows a 115 kV path from here north through West Columbia to the Lyles 230/115 kV substation (about 10.9 line-km)."
+     "validation": "The name matches exactly. The operator is SCE&G (now DESC) and the voltage is 115 kV, as in the plan. It is in Cayce/West Columbia, Lexington County."
     },
     {
      "name": "Lyles",
-     "lat": 34.02204,
-     "lon": -81.06064,
+     "lat": 34.02161,
+     "lon": -81.06031,
      "precision": "named-facility",
      "uncertaintyMeters": 500,
-     "coordinateSource": "OSM way/185230443 power=substation substation=transmission voltage=230000;115000;33000 (unnamed), Lucius Rd / Three Points, Elmwood, Columbia",
+     "coordinateSource": "OSM way/185230443 power=substation substation=transmission voltage=230000;115000;33000 (unnamed), about 0.7 km from Lyles Street (Nominatim way/329615916), Elmwood, Columbia",
      "confidence": "confirmed",
-     "validation": "SC PSC order in Docket 2014-86-E (cached as scpsc-2014-86-e-lyles-lake-murray-order, p.6) describes SCE&G's 'existing Lyles 230/115 kV Substation in Columbia' in Richland County. It needed new right-of-way near the Columbia Canal/Riverfront Park. This is the only 230/115 kV substation there, about 0.7 km from Lyles Street. OSM topology links it by 230/115 kV west toward Saluda River/Lake Murray, as the order describes, and by 115 kV south to Dunbar Road. Unnamed in OSM."
+     "validation": "The cached SC PSC order (scpsc-2014-86-e-lyles-lake-murray-order, p.1 and p.6) names SCE&G's existing 'Lyles 230/115 kV substation in Columbia' in Richland County, next to the Columbia Canal. This is the only 230/115 kV substation in that area. OSM has no name tag. The coordinate now matches the desc-2 batch for the same OSM way."
     },
     {
      "name": "Millrace",
@@ -58,12 +58,12 @@
      "lon": -81.08443,
      "precision": "named-facility",
      "uncertaintyMeters": 400,
-     "coordinateSource": "Nominatim address point: 1300 Mohawk Drive, Saluda Terrace, West Columbia, Lexington County (planned substation site)",
+     "coordinateSource": "Nominatim house-number interpolation: 1300 Mohawk Drive on OSM way/12470315, Saluda Terrace, West Columbia, Lexington County (planned substation site; no mapped feature yet)",
      "confidence": "confirmed",
-     "validation": "WestMetroNews reports a City of West Columbia announcement that Dominion Energy plans to build the 'Millrace Substation' on existing company property in the 1300 block of Mohawk Drive, with construction 2027-2028. That matches the plan's in-service date of 12/31/2028. The site lies between Dunbar Road and Lyles, next to the 115 kV corridor through West Columbia, and near Millrace Rapids on the Saluda River. The evidence is local news, not a utility filing, so it was not cached."
+     "validation": "WestMetroNews reports a City of West Columbia announcement: Dominion plans the 'Millrace Substation' on existing company property in the 1300 block of Mohawk Drive, with construction in 2027-2028. That matches the plan's 12/31/2028 in-service date. OSM 115 kV lines (ways 1077742250-1077742252 and 1042448239/185230444) pass within 120-300 m of the site. The point is an interpolated block address, not a surveyed site. The source is local news and was not cached."
     }
    ],
-   "notes": "endpoints[0..1] = the Dunbar Road \u2013 Lyles 115 kV line being rebuilt (A, B). endpoints[2] = the new Millrace tap substation named in the title. All three are within about 9 km of each other in the Columbia / West Columbia area."
+   "notes": "endpoints[0..1] = the Dunbar Road \u2013 Lyles 115 kV line being rebuilt (A, B). endpoints[2] = the new Millrace tap substation named in the title. All three are within about 9 km of each other in Columbia / West Columbia."
   },
   {
    "key": "desc:1060A, I, L",
@@ -75,9 +75,9 @@
      "lon": -81.04873,
      "precision": "named-facility",
      "uncertaintyMeters": 400,
-     "coordinateSource": "OSM way/329102047 power=substation substation=distribution voltage=115000 (unnamed), Williams St at Washington St, The Vista, Columbia",
+     "coordinateSource": "OSM way/329102047 power=substation substation=distribution voltage=115000 (unnamed), on Williams St (Nominatim way/158973881), The Vista, Columbia",
      "confidence": "lower-confidence",
-     "validation": "No name in OSM. A public Waze place listing gives a 'Dominion Energy substation, 1401 Williams St, Columbia', and this is the only 115 kV substation on Williams Street in The Vista. Columbia is inside DESC territory. No utility or regulator source confirms it."
+     "validation": "OSM has no name. A public Waze listing gives a 'Dominion Energy substation, 1401 Williams St, Columbia', and this is the only 115 kV substation on Williams Street. The other two sites in the package are also DESC plant substations, which supports Columbia. No utility or regulator source confirms it."
     },
     {
      "name": "AM Williams",
@@ -87,7 +87,7 @@
      "uncertaintyMeters": 400,
      "coordinateSource": "OSM way/184867924 power=substation name=Williams Substation voltage=230000;115000, next to relation/20086234 power=plant name=Williams Station operator=South Carolina Generating Company",
      "confidence": "confirmed",
-     "validation": "A.M. Williams Station is the DESC/GENCO coal plant at Bushy Park, Goose Creek, Berkeley County. The switchyard substation sits next to the plant, which OSM tags with operator SC Generating Co (a DESC affiliate). The name matches."
+     "validation": "A.M. Williams Station is the DESC/GENCO plant at Bushy Park, Goose Creek, Berkeley County. The switchyard substation is next to the plant, and the name matches."
     },
     {
      "name": "McMeekin",
@@ -95,12 +95,12 @@
      "lon": -81.21686,
      "precision": "named-facility",
      "uncertaintyMeters": 500,
-     "coordinateSource": "OSM way/186840912 power=plant name=McMeekin Station operator=Dominion Energy South Carolina, Inc addr=6055 Bush River Road, Columbia",
+     "coordinateSource": "OSM way/186840912 power=plant name=McMeekin Station operator=Dominion Energy South Carolina, Inc addr=6055 Bush River Road; the unnamed 115 kV generation switchyard OSM way/185149203 (34.05537,-81.21669) is 60 m away",
      "confidence": "confirmed",
-     "validation": "The plan adds a switch house to move relays out of the plant relay room, so the work is at the McMeekin plant itself. The plant is at the Lake Murray dam, Lexington County. The name matches and the operator is DESC."
+     "validation": "The plan moves relays out of the plant relay room, so the substation is at the McMeekin plant itself. It is at the Lake Murray dam in Lexington County. The name matches and the operator is DESC."
     }
    ],
-   "notes": "Multi-site package with three sites about 150 km apart (downtown Columbia, Goose Creek, Lake Murray). Do NOT average them into one center; treat them as three separate points. The work is switch-house and relay replacement only (no line work)."
+   "notes": "A package of three sites up to 150 km apart (downtown Columbia, Goose Creek, Lake Murray). Do NOT average them into one center; treat them as separate points. The work is switch-house and relay replacement only, with no line work."
   },
   {
    "key": "desc:6810 T",
@@ -112,9 +112,9 @@
      "lon": -80.69793,
      "precision": "named-facility",
      "uncertaintyMeters": 500,
-     "coordinateSource": "OSM node/5211620240: 46 kV line junction (degree 3), 2.26 line-km south of Cameron Substation, Calhoun County. Found by shortest-path analysis of the OSM 46 kV network (Overpass mirror overpass.kumi.systems)",
+     "coordinateSource": "OSM node/5211620240 power=pole line_management=branch, where 46 kV way/623292013 (from Orangeburg) joins 46 kV way/12139895, 2.24 line-km south of Cameron Substation, Calhoun County",
      "confidence": "confirmed",
-     "validation": "Cameron Jct is a line junction, not a substation. Three plan mileages match this OSM junction: Cameron Jct \u2013 Cameron \u2013 St Matthews is 9.8 mi in the plan and 9.84 mi in OSM; Orangeburg #1 \u2013 Cameron Jct is 7.5 mi (desc-scrtp-2025-2029 p41) and 7.8 mi in OSM; Cameron Jct \u2013 Elloree is 7.3 mi (desc-scrtp-2024-2028 p41) and 8.1 mi in OSM. No other 3-way split on the Cameron 46 kV line fits."
+     "validation": "Cameron Jct is a line junction, not a substation. I checked plan mileages against OSM line lengths. Cameron Jct to St Matthews is 9.8 mi in the plan and 9.82 mi along OSM way/12139895. Orangeburg #1 to Cameron Jct is 7.5 mi in the plan (desc-scrtp-2025-2029 p41) and 7.81 mi along the branch. Cameron Jct to Elloree is 7.3 mi in the plan (2024-2028 p41; 2025-2029 p35) and 7.55 mi."
     },
     {
      "name": "St Matthews",
@@ -122,12 +122,22 @@
      "lon": -80.77124,
      "precision": "named-facility",
      "uncertaintyMeters": 400,
-     "coordinateSource": "OSM way/1077428670 power=substation substation=distribution voltage=46000 (unnamed), Emily St, St. Matthews, Calhoun County",
+     "coordinateSource": "OSM way/1077428670 power=substation substation=distribution voltage=46000 (unnamed), Emily St, St. Matthews, Calhoun County; 20 m from 46 kV way/12139895",
      "confidence": "confirmed",
-     "validation": "It is the only 46 kV substation in the town of St. Matthews, and the plan's line is 46 kV. The OSM 46 kV line runs directly from Cameron Substation (way/318318141) to here, 8.4 mi, so Cameron Jct to here is 9.84 mi, matching the plan's 9.8 mi. Unnamed in OSM."
+     "validation": "It is the only 46 kV substation in St. Matthews, and it sits exactly 9.82 line-miles from Cameron Jct, matching the plan's 9.8 mi. OSM has no name tag."
+    },
+    {
+     "name": "Cameron (intermediate)",
+     "lat": 33.56369,
+     "lon": -80.709,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/318318141 power=substation name=Cameron Substation voltage=46000",
+     "confidence": "confirmed",
+     "validation": "This is the intermediate substation named in the title. The name matches, and the 46 kV line way/12139895 passes within 30 m of it."
     }
    ],
-   "notes": "Title route Cameron Jct -> Cameron -> St Matthews. The intermediate Cameron Substation is at 33.56369,-80.70900 (OSM way/318318141, name=Cameron Substation, 46 kV, confirmed)."
+   "notes": "The title route is Cameron Jct -> Cameron -> St Matthews. endpoints[0..1] are the line terminals (A, B) and endpoints[2] is the intermediate Cameron Substation."
   },
   {
    "key": "desc:6888",
@@ -135,19 +145,436 @@
    "endpoints": [
     {
      "name": "Okatie",
-     "lat": 33,
-     "lon": -81,
+     "lat": 32.3358,
+     "lon": -81.03144,
      "precision": "named-facility",
-     "uncertaintyMeters": 600,
-     "coordinateSource": "placeholder",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/498967280 (230 kV) and way/1064022697 (230 kV switching), Jasper County; same point as desc-1 (calibrated on Dominion map desc-riverport-route-map)",
      "confidence": "confirmed",
-     "validation": "placeholder"
+     "validation": "This is the same Okatie substation confirmed in desc-1. In OSM, the 230/115 kV double-circuit line way/185380601 leaves this complex toward Purrysburg. Its 115 kV circuit continues via ways 185380566 and 185380584 into McIntosh (about 10.7 mi in total). The NRC V.C. Summer FSAR Table 8.1-1 (cached nrc-vcsummer-fsar-ch8-rev22, p.11) lists 'Okatie \u2013 McIntosh 115' as a tie with Georgia Power Company."
+    },
+    {
+     "name": "McIntosh",
+     "lat": 32.35212,
+     "lon": -81.17511,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/121624352 power=substation name=McIntosh Substation operator=Georgia Power (next to Plant McIntosh), Effingham County, GA; 115 kV line way/185380584 ends inside it",
+     "confidence": "confirmed",
+     "validation": "This is the Georgia Power McIntosh substation at the river border, the GPC end of the tie (same feature as the gpc-border batch). The 115 kV busbars (ways 1054230277-1054230279) are inside the fence. It is the far terminal of a DESC\u2013GPC tie, so a GA location is expected."
+    },
+    {
+     "name": "Deerfield Switching Station (new)",
+     "lat": 32.38241,
+     "lon": -81.0965,
+     "precision": "locality",
+     "uncertaintyMeters": 5000,
+     "coordinateSource": "Nominatim: OSM node/154131809 place=hamlet 'Deerfield', Jasper County, SC",
+     "confidence": "lower-confidence",
+     "validation": "The plan names a new Deerfield Switching Station but gives no site. The only Deerfield near the tie is this Jasper County hamlet. It is 1.7 km from the Okatie\u2013Purrysburg corridor that carries the tie's 115 kV circuit and 2.9 km from Purrysburg. The link is by name only, and no public source confirms the site."
     }
    ],
-   "notes": "placeholder"
+   "notes": "A = Okatie (DESC), B = McIntosh (Georgia Power); the series reactor goes on the DESC\u2013GPC 115 kV tie across the Savannah River. endpoints[2] = the new Deerfield switching station (approximate). This is a direct cross-utility interface project."
+  },
+  {
+   "key": "desc:6809 R",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "CAE Industrial Park",
+     "lat": 33.96219,
+     "lon": -81.13485,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/988763741 power=substation name='Cayce Industrial Park Substation' operator=South Carolina Gas & Electric voltage=115000, Old Barnwell Rd, Springdale, Lexington County",
+     "confidence": "confirmed",
+     "validation": "CAE is the Columbia Metropolitan Airport code. Lexington County's CAE Enterprise Park page says the park, next to the airport, is also titled 'CAE Industrial Park' and is served by Dominion Energy. This SCE&G 115 kV substation is 350 m from the park's industrial land and 1.2 km from Enterprise Pkwy. The DESC 115 kV line OSM way/1083493573 runs directly from it to Springdale Substation (3.05 km). OSM spells the name 'Cayce'."
+    },
+    {
+     "name": "Springdale",
+     "lat": 33.98202,
+     "lon": -81.11784,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185230439 power=substation name=Springdale Substation operator=South Carolina Gas & Electric voltage=115000;24000",
+     "confidence": "confirmed",
+     "validation": "The name matches, the operator is SCE&G/DESC, and the voltage is 115 kV. It is in Springdale/West Columbia, Lexington County, and it is the other end of line way/1083493573 from the CAE Industrial Park substation."
+    }
+   ],
+   "notes": "A short radial 115 kV line of about 1.9 mi (28 wood poles) between the two substations, near Columbia Metropolitan Airport."
+  },
+  {
+   "key": "desc:6809 O",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "St. George",
+     "lat": 33.19469,
+     "lon": -80.5891,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185032978 power=substation substation=switching voltage=115000 (unnamed); OSM lines 'Orangeburg East - St. George 115kV' (ways 1069480271/1069480272) end here, St. George, Dorchester County",
+     "confidence": "confirmed",
+     "validation": "The OSM line names confirm this is the St. George 115 kV terminal. I used it instead of the separate 230 kV 'Saint George Switching Station' 600 m north because the plan's line is 115 kV. OSM 115 kV way/1075801492 runs from here 14.6 mi to Holly Hill."
+    },
+    {
+     "name": "Holly Hill",
+     "lat": 33.32584,
+     "lon": -80.42142,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/1074661994 power=substation name=Holly Hill Substation voltage=115000",
+     "confidence": "confirmed",
+     "validation": "The name matches, the voltage is 115 kV, and it is in Holly Hill, Orangeburg County (DESC territory). It is the far end of OSM 115 kV way/1075801492 from St. George."
+    },
+    {
+     "name": "Don's Car Crushing (flat switches)",
+     "lat": 33.28433,
+     "lon": -80.43868,
+     "precision": "named-facility",
+     "uncertaintyMeters": 1000,
+     "coordinateSource": "OSM way/1075801497 power=substation name='DCC Metals Substation' voltage=115000 substation=industrial; its tap line way/1075801496 leaves the St. George\u2013Holly Hill line at 33.2902,-80.4489",
+     "confidence": "confirmed",
+     "validation": "Don's Car Crushing does business as DCC Metal Recycling (company LinkedIn and website) and has a yard on White Sands Rd, Holly Hill (Yelp). The OSM 'DCC Metals' 115 kV customer substation is tapped from the St. George\u2013Holly Hill line at 11.7 line-mi from St. George, 2.9 mi from Holly Hill. The flat switches are at that tap, 1.15 km from this point, which places the rebuilt 3.4-mile section near the Holly Hill end."
+    }
+   ],
+   "notes": "A = St. George, B = Holly Hill. Only structures 83-108 (3.4 mi) are rebuilt. endpoints[2] marks the DCC tap switches named in the plan, which fall inside that section, near the Holly Hill end. Prefer it over the A\u2013B midpoint for a site estimate."
+  },
+  {
+   "key": "desc:06076 A",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Canadys",
+     "lat": 33.0641,
+     "lon": -80.6206,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185032900 power=substation name='Canadys Substation' operator='South Carolina Electric & Gas Company' voltage=230000;115000",
+     "confidence": "confirmed",
+     "validation": "The name matches and the operator is DESC's predecessor. It is at Canadys, Colleton County (same feature as desc-1)."
+    },
+    {
+     "name": "Ritter",
+     "lat": 32.82319,
+     "lon": -80.62064,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185397978 power=substation substation=transmission voltage=230000;115000 (unnamed) = HIFLD UNKNOWN120999",
+     "confidence": "confirmed",
+     "validation": "This is the same Ritter substation as desc-1, confirmed there by HIFLD topology (Ritter\u2013Yemassee and Church Creek\u2013Ritter 230 kV). OSM 115 kV lines run from Canadys 10.5 mi south (way/498420143) to the Walterboro area and from Ritter 6.0 mi north (way/498420134). The route totals roughly the plan's 17.5 mi. The substation is 3.8 km from Ritter hamlet, Colleton County."
+    }
+   ],
+   "notes": "A = Canadys, B = Ritter. The 115 kV line runs via the Walterboro area."
+  },
+  {
+   "key": "desc:6808 R",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Wateree",
+     "lat": 33.82627,
+     "lon": -80.62408,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/1082130490 power=substation name=Wateree Substation voltage=230000, next to relation/17131066 Wateree Station (DESC); HIFLD node 'WATEREE STATION'",
+     "confidence": "confirmed",
+     "validation": "The name and 230 kV voltage match. It is next to DESC's Wateree Station near Eastover, Richland County. I rejected Duke's 'Wateree Dam' substation (34.33,-80.70). HIFLD route check: Wateree Station to TAP142264 (0.56 mi, line 106326), then to UNKNOWN117532 (29.43 mi, line 137325), then to UNKNOWN117539/Killian (5.11 mi, line 127629). That totals 35.1 mi against the plan's 35 miles."
+    },
+    {
+     "name": "Killian",
+     "lat": 34.12226,
+     "lon": -80.94407,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/185201670 power=substation substation=transmission voltage=230000;115000 (unnamed) = HIFLD UNKNOWN117539",
+     "confidence": "confirmed",
+     "validation": "This is the same Killian substation confirmed in desc-1 (end of the HIFLD V C Summer 230 kV line, near Killian Road, Richland County). The 35.1-mile HIFLD path from Wateree ends here, matching the plan's 35 miles. OSM has no name tag."
+    }
+   ],
+   "notes": "A = Wateree, B = Killian. A 35-mile 230 kV line across Richland County."
+  },
+  {
+   "key": "desc:6877 A",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Dawson",
+     "lat": 32.95843,
+     "lon": -80.30579,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/1466128356 power=substation substation=transmission voltage=230000 (unnamed); cached DESC PSC letter scpsc-2024-91-e-dawson-request p.2 (same point as desc-1)",
+     "confidence": "confirmed",
+     "validation": "This is the same new Dawson 230 kV substation confirmed in desc-1: Mallard LLC property near Ridgeville, Dorchester County, folded into the Canadys\u2013Church Creek 230 kV line. Along HIFLD line 144837, Church Creek to the Dawson fold-in is 16.36 mi, close to the plan's 13.6 + 3.0 = 16.6 mi."
+    },
+    {
+     "name": "Long Savannah",
+     "lat": 32.85267,
+     "lon": -80.10842,
+     "precision": "locality",
+     "uncertaintyMeters": 2500,
+     "coordinateSource": "Derived: the point 3.0 line-miles from Church Creek along HIFLD 230 kV line 144837 (Church Creek\u2013Canadys corridor, which now carries Church Creek\u2013Dawson), using the plan's 'Long Savannah \u2013 Church Creek 230kV (3.0 miles)'",
+     "confidence": "lower-confidence",
+     "validation": "Long Savannah is a 1,520-acre planned community just west of (above) Bees Ferry Road in West Ashley, Charleston County (Post and Courier). The plan puts the Long Savannah split 3.0 mi from Church Creek on the Church Creek\u2013Dawson 230 kV line. That point is on undeveloped land in Charleston County above Bees Ferry Road, which fits the tract. No substation is mapped and no public source gives its site."
+    }
+   ],
+   "notes": "A = Dawson, B = Long Savannah (the 13.6-mile rebuild). The line's other terminal, Church Creek, is covered by 6869 C/D. The plan also rebuilds 8 mi of the parallel Dawson \u2013 Faber Place 230 kV toward Mateeba (a Santee Cooper 230 kV substation per the FSAR table, p.10). Mateeba was not located; the nearest named place is Mateeba Gardens, Dorchester County."
+  },
+  {
+   "key": "desc:6869 D",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Long Savannah",
+     "lat": 32.85267,
+     "lon": -80.10842,
+     "precision": "locality",
+     "uncertaintyMeters": 2500,
+     "coordinateSource": "Derived: the point 3.0 line-miles from Church Creek along HIFLD 230 kV line 144837 (see desc:6877 A)",
+     "confidence": "lower-confidence",
+     "validation": "This is the same estimate as desc:6877 A: the plan's 3.0-mile Long Savannah \u2013 Church Creek section on the Church Creek\u2013Dawson corridor, inside the Long Savannah tract west of Bees Ferry Road in West Ashley. The new substation's site is not public."
+    },
+    {
+     "name": "Church Creek",
+     "lat": 32.83032,
+     "lon": -80.07028,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185330726 power=substation name=Church Creek Substation voltage=230000;115000 (HIFLD UNKNOWN120998)",
+     "confidence": "confirmed",
+     "validation": "The name and 230/115 kV voltages match. It is on Bees Ferry Road, West Ashley, Charleston County (same feature as desc-1, and it matches the Dominion route map)."
+    }
+   ],
+   "notes": "A = Long Savannah (new 115 kV substation), B = Church Creek. The work rebuilds the 3.0-mile Church Creek \u2013 Long Savannah section of the 230 kV line with the new 115 kV tap on the same structures. Long Savannah will be fed from the Church Creek \u2013 Ravenel (BEC) 115 kV line."
+  },
+  {
+   "key": "desc:6809 M",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Modoc",
+     "lat": 33.73629,
+     "lon": -82.2015,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/1074904620 power=substation name=Modoc Substation voltage=46000; HIFLD TAP141829 on the Stevens Creek 115 kV line",
+     "confidence": "confirmed",
+     "validation": "The name matches, and it is in Modoc, McCormick County, SC (same feature as desc-2). The OSM SPDC pair, 115 kV way/12356976 and 46 kV way/1073388048, runs from Stevens Creek past this substation (0.12 km) north toward McCormick. That matches the plan's 115/46 kV line."
+    },
+    {
+     "name": "McCormick",
+     "lat": 33.90654,
+     "lon": -82.2928,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/1044493458 power=substation name=McCormick Substation voltage=115000, McCormick, McCormick County, SC",
+     "confidence": "confirmed",
+     "validation": "The name matches. OSM topology: the Modoc SPDC 115/46 kV pair ends at an unnamed 115 kV transmission substation (way/1066636216, 33.8768,-82.2800). From there, 115 kV way/1074904633 and 46 kV ways 1074904625/1074904626 continue 3.5 km into this McCormick Substation. The 115/46 kV SPDC way/1074904628 then continues northwest toward Calhoun Falls."
+    }
+   ],
+   "notes": "A = Modoc, B = McCormick, both in McCormick County, SC, near the Savannah River / Lake Thurmond border. Duplicate key: in the 2024-2028 and 2025-2029 editions '6809 M' was 'St George - Sumter 230kV Tie' (the desc-2 batch). Match this entry only to the 2026-2030 'Modoc \u2013 McCormick' title."
+  },
+  {
+   "key": "desc:6809 T",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Stevens Creek",
+     "lat": 33.56162,
+     "lon": -82.05329,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/52102616 power=substation name='Stevens Creek Dam Substation' voltage=115000, next to way/1088635944 'Stevens Creek Power Plant' operator=Dominion Energy South Carolina; HIFLD node 'STEVENS CREEK'",
+     "confidence": "confirmed",
+     "validation": "This is DESC's Stevens Creek hydro station on the Savannah River, the SC\u2013GA border just above Augusta. Nominatim reverse-geocodes the point to Columbia County, GA because the dam straddles the river, which is acceptable as a border location. OSM line 'Ward - Stevens Creek 115kV' starts here, and HIFLD shows nine SCE&G 115 kV lines. The shortest OSM 115 kV path from here to Graniteville is 15.03 mi, matching the plan's 15-mile section."
+    },
+    {
+     "name": "Graniteville",
+     "lat": 33.58344,
+     "lon": -81.80451,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM relation/14294792 power=substation name='Graniteville Substation' voltage=230000;115000;46000 (HIFLD UNKNOWN117189)",
+     "confidence": "confirmed",
+     "validation": "The name matches. It is in Graniteville, Aiken County (same feature as desc-1), at the far end of the 15.03-mile OSM 115 kV path from Stevens Creek (ways 499573298 through 499570744)."
+    }
+   ],
+   "notes": "A = Stevens Creek (at the Savannah River border), B = Graniteville (Aiken County). A 15-mile 115 kV rebuild."
+  },
+  {
+   "key": "desc:6810 N",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Calhoun County",
+     "lat": 33.64879,
+     "lon": -80.93578,
+     "precision": "named-facility",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "OSM way/1077699947 power=substation substation=distribution voltage=115000 (unnamed), Ringneck Trail, Calhoun County; next to Midlands Solar Substation way/1077699958",
+     "confidence": "lower-confidence",
+     "validation": "I measured along the 46 kV line OSM way/12139895, which ends at North Substation. The only utility substation on it about 9.5 mi from North is this one: 9.67 line-mi, 0.2 km off the line, and it is in Calhoun County. That matches the plan's 'Calhoun County - North ... 9.5 miles'. OSM has no name tag and no source names it."
+    },
+    {
+     "name": "North",
+     "lat": 33.60988,
+     "lon": -81.08976,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM relation/14275397 power=substation name=North Substation voltage=115000, Airbase Rd near the town of North, Orangeburg County",
+     "confidence": "confirmed",
+     "validation": "The name matches, and it is the end of 46 kV line way/12139895 from Calhoun County. I rejected the other OSM 'North Substation' (way/185577977, 33.468,-80.786, in Orangeburg city) because it is not on this 46 kV line."
+    }
+   ],
+   "notes": "A = Calhoun County, B = North. A 46 kV system-hardening rebuild of 9.5 mi."
+  },
+  {
+   "key": "desc:0167 C-D",
+   "kind": "substation",
+   "endpoints": [
+    {
+     "name": "Union Pier",
+     "lat": 32.78434,
+     "lon": -79.92559,
+     "precision": "locality",
+     "uncertaintyMeters": 800,
+     "coordinateSource": "Nominatim: OSM way/1433392301 landuse=industrial 'Union Pier Terminal', Ansonborough, Charleston (site centroid; substation not mapped)",
+     "confidence": "lower-confidence",
+     "validation": "The plan names a future Union Pier 115-13.8 kV substation. Union Pier is the SC Ports terminal on the Cooper River in downtown Charleston, which is being redeveloped. The substation's exact site within the tract is not public."
+    },
+    {
+     "name": "Charlotte Street (possible feed)",
+     "lat": 32.79061,
+     "lon": -79.92817,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/263443280 power=substation name=Charlotte Street Substation operator=Dominion Energy South Carolina voltage=115000",
+     "confidence": "confirmed",
+     "validation": "The name matches and the operator is DESC. It is 0.74 km north of the Union Pier tract. The plan names it as a possible dedicated feed."
+    }
+   ],
+   "notes": "endpoints[0] is the substation site. endpoints[1] is the possible feed source named in the plan ('115 kV Tap (or possibly dedicated feed from Charlotte St)'). The tap's source line is not named."
+  },
+  {
+   "key": "desc:6808 V",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "N. Bridge Terrace",
+     "lat": 32.82182,
+     "lon": -79.99017,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/495331195 power=substation substation=distribution voltage=115000 (unnamed), Latham Circle, Northbridge, Charleston 29407; 0.15 km from HIFLD 115 kV line 108356 (Faber Place UNKNOWN121120 to TAP147152)",
+     "confidence": "lower-confidence",
+     "validation": "HIFLD traces the Faber Place \u2013 Bayfront 115 kV line from Faber Place (line 108356, 4.8 mi) to a tap at Maryville, then 4.63 mi to Bayfront. This unnamed substation sits on that line 1.9 mi from Faber Place, just west of the Ashley River in the Northbridge neighborhood. That fits the plan's 'across the Ashley River - N. Bridge Terrace'. OSM has no name tag."
+    },
+    {
+     "name": "Bayfront",
+     "lat": 32.73906,
+     "lon": -79.96632,
+     "precision": "named-facility",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/495589323 power=substation substation=distribution voltage=115000 (unnamed), Folly Rd, James Island = HIFLD UNKNOWN147150, end of the Faber Place line; Nominatim hamlet 'Bayfront' (node/158550026) 0.44 km away",
+     "confidence": "confirmed",
+     "validation": "The HIFLD 115 kV path from Faber Place ends here. It is 0.44 km from Bayfront hamlet on James Island, Charleston County."
+    },
+    {
+     "name": "Camp Rd",
+     "lat": 32.73432,
+     "lon": -79.96901,
+     "precision": "locality",
+     "uncertaintyMeters": 3000,
+     "coordinateSource": "Nominatim: OSM way/762758751 Camp Road, James Island, Charleston County (road point, not a facility)",
+     "confidence": "lower-confidence",
+     "validation": "The plan strings conductor 'from Bayfront - Camp Rd' and adds a 'Camp Rd. - James Island section'. Camp Road is on James Island next to Bayfront. No feature named Camp Rd is mapped, so this is only the road location."
+    },
+    {
+     "name": "James Island",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "not found: no OSM, HIFLD or Nominatim feature identifies a DESC 'James Island' substation",
+     "confidence": "not-found",
+     "validation": "There are several unnamed 115 kV substations on James Island: way/217439463 on Fort Johnson Rd and Queensborough way/290264139. None can be tied to the name 'James Island' from public sources."
+    }
+   ],
+   "notes": "A = N. Bridge Terrace, B = Bayfront (the section rebuilt on the Faber Place \u2013 Bayfront 115 kV line). The scope adds reconductoring from the Ashley River crossing to N. Bridge Terrace, and from Bayfront to Camp Rd to James Island (endpoints[2..3]). Faber Place (32.85008,-80.01462, desc-1) is the line's origin but not part of the rebuilt section."
+  },
+  {
+   "key": "desc:0147 A-I",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "Cainhoy",
+     "lat": 32.9414,
+     "lon": -79.84228,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/229116275 power=substation name='Cainhoy Substation' operator='Dominion Energy South Carolina' voltage=230000;115000;23900",
+     "confidence": "confirmed",
+     "validation": "The name matches and the operator is DESC. It is in the Cainhoy area of Berkeley County, 0.8 km from Clements Ferry Road (same feature as desc-1)."
+    },
+    {
+     "name": "Clements Ferry Rd Sub (new)",
+     "precision": "unknown",
+     "uncertaintyMeters": 0,
+     "coordinateSource": "not found: no OSM feature, utility page or filing gives the new substation's site",
+     "confidence": "not-found",
+     "validation": "The plan puts the new substation at the end of a 2.8-mile 115 kV tap from Cainhoy. That means it lies within about 4.5 km of Cainhoy along Clements Ferry Road, Berkeley County, but the direction is not public. OSM shows no substation within 4.8 km of Cainhoy apart from INEOS."
+    }
+   ],
+   "notes": "A = Cainhoy, B = the new Clements Ferry Rd substation (not located; within about 2.8 line-miles of Cainhoy). Use Cainhoy as the project point."
+  },
+  {
+   "key": "desc:06810 F",
+   "kind": "line",
+   "endpoints": [
+    {
+     "name": "VCS2",
+     "lat": 34.29038,
+     "lon": -81.32861,
+     "precision": "named-facility",
+     "uncertaintyMeters": 600,
+     "coordinateSource": "OSM way/552845047 power=substation name='Virgil C. Summer Nuclear #2/3 Switching Station' voltage=230000, Jenkinsville, Fairfield County",
+     "confidence": "confirmed",
+     "validation": "VCS2 is the V.C. Summer Unit 2 switchyard, and the NRC FSAR Table 8.1-1 (p.10) lists a 'VCS2' 230 kV terminal. OSM 230 kV way/185197503 (1.38 mi, starting at 34.2812,-81.3367 by the switchyard) joins way/185197505, which runs 38.04 mi into Ward. About 39.4 mi of mapped line matches the plan's 40 miles."
+    },
+    {
+     "name": "Ward",
+     "lat": 33.87218,
+     "lon": -81.69772,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/185197506 power=substation name=Ward Substation voltage=230000",
+     "confidence": "confirmed",
+     "validation": "The name matches, near Ward, Saluda County. The OSM lines 'Graniteville - Ward 230kV', 'Batesburg - Ward 115kV' and 'Ward - Stevens Creek 115kV' all terminate here, and the 230 kV line from V.C. Summer (way/185197505) ends here too."
+    }
+   ],
+   "notes": "A = VCS2 (Fairfield County), B = Ward (Saluda County). A 40-mile 230 kV rebuild."
   }
  ],
+ "issuesFixed": [
+  "desc:6888 was a placeholder (33,-81, 'named-facility'/'confirmed', coordinateSource 'placeholder'), which would have put a fake confirmed point in the data. Replaced it with Okatie (desc-1 feature), McIntosh (Georgia Power OSM way/121624352) and the new Deerfield switching station (hamlet locality, lower-confidence). Added NRC FSAR Table 8.1-1 (cached nrc-vcsummer-fsar-ch8-rev22 p.11, excerpt verified) showing 'Okatie \u2013 McIntosh 115' is a DESC\u2013Georgia Power tie.",
+  "The researcher's result had no entries for 13 of the batch's 18 items (6809 R, 6809 O, 06076 A, 6808 R, 6877 A, 6869 D, 6809 M, 6809 T, 6810 N, 0167 C-D, 6808 V, 0147 A-I, 06810 F). All were researched and added. Where possible I checked each against the plan's line mileage using OSM or HIFLD: Wateree\u2013Killian 35.1 vs 35 mi; Stevens Creek\u2013Graniteville 15.03 vs 15 mi; VCS2\u2013Ward about 39.4 vs 40 mi; Church Creek\u2013Dawson 16.36 vs 16.6 mi; Calhoun County 9.67 mi from North vs 9.5 mi.",
+  "Removed the placeholder unresolved entry and replaced it with the real open items.",
+  "desc:6842 Clemson Wind Turbine: the validation cited 1250 Supply St, which Nominatim shows is the Warren Lasch Conservation Center / H.L. Hunley site. clemson.edu gives the Dominion Energy Innovation Center as 1240 Supply St (Nominatim 32.8551,-79.9597), 250 m from the substation. Corrected the text; the match stays lower-confidence because the substation is unnamed.",
+  "desc:6842 Coast Guard: confirmed the new campus address (4500 S Hobson Ave, Live 5 News) falls in the OSM USCG polygon. Coordinate kept as locality, lower-confidence.",
+  "desc:6864 Millrace: clarified that the coordinate is a Nominatim house-number interpolation on Mohawk Dr (way 12470315), not a mapped address point or substation. Checked that OSM 115 kV lines pass within 120-300 m. Confidence stays confirmed on the strength of the name, operator and date match.",
+  "desc:6864 Lyles: harmonized the coordinate to 34.02161,-81.06031 so it matches the same OSM way/185230443 used in desc-2. The researcher's 34.02204,-81.06064 was a different centroid for the same way.",
+  "desc:1060A, I, L McMeekin: noted the adjacent unnamed 115 kV generation switchyard (way/185149203, 60 m away). The coordinate is unchanged.",
+  "desc:6810 T: checked Cameron Jct OSM node/5211620240; it is power=pole line_management=branch. Recomputed along-line distances: 9.82 mi to St Matthews, 7.81 mi to Orangeburg #1, 7.55 mi to Elloree (the researcher had 8.1). Also corrected the Elloree citation, which appears on 2025-2029 p35 and 2024-2028 p41. Added Cameron Substation (way/318318141) as an intermediate endpoint because the title names it.",
+  "desc:6809 M McCormick: checked topology before choosing the named McCormick Substation. The Modoc SPDC line first ends at an unnamed 115 kV transmission substation 3.5 km south (way/1066636216), then continues by 115 kV and 46 kV ways into the named substation, so the named one is the McCormick terminal.",
+  "desc:6809 R: resolved 'CAE Industrial Park' to OSM 'Cayce Industrial Park Substation' (way/988763741). Lexington County says CAE Enterprise Park is also titled 'CAE Industrial Park', and a direct DESC 115 kV line (way/1083493573) connects this substation to Springdale.",
+  "desc:6809 O: used the St. George 115 kV switching substation (way/185032978), not the 230 kV 'Saint George Switching Station' 600 m away, because the plan's line is 115 kV. Added the Don's Car Crushing (DCC Metals) tap named in the plan to locate the 3.4-mile rebuilt section."
+ ],
  "unresolved": [
-  "placeholder"
+  "desc:0147 A-I Clements Ferry Rd Sub (new): site not public. It is at the end of a 2.8-mile tap from Cainhoy, near Clements Ferry Road, Berkeley County, but the direction is unknown.",
+  "desc:6808 V James Island: cannot tie the name to one of the several unnamed 115 kV substations on James Island. Camp Rd is only a road locality.",
+  "desc:6877 A / 6869 D Long Savannah: estimated from plan mileage (3.0 mi from Church Creek on the HIFLD corridor). No mapped substation or public site.",
+  "desc:6888 Deerfield Switching Station: linked to the Jasper County hamlet by name only. No public source gives the site.",
+  "Lower-confidence unnamed-OSM matches: Clemson Wind Turbine, Williams Street, N. Bridge Terrace, Calhoun County. Localities: Coast Guard, Union Pier.",
+  "Cross-batch: desc-2 put 'Cameron Jct' (6810 U, 6809 F) at the Cameron town centroid. This batch found the actual junction pole (OSM node/5211620240, 33.54637,-80.69793), which matches all three plan mileages. Consider updating desc-2.",
+  "Cross-batch: NRC FSAR Table 8.1-1 (cached nrc-vcsummer-fsar-ch8-rev22 p.10) lists 'VCS2 \u2013 Bush River 230' and 'Saluda Hydro #1/#2 \u2013 Bush River (B)/(W) 115' as ties to Duke Energy Carolinas. desc-1's 'Bush River' (6870 A), placed at an unnamed DESC 230/115 kV substation in Columbia (34.01969,-81.12803), should be rechecked. A 230 kV branch from V.C. Summer (OSM way/185197504) heads toward Newberry (ends at 34.2467,-81.5887)."
  ]
 }
