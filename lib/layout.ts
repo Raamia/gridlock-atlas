@@ -1,0 +1,368 @@
+import { useEffect, useLayoutEffect, useMemo, useSyncExternalStore } from "react";
+import { useAtlas, type AtlasState, type SheetSnap } from "@/lib/store";
+
+/**
+ * One source of truth for the floating layout over the full-bleed map (SPEC §3).
+ *
+ * `computeLayout` is pure (unit-tested in tests/layout.test.ts). `useLayout()` feeds it the viewport and the store and
+ * writes the result as CSS custom properties, so every floating element positions itself only from these variables:
+ *
+ *   --gutter        outer gutter (12 phone · 16 · 20 at ≥1536)
+ *   --header-h      header strip height (48); the header sits at top: var(--gutter)
+ *   --panel-top     top of the rail, inspector, key chip, demo card (gutter + header + 12; phone + 8)
+ *   --rail-w        Opportunities panel width (also the lg pill overlay / md drawer width; phone = viewport width)
+ *   --inspector-w   inspector width, written even while it is closed so it can animate in (phone = viewport width)
+ *   --dock-h        timeline dock height (overview 96 · pair 196 · collapsed 44 · 0 on phones / hidden UI)
+ *   --focal-l/t/r/b the focal hole as INSETS from the viewport edges (like CSS `inset`), gaps to the panels included:
+ *                   left = gutter + rail + 12 when the rail is docked, right = gutter + inspector + 12 when it is open,
+ *                   top = --panel-top, bottom = gutter + dock + 12 (phone: bottom sheet + 8)
+ *   --focal-w/h     size of that hole
+ *   --demo-card-w   guided-demo card width, min(520, focal width − 24)
+ *   --sheet-h       phone bottom-sheet height for the current snap (0 on desktop)
+ *
+ * e.g. the dock is `left: var(--focal-l); right: var(--focal-r); bottom: var(--gutter); height: var(--dock-h)`, the
+ * map controls are `right: var(--focal-r); bottom: var(--focal-b)`, the key chip is `left: var(--focal-l); top: var(--focal-t)`.
+ * The shell also gets `data-tier` (xl | lg | md | phone) and `data-rail-mode` (panel | pill | drawer | sheet).
+ */
+
+export type Tier = "xl" | "lg" | "md" | "phone";
+export type RailMode = "panel" | "pill" | "drawer" | "sheet";
+
+export interface LayoutOptions {
+  inspectorOpen: boolean;
+  /** lg/md: the rail pill's overlay is open (never changes the focal hole: it floats over the map). */
+  railOpen: boolean;
+  demoOn: boolean;
+  /** The user's dock toggle; the layout may still force the dock collapsed (see `dockForced`). */
+  timelineCollapsed: boolean;
+  isPhone: boolean;
+  /** Pair selected → the dock shows the pair Gantt (196) instead of the overview (96). */
+  pairSelected: boolean;
+  /** 0-based demo step: the dock stays open on steps 1 and 4 (indices 0 and 3); unknown → collapsed while the demo runs. */
+  demoStep?: number | null;
+  /** Phone bottom-sheet snap (ignored while the inspector sheet is open). */
+  sheetSnap?: SheetSnap;
+  /** H key: panels hidden (the demo card stays); the focal hole grows to the gutters. */
+  uiHidden?: boolean;
+}
+
+export interface Insets {
+  l: number;
+  t: number;
+  r: number;
+  b: number;
+}
+
+export interface Layout {
+  vw: number;
+  vh: number;
+  tier: Tier;
+  railMode: RailMode;
+  /** The rail is docked on the left as a full-height panel (xl always; lg while the inspector is closed). */
+  railDocked: boolean;
+  /** The "Opportunities · N" pill shows at the focal top-left (lg with the inspector open, md always). */
+  pillVisible: boolean;
+  gutter: number;
+  headerH: number;
+  panelTop: number;
+  railW: number;
+  inspectorW: number;
+  dockH: number;
+  dockCollapsed: boolean;
+  /** Collapsed by a layout rule (md tier, demo step other than 1/4, focal height < 300) — the toggle cannot expand it. */
+  dockForced: boolean;
+  /** Phone bottom-sheet height for the current snap (inspector sheet when open); 0 on desktop. */
+  sheetH: number;
+  /** Focal hole as insets from the viewport edges. */
+  focal: Insets;
+  focalW: number;
+  focalH: number;
+  demoCardW: number;
+  /** Map key chip collapses to its 32px (i): phones, while the demo runs, or when the focal hole is narrower than 900. */
+  keyCollapsed: boolean;
+}
+
+export const HEADER_H = 48;
+/** Gap between a panel and the focal hole / between stacked floating elements. */
+export const PANEL_GAP = 12;
+export const RAIL = { min: 336, max: 392, vw: 0.25 } as const;
+export const INSPECTOR = { min: 384, max: 440, vw: 0.29, md: 360 } as const;
+export const DOCK = { overview: 96, pair: 196, collapsed: 44 } as const;
+/** Below this focal height (with the full dock) the dock collapses to its 44px summary. */
+export const MIN_FOCAL_H = 300;
+export const DEMO_CARD_MAX_W = 520;
+export const PHONE_SHEET = { peek: 132, half: 0.52, full: 0.88, inspector: 0.64 } as const;
+
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+
+export function tierOf(vw: number, isPhone = false): Tier {
+  if (isPhone || vw < 768) return "phone";
+  if (vw >= 1280) return "xl";
+  if (vw >= 1024) return "lg";
+  return "md";
+}
+
+export function computeLayout(vw: number, vh: number, o: LayoutOptions): Layout {
+  const tier = tierOf(vw, o.isPhone);
+  const phone = tier === "phone";
+  const hidden = !!o.uiHidden;
+  const gutter = phone ? 12 : vw >= 1536 ? 20 : 16;
+  const headerH = HEADER_H;
+  const panelTop = gutter + headerH + (phone ? 8 : PANEL_GAP);
+
+  if (phone) {
+    const snap = o.sheetSnap ?? "peek";
+    const sheetH = Math.round(
+      o.inspectorOpen ? vh * PHONE_SHEET.inspector : snap === "full" ? vh * PHONE_SHEET.full : snap === "half" ? vh * PHONE_SHEET.half : PHONE_SHEET.peek,
+    );
+    const focal = { l: gutter, t: panelTop, r: gutter, b: hidden ? gutter : sheetH + 8 };
+    const focalW = Math.max(0, vw - focal.l - focal.r);
+    return {
+      vw,
+      vh,
+      tier,
+      railMode: "sheet",
+      railDocked: false,
+      pillVisible: false,
+      gutter,
+      headerH,
+      panelTop,
+      railW: vw,
+      inspectorW: vw,
+      dockH: 0,
+      dockCollapsed: true,
+      dockForced: true,
+      sheetH: hidden ? 0 : sheetH,
+      focal,
+      focalW,
+      focalH: Math.max(0, vh - focal.t - focal.b),
+      demoCardW: Math.max(0, vw - 2 * gutter),
+      keyCollapsed: true,
+    };
+  }
+
+  const railW = tier === "xl" ? clamp(Math.round(vw * RAIL.vw), RAIL.min, RAIL.max) : RAIL.min;
+  const inspectorW = tier === "xl" ? clamp(Math.round(vw * INSPECTOR.vw), INSPECTOR.min, INSPECTOR.max) : tier === "lg" ? INSPECTOR.min : INSPECTOR.md;
+  const railMode: RailMode = tier === "xl" ? "panel" : tier === "lg" ? (o.inspectorOpen ? "pill" : "panel") : "drawer";
+  const railDocked = railMode === "panel" && !hidden;
+  const inspectorShown = o.inspectorOpen && !hidden;
+
+  const l = railDocked ? gutter + railW + PANEL_GAP : gutter;
+  const r = inspectorShown ? gutter + inspectorW + PANEL_GAP : gutter;
+  const t = panelTop;
+
+  const fullDock = o.pairSelected ? DOCK.pair : DOCK.overview;
+  const step = o.demoStep;
+  const demoCollapses = o.demoOn && !(step === 0 || step === 3);
+  const tooShort = vh - t - (gutter + fullDock + PANEL_GAP) < MIN_FOCAL_H;
+  const dockForced = tier === "md" || demoCollapses || tooShort;
+  const dockCollapsed = dockForced || o.timelineCollapsed;
+  const dockH = hidden ? 0 : dockCollapsed ? DOCK.collapsed : fullDock;
+  const b = dockH ? gutter + dockH + PANEL_GAP : gutter;
+
+  const focal = { l, t, r, b };
+  const focalW = Math.max(0, vw - l - r);
+  const focalH = Math.max(0, vh - t - b);
+  return {
+    vw,
+    vh,
+    tier,
+    railMode,
+    railDocked,
+    pillVisible: !hidden && (railMode === "pill" || railMode === "drawer"),
+    gutter,
+    headerH,
+    panelTop,
+    railW,
+    inspectorW,
+    dockH,
+    dockCollapsed,
+    dockForced,
+    sheetH: 0,
+    focal,
+    focalW,
+    focalH,
+    demoCardW: Math.max(0, Math.min(DEMO_CARD_MAX_W, focalW - 24)),
+    keyCollapsed: o.demoOn || focalW < 900,
+  };
+}
+
+export interface RectLike {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+}
+
+export interface CameraPadding {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
+
+/** Breathing room inside the focal hole; the top also clears the 32px map-key chip row on desktop. */
+export const CAMERA_INSET = { top: 44, phoneTop: 16, side: 24, bottom: 24 } as const;
+/** fitBounds always keeps at least this many px of frame on each axis. */
+export const MIN_FRAME = 80;
+
+/**
+ * Mapbox camera padding for the focal hole: the layout's insets plus breathing room, plus the measured guided-demo card
+ * (a card in the top half pushes the top down, one in the bottom half pushes the bottom up). Shrunk proportionally so
+ * fitBounds can always succeed (at least MIN_FRAME px of frame on each axis).
+ */
+export function cameraPadding(l: Layout, demoCard?: RectLike | null): CameraPadding {
+  const phone = l.tier === "phone";
+  const pad: CameraPadding = {
+    top: l.focal.t + (phone ? CAMERA_INSET.phoneTop : CAMERA_INSET.top),
+    right: l.focal.r + CAMERA_INSET.side,
+    bottom: l.focal.b + CAMERA_INSET.bottom,
+    left: l.focal.l + CAMERA_INSET.side,
+  };
+  if (demoCard && demoCard.bottom > demoCard.top) {
+    if ((demoCard.top + demoCard.bottom) / 2 < l.vh / 2) pad.top = Math.max(pad.top, Math.round(demoCard.bottom + 16));
+    else pad.bottom = Math.max(pad.bottom, Math.round(l.vh - demoCard.top + 16));
+  }
+  const fit = (a: number, b: number, total: number): [number, number] => {
+    const max = Math.max(0, total - MIN_FRAME);
+    const k = a + b > max ? max / (a + b) : 1;
+    return [Math.floor(a * k), Math.floor(b * k)];
+  };
+  [pad.left, pad.right] = fit(pad.left, pad.right, l.vw);
+  [pad.top, pad.bottom] = fit(pad.top, pad.bottom, l.vh);
+  return pad;
+}
+
+/** The CSS custom properties for a layout (px strings), as `useLayout` writes them. */
+export function layoutCssVars(l: Layout): Record<string, string> {
+  const px = (n: number) => `${Math.round(n)}px`;
+  return {
+    "--gutter": px(l.gutter),
+    "--header-h": px(l.headerH),
+    "--panel-top": px(l.panelTop),
+    "--rail-w": px(l.railW),
+    "--inspector-w": px(l.inspectorW),
+    "--dock-h": px(l.dockH),
+    "--focal-l": px(l.focal.l),
+    "--focal-t": px(l.focal.t),
+    "--focal-r": px(l.focal.r),
+    "--focal-b": px(l.focal.b),
+    "--focal-w": px(l.focalW),
+    "--focal-h": px(l.focalH),
+    "--demo-card-w": px(l.demoCardW),
+    "--sheet-h": px(l.sheetH),
+  };
+}
+
+/* ------------------------------------------------ client hook ------------------------------------------------ */
+
+const SERVER_VIEWPORT = { vw: 1440, vh: 900 } as const;
+let viewport: { vw: number; vh: number } = SERVER_VIEWPORT;
+
+function readViewport() {
+  if (typeof window === "undefined") return SERVER_VIEWPORT;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  if (vw !== viewport.vw || vh !== viewport.vh) viewport = { vw, vh };
+  return viewport;
+}
+
+function subscribeViewport(cb: () => void) {
+  window.addEventListener("resize", cb);
+  window.addEventListener("orientationchange", cb);
+  return () => {
+    window.removeEventListener("resize", cb);
+    window.removeEventListener("orientationchange", cb);
+  };
+}
+
+/** Live viewport size (SSR and hydration: 1440×900, the judge layout). */
+export function useViewport(): { vw: number; vh: number } {
+  return useSyncExternalStore(subscribeViewport, readViewport, () => SERVER_VIEWPORT);
+}
+
+function writeVars(l: Layout) {
+  const vars = layoutCssVars(l);
+  const targets = new Set<HTMLElement>([document.documentElement]);
+  const shell = document.querySelector<HTMLElement>(".atlas-shell");
+  if (shell) targets.add(shell);
+  for (const el of targets) {
+    for (const [k, v] of Object.entries(vars)) if (el.style.getPropertyValue(k) !== v) el.style.setProperty(k, v);
+    if (el.dataset.tier !== l.tier) el.dataset.tier = l.tier;
+    if (el.dataset.railMode !== l.railMode) el.dataset.railMode = l.railMode;
+  }
+}
+
+type LayoutInputs = Pick<AtlasState, "inspectorOpen" | "railOpen" | "demoStep" | "timelineCollapsed" | "selectedMatchId" | "sheetSnap" | "uiHidden">;
+
+/** Layout options from the store fields that drive the layout (shared by useLayout and getLayout, so they always agree). */
+export function layoutOptions(s: LayoutInputs, vw: number): LayoutOptions {
+  return {
+    inspectorOpen: s.inspectorOpen,
+    railOpen: s.railOpen,
+    demoOn: s.demoStep !== null,
+    demoStep: s.demoStep,
+    timelineCollapsed: s.timelineCollapsed,
+    isPhone: vw < 768,
+    pairSelected: s.selectedMatchId !== null,
+    sheetSnap: s.sheetSnap,
+    uiHidden: s.uiHidden,
+  };
+}
+
+/**
+ * The layout right now, outside React: e.g. MapStage computing camera padding at call time
+ * (`cameraPadding(getLayout(), demoCard?.getBoundingClientRect())`).
+ */
+export function getLayout(): Layout {
+  const { vw, vh } = readViewport();
+  return computeLayout(vw, vh, layoutOptions(useAtlas.getState(), vw));
+}
+
+/** Just the tier (cheaper than useLayout: re-renders only when the viewport crosses a breakpoint). */
+export function useTier(): Tier {
+  return useSyncExternalStore(subscribeViewport, () => tierOf(readViewport().vw), () => tierOf(SERVER_VIEWPORT.vw));
+}
+
+// the tier the dock default was last applied for (module-wide, so a late-mounting caller never re-collapses the dock)
+let dockDefaultTier: Tier | null = null;
+
+/**
+ * The live layout. Safe to call from any client component (Atlas calls it once so the variables exist on first paint
+ * after hydration; other callers just read it). Writes the CSS variables on `.atlas-shell` and `<html>` (so portals get
+ * them too) and, whenever the tier changes, applies the dock default: collapsed on lg/md ("starts collapsed"), open on xl.
+ */
+export function useLayout(): Layout {
+  const { vw, vh } = useViewport();
+  const inspectorOpen = useAtlas((s) => s.inspectorOpen);
+  const railOpen = useAtlas((s) => s.railOpen);
+  const demoStep = useAtlas((s) => s.demoStep);
+  const timelineCollapsed = useAtlas((s) => s.timelineCollapsed);
+  const pairSelected = useAtlas((s) => s.selectedMatchId !== null);
+  const sheetSnap = useAtlas((s) => s.sheetSnap);
+  const uiHidden = useAtlas((s) => s.uiHidden);
+
+  const layout = useMemo(
+    () =>
+      computeLayout(
+        vw,
+        vh,
+        layoutOptions({ inspectorOpen, railOpen, demoStep, timelineCollapsed, selectedMatchId: pairSelected ? "" : null, sheetSnap, uiHidden }, vw),
+      ),
+    [vw, vh, inspectorOpen, railOpen, demoStep, timelineCollapsed, pairSelected, sheetSnap, uiHidden],
+  );
+
+  useLayoutEffect(() => writeVars(layout), [layout]);
+
+  useEffect(() => {
+    if (dockDefaultTier === layout.tier) return;
+    const first = dockDefaultTier === null;
+    dockDefaultTier = layout.tier;
+    const collapsed = layout.tier === "lg" || layout.tier === "md";
+    // xl starts open, which is already the store default
+    if (first && !collapsed) return;
+    if (useAtlas.getState().timelineCollapsed !== collapsed) useAtlas.getState().set({ timelineCollapsed: collapsed });
+  }, [layout.tier]);
+
+  return layout;
+}
