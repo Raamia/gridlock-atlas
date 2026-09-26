@@ -40,32 +40,46 @@ export function PermitSearch({ compact }: { compact: boolean }) {
     return () => document.removeEventListener("pointerdown", away);
   }, [open]);
 
+  // only the newest request may update the panel (a slow earlier search never overwrites a newer one)
+  const seq = useRef(0);
+  const searched = useRef("");
   const run = async (text: string) => {
     const t = text.trim();
     if (t.length < 2) return;
-    setQ(t);
+    const id = ++seq.current;
+    searched.current = t;
     setOpen(true);
     setBusy("search");
     setError(null);
     setFresh(null);
     try {
-      setResult(await post<SearchResult>({ q: t }));
+      const r = await post<SearchResult>({ q: t });
+      if (id === seq.current) setResult(r);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "the permit portals did not answer");
+      if (id === seq.current) setError(e instanceof Error ? e.message : "the permit portals did not answer");
     } finally {
-      setBusy(null);
+      if (id === seq.current) setBusy(null);
     }
   };
+  // search on its own once typing pauses (3+ characters); Enter or the button searches at once
+  useEffect(() => {
+    const t = q.trim();
+    if (t.length < 3 || t === searched.current) return;
+    const timer = window.setTimeout(() => void run(t), 700);
+    return () => window.clearTimeout(timer);
+  }, [q]);
   const checkNew = async () => {
+    const id = ++seq.current;
     setBusy("new");
     setError(null);
     setResult(null);
     try {
-      setFresh(await post<LiveCheck>({}));
+      const r = await post<LiveCheck>({});
+      if (id === seq.current) setFresh(r);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "the permit portals did not answer");
+      if (id === seq.current) setError(e instanceof Error ? e.message : "the permit portals did not answer");
     } finally {
-      setBusy(null);
+      if (id === seq.current) setBusy(null);
     }
   };
   const onKey = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -87,15 +101,25 @@ export function PermitSearch({ compact }: { compact: boolean }) {
         onKeyDown={onKey}
         onFocus={() => setOpen(true)}
         maxLength={60}
-        placeholder="Search state permits…"
-        aria-label="Search state permit filings (Georgia EPD and SC DES)"
+        placeholder="Permits: e.g. Goshen"
+        aria-label="Search state permit filings by facility name (Georgia EPD and SC DES)"
         className="min-w-0 flex-1 bg-transparent text-[12.5px] text-fg-1 outline-none placeholder:text-fg-3"
       />
       {busy === "search" && <Spinner size={12} label="Searching" />}
       {q && !busy && (
-        <button type="button" aria-label="Clear" onClick={() => (setQ(""), setResult(null), input.current?.focus())} className="text-fg-3 hover:text-fg-1">
-          <X size={12} />
-        </button>
+        <>
+          <button
+            type="button"
+            aria-label="Clear"
+            onClick={() => (setQ(""), setResult(null), (searched.current = ""), input.current?.focus())}
+            className="text-fg-3 hover:text-fg-1"
+          >
+            <X size={12} />
+          </button>
+          <button type="button" onClick={() => void run(q)} className="rounded-full bg-bg-3 px-2 py-0.5 text-[11px] text-fg-1 ring-1 ring-line hover:ring-line-2">
+            Search
+          </button>
+        </>
       )}
     </label>
   );
@@ -125,9 +149,15 @@ export function PermitSearch({ compact }: { compact: boolean }) {
 
           <div className="min-h-0 flex-1 overflow-y-auto px-3 py-2" aria-live="polite">
             {!result && !fresh && !busy && !error && (
+              <p className="mb-2 text-[11.5px] leading-snug text-fg-2">
+                Type a <b className="font-medium text-fg-1">place or facility name</b>, such as a substation or line, and press Enter. It matches the name a builder gave the
+                permit, not a state or a company. Try the places behind the top leads:
+              </p>
+            )}
+            {!result && !fresh && !busy && !error && (
               <div className="flex flex-wrap gap-1.5">
                 {SUGGESTIONS.map((s) => (
-                  <button key={s} type="button" onClick={() => void run(s)} className="rounded-full bg-bg-3 px-2.5 py-1 text-[11.5px] text-fg-1 ring-1 ring-line hover:ring-line-2">
+                  <button key={s} type="button" onClick={() => (setQ(s), void run(s))} className="rounded-full bg-bg-3 px-2.5 py-1 text-[11.5px] text-fg-1 ring-1 ring-line hover:ring-line-2">
                     {s}
                   </button>
                 ))}
@@ -152,7 +182,11 @@ export function PermitSearch({ compact }: { compact: boolean }) {
                     <Row key={b.objectId} date={b.boundaryFiled} name={b.project} meta={`${b.acres} acres`} />
                   ))}
                 </Group>
-                <p className="text-[11px] text-fg-3">Dimmed rows do not look like power work by name. Newest first; at most 40 per state.</p>
+                {result.georgia.length + result.southCarolina.length === 0 ? (
+                  <p className="text-[11px] text-fg-3">Try a shorter or different place name, e.g. a substation (“McIntosh”) or one end of a line (“Goshen”).</p>
+                ) : (
+                  <p className="text-[11px] text-fg-3">Bold rows look like power work; dimmed rows (roads, housing, businesses) do not. Newest first; at most 40 per state.</p>
+                )}
               </div>
             )}
 
