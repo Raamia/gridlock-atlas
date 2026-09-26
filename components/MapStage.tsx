@@ -1,6 +1,10 @@
 "use client";
 
-import mapboxgl, { type GeoJSONSource, type LngLatBoundsLike, type StyleSpecification } from "mapbox-gl";
+import mapboxgl, {
+  type GeoJSONSource,
+  type LngLatBoundsLike,
+  type StyleSpecification,
+} from "mapbox-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { Project } from "@/lib/domain/types";
@@ -55,7 +59,16 @@ const roleColor: mapboxgl.ExpressionSpecification = [
   COLORS.all,
 ];
 
-const roleOpacity = (base: number, dim: number): mapboxgl.ExpressionSpecification => ["match", ["get", "role"], "other", dim, base];
+const roleOpacity = (
+  base: number,
+  dim: number,
+): mapboxgl.ExpressionSpecification => [
+  "match",
+  ["get", "role"],
+  "other",
+  dim,
+  base,
+];
 
 /** 3D mode tilts the region overview too, so the toggle always does something visible. */
 const OVERVIEW_PITCH = 45;
@@ -70,16 +83,40 @@ function offlineStyle(): StyleSpecification {
       "ctx-states": { type: "geojson", data: "/geo/states.json" },
     },
     layers: [
-      { id: "bg", type: "background", paint: { "background-color": "#060d1c" } },
-      { id: "ctx-states-fill", type: "fill", source: "ctx-states", paint: { "fill-emissive-strength": 1, "fill-color": "#0b1528", "fill-opacity": 1 } },
-      { id: "ctx-states-line", type: "line", source: "ctx-states", paint: { "line-emissive-strength": 1, "line-color": "#2a3a5c", "line-width": 1.1 } },
+      {
+        id: "bg",
+        type: "background",
+        paint: { "background-color": "#060d1c" },
+      },
+      {
+        id: "ctx-states-fill",
+        type: "fill",
+        source: "ctx-states",
+        paint: {
+          "fill-emissive-strength": 1,
+          "fill-color": "#0b1528",
+          "fill-opacity": 1,
+        },
+      },
+      {
+        id: "ctx-states-line",
+        type: "line",
+        source: "ctx-states",
+        paint: {
+          "line-emissive-strength": 1,
+          "line-color": "#2a3a5c",
+          "line-width": 1.1,
+        },
+      },
     ],
   };
 }
 
 function styleFor(basemap: Basemap): string | StyleSpecification {
   if (basemap === "offline" || !TOKEN) return offlineStyle();
-  return basemap === "satellite" ? "mapbox://styles/mapbox/standard-satellite" : "mapbox://styles/mapbox/standard";
+  return basemap === "satellite"
+    ? "mapbox://styles/mapbox/standard-satellite"
+    : "mapbox://styles/mapbox/standard";
 }
 
 function isStandard(basemap: Basemap) {
@@ -92,8 +129,20 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
   const slot = isStandard(basemap) ? { slot: "top" as const } : {};
   const empty = { type: "FeatureCollection" as const, features: [] };
 
-  if (!map.getSource("ctx-counties")) map.addSource("ctx-counties", { type: "geojson", data: "/geo/counties.json" });
-  for (const id of ["gl-halos", "gl-routes", "gl-points", "gl-connector", "gl-overlaps", "gl-overlap-dots", "gl-centers"]) {
+  if (!map.getSource("ctx-counties"))
+    map.addSource("ctx-counties", {
+      type: "geojson",
+      data: "/geo/counties.json",
+    });
+  for (const id of [
+    "gl-halos",
+    "gl-routes",
+    "gl-points",
+    "gl-connector",
+    "gl-overlaps",
+    "gl-overlap-dots",
+    "gl-centers",
+  ]) {
     if (!map.getSource(id)) map.addSource(id, { type: "geojson", data: empty });
   }
 
@@ -102,7 +151,12 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "ctx-counties-line",
     type: "line",
     source: "ctx-counties",
-    paint: { "line-emissive-strength": 1, "line-color": "#8aa0ce", "line-opacity": basemap === "offline" ? 0.13 : 0.0, "line-width": 0.6 },
+    paint: {
+      "line-emissive-strength": 1,
+      "line-color": "#8aa0ce",
+      "line-opacity": basemap === "offline" ? 0.13 : 0.0,
+      "line-width": 0.6,
+    },
     ...slot,
   });
   map.addLayer({
@@ -110,7 +164,11 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "fill",
     source: "ctx-counties",
     filter: ["==", ["get", "fips"], "__none__"],
-    paint: { "fill-emissive-strength": 1, "fill-color": "#8aa0ce", "fill-opacity": 0.05 },
+    paint: {
+      "fill-emissive-strength": 1,
+      "fill-color": "#8aa0ce",
+      "fill-opacity": 0.05,
+    },
     ...slot,
   });
   map.addLayer({
@@ -118,7 +176,13 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "ctx-counties",
     filter: ["==", ["get", "fips"], "__none__"],
-    paint: { "line-emissive-strength": 1, "line-color": "#8aa0ce", "line-opacity": 0.4, "line-width": 1, "line-dasharray": [2, 2] },
+    paint: {
+      "line-emissive-strength": 1,
+      "line-color": "#8aa0ce",
+      "line-opacity": 0.4,
+      "line-width": 1,
+      "line-dasharray": [2, 2],
+    },
     ...slot,
   });
 
@@ -126,14 +190,24 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-halos-fill",
     type: "fill",
     source: "gl-halos",
-    paint: { "fill-emissive-strength": 1, "fill-color": roleColor, "fill-opacity": roleOpacity(0.1, 0.03) },
+    paint: {
+      "fill-emissive-strength": 1,
+      "fill-color": roleColor,
+      "fill-opacity": roleOpacity(0.1, 0.03),
+    },
     ...slot,
   });
   map.addLayer({
     id: "gl-halos-line",
     type: "line",
     source: "gl-halos",
-    paint: { "line-emissive-strength": 1, "line-color": roleColor, "line-opacity": roleOpacity(0.55, 0.15), "line-width": 1, "line-dasharray": [1.5, 1.5] },
+    paint: {
+      "line-emissive-strength": 1,
+      "line-color": roleColor,
+      "line-opacity": roleOpacity(0.55, 0.15),
+      "line-width": 1,
+      "line-dasharray": [1.5, 1.5],
+    },
     ...slot,
   });
 
@@ -142,7 +216,13 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "gl-routes",
     layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-emissive-strength": 1, "line-color": roleColor, "line-width": ["interpolate", ["linear"], ["zoom"], 5, 6, 10, 14], "line-blur": 8, "line-opacity": roleOpacity(0.35, 0.05) },
+    paint: {
+      "line-emissive-strength": 1,
+      "line-color": roleColor,
+      "line-width": ["interpolate", ["linear"], ["zoom"], 5, 6, 10, 14],
+      "line-blur": 8,
+      "line-opacity": roleOpacity(0.35, 0.05),
+    },
     ...slot,
   });
   map.addLayer({
@@ -150,11 +230,17 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "gl-routes",
     layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-emissive-strength": 1,
+    paint: {
+      "line-emissive-strength": 1,
       "line-color": roleColor,
       "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2, 10, 3.5],
       "line-opacity": roleOpacity(0.95, 0.3),
-      "line-dasharray": ["case", ["==", ["get", "precision"], "official-map-digitized"], ["literal", [2.2, 1.6]], ["literal", [1, 0]]],
+      "line-dasharray": [
+        "case",
+        ["==", ["get", "precision"], "official-map-digitized"],
+        ["literal", [2.2, 1.6]],
+        ["literal", [1, 0]],
+      ],
     },
     ...slot,
   });
@@ -165,11 +251,27 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "gl-overlaps",
     layout: { "line-cap": "round" },
-    paint: { "line-emissive-strength": 1,
+    paint: {
+      "line-emissive-strength": 1,
       "line-color": COLORS.amber,
-      "line-width": ["interpolate", ["linear"], ["get", "priority"], 20, 4, 100, 12],
+      "line-width": [
+        "interpolate",
+        ["linear"],
+        ["get", "priority"],
+        20,
+        4,
+        100,
+        12,
+      ],
       "line-blur": 6,
-      "line-opacity": ["case", ["get", "selected"], 0.5, ["get", "dim"], 0, 0.22],
+      "line-opacity": [
+        "case",
+        ["get", "selected"],
+        0.5,
+        ["get", "dim"],
+        0,
+        0.22,
+      ],
     },
     ...slot,
   });
@@ -178,10 +280,26 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "line",
     source: "gl-overlaps",
     layout: { "line-cap": "round" },
-    paint: { "line-emissive-strength": 1,
+    paint: {
+      "line-emissive-strength": 1,
       "line-color": COLORS.amber,
-      "line-width": ["interpolate", ["linear"], ["get", "priority"], 20, 1.2, 100, 2.6],
-      "line-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.05, 0.75],
+      "line-width": [
+        "interpolate",
+        ["linear"],
+        ["get", "priority"],
+        20,
+        1.2,
+        100,
+        2.6,
+      ],
+      "line-opacity": [
+        "case",
+        ["get", "selected"],
+        0,
+        ["get", "dim"],
+        0.05,
+        0.75,
+      ],
       "line-dasharray": [1, 1.6],
     },
     ...slot,
@@ -191,7 +309,13 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-connector",
     type: "line",
     source: "gl-connector",
-    paint: { "line-emissive-strength": 1, "line-color": COLORS.amber, "line-width": 1.6, "line-dasharray": [0.5, 2], "line-opacity": 0.9 },
+    paint: {
+      "line-emissive-strength": 1,
+      "line-color": COLORS.amber,
+      "line-width": 1.6,
+      "line-dasharray": [0.5, 2],
+      "line-opacity": 0.9,
+    },
     layout: { "line-cap": "round" },
     ...slot,
   });
@@ -200,7 +324,8 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-points-halo",
     type: "circle",
     source: "gl-points",
-    paint: { "circle-emissive-strength": 1,
+    paint: {
+      "circle-emissive-strength": 1,
       "circle-radius": ["match", ["get", "precision"], "named-facility", 9, 6],
       "circle-color": roleColor,
       "circle-opacity": roleOpacity(0.18, 0.04),
@@ -212,11 +337,44 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-points",
     type: "circle",
     source: "gl-points",
-    paint: { "circle-emissive-strength": 1,
-      "circle-radius": ["case", ["==", ["get", "context"], true], 3.5, ["match", ["get", "precision"], "named-facility", 4.5, 3.5]],
-      "circle-color": ["case", ["==", ["get", "context"], true], "rgba(12,21,40,0.9)", ["match", ["get", "precision"], "named-facility", roleColor, "rgba(12,21,40,0.9)"]],
-      "circle-stroke-color": ["case", ["==", ["get", "context"], true], roleColor, ["match", ["get", "precision"], "named-facility", "rgba(4,9,20,0.9)", roleColor]],
-      "circle-stroke-width": ["case", ["==", ["get", "context"], true], 1.4, ["match", ["get", "precision"], "named-facility", 1.2, 1.8]],
+    paint: {
+      "circle-emissive-strength": 1,
+      "circle-radius": [
+        "case",
+        ["==", ["get", "context"], true],
+        3.5,
+        ["match", ["get", "precision"], "named-facility", 4.5, 3.5],
+      ],
+      "circle-color": [
+        "case",
+        ["==", ["get", "context"], true],
+        "rgba(12,21,40,0.9)",
+        [
+          "match",
+          ["get", "precision"],
+          "named-facility",
+          roleColor,
+          "rgba(12,21,40,0.9)",
+        ],
+      ],
+      "circle-stroke-color": [
+        "case",
+        ["==", ["get", "context"], true],
+        roleColor,
+        [
+          "match",
+          ["get", "precision"],
+          "named-facility",
+          "rgba(4,9,20,0.9)",
+          roleColor,
+        ],
+      ],
+      "circle-stroke-width": [
+        "case",
+        ["==", ["get", "context"], true],
+        1.4,
+        ["match", ["get", "precision"], "named-facility", 1.2, 1.8],
+      ],
       "circle-opacity": roleOpacity(1, 0.35),
       "circle-stroke-opacity": roleOpacity(1, 0.35),
     },
@@ -227,13 +385,36 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-overlap-dots",
     type: "circle",
     source: "gl-overlap-dots",
-    paint: { "circle-emissive-strength": 1,
-      "circle-radius": ["interpolate", ["linear"], ["get", "priority"], 20, 3.5, 100, 7],
+    paint: {
+      "circle-emissive-strength": 1,
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["get", "priority"],
+        20,
+        3.5,
+        100,
+        7,
+      ],
       "circle-color": COLORS.amber,
-      "circle-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.12, 0.95],
+      "circle-opacity": [
+        "case",
+        ["get", "selected"],
+        0,
+        ["get", "dim"],
+        0.12,
+        0.95,
+      ],
       "circle-stroke-color": "rgba(4,9,20,0.9)",
       "circle-stroke-width": 1.5,
-      "circle-stroke-opacity": ["case", ["get", "selected"], 0, ["get", "dim"], 0.1, 1],
+      "circle-stroke-opacity": [
+        "case",
+        ["get", "selected"],
+        0,
+        ["get", "dim"],
+        0.1,
+        1,
+      ],
     },
     ...slot,
   });
@@ -242,10 +423,17 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     id: "gl-centers",
     type: "circle",
     source: "gl-centers",
-    paint: { "circle-emissive-strength": 1,
+    paint: {
+      "circle-emissive-strength": 1,
       "circle-radius": 5,
       "circle-color": "rgba(4,9,20,0.6)",
-      "circle-stroke-color": ["match", ["get", "role"], "a", COLORS.a, COLORS.b],
+      "circle-stroke-color": [
+        "match",
+        ["get", "role"],
+        "a",
+        COLORS.a,
+        COLORS.b,
+      ],
       "circle-stroke-width": 1.5,
       "circle-pitch-alignment": "map",
     },
@@ -257,7 +445,11 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
       id: "gl-point-labels",
       type: "symbol",
       source: "gl-points",
-      filter: ["all", ["match", ["get", "role"], ["a", "b", "hover"], true, false], ["!=", ["get", "onSite"], true]],
+      filter: [
+        "all",
+        ["match", ["get", "role"], ["a", "b", "hover"], true, false],
+        ["!=", ["get", "onSite"], true],
+      ],
       layout: {
         "text-field": ["get", "label"],
         "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
@@ -267,13 +459,22 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
         "text-optional": true,
         "text-max-width": 10,
       },
-      paint: { "text-emissive-strength": 1, "text-color": "#c1cbe0", "text-halo-color": "#040914", "text-halo-width": 1.4 },
+      paint: {
+        "text-emissive-strength": 1,
+        "text-color": "#c1cbe0",
+        "text-halo-color": "#040914",
+        "text-halo-width": 1.4,
+      },
       ...slot,
     });
   }
 }
 
-function applyTerrain(map: mapboxgl.Map, mode: "3d" | "flat", basemap: Basemap) {
+function applyTerrain(
+  map: mapboxgl.Map,
+  mode: "3d" | "flat",
+  basemap: Basemap,
+) {
   // a style swap may still be loading; "style.load" re-applies terrain once it is ready
   if (!map.isStyleLoaded()) return;
   if (!isStandard(basemap)) {
@@ -281,9 +482,16 @@ function applyTerrain(map: mapboxgl.Map, mode: "3d" | "flat", basemap: Basemap) 
     return;
   }
   if (!map.getSource("mapbox-dem")) {
-    map.addSource("mapbox-dem", { type: "raster-dem", url: "mapbox://mapbox.mapbox-terrain-dem-v1", tileSize: 512, maxzoom: 14 });
+    map.addSource("mapbox-dem", {
+      type: "raster-dem",
+      url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+      tileSize: 512,
+      maxzoom: 14,
+    });
   }
-  map.setTerrain(mode === "3d" ? { source: "mapbox-dem", exaggeration: 1.8 } : null);
+  map.setTerrain(
+    mode === "3d" ? { source: "mapbox-dem", exaggeration: 1.8 } : null,
+  );
 }
 
 function configureStandard(map: mapboxgl.Map, basemap: Basemap) {
@@ -322,7 +530,10 @@ export default function MapStage() {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
-  const callouts = useRef<{ items: Callout[]; dots: Dot[] }>({ items: [], dots: [] });
+  const callouts = useRef<{ items: Callout[]; dots: Dot[] }>({
+    items: [],
+    dots: [],
+  });
   const popup = useRef<mapboxgl.Popup | null>(null);
   const [styleReady, setStyleReady] = useState(0);
   const [mapReady, setMapReady] = useState(false);
@@ -345,7 +556,13 @@ export default function MapStage() {
     const ids = new Set<string>();
     for (const p of SNAPSHOT.projects) {
       if (region !== "all" && p.region !== region) continue;
-      if (run && run.excludedProjects.some((x) => x.projectId === p.id) && preview?.a.id !== p.id && preview?.b.id !== p.id) continue;
+      if (
+        run &&
+        run.excludedProjects.some((x) => x.projectId === p.id) &&
+        preview?.a.id !== p.id &&
+        preview?.b.id !== p.id
+      )
+        continue;
       ids.add(p.id);
     }
     if (preview) {
@@ -360,7 +577,9 @@ export default function MapStage() {
     if (!el.current || mapRef.current) return;
     mapboxgl.accessToken = TOKEN;
     const startOffline = typeof navigator !== "undefined" && !navigator.onLine;
-    const initialBasemap: Basemap = startOffline ? "offline" : useAtlas.getState().basemap;
+    const initialBasemap: Basemap = startOffline
+      ? "offline"
+      : useAtlas.getState().basemap;
     if (startOffline) set({ basemap: "offline", basemapFailed: true });
     const all = boundsOf(SNAPSHOT.projects.flatMap(projectCoords));
     const map = new mapboxgl.Map({
@@ -374,13 +593,23 @@ export default function MapStage() {
       pitch: 0,
       // globe + terrain fails to draw on some GPUs; mercator is also the honest reading projection
       projection: "mercator",
+      // keep the camera over the US: caps zoom-out at "whole country" for any viewport size
+      maxBounds: [
+        [-125, 22.5],
+        [-55.5, 53.8],
+      ],
+      renderWorldCopies: false,
       attributionControl: false,
       logoPosition: "bottom-right",
       maxPitch: 70,
     });
-    map.addControl(new mapboxgl.AttributionControl({ compact: true }), "bottom-right");
+    map.addControl(
+      new mapboxgl.AttributionControl({ compact: true }),
+      "bottom-right",
+    );
     mapRef.current = map;
-    if (process.env.NODE_ENV !== "production") (window as unknown as { __map: mapboxgl.Map }).__map = map;
+    if (process.env.NODE_ENV !== "production")
+      (window as unknown as { __map: mapboxgl.Map }).__map = map;
     const ro = new ResizeObserver(() => map.resize());
     ro.observe(el.current);
 
@@ -391,7 +620,11 @@ export default function MapStage() {
       // enabling terrain during the first style load can stall the first frame on some GPUs; wait for idle
       map.once("idle", () => {
         try {
-          applyTerrain(map, useAtlas.getState().mapMode, useAtlas.getState().basemap);
+          applyTerrain(
+            map,
+            useAtlas.getState().mapMode,
+            useAtlas.getState().basemap,
+          );
         } catch {
           /* presentation-only */
         }
@@ -403,18 +636,38 @@ export default function MapStage() {
     map.on("error", (e) => {
       const status = (e.error as { status?: number } | undefined)?.status;
       const msg = String(e.error?.message ?? "");
-      const tileOrStyleFailure = status === 401 || status === 403 || /Failed to fetch|NetworkError|style/i.test(msg);
+      const tileOrStyleFailure =
+        status === 401 ||
+        status === 403 ||
+        /Failed to fetch|NetworkError|style/i.test(msg);
       if (tileOrStyleFailure && useAtlas.getState().basemap !== "offline") {
         set({ basemap: "offline", basemapFailed: true });
       }
     });
 
-    const hoverLayers = ["gl-overlap-dots", "gl-overlaps", "gl-routes", "gl-points", "gl-halos-fill"];
+    const hoverLayers = [
+      "gl-overlap-dots",
+      "gl-overlaps",
+      "gl-routes",
+      "gl-points",
+      "gl-halos-fill",
+    ];
     // touch: no hover and no mouseout to ever close a hover card, so a tap shows the project card instead
     const isTouch = (oe: Event) =>
-      !!(oe as MouseEvent & { sourceCapabilities?: { firesTouchEvents?: boolean } }).sourceCapabilities?.firesTouchEvents || !!window.matchMedia?.("(hover: none)").matches;
+      !!(
+        oe as MouseEvent & {
+          sourceCapabilities?: { firesTouchEvents?: boolean };
+        }
+      ).sourceCapabilities?.firesTouchEvents ||
+      !!window.matchMedia?.("(hover: none)").matches;
     const showCard = (html: string, at: mapboxgl.LngLat) => {
-      if (!popup.current) popup.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 14, maxWidth: "300px" });
+      if (!popup.current)
+        popup.current = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false,
+          offset: 14,
+          maxWidth: "300px",
+        });
       popup.current.setLngLat(at).setHTML(html).addTo(map);
     };
     const projectCard = (f: mapboxgl.MapboxGeoJSONFeature, p: Project) => {
@@ -427,8 +680,11 @@ export default function MapStage() {
       </div>`;
     };
     map.on("click", (ev) => {
-      const layers = ["gl-overlap-dots", "gl-overlaps"].filter((l) => map.getLayer(l));
-      const id = map.queryRenderedFeatures(ev.point, { layers })[0]?.properties?.id as string | undefined;
+      const layers = ["gl-overlap-dots", "gl-overlaps"].filter((l) =>
+        map.getLayer(l),
+      );
+      const id = map.queryRenderedFeatures(ev.point, { layers })[0]?.properties
+        ?.id as string | undefined;
       if (id) {
         // a tap also fires an emulated mousemove that opened the hover card; it would ride along with the camera
         popup.current?.remove();
@@ -441,7 +697,11 @@ export default function MapStage() {
         [x - 10, y - 10],
         [x + 10, y + 10],
       ];
-      const f = map.queryRenderedFeatures(box, { layers: hoverLayers.filter((l) => map.getLayer(l)) }).find((x) => x.properties?.projectId);
+      const f = map
+        .queryRenderedFeatures(box, {
+          layers: hoverLayers.filter((l) => map.getLayer(l)),
+        })
+        .find((x) => x.properties?.projectId);
       const p = f ? IDX.project(f.properties!.projectId as string) : undefined;
       if (f && p) showCard(projectCard(f, p), ev.lngLat);
       else popup.current?.remove();
@@ -450,17 +710,24 @@ export default function MapStage() {
       if (isTouch(ev.originalEvent)) return;
       const layers = hoverLayers.filter((l) => map.getLayer(l));
       const all = map.queryRenderedFeatures(ev.point, { layers });
-      const ov = all.find((x) => x.layer?.id === "gl-overlap-dots" || x.layer?.id === "gl-overlaps");
+      const ov = all.find(
+        (x) =>
+          x.layer?.id === "gl-overlap-dots" || x.layer?.id === "gl-overlaps",
+      );
       if (ov && ov.properties?.id) {
         map.getCanvas().style.cursor = "pointer";
-        const m = useAtlas.getState().run?.matches.find((x) => x.id === ov.properties!.id);
+        const m = useAtlas
+          .getState()
+          .run?.matches.find((x) => x.id === ov.properties!.id);
         if (m) {
           const pa = IDX.project(m.projectAId);
           const pb = IDX.project(m.projectBId);
           const c = m.geoDetail.center;
           const thr = m.geoDetail.thresholdMiles;
           // flagged for a shared facility, not for distance: name the facility, never a bare "105 mi apart"
-          const byFacility = m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint";
+          const byFacility =
+            m.geoDetail.method === "shared-site" ||
+            m.geoDetail.method === "shared-endpoint";
           const place = byFacility
             ? `${geoShort(m).title}${c && c.miles > thr ? ` (centers ${formatMilesNear(c.miles, thr)} apart)` : ""}`
             : c
@@ -485,19 +752,30 @@ export default function MapStage() {
       const pid = f?.properties?.projectId as string | undefined;
       if (!pid) {
         popup.current?.remove();
-        if (useAtlas.getState().hoveredProjectId) set({ hoveredProjectId: null });
+        if (useAtlas.getState().hoveredProjectId)
+          set({ hoveredProjectId: null });
         return;
       }
       const p = IDX.project(pid);
       if (!p) return;
-      if (useAtlas.getState().hoveredProjectId !== pid && !useAtlas.getState().selectedMatchId) set({ hoveredProjectId: pid });
+      if (
+        useAtlas.getState().hoveredProjectId !== pid &&
+        !useAtlas.getState().selectedMatchId
+      )
+        set({ hoveredProjectId: pid });
       showCard(projectCard(f, p), ev.lngLat);
     };
     map.on("mousemove", onMove);
     map.on("mouseout", () => popup.current?.remove());
     map.on("touchstart", () => popup.current?.remove());
 
-    const relayout = (ev?: { type: string }) => layoutCallouts(map, callouts.current.items, callouts.current.dots, ev?.type === "move");
+    const relayout = (ev?: { type: string }) =>
+      layoutCallouts(
+        map,
+        callouts.current.items,
+        callouts.current.dots,
+        ev?.type === "move",
+      );
     map.on("move", relayout);
     map.on("moveend", relayout);
     map.on("resize", relayout);
@@ -525,7 +803,9 @@ export default function MapStage() {
     if (lastBasemap.current === basemap) return;
     lastBasemap.current = basemap;
     // diff:false forces a full reload so "style.load" fires and our layers are re-added
-    map.setStyle(styleFor(basemap), { diff: false } as Parameters<typeof map.setStyle>[1]);
+    map.setStyle(styleFor(basemap), { diff: false } as Parameters<
+      typeof map.setStyle
+    >[1]);
   }, [basemap]);
 
   /* terrain / pitch */
@@ -537,8 +817,10 @@ export default function MapStage() {
     } catch {
       /* terrain is presentation-only; never let it break the map */
     }
-    if (mapMode === "flat") map.easeTo({ pitch: 0, bearing: 0, duration: reduced ? 0 : 700 });
-    else if (useAtlas.getState().selectedMatchId) map.easeTo({ pitch: 52, bearing: -14, duration: reduced ? 0 : 900 });
+    if (mapMode === "flat")
+      map.easeTo({ pitch: 0, bearing: 0, duration: reduced ? 0 : 700 });
+    else if (useAtlas.getState().selectedMatchId)
+      map.easeTo({ pitch: 52, bearing: -14, duration: reduced ? 0 : 900 });
     else map.easeTo({ pitch: OVERVIEW_PITCH, duration: reduced ? 0 : 900 });
   }, [mapMode, styleReady, reduced]);
 
@@ -551,35 +833,76 @@ export default function MapStage() {
       hoveredProjectId,
       visibleProjectIds,
     };
-    (map.getSource("gl-routes") as GeoJSONSource | undefined)?.setData(routeFeatures(ctx));
-    (map.getSource("gl-halos") as GeoJSONSource | undefined)?.setData(haloFeatures(ctx));
+    (map.getSource("gl-routes") as GeoJSONSource | undefined)?.setData(
+      routeFeatures(ctx),
+    );
+    (map.getSource("gl-halos") as GeoJSONSource | undefined)?.setData(
+      haloFeatures(ctx),
+    );
     // the shared-site callout names the meeting point, so the map's own place names there are not repeated under it
     const site = sharedSite(preview?.match ?? null);
     const points = pointFeatures(ctx);
     if (site)
       for (const f of points.features) {
         const [lon, lat] = f.geometry.coordinates;
-        if (Math.hypot((lon - site.lon) * Math.cos((lat * Math.PI) / 180), lat - site.lat) * 69 < 0.6) f.properties.onSite = true;
+        if (
+          Math.hypot(
+            (lon - site.lon) * Math.cos((lat * Math.PI) / 180),
+            lat - site.lat,
+          ) *
+            69 <
+          0.6
+        )
+          f.properties.onSite = true;
       }
     (map.getSource("gl-points") as GeoJSONSource | undefined)?.setData(points);
-    (map.getSource("gl-connector") as GeoJSONSource | undefined)?.setData(connectorFeature(preview?.match ?? null));
-    (map.getSource("gl-centers") as GeoJSONSource | undefined)?.setData(centerFeatures(preview?.match ?? null));
-    const visibleMatches = (run?.matches ?? []).filter((m) => visibleProjectIds.has(m.projectAId) && visibleProjectIds.has(m.projectBId));
+    (map.getSource("gl-connector") as GeoJSONSource | undefined)?.setData(
+      connectorFeature(preview?.match ?? null),
+    );
+    (map.getSource("gl-centers") as GeoJSONSource | undefined)?.setData(
+      centerFeatures(preview?.match ?? null),
+    );
+    const visibleMatches = (run?.matches ?? []).filter(
+      (m) =>
+        visibleProjectIds.has(m.projectAId) &&
+        visibleProjectIds.has(m.projectBId),
+    );
     const ov = overlapFeatures(visibleMatches, preview?.match.id ?? null);
     const dim = (fc: typeof ov.lines | typeof ov.dots) => ({
       ...fc,
-      features: fc.features.map((f) => ({ ...f, properties: { ...f.properties, dim: !!preview && f.properties.id !== preview.match.id } })),
+      features: fc.features.map((f) => ({
+        ...f,
+        properties: {
+          ...f.properties,
+          dim: !!preview && f.properties.id !== preview.match.id,
+        },
+      })),
     });
-    (map.getSource("gl-overlaps") as GeoJSONSource | undefined)?.setData(dim(ov.lines) as GeoJSON.FeatureCollection);
-    (map.getSource("gl-overlap-dots") as GeoJSONSource | undefined)?.setData(dim(ov.dots) as GeoJSON.FeatureCollection);
+    (map.getSource("gl-overlaps") as GeoJSONSource | undefined)?.setData(
+      dim(ov.lines) as GeoJSON.FeatureCollection,
+    );
+    (map.getSource("gl-overlap-dots") as GeoJSONSource | undefined)?.setData(
+      dim(ov.dots) as GeoJSON.FeatureCollection,
+    );
 
-    const counties = projectCounties({ ...ctx, visibleProjectIds: preview ? new Set([preview.a.id, preview.b.id]) : new Set() });
+    const counties = projectCounties({
+      ...ctx,
+      visibleProjectIds: preview
+        ? new Set([preview.a.id, preview.b.id])
+        : new Set(),
+    });
     const names = counties.map((c) => `${c.name}|${c.state}`);
     const filter: mapboxgl.FilterSpecification = names.length
-      ? ["in", ["concat", ["get", "name"], "|", ["get", "state"]], ["literal", names]]
+      ? [
+          "in",
+          ["concat", ["get", "name"], "|", ["get", "state"]],
+          ["literal", names],
+        ]
       : ["==", ["get", "fips"], "__none__"];
-    if (map.getLayer("ctx-counties-hl-fill")) map.setFilter("ctx-counties-hl-fill", filter);
-    if (map.getLayer("ctx-counties-hl-line")) map.setFilter("ctx-counties-hl-line", filter);
+    if (map.getLayer("ctx-counties-hl-fill"))
+      map.setFilter("ctx-counties-hl-fill", filter);
+    if (map.getLayer("ctx-counties-hl-line"))
+      map.setFilter("ctx-counties-hl-line", filter);
   }, [styleReady, preview, hoveredProjectId, visibleProjectIds, run]);
 
   /* HTML callouts for the previewed pair, ranked: shared site > project labels > distance chip */
@@ -588,25 +911,50 @@ export default function MapStage() {
     markers.current.forEach((mk) => mk.remove());
     markers.current = [];
     callouts.current = { items: [], dots: [] };
-    const m = previewId ? useAtlas.getState().run?.matches.find((x) => x.id === previewId) : undefined;
+    const m = previewId
+      ? useAtlas.getState().run?.matches.find((x) => x.id === previewId)
+      : undefined;
     if (!map || !styleReady || !m) return;
     const items: Callout[] = [];
     const dots: Dot[] = [];
-    const add = (root: HTMLElement, at: [number, number], rank: number, spots: Callout["spots"], optional = false) => {
+    const add = (
+      root: HTMLElement,
+      at: [number, number],
+      rank: number,
+      spots: Callout["spots"],
+      optional = false,
+    ) => {
       root.style.zIndex = String(rank);
-      markers.current.push(new mapboxgl.Marker({ element: root, anchor: "center" }).setLngLat(at).addTo(map));
-      items.push({ box: root.querySelector<HTMLElement>("[data-callout]")!, at, spots, optional });
+      markers.current.push(
+        new mapboxgl.Marker({ element: root, anchor: "center" })
+          .setLngLat(at)
+          .addTo(map),
+      );
+      items.push({
+        box: root.querySelector<HTMLElement>("[data-callout]")!,
+        at,
+        spots,
+        optional,
+      });
     };
     const c = m.geoDetail.center;
     const site = sharedSite(m);
     if (site) {
-      const caption = site.stated ? "Shared site stated in source" : site.implied ? "Shared site implied by sources" : "Both projects end here";
+      const caption = site.stated
+        ? "Shared site stated in source"
+        : site.implied
+          ? "Shared site implied by sources"
+          : "Both projects end here";
       // first choice: the side facing away from the pair, where the project labels are not
       const left = !!c && site.lon < (c.a[0] + c.b[0]) / 2;
       // the dot sits below the project labels (2): a label that has to touch the site hides the dot, never its own text
       const dot = siteDot();
       dot.style.zIndex = "1";
-      markers.current.push(new mapboxgl.Marker({ element: dot, anchor: "center" }).setLngLat([site.lon, site.lat]).addTo(map));
+      markers.current.push(
+        new mapboxgl.Marker({ element: dot, anchor: "center" })
+          .setLngLat([site.lon, site.lat])
+          .addTo(map),
+      );
       add(siteMarker(site.label, caption), [site.lon, site.lat], 3, (w, h) => {
         const [r, l] = [16, -16 - w];
         const spots = [
@@ -624,7 +972,20 @@ export default function MapStage() {
           { x: -12, y: -12 - h },
           { x: 12 - w, y: -12 - h },
         ];
-        return left ? [spots[1], spots[0], spots[2], spots[4], spots[3], spots[5], tight[1], tight[0], tight[3], tight[2]] : [...spots, ...tight];
+        return left
+          ? [
+              spots[1],
+              spots[0],
+              spots[2],
+              spots[4],
+              spots[3],
+              spots[5],
+              tight[1],
+              tight[0],
+              tight[3],
+              tight[2],
+            ]
+          : [...spots, ...tight];
       });
       // the shared-site dot is the pair's one amber landmark: covering it is all but ruled out
       dots.push({ at: [site.lon, site.lat], weight: 20, site: true });
@@ -640,36 +1001,53 @@ export default function MapStage() {
       if (!at) continue;
       if (c) dots.push({ at, weight: 1 });
       const above = role === "a" ? aAbove : !aAbove;
-      add(projectLabel(p.shortTitle, ownerNames(p, IDX, true), role), at, 2, (w, h) => {
-        const up = [
-          { x: -w / 2, y: -12 - h },
-          { x: -14, y: -12 - h },
-          { x: 14 - w, y: -12 - h },
-        ];
-        const down = up.map((s) => ({ x: s.x, y: 12 }));
-        const side = [
-          { x: 14, y: -h / 2 },
-          { x: -14 - w, y: -h / 2 },
-        ];
-        return above ? [...up, ...side, ...down] : [...down, ...side, ...up];
-      });
+      add(
+        projectLabel(p.shortTitle, ownerNames(p, IDX, true), role),
+        at,
+        2,
+        (w, h) => {
+          const up = [
+            { x: -w / 2, y: -12 - h },
+            { x: -14, y: -12 - h },
+            { x: 14 - w, y: -12 - h },
+          ];
+          const down = up.map((s) => ({ x: s.x, y: 12 }));
+          const side = [
+            { x: 14, y: -h / 2 },
+            { x: -14 - w, y: -h / 2 },
+          ];
+          return above ? [...up, ...side, ...down] : [...down, ...side, ...up];
+        },
+      );
     }
     const conn = connectorFeature(m).features[0];
     if (conn) {
-      const [[x1, y1], [x2, y2]] = conn.geometry.coordinates as [number, number][];
-      const along = (t: number): [number, number] => [x1 + (x2 - x1) * t, y1 + (y2 - y1) * t];
+      const [[x1, y1], [x2, y2]] = conn.geometry.coordinates as [
+        number,
+        number,
+      ][];
+      const along = (t: number): [number, number] => [
+        x1 + (x2 - x1) * t,
+        y1 + (y2 - y1) * t,
+      ];
       // slides along the connector (then flips above it) to stay clear of the site and the project labels
-      add(distanceLabel(conn.properties.label), along(0.5), 1, (w, h) => {
-        const p0 = map.project(along(0.5));
-        return [0.5, 0.35, 0.65, 0.2, 0.8].flatMap((t) => {
-          const p = map.project(along(t));
-          const [x, y] = [p.x - p0.x - w / 2, p.y - p0.y];
-          return [
-            { x, y: y + 8 },
-            { x, y: y - 8 - h },
-          ];
-        });
-      }, true);
+      add(
+        distanceLabel(conn.properties.label),
+        along(0.5),
+        1,
+        (w, h) => {
+          const p0 = map.project(along(0.5));
+          return [0.5, 0.35, 0.65, 0.2, 0.8].flatMap((t) => {
+            const p = map.project(along(t));
+            const [x, y] = [p.x - p0.x - w / 2, p.y - p0.y];
+            return [
+              { x, y: y + 8 },
+              { x, y: y - 8 - h },
+            ];
+          });
+        },
+        true,
+      );
     }
     callouts.current = { items, dots };
     layoutCallouts(map, items, dots);
@@ -690,21 +1068,35 @@ export default function MapStage() {
       const rect = map.getContainer().getBoundingClientRect();
       const mobile = cw < 640;
       // the phone sheet moves down to clear a tall demo card: read where it really starts
-      const sheetTop = document.querySelector('aside[aria-label="Evidence inspector"]')?.getBoundingClientRect().top ?? window.innerHeight * 0.46;
+      const sheetTop =
+        document
+          .querySelector('aside[aria-label="Evidence inspector"]')
+          ?.getBoundingClientRect().top ?? window.innerHeight * 0.46;
       // the guided-demo card sits over the map (top on phones, bottom-left on desktop): keep the pair clear of it
-      const demo = st.demoStep !== null && !st.briefOpen ? document.querySelector('[aria-label="Guided demo"]')?.getBoundingClientRect() : undefined;
+      const demo =
+        st.demoStep !== null && !st.briefOpen
+          ? document
+              .querySelector('[aria-label="Guided demo"]')
+              ?.getBoundingClientRect()
+          : undefined;
       const pad = mobile
         ? {
             top: demo ? Math.max(64, demo.bottom - rect.top + 16) : 64,
             left: 24,
             right: 24,
-            bottom: st.inspectorOpen ? Math.max(24, rect.bottom - sheetTop + 24) : 32,
+            bottom: st.inspectorOpen
+              ? Math.max(24, rect.bottom - sheetTop + 24)
+              : 32,
           }
         : {
             top: 90,
             left: 70,
             // leave room for the inspector column at whatever width the layout gives it
-            right: st.inspectorOpen ? (document.querySelector('[aria-label="Evidence inspector"]')?.getBoundingClientRect().width ?? 408) + 32 : 64,
+            right: st.inspectorOpen
+              ? (document
+                  .querySelector('[aria-label="Evidence inspector"]')
+                  ?.getBoundingClientRect().width ?? 408) + 32
+              : 64,
             bottom: demo ? Math.max(70, rect.bottom - demo.top + 24) : 70,
           };
       const fit = (a: number, b: number, total: number) => {
@@ -716,7 +1108,10 @@ export default function MapStage() {
       [pad.top, pad.bottom] = fit(pad.top, pad.bottom, ch);
       const right = pad.right;
       if (selected) {
-        const b = boundsOf([...projectCoords(selected.a), ...projectCoords(selected.b)]);
+        const b = boundsOf([
+          ...projectCoords(selected.a),
+          ...projectCoords(selected.b),
+        ]);
         if (b) {
           const threeD = st.mapMode === "3d";
           map.fitBounds(b as LngLatBoundsLike, {
@@ -736,11 +1131,20 @@ export default function MapStage() {
             [r.bbox[0], r.bbox[1]],
             [r.bbox[2], r.bbox[3]],
           ] as LngLatBoundsLike)
-        : (boundsOf(SNAPSHOT.projects.flatMap(projectCoords)) as LngLatBoundsLike | null);
+        : (boundsOf(
+            SNAPSHOT.projects.flatMap(projectCoords),
+          ) as LngLatBoundsLike | null);
       const ovPad = { ...pad, right: mobile ? pad.right : Math.min(right, 64) };
       // the expanded legend fills the bottom-left corner: frame the overview to its right (collapsed, it is a ~34px header)
-      const legend = mobile ? undefined : document.querySelector("[data-map-legend]")?.getBoundingClientRect();
-      if (legend && legend.height > 60) [ovPad.left, ovPad.right] = fit(Math.max(ovPad.left, Math.round(legend.right - rect.left + 16)), ovPad.right, cw);
+      const legend = mobile
+        ? undefined
+        : document.querySelector("[data-map-legend]")?.getBoundingClientRect();
+      if (legend && legend.height > 60)
+        [ovPad.left, ovPad.right] = fit(
+          Math.max(ovPad.left, Math.round(legend.right - rect.left + 16)),
+          ovPad.right,
+          cw,
+        );
       if (target)
         map.fitBounds(target, {
           padding: ovPad,
@@ -762,7 +1166,9 @@ export default function MapStage() {
   // or shrinks (the camera reads the sheet's new top), and the callouts relayout after the move
   useEffect(() => {
     const map = mapRef.current;
-    const card = document.querySelector<HTMLElement>('[aria-label="Guided demo"]');
+    const card = document.querySelector<HTMLElement>(
+      '[aria-label="Guided demo"]',
+    );
     if (!map || !mapReady || !demoOn || !card) return;
     let last = card.offsetHeight;
     const ro = new ResizeObserver(() => {
@@ -787,8 +1193,16 @@ export default function MapStage() {
 
   // mapbox-gl.css is unlayered and sets .mapboxgl-map{position:relative}, so size the map through a wrapper
   return (
-    <div className="absolute inset-0" data-inspector={inspectorOpen && !!selected}>
-      <div ref={el} style={{ width: "100%", height: "100%" }} aria-label="Map of public construction plans" role="region" />
+    <div
+      className="absolute inset-0"
+      data-inspector={inspectorOpen && !!selected}
+    >
+      <div
+        ref={el}
+        style={{ width: "100%", height: "100%" }}
+        aria-label="Map of public construction plans"
+        role="region"
+      />
     </div>
   );
 }
@@ -796,19 +1210,27 @@ export default function MapStage() {
 /* ------------------------------ marker elements ------------------------------ */
 
 function escapeHtml(s: string) {
-  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+  return s.replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ]!,
+  );
 }
 
 function precisionText(p: string) {
   return (
-    {
-      "official-gis": "official GIS",
-      "official-map-digitized": "schematic · not survey accurate",
-      "named-facility": "named facility",
-      locality: "approximate locality",
-      county: "county-level",
-    } as Record<string, string>
-  )[p] ?? p;
+    (
+      {
+        "official-gis": "official GIS",
+        "official-map-digitized": "schematic · not survey accurate",
+        "named-facility": "named facility",
+        locality: "approximate locality",
+        county: "county-level",
+      } as Record<string, string>
+    )[p] ?? p
+  );
 }
 
 function siteDot() {
@@ -878,35 +1300,74 @@ function overlapArea(a: Box, b: Box) {
  * hidden. While the camera moves, a callout keeps its spot as long as that spot stays clear, so labels do not hop
  * between equally good spots mid-flight.
  */
-function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[], moving = false) {
+function layoutCallouts(
+  map: mapboxgl.Map,
+  items: Callout[],
+  dots: Dot[],
+  moving = false,
+) {
   if (!items.length) return;
   const host = map.getContainer().getBoundingClientRect();
   // the map under the inspector (a side column, or a bottom sheet on phones) and under a full-width phone demo card is
   // hidden outright: take it out of the usable view rather than weighing it as a panel
   let [top, bottom, right] = [4, host.height - 4, host.width - 4];
-  for (const q of ['[aria-label="Evidence inspector"]', '[aria-label="Guided demo"]']) {
+  for (const q of [
+    '[aria-label="Evidence inspector"]',
+    '[aria-label="Guided demo"]',
+  ]) {
     const r = document.querySelector(q)?.getBoundingClientRect();
     if (!r || !r.width || !r.height) continue;
-    const [t, b, l] = [r.top - host.top, r.bottom - host.top, r.left - host.left];
+    const [t, b, l] = [
+      r.top - host.top,
+      r.bottom - host.top,
+      r.left - host.left,
+    ];
     if (r.width >= host.width * 0.9) {
       if (t + b < host.height) top = Math.max(top, b + 4);
       else bottom = Math.min(bottom, t - 4);
-    } else if (Math.min(b, host.height) - Math.max(t, 0) >= host.height / 2 && l > host.width / 4) right = Math.min(right, l - 4);
+    } else if (
+      Math.min(b, host.height) - Math.max(t, 0) >= host.height / 2 &&
+      l > host.width / 4
+    )
+      right = Math.min(right, l - 4);
   }
-  const view: Box = { x: 4, y: top, w: Math.max(80, right - 4), h: Math.max(40, bottom - top) };
-  const panels: Box[] = [...document.querySelectorAll<HTMLElement>("[data-map-ui]")]
+  const view: Box = {
+    x: 4,
+    y: top,
+    w: Math.max(80, right - 4),
+    h: Math.max(40, bottom - top),
+  };
+  const panels: Box[] = [
+    ...document.querySelectorAll<HTMLElement>("[data-map-ui]"),
+  ]
     .map((el) => el.getBoundingClientRect())
     .filter((r) => r.width > 0 && r.height > 0)
-    .map((r) => ({ x: r.left - host.left, y: r.top - host.top, w: r.width, h: r.height }));
+    .map((r) => ({
+      x: r.left - host.left,
+      y: r.top - host.top,
+      w: r.width,
+      h: r.height,
+    }));
   const dotBoxes = dots.map((d) => {
     const p = map.project(d.at);
-    return { x: p.x - 9, y: p.y - 9, w: 18, h: 18, weight: d.weight, site: !!d.site };
+    return {
+      x: p.x - 9,
+      y: p.y - 9,
+      w: 18,
+      h: 18,
+      weight: d.weight,
+      site: !!d.site,
+    };
   });
-  const sites = dotBoxes.filter((d) => d.site).map((d) => ({ x: d.x + 9, y: d.y + 9 }));
+  const sites = dotBoxes
+    .filter((d) => d.site)
+    .map((d) => ({ x: d.x + 9, y: d.y + 9 }));
   // the pair's place names (gl-point-labels: 11px, anchored top 1.1em below the dot, wrapped at 10em); the one on the
   // shared site is left out, since the site callout already names that place
   const names: Box[] = [];
-  const labels = map.getLayer("gl-point-labels") ? map.queryRenderedFeatures({ layers: ["gl-point-labels"] }) : [];
+  const labels = map.getLayer("gl-point-labels")
+    ? map.queryRenderedFeatures({ layers: ["gl-point-labels"] })
+    : [];
   for (const f of labels) {
     if (f.geometry.type !== "Point") continue;
     const p = map.project(f.geometry.coordinates as [number, number]);
@@ -916,21 +1377,40 @@ function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[], moving
     const h = Math.ceil((text.length * 6) / 116) * 13;
     names.push({ x: p.x - w / 2, y: p.y + 10, w, h });
   }
-  const clamp = (v: number, lo: number, hi: number) => Math.min(Math.max(v, lo), Math.max(lo, hi));
+  const clamp = (v: number, lo: number, hi: number) =>
+    Math.min(Math.max(v, lo), Math.max(lo, hi));
   const cands = items.map((c) => {
     const p = map.project(c.at);
     const [w, h] = [c.box.offsetWidth, c.box.offsetHeight];
-    const base = c.spots(w, h).map((s) => ({ s, r: { x: p.x + s.x, y: p.y + s.y, w, h } }));
+    const base = c
+      .spots(w, h)
+      .map((s) => ({ s, r: { x: p.x + s.x, y: p.y + s.y, w, h } }));
     // each spot again, slid back inside the view by at most half the box so it stays attached to its point; the
     // originals keep indices 0..n-1, so a callout's remembered spot stays stable and ties go to the preferred spots
     const slid = base.map(({ s, r }) => {
-      const sx = clamp(clamp(r.x, view.x, view.x + view.w - w) - r.x, -w / 2, w / 2);
-      const sy = clamp(clamp(r.y, view.y, view.y + view.h - h) - r.y, -h / 2, h / 2);
-      return { s: { x: s.x + sx, y: s.y + sy }, r: { x: r.x + sx, y: r.y + sy, w, h } };
+      const sx = clamp(
+        clamp(r.x, view.x, view.x + view.w - w) - r.x,
+        -w / 2,
+        w / 2,
+      );
+      const sy = clamp(
+        clamp(r.y, view.y, view.y + view.h - h) - r.y,
+        -h / 2,
+        h / 2,
+      );
+      return {
+        s: { x: s.x + sx, y: s.y + sy },
+        r: { x: r.x + sx, y: r.y + sy, w, h },
+      };
     });
     return [...base, ...slid];
   });
-  const grow = (r: Box): Box => ({ x: r.x - 4, y: r.y - 4, w: r.w + 8, h: r.h + 8 });
+  const grow = (r: Box): Box => ({
+    x: r.x - 4,
+    y: r.y - 4,
+    w: r.w + 8,
+    h: r.h + 8,
+  });
   // clipped or hidden text is lost outright; covering map UI costs as much as covering another callout; the shared
   // site's dot is weighted near a hard rule; a pair's own place names cost least
   const cost = (r: Box, placed: Box[]) =>
@@ -946,7 +1426,9 @@ function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[], moving
     const placed: Box[] = [];
     items.forEach((c, i) => {
       const prev = Number(c.box.dataset.spot ?? -1);
-      const order = cands[i].map((_, k) => k).sort((x, y) => Number(y === prev) - Number(x === prev));
+      const order = cands[i]
+        .map((_, k) => k)
+        .sort((x, y) => Number(y === prev) - Number(x === prev));
       let [best, low] = [order[0], Infinity];
       for (const k of order) {
         const v = cost(cands[i][k].r, placed);
@@ -967,7 +1449,11 @@ function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[], moving
       }
       if (items[i].optional) {
         cur[i] = cands[i].findIndex((c) => cost(c.r, placed) === 0);
-        return walk(i + 1, cur[i] >= 0 ? [...placed, grow(cands[i][cur[i]].r)] : placed, total);
+        return walk(
+          i + 1,
+          cur[i] >= 0 ? [...placed, grow(cands[i][cur[i]].r)] : placed,
+          total,
+        );
       }
       cands[i].forEach((c, k) => {
         cur[i] = k;
@@ -980,7 +1466,9 @@ function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[], moving
     const k = pick[i];
     const s = cands[i][Math.max(0, k)].s;
     const shown = c.box.dataset.spot !== undefined;
-    c.box.style.transition = shown ? "transform .2s var(--ease-out), opacity .2s" : "none";
+    c.box.style.transition = shown
+      ? "transform .2s var(--ease-out), opacity .2s"
+      : "none";
     c.box.style.transform = `translate(${Math.round(s.x)}px,${Math.round(s.y)}px)`;
     c.box.style.opacity = k < 0 ? "0" : "";
     if (k >= 0 || !shown) c.box.dataset.spot = String(Math.max(0, k));
