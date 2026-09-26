@@ -1,0 +1,80 @@
+{
+ "id": "desc-scrtp-2025-2029-p24",
+ "sourceId": "desc-scrtp-2025-2029",
+ "page": 24,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:01:32Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "St George - Sumter 230kV Tie: Rebuild Line from Santee Substation Duke/Progress Energy Tie",
+   "excerpt": "St George - Sumter 230kV Tie: Rebuild Line from Santee Substation Duke/Progress Energy Tie\nProject ID",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6809 M",
+   "excerpt": "Project ID\n6809 M\nProject Description\nRebuild Line from Santee Substation - Duke/Progress Energy Tie.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2027",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "230kV",
+   "excerpt": "St George - Sumter 230kV Tie: Rebuild Line from Santee Substation Duke/Progress Energy Tie\nProject ID",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$5,000,000",
+   "excerpt": "2029\n$0\n\nTotal*\n$5,000,000\n\n\f",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Santee Substation",
+   "excerpt": "Project Description\nRebuild Line from Santee Substation - Duke/Progress Energy Tie.\nProject Need\nGrid hardening.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 738,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 866,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1604
+ }
+}

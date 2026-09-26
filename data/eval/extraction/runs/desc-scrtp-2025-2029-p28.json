@@ -1,0 +1,101 @@
+{
+ "id": "desc-scrtp-2025-2029-p28",
+ "sourceId": "desc-scrtp-2025-2029",
+ "page": 28,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:01:36Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Dawson 230kV Sub and Fold-in: Construct and Rebuild",
+   "excerpt": "5 Year Budget\nDawson 230kV Sub and Fold-in: Construct and Rebuild\nProject ID",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6859",
+   "excerpt": "Dawson 230kV Sub and Fold-in: Construct and Rebuild\nProject ID\n6859\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Need\nLoad growth.\nProject Status\nIn Progress\nPlanned In-Service Date",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "10/1/2025 (phase 1) and 10/1/2026 (phase 2)",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n10/1/2025 (phase 1) and 10/1/2026 (phase 2)\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Construct Dawson 230kV substation. Fold in the existing Canadys – Church Creek and Canadys – Faber\nPlace 230kV lines",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$93,603,207",
+   "excerpt": "2029\n$0\n\nTotal*\n$93,603,207",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Dawson 230kV substation",
+   "excerpt": "Construct Dawson 230kV substation. Fold in the existing Canadys – Church Creek and Canadys – Faber\nPlace 230kV lines",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Canadys",
+   "excerpt": "Fold in the existing Canadys – Church Creek and Canadys – Faber\nPlace 230kV lines at the Dawson 230kV substation",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Church Creek",
+   "excerpt": "Fold in the existing Canadys – Church Creek and Canadys – Faber\nPlace 230kV lines at the Dawson 230kV substation",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "Faber Place",
+   "excerpt": "Fold in the existing Canadys – Church Creek and Canadys – Faber\nPlace 230kV lines at the Dawson 230kV substation",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 803,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 500,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1303
+ }
+}

@@ -32,6 +32,46 @@
    "cached": true
   },
   {
+   "id": "scpsc-2023-115-e-application",
+   "title": "DESC application for a Certificate: Jasper-Okatie 230 kV Line No. 2, Okatie-Riverport 230 kV Line, Riverport 230 kV Substation",
+   "publisher": "Public Service Commission of South Carolina (Docket 2023-115-E)",
+   "url": "https://dms.psc.sc.gov/Attachments/Matter/106e010f-4861-4bcc-a731-410e48b4383a",
+   "sourceType": "regulator",
+   "publishedAt": "2023-03-31",
+   "documentDateEvidence": "Filed March 31, 2023; stamped 'ACCEPTED FOR PROCESSING - 2023 April 3'. SC PSC Docket 2023-115-E.",
+   "cached": true
+  },
+  {
+   "id": "scpsc-2023-115-e-letter-2024-05",
+   "title": "DESC letter: revised commercial operation date (May 15, 2024)",
+   "publisher": "Public Service Commission of South Carolina (Docket 2023-115-E)",
+   "url": "https://dms.psc.sc.gov/Attachments/Matter/6ec50f04-9300-41f0-b38e-1d946792565f",
+   "sourceType": "regulator",
+   "publishedAt": "2024-05-15",
+   "documentDateEvidence": "DESC letter dated May 15, 2024. SC PSC Docket 2023-115-E.",
+   "cached": true
+  },
+  {
+   "id": "scpsc-2023-115-e-letter-2025-03",
+   "title": "DESC letter: permits status and commercial operation date December 1, 2026 (March 7, 2025)",
+   "publisher": "Public Service Commission of South Carolina (Docket 2023-115-E)",
+   "url": "https://dms.psc.sc.gov/Attachments/Matter/f3487fd5-e4cd-46a6-b02f-205db35134aa",
+   "sourceType": "regulator",
+   "publishedAt": "2025-03-07",
+   "documentDateEvidence": "Electronically filed March 7, 2025; no later schedule letter was found in the docket (searched 2026-09-26). SC PSC Docket 2023-115-E.",
+   "cached": true
+  },
+  {
+   "id": "scpsc-2023-115-e-order-2023-649",
+   "title": "Order No. 2023-649 granting Certificate (Jasper-Okatie 230 kV No. 2, Okatie-Riverport 230 kV, Riverport Substation)",
+   "publisher": "Public Service Commission of South Carolina (Docket 2023-115-E)",
+   "url": "https://dms.psc.sc.gov/Attachments/Order/5b993685-7507-4678-89a6-4a37390f8f28",
+   "sourceType": "regulator",
+   "publishedAt": "2023-09-07",
+   "documentDateEvidence": "Order No. 2023-649, dated September 7, 2023. SC PSC Docket 2023-115-E.",
+   "cached": true
+  },
+  {
    "id": "desc-jasper-okatie-sherwood-page",
    "title": "Jasper-Okatie-Sherwood power line project page",
    "publisher": "Dominion Energy South Carolina",
@@ -189,12 +229,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-04-01",
+      "latest": "2026-04-30",
+      "precision": "month"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 28,
+       "exactExcerpt": "Previous 2024 $2,475,000 $6,000,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 1,
+       "exactExcerpt": "Planned In-Service Date 04/31/26",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 04/30/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-04-01",
       "latest": "2026-04-30",
@@ -404,12 +478,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-05-31",
+      "latest": "2026-05-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 2,
+       "exactExcerpt": "Previous 2026 $150,364 $1,000,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 2,
+       "exactExcerpt": "Planned In-Service Date 05/31/26",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 05/31/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-05-31",
       "latest": "2026-05-31",
@@ -587,12 +695,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024; DESC also budgets spending after the planned in-service date (2027: $2,590,000), so the window may run to the end of 2027."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-05-31",
+      "latest": "2026-05-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 33,
+       "exactExcerpt": "Previous 2024 $65,000 $360,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 3,
+       "exactExcerpt": "Planned In-Service Date 5/31/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 05/31/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-05-31",
       "latest": "2026-05-31",
@@ -844,12 +986,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; DESC also budgets spending after the planned in-service date (2027: $850,000), so the window may run to the end of 2027."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-05-31",
+      "latest": "2026-05-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 34,
+       "exactExcerpt": "Previous 2025 $75,000 $175,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 4,
+       "exactExcerpt": "Planned In-Service Date 5/31/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 05/31/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-05-31",
       "latest": "2026-05-31",
@@ -1056,12 +1232,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-06-01",
+      "latest": "2026-06-30",
+      "precision": "month"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 32,
+       "exactExcerpt": "Previous 2024 $50,000 $200,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 5,
+       "exactExcerpt": "Planned In-Service Date 06/31/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 06/30/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-06-01",
       "latest": "2026-06-30",
@@ -1306,12 +1516,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-07-31",
+      "latest": "2026-07-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 6,
+       "exactExcerpt": "Previous 2026 2027 2028 2029 2030 Total $8,475,000 $0 $0 $0 $0 $12,475,000 $4,000,000",
+       "supports": "the budget table: spending before 2026 ('Previous' column) and by year",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 6,
+       "exactExcerpt": "Planned In-Service Date 07/31/26",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 07/31/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-07-31",
       "latest": "2026-07-31",
@@ -1518,12 +1762,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-08-12",
+      "latest": "2026-08-12",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 35,
+       "exactExcerpt": "Previous 2024 $100,000 $100,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 7,
+       "exactExcerpt": "Planned In-Service Date 8/12/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 08/12/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-08-12",
       "latest": "2026-08-12",
@@ -1716,12 +1994,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024; DESC also budgets spending after the planned in-service date (2027: $39,764,841), so the window may run to the end of 2027."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-10-01",
+      "latest": "2026-10-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 34,
+       "exactExcerpt": "Previous 2024 $284,366 $8,014,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 8,
+       "exactExcerpt": "Planned In-Service Date 10/1/2025 (phase 1) and 10/1/2026 (phase 2)",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 10/01/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-10-01",
       "latest": "2026-10-01",
@@ -1915,12 +2227,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-12-02",
+      "latest": "2026-12-02",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 4,
+       "exactExcerpt": "Previous 2024 $1,189,020 $6,601,830",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 9,
+       "exactExcerpt": "Planned In-Service Date 12/02/26",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/02/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-12-02",
       "latest": "2026-12-02",
@@ -2122,12 +2468,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-12-31",
+      "latest": "2026-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 30,
+       "exactExcerpt": "Previous 2024 $330,954 $2,178,648",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 10,
+       "exactExcerpt": "Planned In-Service Date 12/31/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/31/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-12-31",
       "latest": "2026-12-31",
@@ -2344,12 +2724,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024; DESC also budgets spending after the planned in-service date (2027: $1,024,912), so the window may run to the end of 2027."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-12-31",
+      "latest": "2026-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 3,
+       "exactExcerpt": "Previous 2024 $2,717,933 $6,631,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 11,
+       "exactExcerpt": "Planned In-Service Date 12/31/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/31/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-12-31",
       "latest": "2026-12-31",
@@ -2501,6 +2915,48 @@
        "verifiedByScript": true
       }
      ]
+    },
+    {
+     "key": "rowWidthFt",
+     "label": "Right-of-way width (SC PSC application)",
+     "value": "100 ft",
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-application",
+       "page": 2,
+       "exactExcerpt": "Jasper- Okatie 230 kV Line No. 2 EXTENDING FROM: Jasper Substation in Jasper County, South Carolina TO: Okatie Substation in Jasper County, South Carolina ESTIMATED LENGTH: 6.6 MILES WIDTH OF RIGHT-OF-WAY: 100 FEET",
+       "supports": "Jasper \u2013 Okatie 230 kV Line No. 2: length and right-of-way width in DESC's certificate application",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Construction estimate for the certificated facilities (SC PSC letter, Mar 2025)",
+     "value": "\u2248$98 million (revised from \u2248$54 million)",
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-letter-2025-03",
+       "page": 2,
+       "exactExcerpt": "DESC has revised its initial construction estimate from approximately $54 million to approximately $98 million.",
+       "supports": "DESC's revised construction estimate for both lines and the Riverport substation",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Existing corridor (SC PSC order)",
+     "value": "runs mostly beside an existing DESC and Santee Cooper right-of-way",
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-order-2023-649",
+       "page": 16,
+       "exactExcerpt": "most of the Jasper - Okatie 230 kV line No, 2 will run parallel and adjacent to an existing right-of-way containing multiple DESC and Santee Cooper transmission lines",
+       "supports": "Existing corridor (SC PSC order)",
+       "verifiedByScript": true
+      }
+     ]
     }
    ],
    "places": [
@@ -2590,6 +3046,13 @@
        "verifiedByScript": true
       },
       {
+       "sourceId": "scpsc-2023-115-e-letter-2025-03",
+       "page": 2,
+       "exactExcerpt": "review for the required South Carolina Coastal Zone Consistency Certification. DESC is hopeful that approval from the SCDES-BCM will be obtained soon.",
+       "supports": "in March 2025 a required state coastal-zone certification was still pending (caveat on the page's Q1 2025 start)",
+       "verifiedByScript": true
+      },
+      {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 12,
        "exactExcerpt": "Planned In-Service Date 12/01/2026",
@@ -2597,7 +3060,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Dominion project page: tree clearing and construction begin Q1 2025 (its timeline is marked 'Anticipated \u2013 Subject to Change'). The page gives no end, so the SCRTP planned in-service date bounds the window; the field work within is not dated.",
+     "note": "Dominion project page: tree clearing and construction begin Q1 2025 (its timeline is marked 'Anticipated \u2013 Subject to Change'). The page gives no end, so the SCRTP planned in-service date bounds the window; the field work within is not dated. In its March 7, 2025 letter to the SC PSC, DESC said a required South Carolina Coastal Zone Consistency Certification was still pending, so the anticipated Q1 2025 start may have slipped; no source gives a later start.",
      "sourceLabel": "Dominion project page start \u2192 SCRTP planned in-service"
     },
     {
@@ -2639,12 +3102,53 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-12-01",
+      "latest": "2026-12-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 23,
+       "exactExcerpt": "Previous 2024 $9,591,713 $5,087,710",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 12,
+       "exactExcerpt": "Planned In-Service Date 12/01/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "scpsc-2023-115-e-letter-2025-03",
+       "page": 2,
+       "exactExcerpt": "DESC now estimates the commercial operation date for the facilities to be December 1, 2026.",
+       "supports": "commercial operation date 12/01/2026 (SC PSC Docket 2023-115-E)",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/01/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-12-01",
       "latest": "2026-12-01",
@@ -2698,10 +3202,69 @@
       }
      ],
      "current": false
+    },
+    {
+     "claimSourceId": "scpsc-2023-115-e-letter-2025-03",
+     "label": "commercial operation (SC PSC letter of Mar 2025)",
+     "date": {
+      "earliest": "2026-12-01",
+      "latest": "2026-12-01",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-letter-2025-03",
+       "page": 2,
+       "exactExcerpt": "DESC now estimates the commercial operation date for the facilities to be December 1, 2026.",
+       "supports": "commercial operation date 12/01/2026 (SC PSC Docket 2023-115-E)",
+       "verifiedByScript": true
+      }
+     ],
+     "current": true
+    },
+    {
+     "claimSourceId": "scpsc-2023-115-e-letter-2024-05",
+     "label": "commercial operation (SC PSC letter of May 2024)",
+     "date": {
+      "earliest": "2026-05-31",
+      "latest": "2026-05-31",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-letter-2024-05",
+       "page": 1,
+       "exactExcerpt": "DESC now anticipates the facilities entering commercial operation by May 31, 2026.",
+       "supports": "commercial operation date 05/31/2026 (SC PSC Docket 2023-115-E)",
+       "verifiedByScript": true
+      }
+     ],
+     "current": false
+    },
+    {
+     "claimSourceId": "scpsc-2023-115-e-order-2023-649",
+     "label": "planned commercial operation (SC PSC Order No. 2023-649 of Sep 2023)",
+     "date": {
+      "earliest": "2025-05-31",
+      "latest": "2025-05-31",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-order-2023-649",
+       "page": 23,
+       "exactExcerpt": "any delays in the planned commercial operation date of May 31, 2025.",
+       "supports": "commercial operation date 05/31/2025 (SC PSC Docket 2023-115-E)",
+       "verifiedByScript": true
+      }
+     ],
+     "current": false
     }
    ],
    "knownCoordination": [],
-   "caveats": [],
+   "caveats": [
+    "SC PSC Docket 2023-115-E certificates the Jasper \u2013 Okatie 230 kV Line No. 2 (matched by name (Jasper \u2013 Okatie 230 kV #2)), together with the other Okatie line and the Riverport 230 kV substation. DESC's letters to the Commission move commercial operation from May 31, 2025 (Order No. 2023-649) to May 31, 2026 (May 2024 letter) to December 1, 2026 (March 2025 letter), the date the 2026\u20132030 list also gives; the earlier dates are kept as version history. The March 2025 letter says a required South Carolina Coastal Zone Consistency Certification was still pending and raises the construction estimate for the certificated facilities from about $54 million to about $98 million."
+   ],
    "docketId": "DESC project 06367 D - G",
    "region": "southeast"
   },
@@ -2777,6 +3340,103 @@
        "page": 13,
        "exactExcerpt": "Constructing a 230 kV Tap from Okatie to Riverport",
        "supports": "voltage stated in the project scope",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "rowWidthFt",
+     "label": "Right-of-way width (SC PSC application)",
+     "value": "150 ft",
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-application",
+       "page": 3,
+       "exactExcerpt": "Okatie \u2014 Riverport 230 kV Line EXTENDING FROM: Okatie Substation in Jasper County, South Carolina TO: Proposed Riverport Substation in Jasper County ESTIMATED LENGTH: 12.4 MILES WIDTH OF RIGHT-OF-WAY: 150 FEET",
+       "supports": "Okatie \u2013 Riverport 230 kV Line: length and right-of-way width in DESC's certificate application",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "lengthMiles",
+     "label": "Line length",
+     "value": "12.4 mi",
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-application",
+       "page": 3,
+       "exactExcerpt": "Okatie \u2014 Riverport 230 kV Line EXTENDING FROM: Okatie Substation in Jasper County, South Carolina TO: Proposed Riverport Substation in Jasper County ESTIMATED LENGTH: 12.4 MILES WIDTH OF RIGHT-OF-WAY: 150 FEET",
+       "supports": "Okatie \u2013 Riverport 230 kV Line: length and right-of-way width in DESC's certificate application",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Construction estimate for the certificated facilities (SC PSC letter, Mar 2025)",
+     "value": "\u2248$98 million (revised from \u2248$54 million)",
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-letter-2025-03",
+       "page": 2,
+       "exactExcerpt": "DESC has revised its initial construction estimate from approximately $54 million to approximately $98 million.",
+       "supports": "DESC's revised construction estimate for both lines and the Riverport substation",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Structures (SC PSC application)",
+     "value": "double-circuit single poles from Okatie Substation to Hardeeville Tap",
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-application",
+       "page": 3,
+       "exactExcerpt": "Single Pole (Double Circuit) Tangent and Angle Structures (from Okatie Substation to Hardeeville Tap)",
+       "supports": "Structures (SC PSC application)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Existing corridor (SC PSC order)",
+     "value": "about 3.1 miles inside an existing cleared DESC right-of-way",
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-order-2023-649",
+       "page": 16,
+       "exactExcerpt": "approximately 3.1 miles of the Okatie - Riverport 230 kV line will be built within an existing cleared DESC right-of-way where the proposed line will parallel existing DESC and Santee Cooper transmission lines",
+       "supports": "Existing corridor (SC PSC order)",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
+     "key": "other",
+     "label": "Earlier names of this tap (inference)",
+     "value": "Riverport Tap \u2192 Sherwood Tap \u2192 Riverport 115kV Tap",
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 22,
+       "exactExcerpt": "Riverport Tap: Construct Tap Project ID 06367 A - C, H",
+       "supports": "2024\u20132028 list: 'Riverport Tap', ID 06367 A - C, H",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 17,
+       "exactExcerpt": "Sherwood Tap: Construct Tap Project ID 06367 A - C, H",
+       "supports": "2025\u20132029 list: 'Sherwood Tap', same ID",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-jasper-okatie-sherwood-page",
+       "exactExcerpt": "The second 230 kV line will begin at the Okatie substation and end at the new Sherwood substation.",
+       "supports": "Dominion page: the second line ends at the new Sherwood substation",
        "verifiedByScript": true
       }
      ]
@@ -2873,12 +3533,53 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-12-01",
+      "latest": "2026-12-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 13,
+       "exactExcerpt": "Previous 2026 $14,773,047 $26,616,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 13,
+       "exactExcerpt": "Planned In-Service Date 12/01/26",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "scpsc-2023-115-e-letter-2025-03",
+       "page": 2,
+       "exactExcerpt": "DESC now estimates the commercial operation date for the facilities to be December 1, 2026.",
+       "supports": "commercial operation date 12/01/2026 (SC PSC Docket 2023-115-E)",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/01/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-12-01",
       "latest": "2026-12-01",
@@ -2894,12 +3595,71 @@
       }
      ],
      "current": true
+    },
+    {
+     "claimSourceId": "scpsc-2023-115-e-letter-2025-03",
+     "label": "commercial operation (SC PSC letter of Mar 2025)",
+     "date": {
+      "earliest": "2026-12-01",
+      "latest": "2026-12-01",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-letter-2025-03",
+       "page": 2,
+       "exactExcerpt": "DESC now estimates the commercial operation date for the facilities to be December 1, 2026.",
+       "supports": "commercial operation date 12/01/2026 (SC PSC Docket 2023-115-E)",
+       "verifiedByScript": true
+      }
+     ],
+     "current": true
+    },
+    {
+     "claimSourceId": "scpsc-2023-115-e-letter-2024-05",
+     "label": "commercial operation (SC PSC letter of May 2024)",
+     "date": {
+      "earliest": "2026-05-31",
+      "latest": "2026-05-31",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-letter-2024-05",
+       "page": 1,
+       "exactExcerpt": "DESC now anticipates the facilities entering commercial operation by May 31, 2026.",
+       "supports": "commercial operation date 05/31/2026 (SC PSC Docket 2023-115-E)",
+       "verifiedByScript": true
+      }
+     ],
+     "current": false
+    },
+    {
+     "claimSourceId": "scpsc-2023-115-e-order-2023-649",
+     "label": "planned commercial operation (SC PSC Order No. 2023-649 of Sep 2023)",
+     "date": {
+      "earliest": "2025-05-31",
+      "latest": "2025-05-31",
+      "precision": "day"
+     },
+     "evidence": [
+      {
+       "sourceId": "scpsc-2023-115-e-order-2023-649",
+       "page": 23,
+       "exactExcerpt": "any delays in the planned commercial operation date of May 31, 2025.",
+       "supports": "commercial operation date 05/31/2025 (SC PSC Docket 2023-115-E)",
+       "verifiedByScript": true
+      }
+     ],
+     "current": false
     }
    ],
    "knownCoordination": [],
    "caveats": [
     "The SCRTP title says 115kV, but the description, the route map and the Dominion page all describe the Okatie-Riverport line as 230 kV. The line is about 8 miles and runs past Hardeeville. The Riverport end is about 10 km across the Savannah River from GPC's Savannah-area (zone 219) system, so it is a likely proximity candidate.",
-    "Voltage is taken from the project description (230 kV); the title says 115 kV."
+    "Voltage is taken from the project description (230 kV); the title says 115 kV.",
+    "SC PSC Docket 2023-115-E certificates the Okatie \u2013 Riverport 230 kV Line (matched by name (Okatie \u2013 Riverport 230 kV)), together with the other Okatie line and the Riverport 230 kV substation. DESC's letters to the Commission move commercial operation from May 31, 2025 (Order No. 2023-649) to May 31, 2026 (May 2024 letter) to December 1, 2026 (March 2025 letter), the date the 2026\u20132030 list also gives; the earlier dates are kept as version history. The March 2025 letter says a required South Carolina Coastal Zone Consistency Certification was still pending and raises the construction estimate for the certificated facilities from about $54 million to about $98 million.",
+    "Inference, not stated by one source: the 2024\u20132028 list's 'Riverport Tap' and the 2025\u20132029 list's 'Sherwood Tap' (both project ID 06367 A - C, H) and Dominion's page, whose second line ends 'at the new Sherwood substation', appear to describe this tap under earlier names. The ID changed, so those list entries are not merged into this project."
    ],
    "docketId": "DESC project 6367 D",
    "region": "southeast"
@@ -3050,12 +3810,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-12-31",
+      "latest": "2026-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 14,
+       "exactExcerpt": "Previous 2026 $1,743,210 $2,206,790",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 14,
+       "exactExcerpt": "Planned In-Service Date 12/31/26",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-12-31",
       "latest": "2026-12-31",
@@ -3255,12 +4049,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; DESC also budgets spending after the planned in-service date (2027: $2,225,000), so the window may run to the end of 2027."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2026-12-31",
+      "latest": "2026-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 39,
+       "exactExcerpt": "Previous 2025 $165,825 $750,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 15,
+       "exactExcerpt": "Planned In-Service Date 12/31/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 12/31/2026. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2026-12-31",
       "latest": "2026-12-31",
@@ -3489,12 +4317,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; DESC also budgets spending after the planned in-service date (2028: $5,617,468), so the window may run to the end of 2028."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-05-01",
+      "latest": "2027-05-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 33,
+       "exactExcerpt": "Previous 2025 $3,556,350 $7,399,577",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 16,
+       "exactExcerpt": "Planned In-Service Date 5/1/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 05/01/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-05-01",
       "latest": "2027-05-01",
@@ -3694,12 +4556,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-06-01",
+      "latest": "2027-06-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 21,
+       "exactExcerpt": "Previous 2024 $100,000 $1,300,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 17,
+       "exactExcerpt": "Planned In-Service Date 6/1/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 06/01/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-06-01",
       "latest": "2027-06-01",
@@ -3875,7 +4771,7 @@
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-09-07",
       "latest": "2027-09-07",
@@ -4074,12 +4970,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $219,331, 2026: $50,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 24,
+       "exactExcerpt": "Previous 2025 $150,000 $100,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 19,
+       "exactExcerpt": "Planned In-Service Date 12/31/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -4312,12 +5242,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $234,285, 2026: $100,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 11,
+       "exactExcerpt": "Previous 2025 $150,000 $0",
+       "supports": "spending before 2025 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 20,
+       "exactExcerpt": "Planned In-Service Date 12/31/27",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -4530,12 +5494,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 7,
+       "exactExcerpt": "Previous 2024 $50,000 $50,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 21,
+       "exactExcerpt": "Planned In-Service Date 12/31/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -4754,12 +5752,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $15,000, 2026: $175,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 24,
+       "exactExcerpt": "Previous 2024 $5,000 $2,800,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 22,
+       "exactExcerpt": "Planned In-Service Date 12/31/27",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -4991,12 +6023,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $125,000, 2026: $100,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 23,
+       "exactExcerpt": "Previous 2026 $125,000 $100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 23,
+       "exactExcerpt": "Planned In-Service Date 12/31/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -5190,12 +6256,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $90,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 24,
+       "exactExcerpt": "Previous 2026 $0 $90,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 24,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2026 (2026\u20132030 list) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -5408,12 +6507,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $94,609, 2026: $100,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 36,
+       "exactExcerpt": "Previous 2025 $100,000 $0",
+       "supports": "spending before 2025 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 25,
+       "exactExcerpt": "Planned In-Service Date 12/31/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -5624,12 +6757,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $100,000) is treated as preconstruction and does not start the window; DESC also budgets spending after the planned in-service date (2028: $2,900,000), so the window may run to the end of 2028."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 26,
+       "exactExcerpt": "2027 $100,000",
+       "supports": "budgeted spending in 2027",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 26,
+       "exactExcerpt": "Planned In-Service Date 12/31/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2027 (2026\u20132030 list) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -5828,12 +6994,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $800,000, 2026: $100,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 27,
+       "exactExcerpt": "Previous 2026 $800,000 $100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 27,
+       "exactExcerpt": "Planned In-Service Date 12/31/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -6049,12 +7249,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $277,791, 2026: $325,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 28,
+       "exactExcerpt": "Previous 2026 $277,791 $325,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 28,
+       "exactExcerpt": "Planned In-Service Date 12/31/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -6267,12 +7501,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $150,000, 2026: $100,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-01",
+      "latest": "2027-12-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 29,
+       "exactExcerpt": "Previous 2026 $150,000 $100,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 29,
+       "exactExcerpt": "Planned In-Service Date 12/01/2027",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/01/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-01",
       "latest": "2027-12-01",
@@ -6405,7 +7673,7 @@
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-01-31",
       "latest": "2028-01-31",
@@ -6625,12 +7893,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $10,000, 2026: $175,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-05-01",
+      "latest": "2028-05-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 30,
+       "exactExcerpt": "Previous 2025 $180,352 $75,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 31,
+       "exactExcerpt": "Planned In-Service Date 05/01/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 05/01/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-05-01",
       "latest": "2028-05-01",
@@ -6868,12 +8170,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 25,
+       "exactExcerpt": "Previous 2024 $3,850,000 $7,000,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 32,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -7086,12 +8422,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $3,760) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 33,
+       "exactExcerpt": "Previous 2026 $3,760 $0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 33,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -7290,12 +8660,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 34,
+       "exactExcerpt": "Previous 2026 2027 $0 $250,000 $1,500,000",
+       "supports": "budgeted spending in 2026 and budgeted spending in 2027",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 34,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2026 (2026\u20132030 list) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -7551,12 +8954,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2027: $125,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 41,
+       "exactExcerpt": "Previous 2025 $150,000 $0",
+       "supports": "spending before 2025 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 35,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -7803,12 +9240,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $463,118, 2027: $100,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 8,
+       "exactExcerpt": "Previous 2024 $332,096 $80,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 36,
+       "exactExcerpt": "Planned In-Service Date 12/31/28",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -8052,12 +9523,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $30,000) is treated as preconstruction and does not start the window; DESC also budgets spending after the planned in-service date (2028: $850,000), so the window may run to the end of 2028."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2027-12-31",
+      "latest": "2027-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 37,
+       "exactExcerpt": "Previous 2026 $0 $30,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 37,
+       "exactExcerpt": "Planned In-Service Date 12/31/27",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2026 (2026\u20132030 list) \u2192 planned in-service 12/31/2027. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2027-12-31",
       "latest": "2027-12-31",
@@ -8285,12 +9789,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $75,000, 2027: $50,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 38,
+       "exactExcerpt": "Previous 2026 $75,000 $0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 38,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -8531,12 +10069,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024; DESC also budgets spending after the planned in-service date (2029: $2,600,000), so the window may run to the end of 2029."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 17,
+       "exactExcerpt": "Previous 2024 2025 $709,124 $1,689,800 $1,200,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024 and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 39,
+       "exactExcerpt": "Planned In-Service Date 12/31/28",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -8778,12 +10350,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $175,000, 2027: $100,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 40,
+       "exactExcerpt": "Previous 2026 $0 $175,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 40,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2026 (2026\u20132030 list) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -9004,12 +10609,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $50,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 41,
+       "exactExcerpt": "2027 $50,000",
+       "supports": "budgeted spending in 2027",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 41,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2027 (2026\u20132030 list) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -9215,12 +10853,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $125,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 42,
+       "exactExcerpt": "Previous 2026 $0 $125,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 42,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2026 (2026\u20132030 list) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -9462,12 +11133,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2026: $175,000, 2027: $125,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2028-12-31",
+      "latest": "2028-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 43,
+       "exactExcerpt": "Previous 2026 $25,000 $175,000",
+       "supports": "spending before 2026 ('Previous' column) and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 43,
+       "exactExcerpt": "Planned In-Service Date 12/31/2028",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2028. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2028-12-31",
       "latest": "2028-12-31",
@@ -9687,12 +11392,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $1,038,795, 2026: $500,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2029-06-01",
+      "latest": "2029-06-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 20,
+       "exactExcerpt": "Previous 2024 $100,000 $400,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2024",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 44,
+       "exactExcerpt": "Planned In-Service Date 6/1/2029",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 06/01/2029. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2029-06-01",
       "latest": "2029-06-01",
@@ -9959,12 +11698,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $174,719, 2026: $150,000, 2027: $200,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2024-2028",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2021-01-01",
+      "latest": "2023-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2029-12-31",
+      "latest": "2029-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2024-2028",
+       "page": 9,
+       "exactExcerpt": "Previous 2024 2025 $174,719 $0 $100,000",
+       "supports": "spending before 2024 ('Previous' column) and budgeted spending in 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 45,
+       "exactExcerpt": "Planned In-Service Date 12/31/29",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2024 ('Previous' column, 2024\u20132028 list; the start year is not published) \u2192 planned in-service 12/31/2029. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2024\u20132028 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2029-12-31",
       "latest": "2029-12-31",
@@ -10229,12 +12002,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $150,000, 2027: $175,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2029-12-31",
+      "latest": "2029-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "Previous 2026 $150,000 0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "Planned In-Service Date 12/31/2029",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2029. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2029-12-31",
       "latest": "2029-12-31",
@@ -10452,12 +12259,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2028: $100,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2029-12-31",
+      "latest": "2029-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 47,
+       "exactExcerpt": "2028 $100,000",
+       "supports": "budgeted spending in 2028",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 47,
+       "exactExcerpt": "Planned In-Service Date 12/31/2029",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2028 (2026\u20132030 list) \u2192 planned in-service 12/31/2029. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2029-12-31",
       "latest": "2029-12-31",
@@ -10689,12 +12529,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $275,000, 2027: $125,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2029-12-31",
+      "latest": "2029-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 48,
+       "exactExcerpt": "Previous 2026 $0 $275,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 48,
+       "exactExcerpt": "Planned In-Service Date 12/31/29",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2026 (2026\u20132030 list) \u2192 planned in-service 12/31/2029. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2029-12-31",
       "latest": "2029-12-31",
@@ -10915,12 +12788,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $100,000, 2027: $200,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2026-01-01",
+      "latest": "2026-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2029-12-31",
+      "latest": "2029-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 49,
+       "exactExcerpt": "Previous 2026 $0 $100,000",
+       "supports": "budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 49,
+       "exactExcerpt": "Planned In-Service Date 12/31/29",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2026 (2026\u20132030 list) \u2192 planned in-service 12/31/2029. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2029-12-31",
       "latest": "2029-12-31",
@@ -11140,12 +13046,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $100,000, 2028: $200,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2029-12-31",
+      "latest": "2029-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 50,
+       "exactExcerpt": "2027 $100,000",
+       "supports": "budgeted spending in 2027",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 50,
+       "exactExcerpt": "Planned In-Service Date 12/31/2029",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2027 (2026\u20132030 list) \u2192 planned in-service 12/31/2029. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2029-12-31",
       "latest": "2029-12-31",
@@ -11344,12 +13283,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2028: $350,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2030-12-31",
+      "latest": "2030-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 51,
+       "exactExcerpt": "2028 $350,000",
+       "supports": "budgeted spending in 2028",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 51,
+       "exactExcerpt": "Planned In-Service Date 12/31/30",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2028 (2026\u20132030 list) \u2192 planned in-service 12/31/2030. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2030-12-31",
       "latest": "2030-12-31",
@@ -11623,12 +13595,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2025-2029",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2022-01-01",
+      "latest": "2024-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2030-12-31",
+      "latest": "2030-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2025-2029",
+       "page": 10,
+       "exactExcerpt": "Previous 2025 2026 $918,768 $100,000 $200,000",
+       "supports": "spending before 2025 ('Previous' column) and budgeted spending in 2025 and budgeted spending in 2026",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 52,
+       "exactExcerpt": "Planned In-Service Date 12/31/30",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2025 ('Previous' column, 2025\u20132029 list; the start year is not published) \u2192 planned in-service 12/31/2030. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2025\u20132029 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2030-12-31",
       "latest": "2030-12-31",
@@ -11858,12 +13864,45 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (2029: $250,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2031-12-31",
+      "latest": "2031-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 53,
+       "exactExcerpt": "2029 $250,000",
+       "supports": "budgeted spending in 2029",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 53,
+       "exactExcerpt": "Planned In-Service Date 12/31/2031",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: first budgeted year 2029 (2026\u20132030 list) \u2192 planned in-service 12/31/2031. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2031-12-31",
       "latest": "2031-12-31",
@@ -12084,12 +14123,46 @@
       }
      ],
      "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date (or the last budgeted spending year, if later). DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2029: $850,000) is treated as preconstruction and does not start the window."
+    },
+    {
+     "claimSourceId": "desc-scrtp-2026-2030",
+     "phase": "scheduled",
+     "start": {
+      "earliest": "2023-01-01",
+      "latest": "2025-12-31",
+      "precision": "year"
+     },
+     "end": {
+      "earliest": "2032-12-31",
+      "latest": "2032-12-31",
+      "precision": "day"
+     },
+     "continuous": true,
+     "openStart": true,
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 54,
+       "exactExcerpt": "Previous 2026 2027 25,000 $0 $0",
+       "supports": "spending before 2026 ('Previous' column)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 54,
+       "exactExcerpt": "Planned In-Service Date 12/31/32",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Published schedule: spending before 2026 ('Previous' column, 2026\u20132030 list; the start year is not published) \u2192 planned in-service 12/31/2032. DESC publishes spending and an in-service date, not construction dates; the field work within this schedule is not dated.",
+     "sourceLabel": "SCRTP 2026\u20132030 list spending \u2192 2026\u20132030 list planned in-service"
     }
    ],
    "completionClaims": [
     {
      "claimSourceId": "desc-scrtp-2026-2030",
-     "label": "planned in-service",
+     "label": "planned in-service (2026\u20132030 list)",
      "date": {
       "earliest": "2032-12-31",
       "latest": "2032-12-31",

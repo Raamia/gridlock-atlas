@@ -1,0 +1,73 @@
+{
+ "id": "gpc-irp-2025-vol3-p308",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 308,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:47Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "JESUP - OFFERMAN 115KV REBUILD",
+   "excerpt": "JESUP - OFFERMAN 115KV REBUILD\nTeams # 18668\nNeed Date 06/01/2027 Start Date 04/06/2021",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "18668",
+   "excerpt": "JESUP - OFFERMAN 115KV REBUILD\nTeams # 18668\nNeed Date 06/01/2027 Start Date 04/06/2021",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "04/06/2021",
+   "excerpt": "JESUP - OFFERMAN 115KV REBUILD\nTeams # 18668\nNeed Date 06/01/2027 Start Date 04/06/2021",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "20 miles",
+   "excerpt": "Rebuild 20 miles of 100C 4/0 ACSR Penguin conductor along the Jesup - Offerman 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Rebuild 20 miles of 100C 4/0 ACSR Penguin conductor along the Jesup - Offerman 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Jesup",
+   "excerpt": "Rebuild 20 miles of 100C 4/0 ACSR Penguin conductor along the Jesup - Offerman 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Offerman",
+   "excerpt": "Rebuild 20 miles of 100C 4/0 ACSR Penguin conductor along the Jesup - Offerman 115kV line",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 867,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 878,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1745
+ }
+}

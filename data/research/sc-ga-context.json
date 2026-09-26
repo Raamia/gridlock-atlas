@@ -99,6 +99,26 @@
    "cached": true,
    "publishedAt": "2025-06-03",
    "documentDateEvidence": "Title slide: June 3, 2025. Searched for McIntosh, Purrysburg, Thurmond, Okatie, Georgia and SERTP: no hits. Slides 10-12 list earlier economic planning (transfer) studies, including SOCO to DESC transfers (2023: 1300 MW and 950 MW for 2028/29 winter; 2024: 300 MW for 2025 summer). Nothing on specific DESC or GPC projects."
+  },
+  {
+   "id": "sertp-2026-q3-presentation",
+   "title": "2026 SERTP 3rd Quarter Meeting presentation",
+   "publisher": "Southeastern Regional Transmission Planning (SERTP)",
+   "url": "https://www.southeasternrtp.com/docs/general/2026/2026_SERTP_3rd_Quarter_Meeting_Presentation.pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2026-09-18",
+   "documentDateEvidence": "Presentation for the September 22, 2026 SERTP 3rd quarter meeting; file dated 2026-09-18. Retrieved 2026-09-26."
+  },
+  {
+   "id": "sertp-2026-prelim-plan",
+   "title": "2026 SERTP Preliminary Expansion Plan Report (Non-CEII)",
+   "publisher": "Southeastern Regional Transmission Planning (SERTP)",
+   "url": "https://www.southeasternrtp.com/docs/general/2026/2026_SERTP_Preliminary_Expansion_Plan_Report_(Non-CEII).pdf",
+   "sourceType": "rto",
+   "cached": true,
+   "publishedAt": "2026-06-12",
+   "documentDateEvidence": "Every page footer is dated '06/12/2026'. Retrieved 2026-09-26 (115 pp.)."
   }
  ],
  "projects": [
@@ -1236,5 +1256,57 @@
   "Earlier pass: Seasonal milestones are modeled with quarter precision and explicit date ranges. Open-ended construction phases use a documented 2099-12-31 end sentinel, so the time engine can return 'possible' but never a false 'confirmed' or 'no-match'.",
   "Earlier pass: No shared-site relation was recorded between DESC 6888 and GPC McIntosh-area items. The DESC source does not name Georgia Power, and neither project's work is stated to be at McIntosh itself; recording one would have produced a false GEO-confirmed result.",
   "Earlier pass: Purrysburg is not attributed to DESC. The GPC plan says only 'GPC portion', and no DESC list mentions Purrysburg."
+ ],
+ "contextNotes": [
+  {
+   "id": "newest-source-check-desc",
+   "region": "southeast",
+   "title": "Newest-source check: DESC is not yet in a SERTP plan",
+   "text": "The newest regional plan, the SERTP 2026 Preliminary Expansion Plan (June 12, 2026), has project sections for the AECI, Duke Carolinas, Duke Progress East and West, LG&E/KU, Southern and TVA balancing authority areas. A text search finds DESC only as a line terminal in a Duke Energy Progress project ('Sumter \u2013 DESC Eastover'), and no DESC-sponsored project. DESC's current plan is therefore still its SCRTP 2026\u20132030 list; SCRTP's home page says DESC and Santee Cooper plan to join SERTP. This is a search result over the named documents, not a statement by either utility.",
+   "evidence": [
+    {
+     "sourceId": "sertp-2026-prelim-plan",
+     "page": 1,
+     "exactExcerpt": "AECI Balancing Authority Area",
+     "supports": "the report is organized by balancing authority area",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "sertp-2026-prelim-plan",
+     "page": 24,
+     "exactExcerpt": "LG&E/KU Balancing Authority Area",
+     "supports": "LG&E/KU section",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "sertp-2026-prelim-plan",
+     "page": 17,
+     "exactExcerpt": "SUMTER - DESC EASTOVER 115 KV TRANSMISSION LINE",
+     "supports": "DESC appears only as a terminal of a Duke Energy Progress line",
+     "verifiedByScript": true
+    },
+    {
+     "sourceId": "scrtp-home",
+     "exactExcerpt": "Dominion Energy South Carolina and Santee Cooper to Join SERTP",
+     "supports": "SCRTP notice: DESC and Santee Cooper plan to join SERTP",
+     "verifiedByScript": true
+    }
+   ]
+  },
+  {
+   "id": "interregional-data-exchange",
+   "region": "southeast",
+   "title": "Planning context: SERTP and SCRTP exchange planning data",
+   "text": "SERTP's September 2026 quarterly presentation says it has held interregional data exchange meetings with SCRTP. That is regional planning-model exchange, not coordination on any listed project; no source reviewed states that DESC and Georgia Power coordinate on a specific project, so Savannah pairs stay 'needs review' (unknown, not 'uncoordinated').",
+   "evidence": [
+    {
+     "sourceId": "sertp-2026-q3-presentation",
+     "page": 43,
+     "exactExcerpt": "SERTP has now held interregional data exchange meetings with the following neighbors: - SCRTP and FRCC",
+     "supports": "SERTP\u2013SCRTP interregional data exchange",
+     "verifiedByScript": true
+    }
+   ]
+  }
  ]
 }

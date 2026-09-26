@@ -1,0 +1,87 @@
+{
+ "id": "desc-scrtp-2025-2029-p19",
+ "sourceId": "desc-scrtp-2025-2029",
+ "page": 19,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:01:24Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Wagener 115kV Tap: Construct Tap",
+   "excerpt": "5 Year Budget\nWagener 115kV Tap: Construct Tap\nProject ID\n06371 D",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "06371 D",
+   "excerpt": "Wagener 115kV Tap: Construct Tap\nProject ID\n06371 D\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Need\nLoad growth.\nProject Status\nPlanned\nPlanned In-Service Date\n12/31/27",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/27",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/31/27\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Constructing a 115 kV Tap off the Edmund Switching Station- Owens Corning 115 kV Line to feed new\nWagener Distribution substation.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$6,005,000",
+   "excerpt": "2028\n$0\n\n2029\n$0\n\nTotal*\n$6,005,000",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Edmund Switching Station",
+   "excerpt": "Constructing a 115 kV Tap off the Edmund Switching Station- Owens Corning 115 kV Line to feed new\nWagener Distribution substation.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Wagener Distribution substation",
+   "excerpt": "Constructing a 115 kV Tap off the Edmund Switching Station- Owens Corning 115 kV Line to feed new\nWagener Distribution substation.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 742,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 910,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1652
+ }
+}

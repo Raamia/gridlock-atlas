@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p214",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 214,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T16:59:50Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "GPC",
+   "excerpt": "Relay protection modifications at GPC's Thalmann and Colerain substations to match relay scheme",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectTitle",
+   "value": "THALMANN AND COLERAIN 23O KV LINE RELAY PANEL UPGRADES",
+   "excerpt": "THALMANN AND COLERAIN 23O KV LINE RELAY PANEL UPGRADES\nTeams # 21046",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21046",
+   "excerpt": "THALMANN AND COLERAIN 23O KV LINE RELAY PANEL UPGRADES\nTeams # 21046",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "12/01/2024",
+   "excerpt": "Need Date 06/01/2025 Start Date 12/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "used at GTC's new Camden Industrial Park 230/115kV substation.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Thalmann substation",
+   "excerpt": "Relay protection modifications at GPC's Thalmann and Colerain substations to match relay scheme",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Colerain substation",
+   "excerpt": "Relay protection modifications at GPC's Thalmann and Colerain substations to match relay scheme",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 865,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 869,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1734
+ }
+}

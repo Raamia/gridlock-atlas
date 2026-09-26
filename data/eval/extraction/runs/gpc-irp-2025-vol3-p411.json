@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p411",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 411,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:05:13Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "EVANS PRIMARY - THURMOND DAM (USA) #6 115KV REBUILD",
+   "excerpt": "EVANS PRIMARY - THURMOND DAM (USA) #6 115KV REBUILD\nTeams # 20794\nNeed Date 06/01/2033 Start Date 06/01/2030",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20794",
+   "excerpt": "EVANS PRIMARY - THURMOND DAM (USA) #6 115KV REBUILD\nTeams # 20794\nNeed Date 06/01/2033 Start Date 06/01/2030",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2030",
+   "excerpt": "Teams # 20794\nNeed Date 06/01/2033 Start Date 06/01/2030\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2033",
+   "excerpt": "Teams # 20794\nNeed Date 06/01/2033 Start Date 06/01/2030\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "8.9 miles",
+   "excerpt": "Rebuild approximately 8.9 miles of the Evans Primary - Thurmond Dam (USA) #6 115kV line with\n200C 1351 ACSS Martin conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115kV",
+   "excerpt": "Rebuild approximately 8.9 miles of the Evans Primary - Thurmond Dam (USA) #6 115kV line with\n200C 1351 ACSS Martin conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Evans Primary",
+   "excerpt": "Rebuild approximately 8.9 miles of the Evans Primary - Thurmond Dam (USA) #6 115kV line with\n200C 1351 ACSS Martin conductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Thurmond Dam (USA)",
+   "excerpt": "Replace the main bus with a larger element at Thurmond Dam\n(USA).",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 880,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 456,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1336
+ }
+}

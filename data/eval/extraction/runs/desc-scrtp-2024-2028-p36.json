@@ -1,0 +1,101 @@
+{
+ "id": "desc-scrtp-2024-2028-p36",
+ "sourceId": "desc-scrtp-2024-2028",
+ "page": 36,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:31Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Williams-Summerville 230kV: Upgrade to SPDC B1272 ACSR",
+   "excerpt": "Williams-Summerville 230kV: Upgrade to SPDC B1272 ACSR\nProject ID\n6388 A",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "6388 A",
+   "excerpt": "Williams-Summerville 230kV: Upgrade to SPDC B1272 ACSR\nProject ID\n6388 A\nProject Description",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n5/1/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "5/1/2027",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n5/1/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "Approximately 10 miles",
+   "excerpt": "Line to\nupgraded to B-1272 and designed for a future second circuit. Approximately 10 miles.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "230 kV",
+   "excerpt": "Rebuild the section of the Williams - Summerville 230 kV line from Ladson Jct to Williams.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$19,300,000",
+   "excerpt": "2027\n2028\n$10,000,000 $0\n\nTotal*\n$19,300,000",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Williams",
+   "excerpt": "Rebuild the section of the Williams - Summerville 230 kV line from Ladson Jct to Williams.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Summerville",
+   "excerpt": "Rebuild the section of the Williams - Summerville 230 kV line from Ladson Jct to Williams.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Ladson Jct",
+   "excerpt": "Rebuild the section of the Williams - Summerville 230 kV line from Ladson Jct to Williams.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 785,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 777,
+  "output_tokens_details": {
+   "reasoning_tokens": 340
+  },
+  "total_tokens": 1562
+ }
+}

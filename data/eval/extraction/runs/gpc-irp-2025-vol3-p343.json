@@ -1,0 +1,73 @@
+{
+ "id": "gpc-irp-2025-vol3-p343",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 343,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:20Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "BROADWAY - ECHECONNEE 115 KV LINE REBUILD",
+   "excerpt": "BROADWAY - ECHECONNEE 115 KV LINE REBUILD\nTeams # 21047\nNeed Date 06/01/2029 Start Date 01/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21047",
+   "excerpt": "BROADWAY - ECHECONNEE 115 KV LINE REBUILD\nTeams # 21047\nNeed Date 06/01/2029 Start Date 01/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2025",
+   "excerpt": "Teams # 21047\nNeed Date 06/01/2029 Start Date 01/01/2025\nDescription\nRebuild the Griffin Rd",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "BROADWAY - ECHECONNEE 115 KV LINE REBUILD\nTeams # 21047\nNeed Date 06/01/2029 Start Date 01/01/2025",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Broadway",
+   "excerpt": "Rebuild the Griffin Rd – Echeconnee line section of Broadway - Echeconnee line with 200C 1351 ACSS\nconductor.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Echeconnee",
+   "excerpt": "Rebuild the Griffin Rd – Echeconnee line section of Broadway - Echeconnee line with 200C 1351 ACSS\nconductor.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 855,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 900,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1755
+ }
+}

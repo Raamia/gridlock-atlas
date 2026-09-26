@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p369",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 369,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:39Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "ATKINSON - NORTHWEST 115KV REBUILD",
+   "excerpt": "ATKINSON - NORTHWEST 115KV REBUILD\nTeams # 20761\nNeed Date 06/01/2030 Start Date 06/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20761",
+   "excerpt": "ATKINSON - NORTHWEST 115KV REBUILD\nTeams # 20761\nNeed Date 06/01/2030 Start Date 06/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2027",
+   "excerpt": "ATKINSON - NORTHWEST 115KV REBUILD\nTeams # 20761\nNeed Date 06/01/2030 Start Date 06/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "1.2",
+   "excerpt": "Rebuild the 1.2 mile Atkinson - Tilford Yards section of the Atkinson - Northwest 115kV with 200C\n1351 ACSS Martin.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Rebuild the 1.2 mile Atkinson - Tilford Yards section of the Atkinson - Northwest 115kV with 200C\n1351 ACSS Martin.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Atkinson",
+   "excerpt": "Rebuild the 1.2 mile Atkinson - Tilford Yards section of the Atkinson - Northwest 115kV with 200C\n1351 ACSS Martin.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Tilford Yards",
+   "excerpt": "Rebuild the 1.2 mile Atkinson - Tilford Yards section of the Atkinson - Northwest 115kV with 200C\n1351 ACSS Martin.",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Northwest",
+   "excerpt": "Rebuild the 1.2 mile Atkinson - Tilford Yards section of the Atkinson - Northwest 115kV with 200C\n1351 ACSS Martin.",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 855,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1025,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1880
+ }
+}

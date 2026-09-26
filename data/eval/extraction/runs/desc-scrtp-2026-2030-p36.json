@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2026-2030-p36",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 36,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:39Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "VCS1-Denny Terrace 230kV & VCS1-Pineland 230kV: Rebuild Single Circuit Sections",
+   "excerpt": "VCS1-Denny Terrace 230kV & VCS1-Pineland 230kV: Rebuild Single\nCircuit Sections\nProject ID\n6808 N,O",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6808 N,O",
+   "excerpt": "Circuit Sections\nProject ID\n6808 N,O\nProject Description\nReplace wooden H-Frame structures with Self Supporting Steel Structures",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/28\nEstimated Project Cost\nPrevious",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/28",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/28\nEstimated Project Cost\nPrevious",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "VCS1-Denny Terrace 230kV & VCS1-Pineland 230kV: Rebuild Single\nCircuit Sections\nProject ID\n6808 N,O",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$13,285,118",
+   "excerpt": "Estimated Project Cost\nPrevious\n2026\n$463,118\n$0\n\n2027\n$100,000\n\n2028\n$12,722,000\n\n2029\n$0\n\n2030\n$0\n\nTotal\n$13,285,118",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "VCS1",
+   "excerpt": "VCS1-Denny Terrace 230kV & VCS1-Pineland 230kV: Rebuild Single\nCircuit Sections\nProject ID\n6808 N,O",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Denny Terrace",
+   "excerpt": "VCS1-Denny Terrace 230kV & VCS1-Pineland 230kV: Rebuild Single\nCircuit Sections\nProject ID\n6808 N,O",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Pineland",
+   "excerpt": "VCS1-Denny Terrace 230kV & VCS1-Pineland 230kV: Rebuild Single\nCircuit Sections\nProject ID\n6808 N,O",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 747,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1031,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1778
+ }
+}

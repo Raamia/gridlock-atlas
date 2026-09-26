@@ -1,0 +1,59 @@
+{
+ "id": "gpc-irp-2025-vol3-p243",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 243,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:00Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "NORCROSS 230KV BUS 1-3 SERIES BUS TIE BREAKER INSTALLATION",
+   "excerpt": "NORCROSS 230KV BUS 1-3 SERIES BUS TIE BREAKER INSTALLATION\nTeams # 20464",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20464",
+   "excerpt": "NORCROSS 230KV BUS 1-3 SERIES BUS TIE BREAKER INSTALLATION\nTeams # 20464",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "constructionStart",
+   "value": "11/01/2023",
+   "excerpt": "Need Date 06/01/2025 Start Date 11/01/2023\nDescription\nInstall a bus tie breaker",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230",
+   "excerpt": "Install a bus tie breaker in series with existing bus tie breaker between 230kV Bus 1 and Bus 3 at\nNorcross.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Norcross",
+   "excerpt": "Install a bus tie breaker in series with existing bus tie breaker between 230kV Bus 1 and Bus 3 at\nNorcross.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 855,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 778,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1633
+ }
+}

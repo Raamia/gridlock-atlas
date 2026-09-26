@@ -1,0 +1,108 @@
+{
+ "id": "gpc-irp-2025-vol3-p290",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 290,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:41Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "MORROW - YATES COMMON 115KV LINE UPGRADE",
+   "excerpt": "MORROW - YATES COMMON 115KV LINE UPGRADE\nTeams # 19601\nNeed Date 05/01/2027 Start Date 05/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19601",
+   "excerpt": "MORROW - YATES COMMON 115KV LINE UPGRADE\nTeams # 19601\nNeed Date 05/01/2027 Start Date 05/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "05/01/2024",
+   "excerpt": "Teams # 19601\nNeed Date 05/01/2027 Start Date 05/01/2024\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "05/01/2027",
+   "excerpt": "Teams # 19601\nNeed Date 05/01/2027 Start Date 05/01/2024\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "5.8",
+   "excerpt": "On the Fife - Fairburn SW - Owens Corning Tap sections of the Morrow - Yates Common 115kV line,\nrebuild approximately 5.8 miles",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "On the Fife - Fairburn SW - Owens Corning Tap sections of the Morrow - Yates Common 115kV line,\nrebuild approximately 5.8 miles",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Fife",
+   "excerpt": "On the Fife - Fairburn SW - Owens Corning Tap sections of the Morrow - Yates Common 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Fairburn SW",
+   "excerpt": "On the Fife - Fairburn SW - Owens Corning Tap sections of the Morrow - Yates Common 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Owens Corning Tap",
+   "excerpt": "On the Fife - Fairburn SW - Owens Corning Tap sections of the Morrow - Yates Common 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "Morrow",
+   "excerpt": "On the Fife - Fairburn SW - Owens Corning Tap sections of the Morrow - Yates Common 115kV line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[4]",
+   "value": "Yates Common",
+   "excerpt": "On the Fife - Fairburn SW - Owens Corning Tap sections of the Morrow - Yates Common 115kV line",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 891,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 542,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1433
+ }
+}

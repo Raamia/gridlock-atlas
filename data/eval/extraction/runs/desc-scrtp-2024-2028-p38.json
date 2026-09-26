@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2024-2028-p38",
+ "sourceId": "desc-scrtp-2024-2028",
+ "page": 38,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:02:36Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Jack Primus 115 kV Tap: Construct",
+   "excerpt": "Jack Primus 115 kV Tap: Construct\nProject ID\n0147 B, J\nProject Description\nConstruct a 115 kV tap",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectId",
+   "value": "0147 B, J",
+   "excerpt": "Jack Primus 115 kV Tap: Construct\nProject ID\n0147 B, J\nProject Description\nConstruct a 115 kV tap",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Need\nLoad growth.\nProject Status\nPlanned\nPlanned In-Service Date\n12/31/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/2027",
+   "excerpt": "Project Need\nLoad growth.\nProject Status\nPlanned\nPlanned In-Service Date\n12/31/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "lengthMiles",
+   "value": "2.2",
+   "excerpt": "Construct a 115 kV tap from Jack Primus to Clements Ferry. Approximately 2.2 miles. Construct\nterminals at Jack Primus.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Construct a 115 kV tap from Jack Primus to Clements Ferry. Approximately 2.2 miles. Construct\nterminals at Jack Primus.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$18,000,000",
+   "excerpt": "*Total Estimated Amount applied to 2027 Rate Base Calculation\n\n2028\n$0\n\nTotal*\n$18,000,000",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Jack Primus",
+   "excerpt": "Construct a 115 kV tap from Jack Primus to Clements Ferry. Approximately 2.2 miles. Construct\nterminals at Jack Primus.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Clements Ferry",
+   "excerpt": "Construct a 115 kV tap from Jack Primus to Clements Ferry. Approximately 2.2 miles. Construct\nterminals at Jack Primus.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 745,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 979,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1724
+ }
+}

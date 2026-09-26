@@ -5,8 +5,16 @@ const PRECISION_RANK: Record<DateBound["precision"], number> = { day: 0, month: 
 
 /** Construction-phase windows that are still current (superseded claims are kept for history only). */
 export function activeWindows(project: Project): ConstructionWindow[] {
-  return project.constructionWindows.filter((w) => !w.supersededBy && w.phase !== "preconstruction");
+  return project.constructionWindows.filter((w) => !w.supersededBy && w.phase !== "preconstruction" && w.phase !== "scheduled");
 }
+
+/** Current published schedules (implementation start → in-service): evaluated apart from construction windows. */
+export function scheduleWindows(project: Project): ConstructionWindow[] {
+  return project.constructionWindows.filter((w) => !w.supersededBy && w.phase === "scheduled");
+}
+
+/** Certain schedule overlap shorter than this is a sliver of date precision ("Dec 31, 2027 → Jan 1, 2028"), not a shared build window. */
+export const MIN_SCHEDULE_OVERLAP_DAYS = 30;
 
 /** The coarsest precision across every start and end bound of the windows. */
 export function coarsest(windows: ConstructionWindow[]): DateBound["precision"] {
@@ -74,6 +82,40 @@ export function currentInService(p: Project) {
 }
 
 const DAY = 86_400_000;
+const days = (start: string, end: string) => Math.round((Date.parse(end) - Date.parse(start)) / DAY);
+
+/** "18 months" · "45 days" */
+export function durationText(n: number): string {
+  return n < 60 ? dayCount(n) : `${Math.round(n / 30.4375)} months`;
+}
+
+/**
+ * Published schedules (phase "scheduled": implementation start → current in-service), compared with the same interval math as
+ * construction windows. Confirmed only when every combination is certain to overlap for at least MIN_SCHEDULE_OVERLAP_DAYS;
+ * the certain span is where both schedules run whatever the stated precision, never a claim that crews work at the same time.
+ */
+export function evaluateSchedule(a: Project, b: Project): TimeDetail["schedule"] {
+  const sa = scheduleWindows(a);
+  const sb = scheduleWindows(b);
+  if (!sa.length || !sb.length) return undefined;
+  let start: string | undefined;
+  let end: string | undefined;
+  for (const x of sa)
+    for (const y of sb) {
+      const hs = max(x.start.latest, y.start.latest);
+      const he = min(x.end.earliest, y.end.earliest);
+      start = start ? max(start, hs) : hs;
+      end = end ? min(end, he) : he;
+    }
+  const n = start && end && start <= end ? days(start, end) : 0;
+  return {
+    windowIdsA: sa.map((w) => w.id),
+    windowIdsB: sb.map((w) => w.id),
+    ...(n > 0 ? { overlap: { start: start!, end: end! } } : {}),
+    days: n,
+    confirmed: n >= MIN_SCHEDULE_OVERLAP_DAYS,
+  };
+}
 /**
  * Sponsor's secondary signal: days between in-service dates. With day-precision dates this is the plain
  * difference; with coarser claims ("2028", "Q3 2029") it is the gap between the nearest edges of the two
@@ -131,6 +173,35 @@ export function displayWindowGroups(p: Project, publisherOf: (sourceId: string) 
   return [...out.values()];
 }
 
+/** The secondary-signal sentence appended to every TIME reason. */
+function gapNote(g: TimeDetail["inService"]): string {
+  if (!g) return "";
+  if (!g.coarse) return ` In-service dates are ${dayCount(g.gapDays)} apart (secondary signal).`;
+  return g.gapDays === 0
+    ? " Published in-service dates overlap at their stated precision (secondary signal)."
+    : ` In-service dates are at least ${dayCount(g.gapDays)} apart at their stated precision (secondary signal).`;
+}
+
+/**
+ * TIME: construction windows first (plan.md §8, below); when they leave overlap "possible" or "unknown", published schedules
+ * (start → in-service) that certainly overlap for at least MIN_SCHEDULE_OVERLAP_DAYS confirm it on a "schedule" basis.
+ * A construction "no-match" is never overridden, and the reason never calls a schedule overlap a construction overlap.
+ */
+export function evaluateTime(a: Project, b: Project): TimeResult {
+  const t = evaluateConstruction(a, b);
+  if (t.level === "confirmed") t.detail.basis = "construction";
+  const schedule = evaluateSchedule(a, b);
+  if (!schedule) return t;
+  t.detail.schedule = schedule;
+  if (t.level === "confirmed" || t.level === "no-match" || !schedule.confirmed) return t;
+  const o = schedule.overlap!;
+  return {
+    level: "confirmed",
+    reason: `Published schedules overlap (start → in-service) for ${durationText(schedule.days)} (${formatSpan(o, "month")}); field-work dates are not published.${gapNote(t.detail.inService)}`,
+    detail: { ...t.detail, basis: "schedule", confirmedOverlap: o },
+  };
+}
+
 /**
  * Reported-window overlap test from plan.md §8.
  *
@@ -142,7 +213,7 @@ export function displayWindowGroups(p: Project, publisherOf: (sourceId: string) 
  * confirmed only if every source combination confirms, possible if any overlaps, no-match if none.
  * Missing windows yield "unknown", never "no overlap".
  */
-export function evaluateTime(a: Project, b: Project): TimeResult {
+function evaluateConstruction(a: Project, b: Project): TimeResult {
   const ga = windowsBySource(a);
   const gb = windowsBySource(b);
   const wa = ga.flat();
@@ -157,19 +228,13 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
     continuityCaveat: false,
     inService: inServiceGap(a, b),
   };
-  const gapNote = base.inService
-    ? base.inService.coarse
-      ? base.inService.gapDays === 0
-        ? " Published in-service dates overlap at their stated precision (secondary signal)."
-        : ` In-service dates are at least ${dayCount(base.inService.gapDays)} apart at their stated precision (secondary signal).`
-      : ` In-service dates are ${dayCount(base.inService.gapDays)} apart (secondary signal).`
-    : "";
+  const gap = gapNote(base.inService);
 
   if (!wa.length || !wb.length) {
     const missing = [!wa.length ? displayTitle(a) : null, !wb.length ? displayTitle(b) : null].filter(Boolean).join(" and ");
     return {
       level: "unknown",
-      reason: `No construction window published for ${missing}; window overlap is unknown, not ruled out.${gapNote}`,
+      reason: `No construction window published for ${missing}; window overlap is unknown, not ruled out.${gap}`,
       detail: base,
     };
   }
@@ -222,7 +287,7 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
     if (coreStart && coreEnd && coreStart <= coreEnd) base.confirmedOverlap = { start: coreStart, end: coreEnd };
     return {
       level: "confirmed",
-      reason: `Reported construction windows overlap in ${formatSpan(base.confirmedOverlap ?? base.possibleOverlap!, base.precision)}${combos}.${gapNote}`,
+      reason: `Reported construction windows overlap in ${formatSpan(base.confirmedOverlap ?? base.possibleOverlap!, base.precision)}${combos}.${gap}`,
       detail: base,
     };
   }
@@ -235,7 +300,7 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
         : `overlap depends on where ${precisionLabel(base.precision)}-precision dates fall`;
     return {
       level: "possible",
-      reason: `Construction windows may overlap (${formatSpan(base.possibleOverlap!, base.precision)}); ${why}.${gapNote}`,
+      reason: `Construction windows may overlap (${formatSpan(base.possibleOverlap!, base.precision)}); ${why}.${gap}`,
       detail: base,
     };
   }
@@ -255,7 +320,7 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
       : "Schedule bounds do not overlap (budget years or start-to-need-date bounds; no construction dates are published)";
   return {
     level: "no-match",
-    reason: `${lead}: ${displayTitle(first)}'s window ends before ${displayTitle(second)}'s begins.${gapNote}`,
+    reason: `${lead}: ${displayTitle(first)}'s window ends before ${displayTitle(second)}'s begins.${gap}`,
     detail: base,
   };
 }

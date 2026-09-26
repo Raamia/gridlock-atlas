@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p422",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 422,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:05:20Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "PINE GROVE PRIMARY - WEST VALDOSTA 115 KV RECONDUCTOR",
+   "excerpt": "PINE GROVE PRIMARY - WEST VALDOSTA 115 KV RECONDUCTOR\nTeams # 10487\nNeed Date 12/31/2033 Start Date 12/31/2029",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "10487",
+   "excerpt": "PINE GROVE PRIMARY - WEST VALDOSTA 115 KV RECONDUCTOR\nTeams # 10487\nNeed Date 12/31/2033 Start Date 12/31/2029",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "12/31/2029",
+   "excerpt": "Teams # 10487\nNeed Date 12/31/2033 Start Date 12/31/2029\nDescription",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "3.7 miles",
+   "excerpt": "Rebuild 3.7 miles of 100C 4/0 ACSR conductor with 200C 795 ACSS Drake",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Primary section of the Pine Grove Primary - West Valdosta 115kV line.\nSupporting Statement\nREDACTED",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – ITS\nREDACTED\nAssigned*\n* The ITS Assigned designation is for parity forecast purposes only",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Pine Grove Primary",
+   "excerpt": "PINE GROVE PRIMARY - WEST VALDOSTA 115 KV RECONDUCTOR\nTeams # 10487",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "West Valdosta",
+   "excerpt": "PINE GROVE PRIMARY - WEST VALDOSTA 115 KV RECONDUCTOR\nTeams # 10487",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Bemis",
+   "excerpt": "Rebuild 3.7 miles of 100C 4/0 ACSR conductor with 200C 795 ACSS Drake on the Bemis - Pine Grove",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 878,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 980,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1858
+ }
+}

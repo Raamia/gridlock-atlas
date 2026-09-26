@@ -1,0 +1,94 @@
+{
+ "id": "desc-scrtp-2026-2030-p14",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 14,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:14Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Flat Rock 115kV Sub and Tap: Construct",
+   "excerpt": "Flat Rock 115kV Sub and Tap: Construct\nProject ID\n6381\nProject Description",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6381",
+   "excerpt": "Project ID\n6381\nProject Description\nConstructing a 115 kV tap off the Belv Sw Sta",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "In Progress",
+   "excerpt": "Project Need\nGrowth Load Transmission Line Design\nProject Status\nIn Progress\nPlanned In-Service Date",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/31/26",
+   "excerpt": "Project Status\nIn Progress\nPlanned In-Service Date\n12/31/26\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "Constructing a 115 kV tap off the Belv Sw Sta - Graniteville 115 kV #1 line to feed the new Sub.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$3,950,000",
+   "excerpt": "2028\n$0\n\n2029\n$0\n\n2030\n$0\n\nTotal\n$3,950,000",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Flat Rock 115kV Sub",
+   "excerpt": "Flat Rock 115kV Sub and Tap: Construct\nProject ID\n6381\nProject Description",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Belv Sw Sta",
+   "excerpt": "Constructing a 115 kV tap off the Belv Sw Sta - Graniteville 115 kV #1 line to feed the new Sub.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Graniteville",
+   "excerpt": "Constructing a 115 kV tap off the Belv Sw Sta - Graniteville 115 kV #1 line to feed the new Sub.",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 737,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 932,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1669
+ }
+}

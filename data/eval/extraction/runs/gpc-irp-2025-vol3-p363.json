@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p363",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 363,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:34Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "SAV: DEAN FOREST - LITTLE OGEECHEE 230 KV REBUILD",
+   "excerpt": "SAV: DEAN FOREST - LITTLE OGEECHEE 230 KV REBUILD\nTeams # 21023\nNeed Date 06/01/2029 Start Date 01/01/2026",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "21023",
+   "excerpt": "SAV: DEAN FOREST - LITTLE OGEECHEE 230 KV REBUILD\nTeams # 21023\nNeed Date 06/01/2029 Start Date 01/01/2026",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "01/01/2026",
+   "excerpt": "Teams # 21023\nNeed Date 06/01/2029 Start Date 01/01/2026\nDescription\nRebuild the entire line",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2029",
+   "excerpt": "SAV: DEAN FOREST - LITTLE OGEECHEE 230 KV REBUILD\nTeams # 21023\nNeed Date 06/01/2029 Start Date 01/01/2026",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "approximately 8 miles",
+   "excerpt": "Rebuild the entire line from Little Ogeechee - Salt Creek and Salt Creek - Dean Forest, approximately\n8 miles, using 200C",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "230 kV",
+   "excerpt": "SAV: DEAN FOREST - LITTLE OGEECHEE 230 KV REBUILD\nTeams # 21023\nNeed Date 06/01/2029 Start Date 01/01/2026",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Little Ogeechee",
+   "excerpt": "Rebuild the entire line from Little Ogeechee - Salt Creek and Salt Creek - Dean Forest, approximately\n8 miles",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Salt Creek",
+   "excerpt": "Rebuild the entire line from Little Ogeechee - Salt Creek and Salt Creek - Dean Forest, approximately\n8 miles",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Dean Forest",
+   "excerpt": "Rebuild the entire line from Little Ogeechee - Salt Creek and Salt Creek - Dean Forest, approximately\n8 miles",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 875,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 501,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1376
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "id": "gpc-irp-2025-vol3-p292",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 292,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:42Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "CC - GULLATT ROAD TRANSMISSION IMPROVEMENTS",
+   "excerpt": "CC - GULLATT ROAD TRANSMISSION IMPROVEMENTS\nTeams # 20771\nNeed Date 06/01/2027 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20771",
+   "excerpt": "CC - GULLATT ROAD TRANSMISSION IMPROVEMENTS\nTeams # 20771\nNeed Date 06/01/2027 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNew Project\nChange From Previous IRP\nNew Project",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2024",
+   "excerpt": "Teams # 20771\nNeed Date 06/01/2027 Start Date 06/01/2024\nDescription\nUpstream Transmission improvements",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "06/01/2027",
+   "excerpt": "CC - GULLATT ROAD TRANSMISSION IMPROVEMENTS\nTeams # 20771\nNeed Date 06/01/2027 Start Date 06/01/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "new customer station being built along the\nMorrow - Yates Common 115kV and Line Creek - Fairburn #2 115kV lines",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Morrow - Yates Common 115kV line",
+   "excerpt": "Rebuild the Morrow - Yates\nCommon 115kV line from Line Creek to the new Gullatt Road customer station",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Line Creek",
+   "excerpt": "Common 115kV line from Line Creek to the new Gullatt Road customer station. Rebuild the Line\nCreek",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Gullatt Road customer station",
+   "excerpt": "Common 115kV line from Line Creek to the new Gullatt Road customer station. Rebuild the Line\nCreek",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "Line Creek - Fairburn #2 115kV line",
+   "excerpt": "Rebuild the Line\nCreek - Fairburn #2 115kV line from Line Creek to the new Gullatt Road customer station",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[4]",
+   "value": "North Coweta",
+   "excerpt": "Remove\nthe Owens Corning Tap Connection on the Morrow - Yates Common 115kV line and rebuild the line\nfrom North Coweta to Str 1",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 968,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 528,
+  "output_tokens_details": {
+   "reasoning_tokens": 0
+  },
+  "total_tokens": 1496
+ }
+}

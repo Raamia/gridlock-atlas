@@ -1,0 +1,87 @@
+{
+ "id": "gpc-irp-2025-vol3-p357",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 357,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:28Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "MCEVER ROAD - SHOAL CREEK 115KV REBUILD",
+   "excerpt": "MCEVER ROAD - SHOAL CREEK 115KV REBUILD\nTeams # 19621\nNeed Date 06/01/2029 Start Date 12/31/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19621",
+   "excerpt": "MCEVER ROAD - SHOAL CREEK 115KV REBUILD\nTeams # 19621\nNeed Date 06/01/2029 Start Date 12/31/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "12/31/2024",
+   "excerpt": "Teams # 19621\nNeed Date 06/01/2029 Start Date 12/31/2024\nDescription\nRebuild the 636 ACSR",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "1 mile; 2.05 miles",
+   "excerpt": "Rebuild the 636 ACSR (1 mile) of the McEver Road - College Square section, and 2 - 4/0 copper part\n(2.05 miles)",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "part\n(2.05 miles) of the College Square to Lakeside WTP B line section, part of the McEver Road - Shoal\nCreek 115kV line",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "McEver Road",
+   "excerpt": "MCEVER ROAD - SHOAL CREEK 115KV REBUILD\nTeams # 19621\nNeed Date 06/01/2029 Start Date 12/31/2024",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Shoal Creek",
+   "excerpt": "MCEVER ROAD - SHOAL CREEK 115KV REBUILD\nTeams # 19621\nNeed Date 06/01/2029 Start Date 12/31/2024",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 902,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1011,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1913
+ }
+}

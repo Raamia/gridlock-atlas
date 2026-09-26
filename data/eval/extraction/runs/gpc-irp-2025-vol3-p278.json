@@ -1,0 +1,94 @@
+{
+ "id": "gpc-irp-2025-vol3-p278",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 278,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:03:29Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "SAV: CC - BIG OGEECHEE 500/230KV (CC NETWORK IMPROVEMENTS)",
+   "excerpt": "SAV: CC - BIG OGEECHEE 500/230KV (CC NETWORK IMPROVEMENTS)\nTeams # 19966\nNeed Date 06/01/2026 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "19966",
+   "excerpt": "SAV: CC - BIG OGEECHEE 500/230KV (CC NETWORK IMPROVEMENTS)\nTeams # 19966\nNeed Date 06/01/2026 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "06/01/2023",
+   "excerpt": "SAV: CC - BIG OGEECHEE 500/230KV (CC NETWORK IMPROVEMENTS)\nTeams # 19966\nNeed Date 06/01/2026 Start Date 06/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "voltageKv",
+   "value": "500/230kV",
+   "excerpt": "accommodate a new 1344MVA 500/230kV auto\ntransformers with an additional 230kV connection to Little Ogeechee.",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "McCall Road",
+   "excerpt": "The new substation will loop in the existing McCall Road - Thalmann 500kV line, the existing\nLittle Ogeechee - Meldrim 230kV lines",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Thalmann",
+   "excerpt": "The new substation will loop in the existing McCall Road - Thalmann 500kV line, the existing\nLittle Ogeechee - Meldrim 230kV lines",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Little Ogeechee",
+   "excerpt": "The new substation will loop in the existing McCall Road - Thalmann 500kV line, the existing\nLittle Ogeechee - Meldrim 230kV lines",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "Meldrim",
+   "excerpt": "The new substation will loop in the existing McCall Road - Thalmann 500kV line, the existing\nLittle Ogeechee - Meldrim 230kV lines",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 960,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1088,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 2048
+ }
+}

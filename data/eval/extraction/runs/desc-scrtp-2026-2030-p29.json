@@ -1,0 +1,87 @@
+{
+ "id": "desc-scrtp-2026-2030-p29",
+ "sourceId": "desc-scrtp-2026-2030",
+ "page": 29,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:00:35Z",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "Dominion Energy South Carolina",
+   "excerpt": "Dominion Energy South Carolina\nPlanned Transmission Projects $2M and above Total\n5 Year Budget",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Lyles – Kilbourne Park 115kV: Replace Structure 67 – Kilbourne Park",
+   "excerpt": "Lyles – Kilbourne Park 115kV: Replace Structure 67 – Kilbourne Park\nProject ID\n6809 S",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "6809 S",
+   "excerpt": "Lyles – Kilbourne Park 115kV: Replace Structure 67 – Kilbourne Park\nProject ID\n6809 S\nProject Description",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "Planned",
+   "excerpt": "Project Need\nSystem hardening.\nProject Status\nPlanned\nPlanned In-Service Date\n12/01/2027",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "inServiceDate",
+   "value": "12/01/2027",
+   "excerpt": "Project Status\nPlanned\nPlanned In-Service Date\n12/01/2027\nEstimated Project Cost",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "2.85",
+   "excerpt": "is back lot construction (difficult access) along with distribution underbuilt throughout.\n2.85 Miles\nProject Need",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115",
+   "excerpt": "Rebuild the section of 115kV line between Kilbourne Park and str# 67 on the Lyles - Kilbourne Park",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "$4,770,000",
+   "excerpt": "Estimated Project Cost\nPrevious\n2026\n$150,000\n$100,000\n\n2027\n$4,520,000\n\n2028\n$0\n\n2029\n$0\n\n2030\n$0\n\nTotal\n$4,770,000",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Kilbourne Park Sub",
+   "excerpt": "Pull 1272 ACSR from Richland Mall GOAB to Kilbourne Park Sub. Most of this section of line",
+   "located": true,
+   "inSnapshot": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 783,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 942,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 1725
+ }
+}

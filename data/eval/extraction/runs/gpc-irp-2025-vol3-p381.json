@@ -1,0 +1,101 @@
+{
+ "id": "gpc-irp-2025-vol3-p381",
+ "sourceId": "gpc-irp-2025-vol3",
+ "page": 381,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "effort": null,
+ "runAt": "2026-09-26T17:04:52Z",
+ "fields": [
+  {
+   "field": "projectTitle",
+   "value": "GORDON-SANDERSVILLE #1 115KV LINE REBUILD (DEEPSTEP-SAND #6)",
+   "excerpt": "GORDON-SANDERSVILLE #1 115KV LINE REBUILD (DEEPSTEP-SAND #6)\nTeams # 20428\nNeed Date 06/01/2030 Start Date 12/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "projectId",
+   "value": "20428",
+   "excerpt": "GORDON-SANDERSVILLE #1 115KV LINE REBUILD (DEEPSTEP-SAND #6)\nTeams # 20428\nNeed Date 06/01/2030 Start Date 12/01/2023",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "status",
+   "value": "New Project",
+   "excerpt": "Change From Previous Ten Year Plan\nNo Change\nChange From Previous IRP\nNew Project\nEstimated Cost – GPC",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "12/01/2023",
+   "excerpt": "Teams # 20428\nNeed Date 06/01/2030 Start Date 12/01/2023\nDescription\nRebuild the Deepstep - Robins Spring",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "lengthMiles",
+   "value": "10.49 miles",
+   "excerpt": "Kaolin J Sandersville #6 (0.66 miles) line sections of the Gordon - Sandersville #1 115kV line. Rebuild a total of\n10.49 miles",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "voltageKv",
+   "value": "115 kV",
+   "excerpt": "line sections of the Gordon - Sandersville #1 115kV line. Rebuild a total of\n10.49 miles from 100C 336 ACSR",
+   "located": true,
+   "inSnapshot": false
+  },
+  {
+   "field": "estimatedCost",
+   "value": "REDACTED",
+   "excerpt": "Estimated Cost – GPC\n\nREDACTED\n\nEstimated Cost – GTC\n\nREDACTED\n\nEstimated Cost – MEAG\n\nREDACTED",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Deepstep",
+   "excerpt": "Rebuild the Deepstep - Robins Spring (7.6 miles) Robins Spring - Kaolin J (2.23mi), and Kaolin J Sandersville #6",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[1]",
+   "value": "Robins Spring",
+   "excerpt": "Rebuild the Deepstep - Robins Spring (7.6 miles) Robins Spring - Kaolin J (2.23mi), and Kaolin J Sandersville #6",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[2]",
+   "value": "Kaolin J",
+   "excerpt": "Rebuild the Deepstep - Robins Spring (7.6 miles) Robins Spring - Kaolin J (2.23mi), and Kaolin J Sandersville #6",
+   "located": true,
+   "inSnapshot": true
+  },
+  {
+   "field": "namedFacilities[3]",
+   "value": "Sandersville #6",
+   "excerpt": "Rebuild the Deepstep - Robins Spring (7.6 miles) Robins Spring - Kaolin J (2.23mi), and Kaolin J Sandersville #6",
+   "located": true,
+   "inSnapshot": true
+  }
+ ],
+ "usage": {
+  "input_tokens": 916,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 1118,
+  "output_tokens_details": {
+   "reasoning_tokens": 516
+  },
+  "total_tokens": 2034
+ }
+}
