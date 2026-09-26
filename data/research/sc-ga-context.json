@@ -263,7 +263,8 @@
      "start": {
       "earliest": "2026-06-01",
       "latest": "2026-09-22",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Summer 2026"
      },
      "end": {
       "earliest": "2026-06-01",
@@ -295,7 +296,8 @@
      "start": {
       "earliest": "2027-03-01",
       "latest": "2027-06-20",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Spring 2027"
      },
      "end": {
       "earliest": "2027-03-01",
@@ -727,7 +729,8 @@
      "start": {
       "earliest": "2026-03-01",
       "latest": "2026-04-30",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Early Spring 2026"
      },
      "end": {
       "earliest": "2026-03-01",
@@ -773,7 +776,8 @@
      "start": {
       "earliest": "2026-12-01",
       "latest": "2027-03-19",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Winter 2026"
      },
      "end": {
       "earliest": "2026-12-01",
@@ -812,7 +816,8 @@
      "start": {
       "earliest": "2027-06-01",
       "latest": "2027-09-22",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Summer 2027"
      },
      "end": {
       "earliest": "2027-06-01",

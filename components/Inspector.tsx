@@ -359,7 +359,7 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
                   groups.map(({ ws, sourceIds }) => {
                     const coarse = ws.some((w) => !w.continuous);
                     const src = windowSourceText(ws, IDX);
-                    const meta = `${sourceIds.length > 1 ? `${sourceIds.length} documents · ` : ""}${ws.length > 1 ? `${ws.length} components` : `${precisionLabel(coarsest(ws))} precision`}${coarse ? " · coarse" : ""}`;
+                    const meta = `${sourceIds.length > 1 ? `${sourceIds.length} documents · ` : ""}${ws.length > 1 ? `${ws.length} components` : `${ws.some((w) => w.start.label || w.end.label) ? "season" : precisionLabel(coarsest(ws))} precision`}${coarse ? " · coarse" : ""}`;
                     const notes = ws.map(windowNote).filter(Boolean);
                     return (
                       <div key={ws[0].id} className="mt-1.5">

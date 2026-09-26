@@ -892,6 +892,39 @@ describe("snapshot data regressions", () => {
     expect(w.note).toMatch(/after the planned in-service date \(2027: \$1,024,912\), so the window may run to the end of 2027/);
   });
 
+  it("the brief's GEO line cites the terminals each center is measured from", () => {
+    const b = buildBrief(pair("desc-6888", "gpc-20065")!);
+    const geo = b.rows.find((r) => r.label === "Why flagged")!.text.split("\n")[0];
+    const nums = geo.match(/\[([\d, ]+)\]$/)![1].split(", ").map(Number);
+    expect(nums.map((n) => b.citations[n - 1].excerpt).join(" ")).toContain("Georgia Pacific (Rincon)");
+  });
+
+  it("the brief's TIME line cites the budget cell that puts a DESC window in the overlap year", () => {
+    const b = buildBrief(pair("desc-0139-m-n", "gpc-effingham-500")!);
+    const time = b.rows.find((r) => r.label === "Why flagged")!.text.split("\n")[1];
+    const nums = time.match(/\[([\d, ]+)\]$/)![1].split(", ").map(Number);
+    expect(nums.map((n) => b.citations[n - 1].excerpt)).toContain("2027 $1,024,912");
+  });
+
+  it("season wording is shown as the source words it, never as a quarter", () => {
+    const w = proj("transource-potter-beckham-ok").constructionWindows[0];
+    expect(formatWindow(w.start, w.end)).toBe("Spring 2028–Late 2028");
+    expect(formatBound(proj("transource-potter-beckham-ok").completionClaims[0].date)).toBe("Late 2029");
+    const eff = proj("gpc-effingham-500").constructionWindows.find((x) => x.start.label === "Spring 2027")!;
+    expect(formatWindow(eff.start, eff.end, eff.openEnded)).toBe("from Spring 2027");
+  });
+
+  it("a 'completion by' date is kept as bounds for Grid Forward ATC, like WWTC", () => {
+    const g = proj("grid-forward-atc");
+    expect(g.constructionWindows[0].boundsOnly).toBe(true);
+    expect(endsWindow(g, g.completionClaims.find((c) => c.id === "grid-forward-atc:c2")!)).toBe(false);
+    expect(endsWindow(g, g.completionClaims.find((c) => c.id === "grid-forward-atc:c1")!)).toBe(true);
+  });
+
+  it("research notes agree with the Tremval North terminals", () => {
+    for (const u of SNAPSHOT.unresolved) expect(u.note).not.toMatch(/placed at Blair locality|Cross-cluster coordinate mismatch/);
+  });
+
   it("SERTP 2025 in-service years are current for every Savannah-area project that states one", () => {
     for (const [id, y] of [["gpc-20065", 2028], ["gpc-20989", 2028], ["gpc-20407", 2029], ["gpc-20784", 2029], ["gpc-20787", 2029]] as const) {
       const c = currentInService(proj(id));

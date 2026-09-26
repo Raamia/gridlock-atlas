@@ -1236,7 +1236,8 @@
      "end": {
       "earliest": "2027-07-01",
       "latest": "2027-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2027"
      },
      "continuous": true,
      "note": "Line foundations began near Alexandria in 2025; final line segment expected late 2026; Big Oaks substation expected late 2027 ('late 2027' mapped to H2 2027).",
@@ -1305,7 +1306,8 @@
      "date": {
       "earliest": "2026-07-01",
       "latest": "2026-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2026"
      },
      "evidence": [
       {
@@ -1323,7 +1325,8 @@
      "date": {
       "earliest": "2027-07-01",
       "latest": "2027-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2027"
      },
      "evidence": [
       {
@@ -1821,12 +1824,14 @@
      "start": {
       "earliest": "2028-03-01",
       "latest": "2028-06-30",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Spring 2028"
      },
      "end": {
       "earliest": "2030-10-01",
       "latest": "2030-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "End of 2030"
      },
      "continuous": true,
      "note": "'Spring 2028' mapped to 2028-03-01..2028-06-30; 'complete by the end of 2030' mapped to Q4 2030; start conditional on easement acquisition.",
@@ -1866,7 +1871,8 @@
      "date": {
       "earliest": "2030-10-01",
       "latest": "2030-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "End of 2030"
      },
      "evidence": [
       {

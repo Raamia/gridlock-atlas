@@ -1006,12 +1006,14 @@
      "start": {
       "earliest": "2028-03-01",
       "latest": "2028-06-20",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Spring 2028"
      },
      "end": {
       "earliest": "2028-09-01",
       "latest": "2028-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2028"
      },
      "continuous": true,
      "evidence": [
@@ -1034,7 +1036,8 @@
      "date": {
       "earliest": "2029-09-01",
       "latest": "2029-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2029"
      },
      "evidence": [
       {

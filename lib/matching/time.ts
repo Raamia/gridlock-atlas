@@ -39,9 +39,24 @@ export const dayCount = (n: number): string => `${n.toLocaleString("en-US")} ${d
 export function endsWindow(p: Project, c: CompletionClaim): boolean {
   if (c.current === false || DEADLINE.test(c.label)) return false;
   const d = c.date.latest;
+  // a bounds-only window's end was widened back to its start; compare against the end period the source states
   return activeWindows(p).some(
-    (w) => (w.claimSourceId === c.claimSourceId || w.evidenceIds.some((e) => c.evidenceIds.includes(e))) && w.end.earliest <= d && d <= w.end.latest,
+    (w) =>
+      (w.claimSourceId === c.claimSourceId || w.evidenceIds.some((e) => c.evidenceIds.includes(e))) &&
+      (w.boundsOnly ? periodStart(w.end.latest, w.end.precision) : w.end.earliest) <= d &&
+      d <= w.end.latest,
   );
+}
+
+/** First day of the period (year, half, quarter, month) that contains `iso`. */
+function periodStart(iso: string, p: DateBound["precision"]): string {
+  const y = iso.slice(0, 4);
+  const m = Number(iso.slice(5, 7));
+  if (p === "year") return `${y}-01-01`;
+  if (p === "half") return `${y}-${m <= 6 ? "01" : "07"}-01`;
+  if (p === "quarter") return `${y}-${String(Math.floor((m - 1) / 3) * 3 + 1).padStart(2, "0")}-01`;
+  if (p === "month") return `${iso.slice(0, 7)}-01`;
+  return iso;
 }
 
 const spanMs = (b: DateBound) => Date.parse(b.latest) - Date.parse(b.earliest);

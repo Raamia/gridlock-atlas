@@ -74,10 +74,19 @@ export function buildBrief(m: Match): Brief {
     return nums.length ? ` [${[...new Set(nums)].sort((x, y) => x - y).join(", ")}]` : "";
   };
   const rels = SNAPSHOT.relations.filter((r) => m.geoDetail.relationIds.includes(r.id));
-  const geoLine = `GEO (${m.geo}) — ${m.geoReason}${merge(cite(rels.flatMap((r) => r.evidenceIds), 2), cite(placeEvidence(a), 1), cite(placeEvidence(b), 1))}`;
+  const geoLine = `GEO (${m.geo}) — ${m.geoReason}${merge(cite(rels.flatMap((r) => r.evidenceIds), 2), cite(placeEvidence(a), 2), cite(placeEvidence(b), 2))}`;
+  // the TIME line names the possible-overlap years: also cite the cell that puts a window there (e.g. DESC's post-in-service "2027 $1,024,912")
+  const ov = m.timeDetail.possibleOverlap;
+  const inOverlap = (id: string) =>
+    !!ov && (IDX.evidence(id)?.exactExcerpt.match(/\b(?:19|20)\d\d\b/g) ?? []).some((y) => y >= ov.start.slice(0, 4) && y <= ov.end.slice(0, 4));
+  const windowEvidence = (p: Project) => {
+    const ids = dated(activeWindows(p).flatMap((w) => w.evidenceIds));
+    const hit = ids.find(inOverlap);
+    return hit && hit !== ids[0] ? [ids[0], hit] : ids.slice(0, 1);
+  };
   const timeLine = `TIME (${m.time}) — ${m.timeReason}${merge(
-    cite(dated(activeWindows(a).flatMap((w) => w.evidenceIds)), 1),
-    cite(dated(activeWindows(b).flatMap((w) => w.evidenceIds)), 1),
+    cite(windowEvidence(a), 2),
+    cite(windowEvidence(b), 2),
     // cite the same in-service claims the gap is computed from
     m.timeDetail.inService ? cite(dated(currentInService(a)?.evidenceIds ?? []), 1) : "",
     m.timeDetail.inService ? cite(dated(currentInService(b)?.evidenceIds ?? []), 1) : "",
@@ -135,8 +144,11 @@ export function buildBrief(m: Match): Brief {
   };
 }
 
+/** One excerpt per terminal the project's center is measured from (centerOf), preferring one that names it in the scope. */
 function placeEvidence(p: Project): string[] {
-  return p.places.filter((pl) => pl.role === "endpoint").flatMap((pl) => pl.evidenceIds);
+  const pts = centerOf(p)?.places ?? p.places.filter((pl) => pl.role === "endpoint");
+  const pick = (ids: string[]) => ids.find((id) => !/^project name$/i.test(IDX.evidence(id)?.supports ?? "")) ?? ids[0];
+  return [...new Set(pts.map((pl) => pick(pl.evidenceIds)).filter((id): id is string => !!id))];
 }
 
 function pdfAnchor(e: Evidence, url?: string, mime?: string) {

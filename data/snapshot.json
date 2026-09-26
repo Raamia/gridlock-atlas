@@ -1,6 +1,6 @@
 {
- "version": "snap-2026-09-26-cf31d099",
- "generatedAt": "2026-09-26T13:24:47.118Z",
+ "version": "snap-2026-09-26-6c81e4ac",
+ "generatedAt": "2026-09-26T14:17:10.766Z",
  "snapshotDate": "2026-09-26",
  "regions": [
   {
@@ -18911,12 +18911,14 @@
      "start": {
       "earliest": "2028-06-01",
       "latest": "2028-09-30",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Summer 2028"
      },
      "end": {
       "earliest": "2030-06-01",
       "latest": "2030-09-30",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Summer 2030"
      },
      "continuous": true,
      "evidenceIds": [
@@ -22010,11 +22012,11 @@
      "phase": "general-construction",
      "start": {
       "earliest": "2026-10-01",
-      "latest": "2026-12-31",
+      "latest": "2030-12-31",
       "precision": "quarter"
      },
      "end": {
-      "earliest": "2030-12-01",
+      "earliest": "2026-10-01",
       "latest": "2030-12-31",
       "precision": "month"
      },
@@ -22022,7 +22024,8 @@
      "evidenceIds": [
       "ev-33edc609d550"
      ],
-     "note": "Project-wide PSC statement (both packages); 'completion by December 2030' is an upper bound read as end of construction. Construction is sequenced from the Columbia (ATC) end."
+     "note": "Project-wide PSC statement (both packages); 'completion by December 2030' is an upper bound read as end of construction. Construction is sequenced from the Columbia (ATC) end.",
+     "boundsOnly": true
     },
     {
      "id": "grid-forward-atc:w2",
@@ -22852,7 +22855,8 @@
      "end": {
       "earliest": "2027-07-01",
       "latest": "2027-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2027"
      },
      "continuous": true,
      "evidenceIds": [
@@ -22896,7 +22900,8 @@
      "date": {
       "earliest": "2026-07-01",
       "latest": "2026-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2026"
      },
      "evidenceIds": [
       "ev-3bd982e45177"
@@ -22909,7 +22914,8 @@
      "date": {
       "earliest": "2027-07-01",
       "latest": "2027-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2027"
      },
      "evidenceIds": [
       "ev-3efdc3300492"
@@ -23206,12 +23212,14 @@
      "start": {
       "earliest": "2028-03-01",
       "latest": "2028-06-30",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Spring 2028"
      },
      "end": {
       "earliest": "2030-10-01",
       "latest": "2030-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "End of 2030"
      },
      "continuous": true,
      "evidenceIds": [
@@ -23241,7 +23249,8 @@
      "date": {
       "earliest": "2030-10-01",
       "latest": "2030-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "End of 2030"
      },
      "evidenceIds": [
       "ev-b45d8a26542d"
@@ -24324,12 +24333,14 @@
      "start": {
       "earliest": "2028-03-01",
       "latest": "2028-06-20",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Spring 2028"
      },
      "end": {
       "earliest": "2028-09-01",
       "latest": "2028-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2028"
      },
      "continuous": true,
      "evidenceIds": [
@@ -24346,7 +24357,8 @@
      "date": {
       "earliest": "2029-09-01",
       "latest": "2029-12-31",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Late 2029"
      },
      "evidenceIds": [
       "ev-dc490782d9b4"
@@ -24507,7 +24519,8 @@
      "start": {
       "earliest": "2026-06-01",
       "latest": "2026-09-22",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Summer 2026"
      },
      "end": {
       "earliest": "2026-06-01",
@@ -24529,7 +24542,8 @@
      "start": {
       "earliest": "2027-03-01",
       "latest": "2027-06-20",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Spring 2027"
      },
      "end": {
       "earliest": "2027-03-01",
@@ -24808,7 +24822,8 @@
      "start": {
       "earliest": "2026-03-01",
       "latest": "2026-04-30",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Early Spring 2026"
      },
      "end": {
       "earliest": "2026-03-01",
@@ -24832,7 +24847,8 @@
      "start": {
       "earliest": "2026-12-01",
       "latest": "2027-03-19",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Winter 2026"
      },
      "end": {
       "earliest": "2026-12-01",
@@ -24855,7 +24871,8 @@
      "start": {
       "earliest": "2027-06-01",
       "latest": "2027-09-22",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Summer 2027"
      },
      "end": {
       "earliest": "2027-06-01",
@@ -51744,7 +51761,7 @@
   },
   {
    "cluster": "grid-forward",
-   "note": "Larkin Valley Substation (new) is not in OSM; placed at Blair locality (5 km uncertainty). The existing Tremval Substation (OSM way 258582476) is ~1.7 km west of that centroid."
+   "note": "Larkin Valley Substation (new) is not in OSM; it is placed at the PSC 5-CE-158 GIS point 'Tremval Expansion North' (official GIS, ~300 m uncertainty), about 0.9 km north of the existing Tremval Substation (OSM way 258582476), which is shown as context only."
   },
   {
    "cluster": "grid-forward",
@@ -52073,10 +52090,6 @@
   {
    "cluster": "xcel-wwtc",
    "note": "Owner overlap with Grid Forward: NSPW and ATC are applicants for both WWTC and Grid Forward (5-CE-157, with SMMPA and WPPI). A WWTC vs Grid Forward pair is therefore shared-owner context, not a cross-utility review lead. Grid Forward also describes 'expanding the Tremval Substation', and how Tremval North / Larkin Valley work is split between 5-CE-157 and 5-CE-158 was not determined."
-  },
-  {
-   "cluster": "xcel-wwtc",
-   "note": "Cross-cluster coordinate mismatch: the Dairyland cluster places the same Tremval North switching station at the Blair locality centroid (44.2946, -91.2338, precision locality). The PSC GIS point 'Tremval Expansion North' (44.30158, -91.25420) is about 1.8 km away and should be preferred when the clusters are merged."
   },
   {
    "cluster": "xcel-wwtc",

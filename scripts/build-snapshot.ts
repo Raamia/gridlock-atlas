@@ -231,8 +231,9 @@ for (const c of clusters) {
     // bounds-only windows: the source dates the envelope (start … "by"/need date), not the field work inside it
     for (const w of windows) {
       if (!w.boundsOnly) continue;
-      w.start = { earliest: w.start.earliest, latest: w.end.latest, precision: w.start.precision };
-      w.end = { earliest: w.start.earliest, latest: w.end.latest, precision: w.end.precision };
+      // a source-worded label ("Spring 2028") still names the stated start and end
+      w.start = { ...w.start, latest: w.end.latest };
+      w.end = { ...w.end, earliest: w.start.earliest };
     }
     const completion: CompletionClaim[] = (p.completionClaims ?? [])
       .map((cc: R, i: number) => ({

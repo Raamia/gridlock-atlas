@@ -90,6 +90,8 @@ export interface DateBound {
   latest: string;
   /** "half": a source's "Early/Late YYYY" (Jan–Jun / Jul–Dec). */
   precision: "day" | "month" | "quarter" | "half" | "year";
+  /** The bound as the source words it ("Spring 2028"), shown instead of the precision-derived text; matching uses the dates. */
+  label?: string;
 }
 
 export interface ConstructionWindow {

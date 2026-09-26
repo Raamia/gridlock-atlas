@@ -759,12 +759,14 @@
      "start": {
       "earliest": "2028-06-01",
       "latest": "2028-09-30",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Summer 2028"
      },
      "end": {
       "earliest": "2030-06-01",
       "latest": "2030-09-30",
-      "precision": "quarter"
+      "precision": "quarter",
+      "label": "Summer 2030"
      },
      "continuous": true,
      "note": "'Easement Acquisition, Final Design, and Surveys Summer 2028 - Summer 2030'; 'Summer' encoded as June-September (interpretation; 'quarter' is the closest precision value). Preconstruction, not field construction.",

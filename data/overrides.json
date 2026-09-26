@@ -22,6 +22,9 @@
   },
   "grid-forward-atc:w2": {
    "supersededBy": "grid-forward-atc:w1"
+  },
+  "grid-forward-atc:w1": {
+   "boundsOnly": true
   }
  }
 }

@@ -31,6 +31,7 @@ export function precisionLabel(p: DateBound["precision"]): string {
 
 /** A DateBound as the source stated it: "2026", "Q3 2029", "2027–2028". */
 export function formatBound(b: DateBound): string {
+  if (b.label) return b.label;
   const a = formatPoint(b.earliest, b.precision);
   const z = formatPoint(b.latest, b.precision);
   return a === z ? a : `${a}–${z}`;
@@ -44,18 +45,18 @@ export function formatSpan(span: { start: string; end: string }, precision: Date
 
 /** Where a window starts: "before 2026" when the source only itemizes spending before its first year (openStart), else the start point. */
 export function windowStartText(w: { start: DateBound; openStart?: boolean }): string {
-  return w.openStart ? `before ${year(w.start.latest)}` : formatPoint(w.start.earliest, w.start.precision);
+  return w.openStart ? `before ${year(w.start.latest)}` : (w.start.label ?? formatPoint(w.start.earliest, w.start.precision));
 }
 
 /** A window as published: "2027–2028", "2028" (a year-precision start inside the calendar year that ends it), "before 2026 → 2026" (openStart), "from Fall 2027" (openEnded). */
 export function formatWindow(start: DateBound, end: DateBound, openEnded?: boolean, openStart?: boolean): string {
   const open = openEnded || end.latest >= "2090";
-  const z = formatPoint(end.latest, end.precision);
+  const z = end.label ?? formatPoint(end.latest, end.precision);
   if (openStart) return open ? `from before ${year(start.latest)}` : `${windowStartText({ start, openStart })} → ${z}`;
-  if (open) return `from ${formatPoint(start.earliest, start.precision)}`;
+  if (open) return `from ${start.label ?? formatPoint(start.earliest, start.precision)}`;
   // the in-service row and tooltips keep the exact end date
   if (start.precision === "year" && start.earliest.slice(0, 4) === end.latest.slice(0, 4) && end.latest.endsWith("-12-31")) return start.earliest.slice(0, 4);
-  const a = formatPoint(start.earliest, start.precision);
+  const a = start.label ?? formatPoint(start.earliest, start.precision);
   return a === z ? a : `${a}–${z}`;
 }
 

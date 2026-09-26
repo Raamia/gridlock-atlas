@@ -380,7 +380,7 @@ function WindowBar({ ws, sourceIds, color, y0, y1, top, height }: { ws: Construc
                 <span className="num text-text-0">{formatWindow(w.start, w.end, w.openEnded, w.openStart)}</span>
                 <span className="text-text-3">
                   {" "}
-                  · {precisionLabel(coarsest([w]))} precision{w.openStart ? " · start not published" : ""}
+                  · {w.start.label || w.end.label ? "season" : precisionLabel(coarsest([w]))} precision{w.openStart ? " · start not published" : ""}
                 </span>
                 {windowNote(w) && <div className="text-[10.5px] leading-snug text-text-3">{windowNote(w)}</div>}
               </li>

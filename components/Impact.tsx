@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import { Calculator, ExternalLink } from "lucide-react";
 import { useMemo, useState } from "react";
 import { IDX } from "@/lib/data";
@@ -138,14 +139,18 @@ export function ImpactEstimate({ m }: { m: Match }) {
         <div className="rounded-lg bg-bg-2/60 p-3 text-[11.5px] leading-snug text-text-1 ring-1 ring-line">
           <div className="flex items-center justify-between gap-2">
             <span className="font-medium text-text-0">Staging both jobs together</span>
-            <span className="num text-[13px] text-text-0">≈{formatUsd(mobil.typical * (d.avoidedMobilizations?.typical ?? 1))}</span>
+            {/* without a shared corridor the saving is conditional on co-located work no source shows */}
+            <span className={clsx("num text-[13px]", miles > 0 ? "text-text-0" : "text-text-3")}>
+              {miles > 0 ? "≈" : "up to ≈"}
+              {formatUsd(mobil.typical * (d.avoidedMobilizations?.typical ?? 1))}
+            </span>
           </div>
           <p className="mt-1 text-text-2">
             If both jobs were actually staged together — which no source here establishes — one crew mobilization could be avoided, priced at MISO&apos;s {d.mobilClass}{" "}
             kV-class unit cost{d.mobilClass !== d.voltageClass ? ", the highest class it publishes" : ""}
             {mobil.unit.match(/(\d{4}) \$/) ? ` (${mobil.unit.match(/(\d{4}) \$/)![1]} dollars, before overhead and contingency)` : ""}.
             {d.avoidedMobilizations &&
-              " A joint proposed order filed in a South Carolina PSC docket (summarizing utility testimony) states that building two lines at the same time avoids mobilizing crews twice."}
+              " A joint proposed order filed in a South Carolina PSC docket (summarizing utility testimony) states that building two lines that share the same structures at the same time avoids mobilizing crews twice; no source shows these two projects share structures or work sites."}
           </p>
           <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5">
             <Cite a={mobil} />
