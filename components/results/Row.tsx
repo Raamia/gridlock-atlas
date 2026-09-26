@@ -82,23 +82,35 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
         onFocus={() => set({ hoveredMatchId: m.id })}
         onBlur={() => useAtlas.getState().hoveredMatchId === m.id && set({ hoveredMatchId: null })}
         className={clsx(
-          // --row-lh: one line box for the rank, dots, owner codes and title lines, so they share a first line
-          "group relative grid w-full scroll-mt-(--sticky-h,8px) scroll-mb-2 grid-cols-[16px_minmax(0,1fr)_auto] gap-x-1.5 rounded-control py-2 pr-1.5 pl-2 text-left transition-colors duration-150 ease-enter [--row-lh:calc(var(--text-ui)*1.3)]",
-          selected ? "bg-fill-3" : "hover:bg-fill-2 data-hovered:bg-fill-2",
+          // a separated card: rank gutter · two owner-labelled titles · a divider · the pair's facts in plain words.
+          // --row-lh: one line box for the rank, dots and first title lines, so they share a first line
+          "group relative grid w-full scroll-mt-(--sticky-h,8px) scroll-mb-2 grid-cols-[22px_minmax(0,1fr)] gap-x-2 rounded-card border px-3 py-3 text-left transition-[background-color,border-color] duration-150 ease-enter [--row-lh:calc(var(--text-ui)*1.3)]",
+          selected
+            ? "border-edge-strong bg-fill-3"
+            : "border-edge bg-fill-1 hover:border-edge-strong hover:bg-fill-2 data-hovered:border-edge-strong data-hovered:bg-fill-2",
         )}
       >
         {selected && (
-          <span aria-hidden className="absolute top-2 bottom-2 left-0 w-0.5 rounded-full bg-[linear-gradient(var(--util-a)_50%,var(--util-b)_50%)]" />
+          <span aria-hidden className="absolute top-3 bottom-3 left-0 w-[3px] rounded-r-full bg-[linear-gradient(var(--util-a)_50%,var(--util-b)_50%)]" />
         )}
-        <span className="num text-[length:var(--text-label)] leading-(--row-lh) text-fg-3 tabular-nums">
+        <span className="num text-heading leading-(--row-lh) font-medium text-fg-3 tabular-nums">
           <span aria-hidden>{rankLabel(rank)}</span>
           <span className="sr-only">Rank {rank}: </span>
         </span>
         <span className="min-w-0">
           <TitleLine p={a} role={selected ? "a" : undefined} times={a.id === focusId ? 0 : (repeats.get(a.id) ?? 0)} />
-          <TitleLine p={b} role={selected ? "b" : undefined} times={b.id === focusId ? 0 : (repeats.get(b.id) ?? 0)} className="mt-1" />
+          <TitleLine p={b} role={selected ? "b" : undefined} times={b.id === focusId ? 0 : (repeats.get(b.id) ?? 0)} className="mt-2.5" />
+          {/* pair-level facts in plain words: the distance between centers, then the timing (never per project) */}
+          <span className="mt-3 flex flex-wrap items-start gap-x-3 gap-y-1 border-t border-divider pt-2.5 text-caption text-fg-2">
+            <SignalFact kind="place" state={place.state} mono={false} wrap alignIcon tooltip={place.tooltip} className="gap-1! leading-[1.3]">
+              <FactText f={place} />
+            </SignalFact>
+            <SignalFact kind="time" state={time.state} mono={false} wrap alignIcon tooltip={time.tooltip} className="gap-1! leading-[1.3]">
+              <FactText f={time} />
+            </SignalFact>
+          </span>
           {chips && (
-            <span className="mt-1.5 flex flex-wrap gap-1">
+            <span className="mt-2 flex flex-wrap gap-1">
               {sperry && (
                 <Tag mono title={sperry.tooltip}>
                   Sperry {sperry.id}
@@ -127,16 +139,6 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
             </span>
           )}
         </span>
-        {/* pair-level facts in plain words: the distance between centers over the timing (never per project). The
-            column holds "may overlap 2028" on one line and "schedules overlap / 2025–26" on two; the titles get the rest */}
-        <span className="flex w-[134px] min-w-0 flex-col justify-center gap-1 self-stretch border-l border-divider pl-2">
-          <SignalFact kind="place" state={place.state} mono={false} wrap alignIcon tooltip={place.tooltip} className="gap-1! leading-[1.3]">
-            <FactText f={place} />
-          </SignalFact>
-          <SignalFact kind="time" state={time.state} mono={false} wrap alignIcon tooltip={time.tooltip} className="gap-1! leading-[1.3]">
-            <FactText f={time} />
-          </SignalFact>
-        </span>
       </button>
     </motion.div>
   );
@@ -158,24 +160,24 @@ function FactText({ f }: { f: Fact }) {
 const DOT: Record<UtilityKey, UtilityKey> = { a: "a", b: "b", other: "other" };
 
 /**
- * Owner first (dot + mono short name, full names for screen readers), then the title — up to two lines, the full title
- * in its tooltip — then "×18" when repeated. The owner code runs inline with the title, so a second line starts under
- * it and gets the full width; the dot and "×18" sit on the first line box (--row-lh). The "×18" gives way first: it shows
- * only in a wide rail, where it no longer costs the title its words.
+ * A utility dot, the title (up to two lines, the full title in its tooltip) and "×18" when repeated, with the owner's
+ * name on its own line underneath (colour is always backed by text). The dot and "×18" sit on the first line box
+ * (--row-lh); the "×18" shows only in a wide rail, where it no longer costs the title its words.
  */
 function TitleLine({ p, role, times, className }: { p: Project; role?: "a" | "b"; times: number; className?: string }) {
   const owner = rowOwner(p);
   return (
-    <span className={clsx("flex min-w-0 items-start gap-1.5", className)}>
+    <span className={clsx("flex min-w-0 items-start gap-2", className)}>
       <span className="flex h-(--row-lh) shrink-0 items-center">
-        <UtilityDot utility={DOT[role ?? owner.hue]} />
+        <UtilityDot utility={DOT[role ?? owner.hue]} size={7} />
       </span>
-      <span className="line-clamp-2 min-w-0 text-ui leading-(--row-lh) font-medium text-fg-1" title={p.title}>
-        <span aria-hidden title={owner.full} className="num mr-1.5 text-[length:var(--text-label)] font-normal text-fg-3">
-          {owner.label}
+      <span className="min-w-0 flex-1">
+        <span className="line-clamp-2 text-ui leading-(--row-lh) font-medium text-fg-1" title={p.title}>
+          {p.shortTitle}
         </span>
-        <span className="sr-only">{owner.full}: </span>
-        {p.shortTitle}
+        <span className="mt-0.5 block truncate text-caption text-fg-3" title={owner.full}>
+          {owner.full}
+        </span>
       </span>
       {times >= 3 && (
         <span className="num hidden shrink-0 pl-0.5 text-[length:var(--text-label)] leading-(--row-lh) text-fg-3 @[372px]:inline" title={`In ${times} pairs of this tab`}>

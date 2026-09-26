@@ -416,7 +416,7 @@ function List({
 
   return (
     <>
-      <div role="list" id={LIST_ID} aria-label="Coordination opportunities" className="@container space-y-px">
+      <div role="list" id={LIST_ID} aria-label="Coordination opportunities" className="@container space-y-2">
         {rows.length === 0
           ? empty
           : rows.slice(0, shown).map((m, i) => (

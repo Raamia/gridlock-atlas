@@ -35,7 +35,8 @@ export function SectionNav({ items, active, onJump, stuck }: { items: NavItem[];
         stuck ? "bg-surface-solid shadow-[0_1px_0_var(--divider)]" : "bg-transparent",
       )}
     >
-      <div ref={track} className="-mx-1 flex items-center justify-between gap-0.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      {/* pill "bubbles": each section is a rounded chip; the one in view carries a sliding filled pill */}
+      <div ref={track} className="flex flex-wrap items-center gap-1.5 py-2">
         {items.map((it) => {
           const on = it.id === active;
           return (
@@ -46,19 +47,28 @@ export function SectionNav({ items, active, onJump, stuck }: { items: NavItem[];
               aria-current={on ? "location" : undefined}
               onClick={() => onJump(it.id)}
               className={clsx(
-                "relative inline-flex h-10 shrink-0 items-center gap-1 rounded-chip px-1 text-caption font-medium whitespace-nowrap transition-colors duration-150 min-[1440px]:px-1.5",
-                on ? "text-fg-1" : "text-fg-3 hover:text-fg-1",
+                "relative inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-caption font-medium whitespace-nowrap transition-colors duration-150",
+                on ? "text-fg-1" : "bg-fill-1 text-fg-2 hover:bg-fill-2 hover:text-fg-1",
               )}
             >
-              {it.label}
-              {it.count !== undefined && <span className={clsx("num", on ? "text-fg-2" : "text-fg-4")}>{it.count}</span>}
               {on && (
                 <motion.span
                   layoutId={`insp-nav-${uid}`}
                   aria-hidden
-                  className="absolute inset-x-1 bottom-1.5 h-[2px] rounded-full bg-fg-1 min-[1440px]:inset-x-1.5"
+                  className="absolute inset-0 rounded-full bg-fill-3 ring-1 ring-edge-strong ring-inset"
                   transition={{ type: "spring", bounce: 0.12, duration: 0.34 }}
                 />
+              )}
+              <span className="relative">{it.label}</span>
+              {it.count !== undefined && (
+                <span
+                  className={clsx(
+                    "num relative inline-grid h-[18px] min-w-[18px] place-items-center rounded-full px-1 text-[length:var(--text-label)] leading-none",
+                    on ? "bg-fill-3 text-fg-1" : "bg-fill-2 text-fg-3",
+                  )}
+                >
+                  {it.count}
+                </span>
               )}
             </button>
           );
