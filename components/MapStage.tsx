@@ -575,7 +575,13 @@ export default function MapStage() {
       const sheetTop = window.innerHeight * 0.46;
       const pad = mobile
         ? { top: 64, left: 24, right: 24, bottom: st.inspectorOpen ? Math.max(24, rect.bottom - sheetTop + 24) : 32 }
-        : { top: 90, left: 70, right: st.inspectorOpen ? 440 : 64, bottom: 70 };
+        : {
+            top: 90,
+            left: 70,
+            // leave room for the inspector column at whatever width the layout gives it
+            right: st.inspectorOpen ? (document.querySelector('[aria-label="Evidence inspector"]')?.getBoundingClientRect().width ?? 408) + 32 : 64,
+            bottom: 70,
+          };
       const fit = (a: number, b: number, total: number) => {
         const max = Math.max(0, total - 80);
         const k = a + b > max ? max / (a + b) : 1;

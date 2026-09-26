@@ -57,8 +57,8 @@ export function Timeline() {
   return (
     <section aria-label="Construction timeline" className="relative hidden h-[184px] shrink-0 border-t border-line bg-bg-1 md:block">
       <div className="flex h-8 items-center justify-between px-4">
-        <div className="eyebrow">Construction windows · from sources</div>
-        <div className="flex items-center gap-4 text-[10.5px] text-text-3">
+        <div className="eyebrow whitespace-nowrap">Construction windows · from sources</div>
+        <div className="hidden items-center gap-4 text-[10.5px] text-text-3 xl:flex">
           <span className="flex items-center gap-1.5">
             <span className="h-2 w-5 rounded-sm bg-text-2/70" /> stated
           </span>
@@ -87,7 +87,7 @@ export function Timeline() {
           })}
           <div className="absolute inset-y-0 z-20" style={{ left: `${today}%` }}>
             <div className="absolute inset-y-0 w-px border-l border-dashed border-text-1/60" />
-            <div className="mono absolute -top-0.5 right-1 whitespace-nowrap rounded bg-bg-1 px-1 text-[10px] text-text-1">Snapshot</div>
+            <div className="mono absolute right-1 top-[13px] whitespace-nowrap rounded bg-bg-1/90 px-1 text-[10px] text-text-1">Snapshot</div>
           </div>
         </div>
         <div className="absolute inset-x-0 bottom-0 top-4">

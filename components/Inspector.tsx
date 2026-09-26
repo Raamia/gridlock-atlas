@@ -29,7 +29,7 @@ export function Inspector() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 28 }}
           transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-          className="glass fixed inset-x-0 bottom-0 top-[46vh] z-40 flex flex-col overflow-hidden rounded-t-2xl !bg-bg-1/[0.94] sm:absolute sm:inset-x-auto sm:bottom-3 sm:right-3 sm:top-3 sm:w-[408px] sm:rounded-2xl"
+          className="glass fixed inset-x-0 bottom-0 top-[46vh] z-40 flex flex-col overflow-hidden rounded-t-2xl !bg-bg-1/[0.94] sm:absolute sm:inset-x-auto sm:bottom-3 sm:right-3 sm:top-3 sm:w-[360px] sm:rounded-2xl xl:w-[408px]"
           aria-label="Evidence inspector"
         >
           <InspectorBody key={pair.match.id} m={pair.match} a={pair.a} b={pair.b} />

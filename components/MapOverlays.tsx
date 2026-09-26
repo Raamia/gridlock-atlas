@@ -64,7 +64,7 @@ function MapControls() {
     <div
       className={clsx(
         "absolute top-4 z-10 flex flex-col items-end gap-2 transition-[right] duration-500 ease-[var(--ease-out)]",
-        inspectorOpen ? "right-3 sm:right-[424px]" : "right-3 sm:right-4",
+        inspectorOpen ? "right-3 sm:right-[376px] xl:right-[424px]" : "right-3 sm:right-4",
       )}
     >
       <div className="glass flex items-center gap-0.5 rounded-[10px] p-0.5" role="group" aria-label="Map perspective">

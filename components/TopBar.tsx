@@ -28,7 +28,8 @@ export function TopBar() {
   const resetView = useAtlas((s) => s.resetView);
   const demoStep = useAtlas((s) => s.demoStep);
   const utilities = new Set(SNAPSHOT.projects.flatMap((p) => p.owners.map((o) => o.utilityId)));
-  const regions = [...SNAPSHOT.regions.map((r) => ({ id: r.id, label: r.label })), { id: "all", label: "All" }];
+  const SHORT: Record<string, string> = { southeast: "SC–GA", "upper-midwest": "Midwest", "southern-plains": "Plains" };
+  const regions = [...SNAPSHOT.regions.map((r) => ({ id: r.id, label: r.label, short: SHORT[r.id] ?? r.label })), { id: "all", label: "All", short: "All" }];
 
   return (
     <header className="relative z-30 flex h-14 min-w-0 items-center gap-2 overflow-hidden border-b border-line bg-bg-1/95 px-3 backdrop-blur sm:gap-3 sm:px-4">
@@ -42,8 +43,8 @@ export function TopBar() {
       </div>
 
       <div className="mx-2 hidden h-5 w-px bg-line-2 lg:block" />
-      <div className="hidden items-center gap-2 lg:flex">
-        <span className="inline-flex h-6 items-center gap-1.5 rounded-full border border-line-2 px-2.5 text-[11px] text-text-1">
+      <div className="hidden items-center gap-2 whitespace-nowrap lg:flex">
+        <span className="hidden h-6 items-center gap-1.5 rounded-full border border-line-2 px-2.5 text-[11px] text-text-1 min-[1400px]:inline-flex">
           <span className="h-1.5 w-1.5 rounded-full bg-known shadow-[0_0_8px_var(--known)]" />
           Public planning data
         </span>
@@ -59,11 +60,13 @@ export function TopBar() {
             onClick={() => set({ region: r.id, cameraNonce: useAtlas.getState().cameraNonce + 1, selectedMatchId: null, inspectorOpen: false })}
             aria-pressed={region === r.id}
             className={clsx(
-              "h-7 rounded-[8px] px-3 text-[12px] transition-colors",
+              "h-7 whitespace-nowrap rounded-[8px] px-3 text-[12px] transition-colors",
               region === r.id ? "bg-bg-3 text-text-0 ring-1 ring-line-2" : "text-text-2 hover:text-text-1",
             )}
+            title={r.label}
           >
-            {r.label}
+            <span className="min-[1400px]:hidden">{r.short}</span>
+            <span className="hidden min-[1400px]:inline">{r.label}</span>
           </button>
         ))}
       </nav>
