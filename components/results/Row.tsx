@@ -90,9 +90,6 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
             : "border-edge bg-fill-1 hover:border-edge-strong hover:bg-fill-2 data-hovered:border-edge-strong data-hovered:bg-fill-2",
         )}
       >
-        {selected && (
-          <span aria-hidden className="absolute top-3 bottom-3 left-0 w-[3px] rounded-r-full bg-[linear-gradient(var(--util-a)_50%,var(--util-b)_50%)]" />
-        )}
         <span className="num text-heading leading-(--row-lh) font-medium text-fg-3 tabular-nums">
           <span aria-hidden>{rankLabel(rank)}</span>
           <span className="sr-only">Rank {rank}: </span>
