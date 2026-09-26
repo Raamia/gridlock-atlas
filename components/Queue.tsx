@@ -2,17 +2,19 @@
 
 import clsx from "clsx";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { AlertTriangle, Archive, ChevronDown, Download, FileSearch, Play, RotateCw, SlidersHorizontal } from "lucide-react";
+import { AlertTriangle, Archive, CalendarRange, ChevronDown, Download, FileSearch, MapPin, Play, RotateCw, SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import { displayTitle, geoShort, timeShort } from "@/lib/describe";
 import type { Match, Project } from "@/lib/domain/types";
 import { pluralize } from "@/lib/format";
-import { ownerNames } from "@/lib/selectors";
+import { ownerNames, regionPairCounts } from "@/lib/selectors";
 import { overlapTableCsv } from "@/lib/export";
 import { download } from "@/lib/review";
 import { inTab, useAtlas, type FlagFilter, type QueueTab } from "@/lib/store";
 import { Button, Dot, Kbd, MatchBadges, StatusChip } from "./ui";
+
+const ALL_FLAGS: FlagFilter[] = ["BOTH", "GEO", "TIME", "POSSIBLE"];
 
 const TABS: { id: QueueTab; label: string; hint: string }[] = [
   { id: "needs-review", label: "Needs review", hint: "Cross-utility pairs whose resource coordination is not established in the reviewed sources" },
@@ -21,18 +23,28 @@ const TABS: { id: QueueTab; label: string; hint: string }[] = [
   { id: "possible", label: "Possible", hint: "Only coarse or possible signals" },
 ];
 
+/** Pair totals for the region on screen (the run's own counts cover every region). */
+function useRegionCounts() {
+  const run = useAtlas((s) => s.run);
+  const region = useAtlas((s) => s.region);
+  return useMemo(() => (run ? regionPairCounts(run, SNAPSHOT.projects, region) : null), [run, region]);
+}
+
 export function Queue() {
   const run = useAtlas((s) => s.run);
   const running = useAtlas((s) => s.running);
+  const runError = useAtlas((s) => s.runError);
+  const region = useAtlas((s) => s.region);
+  const counts = useRegionCounts();
 
   return (
     <aside className="relative flex min-h-0 flex-col border-r border-line bg-bg-1" aria-label="Coordination queue">
       <div className="px-4 pb-3 pt-4">
         <div className="flex items-baseline justify-between">
           <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-text-0">Coordination queue</h2>
-          {run && (
-            <span className="mono text-[10.5px] text-text-3">
-              {run.pairsEvaluated} pairs · {run.thresholdMiles} mi
+          {run && counts && (
+            <span className="mono text-[10.5px] text-text-3" title={`Cross-utility pairs evaluated ${region === "all" ? "across all regions" : "in this region"}`}>
+              {counts.evaluated.toLocaleString("en-US")} pairs · {run.thresholdMiles} mi
             </span>
           )}
         </div>
@@ -40,8 +52,25 @@ export function Queue() {
           Cross-utility project pairs within the review radius, ranked by place first, then timing.
         </p>
       </div>
+      {runError && !running && <EngineError message={runError} hasRun={!!run} />}
       {running ? <Scanning /> : run ? <RunResults /> : <PreRun />}
     </aside>
+  );
+}
+
+function EngineError({ message, hasRun }: { message: string; hasRun: boolean }) {
+  const compare = useAtlas((s) => s.compare);
+  return (
+    <div role="alert" className="mx-4 mb-3 flex items-start gap-2 rounded-lg bg-danger/8 px-3 py-2.5 ring-1 ring-danger/30">
+      <AlertTriangle size={13} className="mt-0.5 shrink-0 text-danger" />
+      <p className="min-w-0 flex-1 text-[11.5px] leading-snug text-text-1">
+        Comparison failed: {message}.{hasRun ? " The last successful run is still shown." : ""}
+      </p>
+      <Button size="sm" variant="outline" className="-my-0.5 shrink-0" onClick={() => compare()}>
+        <RotateCw size={12} />
+        Retry
+      </Button>
+    </div>
   );
 }
 
@@ -184,17 +213,15 @@ function RunResults() {
   const set = useAtlas((s) => s.set);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  const regional = useMemo(() => run.matches.filter((m) => region === "all" || IDX.project(m.projectAId).region === region), [run, region]);
   const filtered = useMemo(
     () =>
-      run.matches.filter((m) => {
+      regional.filter((m) => {
         if (!flags.includes(m.badge)) return false;
-        const a = IDX.project(m.projectAId);
-        const b = IDX.project(m.projectBId);
-        if (utilityFilter && ![...a.owners, ...b.owners].some((o) => o.utilityId === utilityFilter)) return false;
-        if (region !== "all" && a.region !== region && b.region !== region) return false;
-        return true;
+        if (!utilityFilter) return true;
+        return [...IDX.project(m.projectAId).owners, ...IDX.project(m.projectBId).owners].some((o) => o.utilityId === utilityFilter);
       }),
-    [run, flags, utilityFilter, region],
+    [regional, flags, utilityFilter],
   );
 
   const counts = useMemo(
@@ -202,6 +229,9 @@ function RunResults() {
     [filtered],
   );
   const inCurrent = filtered.filter((m) => inTab(m, tab));
+  const hidden = regional.filter((m) => inTab(m, tab)).length - inCurrent.length;
+  const active = (utilityFilter ? 1 : 0) + ALL_FLAGS.filter((f) => !flags.includes(f)).length;
+  const clearFilters = () => set({ utilityFilter: null, flags: ALL_FLAGS });
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -237,14 +267,23 @@ function RunResults() {
         >
           <SlidersHorizontal size={12} />
           Filters & review radius
+          {active > 0 && (
+            <span
+              className="rounded-full bg-bg-4 px-1.5 text-[10px] font-medium leading-[16px] text-text-0 ring-1 ring-line-3"
+              title={[utilityFilter && `Utility: ${IDX.utility(utilityFilter)?.name ?? utilityFilter}`, flags.length < ALL_FLAGS.length && "Some signals hidden"].filter(Boolean).join(" · ")}
+            >
+              {active} active
+            </span>
+          )}
           <span className="mono ml-auto text-text-3">{threshold} mi</span>
           <ChevronDown size={12} className={clsx("transition-transform", filtersOpen && "rotate-180")} />
         </button>
         <AnimatePresence initial={false}>{filtersOpen && <Filters />}</AnimatePresence>
       </div>
 
-      <div className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto px-3 pb-3" role="list">
-        {inCurrent.length === 0 && <EmptyTab tab={tab} />}
+      {/* keyed by view: a tab or region switch swaps the list at once (no exiting cards to shift the scroll) */}
+      <div key={`${region}|${tab}`} className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto px-3 pb-3" role="list">
+        {inCurrent.length === 0 && <EmptyTab tab={tab} hidden={hidden} onClear={clearFilters} />}
         <AnimatePresence initial>
           {inCurrent.map((m, i) => (
             <MatchCard key={m.id} m={m} index={i} rank={i + 1} />
@@ -264,6 +303,12 @@ function Filters() {
   const set = useAtlas((s) => s.set);
   const compare = useAtlas((s) => s.compare);
   const [local, setLocal] = useState(threshold);
+  // follow the store when something else (the guided demo, a deep link) changes the radius
+  const [seen, setSeen] = useState(threshold);
+  if (seen !== threshold) {
+    setSeen(threshold);
+    setLocal(threshold);
+  }
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const toggle = (f: FlagFilter) => set({ flags: flags.includes(f) ? flags.filter((x) => x !== f) : [...flags, f] });
@@ -346,7 +391,7 @@ function Filters() {
   );
 }
 
-function EmptyTab({ tab }: { tab: QueueTab }) {
+function EmptyTab({ tab, hidden, onClear }: { tab: QueueTab; hidden: number; onClear: () => void }) {
   const copy: Record<QueueTab, { title: string; body: string }> = {
     "needs-review": {
       title: "No open review leads",
@@ -360,7 +405,14 @@ function EmptyTab({ tab }: { tab: QueueTab }) {
     <div className="mt-6 flex flex-col items-center px-4 text-center">
       <FileSearch size={20} className="text-text-3" />
       <div className="mt-2 text-[12.5px] font-medium text-text-1">{copy[tab].title}</div>
-      <p className="mt-1 text-[11.5px] leading-snug text-text-3">{copy[tab].body}</p>
+      <p className="mt-1 text-[11.5px] leading-snug text-text-3">
+        {hidden ? `No pairs match the current filters — ${pluralize(hidden, "pair")} in this tab ${hidden === 1 ? "is" : "are"} hidden.` : copy[tab].body}
+      </p>
+      {hidden > 0 && (
+        <Button size="sm" variant="outline" className="mt-3" onClick={onClear}>
+          Clear filters
+        </Button>
+      )}
     </div>
   );
 }
@@ -370,13 +422,14 @@ function ExcludedFooter() {
   const set = useAtlas((s) => s.set);
   const compare = useAtlas((s) => s.compare);
   const region = useAtlas((s) => s.region);
+  const counts = useRegionCounts()!;
   const exportCsv = () => {
     const inRegion = run.matches.filter((m) => region === "all" || IDX.project(m.projectAId).region === region);
     download(`gridlock-overlaps-${region}.csv`, overlapTableCsv(inRegion), "text/csv");
   };
-  const archived = run.excludedProjects.length;
-  const beyond = run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"];
-  const unknown = run.excludedCounts["location-unknown"];
+  const archived = run.excludedProjects.filter((x) => region === "all" || IDX.project(x.projectId)?.region === region).length;
+  const { beyond, unlocated } = counts;
+  const where = region === "all" ? "" : " in this region";
   return (
     <div className="flex items-center gap-2 border-t border-line px-3 py-2">
       <button
@@ -384,9 +437,13 @@ function ExcludedFooter() {
         className="flex min-w-0 items-center gap-1.5 rounded-md px-1.5 py-1 text-[11px] text-text-2 hover:bg-bg-2 hover:text-text-1"
         title="See what the engine excluded and why"
       >
-        <Archive size={12} />
-        <span className="truncate" title={`${beyond.toLocaleString("en-US")} pairs farther than ${run.thresholdMiles} mi · ${unknown.toLocaleString("en-US")} pairs where a location is unknown · ${archived} archived projects`}>
-          {beyond.toLocaleString("en-US")} beyond {run.thresholdMiles} mi · {unknown.toLocaleString("en-US")} unlocated
+        <Archive size={12} className="shrink-0" />
+        <span
+          className="truncate"
+          title={`${beyond.toLocaleString("en-US")} pairs${where} farther than ${run.thresholdMiles} mi · ${unlocated.toLocaleString("en-US")} where a location is unknown · ${archived} archived projects`}
+        >
+          {beyond.toLocaleString("en-US")} beyond {run.thresholdMiles} mi
+          {unlocated > 0 && ` · ${unlocated.toLocaleString("en-US")} unlocated`}
         </span>
       </button>
       <Button size="sm" variant="ghost" className="ml-auto" onClick={exportCsv} title="Download the flagged pairs in the sponsor's overlap-table format" aria-label="Export overlap table as CSV">
@@ -412,8 +469,19 @@ function MatchCard({ m, index, rank, dim }: { m: Match; index: number; rank: num
   const ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (selected) ref.current?.scrollIntoView({ block: "nearest", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    if (!selected) return;
+    // after layout settles; a card far out of view is centered, a neighbour (j/k) only nudged into view
+    const f = requestAnimationFrame(() => {
+      const el = ref.current;
+      const box = el?.closest("[role=list]")?.getBoundingClientRect();
+      if (!el || !box) return;
+      const r = el.getBoundingClientRect();
+      const away = r.bottom < box.top || r.top > box.bottom;
+      el.scrollIntoView({ block: away ? "center" : "nearest", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+    return () => cancelAnimationFrame(f);
   }, [selected]);
+  const geo = geoShort(m);
 
   return (
     <motion.div
@@ -454,18 +522,25 @@ function MatchCard({ m, index, rank, dim }: { m: Match; index: number; rank: num
           <ProjectLine p={a} color="var(--a)" />
           <ProjectLine p={b} color="var(--b)" />
         </div>
-        <div className="mono mt-2.5 flex items-center gap-2 border-t border-line pt-2 text-[10.5px] text-text-2">
-          <span className="truncate">{geoShort(m)}</span>
-          <span className="text-text-3">·</span>
-          <span className="shrink-0">{timeShort(m)}</span>
-          {m.conflicts.length > 0 && (
-            <span className="flex shrink-0 items-center gap-0.5 text-conflict" title={`${m.conflicts.length} preserved source disagreement${m.conflicts.length > 1 ? "s" : ""}`}>
-              <AlertTriangle size={10} />
-              {m.conflicts.length}
+        <div className="mono mt-2.5 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2.5 border-t border-line pt-2 text-[10.5px] text-text-2">
+          <span className="flex min-w-0 items-center gap-1" title={geo.title}>
+            <MapPin size={10} className="shrink-0 text-text-3" aria-hidden />
+            <span className="truncate">{geo.text}</span>
+          </span>
+          <span className="flex items-center gap-2 whitespace-nowrap">
+            <span className="flex items-center gap-1">
+              <CalendarRange size={10} className="text-text-3" aria-hidden />
+              {timeShort(m)}
             </span>
-          )}
-          <span className="ml-auto shrink-0 text-text-3" title="Explainable review priority (ordering, not a probability)">
-            P{m.priority}
+            {m.conflicts.length > 0 && (
+              <span className="flex items-center gap-0.5 text-conflict" title={`${m.conflicts.length} preserved source disagreement${m.conflicts.length > 1 ? "s" : ""}`}>
+                <AlertTriangle size={10} />
+                {m.conflicts.length}
+              </span>
+            )}
+            <span className="text-text-3" title="Explainable review priority (ordering, not a probability)">
+              P{m.priority}
+            </span>
           </span>
         </div>
       </button>

@@ -6,7 +6,7 @@ GridLock Atlas is our ShellHacks 2026 entry for the **Sperry Tech GridLock Chall
 
 > A match is a **review lead**, not a finding that crews or equipment can be shared. Absence of a coordination statement is shown as *unknown*, never as "uncoordinated."
 
-![Top lead: DESC's Okatie–McIntosh 115 kV tie and Georgia Power's Goshen–McIntosh rebuild both end at the McIntosh substation](docs/screenshots/top-lead.jpg)
+![Top lead: DESC's Okatie–McIntosh 115 kV tie reactor and Georgia Power's Goshen–McIntosh line rebuild, project centers about 6.7 miles apart](docs/screenshots/top-lead.jpg)
 
 | Where plans meet (Savannah River) | Known coordination (Wisconsin) |
 | --- | --- |
@@ -35,7 +35,8 @@ Snapshot date **26 September 2026**. All sources are public; each is fetched, ha
 
 - Dominion Energy South Carolina: SCRTP *Planned Transmission Projects $2M and above*, 2026–2030 (current), with the 2025–2029 and 2024–2028 editions kept as version history. Parsed deterministically, one project per page, with project ID, status, planned in-service date, yearly budget and scope.
 - Georgia Power: 2025 IRP Technical Appendix Vol. 3 — the 2024 GA ITS Ten-Year Plan (public disclosure, Georgia PSC Docket 56002). Parsed from the summary table (zone, TEAMS number, sponsor) and each project page (Start Date, Need Date, scope, miles). GPC and Savannah-area (SAV) projects are included; GTC, MEAG and Dalton projects in the joint plan are out of scope.
-- Georgia Power project pages (Effingham County 500 kV, Callaway Road–Thomson 500 kV) and the SERTP 2025 regional plan for context.
+- Georgia Power project pages (Effingham County 500 kV, Callaway Road–Thomson 500 kV) and the SERTP 2025 regional plan (November 2025) for context; where SERTP gives a newer in-service year than the Ten-Year Plan, the newer year is current and the Need Date is kept as version history.
+- Dominion's Jasper–Okatie–Sherwood project page, which dates the start of construction (Q1 2025, "Anticipated – Subject to Change") that the SCRTP list leaves undated.
 - Terminals are geocoded against OpenStreetMap power features (Overpass) and Nominatim, then checked against each plan's own wording; unconfirmed matches are marked lower-confidence and cost ranking points.
 
 **Region A — Upper Midwest and Southern Plains** (featured *Known coordination* cases)
@@ -48,13 +49,13 @@ Research was agent-assisted: AI research agents located facts and exact quotes, 
 ## Method (short)
 
 1. **Place first.** Each project's center is the midpoint of its two named terminals (or its one located point) — exactly the sponsor's guide. A pair is flagged when centers are within the review radius (default 25 mi), with uncertainty bounds `d_low = max(0, d − e_A − e_B)`, `d_high = d + e_A + e_B` (confirmed when `d_high ≤ 25`, possible when only `d_low ≤ 25`). A source-stated shared facility, or terminals geocoded to the same substation, also confirm place. County-only evidence is at most "possible"; schematic routes are never measured.
-2. **Then time.** Construction windows are compared for every source combination (confirmed when `max(S_latest) ≤ min(E_earliest)`). No window is invented from an in-service date alone: a start plus a "by"/need date is kept as bounds with the field work undated, and DESC's yearly budget gives a coarse window — both support at most a "possible" overlap. The gap between in-service dates in days — the sponsor's secondary signal — informs ranking.
+2. **Then time.** Construction windows are compared for every source combination (confirmed when `max(S_latest) ≤ min(E_earliest)`). No window is invented from an in-service date alone: a start plus a "by"/need date is kept as bounds with the field work undated, and DESC's yearly budget gives a coarse window (a budget year under 5% of the total counts as preconstruction and never starts it) — both support at most a "possible" overlap. The gap between in-service dates in days — the sponsor's secondary signal — informs ranking.
 3. **Status.** Documented joint work or interface coordination → *Known coordination*. Otherwise within the radius (or sharing a facility stated in, or implied by, the sources) → *Needs review*.
 4. **Rank.** Explainable points: place (≤ 60), timing (≤ 30), evidence completeness (≤ 10), minus 5 for lower-confidence locations.
 
 The engine reproduces the sponsor's starter overlap table exactly (six rows, ±0.01 mi and to the day, no extra pairs) — see `tests/engine.test.ts` and the Method drawer.
 
-**Impact estimate (bonus).** For any flagged pair: acres of right-of-way one shared corridor would avoid encumbering twice (`miles × 5,280 × width ÷ 43,560`) and its value, plus one avoided crew mobilization. Defaults are cited (Georgia Transmission easement widths, USDA NASS 2026 land values, MISO transmission cost guide, and a joint proposed order in an SC PSC docket on co-building); every input is editable, and the result is labeled a scenario, not a saving.
+**Impact estimate (bonus).** For any flagged pair: acres of right-of-way one shared corridor would avoid encumbering twice (`miles × 5,280 × width ÷ 43,560`) and its value, plus one avoided crew mobilization. Defaults are cited (Georgia Transmission easement widths, USDA NASS 2026 land values, MISO transmission cost guide, and a joint proposed order in an SC PSC docket on co-building); every input is editable, and the result is labeled a scenario, not a saving. The shared-corridor length defaults to the shorter published length only when both projects build new lines; when either is equipment work or a rebuild on existing right-of-way (as in the top Savannah River lead) it defaults to 0 and says so.
 
 ## Run it
 
@@ -91,9 +92,9 @@ API: `GET /api/snapshot`, `GET /api/matches?threshold=25&utilityA=&utilityB=&reg
 ## Demo (three minutes)
 
 1. **Two plans, one map** — Savannah River region: DESC in cyan, Georgia Power in violet.
-2. **Compare public plans** — thousands of pairs measured; a few dozen within 25 miles light up in amber.
-3. **Top opportunity** — open #1: DESC's Okatie–McIntosh 115 kV tie and Georgia Power's Goshen–McIntosh rebuild both end at McIntosh (6 mi center to center); terminals and their provenance, windows, in-service timing.
-4. **Rough impact** — acres and one avoided mobilization, with cited, editable assumptions.
+2. **Compare public plans** — thousands of pairs measured; about 70 within 25 miles light up in amber.
+3. **Top opportunity** — open #1: DESC's Okatie–McIntosh 115 kV tie (a series reactor and a new Deerfield switching station) and Georgia Power's rebuild of the Goshen–McIntosh line, which stops at Georgia Pacific (Rincon) about 1.7 mi short of McIntosh — centers 6.7 mi apart, both due in service in 2028; terminals and their provenance, windows, in-service timing.
+4. **Rough impact** — neither project needs a new corridor, so shared right-of-way starts at 0 mi (set a length to explore); one avoided crew mobilization, with cited, editable assumptions.
 5. **Known coordination** — Upper Midwest: Dairyland × Xcel at Tremval North, filed as a known interface.
 6. **Sources disagree** — Xcel's page vs the Wisconsin PSC on completion; DESC's in-service date across plan editions.
 7. **Cited brief** — export a planner-ready question with numbered sources.

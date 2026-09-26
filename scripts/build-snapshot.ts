@@ -44,7 +44,9 @@ const overrides: {
   projectPatches?: Record<string, Partial<Project>>;
   windowPatches?: Record<string, Partial<ConstructionWindow>>;
 } = fs.existsSync(OVERRIDES) ? JSON.parse(fs.readFileSync(OVERRIDES, "utf8")) : {};
-const alias = (id: string) => overrides.projectAliases?.[id] ?? id;
+/** Project id aliases; "id@context" keys resolve a placeholder differently depending on the project that cites it. */
+const alias = (id: string, context?: string): string =>
+  (context && overrides.projectAliases?.[`${id}@${alias(context)}`]) || overrides.projectAliases?.[id] || id;
 
 const reviewed = new Set<string>(fs.existsSync(REVIEW_LOG) ? (JSON.parse(fs.readFileSync(REVIEW_LOG, "utf8")).reviewedEvidenceIds ?? []) : []);
 
@@ -210,6 +212,7 @@ for (const c of clusters) {
       continuous: openEnded ? false : w.continuous !== false,
       ...(openEnded ? { openEnded: true } : {}),
       ...(w.boundsOnly ? { boundsOnly: true } : {}),
+      ...(w.supersededBy ? { supersededBy: w.supersededBy } : {}),
       evidenceIds: ev(w.evidence),
       note: w.note || undefined,
       ...(overrides.windowPatches?.[`${id}:w${i + 1}`] ?? {}),
@@ -319,7 +322,7 @@ for (const p of projects.values()) {
 
 // coordination claims must point at a project in the snapshot
 for (const { from, c } of coordinationRaw) {
-  const partner = alias(c.partner);
+  const partner = alias(c.partner, from);
   const p = projects.get(from);
   if (!p) continue;
   if (!projects.has(partner)) {
@@ -336,8 +339,8 @@ const relations: Relation[] = [];
 const relKey = new Set<string>();
 for (const c of clusters) {
   for (const r of c.relations ?? []) {
-    const a = alias(r.projectA);
-    const b = alias(r.projectB);
+    const a = alias(r.projectA, r.projectB);
+    const b = alias(r.projectB, r.projectA);
     if (!projects.has(a) || !projects.has(b)) {
       warn(`relation ${r.projectA} × ${r.projectB} (${r.kind}) dropped: project missing`);
       continue;

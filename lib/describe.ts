@@ -2,16 +2,16 @@ import { SNAPSHOT } from "@/lib/data/snapshot";
 import type { Match } from "@/lib/domain/types";
 import { formatMiles, formatSpan } from "@/lib/format";
 
-export function geoShort(m: Match): string {
+/** The place signal in a few words — the stated site or shared terminal itself, or the distance — plus a full label. */
+export function geoShort(m: Match): { text: string; title: string } {
   const d = m.geoDetail;
   if (d.method === "shared-site") {
-    const rel = SNAPSHOT.relations.find((r) => d.relationIds.includes(r.id));
-    return rel?.siteLabel ? `Shared site · ${rel.siteLabel}` : "Shared site stated";
+    const site = SNAPSHOT.relations.find((r) => d.relationIds.includes(r.id) && r.siteLabel)?.siteLabel;
+    return site ? { text: site, title: `Shared site · ${site}` } : { text: "Shared site stated", title: "Shared site stated in a source" };
   }
-  if (d.method === "shared-endpoint" && d.sharedEndpoint) return `Same terminal · ${d.sharedEndpoint.labelA}`;
-  if (d.method === "measured" && d.center) return `${formatMiles(d.center.miles)} apart`;
-  if (d.method === "coarse") return "County-level only";
-  return "Location unknown";
+  if (d.method === "shared-endpoint" && d.sharedEndpoint) return { text: d.sharedEndpoint.labelA, title: `Same terminal · ${d.sharedEndpoint.labelA}` };
+  const text = d.method === "measured" && d.center ? `${formatMiles(d.center.miles)} apart` : d.method === "coarse" ? "County-level only" : "Location unknown";
+  return { text, title: text };
 }
 
 export function timeShort(m: Match): string {

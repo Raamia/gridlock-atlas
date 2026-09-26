@@ -1,4 +1,9 @@
 {
+ "projectAliases": {
+  "atc-nspw-grid-forward@transource-beci": "grid-forward-atc",
+  "atc-nspw-grid-forward@atc-columbia-beci-work": "grid-forward-atc",
+  "atc-nspw-grid-forward": "grid-forward-nspw"
+ },
  "windowPatches": {
   "xcel-wwtc:w3": {
    "boundsOnly": true
@@ -8,6 +13,15 @@
   },
   "xcel-wwtc:w5": {
    "boundsOnly": true
+  },
+  "grid-forward-nspw:w2": {
+   "supersededBy": "grid-forward-nspw:w1"
+  },
+  "grid-forward-nspw:w3": {
+   "supersededBy": "grid-forward-nspw:w4"
+  },
+  "grid-forward-atc:w2": {
+   "supersededBy": "grid-forward-atc:w1"
   }
  }
 }

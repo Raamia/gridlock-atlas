@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, Copy, Download, Printer, X } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
@@ -12,6 +13,7 @@ import { Button, IconButton, MatchBadges, StatusChip } from "./ui";
 
 export function BriefModal() {
   const open = useAtlas((s) => s.briefOpen);
+  const demo = useAtlas((s) => s.demoStep !== null);
   const set = useAtlas((s) => s.set);
   const pair = useSelectedPair();
   const brief = useMemo(() => (pair ? buildBrief(pair.match) : null), [pair]);
@@ -38,7 +40,11 @@ export function BriefModal() {
     <AnimatePresence>
       {open && pair && brief && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-bg-0/70 p-3 backdrop-blur-sm sm:p-6 print:static print:bg-white print:p-0"
+          className={clsx(
+            "fixed inset-0 z-50 flex items-center justify-center bg-bg-0/70 p-3 backdrop-blur-sm sm:p-6 print:static print:bg-white print:p-0",
+            // during the guided demo its card sits bottom-left above this backdrop: center the brief in the space beside it
+            demo && "lg:pl-[480px]",
+          )}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -83,7 +89,7 @@ export function BriefModal() {
                 <MatchBadges m={pair.match} />
                 <StatusChip status={pair.match.reviewStatus} />
               </div>
-              <h2 className="mt-3 font-serif text-[30px] leading-[1.08] tracking-[-0.01em] text-text-0 print:text-black">
+              <h2 className="mt-3 text-[26px] font-semibold leading-[1.15] tracking-[-0.02em] text-text-0 print:text-black">
                 {displayTitle(pair.a)} <span className="text-text-3">×</span> {displayTitle(pair.b)}
               </h2>
               <dl className="mt-6 space-y-4">
@@ -109,8 +115,8 @@ export function BriefModal() {
                   </div>
                 )}
                 <div className="grid grid-cols-1 gap-1 sm:grid-cols-[140px_1fr] sm:gap-4">
-                  <dt className="eyebrow pt-1 text-amber">Review question</dt>
-                  <dd className="rounded-xl bg-amber/8 p-4 font-serif text-[18px] leading-[1.4] text-text-0 ring-1 ring-amber/25 print:text-black">{brief.question}</dd>
+                  <dt className="eyebrow pt-1 text-text-1">Review question</dt>
+                  <dd className="rounded-xl bg-bg-2 p-4 text-[15.5px] font-medium leading-[1.5] text-text-0 ring-1 ring-line-2 print:text-black">{brief.question}</dd>
                 </div>
               </dl>
 
@@ -122,7 +128,7 @@ export function BriefModal() {
                       <span className="num text-text-3">{c.n}.</span>
                       <span className="text-text-2 print:text-black">
                         <span className="text-text-1">{c.publisher}</span>, <em>{c.title}</em>
-                        {c.anchor && `, ${c.anchor}`} — <span className="font-serif text-[13px] text-text-1">“{c.excerpt}”</span>{" "}
+                        {c.anchor && `, ${c.anchor}`} — <span className="italic text-text-1">“{c.excerpt}”</span>{" "}
                         <a href={c.url} target="_blank" rel="noreferrer" className="break-all text-a hover:underline">
                           {c.url.replace(/^https?:\/\//, "").slice(0, 80)}
                           {c.url.length > 88 ? "…" : ""}

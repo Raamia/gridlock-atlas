@@ -209,7 +209,7 @@
   {
    "key": "gpc:20065",
    "kind": "line",
-   "notes": "The rebuilt section runs from Goshen (SAV) to Georgia Pacific (Rincon), about 6.7 mi. Georgia Pacific (Rincon) is the unnamed Georgia Power 115 kV substation OSM way/652933520 (32.33053,-81.18768), next to the Georgia-Pacific Savannah River Mill. It lies 83 m from the Goshen - McIntosh 115 kV way/1015932064, 6.72 mi along the line from Goshen, which matches the plan's 6.7 mi.",
+   "notes": "The rebuilt section runs from Goshen (SAV) to Georgia Pacific (Rincon), about 6.7 mi, so those are the project's terminals. Georgia Pacific (Rincon) is the unnamed Georgia Power 115 kV substation OSM way/652933520 (32.33053,-81.18768), next to the Georgia-Pacific Savannah River Mill. It lies 83 m from the Goshen - McIntosh 115 kV way/1015932064, 6.72 mi along the line from Goshen, which matches the plan's 6.7 mi. The line itself continues about 1.7 mi to McIntosh, which is kept as a context place, not a terminal.",
    "endpoints": [
     {
      "name": "Goshen (SAV)",
@@ -222,6 +222,18 @@
      "validation": "Fact-check: the '(Sav)' qualifier and zone 219 rule out the Augusta Goshen (way/52019569). The OSM 115 kV way/1015932064 (8.41 mi) runs directly from this Goshen to McIntosh."
     },
     {
+     "name": "Georgia Pacific (Rincon)",
+     "lat": 32.33053,
+     "lon": -81.18768,
+     "precision": "named-facility",
+     "uncertaintyMeters": 400,
+     "coordinateSource": "OSM way/652933520 power=substation operator=Georgia Power voltage=115000 (unnamed), next to the Georgia-Pacific Savannah River Mill near Rincon; identified by line topology",
+     "confidence": "confirmed",
+     "validation": "The plan rebuilds only the Goshen (Savannah) - Georgia Pacific (Rincon) section of the Goshen (Sav) - McIntosh line. This Georgia Power 115 kV substation lies 83 m from the Goshen - McIntosh 115 kV way/1015932064, 6.72 mi along the line from Goshen, matching the plan's 6.7 mi (SERTP 2025 p.111 says the same)."
+    }
+   ],
+   "otherPlaces": [
+    {
      "name": "McIntosh",
      "lat": 32.35212,
      "lon": -81.17511,
@@ -229,7 +241,9 @@
      "uncertaintyMeters": 400,
      "coordinateSource": "OSM way/121624352 power=substation name=McIntosh Substation operator=Georgia Power voltage=230000",
      "confidence": "confirmed",
-     "validation": "Fact-check: the 115 kV way/1015932064 from Goshen ends inside this substation, and I re-verified this in Overpass. OSM tags only 230 kV, but the 115 kV lines end here and SERTP 2014 calls McIntosh a 230/115 kV substation."
+     "validation": "The Goshen (Sav) - McIntosh line ends here, about 1.7 mi north of the rebuilt section's end at Georgia Pacific (Rincon). Kept as context, not as a terminal of this project. Fact-check: the 115 kV way/1015932064 from Goshen ends inside this substation, and I re-verified this in Overpass. OSM tags only 230 kV, but the 115 kV lines end here and SERTP 2014 calls McIntosh a 230/115 kV substation.",
+     "role": "context",
+     "label": "McIntosh line terminal; outside the rebuilt section"
     }
    ]
   },

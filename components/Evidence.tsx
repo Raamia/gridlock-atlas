@@ -43,7 +43,7 @@ export function EvidenceCard({ e, tone = "neutral", compact }: { e: Evidence; to
           </a>
         )}
       </figcaption>
-      <blockquote className={clsx("px-3 pb-2 pt-1.5 font-serif leading-[1.45] text-text-0", compact ? "text-[14px]" : "text-[15.5px]")}>
+      <blockquote className={clsx("px-3 pb-2 pt-1.5 font-sans italic leading-[1.5] text-text-0", compact ? "text-[12.5px]" : "text-[13.5px]")}>
         <span className="text-text-3">“</span>
         {e.exactExcerpt}
         <span className="text-text-3">”</span>

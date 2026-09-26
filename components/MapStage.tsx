@@ -54,6 +54,9 @@ const roleColor: mapboxgl.ExpressionSpecification = [
 
 const roleOpacity = (base: number, dim: number): mapboxgl.ExpressionSpecification => ["match", ["get", "role"], "other", dim, base];
 
+/** 3D mode tilts the region overview too, so the toggle always does something visible. */
+const OVERVIEW_PITCH = 45;
+
 /* ---------------------------------- styles ---------------------------------- */
 
 function offlineStyle(): StyleSpecification {
@@ -316,6 +319,7 @@ export default function MapStage() {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
+  const callouts = useRef<{ items: Callout[]; dots: [number, number][] }>({ items: [], dots: [] });
   const popup = useRef<mapboxgl.Popup | null>(null);
   const [styleReady, setStyleReady] = useState(0);
   const [mapReady, setMapReady] = useState(false);
@@ -327,10 +331,12 @@ export default function MapStage() {
   const hoveredProjectId = useAtlas((s) => s.hoveredProjectId);
   const cameraNonce = useAtlas((s) => s.cameraNonce);
   const inspectorOpen = useAtlas((s) => s.inspectorOpen);
+  const demoOn = useAtlas((s) => s.demoStep !== null);
   const run = useAtlas((s) => s.run);
   const set = useAtlas((s) => s.set);
   const preview = usePreviewPair();
   const selected = useSelectedPair();
+  const previewId = preview?.match.id ?? null;
 
   const visibleProjectIds = useMemo(() => {
     const ids = new Set<string>();
@@ -418,7 +424,7 @@ export default function MapStage() {
           const pa = IDX.project(m.projectAId);
           const pb = IDX.project(m.projectBId);
           const c = m.geoDetail.center;
-          const html = `<div class="glass rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:280px">
+          const html = `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:280px">
             <div class="mono text-[10px] uppercase tracking-[0.08em]" style="color:#fbbf24">Flagged pair · P${m.priority}</div>
             <div class="mt-0.5 font-medium" style="color:#2fd6f2">${escapeHtml(pa.shortTitle)}</div>
             <div class="font-medium" style="color:#a78bfa">${escapeHtml(pb.shortTitle)}</div>
@@ -443,7 +449,7 @@ export default function MapStage() {
       if (useAtlas.getState().hoveredProjectId !== pid && !useAtlas.getState().selectedMatchId) set({ hoveredProjectId: pid });
       const label = (f.properties?.label as string | undefined) ?? p.shortTitle;
       const precision = (f.properties?.precision as string | undefined) ?? "";
-      const html = `<div class="glass rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:260px">
+      const html = `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:260px">
         <div class="font-medium text-text-0">${escapeHtml(p.title)}</div>
         <div class="text-text-2">${escapeHtml(ownerNames(p, IDX))}</div>
         <div class="mono mt-1 text-[10.5px] text-text-3">${escapeHtml(label)}${precision ? ` · ${escapeHtml(precisionText(precision))}` : ""}</div>
@@ -453,6 +459,12 @@ export default function MapStage() {
     };
     map.on("mousemove", onMove);
     map.on("mouseout", () => popup.current?.remove());
+
+    const relayout = (ev?: { type: string }) => layoutCallouts(map, callouts.current.items, callouts.current.dots, ev?.type === "move");
+    map.on("move", relayout);
+    map.on("moveend", relayout);
+    map.on("resize", relayout);
+    void document.fonts?.ready.then(() => relayout());
 
     return () => {
       ro.disconnect();
@@ -488,6 +500,7 @@ export default function MapStage() {
     }
     if (mapMode === "flat") map.easeTo({ pitch: 0, bearing: 0, duration: reduced ? 0 : 700 });
     else if (useAtlas.getState().selectedMatchId) map.easeTo({ pitch: 52, bearing: -14, duration: reduced ? 0 : 900 });
+    else map.easeTo({ pitch: OVERVIEW_PITCH, duration: reduced ? 0 : 900 });
   }, [mapMode, styleReady, reduced]);
 
   /* data */
@@ -520,52 +533,88 @@ export default function MapStage() {
       : ["==", ["get", "fips"], "__none__"];
     if (map.getLayer("ctx-counties-hl-fill")) map.setFilter("ctx-counties-hl-fill", filter);
     if (map.getLayer("ctx-counties-hl-line")) map.setFilter("ctx-counties-hl-line", filter);
+  }, [styleReady, preview, hoveredProjectId, visibleProjectIds, run]);
 
-    // HTML markers: project labels for the previewed pair + the stated shared site
+  /* HTML callouts for the previewed pair, ranked: shared site > project labels > distance chip */
+  useEffect(() => {
+    const map = mapRef.current;
     markers.current.forEach((mk) => mk.remove());
     markers.current = [];
-    if (preview) {
-      const site = sharedSite(preview.match);
-      const cMid = preview.match.geoDetail.center ? (preview.match.geoDetail.center.a[0] + preview.match.geoDetail.center.b[0]) / 2 : null;
-      if (site)
-        markers.current.push(
-          new mapboxgl.Marker({
-            element: siteMarker(
-              site.label,
-              site.stated ? "Shared site stated in source" : site.implied ? "Shared site implied by sources" : "Both projects end here",
-              // put the caption on the side facing away from the pair, where the project labels are not
-              cMid !== null && site.lon < cMid ? "left" : "right",
-            ),
-            anchor: "center",
-          })
-            .setLngLat([site.lon, site.lat])
-            .addTo(map),
-        );
-      const c = preview.match.geoDetail.center;
-      for (const [p, role] of [
-        [preview.a, "a"],
-        [preview.b, "b"],
-      ] as const) {
-        // label each project at its center point (the sponsor's distance anchor): A above, B below
-        const at = c ? (role === "a" ? c.a : c.b) : anchorOf(p);
-        if (!at) continue;
-        const aAbove = !c || c.a[1] >= c.b[1];
-        const above = role === "a" ? aAbove : !aAbove;
-        markers.current.push(
-          new mapboxgl.Marker({ element: projectLabel(p.shortTitle, ownerNames(p, IDX, true), role), anchor: above ? "bottom" : "top", offset: above ? [0, -12] : [0, 12] })
-            .setLngLat(at)
-            .addTo(map),
-        );
-      }
-      const conn = connectorFeature(preview.match).features[0];
-      if (conn) {
-        const [[x1, y1], [x2, y2]] = conn.geometry.coordinates as [number, number][];
-        // a third of the way from A keeps the label clear of a shared-site marker near the middle
-        const t = site ? 0.3 : 0.5;
-        markers.current.push(new mapboxgl.Marker({ element: distanceLabel(conn.properties.label) }).setLngLat([x1 + (x2 - x1) * t, y1 + (y2 - y1) * t]).addTo(map));
-      }
+    callouts.current = { items: [], dots: [] };
+    const m = previewId ? useAtlas.getState().run?.matches.find((x) => x.id === previewId) : undefined;
+    if (!map || !styleReady || !m) return;
+    const items: Callout[] = [];
+    const dots: [number, number][] = [];
+    const add = (root: HTMLElement, at: [number, number], rank: number, spots: Callout["spots"], optional = false) => {
+      root.style.zIndex = String(rank);
+      markers.current.push(new mapboxgl.Marker({ element: root, anchor: "center" }).setLngLat(at).addTo(map));
+      items.push({ box: root.querySelector<HTMLElement>("[data-callout]")!, at, spots, optional });
+    };
+    const c = m.geoDetail.center;
+    const site = sharedSite(m);
+    if (site) {
+      const caption = site.stated ? "Shared site stated in source" : site.implied ? "Shared site implied by sources" : "Both projects end here";
+      // first choice: the side facing away from the pair, where the project labels are not
+      const left = !!c && site.lon < (c.a[0] + c.b[0]) / 2;
+      add(siteMarker(site.label, caption), [site.lon, site.lat], 3, (w, h) => {
+        const [r, l] = [16, -16 - w];
+        const spots = [
+          { x: r, y: -12 - h },
+          { x: l, y: -12 - h },
+          { x: -w / 2, y: -22 - h },
+          { x: r, y: 12 },
+          { x: l, y: 12 },
+          { x: -w / 2, y: 22 },
+        ];
+        return left ? [spots[1], spots[0], spots[2], spots[4], spots[3], spots[5]] : spots;
+      });
+      dots.push([site.lon, site.lat]);
     }
-  }, [styleReady, preview, hoveredProjectId, visibleProjectIds, run]);
+    const aAbove = !c || c.a[1] >= c.b[1];
+    for (const [id, role] of [
+      [m.projectAId, "a"],
+      [m.projectBId, "b"],
+    ] as const) {
+      // label each project at its center point (the sponsor's distance anchor): the northern one above
+      const p = IDX.project(id);
+      const at = c ? (role === "a" ? c.a : c.b) : anchorOf(p);
+      if (!at) continue;
+      if (c) dots.push(at);
+      const above = role === "a" ? aAbove : !aAbove;
+      add(projectLabel(p.shortTitle, ownerNames(p, IDX, true), role), at, 2, (w, h) => {
+        const up = [
+          { x: -w / 2, y: -12 - h },
+          { x: -14, y: -12 - h },
+          { x: 14 - w, y: -12 - h },
+        ];
+        const down = up.map((s) => ({ x: s.x, y: 12 }));
+        const side = [
+          { x: 14, y: -h / 2 },
+          { x: -14 - w, y: -h / 2 },
+        ];
+        return above ? [...up, ...side, ...down] : [...down, ...side, ...up];
+      });
+    }
+    const conn = connectorFeature(m).features[0];
+    if (conn) {
+      const [[x1, y1], [x2, y2]] = conn.geometry.coordinates as [number, number][];
+      const along = (t: number): [number, number] => [x1 + (x2 - x1) * t, y1 + (y2 - y1) * t];
+      // slides along the connector (then flips above it) to stay clear of the site and the project labels
+      add(distanceLabel(conn.properties.label), along(0.5), 1, (w, h) => {
+        const p0 = map.project(along(0.5));
+        return [0.5, 0.35, 0.65, 0.2, 0.8].flatMap((t) => {
+          const p = map.project(along(t));
+          const [x, y] = [p.x - p0.x - w / 2, p.y - p0.y];
+          return [
+            { x, y: y + 8 },
+            { x, y: y - 8 - h },
+          ];
+        });
+      }, true);
+    }
+    callouts.current = { items, dots };
+    layoutCallouts(map, items, dots);
+  }, [styleReady, previewId]);
 
   /* camera */
   const firstCamera = useRef(true);
@@ -582,14 +631,21 @@ export default function MapStage() {
       const rect = map.getContainer().getBoundingClientRect();
       const mobile = cw < 640;
       const sheetTop = window.innerHeight * 0.46;
+      // the guided-demo card sits over the map (top on phones, bottom-left on desktop): keep the pair clear of it
+      const demo = st.demoStep !== null && !st.briefOpen ? document.querySelector('[aria-label="Guided demo"]')?.getBoundingClientRect() : undefined;
       const pad = mobile
-        ? { top: 64, left: 24, right: 24, bottom: st.inspectorOpen ? Math.max(24, rect.bottom - sheetTop + 24) : 32 }
+        ? {
+            top: demo ? Math.max(64, demo.bottom - rect.top + 16) : 64,
+            left: 24,
+            right: 24,
+            bottom: st.inspectorOpen ? Math.max(24, rect.bottom - sheetTop + 24) : 32,
+          }
         : {
             top: 90,
             left: 70,
             // leave room for the inspector column at whatever width the layout gives it
             right: st.inspectorOpen ? (document.querySelector('[aria-label="Evidence inspector"]')?.getBoundingClientRect().width ?? 408) + 32 : 64,
-            bottom: 70,
+            bottom: demo ? Math.max(70, rect.bottom - demo.top + 24) : 70,
           };
       const fit = (a: number, b: number, total: number) => {
         const max = Math.max(0, total - 80);
@@ -621,18 +677,25 @@ export default function MapStage() {
             [r.bbox[2], r.bbox[3]],
           ] as LngLatBoundsLike)
         : (boundsOf(SNAPSHOT.projects.flatMap(projectCoords)) as LngLatBoundsLike | null);
-      if (target) map.fitBounds(target, { padding: { ...pad, right: mobile ? pad.right : Math.min(right, 64) }, pitch: 0, bearing: 0, duration, essential: true });
+      if (target)
+        map.fitBounds(target, {
+          padding: { ...pad, right: mobile ? pad.right : Math.min(right, 64) },
+          pitch: st.mapMode === "3d" ? OVERVIEW_PITCH : 0,
+          bearing: 0,
+          duration,
+          essential: true,
+        });
     };
     // first placement after load is instant; later moves animate
     if (!mapReady) return;
     apply(firstCamera.current ? false : true);
     firstCamera.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cameraNonce, selected?.match.id, inspectorOpen, mapReady]);
+  }, [cameraNonce, selected?.match.id, inspectorOpen, demoOn, mapReady]);
 
   // mapbox-gl.css is unlayered and sets .mapboxgl-map{position:relative}, so size the map through a wrapper
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0" data-inspector={inspectorOpen && !!selected}>
       <div ref={el} style={{ width: "100%", height: "100%" }} aria-label="Map of public construction plans" role="region" />
     </div>
   );
@@ -656,13 +719,13 @@ function precisionText(p: string) {
   )[p] ?? p;
 }
 
-function siteMarker(label: string, caption: string, side: "left" | "right" = "right") {
+function siteMarker(label: string, caption: string) {
   const root = document.createElement("div");
   root.className = "pointer-events-none relative";
   root.innerHTML = `
     <span class="site-pulse absolute left-1/2 top-1/2 block h-10 w-10 rounded-full" style="border:1.5px solid #fbbf24"></span>
     <span class="absolute left-1/2 top-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.25),0 0 18px #fbbf24"></span>
-    <div class="absolute bottom-3 ${side === "left" ? "right-4 text-right" : "left-4"} whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.86);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
+    <div data-callout class="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-medium" style="background:rgba(4,9,20,.94);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.45)">
       <div class="mono text-[9.5px] uppercase tracking-[0.08em]" style="color:rgba(251,191,36,.8)">${escapeHtml(caption)}</div>
       ${escapeHtml(label)}
     </div>`;
@@ -672,17 +735,114 @@ function siteMarker(label: string, caption: string, side: "left" | "right" = "ri
 function projectLabel(title: string, owner: string, role: "a" | "b") {
   const color = role === "a" ? "#2fd6f2" : "#a78bfa";
   const el = document.createElement("div");
-  el.className = "pointer-events-none";
-  el.innerHTML = `<div class="glass rounded-lg px-2.5 py-1.5" style="box-shadow: inset 3px 0 0 ${color}, 0 10px 30px -10px rgba(0,0,0,.7)">
-    <div class="text-[12px] font-semibold leading-tight" style="color:${color}">${escapeHtml(title)}</div>
-    <div class="text-[10.5px] leading-tight text-text-2">${escapeHtml(owner)}</div>
+  el.className = "pointer-events-none relative";
+  // phones: title only, narrower, so the pair's three callouts fit in the strip of map above the inspector sheet
+  el.innerHTML = `<div data-callout class="glass glass-solid pointer-events-none absolute left-0 top-0 max-w-[168px] whitespace-nowrap rounded-lg px-2 py-1 sm:max-w-[240px] sm:px-2.5 sm:py-1.5" style="box-shadow: inset 3px 0 0 ${color}, 0 10px 30px -10px rgba(0,0,0,.7)">
+    <div class="truncate text-[11.5px] font-semibold leading-tight sm:text-[12px]" style="color:${color}">${escapeHtml(title)}</div>
+    <div class="hidden truncate text-[10.5px] leading-tight text-text-2 sm:block">${escapeHtml(owner)}</div>
   </div>`;
   return el;
 }
 
 function distanceLabel(label: string) {
   const el = document.createElement("div");
-  el.className = "pointer-events-none";
-  el.innerHTML = `<span class="mono rounded px-1.5 py-0.5 text-[10.5px]" style="background:rgba(4,9,20,.85);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.4)">${escapeHtml(label)}</span>`;
+  el.className = "pointer-events-none relative";
+  el.innerHTML = `<div data-callout class="mono pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded px-1.5 py-0.5 text-[10.5px] leading-[1.4]" style="background:rgba(4,9,20,.9);color:#fbbf24;box-shadow:inset 0 0 0 1px rgba(251,191,36,.4)">${escapeHtml(label)}</div>`;
   return el;
+}
+
+/* ------------------------------ callout layout ------------------------------ */
+
+interface Callout {
+  /** the label box, absolutely placed inside a 0×0 marker root that sits on `at` */
+  box: HTMLElement;
+  at: [number, number];
+  /** candidate top-left offsets from the marker point, best first */
+  spots: (w: number, h: number) => { x: number; y: number }[];
+  /** hide instead of drawing over something */
+  optional: boolean;
+}
+
+type Box = { x: number; y: number; w: number; h: number };
+
+function overlapArea(a: Box, b: Box) {
+  const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+  const h = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+  return w > 0 && h > 0 ? w * h : 0;
+}
+
+/**
+ * Label placement, in rank order: each callout wants a spot that stays on screen and clear of the map panels,
+ * the pair's dots and every higher-ranked callout. At rest, a small branch-and-bound search takes the combination
+ * with the least covered area, ties going to the preferred spots; an optional callout that cannot sit clear is
+ * hidden. While the camera moves, a callout keeps its spot as long as that spot stays clear, so labels do not hop
+ * between equally good spots mid-flight.
+ */
+function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: [number, number][], moving = false) {
+  if (!items.length) return;
+  const host = map.getContainer().getBoundingClientRect();
+  const view: Box = { x: 4, y: 4, w: host.width - 8, h: host.height - 8 };
+  const fixed: Box[] = [...document.querySelectorAll<HTMLElement>('[data-map-ui], [aria-label="Evidence inspector"]')]
+    .map((el) => el.getBoundingClientRect())
+    .filter((r) => r.width > 0 && r.height > 0)
+    .map((r) => ({ x: r.left - host.left, y: r.top - host.top, w: r.width, h: r.height }));
+  for (const d of dots) {
+    const p = map.project(d);
+    fixed.push({ x: p.x - 9, y: p.y - 9, w: 18, h: 18 });
+  }
+  const cands = items.map((c) => {
+    const p = map.project(c.at);
+    const [w, h] = [c.box.offsetWidth, c.box.offsetHeight];
+    return c.spots(w, h).map((s) => ({ s, r: { x: p.x + s.x, y: p.y + s.y, w, h } }));
+  });
+  const grow = (r: Box): Box => ({ x: r.x - 4, y: r.y - 4, w: r.w + 8, h: r.h + 8 });
+  // covering another callout costs more than covering a panel or running off screen
+  const cost = (r: Box, placed: Box[]) =>
+    (r.w * r.h - overlapArea(r, view)) * 2 + fixed.reduce((sum, t) => sum + overlapArea(r, t), 0) + placed.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0);
+
+  // -1 = hidden (optional callouts only)
+  let pick: number[] = [];
+  if (moving) {
+    const placed: Box[] = [];
+    items.forEach((c, i) => {
+      const prev = Number(c.box.dataset.spot ?? -1);
+      const order = cands[i].map((_, k) => k).sort((x, y) => Number(y === prev) - Number(x === prev));
+      let [best, low] = [order[0], Infinity];
+      for (const k of order) {
+        const v = cost(cands[i][k].r, placed);
+        if (v < low) [best, low] = [k, v];
+        if (v === 0) break;
+      }
+      pick[i] = low > 0 && c.optional ? -1 : best;
+      if (pick[i] >= 0) placed.push(grow(cands[i][best].r));
+    });
+  } else {
+    let bound = Infinity;
+    const cur: number[] = [];
+    const walk = (i: number, placed: Box[], total: number) => {
+      if (total >= bound) return;
+      if (i === items.length) {
+        [bound, pick] = [total, [...cur]];
+        return;
+      }
+      if (items[i].optional) {
+        cur[i] = cands[i].findIndex((c) => cost(c.r, placed) === 0);
+        return walk(i + 1, cur[i] >= 0 ? [...placed, grow(cands[i][cur[i]].r)] : placed, total);
+      }
+      cands[i].forEach((c, k) => {
+        cur[i] = k;
+        walk(i + 1, [...placed, grow(c.r)], total + cost(c.r, placed));
+      });
+    };
+    walk(0, [], 0);
+  }
+  items.forEach((c, i) => {
+    const k = pick[i];
+    const s = cands[i][Math.max(0, k)].s;
+    const shown = c.box.dataset.spot !== undefined;
+    c.box.style.transition = shown ? "transform .2s var(--ease-out), opacity .2s" : "none";
+    c.box.style.transform = `translate(${Math.round(s.x)}px,${Math.round(s.y)}px)`;
+    c.box.style.opacity = k < 0 ? "0" : "";
+    if (k >= 0 || !shown) c.box.dataset.spot = String(Math.max(0, k));
+  });
 }

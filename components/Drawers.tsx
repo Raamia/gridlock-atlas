@@ -90,6 +90,7 @@ export function SourcesDrawer() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Filter sources"
+          aria-label="Filter sources"
           className="h-8 w-full rounded-lg border border-line-2 bg-bg-2 pl-8 pr-3 text-[12.5px] text-text-0 outline-none placeholder:text-text-3 focus:border-a"
         />
       </div>
@@ -109,6 +110,7 @@ export function SourcesDrawer() {
           </div>
         );
       })}
+      {filtered.length === 0 && <p className="mt-6 text-center text-[12px] text-text-3">No sources match “{q.trim()}”.</p>}
     </Drawer>
   );
 }
@@ -252,7 +254,7 @@ function Pipeline() {
     <div className="flex flex-wrap items-center gap-1.5">
       {steps.map((s, i) => (
         <span key={s} className="flex items-center gap-1.5">
-          <span className={clsx("rounded-md px-2 py-1 text-[11px] ring-1", i === 6 ? "bg-amber/10 text-amber ring-amber/30" : "bg-bg-2 text-text-1 ring-line")}>{s}</span>
+          <span className={clsx("rounded-md px-2 py-1 text-[11px] ring-1", i === 6 ? "bg-bg-3 text-text-0 ring-line-3" : "bg-bg-2 text-text-1 ring-line")}>{s}</span>
           {i < steps.length - 1 && <ArrowRight size={11} className="text-text-3" />}
         </span>
       ))}

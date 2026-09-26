@@ -34,14 +34,17 @@ function FocusChip() {
     title = `${preview.a.shortTitle} × ${preview.b.shortTitle}`;
     sub = counties.length ? `${counties.slice(0, 3).join(", ")}${counties.length > 3 ? ` +${counties.length - 3}` : ""} ${counties.length === 1 ? "County" : "counties"} · ${states.join(" / ")}` : states.join(" / ");
   } else if (run) {
-    sub += ` · ${run.matches.length} candidate pairs`;
+    // same region rule as the queue: a pair belongs to a region when either project does
+    const n = run.matches.filter((m) => region === "all" || IDX.project(m.projectAId).region === region || IDX.project(m.projectBId).region === region).length;
+    sub += ` · ${n} candidate pair${n === 1 ? "" : "s"}`;
   }
   return (
     <div
+      data-map-ui
       className={clsx("pointer-events-none absolute left-3 top-3 z-10 sm:left-4 sm:top-4", inspectorOpen && "hidden xl:block")}
       style={{ maxWidth: inspectorOpen ? "calc(100% - 424px - 280px)" : "calc(100% - 290px)" }}
     >
-      <div className="glass rounded-xl px-3.5 py-2.5">
+      <div className="glass glass-solid rounded-xl px-3.5 py-2.5">
         <div className="eyebrow">{preview ? "Pair in view" : "Overview"}</div>
         <div className="mt-0.5 truncate text-[14px] font-medium tracking-[-0.01em] text-text-0">{title}</div>
         <div className="truncate text-[11.5px] text-text-2">{sub}</div>
@@ -62,6 +65,7 @@ function MapControls() {
   ];
   return (
     <div
+      data-map-ui
       className={clsx(
         "absolute top-4 z-10 flex flex-col items-end gap-2 transition-[right] duration-500 ease-[var(--ease-out)]",
         inspectorOpen ? "right-3 sm:right-[376px] xl:right-[424px]" : "right-3 sm:right-4",
@@ -113,8 +117,8 @@ function Legend() {
   const focal = FOCAL_UTILITIES[region];
   if (demo !== null) return null;
   return (
-    <div className="absolute bottom-4 left-4 z-10 hidden w-[252px] sm:block">
-      <div className="glass overflow-hidden rounded-xl">
+    <div data-map-ui className="absolute bottom-4 left-4 z-10 hidden w-[252px] sm:block">
+      <div className="glass glass-solid overflow-hidden rounded-xl">
         <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between px-3 py-2" aria-expanded={open}>
           <span className="eyebrow">Map truth rules</span>
           <ChevronDown size={13} className={clsx("text-text-3 transition-transform", !open && "-rotate-90")} />
@@ -186,7 +190,7 @@ function BasemapNotice() {
   const basemap = useAtlas((s) => s.basemap);
   if (!failed || basemap !== "offline") return null;
   return (
-    <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2">
+    <div data-map-ui className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2">
       <div className="glass flex items-center gap-2 rounded-full px-3 py-1.5 text-[11.5px] text-text-1">
         <CloudOff size={13} className="text-conflict" />
         Basemap unavailable — showing bundled Census boundaries. All plan data is local.

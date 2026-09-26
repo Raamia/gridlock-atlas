@@ -1,4 +1,4 @@
-import type { Evidence, Match, Project, SourceDocument, Snapshot, Utility } from "@/lib/domain/types";
+import type { Conflict, Evidence, Match, MatchRun, Project, SourceDocument, Snapshot, Utility } from "@/lib/domain/types";
 
 export function indexSnapshot(s: Snapshot) {
   const projects = new Map(s.projects.map((p) => [p.id, p]));
@@ -48,4 +48,36 @@ export function matchSourceIds(m: Match, idx: SnapshotIndex): string[] {
     if (e) ids.add(e.sourceId);
   }
   return [...ids];
+}
+
+/** A conflict picked out by id, by its project, or by a source on any side (see `focusConflict` in the store). */
+export function conflictMatches(c: Conflict, key: string): boolean {
+  return c.id === key || c.projectId === key || c.sides.some((s) => s.sourceIds.includes(key));
+}
+
+/**
+ * Pair totals for the region on screen. The API returns only run-wide exclusion counts, so a region's are
+ * recounted here the way the engine forms pairs: eligible projects, same region, no shared owner.
+ */
+export function regionPairCounts(run: MatchRun, projects: Project[], region: string) {
+  if (region === "all") {
+    return { evaluated: run.pairsEvaluated, beyond: run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"], unlocated: run.excludedCounts["location-unknown"] };
+  }
+  const archived = new Set(run.excludedProjects.map((x) => x.projectId));
+  const flagged = new Set(run.matches.map((m) => m.id));
+  const ps = projects.filter((p) => p.region === region && !archived.has(p.id));
+  const located = (p: Project) => p.places.some((pl) => pl.precision !== "unknown");
+  let evaluated = 0;
+  let matched = 0;
+  let unlocated = 0;
+  for (let i = 0; i < ps.length; i++) {
+    for (let j = i + 1; j < ps.length; j++) {
+      const [a, b] = [ps[i], ps[j]];
+      if (a.owners.some((o) => b.owners.some((x) => x.utilityId === o.utilityId))) continue;
+      evaluated++;
+      if (flagged.has(`${a.id}__${b.id}`) || flagged.has(`${b.id}__${a.id}`)) matched++;
+      else if (!located(a) || !located(b)) unlocated++;
+    }
+  }
+  return { evaluated, beyond: evaluated - matched - unlocated, unlocated };
 }

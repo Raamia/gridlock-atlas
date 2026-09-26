@@ -10,7 +10,7 @@ import type { Conflict, ConflictSide, Evidence, Match, Project, SignalLevel } fr
 import { formatBound, formatDate, formatMiles, formatPoint, formatWindow } from "@/lib/format";
 import { useSelectedPair } from "@/lib/hooks";
 import { activeWindows, windowsBySource } from "@/lib/matching/time";
-import { evidenceHref, matchSourceIds, ownerNames, pageLabel } from "@/lib/selectors";
+import { conflictMatches, evidenceHref, matchSourceIds, ownerNames, pageLabel } from "@/lib/selectors";
 import { useAtlas, type InspectorSection } from "@/lib/store";
 import { EvidenceCard, SourceRow, type EvidenceTone } from "./Evidence";
 import { ImpactEstimate } from "./Impact";
@@ -132,7 +132,7 @@ function PairTitle({ p, color }: { p: Project; color: string }) {
         <Dot color={color} size={8} ring />
       </span>
       <div className="min-w-0">
-        <h3 className="font-serif text-[21px] leading-[1.12] tracking-[-0.005em] text-text-0" title={p.title}>
+        <h3 className="text-[17px] font-semibold leading-[1.22] tracking-[-0.015em] text-text-0" title={p.title}>
           {displayTitle(p)}
         </h3>
         <div className="mt-1 flex flex-wrap items-center gap-x-1.5 text-[11.5px] text-text-2">
@@ -173,7 +173,7 @@ function Section({
       data-section={id}
       className={clsx(
         "scroll-mt-3 rounded-xl border bg-bg-1/70 p-3.5 transition-[border-color,box-shadow] duration-500",
-        active ? "border-amber/50 shadow-[0_0_0_3px_rgba(251,191,36,.12)]" : "border-line",
+        active ? "border-text-2/50 shadow-[0_0_0_3px_rgba(193,203,224,.10)]" : "border-line",
       )}
     >
       <div className="flex items-center justify-between gap-2">
@@ -240,26 +240,36 @@ function EvidenceList({ ids, a, b, tone, limit = 3 }: { ids: string[]; a: Projec
 function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; active: boolean }) {
   const rels = IDX.relations(m.geoDetail.relationIds);
   const c = m.geoDetail.center;
+  const radius = m.geoDetail.thresholdMiles;
+  const method = m.geoDetail.method;
+  // a stated shared site or terminal confirms place however far apart the centers are; a meter would read as a failed test
+  const byFacility = !!c && c.miles > radius && (method === "shared-site" || method === "shared-endpoint");
+  const facility = method === "shared-site" ? rels.find((x) => x.siteLabel)?.siteLabel : m.geoDetail.sharedEndpoint?.labelA;
   const evidence = [...rels.flatMap((r) => r.evidenceIds), ...[a, b].flatMap((p) => p.places.filter((pl) => pl.role === "endpoint").flatMap((pl) => pl.evidenceIds))];
   return (
     <Section id="place" icon={<MapPin size={14} />} title="Where they meet" level={<LevelPill label="GEO" level={m.geo} />} active={active}>
       <p className="text-[12.5px] leading-[1.5] text-text-1">{m.geoReason}</p>
       {c && (
         <div className="flex items-center gap-3 rounded-lg bg-bg-2/70 px-3 py-2 ring-1 ring-line">
-          <div>
+          <div className="shrink-0">
             <div className="num text-[20px] leading-none text-text-0">{formatMiles(c.miles)}</div>
             <div className="mt-1 text-[10.5px] text-text-3">center to center</div>
           </div>
-          <div className="h-8 w-px bg-line-2" />
-          <div className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
-            Range {formatMiles(c.lowMiles)}–{formatMiles(c.highMiles)} with location uncertainty · review radius <span className="num text-text-1">{m.geoDetail.thresholdMiles} mi</span>
-            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-bg-4">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-amber to-amber/40"
-                style={{ width: `${Math.max(3, Math.min(100, (1 - c.miles / m.geoDetail.thresholdMiles) * 100))}%` }}
-              />
+          <div className="h-8 w-px shrink-0 bg-line-2" />
+          {byFacility ? (
+            <p className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
+              Beyond the <span className="num text-text-1">{radius} mi</span> review radius. Place is confirmed by the {method === "shared-site" ? "stated shared site" : "shared terminal"}
+              {facility ? ` (${facility})` : ""}, so center distance is not the signal here.
+            </p>
+          ) : (
+            <div className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
+              {formatMiles(c.lowMiles) === formatMiles(c.highMiles) ? "±<1 mi location uncertainty" : `Range ${formatMiles(c.lowMiles)}–${formatMiles(c.highMiles)} with location uncertainty`} · review
+              radius <span className="num text-text-1">{radius} mi</span>
+              <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-bg-4">
+                <div className="h-full rounded-full bg-gradient-to-r from-amber to-amber/40" style={{ width: `${Math.max(3, Math.min(100, (1 - c.miles / radius) * 100))}%` }} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
       <div className="space-y-1.5">
@@ -333,16 +343,16 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
                     const start = ws.map((w) => w.start.earliest).sort()[0];
                     const end = ws.map((w) => w.end.latest).sort().at(-1)!;
                     const coarse = ws.some((w) => !w.continuous);
+                    const src = IDX.source(ws[0].claimSourceId)?.publisher;
+                    const meta = `${ws.length > 1 ? `${ws.length} components` : `${ws[0].start.precision} precision`}${coarse ? " · coarse" : ""}`;
                     return (
-                      <div key={ws[0].id} className="flex items-baseline justify-between gap-2">
-                        <span className="num text-[13px] text-text-0">
+                      <div key={ws[0].id} className="mt-1.5">
+                        <div className="num whitespace-nowrap text-[13px] leading-tight text-text-0">
                           {ws.length === 1 ? formatWindow(ws[0].start, ws[0].end) : `${formatPoint(start, ws[0].start.precision)}–${formatPoint(end, ws.at(-1)!.end.precision)}`}
-                        </span>
-                        <span className="truncate text-[10.5px] text-text-3" title={ws.map((w) => w.note).filter(Boolean).join(" ")}>
-                          {IDX.source(ws[0].claimSourceId)?.publisher}
-                          {ws.length > 1 ? ` · ${ws.length} components` : ` · ${ws[0].start.precision} precision`}
-                          {coarse && " · coarse"}
-                        </span>
+                        </div>
+                        <div className="truncate text-[10.5px] text-text-3" title={[`${src} · ${meta}`, ...ws.map((w) => w.note).filter(Boolean)].join("\n")}>
+                          {src} · {meta}
+                        </div>
                       </div>
                     );
                   })
@@ -356,23 +366,35 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
       </div>
       {m.timeDetail.inService && (
         <div className="flex items-center gap-3 rounded-lg bg-bg-2/70 px-3 py-2 ring-1 ring-line">
-          <div>
+          <div className="w-[92px] shrink-0">
             <div className="num text-[20px] leading-none text-text-0">
               {m.timeDetail.inService.coarse && m.timeDetail.inService.gapDays > 0 ? "≥" : ""}
               {m.timeDetail.inService.gapDays.toLocaleString("en-US")}
             </div>
-            <div className="mt-1 text-[10.5px] text-text-3">
+            <div className="mt-1 text-[10.5px] leading-tight text-text-3">
               {m.timeDetail.inService.coarse ? (m.timeDetail.inService.gapDays === 0 ? "days · ranges overlap" : "days · nearest edges") : "days between in-service dates"}
             </div>
           </div>
-          <div className="h-8 w-px bg-line-2" />
-          <div className="num min-w-0 flex-1 space-y-0.5 text-[11px] text-text-2">
-            <div className="flex items-center gap-1.5">
-              <Dot color="var(--a)" size={5} /> {formatBound(m.timeDetail.inService.boundA)} <span className="truncate text-text-3">· {m.timeDetail.inService.labelA}</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Dot color="var(--b)" size={5} /> {formatBound(m.timeDetail.inService.boundB)} <span className="truncate text-text-3">· {m.timeDetail.inService.labelB}</span>
-            </div>
+          <div className="w-px self-stretch bg-line-2" />
+          <div className="min-w-0 flex-1 space-y-1">
+            {(
+              [
+                [m.timeDetail.inService.boundA, m.timeDetail.inService.labelA, "var(--a)"],
+                [m.timeDetail.inService.boundB, m.timeDetail.inService.labelB, "var(--b)"],
+              ] as const
+            ).map(([bound, label, color]) => (
+              <div key={color} className="flex items-start gap-1.5">
+                <span className="mt-[5px]">
+                  <Dot color={color} size={5} />
+                </span>
+                <div className="min-w-0">
+                  <div className="num whitespace-nowrap text-[11.5px] leading-tight text-text-1">{formatBound(bound)}</div>
+                  <div className="truncate text-[10.5px] text-text-3" title={label}>
+                    {label}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -442,6 +464,20 @@ function CoordinationItem({ scope, text }: { scope: string; text: string }) {
 
 function ConflictSection({ m, active }: { m: Match; active: boolean }) {
   const set = useAtlas((s) => s.set);
+  const focus = useAtlas((s) => s.focusConflict);
+  const focused = useRef<HTMLDivElement>(null);
+  const hit = (c: Conflict) => !!focus && conflictMatches(c, focus);
+  // the conflict a caller points at (e.g. the guided demo) leads the list and is scrolled to
+  const list = [...m.conflicts].sort((x, y) => Number(hit(y)) - Number(hit(x)));
+  const hasFocus = !!list[0] && hit(list[0]);
+  useEffect(() => {
+    if (!hasFocus) return;
+    const t = setTimeout(
+      () => focused.current?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }),
+      80,
+    );
+    return () => clearTimeout(t);
+  }, [focus, hasFocus]);
   return (
     <Section
       id="conflicts"
@@ -450,10 +486,17 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
       level={<span className="text-[10.5px] text-conflict">{m.conflicts.length} preserved</span>}
       active={active}
     >
-      {m.conflicts.map((c) => {
+      {list.map((c) => {
         const p = IDX.project(c.projectId);
         return (
-          <div key={c.id} onMouseEnter={() => set({ highlightConflict: true })} onMouseLeave={() => set({ highlightConflict: false })}>
+          <div
+            key={c.id}
+            ref={hit(c) && c === list[0] ? focused : undefined}
+            data-conflict-id={c.id}
+            className={clsx("scroll-mt-14", hit(c) && "-mx-2 rounded-lg bg-conflict/5 p-2 ring-1 ring-conflict/30")}
+            onMouseEnter={() => set({ highlightConflict: true })}
+            onMouseLeave={() => set({ highlightConflict: false })}
+          >
             <div className="text-[11.5px] text-text-2">
               {p.shortTitle} · <span className="text-text-1">{c.field === "completion" ? "completion / in-service date" : "construction window"}</span>
             </div>
@@ -497,7 +540,7 @@ function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: C
           );
         })}
       </div>
-      {e && <div className="mt-2 line-clamp-4 font-serif text-[12.5px] leading-snug text-text-1">“{e.exactExcerpt}”</div>}
+      {e && <div className="mt-2 line-clamp-4 text-[11.5px] italic leading-snug text-text-1">“{e.exactExcerpt}”</div>}
       {first && e && (
         <a href={evidenceHref(e, first)} target="_blank" rel="noreferrer" className="mt-auto pt-2 text-[10.5px] text-text-2 hover:text-a">
           Open source{pageLabel(e) ? ` · ${pageLabel(e)}` : ""} ↗

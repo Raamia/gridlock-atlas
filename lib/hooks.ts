@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 import { IDX } from "@/lib/data";
 import type { Match, Project } from "@/lib/domain/types";
 import { useAtlas } from "@/lib/store";
@@ -39,4 +39,17 @@ export function useReducedMotion(): boolean {
     return () => mq.removeEventListener("change", update);
   }, []);
   return reduced;
+}
+
+/** Live pixel width of an element (0 until first measured). */
+export function useWidth(ref: RefObject<HTMLElement | null>): number {
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setWidth(e.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [ref]);
+  return width;
 }

@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { useCallback, useEffect } from "react";
 import { SNAPSHOT } from "@/lib/data";
 import type { Match, MatchRun } from "@/lib/domain/types";
-import { useAtlas, type InspectorSection } from "@/lib/store";
+import { useAtlas, type FlagFilter, type InspectorSection } from "@/lib/store";
 import { Button, IconButton, Kbd } from "./ui";
 
 interface Step {
@@ -16,6 +16,9 @@ interface Step {
 }
 
 const FEATURED = ["dpc-alma-blair", "xcel-wwtc"];
+/** The narration quotes the sponsor's radius, so the demo always runs at it. */
+const DEMO_RADIUS = 25;
+const ALL_FLAGS: FlagFilter[] = ["BOTH", "GEO", "TIME", "POSSIBLE"];
 
 function featured(run: MatchRun | null) {
   return run?.matches.find((m) => FEATURED.includes(m.projectAId) && FEATURED.includes(m.projectBId)) ?? null;
@@ -33,10 +36,12 @@ const stale = (token: number) => token !== stepToken;
 
 async function ensureRun() {
   const st = useAtlas.getState();
-  return st.run ?? (await st.compare());
+  return st.run?.thresholdMiles === DEMO_RADIUS ? st.run : await st.compare({ thresholdMiles: DEMO_RADIUS });
 }
 
-function open(pick: (run: MatchRun | null) => Match | null, section: InspectorSection | null, extra: Partial<ReturnType<typeof useAtlas.getState>> = {}) {
+type Patch = Partial<ReturnType<typeof useAtlas.getState>>;
+
+function open(pick: (run: MatchRun | null) => Match | null, section: InspectorSection | null, extra: (m: Match) => Patch = () => ({})) {
   return async () => {
     const token = stepToken;
     const run = await ensureRun();
@@ -45,8 +50,13 @@ function open(pick: (run: MatchRun | null) => Match | null, section: InspectorSe
     if (!m) return;
     const st = useAtlas.getState();
     if (st.selectedMatchId !== m.id) st.select(m.id, { section: section ?? undefined });
-    useAtlas.setState({ inspectorOpen: true, inspectorSection: section, briefOpen: false, highlightConflict: false, ...extra });
+    useAtlas.setState({ inspectorOpen: true, inspectorSection: section, briefOpen: false, highlightConflict: false, focusConflict: null, ...extra(m) });
   };
+}
+
+/** The conflict step 7 narrates: WWTC's completion dates (Xcel's page vs. the PSC filings), led and scrolled to by the inspector. */
+function wwtcCompletion(m: Match) {
+  return (m.conflicts.find((c) => c.field === "completion" && c.projectId === FEATURED[1]) ?? m.conflicts.find((c) => c.field === "completion"))?.id ?? null;
 }
 
 const STEPS: Step[] = [
@@ -55,15 +65,28 @@ const STEPS: Step[] = [
     body: "Dominion Energy South Carolina and Georgia Power publish their future transmission work in separate documents — an SCRTP project list and an IRP ten-year plan. Here they are on one map for the first time.",
     run: () => {
       const region = SNAPSHOT.regions.some((r) => r.id === "southeast") ? "southeast" : (SNAPSHOT.regions[0]?.id ?? "all");
-      useAtlas.setState((s) => ({ region, selectedMatchId: null, inspectorOpen: false, briefOpen: false, hoveredMatchId: null, cameraNonce: s.cameraNonce + 1 }));
+      useAtlas.setState((s) => ({
+        region,
+        selectedMatchId: null,
+        inspectorOpen: false,
+        briefOpen: false,
+        sourcesOpen: false,
+        methodOpen: false,
+        highlightConflict: false,
+        focusConflict: null,
+        hoveredMatchId: null,
+        utilityFilter: null,
+        flags: ALL_FLAGS,
+        cameraNonce: s.cameraNonce + 1,
+      }));
     },
   },
   {
     title: "Compare public plans",
-    body: "The deterministic engine measures every cross-utility pair center-to-center and keeps those within 25 miles — or that share a facility — then ranks them by closeness and timing. Amber links mark every flagged pair.",
+    body: `The deterministic engine measures every cross-utility pair center-to-center and keeps those within ${DEMO_RADIUS} miles — or that share a facility — then ranks them by closeness and timing. Amber links mark every flagged pair.`,
     run: async () => {
       const token = stepToken;
-      await useAtlas.getState().compare();
+      await useAtlas.getState().compare({ thresholdMiles: DEMO_RADIUS });
       if (stale(token)) return;
       useAtlas.setState((s) => ({ tab: "needs-review", selectedMatchId: null, inspectorOpen: false, cameraNonce: s.cameraNonce + 1 }));
     },
@@ -80,7 +103,7 @@ const STEPS: Step[] = [
   },
   {
     title: "A rough, sourced impact estimate",
-    body: "How much right-of-way one shared corridor would avoid encumbering twice. Defaults cite public sources where one exists, anything unsourced is marked, every input is editable — a scenario, not a saving.",
+    body: "What one shared corridor could avoid encumbering twice. Equipment work and rebuilds on existing right-of-way start at 0 mi; defaults cite public sources where one exists, anything unsourced is marked, and every input is editable — a scenario, not a saving.",
     run: open(topSoutheast, "impact"),
   },
   {
@@ -91,7 +114,7 @@ const STEPS: Step[] = [
   {
     title: "Sources disagree — both are kept",
     body: "Xcel's page and the Wisconsin PSC give different completion dates. The conflict is shown side by side and does not change the construction-window match.",
-    run: open(featured, "conflicts", { highlightConflict: true }),
+    run: open(featured, "conflicts", (m) => ({ highlightConflict: true, focusConflict: wwtcCompletion(m) })),
   },
   {
     title: "Export a cited review brief",
@@ -107,7 +130,10 @@ const STEPS: Step[] = [
 
 export function GuidedDemo() {
   const step = useAtlas((s) => s.demoStep);
+  const briefOpen = useAtlas((s) => s.briefOpen);
   const set = useAtlas((s) => s.set);
+  // the demo opened the brief on its last beat, so leaving the demo closes it too
+  const end = () => set({ demoStep: null, briefOpen: false, highlightConflict: false, focusConflict: null });
 
   const go = useCallback(
     (n: number) => {
@@ -147,20 +173,25 @@ export function GuidedDemo() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed left-3 right-3 top-[60px] z-50 sm:absolute sm:bottom-4 sm:left-4 sm:right-auto sm:top-auto sm:z-30 sm:w-[440px]"
+          className={clsx(
+            "fixed left-3 right-3 sm:right-auto sm:w-[440px]",
+            // with the brief open the card rides above its backdrop, pinned to the viewport corner, so Finish stays reachable
+            briefOpen ? "bottom-3 z-[60] sm:bottom-4 sm:left-4" : "top-[60px] z-50 sm:absolute sm:bottom-4 sm:left-4 sm:top-auto sm:z-30",
+          )}
           role="region"
           aria-label="Guided demo"
+          data-map-ui
         >
-          <div className="glass overflow-hidden rounded-2xl ring-1 ring-amber/25">
+          <div className="glass glass-solid overflow-hidden rounded-2xl ring-1 ring-line-2">
             <div className="h-[2px] bg-bg-3">
-              <motion.div className="h-full bg-gradient-to-r from-a via-amber to-b" animate={{ width: `${((step + 1) / STEPS.length) * 100}%` }} transition={{ duration: 0.4 }} />
+              <motion.div className="h-full bg-gradient-to-r from-a to-b" animate={{ width: `${((step + 1) / STEPS.length) * 100}%` }} transition={{ duration: 0.4 }} />
             </div>
             <div className="p-4">
               <div className="flex items-center justify-between">
-                <span className="eyebrow text-amber">
+                <span className="eyebrow text-text-1">
                   Guided demo · {step + 1}/{STEPS.length}
                 </span>
-                <IconButton label="Exit demo" onClick={() => set({ demoStep: null, highlightConflict: false })} className="-mr-1.5 -mt-1.5 h-7 w-7">
+                <IconButton label="Exit demo" onClick={end} className="-mr-1.5 -mt-1.5 h-7 w-7">
                   <X size={14} />
                 </IconButton>
               </div>
@@ -177,7 +208,7 @@ export function GuidedDemo() {
                       key={i}
                       onClick={() => go(i)}
                       aria-label={`Go to step ${i + 1}`}
-                      className={clsx("h-1.5 rounded-full transition-all", i === step ? "w-5 bg-amber" : i < step ? "w-1.5 bg-text-2" : "w-1.5 bg-line-3")}
+                      className={clsx("h-1.5 rounded-full transition-all", i === step ? "w-5 bg-text-0" : i < step ? "w-1.5 bg-text-2" : "w-1.5 bg-line-3")}
                     />
                   ))}
                 </div>
@@ -194,7 +225,7 @@ export function GuidedDemo() {
                       Next <ArrowRight size={13} />
                     </Button>
                   ) : (
-                    <Button variant="primary" size="sm" onClick={() => set({ demoStep: null })}>
+                    <Button variant="primary" size="sm" onClick={end}>
                       Finish
                     </Button>
                   )}

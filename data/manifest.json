@@ -90,6 +90,15 @@
   "sha256": "86c56a675a0d216262b70bfab065dd7432d437085c46d66c7229a8e3db758947"
  },
  {
+  "id": "desc-jasper-okatie-sherwood-page",
+  "url": "https://www.dominionenergy.com/about/delivering-energy/electric-projects/power-line-projects/jasper-okatie-sherwood",
+  "publisher": "Dominion Energy South Carolina",
+  "title": "Jasper-Okatie-Sherwood power line project page",
+  "sourceType": "utility",
+  "retrievedAt": "2026-09-26T06:23:22Z",
+  "sha256": "4d2fa1be4ce71b9d968d17c8d66f47e5a7bbf6970f3bf423c07dc1bcd1787b16"
+ },
+ {
   "id": "desc-scrtp-2024-2028",
   "url": "https://www.scrtp.com/assets/pdfs/home/2024-2028-2million-and-above-project-descriptions.pdf",
   "publisher": "Dominion Energy South Carolina (SCRTP)",
@@ -603,6 +612,15 @@
   "sourceType": "regulator",
   "retrievedAt": "2026-09-26T06:29:09Z",
   "sha256": "e9454d0818883942a210f99786ef0edec03e7c4fb89a1388d97a4300a1fd50c5"
+ },
+ {
+  "id": "sertp-2025-plan",
+  "url": "https://www.southeasternrtp.com/docs/general/2025/2025%20Regional%20Transmission%20Plan%20and%20Input%20Assumptions.pdf",
+  "publisher": "Southeastern Regional Transmission Planning (SERTP)",
+  "title": "2025 SERTP Regional Transmission Plan and Input Assumptions",
+  "sourceType": "rto",
+  "retrievedAt": "2026-09-26T06:04:12Z",
+  "sha256": "9183e3ffcb4fc06e46db2afc50510948b6c0f950312440b6272aaa862bc9da6b"
  },
  {
   "id": "spp-beckham-potter-iep-report",

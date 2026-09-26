@@ -30,6 +30,16 @@
    "publishedAt": "2024-03-05",
    "documentDateEvidence": "PDF creation date (pdfinfo), 2024-03-05",
    "cached": true
+  },
+  {
+   "id": "desc-jasper-okatie-sherwood-page",
+   "title": "Jasper-Okatie-Sherwood power line project page",
+   "publisher": "Dominion Energy South Carolina",
+   "url": "https://www.dominionenergy.com/about/delivering-energy/electric-projects/power-line-projects/jasper-okatie-sherwood",
+   "sourceType": "utility",
+   "publishedAt": null,
+   "documentDateEvidence": "No publication date on the page; its timeline is headed '(Anticipated \u2013 Subject to Change)'. Retrieved 2026-09-26.",
+   "cached": true
   }
  ],
  "projects": [
@@ -1595,8 +1605,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 8,
-       "exactExcerpt": "Dawson 230kV Sub and Fold-in: Construct and Rebuild",
-       "supports": "project name",
+       "exactExcerpt": "Fold in the existing Canadys \u2013 Church Creek and Canadys \u2013 Faber Place 230kV lines at the Dawson 230kV substation (phase 1).",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -2458,6 +2468,50 @@
    },
    "constructionWindows": [
     {
+     "claimSourceId": "desc-jasper-okatie-sherwood-page",
+     "phase": "general-construction",
+     "start": {
+      "earliest": "2025-01-01",
+      "latest": "2025-03-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2026-12-01",
+      "latest": "2026-12-01",
+      "precision": "day"
+     },
+     "continuous": true,
+     "boundsOnly": true,
+     "evidence": [
+      {
+       "sourceId": "desc-jasper-okatie-sherwood-page",
+       "exactExcerpt": "The first 230 kV line begins at the Jasper Generating Plant and ends at the Okatie substation.",
+       "supports": "the page covers the Jasper\u2013Okatie 230 kV line",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-jasper-okatie-sherwood-page",
+       "exactExcerpt": "Timeline (Anticipated \u2013 Subject to Change)",
+       "supports": "the page's timeline is anticipated and subject to change",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-jasper-okatie-sherwood-page",
+       "exactExcerpt": "Q1 2025 Tree clearing and construction of transmission lines and substation begin",
+       "supports": "construction start Q1 2025",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 12,
+       "exactExcerpt": "Planned In-Service Date 12/01/2026",
+       "supports": "planned in-service date",
+       "verifiedByScript": true
+      }
+     ],
+     "note": "Dominion project page: tree clearing and construction begin Q1 2025 (its timeline is marked 'Anticipated \u2013 Subject to Change'). The page gives no end, so the SCRTP planned in-service date bounds the window; the field work within is not dated."
+    },
+    {
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
@@ -2619,13 +2673,13 @@
     {
      "key": "voltageKv",
      "label": "Voltage",
-     "value": "115 kV",
+     "value": "230 kV",
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 13,
-       "exactExcerpt": "Riverport 115kV Tap: Construct Tap",
-       "supports": "project name",
+       "exactExcerpt": "Constructing a 230 kV Tap from Okatie to Riverport",
+       "supports": "voltage stated in the project scope",
        "verifiedByScript": true
       }
      ]
@@ -2645,8 +2699,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 13,
-       "exactExcerpt": "Riverport 115kV Tap: Construct Tap",
-       "supports": "project name",
+       "exactExcerpt": "Constructing a 230 kV Tap from Okatie to Riverport",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -2739,7 +2793,8 @@
    ],
    "knownCoordination": [],
    "caveats": [
-    "The SCRTP title says 115kV, but the description, the route map and the Dominion page all describe the Okatie-Riverport line as 230 kV. The line is about 8 miles and runs past Hardeeville. The Riverport end is about 10 km across the Savannah River from GPC's Savannah-area (zone 219) system, so it is a likely proximity candidate."
+    "The SCRTP title says 115kV, but the description, the route map and the Dominion page all describe the Okatie-Riverport line as 230 kV. The line is about 8 miles and runs past Hardeeville. The Riverport end is about 10 km across the Savannah River from GPC's Savannah-area (zone 219) system, so it is a likely proximity candidate.",
+    "Voltage is taken from the project description (230 kV); the title says 115 kV."
    ],
    "docketId": "DESC project 6367 D",
    "region": "southeast"
@@ -3841,8 +3896,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -3874,7 +3929,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $219,331, 2026: $50,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -4004,7 +4059,7 @@
     {
      "key": "voltageKv",
      "label": "Voltage",
-     "value": "46 kV",
+     "value": "115 kV",
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -4072,8 +4127,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -4105,7 +4160,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $234,285, 2026: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -4479,8 +4534,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 22,
-       "exactExcerpt": "Wagener 115kV Tap: Construct Tap",
-       "supports": "project name",
+       "exactExcerpt": "Constructing a 115 kV Tap off the Edmund Switching Station- Owens Corning 115 kV Line to feed new Wagener Distribution substation.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -4499,8 +4554,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -4532,7 +4587,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $15,000, 2026: $175,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -4729,8 +4784,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -4762,7 +4817,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $125,000, 2026: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -4875,7 +4930,7 @@
     {
      "key": "voltageKv",
      "label": "Voltage",
-     "value": "12 kV",
+     "value": "115 kV",
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -4921,8 +4976,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -4954,7 +5009,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $90,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -5132,8 +5187,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -5165,7 +5220,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $94,609, 2026: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -5341,8 +5396,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2027-01-01",
-      "latest": "2027-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -5381,7 +5436,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -5545,8 +5600,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -5578,7 +5633,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $800,000, 2026: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -5759,8 +5814,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -5792,7 +5847,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $277,791, 2026: $325,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -5970,8 +6025,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -6003,7 +6058,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $150,000, 2026: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -6097,7 +6152,7 @@
     {
      "key": "voltageKv",
      "label": "Voltage",
-     "value": "115 kV",
+     "value": "230 kV",
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -6314,8 +6369,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -6354,7 +6409,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $10,000, 2026: $175,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -6556,8 +6611,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2025-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -6589,7 +6644,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026; spending under 5% of the total (2026: $12,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -6767,7 +6822,7 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2024-01-01",
+      "earliest": "2027-01-01",
       "latest": "2027-12-31",
       "precision": "year"
      },
@@ -6800,7 +6855,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $3,760) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -6922,8 +6977,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 34,
-       "exactExcerpt": "Harleyville 115KV Transmission Tap \u2013 Construct (1.4 miles)",
-       "supports": "project name",
+       "exactExcerpt": "Extend the 115 kV line from the Blue Circle tap to the Harleyville substation to provide 115 kV service.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -7211,8 +7266,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2024-01-01",
-      "latest": "2027-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -7251,7 +7306,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2027: $125,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -7456,8 +7511,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2024-01-01",
-      "latest": "2027-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -7496,7 +7551,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $463,118, 2027: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -7656,8 +7711,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 37,
-       "exactExcerpt": "Coast Guard 115kV Substation and Tap: Construct",
-       "supports": "project name",
+       "exactExcerpt": "Construct a 115kV transmission line between Clemson Wind Turbine & Coast Guard Sub.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -7698,8 +7753,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -7738,7 +7793,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $30,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -7860,8 +7915,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 38,
-       "exactExcerpt": "Millrace 115 kV Tap: Construct",
-       "supports": "project name",
+       "exactExcerpt": "Construct Millrace 115kV tap from the existing Dunbar Road \u2013 Lyles 115kV line.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -7882,8 +7937,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 38,
-       "exactExcerpt": "Millrace 115 kV Tap: Construct",
-       "supports": "project name",
+       "exactExcerpt": "Construct Millrace 115kV tap from the existing Dunbar Road \u2013 Lyles 115kV line.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -7924,8 +7979,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2024-01-01",
-      "latest": "2027-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -7964,7 +8019,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $75,000, 2027: $50,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -8091,8 +8146,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 39,
-       "exactExcerpt": "Williams St Sub: Replace Sw House & Relays, AM Williams Sub: Replace Sw House, and McMeekin Sub: Add Sw House",
-       "supports": "project name",
+       "exactExcerpt": "Replace switch house, switch house equipment, and relay panels at Williams Street substation.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -8402,8 +8457,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -8442,7 +8497,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $175,000, 2027: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -8608,8 +8663,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 41,
-       "exactExcerpt": "Okatie \u2013 McIntosh 115kV Tie: Add Series Reactor",
-       "supports": "project name",
+       "exactExcerpt": "Construct Deerfield Switching Station and Install a 9% series reactor on the Okatie \u2013 McIntosh 115kV Tie Line.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -8628,8 +8683,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2027-01-01",
-      "latest": "2027-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -8668,7 +8723,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $50,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -8832,8 +8887,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2027-01-01",
+      "latest": "2027-12-31",
       "precision": "year"
      },
      "end": {
@@ -8872,7 +8927,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $125,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -9052,8 +9107,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 43,
-       "exactExcerpt": "St. George- Holly Hill 115kV: Rebuild Structures 83-108",
-       "supports": "project name",
+       "exactExcerpt": "Replace flat switches at Don's Car Crushing with new flat switches.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -9072,8 +9127,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -9112,7 +9167,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2026: $175,000, 2027: $125,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -9222,7 +9277,7 @@
     {
      "key": "voltageKv",
      "label": "Voltage",
-     "value": "115 kV",
+     "value": "230 kV",
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -9290,8 +9345,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -9330,7 +9385,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $1,038,795, 2026: $500,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -9548,8 +9603,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -9595,7 +9650,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $174,719, 2026: $150,000, 2027: $200,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -9811,8 +9866,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2024-01-01",
-      "latest": "2027-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -9858,7 +9913,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $150,000, 2027: $175,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -10021,8 +10076,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 47,
-       "exactExcerpt": "Long Savannah 115 kV Tap: Construct",
-       "supports": "project name",
+       "exactExcerpt": "Rebuild Church Creek - Dawson 230kV line from Long Savannah to Church Creek.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -10041,8 +10096,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2028-01-01",
-      "latest": "2028-12-31",
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
       "precision": "year"
      },
      "end": {
@@ -10081,7 +10136,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2028: $100,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -10196,7 +10251,7 @@
     {
      "key": "voltageKv",
      "label": "Voltage",
-     "value": "46 kV",
+     "value": "115 kV",
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -10264,8 +10319,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -10311,7 +10366,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $275,000, 2027: $125,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -10490,8 +10545,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2028-01-01",
+      "latest": "2028-12-31",
       "precision": "year"
      },
      "end": {
@@ -10530,7 +10585,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $100,000, 2027: $200,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -10708,8 +10763,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2027-01-01",
-      "latest": "2027-12-31",
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
       "precision": "year"
      },
      "end": {
@@ -10755,7 +10810,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $100,000, 2028: $200,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -10847,6 +10902,20 @@
        "verifiedByScript": true
       }
      ]
+    },
+    {
+     "key": "voltageKv",
+     "label": "Voltage",
+     "value": "115 kV",
+     "evidence": [
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 51,
+       "exactExcerpt": "Installing a 115 kV Tap (or possibly dedicated feed from Charlotte St) to feed the Union Pier 115 kV Sub.",
+       "supports": "voltage stated in the project scope",
+       "verifiedByScript": true
+      }
+     ]
     }
    ],
    "places": [
@@ -10905,8 +10974,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2028-01-01",
-      "latest": "2028-12-31",
+      "earliest": "2029-01-01",
+      "latest": "2029-12-31",
       "precision": "year"
      },
      "end": {
@@ -10945,7 +11014,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2028: $350,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -11149,8 +11218,8 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 52,
-       "exactExcerpt": "Faber Place-Bayfront 115kV: Rebuild North Bridge Terrace to Bayfront Section",
-       "supports": "project name",
+       "exactExcerpt": "String 1272 ACSR from Bayfront - Camp Rd.",
+       "supports": "terminal named in the project scope",
        "verifiedByScript": true
       }
      ],
@@ -11169,8 +11238,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2023-01-01",
-      "latest": "2026-12-31",
+      "earliest": "2026-01-01",
+      "latest": "2029-12-31",
       "precision": "year"
      },
      "end": {
@@ -11216,7 +11285,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026; spending under 5% of the total (2026: $600,000, 2028: $200,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -11411,8 +11480,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2029-01-01",
-      "latest": "2029-12-31",
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
       "precision": "year"
      },
      "end": {
@@ -11451,7 +11520,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2029: $250,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -11630,8 +11699,8 @@
      "claimSourceId": "desc-scrtp-2026-2030",
      "phase": "unknown",
      "start": {
-      "earliest": "2026-01-01",
-      "latest": "2029-12-31",
+      "earliest": "2030-01-01",
+      "latest": "2030-12-31",
       "precision": "year"
      },
      "end": {
@@ -11670,7 +11739,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2029: $850,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [

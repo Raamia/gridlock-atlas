@@ -1225,7 +1225,7 @@
       "latest": "2028-03-31",
       "precision": "quarter"
      },
-     "note": "From the July 2024 application's Southern Route Table 1.8-2. This table is outdated: it assumed CPCN approval in Q3 2025. ROW staking and vegetation clearing start in Q4 2026; the last construction activity (wire stringing and removal of existing structures) ends in Q1 2028. Restoration and mat removal run Q4 2027 to Q4 2028. The same application's narrative start of Q2 2026 matches the Northern Route table 1.8-1, not this Southern table.",
+     "note": "From the July 2024 application's Southern Route Table 1.8-2. This table is outdated: it assumed CPCN approval in Q3 2025. ROW staking and vegetation clearing start in Q4 2026; the last construction activity (wire stringing and removal of existing structures) ends in Q1 2028. Restoration and mat removal run Q4 2027 to Q4 2028. The same application's narrative start of Q2 2026 matches the Northern Route table 1.8-1, not this Southern table. Superseded by the PSC Final Decision's schedule (Q4 2026 start, September 2028 in-service).",
      "evidence": [
       {
        "sourceId": "dpc-alma-blair-cpcn-2024",
@@ -1281,6 +1281,34 @@
        "section": "1.8 Construction Schedule",
        "verifiedByScript": true
       }
+     ],
+     "supersededBy": "dpc-alma-blair:w3"
+    },
+    {
+     "claimSourceId": "psc-1515-ce-103-final",
+     "phase": "general-construction",
+     "continuous": true,
+     "boundsOnly": true,
+     "start": {
+      "earliest": "2026-10-01",
+      "latest": "2026-12-31",
+      "precision": "quarter"
+     },
+     "end": {
+      "earliest": "2028-09-01",
+      "latest": "2028-09-30",
+      "precision": "month"
+     },
+     "note": "PSC Final Decision (March 2026): construction to begin in Q4 2026, in service September 2028. The decision gives no construction end, so the in-service month is used only as the outer bound and the field work within is not dated.",
+     "evidence": [
+      {
+       "sourceId": "psc-1515-ce-103-final",
+       "exactExcerpt": "Construction is expected to begin in the fourth quarter of 2026 with an anticipated in-service date of September 2028.",
+       "supports": "construction start Q4 2026 and in-service September 2028",
+       "page": 41,
+       "section": "Project Cost and Construction Schedule",
+       "verifiedByScript": true
+      }
      ]
     }
    ],
@@ -1324,7 +1352,7 @@
     },
     {
      "claimSourceId": "dpc-alma-blair-cpcn-2024",
-     "label": "in-service (July 2024 application, superseded)",
+     "label": "in-service (2024 application, superseded)",
      "date": {
       "earliest": "2028-04-01",
       "latest": "2028-06-30",
@@ -1349,7 +1377,8 @@
        "section": "1.8 Construction Schedule",
        "verifiedByScript": true
       }
-     ]
+     ],
+     "current": false
     }
    ],
    "knownCoordination": [
@@ -1515,7 +1544,7 @@
    ],
    "caveats": [
     "The route geometry is the PSC docket GIS centerline of the application's Proposed Southern Route (3-28-2024 alignment) plus the Segment 6 alternate end point. It is not survey accurate and may be adjusted after approval (see route.caveat). The Northern alternative was not authorized and is not traced.",
-    "The PSC Final Decision gives only a construction start (Q4 2026) and an in-service date (September 2028), not a construction end. Its start is recorded as a fact, not a construction window. The only windows with both ends come from the Dairyland page (2026-2027) and the outdated July 2024 application table (Q4 2026-Q1 2028).",
+    "The PSC Final Decision gives only a construction start (Q4 2026) and an in-service date (September 2028), not a construction end, so its window is kept as bounds only. The only window with both ends is the Dairyland page (2026-2027); the July 2024 application table (Q4 2026-Q1 2028) is superseded by the decision and kept for history.",
     "The documented Xcel/NSPW interface is an interconnection at a shared switching station (Tremval North, NSPW-owned) plus interface design coordination described in the 2024 application. No source shows shared crews, equipment or other resource sharing.",
     "The Tremval North point comes from the PSC's WWTC (5-CE-158) GIS layer for the candidate 'Tremval Expansion North' site, which the WWTC decision authorized. It marks the site, not a surveyed station footprint.",
     "'not-found-in-sources' coordination entries mean the cached sources are silent. They do not mean the projects are uncoordinated."

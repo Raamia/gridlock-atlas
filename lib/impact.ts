@@ -37,6 +37,15 @@ export function costOf(p: Project): number | null {
   return f.value.includes("$") && Number.isFinite(n) && n > 0 ? n : null;
 }
 
+const NO_NEW_CORRIDOR = /\b(rebuild|rebuilding|rebuilt|reconductor(ing)?|reactors?|(auto ?)?transformers?|autobank|relay|breakers?|capacitors?)\b/i;
+const NEW_LINE = /\b(new|construct(ing)?|build)\b[^.]{0,60}\b(line|tap)\b/i;
+
+/** Equipment at an existing site, or a rebuild/reconductor on existing right-of-way: no new corridor to share. */
+export function needsNewCorridor(p: Project): boolean {
+  const scope = `${p.title}. ${p.summary}`;
+  return NEW_LINE.test(scope) || !NO_NEW_CORRIDOR.test(scope);
+}
+
 function bucket(kv: number | null): "115" | "230" | "500" {
   if (!kv || kv <= 161) return "115";
   if (kv <= 345) return "230";
@@ -77,13 +86,19 @@ export function impactDefaults(m: Match): ImpactDefaults {
   const lengthA = lengthOf(a);
   const lengthB = lengthOf(b);
   const known = [lengthA, lengthB].filter((x): x is number => x !== null);
-  const sharedMiles = known.length === 2 ? Math.min(...known) : known.length === 1 ? known[0] / 2 : 0;
+  // a shared corridor needs two new lines of published length; anything less defaults to 0 and the slider stays editable
+  const noCorridor = [a, b].filter((p) => !needsNewCorridor(p));
+  const sharedMiles = !noCorridor.length && known.length === 2 ? Math.min(...known) : 0;
   const sharedMilesNote =
-    known.length === 2
-      ? "Default: the shorter of the two published line lengths."
-      : known.length === 1
-        ? "Default: half of the one published line length (the other is not published)."
-        : "Neither source publishes a line length — set a corridor length to explore.";
+    noCorridor.length === 2
+      ? "Neither project needs a new corridor — set a length to explore."
+      : noCorridor.length === 1
+        ? `${noCorridor[0].shortTitle} needs no new corridor (equipment or a rebuild on existing right-of-way) — set a length to explore.`
+        : known.length === 2
+          ? "Default: the shorter of the two published line lengths."
+          : known.length === 1
+            ? "Only one source publishes a line length — set a corridor length to explore."
+            : "Neither source publishes a line length — set a corridor length to explore.";
   const b2 = bucket(voltageKv);
   const state = stateOf(a) || stateOf(b);
   return {

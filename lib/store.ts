@@ -6,6 +6,10 @@ import type { Match, MatchRun } from "@/lib/domain/types";
 
 const DEFAULT_REGION = SNAPSHOT.regions[0]?.id ?? "all";
 
+let seq = 0;
+let inflight: AbortController | null = null;
+let latest: Promise<MatchRun | null> = Promise.resolve(null);
+
 export type QueueTab = "needs-review" | "known-coordination" | "conflicts" | "possible";
 export type FlagFilter = "BOTH" | "GEO" | "TIME" | "POSSIBLE";
 export type Basemap = "night" | "satellite" | "offline";
@@ -31,6 +35,8 @@ interface AtlasState {
   inspectorOpen: boolean;
   inspectorSection: InspectorSection | null;
   highlightConflict: boolean;
+  /** Conflict to lead the inspector's "Sources disagree" list with (and scroll to): a conflict id, project id or source id. */
+  focusConflict: string | null;
   briefOpen: boolean;
   sourcesOpen: boolean;
   methodOpen: boolean;
@@ -43,7 +49,7 @@ interface AtlasState {
 
   compare: (opts?: { thresholdMiles?: number; quiet?: boolean }) => Promise<MatchRun | null>;
   setThreshold: (mi: number) => void;
-  select: (id: string | null, opts?: { section?: InspectorSection }) => void;
+  select: (id: string | null, opts?: { section?: InspectorSection; focusConflict?: string }) => void;
   set: (patch: Partial<AtlasState>) => void;
   resetView: () => void;
 }
@@ -68,6 +74,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   inspectorOpen: false,
   inspectorSection: null,
   highlightConflict: false,
+  focusConflict: null,
   briefOpen: false,
   sourcesOpen: false,
   methodOpen: false,
@@ -78,32 +85,41 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   basemapFailed: false,
   cameraNonce: 0,
 
-  async compare(opts) {
+  compare(opts) {
+    // only the newest request may write: an older, slower reply (e.g. a larger radius) is aborted or dropped
+    const my = ++seq;
+    inflight?.abort();
+    const ctrl = (inflight = new AbortController());
     const thresholdMiles = opts?.thresholdMiles ?? get().thresholdMiles;
     set({ running: !opts?.quiet, runError: null });
     const started = performance.now();
-    try {
-      const res = await fetch(`/api/matches?threshold=${thresholdMiles}`, { cache: "no-store" });
-      if (!res.ok) throw new Error(`Engine request failed (${res.status})`);
-      const run = (await res.json()) as MatchRun;
-      // Let the scan read as a deliberate step, not a flicker. The engine itself runs in ~ms.
-      const minVisible = opts?.quiet ? 0 : 900;
-      const wait = Math.max(0, minVisible - (performance.now() - started));
-      if (wait) await new Promise((r) => setTimeout(r, wait));
-      const selected = get().selectedMatchId;
-      const dropped = !!selected && !run.matches.some((m) => m.id === selected);
-      set({
-        run,
-        running: false,
-        thresholdMiles,
-        // a pair that no longer qualifies (e.g. smaller radius) closes the inspector with it
-        ...(dropped ? { selectedMatchId: null, inspectorOpen: false, inspectorSection: null, highlightConflict: false } : {}),
-      });
-      return run;
-    } catch (err) {
-      set({ running: false, runError: err instanceof Error ? err.message : "Engine unavailable" });
-      return null;
-    }
+    latest = (async () => {
+      try {
+        const res = await fetch(`/api/matches?threshold=${thresholdMiles}`, { cache: "no-store", signal: ctrl.signal });
+        if (!res.ok) throw new Error(`Engine request failed (${res.status})`);
+        const run = (await res.json()) as MatchRun;
+        // Let the scan read as a deliberate step, not a flicker. The engine itself runs in ~ms.
+        const minVisible = opts?.quiet ? 0 : 900;
+        const wait = Math.max(0, minVisible - (performance.now() - started));
+        if (wait) await new Promise((r) => setTimeout(r, wait));
+        if (my !== seq) return latest;
+        const selected = get().selectedMatchId;
+        const dropped = !!selected && !run.matches.some((m) => m.id === selected);
+        set({
+          run,
+          running: false,
+          thresholdMiles,
+          // a pair that no longer qualifies (e.g. smaller radius) closes the inspector with it
+          ...(dropped ? { selectedMatchId: null, inspectorOpen: false, inspectorSection: null, highlightConflict: false, focusConflict: null } : {}),
+        });
+        return run;
+      } catch (err) {
+        if (my !== seq) return latest;
+        set({ running: false, runError: err instanceof Error ? err.message : "Engine unavailable" });
+        return null;
+      }
+    })();
+    return latest;
   },
 
   setThreshold(mi) {
@@ -112,7 +128,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
 
   select(id, opts) {
     if (!id) {
-      set({ selectedMatchId: null, inspectorOpen: false, inspectorSection: null, highlightConflict: false });
+      set({ selectedMatchId: null, inspectorOpen: false, inspectorSection: null, highlightConflict: false, focusConflict: null });
       return;
     }
     const m = get().run?.matches.find((x) => x.id === id);
@@ -123,6 +139,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
       selectedMatchId: id,
       inspectorOpen: true,
       inspectorSection: opts?.section ?? null,
+      focusConflict: opts?.focusConflict ?? null,
       focusProjectId: null,
       tab: m ? tabFor(m, get().tab) : get().tab,
       cameraNonce: get().cameraNonce + 1,
@@ -140,6 +157,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
       inspectorSection: null,
       focusProjectId: null,
       highlightConflict: false,
+      focusConflict: null,
       cameraNonce: get().cameraNonce + 1,
     });
   },

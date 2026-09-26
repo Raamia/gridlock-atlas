@@ -116,6 +116,11 @@ body {
   box-shadow: var(--shadow-panel);
 }
 
+/* text panels over the map: basemap labels must not read through the body copy */
+.glass-solid {
+  background: rgba(8, 15, 31, 0.97);
+}
+
 .hairline {
   border-color: var(--line);
 }
@@ -154,6 +159,20 @@ body {
 }
 .mapboxgl-ctrl-logo {
   opacity: 0.55;
+}
+/* logo + attribution slide left of the inspector column, like the map's own controls */
+.mapboxgl-ctrl-bottom-right {
+  transition: right 0.5s var(--ease-out);
+}
+@media (min-width: 640px) {
+  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
+    right: 376px;
+  }
+}
+@media (min-width: 1280px) {
+  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
+    right: 424px;
+  }
 }
 .mapboxgl-popup-content {
   background: transparent !important;

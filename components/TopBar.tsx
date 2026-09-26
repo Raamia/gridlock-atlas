@@ -37,7 +37,7 @@ export function TopBar() {
         <LogoMark />
         <div className="leading-none">
           <div className="text-[14px] font-semibold tracking-[-0.015em] text-text-0">
-            GridLock <span className="font-serif text-[16px] font-normal italic tracking-normal text-text-1">Atlas</span>
+            GridLock <span className="font-serif text-[16px] font-normal italic tracking-normal text-text-1 max-sm:hidden">Atlas</span>
           </div>
         </div>
       </div>
@@ -83,7 +83,8 @@ export function TopBar() {
           </option>
         ))}
       </select>
-      <div className="flex min-w-0 items-center gap-1 md:ml-0">
+      {/* phones: the region select gives up width first, so the demo button always stays on screen */}
+      <div className="flex shrink-0 items-center gap-1 md:ml-0">
         <Button variant="ghost" size="sm" onClick={() => set({ sourcesOpen: true })} title="Source registry" aria-label={`Source registry: ${SNAPSHOT.sources.length} sources, ${utilities.size} utilities`}>
           <Database size={13} />
           <span className="num">{SNAPSHOT.sources.length}</span>
@@ -92,22 +93,22 @@ export function TopBar() {
           <span className="num hidden xl:inline">{utilities.size}</span>
           <span className="hidden xl:inline">utilities</span>
         </Button>
-        <Button variant="ghost" size="sm" onClick={() => set({ methodOpen: true })} className="hidden sm:inline-flex">
+        <Button variant="ghost" size="sm" onClick={() => set({ methodOpen: true })} className="max-sm:hidden">
           <BookOpenText size={13} />
           Method
         </Button>
         <ReviewToggle />
-        <IconButton label="Reset view" onClick={resetView}>
+        <IconButton label="Reset view" onClick={resetView} className="max-sm:hidden">
           <RotateCcw size={14} />
         </IconButton>
         <div className="mx-1 h-5 w-px bg-line-2" />
         <Button
           variant={demoStep === null ? "outline" : "subtle"}
           size="sm"
-          onClick={() => set({ demoStep: demoStep === null ? 0 : null })}
+          onClick={() => set(demoStep === null ? { demoStep: 0 } : { demoStep: null, briefOpen: false, highlightConflict: false, focusConflict: null })}
           aria-label={demoStep === null ? "Start guided demo" : "Exit guided demo"}
         >
-          <PlayCircle size={13} className="text-amber" />
+          <PlayCircle size={13} />
           <span className="hidden sm:inline">{demoStep === null ? "Guided demo" : "Exit demo"}</span>
         </Button>
       </div>

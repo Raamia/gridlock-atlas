@@ -854,6 +854,25 @@
    ],
    "completionClaims": [
     {
+     "claimSourceId": "psc-wwtc-q2-2026-nspw",
+     "label": "in-service (NSPW Q2 2026 report)",
+     "date": {
+      "earliest": "2029-07-01",
+      "latest": "2029-09-30",
+      "precision": "quarter"
+     },
+     "evidence": [
+      {
+       "sourceId": "psc-wwtc-q2-2026-nspw",
+       "exactExcerpt": "At this time construction of the Project is anticipated to start in the fourth quarter 2026 with an in-service date of third quarter 2029.",
+       "supports": "NSPW Q2 2026: construction start Q4 2026; in-service Q3 2029",
+       "page": 2,
+       "section": "Project Schedule",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
      "claimSourceId": "xcel-wwtc-page",
      "label": "completion",
      "date": {
@@ -942,25 +961,6 @@
        "supports": "projected in-service year 2029",
        "page": 51,
        "section": "Project Cost and Construction Schedule",
-       "verifiedByScript": true
-      }
-     ]
-    },
-    {
-     "claimSourceId": "psc-wwtc-q2-2026-nspw",
-     "label": "in-service (NSPW Q2 2026 report)",
-     "date": {
-      "earliest": "2029-07-01",
-      "latest": "2029-09-30",
-      "precision": "quarter"
-     },
-     "evidence": [
-      {
-       "sourceId": "psc-wwtc-q2-2026-nspw",
-       "exactExcerpt": "At this time construction of the Project is anticipated to start in the fourth quarter 2026 with an in-service date of third quarter 2029.",
-       "supports": "NSPW Q2 2026: construction start Q4 2026; in-service Q3 2029",
-       "page": 2,
-       "section": "Project Schedule",
        "verifiedByScript": true
       }
      ]

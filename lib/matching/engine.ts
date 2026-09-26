@@ -85,8 +85,10 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
     const versionText = () =>
       [...cGroups]
         .sort((g1, g2) => {
-          const k = (g: typeof g1) => (g.every((x) => x.earlier) ? (edition(g[0]) ?? sourceDoc(g[0].sourceId)) : "9999 current");
-          return k(g1) < k(g2) ? -1 : k(g1) > k(g2) ? 1 : 0;
+          // earlier editions first (by name), the current one last
+          const cur = (g: typeof g1) => (g.every((x) => x.earlier) ? 0 : 1);
+          const k = (g: typeof g1) => edition(g[0]) ?? sourceDoc(g[0].sourceId);
+          return cur(g1) - cur(g2) || k(g1).localeCompare(k(g2));
         })
         .map((g) => {
           const names = g.map((x) => (x.earlier ? edition(x) : null) ?? (x.earlier ? sourceDoc(x.sourceId) : "current edition"));

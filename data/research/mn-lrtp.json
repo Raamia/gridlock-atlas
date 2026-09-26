@@ -3135,7 +3135,6 @@
    "projectA": "abo-alexandria-big-oaks",
    "projectB": "otp-mres-bssa",
    "kind": "same-initiative",
-   "siteLabel": "Big Stone South-Alexandria-Big Oaks (MISO LRTP Tranche 1)",
    "description": "Eastern and western segments of the Big Stone South-Alexandria-Big Oaks project with a combined Certificate of Need (CN-22-538); owner sets overlap (OTP, MRES).",
    "evidence": [
     {
@@ -3218,7 +3217,6 @@
    "projectA": "xcel-mmrt-wilmarth-north-rochester",
    "projectB": "dpc-alma-blair",
    "kind": "same-initiative",
-   "siteLabel": "MISO LRTP Tranche 1 Project 4 (Wilmarth-North Rochester-Tremval)",
    "description": "MMRT (Minnesota portion of LRTP4) and Alma-Blair (Wisconsin portion of LRTP Tranche 1 Project 4) belong to the same MISO project; Segments 1-2 do not physically meet Alma-Blair. Disjoint owners (Xcel NSPM vs Dairyland).",
    "evidence": [
     {

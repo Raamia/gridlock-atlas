@@ -3,16 +3,19 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { AlertTriangle } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { CompletionClaim, ConstructionWindow, Match, Project } from "@/lib/domain/types";
 import { formatBound, formatPoint, formatSpan, formatWindow } from "@/lib/format";
-import { usePreviewPair } from "@/lib/hooks";
+import { usePreviewPair, useWidth } from "@/lib/hooks";
 import { activeWindows, windowsBySource } from "@/lib/matching/time";
-import { ownerNames } from "@/lib/selectors";
+import { conflictMatches, ownerNames } from "@/lib/selectors";
 import { useAtlas } from "@/lib/store";
 
 const LABEL_W = 208;
+/** Row = bars in the top BAR_H px, then a lane for completion claims so diamonds and dates never sit on bar text. */
+const BAR_H = 34;
+const LANE_H = 12;
 
 function useDomain() {
   return useMemo(() => {
@@ -112,6 +115,7 @@ export function Timeline() {
 
 function PairTimeline({ m, a, b, y0, y1 }: { m: Match; a: Project; b: Project; y0: number; y1: number }) {
   const highlightConflict = useAtlas((s) => s.highlightConflict);
+  const focusConflict = useAtlas((s) => s.focusConflict);
   const o = m.timeDetail.possibleOverlap;
   const core = m.timeDetail.confirmedOverlap;
   const confirmed = m.time === "confirmed";
@@ -150,10 +154,12 @@ function PairTimeline({ m, a, b, y0, y1 }: { m: Match; a: Project; b: Project; y
           )}
         </div>
       )}
-      <div className="relative z-10 flex h-full flex-col justify-center gap-3">
-        {rows.map(([p, role]) => (
-          <PairRow key={p.id} p={p} role={role} y0={y0} y1={y1} m={m} highlightConflict={highlightConflict} />
-        ))}
+      <div className="relative z-10 flex h-full flex-col gap-1 pt-3">
+        {rows.map(([p, role]) => {
+          const conflict = m.conflicts.find((c) => c.projectId === p.id && c.field === "completion");
+          const emphasize = highlightConflict && !!conflict && (!focusConflict || conflictMatches(conflict, focusConflict));
+          return <PairRow key={p.id} p={p} role={role} y0={y0} y1={y1} m={m} emphasize={emphasize} />;
+        })}
       </div>
       {m.timeDetail.inService && !(o && (m.time === "confirmed" || m.time === "possible")) && <InServiceGap m={m} y0={y0} y1={y1} />}
       {o && (m.time === "confirmed" || m.time === "possible") && (
@@ -193,8 +199,27 @@ function InServiceGap({ m, y0, y1 }: { m: Match; y0: number; y1: number }) {
   );
 }
 
-function PairRow({ p, role, y0, y1, m, highlightConflict }: { p: Project; role: "a" | "b"; y0: number; y1: number; m: Match; highlightConflict: boolean }) {
+/** Put each lane label right of its anchor, else left, else leave it to hover — never over a diamond or another label. */
+function placeLabels(width: number, marks: number[], items: { key: string; lo: number; hi: number; w: number }[]) {
+  const taken: [number, number][] = marks.map((x) => [x - 6, x + 6]);
+  const out = new Map<string, "l" | "r">();
+  if (!width) return out;
+  const free = ([a, b]: [number, number]) => a >= 0 && b <= width && taken.every(([x, y]) => b + 2 <= x || a - 2 >= y);
+  for (const it of items) {
+    const r: [number, number] = [it.hi + 9, it.hi + 9 + it.w];
+    const l: [number, number] = [it.lo - 9 - it.w, it.lo - 9];
+    const side = free(r) ? "r" : free(l) ? "l" : null;
+    if (!side) continue;
+    out.set(it.key, side);
+    taken.push(side === "r" ? r : l);
+  }
+  return out;
+}
+
+function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b"; y0: number; y1: number; m: Match; emphasize: boolean }) {
   const color = role === "a" ? "var(--a)" : "var(--b)";
+  const track = useRef<HTMLDivElement>(null);
+  const width = useWidth(track);
   // two documents from one publisher with the same window read as one bar
   const groups = windowsBySource(p).filter((g, i, all) => {
     const key = (x: ConstructionWindow[]) =>
@@ -202,31 +227,39 @@ function PairRow({ p, role, y0, y1, m, highlightConflict }: { p: Project; role: 
     return all.findIndex((h) => key(h) === key(g)) === i;
   });
   const conflict = m.conflicts.find((c) => c.projectId === p.id && c.field === "completion");
+  const claims = p.completionClaims;
+  const xs = claims.map((c) => ((pct(c.date.earliest, y0, y1) + pct(c.date.latest, y0, y1)) / 200) * width);
+  const disputed = xs.filter((_, i) => conflict?.claimIds.includes(claims[i].id));
+  const labels = placeLabels(width, xs, [
+    ...(disputed.length > 1 ? [{ key: "conflict", lo: Math.min(...disputed), hi: Math.max(...disputed), w: 150 }] : []),
+    ...(claims[0] ? [{ key: claims[0].id, lo: xs[0], hi: xs[0], w: formatBound(claims[0].date).length * 5.8 + 6 }] : []),
+  ]);
+  const more = groups.length - 2;
   return (
-    <div className="flex items-center">
-      <div className="flex shrink-0 items-center gap-2 pr-3" style={{ width: LABEL_W }}>
+    <div className="flex items-start">
+      <div className="flex shrink-0 items-center gap-2 pr-3" style={{ width: LABEL_W, height: BAR_H }}>
         <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: color, boxShadow: `0 0 10px ${color}` }} />
         <div className="min-w-0">
           <div className="truncate text-[12px] font-medium text-text-0">{p.shortTitle}</div>
-          <div className="truncate text-[10.5px] text-text-2">{ownerNames(p, IDX, true)}</div>
+          <div className="truncate text-[10.5px] text-text-2">
+            {ownerNames(p, IDX, true)}
+            {more > 0 && <span className="text-text-3"> · +{more} more source{more > 1 ? "s" : ""}</span>}
+          </div>
         </div>
       </div>
-      <div className="relative h-[38px] flex-1">
+      <div ref={track} className="relative flex-1" style={{ height: BAR_H + LANE_H }}>
         {groups.length === 0 && (
-          <div className="absolute inset-y-2 left-0 right-0 flex items-center rounded-md border border-dashed border-line-2 px-2 text-[10.5px] text-text-3">
+          <div className="absolute inset-x-0 top-1 flex h-[26px] items-center rounded-md border border-dashed border-line-2 px-2 text-[10.5px] text-text-3">
             No published construction window — overlap unknown
           </div>
         )}
         {groups.slice(0, 2).map((g, i) => (
-          <WindowBar key={g[0].id} ws={g} color={color} y0={y0} y1={y1} top={groups.length === 1 ? 9 : 2 + i * 18} height={groups.length === 1 ? 20 : 14} />
+          <WindowBar key={g[0].id} ws={g} color={color} y0={y0} y1={y1} top={groups.length === 1 ? 7 : 1 + i * 17} height={groups.length === 1 ? 20 : 14} />
         ))}
-        {groups.length > 2 && (
-          <span className="mono absolute -bottom-1 right-0 text-[9.5px] text-text-3">+{groups.length - 2} more source{groups.length > 3 ? "s" : ""}</span>
-        )}
-        {p.completionClaims.map((c, i) => (
-          <CompletionMark key={c.id} c={c} y0={y0} y1={y1} conflicted={!!conflict?.claimIds.includes(c.id)} emphasize={highlightConflict} showLabel={i === 0} />
+        {conflict && <ConflictLink p={p} claimIds={conflict.claimIds} y0={y0} y1={y1} emphasize={emphasize} label={labels.get("conflict")} />}
+        {claims.map((c) => (
+          <CompletionMark key={c.id} c={c} y0={y0} y1={y1} conflicted={!!conflict?.claimIds.includes(c.id)} emphasize={emphasize} label={labels.get(c.id)} />
         ))}
-        {conflict && <ConflictLink p={p} claimIds={conflict.claimIds} y0={y0} y1={y1} emphasize={highlightConflict} />}
       </div>
     </div>
   );
@@ -323,34 +356,42 @@ function CompletionMark({
   y1,
   conflicted,
   emphasize,
-  showLabel,
+  label,
 }: {
   c: CompletionClaim;
   y0: number;
   y1: number;
   conflicted: boolean;
   emphasize: boolean;
-  showLabel: boolean;
+  /** side the date label fits on; hidden (hover only) when it would collide */
+  label?: "l" | "r";
 }) {
   const [hover, setHover] = useState(false);
   const x0 = pct(c.date.earliest, y0, y1);
   const x1 = pct(c.date.latest, y0, y1);
   const src = IDX.source(c.claimSourceId);
   const tone = conflicted ? "var(--conflict)" : "var(--text-1)";
+  const side = label ?? (hover ? "r" : null);
   return (
     <div
-      className="absolute top-0 z-20 h-full"
-      style={{ left: `${x0}%`, width: `${Math.max(x1 - x0, 0.4)}%` }}
+      className={clsx("absolute", hover ? "z-40" : "z-20")}
+      style={{ left: `${x0}%`, width: `${Math.max(x1 - x0, 0.4)}%`, top: BAR_H, height: LANE_H }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2" style={{ background: tone, opacity: 0.6 }} />
       <div
-        className={clsx("absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border-[1.5px] bg-bg-1 transition-transform", conflicted && emphasize && "scale-150")}
+        className={clsx("absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 border-[1.5px] bg-bg-1 transition-transform", conflicted && emphasize && "scale-150")}
         style={{ borderColor: tone, boxShadow: conflicted && emphasize ? "0 0 12px var(--conflict)" : undefined }}
       />
-      {(showLabel || hover) && (
-        <div className="mono pointer-events-none absolute left-1/2 top-[calc(50%+8px)] -translate-x-1/2 whitespace-nowrap rounded bg-bg-1/80 px-0.5 text-[9.5px]" style={{ color: tone }}>
+      {side && (
+        <div
+          className={clsx(
+            "mono pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded bg-bg-1/85 px-0.5 text-[9.5px] leading-none",
+            side === "r" ? "left-[calc(50%+9px)]" : "right-[calc(50%+9px)]",
+          )}
+          style={{ color: tone }}
+        >
           {formatBound(c.date)}
         </div>
       )}
@@ -359,7 +400,7 @@ function CompletionMark({
           <div className="font-medium text-text-0">
             {c.label[0].toUpperCase() + c.label.slice(1)} · {formatBound(c.date)}
           </div>
-          {c.current === false && <div className="text-[10.5px] text-conflict">Earlier plan edition</div>}
+          {c.current === false && <div className="text-[10.5px] text-conflict">Superseded by a newer source</div>}
           <div className="text-text-2">{src?.publisher}</div>
           <div className="mt-1 text-text-3">Completion dates never drive the construction-window match.</div>
         </div>
@@ -368,18 +409,25 @@ function CompletionMark({
   );
 }
 
-function ConflictLink({ p, claimIds, y0, y1, emphasize }: { p: Project; claimIds: string[]; y0: number; y1: number; emphasize: boolean }) {
+function ConflictLink({ p, claimIds, y0, y1, emphasize, label }: { p: Project; claimIds: string[]; y0: number; y1: number; emphasize: boolean; label?: "l" | "r" }) {
   const claims = p.completionClaims.filter((c) => claimIds.includes(c.id));
   if (claims.length < 2) return null;
-  const xs = claims.map((c) => pct(c.date.earliest, y0, y1) + (pct(c.date.latest, y0, y1) - pct(c.date.earliest, y0, y1)) / 2);
+  const xs = claims.map((c) => (pct(c.date.earliest, y0, y1) + pct(c.date.latest, y0, y1)) / 2);
   const l = Math.min(...xs);
   const r = Math.max(...xs);
   return (
-    <div className="pointer-events-none absolute top-0 z-10" style={{ left: `${l}%`, width: `${r - l}%` }}>
-      <div className={clsx("absolute inset-x-0 top-[3px] border-t border-dashed", emphasize ? "border-conflict" : "border-conflict/60")} />
-      <div className="absolute left-1/2 top-[-6px] flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded bg-bg-1 px-1 text-[9.5px] text-conflict">
-        <AlertTriangle size={9} /> completion dates disagree
-      </div>
+    <div className="pointer-events-none absolute z-10" style={{ left: `${l}%`, width: `${r - l}%`, top: BAR_H, height: LANE_H }}>
+      <div className={clsx("absolute inset-x-0 top-1/2 border-t border-dashed", emphasize ? "border-conflict" : "border-conflict/60")} />
+      {label && (
+        <div
+          className={clsx(
+            "absolute top-1/2 flex -translate-y-1/2 items-center gap-1 whitespace-nowrap rounded bg-bg-1/85 px-1 text-[9.5px] leading-none text-conflict",
+            label === "r" ? "left-[calc(100%+9px)]" : "right-[calc(100%+9px)]",
+          )}
+        >
+          <AlertTriangle size={9} /> completion dates disagree
+        </div>
+      )}
     </div>
   );
 }

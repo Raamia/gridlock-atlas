@@ -51,7 +51,9 @@ export function ReviewPanel({ m }: { m: Match }) {
       {saved && (
         <input
           defaultValue={saved.note ?? ""}
-          onBlur={(e) => setNote(m.id, e.target.value)}
+          // saved as typed: closing the inspector (Escape) unmounts the field without a blur
+          onChange={(e) => setNote(m.id, e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
           placeholder="Optional note"
           aria-label="Reviewer note"
           className="mt-2 h-7 w-full rounded-md border border-line-2 bg-bg-1 px-2 text-[11.5px] text-text-0 outline-none placeholder:text-text-3 focus:border-a"

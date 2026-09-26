@@ -62,7 +62,7 @@ function Slider({
           <span className="text-text-3"> {unit}</span>
         </span>
       </div>
-      <input id={id} type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(Number(e.target.value))} className="mt-1 w-full accent-[var(--amber)]" />
+      <input id={id} type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(Number(e.target.value))} className="mt-1 w-full accent-[var(--text-1)]" />
       <div className="-mt-0.5 flex justify-between gap-2">
         {note ? <span className="text-[10px] leading-snug text-text-3">{note}</span> : <Cite a={a} />}
         {a && (a.low !== undefined || a.high !== undefined) && (
@@ -92,8 +92,8 @@ export function ImpactEstimate({ m }: { m: Match }) {
   return (
     <div className="space-y-3">
       <div className="grid grid-cols-2 gap-2">
-        <div className="rounded-lg bg-amber/8 p-3 ring-1 ring-amber/25">
-          <div className="num text-[22px] leading-none text-amber">{r.acres < 10 ? r.acres.toFixed(1) : Math.round(r.acres)}</div>
+        <div className="rounded-lg bg-bg-2 p-3 ring-1 ring-line">
+          <div className="num text-[22px] leading-none text-text-0">{r.acres < 10 ? r.acres.toFixed(1) : Math.round(r.acres)}</div>
           <div className="mt-1 text-[10.5px] leading-tight text-text-2">acres of right-of-way not encumbered twice</div>
           {r.acresRange && (
             <div className="num mt-1 text-[10px] text-text-3">
@@ -138,7 +138,7 @@ export function ImpactEstimate({ m }: { m: Match }) {
         <div className="rounded-lg bg-bg-2/60 p-3 text-[11.5px] leading-snug text-text-1 ring-1 ring-line">
           <div className="flex items-center justify-between gap-2">
             <span className="font-medium text-text-0">Staging both jobs together</span>
-            <span className="num text-[13px] text-amber">≈{formatUsd(mobil.typical * (d.avoidedMobilizations?.typical ?? 1))}</span>
+            <span className="num text-[13px] text-text-0">≈{formatUsd(mobil.typical * (d.avoidedMobilizations?.typical ?? 1))}</span>
           </div>
           <p className="mt-1 text-text-2">
             If both jobs were actually staged together — which no source here establishes — one crew mobilization could be avoided, priced at MISO&apos;s {d.voltageClass}{" "}

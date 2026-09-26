@@ -13,12 +13,20 @@ export const SAME_SITE_MILES = 0.6;
 
 /** Relations that state, in a source, that two projects physically meet. */
 export function siteRelations(a: Project, b: Project, relations: Relation[]): Relation[] {
-  // any relation that names where the two projects meet counts (e.g. a joint initiative "meeting near Marion")
   return relations.filter(
     (r) =>
-      (r.kind === "shared-site" || r.kind === "interconnects" || (r.kind === "same-initiative" && !!r.siteLabel)) &&
+      (r.kind === "shared-site" || r.kind === "interconnects" || (r.kind === "same-initiative" && siteOnBoth(r, a, b))) &&
       ((r.projectA === a.id && r.projectB === b.id) || (r.projectA === b.id && r.projectB === a.id)),
   );
+}
+
+/**
+ * A joint initiative is a place signal only when it names where the parts meet AND both projects have a place
+ * there (G2B and MariBell both end at Marion). Sharing a program number (MISO LRTP Project 4) is not a site.
+ */
+function siteOnBoth(r: Relation, a: Project, b: Project): boolean {
+  const site = r.siteLabel ? [...a.places, ...b.places].find((pl) => pl.id === r.sitePlaceId) : undefined;
+  return !!site && [a, b].every((p) => p.places.some((pl) => pl.precision !== "county" && miles([pl.lon, pl.lat], [site.lon, site.lat]) <= SAME_SITE_MILES));
 }
 
 const LOCATED = new Set(["named-facility", "locality", "official-gis"]);
@@ -60,9 +68,11 @@ export function centerOf(p: Project): Center | null {
 }
 
 function sharedEndpoint(a: Project, b: Project): GeoDetail["sharedEndpoint"] | undefined {
+  // context places (e.g. the far terminal of a line whose rebuild stops short of it) are not the project's work sites
+  const sites = (p: Project) => p.places.filter((pl) => pl.precision === "named-facility" && pl.role !== "context");
   let best: GeoDetail["sharedEndpoint"] | undefined;
-  for (const x of a.places.filter((pl) => pl.precision === "named-facility")) {
-    for (const y of b.places.filter((pl) => pl.precision === "named-facility")) {
+  for (const x of sites(a)) {
+    for (const y of sites(b)) {
       const d = miles([x.lon, x.lat], [y.lon, y.lat]);
       if (d <= SAME_SITE_MILES && (!best || d < best.milesApart)) best = { labelA: x.label, labelB: y.label, milesApart: d };
     }

@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 import type { ConstructionWindow, DateBound, Place, Project, Relation, Snapshot } from "@/lib/domain/types";
+import { SNAPSHOT } from "@/lib/data";
+import { impactDefaults } from "@/lib/impact";
 import { evaluatePair, runMatching } from "@/lib/matching/engine";
 import { evaluateGeo } from "@/lib/matching/geo";
-import { evaluateTime } from "@/lib/matching/time";
+import { currentInService, evaluateTime } from "@/lib/matching/time";
 
 /* ------------------------------- fixture builders ------------------------------- */
 
@@ -483,13 +485,23 @@ describe("engine-review regressions", () => {
   });
 
   it("a joint initiative that names where the segments meet counts as a site relation", () => {
-    const a = project("a", "u1", { places: [place("Far west", 44, -95)] });
-    const b = project("b", "u2", { places: [place("Far east", 44, -91)] });
-    const rel: Relation = { id: "r", projectA: "a", projectB: "b", kind: "same-initiative", siteLabel: "Marion, Minn.", description: "segments meet near Marion", evidenceIds: ["ev1"] };
+    const marion = (id: string) => place("Marion", 43.94, -92.35, { id, precision: "locality", uncertaintyMeters: 3000 });
+    const a = project("a", "u1", { places: [place("Far west", 44, -95), marion("marion-a")] });
+    const b = project("b", "u2", { places: [marion("marion-b"), place("Far east", 44, -91)] });
+    const rel: Relation = { id: "r", projectA: "a", projectB: "b", kind: "same-initiative", siteLabel: "Marion, Minn.", sitePlaceId: "marion-a", description: "segments meet near Marion", evidenceIds: ["ev1"] };
     const m = evaluatePair(a, b, snapshot([a, b], [rel]))!;
     expect(m).not.toBeNull();
     expect(m.geoDetail.method).toBe("shared-site");
     expect(m.reviewStatus).toBe("known-coordination");
+  });
+
+  it("a joint initiative is not a shared site when only one project has the named place", () => {
+    // MMRT Segments 1-2 × Alma–Blair: same MISO project number, ~87 mi apart, no common facility
+    const a = project("a", "u1", { places: [place("North Rochester", 44.22, -92.66), place("Wilmarth", 44.2, -94.01)] });
+    const b = project("b", "u2", { places: [place("Alma", 44.31, -91.91), place("Tremval North", 44.3, -91.25)] });
+    const rel: Relation = { id: "r", projectA: "a", projectB: "b", kind: "same-initiative", siteLabel: "LRTP Project 4", sitePlaceId: "north-rochester", description: "", evidenceIds: ["ev1"] };
+    expect(evaluateGeo(a, b, [rel]).detail.method).not.toBe("shared-site");
+    expect(evaluatePair(a, b, snapshot([a, b], [rel]))).toBeNull();
   });
 
   it("possible timing never scores below unknown timing", () => {
@@ -507,3 +519,60 @@ describe("engine-review regressions", () => {
 function near2(id: string, owner: string, over: Partial<Project> = {}) {
   return project(id, owner, { places: [place(`${id} site`, BLAIR[0], BLAIR[1])], ...over });
 }
+
+/* ------------------- data-review regressions on the committed snapshot (2026-09-26) ------------------- */
+
+describe("snapshot data regressions", () => {
+  const run = runMatching(SNAPSHOT, { now: "t" });
+  const pair = (x: string, y: string) => run.matches.find((m) => m.id === [x, y].sort().join("__"));
+  const proj = (id: string) => SNAPSHOT.projects.find((p) => p.id === id)!;
+
+  it("F1: MMRT Segments 1-2 × Alma–Blair share a MISO project number, not a site", () => {
+    const g = evaluateGeo(proj("dpc-alma-blair"), proj("xcel-mmrt-wilmarth-north-rochester"), SNAPSHOT.relations);
+    expect(g.detail.method).not.toBe("shared-site");
+    expect(g.level).toBe("no-match");
+    expect(pair("dpc-alma-blair", "xcel-mmrt-wilmarth-north-rochester")).toBeUndefined();
+    // the Marion junction is a real shared place and still counts
+    expect(pair("dpc-glh-maribell", "xcel-g2b-north-rochester-marion")?.geoDetail.method).toBe("shared-site");
+  });
+
+  it("F2: WWTC's current in-service date is NSPW's Q2 2026 report (Q3 2029); Xcel's page stays a live disagreement", () => {
+    const c = currentInService(proj("xcel-wwtc"));
+    expect(c.claimSourceId).toBe("psc-wwtc-q2-2026-nspw");
+    expect(c.date).toMatchObject({ earliest: "2029-07-01", latest: "2029-09-30" });
+    const m = pair("dpc-alma-blair", "xcel-wwtc")!;
+    expect(m.reviewStatus).toBe("known-coordination");
+    expect(m.timeDetail.inService!.gapDays).toBe(182);
+    const wwtc = m.conflicts.find((x) => x.projectId === "xcel-wwtc" && x.field === "completion")!;
+    expect(wwtc.sides.some((side) => side.sourceIds.includes("xcel-wwtc-page") && !side.earlier)).toBe(true);
+  });
+
+  it("F4: Georgia Power's Goshen–McIntosh rebuild ends at Georgia Pacific (Rincon), not at McIntosh", () => {
+    const g = proj("gpc-20065");
+    expect(g.places.filter((pl) => pl.role === "endpoint").map((pl) => pl.label)).toEqual(["Goshen", "Georgia Pacific"]);
+    expect(g.places.find((pl) => pl.role === "context")?.label).toMatch(/^McIntosh/);
+    const m = pair("desc-6888", "gpc-20065")!;
+    expect(m.geoDetail.method).toBe("measured");
+    expect(m.geoDetail.sharedEndpoint).toBeUndefined();
+    expect(m.geoDetail.center!.miles).toBeCloseTo(6.7, 1);
+    expect(m.priorityReasons).not.toContain("Terminals at the same facility");
+  });
+
+  it("F3/F8/F9: newer schedules are current, older ones kept as history", () => {
+    expect(currentInService(proj("gpc-20065"))).toMatchObject({ claimSourceId: "sertp-2025-plan", date: { earliest: "2028-01-01", latest: "2028-12-31" } });
+    expect(pair("desc-6888", "gpc-20065")!.conflicts.some((c) => c.projectId === "gpc-20065" && c.field === "completion")).toBe(true);
+    // DESC 6888's $50,000 2027 line item (0.9% of the total) no longer starts its window
+    expect(proj("desc-6888").constructionWindows[0].start.earliest).toBe("2028-01-01");
+    const alma = proj("dpc-alma-blair");
+    expect(alma.constructionWindows.find((w) => w.claimSourceId === "dpc-alma-blair-cpcn-2024")?.supersededBy).toBe("dpc-alma-blair:w3");
+    expect(alma.completionClaims.find((c) => c.claimSourceId === "dpc-alma-blair-cpcn-2024")?.current).toBe(false);
+  });
+
+  it("F7: no default shared corridor when neither project builds a new line", () => {
+    const d = impactDefaults(pair("desc-6888", "gpc-20065")!);
+    expect(d.sharedMiles).toBe(0);
+    expect(d.sharedMilesNote).toMatch(/Neither project needs a new corridor/);
+    // two new lines with published lengths keep the shorter length as the default
+    expect(impactDefaults(pair("dpc-alma-blair", "xcel-wwtc")!).sharedMiles).toBe(35);
+  });
+});
