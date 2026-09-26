@@ -80,7 +80,7 @@ const STEPS: Step[] = [
   },
   {
     title: "A rough, sourced impact estimate",
-    body: "How much right-of-way one shared corridor would avoid encumbering twice — every default is a cited number, every assumption is editable, and it is labeled as a scenario, not a saving.",
+    body: "How much right-of-way one shared corridor would avoid encumbering twice. Defaults cite public sources where one exists, anything unsourced is marked, every input is editable — a scenario, not a saving.",
     run: open(topSoutheast, "impact"),
   },
   {

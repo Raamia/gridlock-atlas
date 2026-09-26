@@ -36,6 +36,7 @@ function Slider({
   onChange,
   a,
   format,
+  note,
 }: {
   label: string;
   value: number;
@@ -46,6 +47,8 @@ function Slider({
   onChange: (v: number) => void;
   a?: ImpactAssumption;
   format?: (v: number) => string;
+  /** The default comes from project facts rather than an assumption; show the note instead of a citation. */
+  note?: string;
 }) {
   const id = `impact-${label.replace(/\W+/g, "-").toLowerCase()}`;
   return (
@@ -61,7 +64,7 @@ function Slider({
       </div>
       <input id={id} type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(Number(e.target.value))} className="mt-1 w-full accent-[var(--amber)]" />
       <div className="-mt-0.5 flex justify-between gap-2">
-        <Cite a={a} />
+        {note ? <span className="text-[10px] leading-snug text-text-3">{note}</span> : <Cite a={a} />}
         {a && (a.low !== undefined || a.high !== undefined) && (
           <span className="num shrink-0 text-[10px] text-text-3">
             source range {(a.low ?? a.typical).toLocaleString("en-US")}–{(a.high ?? a.typical).toLocaleString("en-US")}
@@ -112,8 +115,7 @@ export function ImpactEstimate({ m }: { m: Match }) {
       </div>
 
       <div className="space-y-2.5 rounded-lg bg-bg-2/60 p-3 ring-1 ring-line">
-        <Slider label="Shared corridor length" value={miles} min={0} max={maxMiles} step={0.1} unit="mi" onChange={setMiles} format={(v) => v.toFixed(1)} />
-        <p className="-mt-1 text-[10px] leading-snug text-text-3">{d.sharedMilesNote}</p>
+        <Slider label="Shared corridor length" value={miles} min={0} max={maxMiles} step={0.1} unit="mi" onChange={setMiles} format={(v) => v.toFixed(1)} note={d.sharedMilesNote} />
         <Slider label={`Right-of-way width${d.voltageKv ? ` (${d.voltageKv} kV${classNote})` : ""}`} value={width} min={50} max={250} step={5} unit="ft" onChange={setWidth} a={d.rowWidthFt} />
         <Slider
           label={d.landValue ? "Land value" : "Land value (your input)"}

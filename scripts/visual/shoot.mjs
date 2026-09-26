@@ -70,7 +70,7 @@ if (steps.includes("midwest")) {
 if (steps.includes("demo")) {
   await page.goto(base, { waitUntil: "load" });
   await wait(4000);
-  await page.getByRole("button", { name: /Guided demo/ }).click();
+  await page.getByRole("button", { name: /guided demo/i }).click();
   await wait(1500);
   await shot("10-demo-1");
   for (let i = 2; i <= 8; i++) {
