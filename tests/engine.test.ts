@@ -925,6 +925,18 @@ describe("snapshot data regressions", () => {
     for (const u of SNAPSHOT.unresolved) expect(u.note).not.toMatch(/placed at Blair locality|Cross-cluster coordinate mismatch/);
   });
 
+  it("model-extraction runs are recorded with provider and model, and only located spans count", () => {
+    expect(SNAPSHOT.extractionRuns.length).toBeGreaterThan(0);
+    for (const r of SNAPSHOT.extractionRuns) {
+      expect(r.provider && r.model && r.promptVersion).toBeTruthy();
+      for (const f of r.fields) if (f.inSnapshot) expect(f.located).toBe(true);
+      const located = r.fields.filter((f) => f.located).length;
+      expect(r.note).toContain(`${located}/${r.fields.length} excerpts located verbatim`);
+    }
+    // runs cross-check the snapshot; no evidence is attributed to a model
+    expect(Object.values(SNAPSHOT.evidence).some((e) => e.extractionMethod === "model")).toBe(false);
+  });
+
   it("SERTP 2025 in-service years are current for every Savannah-area project that states one", () => {
     for (const [id, y] of [["gpc-20065", 2028], ["gpc-20989", 2028], ["gpc-20407", 2029], ["gpc-20784", 2029], ["gpc-20787", 2029]] as const) {
       const c = currentInService(proj(id));

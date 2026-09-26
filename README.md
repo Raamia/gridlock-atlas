@@ -46,6 +46,8 @@ Snapshot date **26 September 2026**. All sources are public; each is fetched, ha
 
 Research was agent-assisted: AI research agents located facts and exact quotes, adversarial fact-checking agents re-verified them, and **every excerpt is re-located verbatim by script** when the snapshot is built (`scripts/build-snapshot.ts`) and again by the audit (`npm run audit`). Excerpts are labeled "awaiting human check" until a person marks them in reviewer mode and the exported `review-log.json` is committed.
 
+**Model cross-check.** OpenAI GPT-5.5 (`gpt-5.5-2026-04-23`, structured outputs) independently re-read the eight source pages behind the top leads (`scripts/ingest/extract.py`). It returned 68 quoted fields. 67 were re-found verbatim on their page; the one that was not (a cost figure) is rejected. 46 of the 67 quote the same passage the snapshot already cites on that page. The runs are shown in the Method drawer and re-checked by the audit; they cross-check the snapshot and never add facts to it. The script also supports Gemini (`--provider gemini`).
+
 ## Method (short)
 
 1. **Place first.** Each project's center is the midpoint of its two named terminals (or its one located point) — exactly the sponsor's guide. A pair is flagged when centers are within the review radius (default 25 mi), with uncertainty bounds `d_low = max(0, d − e_A − e_B)`, `d_high = d + e_A + e_B` (confirmed when `d_high ≤ 25`, possible when only `d_low ≤ 25`). A source-stated shared facility, or terminals geocoded to the same substation, also confirm place. County-only evidence is at most "possible"; schematic routes are never measured.
@@ -84,7 +86,7 @@ Rebuilding data (optional — the snapshot is committed):
 npm run sources:fetch -- --local gpc-irp-2025-vol3="path/to/2025 IRP Volume 3 PUBLIC DISCLOSURE.pdf"
 python3 scripts/ingest/parse_region_b.py
 npm run snapshot:build
-GEMINI_API_KEY=... npm run extract:gemini -- desc-scrtp-2026-2030 --page 41   # optional structured-extraction run
+npm run extract -- desc-scrtp-2026-2030 --page 41    # optional model extraction (OPENAI_API_KEY in .env.local; --provider gemini for Gemini)
 ```
 
 API: `GET /api/snapshot`, `GET /api/matches?threshold=25&utilityA=&utilityB=&region=&year=`, `GET /api/matches/:id`.

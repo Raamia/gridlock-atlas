@@ -343,13 +343,21 @@ function ExtractionRuns() {
         </div>
         <p className="mt-1.5">
           Plan fields were parsed deterministically from the DESC and Georgia Power documents; other facts were located by AI research agents and checked by adversarial agents.
-          Every excerpt is then re-found verbatim by script. The Gemini structured-extraction job (<code className="mono text-[11px]">npm run extract:gemini</code>) records model,
-          prompt version and span checks here when run with an API key.
+          Every excerpt is then re-found verbatim by script. The structured model-extraction job (<code className="mono text-[11px]">npm run extract</code>, OpenAI or Gemini) records
+          provider, model, prompt version and span checks here when run with an API key.
         </p>
       </div>
     );
+  const located = runs.reduce((n, r) => n + r.fields.filter((f) => f.located).length, 0);
+  const total = runs.reduce((n, r) => n + r.fields.length, 0);
+  const cited = runs.reduce((n, r) => n + r.fields.filter((f) => f.inSnapshot).length, 0);
   return (
     <div className="space-y-2">
+      <p className="text-[12px] leading-snug text-text-2">
+        {runs[0].model} independently re-read {runs.length} source {runs.length === 1 ? "page" : "pages"}:{" "}
+        <span className="num text-text-0">{located}</span> of <span className="num text-text-0">{total}</span> quoted spans were re-found verbatim (the rest are rejected), and{" "}
+        <span className="num text-text-0">{cited}</span> quote a passage the snapshot already cites. Runs are a cross-check; they never add facts.
+      </p>
       {runs.map((r) => (
         <div key={r.id} className="rounded-xl bg-bg-2 p-3 ring-1 ring-line">
           <div className="flex items-center gap-2">
@@ -358,19 +366,23 @@ function ExtractionRuns() {
             <span className={clsx("mono ml-auto rounded px-1.5 text-[10px] uppercase", r.status === "completed" ? "bg-known/10 text-known" : "bg-bg-3 text-text-3")}>{r.status}</span>
           </div>
           <div className="mono mt-1 text-[10.5px] text-text-3">
-            {r.model} · prompt {r.promptVersion}
+            {r.provider ? `${r.provider} · ` : ""}
+            {r.model}
+            {r.page ? ` · p. ${r.page}` : ""} · prompt {r.promptVersion}
             {r.runAt && ` · ${formatDate(r.runAt)}`}
           </div>
           {r.note && <p className="mt-1.5 text-[11.5px] leading-snug text-text-2">{r.note}</p>}
           {r.fields.length > 0 && (
             <div className="mt-2 overflow-hidden rounded-lg ring-1 ring-line">
               {r.fields.map((f) => (
-                <div key={f.field} className="grid grid-cols-[110px_1fr_auto] gap-2 border-b border-line px-2.5 py-1.5 text-[11px] last:border-b-0">
-                  <span className="mono text-text-3">{f.field}</span>
-                  <span className="truncate text-text-1" title={f.value}>
+                <div key={f.field} className="grid grid-cols-[110px_minmax(0,1fr)_auto] gap-2 border-b border-line px-2.5 py-1.5 text-[11px] last:border-b-0">
+                  <span className="mono truncate text-text-3">{f.field}</span>
+                  <span className="truncate text-text-1" title={f.excerpt ? `${f.value}\n“${f.excerpt}”` : f.value}>
                     {f.value}
                   </span>
-                  <span className={f.located ? "text-known" : "text-conflict"}>{f.located ? "span found" : "span missing"}</span>
+                  <span className={clsx("whitespace-nowrap", f.located ? "text-known" : "text-conflict")}>
+                    {f.located ? (f.inSnapshot ? "span found · also cited" : "span found") : "span missing · rejected"}
+                  </span>
                 </div>
               ))}
             </div>

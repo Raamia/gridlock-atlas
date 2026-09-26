@@ -83,7 +83,7 @@ function CheckToggle({ id }: { id: string }) {
 
 export function ProvenanceTag({ e }: { e: Evidence }) {
   const mine = useReview((s) => !!s.checked[e.id]);
-  const method = e.extractionMethod === "gemini" ? "Gemini extraction" : e.extractionMethod === "manual" ? "Manual entry" : "Agent-assisted";
+  const method = e.extractionMethod === "model" ? "Model extraction" : e.extractionMethod === "manual" ? "Manual entry" : "Agent-assisted";
   return (
     <span className="ml-auto inline-flex items-center gap-1 whitespace-nowrap">
       {e.verifiedInSource ? (

@@ -1,0 +1,81 @@
+{
+ "id": "psc-wwtc-q2-2026-atc-p1",
+ "sourceId": "psc-wwtc-q2-2026-atc",
+ "page": 1,
+ "provider": "openai",
+ "model": "gpt-5.5-2026-04-23",
+ "promptVersion": "gridlock-extract/1.1",
+ "runAt": "2026-09-26T14:48:45Z",
+ "status": "completed",
+ "fields": [
+  {
+   "field": "utility",
+   "value": "American Transmission Company LLC (ATC)",
+   "excerpt": "American Transmission Company LLC and its corporate manager, ATC Management Inc. (collectively ATC), submits this quarterly progress report",
+   "located": true,
+   "inSnapshot": false,
+   "humanChecked": false
+  },
+  {
+   "field": "projectTitle",
+   "value": "Western Wisconsin Transmission Connection Project",
+   "excerpt": "Western Wisconsin Transmission Connection Project\nDocket No. 5-CE-158\nQuarterly Progress Report\nDear Mr. Stubley:",
+   "located": true,
+   "inSnapshot": true,
+   "humanChecked": false
+  },
+  {
+   "field": "projectId",
+   "value": "Docket No. 5-CE-158",
+   "excerpt": "Western Wisconsin Transmission Connection Project\nDocket No. 5-CE-158\nQuarterly Progress Report\nDear Mr. Stubley:",
+   "located": true,
+   "inSnapshot": true,
+   "humanChecked": false
+  },
+  {
+   "field": "status",
+   "value": "Approximately 4% complete",
+   "excerpt": "Jump River Substation will begin arriving on site in early 2028.\nThe Project is approximately 4% complete.",
+   "located": true,
+   "inSnapshot": false,
+   "humanChecked": false
+  },
+  {
+   "field": "constructionStart",
+   "value": "Q3 2027",
+   "excerpt": "ATC anticipates beginning substation\nconstruction in Q3 2027.",
+   "located": true,
+   "inSnapshot": true,
+   "humanChecked": false
+  },
+  {
+   "field": "inServiceDate",
+   "value": "Q3 2029",
+   "excerpt": "The planned Project in-service date is Q3 2029. ATC anticipates beginning substation\nconstruction in Q3 2027.",
+   "located": true,
+   "inSnapshot": true,
+   "humanChecked": false
+  },
+  {
+   "field": "namedFacilities[0]",
+   "value": "Jump River Substation",
+   "excerpt": "Design is in the early stages for the Jump River Substation. The project remains on schedule",
+   "located": true,
+   "inSnapshot": false,
+   "humanChecked": false
+  }
+ ],
+ "usage": {
+  "input_tokens": 886,
+  "input_tokens_details": {
+   "cache_write_tokens": 0,
+   "cached_tokens": 0
+  },
+  "output_tokens": 792,
+  "output_tokens_details": {
+   "reasoning_tokens": 477
+  },
+  "total_tokens": 1678
+ },
+ "note": "Page 1. 7/7 excerpts located verbatim (unlocated fields are rejected); 4 of the located excerpts quote a passage the snapshot already cites on this page."
+}
