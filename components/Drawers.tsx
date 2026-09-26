@@ -435,7 +435,9 @@ function Evaluation() {
         No human labels. “Documented interfaces” are the {e.interfaces.inUniverse} cross-utility links the filings state or imply (none in the Savannah River region); the engine&apos;s
         shared-facility rule reads the same statements, so its score there is a design check, not accuracy
         {noSite && ` (without that rule it keeps ${noSite.recall.all.hit}/${noSite.recall.all.of})`}. Unflagged pairs are not labeled negatives, so no precision is claimed.
-        {e.meta.snapshot !== SNAPSHOT.version && ` Computed on ${e.meta.snapshot}; this app runs ${SNAPSHOT.version} — re-run npm run eval.`}
+        {e.meta.snapshot === SNAPSHOT.version
+          ? ` Committed report for this snapshot (${e.meta.snapshot}, ${e.meta.engine}, ${e.meta.radiusMiles} mi).`
+          : ` Computed on ${e.meta.snapshot}; this app runs ${SNAPSHOT.version} — re-run npm run eval.`}
       </p>
       <div className="overflow-hidden rounded-xl ring-1 ring-line">
         <div className="mono grid grid-cols-[1fr_58px_62px_62px] gap-2 border-b border-line bg-bg-3/60 px-3 py-1.5 text-[10px] uppercase tracking-wide text-text-3">

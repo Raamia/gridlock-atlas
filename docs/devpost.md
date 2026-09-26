@@ -26,7 +26,7 @@ GridLock Atlas puts two utilities' public plans on one interactive map. It measu
 
 ## How we built it
 
-- **Sources.** We use 103 public documents: DESC's SCRTP lists (2026–2030 current, two older editions as history), Georgia Power's 2025 IRP Ten-Year Plan (public disclosure), SERTP's 2025 plan and June 2026 preliminary plan, an SC PSC siting docket, a Georgia EPD construction permit, Wisconsin PSC decisions, MISO cost guides, FERC Order 1920 and NERC IRO-017-1. Each document is fetched, SHA-256-hashed and cached. The app reads only a frozen snapshot, so the demo works offline.
+- **Sources.** We use 103 public documents: DESC's SCRTP lists (2026–2030 current, two older editions as history), Georgia Power's 2025 IRP Ten-Year Plan (public disclosure), SERTP's 2025 plan and June 2026 preliminary plan, an SC PSC siting docket, a Georgia EPD stormwater permit notice, Wisconsin PSC decisions, MISO cost guides, FERC Order 1920 and NERC IRO-017-1. Each document is fetched, SHA-256-hashed and cached. The app reads only a frozen snapshot, so the demo works offline.
 - **Parsing.** Python with poppler's `pdftotext` parses DESC's list (one project per page) and Georgia Power's plan (summary table plus project pages) deterministically. Terminals are geocoded against OpenStreetMap power features (Overpass) and Nominatim, then checked against each plan's wording. Unconfirmed matches are labeled lower-confidence.
 - **Provenance.** 1,786 excerpts are each re-found verbatim in their cached source when the snapshot is built and again by `npm run audit`.
 - **Engine.** Deterministic TypeScript. It computes midpoint centers and haversine distances, turns location uncertainty into distance bounds, uses source-stated shared facilities, compares construction windows and published schedules, and computes in-service gaps. No model output enters matching.
@@ -39,7 +39,7 @@ GridLock Atlas puts two utilities' public plans on one interactive map. It measu
 - **Plans move.** DESC's Jasper–Okatie #2 in-service date moved from 12/31/25 to 5/31/2026 to 12/01/2026 across three list editions. Four of Sperry's six starter rows involve a DESC project that no longer appears in the current list. We show these as "no longer listed", with the page where each was last listed, never as "completed".
 - **Dates that are not construction dates.** DESC publishes yearly spending. Georgia Power publishes a Start Date and a Need Date. No top Savannah pair has published field-work dates, so we added a separate, clearly labeled *schedule* basis instead of inventing construction windows.
 - **The river is the state line.** A county join finds almost nothing: only 23 of the 111 DESC × Georgia Power pairs under 25 miles share a county.
-- **Long lines meet end to end.** Documented interfaces, such as Tremval North in Wisconsin, have centers 25.8–122 miles apart. The center rule alone keeps 0 of 13, so we keep them only when a filing states the shared facility, and we rank them after every pair inside the rule.
+- **Long lines meet end to end.** Documented interfaces, such as Tremval North in Wisconsin, have centers 25.8–122 miles apart. The center rule alone keeps 0 of 13, so we keep them only when the filings state or imply the shared facility, and we rank them after every pair inside the rule.
 - **Redactions and CEII.** Georgia Power's public costs read "REDACTED". We use only public editions, store only short excerpts, and label any mileage-based cost proxy as a proxy.
 - **Near-identical names.** McIntosh and West McIntosh are two substations 0.46 miles apart, and two different Georgia Power substations are both called Goshen. We never merge differently named facilities, and an audit checks that each name resolves to one location.
 
@@ -49,14 +49,14 @@ GridLock Atlas puts two utilities' public plans on one interactive map. It measu
 - **Selective, with the numbers to show it.** We flag 133 of 7,929 pairs. A literal "close *or* same time" rule would flag 4,622 (58.3%).
 - **Every one of 1,786 excerpts is re-found verbatim.** The audit finds 0 quotes of CEII-marked text.
 - **GPT-5.5 cross-check.** 2,578 of 2,579 of its quoted fields are verbatim on the page. Where it and our parser both give a value, they agree 98.5% of the time (95% CI 97.8–99.0). We also report where it falls short: it leaves Georgia Power's "Need Date" out on 88 of 138 pages.
-- **Negative controls hold.** No flagged pair involves a completed project. No past-due plan gets a confirmed time overlap. Nothing over 50 miles is flagged without a source-stated shared facility.
+- **Negative controls hold.** No flagged pair involves a completed project. No past-due plan gets a confirmed time overlap. Nothing over 50 miles is flagged without a shared facility that the sources state or imply.
 - **One planner-ready question per pair,** with every fact numbered to its source.
 
 ## What we learned
 
 - Honesty is a design problem. "Needs review" has to mean "the reviewed sources are silent", never "uncoordinated". A flag is a review lead, not proof that crews or equipment can be shared.
 - Evaluation without labels still says a lot when every denominator is stated. It also means naming the circularity: our shared-facility rule reads the same filings that define the documented interfaces.
-- Newest-source checks matter. SERTP's June 2026 plan changed Georgia Power in-service years and added five projects at McIntosh and Meldrim. It also confirmed that DESC's list is still published by SCRTP.
+- Newest-source checks matter. SERTP's June 2026 plan changed Georgia Power in-service years and added five projects at McIntosh and Meldrim. It contains no DESC project, so our reading, labeled as such in the app, is that DESC's current list is still SCRTP's.
 
 ## What's next for GridLock Atlas
 

@@ -24,7 +24,7 @@ Contributions:
 
 | Region | Utilities | Projects | Main sources |
 | --- | --- | --- | --- |
-| Savannah River (SC–GA) | DESC, Georgia Power | 199 (DESC 54, GPC 145) | SCRTP *Planned Transmission Projects $2M and above* 2026–2030 (current; 2025–2029 and 2024–2028 kept as version history); 2024 GA ITS Ten-Year Plan in the 2025 IRP Technical Appendix Vol. 3 (public disclosure, Georgia PSC Docket 56002); SERTP 2025 regional plan and 2026 preliminary expansion plan (June 12, 2026); SC PSC Docket 2023-115-E; Dominion's Jasper–Okatie project page; a Georgia EPD construction permit |
+| Savannah River (SC–GA) | DESC, Georgia Power | 199 (DESC 54, GPC 145) | SCRTP *Planned Transmission Projects $2M and above* 2026–2030 (current; 2025–2029 and 2024–2028 kept as version history); 2024 GA ITS Ten-Year Plan in the 2025 IRP Technical Appendix Vol. 3 (public disclosure, Georgia PSC Docket 56002); SERTP 2025 regional plan and 2026 preliminary expansion plan (June 12, 2026); SC PSC Docket 2023-115-E; Dominion's Jasper–Okatie project page; a Georgia EPD stormwater permit notice |
 | Upper Midwest | Dairyland, Xcel (NSPW, NSPM), ATC, Transource, and others | 18 | Wisconsin PSC decisions, MISO LRTP/BECI filings, utility project pages |
 | Southern Plains | Xcel (SPS), Transource Oklahoma | 2 | Potter–Beckham filings |
 
@@ -190,7 +190,7 @@ A literal, auditable reading of the sponsor's rule, extended only where the fili
 
 ```bash
 npm install
-npm run check                      # tsc, eslint, vitest (incl. sponsor tables, eval invariants), audit
+npm run check                      # tsc, eslint, vitest (incl. sponsor tables, eval invariants, this paper's numbers and quotes), audit
 npm run audit                      # 219 projects, 103 sources, 1786/1786 excerpts verbatim; 7929 pairs → 133
 npm run eval                       # data/eval/eval.{json,md}: baselines, controls, sweep, ablations
 npm run extract:eval -- score      # data/eval/extraction-eval.{json,md} from the 283 stored runs (no API call)
