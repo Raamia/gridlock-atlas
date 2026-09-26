@@ -120,7 +120,8 @@ export function ImpactEstimate({ m }: { m: Match }) {
             <span className="num text-[13px] text-amber">≈{formatUsd(mobil.typical * (d.avoidedMobilizations?.typical ?? 1))}</span>
           </div>
           <p className="mt-1 text-text-2">
-            One avoided crew mobilization at MISO&apos;s {d.voltageKv ? `${d.voltageKv >= 345 ? "500" : d.voltageKv > 161 ? "230" : "115"} kV-class ` : ""}unit cost ({mobil.unit}).
+            One avoided crew mobilization, priced at MISO&apos;s {d.voltageKv ? `${d.voltageKv >= 345 ? "500" : d.voltageKv > 161 ? "230" : "115"} kV-class ` : ""}unit cost
+            {mobil.unit.match(/(\d{4}) \$/) ? ` (${mobil.unit.match(/(\d{4}) \$/)![1]} dollars, before overhead and contingency)` : ""}.
             {d.avoidedMobilizations &&
               " A joint proposed order filed in a South Carolina PSC docket (summarizing utility testimony) states that building two lines at the same time avoids mobilizing crews twice."}
           </p>

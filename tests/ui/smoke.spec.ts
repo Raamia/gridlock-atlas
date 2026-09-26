@@ -96,4 +96,15 @@ test.describe("GridLock Atlas smoke path", () => {
     const layers = await page.evaluate(() => (window as unknown as { __map: { getStyle: () => { layers: { id: string }[] } } }).__map.getStyle().layers.filter((l) => l.id.startsWith("gl-")).length);
     expect(layers).toBeGreaterThan(5);
   });
+
+  test("exports the ranked overlap table in the sponsor's column format", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /Compare public plans/ }).click();
+    await expect(page.locator("[data-match-id]").first()).toBeVisible({ timeout: 15_000 });
+    const [dl] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Export overlap table as CSV" }).click()]);
+    const text = await (await dl.createReadStream()).toArray().then((c) => Buffer.concat(c).toString("utf8"));
+    const [head, first] = text.split("\n");
+    expect(head.startsWith("overlap_id,distance_mi,time_gap (day),utility_a,project_id_a,project_name_a,utility_b,project_id_b,project_name_b")).toBe(true);
+    expect(first).toMatch(/^OVL_1,\d+\.\d{2},/);
+  });
 });

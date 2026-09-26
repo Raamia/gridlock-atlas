@@ -2,13 +2,15 @@
 
 import clsx from "clsx";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { AlertTriangle, Archive, ChevronDown, FileSearch, Play, RotateCw, SlidersHorizontal } from "lucide-react";
+import { AlertTriangle, Archive, ChevronDown, Download, FileSearch, Play, RotateCw, SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import { displayTitle, geoShort, timeShort } from "@/lib/describe";
 import type { Match, Project } from "@/lib/domain/types";
 import { pluralize } from "@/lib/format";
 import { ownerNames } from "@/lib/selectors";
+import { overlapTableCsv } from "@/lib/export";
+import { download } from "@/lib/review";
 import { inTab, useAtlas, type FlagFilter, type QueueTab } from "@/lib/store";
 import { Button, Dot, Kbd, MatchBadges, StatusChip } from "./ui";
 
@@ -366,6 +368,11 @@ function ExcludedFooter() {
   const run = useAtlas((s) => s.run)!;
   const set = useAtlas((s) => s.set);
   const compare = useAtlas((s) => s.compare);
+  const region = useAtlas((s) => s.region);
+  const exportCsv = () => {
+    const inRegion = run.matches.filter((m) => region === "all" || IDX.project(m.projectAId).region === region);
+    download(`gridlock-overlaps-${region}.csv`, overlapTableCsv(inRegion), "text/csv");
+  };
   const archived = run.excludedProjects.length;
   const beyond = run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"];
   return (
@@ -380,7 +387,11 @@ function ExcludedFooter() {
           {beyond.toLocaleString("en-US")} pairs beyond {run.thresholdMiles} mi · {archived} archived
         </span>
       </button>
-      <Button size="sm" variant="ghost" className="ml-auto" onClick={() => compare()}>
+      <Button size="sm" variant="ghost" className="ml-auto" onClick={exportCsv} title="Download the flagged pairs in the sponsor's overlap-table format" aria-label="Export overlap table as CSV">
+        <Download size={12} />
+        CSV
+      </Button>
+      <Button size="sm" variant="ghost" onClick={() => compare()} aria-label="Re-run comparison">
         <RotateCw size={12} />
         Re-run
       </Button>

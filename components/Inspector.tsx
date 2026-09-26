@@ -480,12 +480,16 @@ function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: C
     <div className="flex flex-col rounded-lg bg-bg-2 p-2.5 ring-1 ring-conflict/30">
       <div className="num text-[17px] leading-none text-text-0">{side.value}</div>
       <div className="mt-1.5 space-y-0.5">
-        {srcs.map((s) => (
-          <div key={s!.id} className="mono truncate text-[9.5px] uppercase tracking-[0.05em] text-text-3" title={s!.title}>
-            {s!.publisher}
-            {side.earlier && " · earlier edition"}
-          </div>
-        ))}
+        {[...new Set(srcs.map((s) => s!.publisher))].map((pub) => {
+          const docs = srcs.filter((s) => s!.publisher === pub);
+          return (
+            <div key={pub} className="mono truncate text-[9.5px] uppercase tracking-[0.05em] text-text-3" title={docs.map((d) => d!.title).join("\n")}>
+              {pub}
+              {docs.length > 1 && ` · ${docs.length} docs`}
+              {side.earlier && " · earlier edition"}
+            </div>
+          );
+        })}
       </div>
       {e && <div className="mt-2 line-clamp-4 font-serif text-[12.5px] leading-snug text-text-1">“{e.exactExcerpt}”</div>}
       {first && e && (

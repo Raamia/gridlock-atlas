@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { Check, Copy, Download, Printer, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { useDialogFocus } from "@/lib/focus";
 import { buildBrief, briefToMarkdown } from "@/lib/brief";
 import { displayTitle } from "@/lib/describe";
 import { useSelectedPair } from "@/lib/hooks";
@@ -16,6 +17,8 @@ export function BriefModal() {
   const brief = useMemo(() => (pair ? buildBrief(pair.match) : null), [pair]);
   const md = useMemo(() => (brief ? briefToMarkdown(brief) : ""), [brief]);
   const [copied, setCopied] = useState(false);
+  const panel = useRef<HTMLDivElement>(null);
+  useDialogFocus(panel, open && !!pair);
 
   const copy = async () => {
     await navigator.clipboard.writeText(md);
@@ -46,6 +49,7 @@ export function BriefModal() {
           aria-label="Review brief"
         >
           <motion.div
+            ref={panel}
             initial={{ y: 16, scale: 0.985, opacity: 0 }}
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}

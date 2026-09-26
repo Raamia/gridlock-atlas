@@ -3,7 +3,8 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Bot, CheckCircle2, CircleDashed, Search, X, XCircle } from "lucide-react";
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useDialogFocus } from "@/lib/focus";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { SourceDocument } from "@/lib/domain/types";
 import { formatDate } from "@/lib/format";
@@ -15,12 +16,15 @@ import { ReviewExports } from "./Review";
 import { IconButton } from "./ui";
 
 function Drawer({ open, onClose, title, eyebrow, children, width = 540 }: { open: boolean; onClose: () => void; title: string; eyebrow: string; children: ReactNode; width?: number }) {
+  const panel = useRef<HTMLElement>(null);
+  useDialogFocus(panel, open);
   return (
     <AnimatePresence>
       {open && (
         <motion.div className="fixed inset-0 z-40" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
           <div className="absolute inset-0 bg-bg-0/55 backdrop-blur-[2px]" onClick={onClose} />
           <motion.aside
+            ref={panel}
             role="dialog"
             aria-modal="true"
             aria-label={title}
