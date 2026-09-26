@@ -1,195 +1,584 @@
 @import "tailwindcss";
 
 /*
- * GridLock Atlas — editorial command center.
- * Midnight navy canvas; cyan = project A, violet = project B, amber = only for
- * source-supported overlap (places or periods). Status colors never reuse those three.
+ * GridLock Atlas — design system v2.
+ *
+ * The map is the stage; UI floats over it as a few frosted panels.
+ * Three data hues only: utility A (cyan), utility B (violet) and ONE warm accent, overlap (amber), which means
+ * "source-supported overlap" and nothing else. Two status hues: ok (known coordination) and warn (sources disagree).
+ * "Needs review" and "possible" carry no hue. Text tiers are lightness steps of one cool white.
+ *
+ * Tailwind classes (see app/dev/ui for the living reference):
+ *   colour      text-fg-1..4 · bg-canvas · bg-surface-{chrome,panel,solid,raised} · bg-fill-1..3 · border-edge
+ *               border-edge-strong · border-divider · bg-util-a/b/other · text-overlap · bg-overlap-wash
+ *               text-ok · text-warn · bg-inverse · text-on-inverse
+ *   type        text-label 11 · text-caption 12 · text-ui 13 · text-body 14 · text-heading 16 · text-title 20
+ *               text-display 32 · font-sans · font-mono · font-display (Instrument Serif; wordmark + brief title only)
+ *   radius      rounded-chip 6 · rounded-control 10 · rounded-card 12 · rounded-panel 18 · rounded-dialog 22 · rounded-pill
+ *   elevation   shadow-float · shadow-pop · shadow-chip
+ *   blur        backdrop-blur-chrome 12 · backdrop-blur-panel 22
+ *   easing      ease-enter · ease-exit · ease-camera        (durations: var(--dur-1..4))
+ *   materials   panel · chrome · sheet · popover            (surface + hairline + shadow + blur, no radius)
+ *   helpers     eyebrow · num · fade-edges · fade-x · fade-b · scroll-thin · range (native range input)
+ *   variants    coarse: / fine: (pointer), e.g. `coarse:hidden` for keyboard hints
+ *   z-layers    z-(--z-panel) etc. — see --z-* below
+ *
+ * Legacy names (--bg-*, --line*, --text-0..3, --a, --b, --amber, --review, --known, --conflict, --possible, --danger,
+ * --glass, .glass, .glass-solid, .mono, …) are ALIASES onto this palette so not-yet-rewritten components keep
+ * rendering. Integration removes them once nothing uses them. Do not use them in new code.
  */
+
+@custom-variant coarse (@media (pointer: coarse));
+@custom-variant fine (@media (pointer: fine));
+
 :root {
-  --bg-0: #040914;
-  --bg-1: #080f1f;
-  --bg-2: #0c1528;
-  --bg-3: #121d35;
-  --bg-4: #1a2744;
-  --line: rgba(138, 160, 206, 0.11);
-  --line-2: rgba(138, 160, 206, 0.2);
-  --line-3: rgba(138, 160, 206, 0.32);
-  --text-0: #eef3fc;
-  --text-1: #c1cbe0;
-  --text-2: #8b98b5;
-  --text-3: #5d6a87;
+  color-scheme: dark;
 
-  --a: #2fd6f2;
-  --a-deep: #0ea5c6;
-  --b: #a78bfa;
-  --b-deep: #7c5cf0;
-  --amber: #fbbf24;
-  --amber-deep: #d99a0b;
+  /* ── surfaces ─────────────────────────────────────────────── */
+  --canvas: #05080e;
+  --surface-chrome: rgb(14 19 29 / 0.62); /* small floating chrome: pills, map controls, key chip, notices */
+  --surface-panel: rgb(11 16 25 / 0.86); /* text-heavy floating panels (opportunities, inspector, dock) */
+  --surface-solid: #0b1019; /* dialogs, sheets, map tooltips */
+  --surface-raised: #111824; /* menus, popovers, tooltips */
 
-  --review: #f472b6;
-  --known: #34d399;
-  --conflict: #fb923c;
-  --possible: #94a3b8;
-  --danger: #f87171;
+  /* ── fills, edges (white at low alpha: they sit on any surface) ─ */
+  --fill-1: rgb(255 255 255 / 0.04); /* wells, tracks, rows at rest */
+  --fill-2: rgb(255 255 255 / 0.07); /* hover */
+  --fill-3: rgb(255 255 255 / 0.11); /* pressed / selected */
+  --edge: rgb(255 255 255 / 0.09); /* the 1px hairline of every floating surface */
+  --edge-strong: rgb(255 255 255 / 0.16); /* inputs, pressed rings, slider track */
+  --divider: rgb(255 255 255 / 0.06); /* separators inside a panel */
 
-  --glass: rgba(8, 15, 31, 0.8);
-  --shadow-panel: 0 24px 60px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px var(--line);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* ── foreground ───────────────────────────────────────────── */
+  --fg-1: #f3f5f9; /* primary text, values */
+  --fg-2: #b4bccb; /* secondary text, prose */
+  --fg-3: #8a93a4; /* labels, meta (AA on every surface) */
+  --fg-4: #5a6272; /* decorative only: separators, placeholders, disabled */
+
+  /* ── data hues ────────────────────────────────────────────── */
+  --util-a: #4cc9f0;
+  --util-b: #a78bfa;
+  --util-other: #8b95a7;
+  --overlap: #f5b83d;
+  --overlap-wash: rgb(245 184 61 / 0.12);
+
+  /* ── status hues (text / icon only, never on the map) ─────── */
+  --ok: #5ccf97;
+  --warn: #f08a6c;
+
+  /* ── the one solid-white control per view ─────────────────── */
+  --inverse: #f3f5f9;
+  --on-inverse: #0a0e15;
+
+  /* ── elevation ────────────────────────────────────────────── */
+  --elev-float: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 2px 8px -2px rgb(0 0 0 / 0.35), 0 18px 44px -14px rgb(0 0 0 / 0.6);
+  --elev-pop: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 12px 28px -12px rgb(0 0 0 / 0.55), 0 32px 72px -18px rgb(0 0 0 / 0.72);
+  --elev-chip: 0 1px 2px rgb(0 0 0 / 0.5);
+
+  /* ── motion ───────────────────────────────────────────────── */
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.5, 0, 0.75, 0);
+  --ease-camera: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 120ms; /* hover, press, colour */
+  --dur-2: 200ms; /* toggles, segment pill, chip state */
+  --dur-3: 320ms; /* panel / popover / dialog enter */
+  --dur-4: 480ms; /* sheet / drawer */
+  --dur-camera: 1400ms;
+
+  /* ── z-order (fixed layers; popovers/tooltips are portalled so they clear dialogs) ─ */
+  --z-map: 0;
+  --z-vignette: 1;
+  --z-marker: 5;
+  --z-chrome: 20;
+  --z-panel: 30;
+  --z-sheet: 50;
+  --z-scrim: 60;
+  --z-dialog: 70;
+  --z-toast: 80;
+  --z-demo: 90;
+  --z-popover: 95;
+  --z-tooltip: 100;
+
+  /* ── spacing (4-pt grid; layout vars from lib/layout.ts override these on .atlas-shell) ─ */
+  --gutter: 16px;
+  --panel-gap: 12px;
+  --panel-pad: 16px;
+  --section-gap: 20px;
+  --header-h: 48px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+
+  /* ── LEGACY ALIASES (old components only; removed at integration) ─ */
+  --bg-0: var(--canvas);
+  --bg-1: var(--surface-solid);
+  --bg-2: var(--surface-raised);
+  --bg-3: #19202b;
+  --bg-4: #222a36;
+  --line: var(--edge);
+  --line-2: var(--edge-strong);
+  --line-3: rgb(255 255 255 / 0.26);
+  --text-0: var(--fg-1);
+  --text-1: var(--fg-2);
+  --text-2: var(--fg-3);
+  --text-3: #6d7586;
+  --a: var(--util-a);
+  --a-deep: #2aa6cf;
+  --b: var(--util-b);
+  --b-deep: #7f63e6;
+  --amber: var(--overlap);
+  --amber-deep: #d99a1e;
+  --review: var(--fg-2);
+  --known: var(--ok);
+  --conflict: var(--warn);
+  --possible: var(--fg-3);
+  --danger: var(--warn);
+  --glass: var(--surface-panel);
+  --shadow-panel: var(--elev-float), 0 0 0 1px var(--edge);
+  --ease-out: var(--ease-enter);
 }
 
+@media (min-width: 1536px) {
+  :root {
+    --gutter: 20px;
+  }
+}
+@media (max-width: 767.98px) {
+  :root {
+    --panel-pad: 12px;
+  }
+}
+
+/* colours + fonts reference the vars above, so a subtree can re-theme (e.g. .theme-paper) */
 @theme inline {
-  --color-bg-0: var(--bg-0);
-  --color-bg-1: var(--bg-1);
-  --color-bg-2: var(--bg-2);
+  --color-canvas: var(--canvas);
+  --color-surface-chrome: var(--surface-chrome);
+  --color-surface-panel: var(--surface-panel);
+  --color-surface-solid: var(--surface-solid);
+  --color-surface-raised: var(--surface-raised);
+  --color-fill-1: var(--fill-1);
+  --color-fill-2: var(--fill-2);
+  --color-fill-3: var(--fill-3);
+  --color-edge: var(--edge);
+  --color-edge-strong: var(--edge-strong);
+  --color-divider: var(--divider);
+  --color-fg-1: var(--fg-1);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-fg-4: var(--fg-4);
+  --color-util-a: var(--util-a);
+  --color-util-b: var(--util-b);
+  --color-util-other: var(--util-other);
+  --color-overlap: var(--overlap);
+  --color-overlap-wash: var(--overlap-wash);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-inverse: var(--inverse);
+  --color-on-inverse: var(--on-inverse);
+
+  /* legacy colour classes (bg-bg-2, text-text-1, ring-line, text-a, bg-amber/12, text-known …) */
+  --color-bg-0: var(--canvas);
+  --color-bg-1: var(--surface-solid);
+  --color-bg-2: var(--surface-raised);
   --color-bg-3: var(--bg-3);
   --color-bg-4: var(--bg-4);
-  --color-line: var(--line);
-  --color-line-2: var(--line-2);
+  --color-line: var(--edge);
+  --color-line-2: var(--edge-strong);
   --color-line-3: var(--line-3);
-  --color-text-0: var(--text-0);
-  --color-text-1: var(--text-1);
-  --color-text-2: var(--text-2);
+  --color-text-0: var(--fg-1);
+  --color-text-1: var(--fg-2);
+  --color-text-2: var(--fg-3);
   --color-text-3: var(--text-3);
-  --color-a: var(--a);
+  --color-a: var(--util-a);
   --color-a-deep: var(--a-deep);
-  --color-b: var(--b);
+  --color-b: var(--util-b);
   --color-b-deep: var(--b-deep);
-  --color-amber: var(--amber);
-  --color-review: var(--review);
-  --color-known: var(--known);
-  --color-conflict: var(--conflict);
-  --color-possible: var(--possible);
-  --color-danger: var(--danger);
+  --color-amber: var(--overlap);
+  --color-review: var(--fg-2);
+  --color-known: var(--ok);
+  --color-conflict: var(--warn);
+  --color-possible: var(--fg-3);
+  --color-danger: var(--warn);
+
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
-  --ease-out-quint: var(--ease-out);
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif; /* legacy */
+
+  --shadow-float: var(--elev-float);
+  --shadow-pop: var(--elev-pop);
+  --shadow-chip: var(--elev-chip);
 }
 
-html,
-body {
-  background: var(--bg-0);
-  color: var(--text-0);
-  height: 100%;
+/* static tokens: always emitted as CSS vars too (var(--text-ui), var(--radius-panel), …) */
+@theme static {
+  /* type scale — the only seven sizes; nothing below 11px */
+  --text-label: 11px;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: 0.08em;
+  --text-label--font-weight: 500;
+  --text-caption: 12px;
+  --text-caption--line-height: 1.45;
+  --text-ui: 13px;
+  --text-ui--line-height: 1.35;
+  --text-body: 14px;
+  --text-body--line-height: 1.55;
+  --text-heading: 16px;
+  --text-heading--line-height: 1.3;
+  --text-heading--letter-spacing: -0.01em;
+  --text-title: 20px;
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.015em;
+  --text-display: 32px;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.025em;
+
+  --radius-chip: 6px;
+  --radius-control: 10px;
+  --radius-card: 12px;
+  --radius-panel: 18px;
+  --radius-dialog: 22px;
+  --radius-pill: 9999px;
+
+  --blur-chrome: 12px;
+  --blur-panel: 22px;
+
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.5, 0, 0.75, 0);
+  --ease-camera: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1); /* legacy */
+
+  --animate-pop-in: pop-in 140ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-spotlight: spotlight 1.4s cubic-bezier(0.22, 1, 0.36, 1) 1;
+  --animate-status-ping: status-ping 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  /* the guided demo's "look here": one 2px white ring pulse, then gone */
+  @keyframes spotlight {
+    0% {
+      box-shadow:
+        0 0 0 0 rgb(243 245 249 / 0),
+        0 0 0 2px rgb(243 245 249 / 0);
+    }
+    18% {
+      box-shadow:
+        0 0 0 0 rgb(243 245 249 / 0.35),
+        0 0 0 2px rgb(243 245 249 / 0.95);
+    }
+    100% {
+      box-shadow:
+        0 0 0 10px rgb(243 245 249 / 0),
+        0 0 0 2px rgb(243 245 249 / 0);
+    }
+  }
+  /* running indicator: the only looping animation allowed besides the selected pair's ring */
+  @keyframes status-ping {
+    0% {
+      box-shadow: 0 0 0 0 rgb(243 245 249 / 0.45);
+    }
+    80%,
+    100% {
+      box-shadow: 0 0 0 6px rgb(243 245 249 / 0);
+    }
+  }
 }
 
-body {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.45;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "ss01", "cv11";
-  overflow: hidden;
+/* ── base ─────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    height: 100%;
+    background: var(--canvas);
+    color: var(--fg-1);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    height: 100%;
+    background: var(--canvas);
+    color: var(--fg-1);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+    overflow: hidden; /* the app never scrolls as a page; panels scroll */
+  }
+
+  ::selection {
+    background: rgb(76 201 240 / 0.3);
+    color: var(--fg-1);
+  }
+
+  /* one focus language: a white ring, never confused with a data colour */
+  :focus-visible {
+    outline: 2px solid var(--fg-1);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  select:not(:disabled),
+  input[type="range"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.14) transparent;
+  }
+
+  select option,
+  select optgroup {
+    background: var(--surface-raised);
+    color: var(--fg-1);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--fg-4);
+  }
+
+  kbd {
+    font-family: var(--font-mono);
+  }
 }
 
-::selection {
-  background: color-mix(in oklab, var(--a) 35%, transparent);
-  color: var(--text-0);
+/* ── utilities ────────────────────────────────────────────────── */
+
+/* mono uppercase micro-label that names a block */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--fg-3);
 }
 
-:focus-visible {
-  outline: 2px solid var(--a);
-  outline-offset: 2px;
-  border-radius: 6px;
+/* every number, distance, date, id */
+@utility num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
-
-.num,
-.mono {
+@utility mono {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
 }
 
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-2);
+/* materials — pair with a radius: `panel rounded-panel`, `chrome rounded-full`, `sheet rounded-dialog`, `popover rounded-card` */
+@utility panel {
+  background-color: var(--surface-panel);
+  border: 1px solid var(--edge);
+  box-shadow: var(--elev-float);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  backdrop-filter: blur(22px) saturate(1.3);
+}
+@utility chrome {
+  background-color: var(--surface-chrome);
+  border: 1px solid var(--edge);
+  box-shadow: var(--elev-float);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+}
+@utility sheet {
+  background-color: var(--surface-solid);
+  border: 1px solid var(--edge);
+  box-shadow: var(--elev-pop);
+}
+@utility popover {
+  background-color: var(--surface-raised);
+  border: 1px solid var(--edge);
+  box-shadow: var(--elev-pop);
 }
 
+/* scroll areas fade at their edges instead of growing borders */
+@utility fade-edges {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12px, #000 calc(100% - 16px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12px, #000 calc(100% - 16px), transparent);
+}
+@utility fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 20px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 20px), transparent);
+}
+@utility fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 16px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 16px), transparent);
+}
+
+@utility scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.14) transparent;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 0.14);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+}
+
+/* paper theme: the review brief sheet (and print). Re-themes every token inside it. */
+@utility theme-paper {
+  color-scheme: light;
+  --canvas: #f7f5f0;
+  --surface-chrome: #f7f5f0;
+  --surface-panel: #f7f5f0;
+  --surface-solid: #f7f5f0;
+  --surface-raised: #ffffff;
+  --fill-1: rgb(0 0 0 / 0.03);
+  --fill-2: rgb(0 0 0 / 0.05);
+  --fill-3: rgb(0 0 0 / 0.08);
+  --edge: rgb(0 0 0 / 0.1);
+  --edge-strong: rgb(0 0 0 / 0.18);
+  --divider: rgb(0 0 0 / 0.08);
+  --fg-1: #15181e;
+  --fg-2: #3a404b;
+  --fg-3: #5b626f;
+  --fg-4: #8a909b;
+  --util-a: #0e7490;
+  --util-b: #6d28d9;
+  --util-other: #4b5563;
+  --overlap: #b45309;
+  --overlap-wash: rgb(180 83 9 / 0.08);
+  --ok: #047857;
+  --warn: #c2410c;
+  --inverse: #15181e;
+  --on-inverse: #f7f5f0;
+  --elev-float: none;
+  --elev-pop: none;
+  /* legacy raw vars used in inline styles */
+  --text-0: #15181e;
+  --text-1: #3a404b;
+  --text-2: #5b626f;
+  --text-3: #6b7280;
+  --line: rgb(0 0 0 / 0.1);
+  --line-2: rgb(0 0 0 / 0.18);
+  --line-3: rgb(0 0 0 / 0.26);
+  --bg-3: rgb(0 0 0 / 0.05);
+  --bg-4: rgb(0 0 0 / 0.08);
+  --a: #0e7490;
+  --b: #6d28d9;
+  --amber: #b45309;
+  --review: #3a404b;
+  --known: #047857;
+  --conflict: #c2410c;
+  --possible: #5b626f;
+  --danger: #c2410c;
+  color: var(--fg-1);
+}
+
+/* native <input type="range"> skin. Set --range-fill (0–100%) inline for the filled part. */
+@layer components {
+  .range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 100%;
+    background: transparent;
+    --range-fill: 0%;
+  }
+  .range::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--fg-2) var(--range-fill), var(--fill-3) var(--range-fill));
+  }
+  .range::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--fill-3);
+  }
+  .range::-moz-range-progress {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--fg-2);
+  }
+  .range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+    border-radius: 999px;
+    background: var(--inverse);
+    border: 0;
+    box-shadow:
+      0 0 0 4px rgb(255 255 255 / 0.12),
+      var(--elev-chip);
+    transition: box-shadow var(--dur-1) var(--ease-enter);
+  }
+  .range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--inverse);
+    border: 0;
+    box-shadow:
+      0 0 0 4px rgb(255 255 255 / 0.12),
+      var(--elev-chip);
+  }
+  .range:hover::-webkit-slider-thumb {
+    box-shadow:
+      0 0 0 6px rgb(255 255 255 / 0.14),
+      var(--elev-chip);
+  }
+  .range:focus-visible {
+    outline: none;
+  }
+  .range:focus-visible::-webkit-slider-thumb {
+    box-shadow:
+      0 0 0 2px var(--canvas),
+      0 0 0 4px var(--fg-1);
+  }
+  .range:focus-visible::-moz-range-thumb {
+    box-shadow:
+      0 0 0 2px var(--canvas),
+      0 0 0 4px var(--fg-1);
+  }
+}
+
+/* ── legacy classes (unlayered, exactly as before, new palette) ── */
 .glass {
-  background: var(--glass);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  background: var(--surface-panel);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  backdrop-filter: blur(22px) saturate(1.3);
   box-shadow: var(--shadow-panel);
 }
-
 /* text panels over the map: basemap labels must not read through the body copy */
 .glass-solid {
-  background: rgba(8, 15, 31, 0.97);
+  background: rgb(11 16 25 / 0.96);
 }
-
 .hairline {
-  border-color: var(--line);
+  border-color: var(--edge);
 }
 
-/* scrollbars */
-.scroll-thin {
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-2) transparent;
-}
-.scroll-thin::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.scroll-thin::-webkit-scrollbar-thumb {
-  background: var(--line-2);
-  border-radius: 8px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-/* subtle grain + vignette over the map stage */
+/* darkening over the map stage so floating type stays legible (top edge carries the header) */
 .stage-vignette {
   pointer-events: none;
   background:
-    radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(4, 9, 20, 0.55) 100%),
-    linear-gradient(to bottom, rgba(4, 9, 20, 0.35), transparent 14%, transparent 86%, rgba(4, 9, 20, 0.5));
-}
-
-/* Mapbox chrome, re-skinned */
-.mapboxgl-ctrl-attrib {
-  background: rgba(4, 9, 20, 0.6) !important;
-  font-size: 10px !important;
-}
-.mapboxgl-ctrl-attrib a {
-  color: var(--text-2) !important;
-}
-.mapboxgl-ctrl-logo {
-  opacity: 0.55;
-}
-/* logo + attribution slide left of the inspector column, like the map's own controls */
-.mapboxgl-ctrl-bottom-right {
-  transition:
-    right 0.5s var(--ease-out),
-    bottom 0.5s var(--ease-out);
-}
-@media (min-width: 640px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    right: 376px;
-  }
-}
-@media (min-width: 1280px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    right: 424px;
-  }
-}
-/* the legend (16px + 252px) and the inspector (376px) leave the logo too little room on a map stage
-   under ~742px wide (640–741 stacked, 1024–1081 beside the queue): lift it above the collapsed legend */
-@media (min-width: 640px) and (max-width: 767px), (min-width: 1024px) and (max-width: 1099px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    bottom: 48px;
-  }
-}
-.mapboxgl-popup-content {
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-.mapboxgl-popup-tip {
-  display: none !important;
+    radial-gradient(120% 90% at 50% 45%, transparent 55%, rgb(5 8 14 / 0.55) 100%),
+    linear-gradient(to bottom, rgb(5 8 14 / 0.6), rgb(5 8 14 / 0) 120px),
+    linear-gradient(to top, rgb(5 8 14 / 0.45), rgb(5 8 14 / 0) 18%);
 }
 
 /* amber pulse for the stated shared site */
@@ -204,7 +593,7 @@ body {
   }
 }
 .site-pulse {
-  animation: site-pulse 2.4s var(--ease-out) infinite;
+  animation: site-pulse 2.4s var(--ease-enter) infinite;
 }
 
 @keyframes scan {
@@ -216,7 +605,7 @@ body {
   }
 }
 .scan-bar {
-  animation: scan 1.1s var(--ease-out) infinite;
+  animation: scan 1.1s var(--ease-enter) infinite;
 }
 
 @keyframes shimmer {
@@ -228,11 +617,78 @@ body {
   }
 }
 .shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.06) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 1.6s linear infinite;
 }
 
+/* ── Mapbox chrome, re-skinned ────────────────────────────────── */
+.mapboxgl-ctrl-attrib {
+  background: rgb(5 8 14 / 0.55) !important;
+  font-size: 11px !important;
+  line-height: 16px;
+  color: var(--fg-3);
+}
+.mapboxgl-ctrl-attrib a {
+  color: var(--fg-3) !important;
+}
+.mapboxgl-ctrl-attrib a:hover {
+  color: var(--fg-2) !important;
+}
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  background: rgb(5 8 14 / 0.55) !important;
+}
+.mapboxgl-ctrl-attrib-button {
+  filter: invert(1) opacity(0.6);
+}
+.mapboxgl-ctrl-logo {
+  opacity: 0.5;
+}
+/* logo + attribution stay inside the focal area (the map region no panel covers).
+   --focal-l/r/b are the px insets lib/layout.ts writes on .atlas-shell; the fallbacks are the old grid layout. */
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right {
+  transition:
+    left var(--dur-4) var(--ease-enter),
+    right var(--dur-4) var(--ease-enter),
+    bottom var(--dur-4) var(--ease-enter);
+}
+.mapboxgl-ctrl-bottom-left {
+  left: var(--focal-l, 0px);
+  bottom: var(--focal-b, 0px);
+}
+.mapboxgl-ctrl-bottom-right {
+  right: var(--focal-r, 0px);
+  bottom: var(--focal-b, 0px);
+}
+@media (min-width: 640px) {
+  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
+    right: var(--focal-r, 376px);
+  }
+}
+@media (min-width: 1280px) {
+  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
+    right: var(--focal-r, 424px);
+  }
+}
+@media (min-width: 640px) and (max-width: 767px), (min-width: 1024px) and (max-width: 1099px) {
+  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
+    bottom: var(--focal-b, 48px);
+  }
+}
+.mapboxgl-popup-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.mapboxgl-popup-tip {
+  display: none !important;
+}
+.mapboxgl-canvas:focus-visible {
+  outline: none;
+}
+
+/* ── reduced motion: nothing animates, fades collapse to instant ─ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -240,6 +696,7 @@ body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -250,6 +707,7 @@ body {
   }
 }
 
+/* ── print: only the review brief, on paper, as many pages as it needs ─ */
 @media print {
   html,
   body {
@@ -259,10 +717,11 @@ body {
     color: #000;
   }
   .no-print,
-  nextjs-portal {
+  nextjs-portal,
+  [data-portal],
+  [role="banner"] {
     display: none !important;
   }
-  /* with the brief open, print only the brief — no app shell — and let it run onto as many pages as it needs */
   body:has([aria-label="Review brief"]) .atlas-shell {
     display: block !important;
     height: auto !important;
@@ -272,22 +731,11 @@ body {
   body:has([aria-label="Review brief"]) .atlas-shell > :not([aria-label="Review brief"]) {
     display: none !important;
   }
-  /* ink on paper: the same tokens, darkened for a white page (amber and conflict orange keep their hues) */
   [aria-label="Review brief"] {
+    @apply theme-paper;
     padding: 0 !important;
+    -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
-    --text-0: #0b1220;
-    --text-1: #1f2937;
-    --text-2: #4b5563;
-    --text-3: #6b7280;
-    --line: rgba(15, 23, 42, 0.14);
-    --line-2: rgba(15, 23, 42, 0.22);
-    --a: #0e7490;
-    --b: #6d28d9;
-    --amber: #b45309;
-    --review: #be185d;
-    --known: #047857;
-    --conflict: #c2410c;
-    --possible: #475569;
+    background: #fff !important;
   }
 }
