@@ -1,6 +1,6 @@
 {
- "version": "snap-2026-09-26-72a3fa02",
- "generatedAt": "2026-09-26T07:03:04.633Z",
+ "version": "snap-2026-09-26-205834a4",
+ "generatedAt": "2026-09-26T07:05:36.537Z",
  "snapshotDate": "2026-09-26",
  "regions": [
   {
@@ -16094,7 +16094,8 @@
      "coordinateSource": "OSM way 176434079 power=substation name='Columbia Station' operator='American Transmission Company' voltage=345000;138000;69000 (re-checked via Overpass mirror maps.mail.ru 2026-09-26; only ATC 345 kV station within 15 km). Name identity 'Columbia Station' = sources' 'Columbia Substation' is by name/operator; MGS fact sheet map p.2 places the Columbia Substation marker in Columbia County, consistent within ~3 km (visual reading).",
      "evidenceIds": [
       "ev-9c00a9bab1cd"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "beci-sugar-creek-substation",
@@ -16109,7 +16110,8 @@
      "evidenceIds": [
       "ev-28b90a90ed17",
       "ev-eb374e00c267"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "beci-il-wi-state-line-poi",
@@ -16320,7 +16322,8 @@
      "evidenceIds": [
       "ev-9c00a9bab1cd",
       "ev-1e15de3c7306"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "constructionWindows": [],
@@ -16407,7 +16410,8 @@
      "coordinateSource": "OSM way 1420924219 power=substation name='Sugar Creek Substation' operator='American Transmission Company, We Energies' voltage=138000 addr 'N5843 Voss Road, Town of Sugar Creek' (re-checked via Overpass mirror maps.mail.ru 2026-09-26). OSM shows only a 138 kV station; footprint of the 765/345 kV modification unknown, hence 1 km uncertainty.",
      "evidenceIds": [
       "ev-fb52f28824b7"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "constructionWindows": [],
@@ -16492,7 +16496,8 @@
      "coordinateSource": "Nominatim: Genoa, Vernon County, Wisconsin (OSM relation 251824, village centroid; re-checked 2026-09-26); used for 'Existing Genoa River Crossing' - crossing location not mapped in sources",
      "evidenceIds": [
       "ev-831bc2b3800e"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "dpc-bell-center-substation",
@@ -16506,7 +16511,8 @@
      "coordinateSource": "OSM way 299956516 power=substation name='Bell Center' operator='Dairyland Power Cooperative' voltage=161000;69000 (re-checked via Overpass mirror maps.mail.ru 2026-09-26)",
      "evidenceIds": [
       "ev-86596bea23d3"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "constructionWindows": [],
@@ -16672,7 +16678,8 @@
      "coordinateSource": "OSM way 888014295 power=substation name='Hickory Creek Substation' operator=ITC voltage=345000;161000 (Overpass around New Vienna, IA)",
      "evidenceIds": [
       "ev-47f0431fba46"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "chc-cassville-crossing",
@@ -16714,7 +16721,8 @@
      "coordinateSource": "OSM way 686507722 power=substation name='Cardinal Substation' operator='American Transmission Company' voltage=345000;138000 (Overpass around Middleton, WI)",
      "evidenceIds": [
       "ev-0150e9d14c7a"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "route": {
@@ -16970,7 +16978,8 @@
      "coordinateSource": "OSM way 541739865 power=substation name='Briggs Road Substation' operator='Xcel Energy' voltage=345000;161000 (re-checked by Overpass way id)",
      "evidenceIds": [
       "ev-5858506dac21"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "bc-blair-wi",
@@ -17000,7 +17009,8 @@
      "evidenceIds": [
       "ev-2bf9525dbb3b",
       "ev-447db3ed4e5e"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "bc-cardinal-sub",
@@ -17275,7 +17285,8 @@
      "evidenceIds": [
       "ev-72f50010e5b5",
       "ev-e57559020d01"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "g2b-marion-mn",
@@ -17289,7 +17300,8 @@
      "coordinateSource": "Nominatim: Marion, Marion Township, Olmsted County, Minnesota (OSM node 151384179, place=village); the source only says 'a point near Marion'",
      "evidenceIds": [
       "ev-e57559020d01"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "constructionWindows": [
@@ -17545,7 +17557,8 @@
      "coordinateSource": "Nominatim: Marion, Marion Township, Olmsted County, Minnesota (OSM node 151384179, place=village)",
      "evidenceIds": [
       "ev-288c937989bf"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "mb-bell-center-wi",
@@ -17559,7 +17572,8 @@
      "coordinateSource": "Nominatim: Bell Center, Crawford County, Wisconsin (OSM relation 242237) village centroid",
      "evidenceIds": [
       "ev-288c937989bf"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "mb-houston-county-switching-station",
@@ -18035,7 +18049,8 @@
      "evidenceIds": [
       "ev-c8f0cb56d717",
       "ev-d188585ef526"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "tremval-north-substation",
@@ -18055,7 +18070,8 @@
       "ev-36fbd22a2af0",
       "ev-aa9549039382",
       "ev-d1be17a1fd9b"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "tremval-substation-existing",
@@ -18522,7 +18538,8 @@
      "evidenceIds": [
       "ev-6e0b09a82e6f",
       "ev-0a79914de697"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "gf-pco",
@@ -18537,7 +18554,8 @@
      "evidenceIds": [
       "ev-4bb034497aa3",
       "ev-b06301908b04"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "route": {
@@ -19066,7 +19084,8 @@
      "evidenceIds": [
       "ev-0a79914de697",
       "ev-df0c3cd9b32b"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "gf-columbia",
@@ -19081,7 +19100,8 @@
      "evidenceIds": [
       "ev-0a79914de697",
       "ev-16e409dad710"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "gf-rocky-run",
@@ -19500,7 +19520,8 @@
      "coordinateSource": "OSM way 911204354 power=substation name='Iron Range Substation' operator='Minnesota Power' voltage=500000;230000;46000 (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-74ad66565c4c"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "nrp-cuyuna",
@@ -19555,7 +19576,8 @@
      "coordinateSource": "OSM way 106952850 power=substation name='Sherburne County Substation' operator='Xcel Energy' voltage=345000;115000 (Sherco = Sherburne County) (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-f3d966b152f5"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "route": {
@@ -19860,7 +19882,8 @@
      "coordinateSource": "OSM relation 9098050 power=substation name='Alexandria Switching Substation' operator='Western Minnesota Municipal Power Agency' voltage=345000;115000 (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-0a7c64e176ab"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "abo-riverview",
@@ -19888,7 +19911,8 @@
      "coordinateSource": "OSM relation 9094967 power=substation name='Quarry Substation' voltage=345000;115000 (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-4b300d017b8b"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "abo-big-oaks",
@@ -20263,7 +20287,8 @@
      "coordinateSource": "OSM way 641025665 power=substation name='Big Stone South Substation' operator='Otter Tail Power Company' voltage=345000;230000 (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-333e1cf31911"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "bssa-border-ortonville",
@@ -20319,7 +20344,8 @@
      "coordinateSource": "OSM relation 9098050 power=substation name='Alexandria Switching Substation' operator='Western Minnesota Municipal Power Agency' voltage=345000;115000 (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-825717b4f752"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "route": {
@@ -20559,7 +20585,8 @@
      "coordinateSource": "OSM way 107336795 power=substation name='Wilmarth Substation' voltage=345000;115000 (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-4ced49c904a5"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "mmrt12-west-faribault",
@@ -20587,7 +20614,8 @@
      "coordinateSource": "OSM way 352702251 power=substation name='North Rochester Substation' voltage=345000 (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-82906b57cd6a"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "route": {
@@ -20848,7 +20876,8 @@
      "coordinateSource": "OSM way 352702251 power=substation name='North Rochester Substation' voltage=345000 (Overpass 2026-09-26)",
      "evidenceIds": [
       "ev-e1264baae9eb"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "mmrt34-plainview",
@@ -20876,7 +20905,8 @@
      "coordinateSource": "Nominatim: Kellogg, Wabasha County, MN (OSM relation 137053) city centroid",
      "evidenceIds": [
       "ev-c8a2e3a46d73"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "mmrt34-seg4-end",
@@ -21198,7 +21228,8 @@
      "evidenceIds": [
       "ev-8516649808a1",
       "ev-cf2489d08bfd"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "tx-ok-state-line",
@@ -21470,7 +21501,8 @@
       "ev-51ad68394f25",
       "ev-1c53737090b8",
       "ev-059e945a716f"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "constructionWindows": [
@@ -21803,7 +21835,8 @@
      "evidenceIds": [
       "ev-fa3e3c88c7bc",
       "ev-166b52e1b5ff"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "gpc-callaway-thomson-500-callaway-road",
@@ -45756,7 +45789,8 @@
      "evidenceIds": [
       "ev-5afb47481bf1",
       "ev-f6879d9d5301"
-     ]
+     ],
+     "role": "endpoint"
     },
     {
      "id": "elk-farm-substation",
@@ -45787,7 +45821,8 @@
      "evidenceIds": [
       "ev-6fa414399683",
       "ev-57d7247a716e"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "route": {
@@ -46278,7 +46313,8 @@
      "evidenceIds": [
       "ev-6fa414399683",
       "ev-57d7247a716e"
-     ]
+     ],
+     "role": "endpoint"
     }
    ],
    "constructionWindows": [

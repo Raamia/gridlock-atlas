@@ -162,7 +162,7 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
     if (coreStart && coreEnd && coreStart <= coreEnd) base.confirmedOverlap = { start: coreStart, end: coreEnd };
     return {
       level: "confirmed",
-      reason: `Reported construction windows overlap within ${formatSpan(base.possibleOverlap!, base.precision)}${combos}.${gapNote}`,
+      reason: `Reported construction windows overlap in ${formatSpan(base.confirmedOverlap ?? base.possibleOverlap!, base.precision)}${combos}.${gapNote}`,
       detail: base,
     };
   }

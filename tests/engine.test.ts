@@ -365,7 +365,8 @@ describe("sponsor overlap table", () => {
     completionClaims: inService("d3", "2025-12-31"),
   });
   const gpc2 = project("gpc-2", "gpc", { places: [endpoint("McIntosh", 32.352116, -81.175112)], completionClaims: inService("g2", "2026-06-01") });
-  const snap = snapshot([desc2, gpc1, desc3, gpc2]);
+  // evaluated as of the sponsor's own timeframe: at our Sept 2026 snapshot these in-service dates have passed
+  const snap = { ...snapshot([desc2, gpc1, desc3, gpc2]), snapshotDate: "2024-01-01" };
 
   it("OVL_1: 4.09 mi and 3,074 days", () => {
     const m = evaluatePair(desc2, gpc1, snap)!;
@@ -461,3 +462,48 @@ describe("review-round regressions", () => {
     expect(() => evaluatePair(a, b, snapshot([a, b]))).not.toThrow();
   });
 });
+
+describe("engine-review regressions", () => {
+  it("archives projects whose planned in-service date has passed, without calling them complete", () => {
+    const past = project("past", "u1", {
+      places: [place("Blair", BLAIR[0], BLAIR[1])],
+      completionClaims: [{ id: "c", claimSourceId: "src", label: "planned in-service", date: { earliest: "2026-04-01", latest: "2026-04-30", precision: "month" }, evidenceIds: [] }],
+    });
+    const live = project("live", "u2", { places: [place("Blair 2", BLAIR[0], BLAIR[1])] });
+    const run = runMatching(snapshot([past, live]), { now: "t" });
+    expect(run.excludedProjects).toEqual([expect.objectContaining({ projectId: "past", reason: "past-in-service" })]);
+  });
+
+  it("locality-only centers are at most a possible match (plan §8.4)", () => {
+    const a = project("a", "u1", { places: [place("Blair", BLAIR[0], BLAIR[1], { precision: "locality", uncertaintyMeters: 3000, role: "endpoint" })] });
+    const b = project("b", "u2", { places: [place("Arcadia", ARCADIA[0], ARCADIA[1], { role: "endpoint" })] });
+    const g = evaluateGeo(a, b, [], 25);
+    expect(g.level).toBe("possible");
+    expect(g.reason).toMatch(/town/);
+  });
+
+  it("a joint initiative that names where the segments meet counts as a site relation", () => {
+    const a = project("a", "u1", { places: [place("Far west", 44, -95)] });
+    const b = project("b", "u2", { places: [place("Far east", 44, -91)] });
+    const rel: Relation = { id: "r", projectA: "a", projectB: "b", kind: "same-initiative", siteLabel: "Marion, Minn.", description: "segments meet near Marion", evidenceIds: ["ev1"] };
+    const m = evaluatePair(a, b, snapshot([a, b], [rel]))!;
+    expect(m).not.toBeNull();
+    expect(m.geoDetail.method).toBe("shared-site");
+    expect(m.reviewStatus).toBe("known-coordination");
+  });
+
+  it("possible timing never scores below unknown timing", () => {
+    const a = near2("a", "u1", { constructionWindows: [win(2025, 2026)] });
+    const b = near2("b", "u2", { constructionWindows: [win(2026, 2028)] });
+    const c = near2("c", "u3");
+    const possible = evaluatePair(a, b, snapshot([a, b]))!;
+    const unknown = evaluatePair(a, c, snapshot([a, c]))!;
+    expect(possible.time).toBe("possible");
+    expect(unknown.time).toBe("unknown");
+    expect(possible.priority).toBeGreaterThan(unknown.priority);
+  });
+});
+
+function near2(id: string, owner: string, over: Partial<Project> = {}) {
+  return project(id, owner, { places: [place(`${id} site`, BLAIR[0], BLAIR[1])], ...over });
+}

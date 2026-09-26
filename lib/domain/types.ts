@@ -349,7 +349,7 @@ export interface Match {
 
 export interface ExcludedProject {
   projectId: string;
-  reason: "complete" | "cancelled" | "duplicate" | "unknown-status";
+  reason: "complete" | "cancelled" | "duplicate" | "unknown-status" | "past-in-service";
   detail: string;
 }
 

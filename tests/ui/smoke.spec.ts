@@ -107,4 +107,47 @@ test.describe("GridLock Atlas smoke path", () => {
     expect(head.startsWith("overlap_id,distance_mi,time_gap (day),utility_a,project_id_a,project_name_a,utility_b,project_id_b,project_name_b")).toBe(true);
     expect(first).toMatch(/^OVL_1,\d+\.\d{2},/);
   });
+
+  test("shortcuts do not act behind the brief; Escape works from inside inputs", async ({ page }) => {
+    await page.goto(`/?pair=${FEATURED}`);
+    const inspector = page.getByRole("complementary", { name: "Evidence inspector" });
+    await expect(inspector).toBeVisible({ timeout: 20_000 });
+    await inspector.getByRole("button", { name: /Create review brief/ }).click();
+    await expect(page.getByRole("dialog", { name: "Review brief" })).toBeVisible();
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("j");
+    await expect(page).toHaveURL(new RegExp(`pair=${FEATURED}`));
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog", { name: "Review brief" })).toBeHidden();
+
+    await page.getByRole("button", { name: /Source registry/ }).click();
+    const drawer = page.getByRole("dialog", { name: "Source registry" });
+    await drawer.getByPlaceholder("Filter sources").fill("psc");
+    await page.keyboard.press("Escape");
+    await expect(drawer).toBeHidden();
+  });
+
+  test("phone: the camera reaches the selected pair and demo controls stay usable", async ({ browser }) => {
+    const ctx = await browser.newContext({ viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true });
+    const page = await ctx.newPage();
+    await page.goto("/");
+    await page.getByRole("button", { name: /Compare public plans/ }).click();
+    await expect(page.locator("[data-match-id]").first()).toBeVisible({ timeout: 15_000 });
+    await page.locator("[data-match-id]").first().click();
+    await expect(page.getByRole("complementary", { name: "Evidence inspector" })).toBeVisible();
+    await page.waitForTimeout(2500);
+    const zoom = await page.evaluate(() => (window as unknown as { __map: { getZoom: () => number } }).__map.getZoom());
+    expect(zoom).toBeGreaterThan(6);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    await expect(page.getByRole("combobox", { name: "Region" })).toBeVisible();
+
+    await page.keyboard.press("Escape");
+    await page.getByRole("button", { name: "Start guided demo" }).click();
+    for (let i = 0; i < 3; i++) await page.getByRole("button", { name: /^Next/ }).click();
+    const next = page.getByRole("button", { name: /^Next/ });
+    const box = (await next.boundingBox())!;
+    const hit = await page.evaluate(([x, y]) => document.elementFromPoint(x, y)?.closest("button")?.textContent ?? "", [box.x + box.width / 2, box.y + box.height / 2]);
+    expect(hit).toMatch(/Next/);
+    await ctx.close();
+  });
 });

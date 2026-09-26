@@ -11,7 +11,7 @@ import type {
 } from "@/lib/domain/types";
 import { formatBound } from "@/lib/format";
 import { DEFAULT_THRESHOLD_MILES, evaluateGeo } from "./geo";
-import { activeWindows, evaluateTime, windowsBySource } from "./time";
+import { activeWindows, currentInService, evaluateTime, windowsBySource } from "./time";
 
 export const ENGINE_VERSION = "gridlock-engine/1.1.0";
 
@@ -45,13 +45,14 @@ interface Dated {
 
 /** Group claims whose dates agree (intersect); two or more groups = one disagreement. */
 function cluster(items: Dated[]): Dated[][] {
-  const groups: { items: Dated[]; start: DateBound; end: DateBound }[] = [];
+  // a claim joins a group only if it agrees with EVERY member (agreement is not transitive for ranges)
+  const groups: Dated[][] = [];
   for (const it of items) {
-    const g = groups.find((x) => boundsIntersect(x.start, it.start) && boundsIntersect(x.end, it.end));
-    if (g) g.items.push(it);
-    else groups.push({ items: [it], start: it.start, end: it.end });
+    const g = groups.find((members) => members.every((x) => boundsIntersect(x.start, it.start) && boundsIntersect(x.end, it.end)));
+    if (g) g.push(it);
+    else groups.push([it]);
   }
-  return groups.map((g) => g.items);
+  return groups;
 }
 
 /**
@@ -159,7 +160,11 @@ function exclusionFor(p: Project, snapshotDate: string): ExcludedProject | null 
   if (!ELIGIBLE.has(p.status.value)) return { projectId: p.id, reason: "unknown-status", detail: "Status not established in sources." };
   const ws = activeWindows(p);
   if (ws.length && ws.every((w) => w.end.latest < snapshotDate)) {
-    return { projectId: p.id, reason: "complete", detail: "Every published construction window ended before the snapshot date." };
+    return { projectId: p.id, reason: "past-in-service", detail: "Every published window ended before the snapshot date; completion is not confirmed by a source." };
+  }
+  const isd = currentInService(p);
+  if (isd && isd.date.latest < snapshotDate) {
+    return { projectId: p.id, reason: "past-in-service", detail: `Planned in-service (${formatBound(isd.date)}) is before the snapshot date; completion is not confirmed by a source.` };
   }
   return null;
 }
@@ -207,11 +212,14 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   else if (geo.level === "confirmed") add(30, "Within the review radius");
   else add(12, "Proximity possible (coarse location)");
 
+  // timing: more evidence never scores lower — confirmed 30 > possible 18–30 > unknown ≤ 15 > no-match 0
   const gap = time.detail.inService?.gapDays;
+  const gapFactor = gap === undefined ? 0 : Math.max(0, 1 - gap / IN_SERVICE_HORIZON_DAYS);
+  const gapText = gap === undefined ? "" : `in-service dates ${time.detail.inService!.coarse ? "≥" : ""}${gap.toLocaleString("en-US")} days apart`;
   if (time.level === "confirmed") add(30, "Construction windows overlap");
-  else if (time.level === "possible") add(18, "Construction windows may overlap");
-  else if (gap !== undefined && gap < IN_SERVICE_HORIZON_DAYS) add(25 * (1 - gap / IN_SERVICE_HORIZON_DAYS), `In-service dates ${gap.toLocaleString("en-US")} days apart`);
-  else if (gap !== undefined) reasons.push(`In-service dates ${gap.toLocaleString("en-US")} days apart`);
+  else if (time.level === "possible") add(18 + 12 * gapFactor, `Construction windows may overlap${gapText ? `; ${gapText}` : ""}`);
+  else if (time.level === "unknown" && gap !== undefined) add(15 * gapFactor, gapText[0].toUpperCase() + gapText.slice(1));
+  else if (time.level === "no-match") reasons.push("Published windows do not overlap");
 
   const evidenceIds = new Set<string>();
   for (const r of snapshot.relations.filter((r) => geo.detail.relationIds.includes(r.id))) r.evidenceIds.forEach((e) => evidenceIds.add(e));

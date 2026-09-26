@@ -284,7 +284,7 @@ function Filters() {
         <div>
           <div className="eyebrow mb-1.5">Signal</div>
           <div className="flex flex-wrap gap-1">
-            {(["BOTH", "GEO", "TIME", "POSSIBLE"] as FlagFilter[]).map((f) => (
+            {(["BOTH", "GEO", "POSSIBLE"] as FlagFilter[]).map((f) => (
               <button
                 key={f}
                 onClick={() => toggle(f)}
@@ -294,7 +294,7 @@ function Filters() {
                   flags.includes(f) ? "bg-bg-4 text-text-0 ring-line-3" : "text-text-3 ring-line hover:text-text-2",
                 )}
               >
-                {f === "POSSIBLE" ? "POSSIBLE ONLY" : f === "GEO" ? "GEO ONLY" : f === "TIME" ? "TIME ONLY" : f}
+                {f === "POSSIBLE" ? "PLACE POSSIBLE" : f === "GEO" ? "PLACE CONFIRMED" : "PLACE + TIME"}
               </button>
             ))}
           </div>
@@ -412,7 +412,7 @@ function MatchCard({ m, index, rank, dim }: { m: Match; index: number; rank: num
   const ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (selected) ref.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    if (selected) ref.current?.scrollIntoView({ block: "nearest", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   }, [selected]);
 
   return (

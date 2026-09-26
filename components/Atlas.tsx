@@ -1,6 +1,8 @@
 "use client";
 
+import { MotionConfig } from "motion/react";
 import dynamic from "next/dynamic";
+import { useReview } from "@/lib/review";
 import { useEffect } from "react";
 import { useAtlas } from "@/lib/store";
 import { BriefModal } from "./BriefModal";
@@ -20,7 +22,9 @@ const MapStage = dynamic(() => import("./MapStage"), {
 export function Atlas() {
   useKeyboard();
   useUrlSync();
+  useEffect(() => useReview.getState().hydrate(), []);
   return (
+    <MotionConfig reducedMotion="user">
     <div className="grid h-dvh w-full max-w-[100vw] grid-cols-[minmax(0,1fr)] grid-rows-[56px_minmax(0,1fr)] overflow-hidden bg-bg-0">
       <TopBar />
       {/* desktop: queue | map+timeline. narrow: map on top, queue below as a scrollable sheet */}
@@ -42,6 +46,7 @@ export function Atlas() {
       <SourcesDrawer />
       <MethodDrawer />
     </div>
+    </MotionConfig>
   );
 }
 
@@ -49,20 +54,25 @@ function useKeyboard() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
-      if (t && (t.tagName === "INPUT" || t.tagName === "SELECT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
-      if (e.metaKey || e.ctrlKey || e.altKey) return;
       const st = useAtlas.getState();
+      // Escape always works, even from a text field inside a drawer or the inspector
       if (e.key === "Escape") {
         if (st.briefOpen) return st.set({ briefOpen: false });
         if (st.sourcesOpen || st.methodOpen) return st.set({ sourcesOpen: false, methodOpen: false });
         if (st.inspectorOpen) return st.select(null);
         if (st.demoStep !== null) return st.set({ demoStep: null });
+        return;
       }
+      if (t && (t.tagName === "INPUT" || t.tagName === "SELECT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      // shortcuts never act behind a modal or drawer
+      if (st.briefOpen || st.sourcesOpen || st.methodOpen || t?.closest("[role=dialog]")) return;
       if ((e.key === "c" || e.key === "C") && !st.running) {
         e.preventDefault();
         void st.compare();
       }
-      if ((e.key === "j" || e.key === "k" || e.key === "ArrowDown" || e.key === "ArrowUp") && st.run && st.demoStep === null) {
+      const onCard = !t || t === document.body || !!t.closest("[data-match-id]");
+      if ((e.key === "j" || e.key === "k" || ((e.key === "ArrowDown" || e.key === "ArrowUp") && onCard)) && st.run && st.demoStep === null) {
         const cards = [...document.querySelectorAll<HTMLElement>("[data-match-id]")];
         if (!cards.length) return;
         const ids = cards.map((c) => c.dataset.matchId!);

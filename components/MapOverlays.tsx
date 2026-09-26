@@ -38,8 +38,8 @@ function FocusChip() {
   }
   return (
     <div
-      className="pointer-events-none absolute left-3 top-3 z-10 max-w-[55%] sm:left-4 sm:top-4"
-      style={{ maxWidth: inspectorOpen ? "calc(100% - 700px)" : "calc(100% - 330px)", minWidth: 200 }}
+      className={clsx("pointer-events-none absolute left-3 top-3 z-10 sm:left-4 sm:top-4", inspectorOpen && "hidden xl:block")}
+      style={{ maxWidth: inspectorOpen ? "calc(100% - 424px - 280px)" : "calc(100% - 290px)" }}
     >
       <div className="glass rounded-xl px-3.5 py-2.5">
         <div className="eyebrow">{preview ? "Pair in view" : "Overview"}</div>
@@ -64,7 +64,7 @@ function MapControls() {
     <div
       className={clsx(
         "absolute top-4 z-10 flex flex-col items-end gap-2 transition-[right] duration-500 ease-[var(--ease-out)]",
-        inspectorOpen ? "right-[424px]" : "right-4",
+        inspectorOpen ? "right-3 sm:right-[424px]" : "right-3 sm:right-4",
       )}
     >
       <div className="glass flex items-center gap-0.5 rounded-[10px] p-0.5" role="group" aria-label="Map perspective">

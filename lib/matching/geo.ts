@@ -13,9 +13,10 @@ export const SAME_SITE_MILES = 0.6;
 
 /** Relations that state, in a source, that two projects physically meet. */
 export function siteRelations(a: Project, b: Project, relations: Relation[]): Relation[] {
+  // any relation that names where the two projects meet counts (e.g. a joint initiative "meeting near Marion")
   return relations.filter(
     (r) =>
-      (r.kind === "shared-site" || r.kind === "interconnects") &&
+      (r.kind === "shared-site" || r.kind === "interconnects" || (r.kind === "same-initiative" && !!r.siteLabel)) &&
       ((r.projectA === a.id && r.projectB === b.id) || (r.projectA === b.id && r.projectB === a.id)),
   );
 }
@@ -33,6 +34,8 @@ export interface Center {
   lonlat: [number, number];
   errorMiles: number;
   lowConfidence: boolean;
+  /** Every point behind this center is a town-level geocode (plan §8.4: at most a "possible" match). */
+  localityOnly: boolean;
   places: Place[];
 }
 
@@ -51,6 +54,7 @@ export function centerOf(p: Project): Center | null {
     lonlat: [lon, lat],
     errorMiles: pts.reduce((s, x) => s + errMiles(x), 0) / pts.length,
     lowConfidence: pts.some((x) => x.confidence === "lower-confidence" || x.precision === "locality"),
+    localityOnly: pts.every((x) => x.precision === "locality"),
     places: pts,
   };
 }
@@ -129,6 +133,13 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
     const est = formatMiles(center.miles);
     const detail: GeoDetail = { ...base, method: "measured" };
     const caveat = center.lowConfidence ? " (a location is approximate or lower-confidence)" : "";
+    // plan §8.4: locality-only evidence can make a possible match, never a precise mileage claim
+    if (ca!.localityOnly || cb!.localityOnly) {
+      const who = [ca!.localityOnly ? a.shortTitle : null, cb!.localityOnly ? b.shortTitle : null].filter(Boolean).join(" and ");
+      return center.lowMiles <= thresholdMiles
+        ? { level: "possible", reason: `${who} is located only to a town; the areas are roughly ${est} apart, which could be within ${thresholdMiles} mi.`, detail, approxMiles: center.miles }
+        : { level: "no-match", reason: `Even the near edge of the town-level locations is beyond the ${thresholdMiles} mi radius.`, detail, approxMiles: center.miles };
+    }
     if (center.highMiles <= thresholdMiles) {
       return { level: "confirmed", reason: `Project centers are ≈${est} apart${caveat} — inside the ${thresholdMiles} mi radius.`, detail, approxMiles: center.miles };
     }

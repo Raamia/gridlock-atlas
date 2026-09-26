@@ -113,6 +113,7 @@ export function Timeline() {
 function PairTimeline({ m, a, b, y0, y1 }: { m: Match; a: Project; b: Project; y0: number; y1: number }) {
   const highlightConflict = useAtlas((s) => s.highlightConflict);
   const o = m.timeDetail.possibleOverlap;
+  const core = m.timeDetail.confirmedOverlap;
   const confirmed = m.time === "confirmed";
   const rows: [Project, "a" | "b"][] = [
     [a, "a"],
@@ -131,10 +132,22 @@ function PairTimeline({ m, a, b, y0, y1 }: { m: Match; a: Project; b: Project; y
             style={{
               left: `${pct(o.start, y0, y1)}%`,
               width: `${pct(o.end, y0, y1) - pct(o.start, y0, y1)}%`,
-              background: confirmed ? "linear-gradient(180deg, rgba(251,191,36,.13), rgba(251,191,36,.05))" : "repeating-linear-gradient(135deg, rgba(251,191,36,.09) 0 6px, transparent 6px 12px)",
-              boxShadow: "inset 0 0 0 1px rgba(251,191,36,.35)",
+              background: "repeating-linear-gradient(135deg, rgba(251,191,36,.09) 0 6px, transparent 6px 12px)",
+              boxShadow: "inset 0 0 0 1px rgba(251,191,36,.3)",
             }}
           />
+          {confirmed && core && (
+            <div
+              className="absolute inset-y-0 rounded-sm"
+              title="Span every source combination guarantees"
+              style={{
+                left: `${pct(core.start, y0, y1)}%`,
+                width: `max(3px, ${pct(core.end, y0, y1) - pct(core.start, y0, y1)}%)`,
+                background: "linear-gradient(180deg, rgba(251,191,36,.28), rgba(251,191,36,.12))",
+                boxShadow: "inset 0 0 0 1px rgba(251,191,36,.6)",
+              }}
+            />
+          )}
         </div>
       )}
       <div className="relative z-10 flex h-full flex-col justify-center gap-3">
@@ -150,7 +163,8 @@ function PairTimeline({ m, a, b, y0, y1 }: { m: Match; a: Project; b: Project; y
             style={{ left: `${pct(o.start, y0, y1)}%`, width: `${pct(o.end, y0, y1) - pct(o.start, y0, y1)}%` }}
           >
             <span className="mono whitespace-nowrap rounded-t-md bg-bg-1 px-1.5 pt-0.5 text-[10px] text-amber">
-              {confirmed ? "Shared window" : "Possible overlap"} {formatSpan(o, m.timeDetail.precision)} · {m.timeDetail.precision} precision
+              {confirmed ? `Overlap guaranteed in ${formatSpan(core ?? o, m.timeDetail.precision)} · possible ${formatSpan(o, m.timeDetail.precision)}` : `Possible overlap ${formatSpan(o, m.timeDetail.precision)}`} ·{" "}
+              {m.timeDetail.precision} precision
             </span>
           </div>
         </div>

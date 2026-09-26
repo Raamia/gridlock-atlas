@@ -27,6 +27,10 @@ function topSoutheast(run: MatchRun | null) {
   return run?.matches.find((m) => inSE(m.projectAId) && m.geo === "confirmed" && m.reviewStatus === "needs-review") ?? run?.matches.find((m) => inSE(m.projectAId)) ?? null;
 }
 
+/** Each step run gets a token; work that resolves after the user moved on is dropped. */
+let stepToken = 0;
+const stale = (token: number) => token !== stepToken;
+
 async function ensureRun() {
   const st = useAtlas.getState();
   return st.run ?? (await st.compare());
@@ -34,7 +38,9 @@ async function ensureRun() {
 
 function open(pick: (run: MatchRun | null) => Match | null, section: InspectorSection | null, extra: Partial<ReturnType<typeof useAtlas.getState>> = {}) {
   return async () => {
+    const token = stepToken;
     const run = await ensureRun();
+    if (stale(token)) return;
     const m = pick(run);
     if (!m) return;
     const st = useAtlas.getState();
@@ -56,7 +62,9 @@ const STEPS: Step[] = [
     title: "Compare public plans",
     body: "The deterministic engine measures every cross-utility pair center-to-center and keeps those within 25 miles — or that share a facility — then ranks them by closeness and timing. Amber links mark every flagged pair.",
     run: async () => {
+      const token = stepToken;
       await useAtlas.getState().compare();
+      if (stale(token)) return;
       useAtlas.setState((s) => ({ tab: "needs-review", selectedMatchId: null, inspectorOpen: false, cameraNonce: s.cameraNonce + 1 }));
     },
   },
@@ -89,7 +97,9 @@ const STEPS: Step[] = [
     title: "Export a cited review brief",
     body: "One question a planner can act on, with every fact numbered to a short excerpt and page. It never contacts a utility.",
     run: async () => {
+      const token = stepToken;
       await open(topSoutheast, "coordination")();
+      if (stale(token)) return;
       useAtlas.setState({ briefOpen: true });
     },
   },
@@ -102,6 +112,7 @@ export function GuidedDemo() {
   const go = useCallback(
     (n: number) => {
       const k = Math.max(0, Math.min(STEPS.length - 1, n));
+      stepToken++;
       set({ demoStep: k });
       void STEPS[k].run();
     },
@@ -109,7 +120,10 @@ export function GuidedDemo() {
   );
 
   useEffect(() => {
-    if (step === 0) void STEPS[0].run();
+    if (step === 0) {
+      stepToken++;
+      void STEPS[0].run();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step === null]);
 
@@ -133,7 +147,7 @@ export function GuidedDemo() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute bottom-3 left-3 right-3 z-30 sm:bottom-4 sm:left-4 sm:right-auto sm:w-[440px]"
+          className="fixed left-3 right-3 top-[60px] z-50 sm:absolute sm:bottom-4 sm:left-4 sm:right-auto sm:top-auto sm:z-30 sm:w-[440px]"
           role="region"
           aria-label="Guided demo"
         >
@@ -172,7 +186,7 @@ export function GuidedDemo() {
                   <Kbd>→</Kbd>
                 </span>
                 <div className="ml-auto flex gap-1.5">
-                  <Button variant="ghost" size="sm" onClick={() => go(step - 1)} disabled={step === 0}>
+                  <Button variant="ghost" size="sm" onClick={() => go(step - 1)} disabled={step === 0} aria-label="Previous step">
                     <ArrowLeft size={13} />
                   </Button>
                   {step < STEPS.length - 1 ? (

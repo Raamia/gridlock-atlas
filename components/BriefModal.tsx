@@ -38,7 +38,7 @@ export function BriefModal() {
     <AnimatePresence>
       {open && pair && brief && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-bg-0/70 p-6 backdrop-blur-sm print:static print:bg-white print:p-0"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-bg-0/70 p-3 backdrop-blur-sm sm:p-6 print:static print:bg-white print:p-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -56,12 +56,12 @@ export function BriefModal() {
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
             className="flex max-h-full w-full max-w-[780px] flex-col overflow-hidden rounded-2xl border border-line-2 bg-bg-1 shadow-[0_40px_120px_-20px_rgba(0,0,0,.8)] print:max-h-none print:border-0 print:shadow-none"
           >
-            <div className="no-print flex items-center gap-2 border-b border-line px-5 py-3">
-              <div>
+            <div className="no-print relative flex flex-wrap items-center gap-2 border-b border-line px-5 py-3 pr-14">
+              <div className="hidden sm:block">
                 <div className="eyebrow">Cited review brief</div>
                 <div className="text-[12px] text-text-2">Built from snapshot fields only · every fact carries a numbered source · excerpts re-found verbatim, awaiting human check</div>
               </div>
-              <div className="ml-auto flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center gap-1.5 sm:ml-auto">
                 <Button variant="outline" size="sm" onClick={copy}>
                   {copied ? <Check size={13} className="text-known" /> : <Copy size={13} />}
                   {copied ? "Copied" : "Copy Markdown"}
@@ -72,13 +72,13 @@ export function BriefModal() {
                 <Button variant="outline" size="sm" onClick={() => window.print()}>
                   <Printer size={13} /> Print / PDF
                 </Button>
-                <IconButton label="Close brief" onClick={() => set({ briefOpen: false })}>
+                <IconButton label="Close brief" onClick={() => set({ briefOpen: false })} className="absolute right-3 top-3">
                   <X size={15} />
                 </IconButton>
               </div>
             </div>
 
-            <article className="scroll-thin overflow-y-auto px-9 py-8 print:overflow-visible print:px-0 print:text-black">
+            <article className="scroll-thin overflow-y-auto px-5 py-6 sm:px-9 sm:py-8 print:overflow-visible print:px-0 print:text-black">
               <div className="flex items-center gap-2">
                 <MatchBadges m={pair.match} />
                 <StatusChip status={pair.match.reviewStatus} />
@@ -88,13 +88,13 @@ export function BriefModal() {
               </h2>
               <dl className="mt-6 space-y-4">
                 {brief.rows.slice(1).map((r) => (
-                  <div key={r.label} className="grid grid-cols-[140px_1fr] gap-4">
+                  <div key={r.label} className="grid grid-cols-1 gap-1 sm:grid-cols-[140px_1fr] sm:gap-4">
                     <dt className="eyebrow pt-0.5">{r.label}</dt>
                     <dd className="whitespace-pre-line text-[13.5px] leading-[1.6] text-text-1 print:text-black">{r.text}</dd>
                   </div>
                 ))}
                 {brief.unresolved.length > 0 && (
-                  <div className="grid grid-cols-[140px_1fr] gap-4">
+                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-[140px_1fr] sm:gap-4">
                     <dt className="eyebrow pt-0.5 text-conflict">Unresolved</dt>
                     <dd>
                       <ul className="space-y-1.5">
@@ -108,7 +108,7 @@ export function BriefModal() {
                     </dd>
                   </div>
                 )}
-                <div className="grid grid-cols-[140px_1fr] gap-4">
+                <div className="grid grid-cols-1 gap-1 sm:grid-cols-[140px_1fr] sm:gap-4">
                   <dt className="eyebrow pt-1 text-amber">Review question</dt>
                   <dd className="rounded-xl bg-amber/8 p-4 font-serif text-[18px] leading-[1.4] text-text-0 ring-1 ring-amber/25 print:text-black">{brief.question}</dd>
                 </div>

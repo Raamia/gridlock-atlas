@@ -563,14 +563,31 @@ export default function MapStage() {
     if (!map) return;
     const apply = (animate: boolean) => {
       const st = useAtlas.getState();
-      const right = st.inspectorOpen ? 440 : 64;
       const duration = animate && !reduced ? 1600 : 0;
+      // padding from the real canvas: desktop leaves room for the inspector column; phones leave room for
+      // the bottom sheet. Clamped so fitBounds can always succeed.
+      const cw = map.getContainer().clientWidth;
+      const ch = map.getContainer().clientHeight;
+      const rect = map.getContainer().getBoundingClientRect();
+      const mobile = cw < 640;
+      const sheetTop = window.innerHeight * 0.46;
+      const pad = mobile
+        ? { top: 64, left: 24, right: 24, bottom: st.inspectorOpen ? Math.max(24, rect.bottom - sheetTop + 24) : 32 }
+        : { top: 90, left: 70, right: st.inspectorOpen ? 440 : 64, bottom: 70 };
+      const fit = (a: number, b: number, total: number) => {
+        const max = Math.max(0, total - 80);
+        const k = a + b > max ? max / (a + b) : 1;
+        return [Math.floor(a * k), Math.floor(b * k)];
+      };
+      [pad.left, pad.right] = fit(pad.left, pad.right, cw);
+      [pad.top, pad.bottom] = fit(pad.top, pad.bottom, ch);
+      const right = pad.right;
       if (selected) {
         const b = boundsOf([...projectCoords(selected.a), ...projectCoords(selected.b)]);
         if (b) {
           const threeD = st.mapMode === "3d";
           map.fitBounds(b as LngLatBoundsLike, {
-            padding: { top: 90, bottom: 70, left: 70, right },
+            padding: pad,
             pitch: threeD ? 52 : 0,
             bearing: threeD ? -14 : 0,
             maxZoom: 10.5,
@@ -587,7 +604,7 @@ export default function MapStage() {
             [r.bbox[2], r.bbox[3]],
           ] as LngLatBoundsLike)
         : (boundsOf(SNAPSHOT.projects.flatMap(projectCoords)) as LngLatBoundsLike | null);
-      if (target) map.fitBounds(target, { padding: { top: 80, bottom: 60, left: 60, right }, pitch: 0, bearing: 0, duration, essential: true });
+      if (target) map.fitBounds(target, { padding: { ...pad, right: mobile ? pad.right : Math.min(right, 64) }, pitch: 0, bearing: 0, duration, essential: true });
     };
     // first placement after load is instant; later moves animate
     if (!mapReady) return;

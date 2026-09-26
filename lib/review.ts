@@ -29,6 +29,8 @@ interface ReviewState {
   labels: Record<string, PairReview>;
   checked: Record<string, boolean>;
   toggle: () => void;
+  /** Load saved labels/checks once on the client (independent of reviewer mode being on). */
+  hydrate: () => void;
   setLabel: (matchId: string, label: ReviewLabel, seconds: number) => void;
   setNote: (matchId: string, note: string) => void;
   toggleCheck: (evidenceId: string) => void;
@@ -60,8 +62,10 @@ export const useReview = create<ReviewState>((set, get) => ({
   labels: {},
   checked: {},
   toggle() {
-    const next = !get().enabled;
-    set({ enabled: next, ...(next ? load() : {}) });
+    set({ enabled: !get().enabled });
+  },
+  hydrate() {
+    set(load());
   },
   setLabel(matchId, label, seconds) {
     const labels = { ...get().labels, [matchId]: { ...get().labels[matchId], label, seconds, at: new Date().toISOString() } };

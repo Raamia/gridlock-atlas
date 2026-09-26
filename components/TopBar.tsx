@@ -68,7 +68,19 @@ export function TopBar() {
         ))}
       </nav>
 
-      <div className="ml-auto flex min-w-0 items-center gap-1 md:ml-0">
+      <select
+        aria-label="Region"
+        value={region}
+        onChange={(e) => set({ region: e.target.value, cameraNonce: useAtlas.getState().cameraNonce + 1, selectedMatchId: null, inspectorOpen: false })}
+        className="ml-auto h-8 min-w-0 max-w-[40vw] rounded-lg border border-line-2 bg-bg-2 px-2 text-[12px] text-text-1 outline-none md:hidden"
+      >
+        {regions.map((r) => (
+          <option key={r.id} value={r.id}>
+            {r.label}
+          </option>
+        ))}
+      </select>
+      <div className="flex min-w-0 items-center gap-1 md:ml-0">
         <Button variant="ghost" size="sm" onClick={() => set({ sourcesOpen: true })} title="Source registry" aria-label={`Source registry: ${SNAPSHOT.sources.length} sources, ${utilities.size} utilities`}>
           <Database size={13} />
           <span className="num">{SNAPSHOT.sources.length}</span>
@@ -86,7 +98,12 @@ export function TopBar() {
           <RotateCcw size={14} />
         </IconButton>
         <div className="mx-1 h-5 w-px bg-line-2" />
-        <Button variant={demoStep === null ? "outline" : "subtle"} size="sm" onClick={() => set({ demoStep: demoStep === null ? 0 : null })}>
+        <Button
+          variant={demoStep === null ? "outline" : "subtle"}
+          size="sm"
+          onClick={() => set({ demoStep: demoStep === null ? 0 : null })}
+          aria-label={demoStep === null ? "Start guided demo" : "Exit guided demo"}
+        >
           <PlayCircle size={13} className="text-amber" />
           <span className="hidden sm:inline">{demoStep === null ? "Guided demo" : "Exit demo"}</span>
         </Button>

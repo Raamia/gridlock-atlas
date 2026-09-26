@@ -91,11 +91,13 @@ export const useAtlas = create<AtlasState>((set, get) => ({
       const wait = Math.max(0, minVisible - (performance.now() - started));
       if (wait) await new Promise((r) => setTimeout(r, wait));
       const selected = get().selectedMatchId;
+      const dropped = !!selected && !run.matches.some((m) => m.id === selected);
       set({
         run,
         running: false,
         thresholdMiles,
-        selectedMatchId: selected && run.matches.some((m) => m.id === selected) ? selected : opts?.quiet ? null : selected,
+        // a pair that no longer qualifies (e.g. smaller radius) closes the inspector with it
+        ...(dropped ? { selectedMatchId: null, inspectorOpen: false, inspectorSection: null, highlightConflict: false } : {}),
       });
       return run;
     } catch (err) {

@@ -281,6 +281,35 @@ for (const c of clusters) {
   }
 }
 
+// sponsor method needs two terminals per project: when research did not tag them, take the two located
+// named places farthest apart (a line's terminals); a single located place is the center by itself
+function haversineMi(a: Place, b: Place) {
+  const r = (x: number) => (x * Math.PI) / 180;
+  const h = Math.sin(r(b.lat - a.lat) / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(r(b.lon - a.lon) / 2) ** 2;
+  return 3958.8 * 2 * Math.asin(Math.sqrt(h));
+}
+for (const p of projects.values()) {
+  if (p.places.some((pl) => pl.role === "endpoint")) continue;
+  const located = p.places.filter((pl) => ["named-facility", "official-gis", "locality"].includes(pl.precision));
+  const named = located.filter((pl) => pl.precision !== "locality");
+  const pool = named.length >= 2 ? named : located;
+  if (pool.length === 1) {
+    pool[0].role = "endpoint";
+    continue;
+  }
+  let best: [Place, Place] | null = null;
+  let far = -1;
+  for (let i = 0; i < pool.length; i++)
+    for (let j = i + 1; j < pool.length; j++) {
+      const d = haversineMi(pool[i], pool[j]);
+      if (d > far) {
+        far = d;
+        best = [pool[i], pool[j]];
+      }
+    }
+  if (best) for (const pl of best) pl.role = "endpoint";
+}
+
 // coordination claims must point at a project in the snapshot
 for (const { from, c } of coordinationRaw) {
   const partner = alias(c.partner);
