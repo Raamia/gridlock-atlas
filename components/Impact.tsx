@@ -84,7 +84,7 @@ export function ImpactEstimate({ m }: { m: Match }) {
   const r = computeImpact({ sharedMiles: miles, rowWidthFt: width, landValuePerAcre: value, easementShare: easement }, d);
   const [valueTouched, setValueTouched] = useState(false);
   const valueSourced = !!d.landValue || valueTouched;
-  const classNote = d.voltageKv && String(d.voltageKv) !== d.voltageClass ? ` · ${d.voltageClass} kV class (nearest published)` : "";
+  const classNote = d.widthClass && d.widthClass !== String(d.voltageKv) ? ` · ${d.widthClass} kV class (nearest published)` : "";
   const staging = m.time !== "no-match";
   const maxMiles = Math.max(5, Math.ceil(Math.max(d.lengthA ?? 0, d.lengthB ?? 0, m.geoDetail.center?.miles ?? 0, 10)));
   const mobil = d.mobilization;
@@ -141,8 +141,8 @@ export function ImpactEstimate({ m }: { m: Match }) {
             <span className="num text-[13px] text-text-0">≈{formatUsd(mobil.typical * (d.avoidedMobilizations?.typical ?? 1))}</span>
           </div>
           <p className="mt-1 text-text-2">
-            If both jobs were actually staged together — which no source here establishes — one crew mobilization could be avoided, priced at MISO&apos;s {d.voltageClass}{" "}
-            kV-class unit cost
+            If both jobs were actually staged together — which no source here establishes — one crew mobilization could be avoided, priced at MISO&apos;s {d.mobilClass}{" "}
+            kV-class unit cost{d.mobilClass !== d.voltageClass ? ", the highest class it publishes" : ""}
             {mobil.unit.match(/(\d{4}) \$/) ? ` (${mobil.unit.match(/(\d{4}) \$/)![1]} dollars, before overhead and contingency)` : ""}.
             {d.avoidedMobilizations &&
               " A joint proposed order filed in a South Carolina PSC docket (summarizing utility testimony) states that building two lines at the same time avoids mobilizing crews twice."}

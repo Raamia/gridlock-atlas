@@ -2,7 +2,7 @@ import { IDX, SNAPSHOT } from "@/lib/data";
 import { displayTitle, firstSentence, SCOPE_LABEL } from "@/lib/describe";
 import type { Evidence, Match, Project } from "@/lib/domain/types";
 import { formatDate, formatSpan } from "@/lib/format";
-import { activeWindows } from "@/lib/matching/time";
+import { activeWindows, currentInService } from "@/lib/matching/time";
 import { ownerNames, pageLabel } from "@/lib/selectors";
 
 export interface BriefCitation {
@@ -74,26 +74,25 @@ export function buildBrief(m: Match): Brief {
   const timeLine = `TIME (${m.time}) — ${m.timeReason}${merge(
     cite(dated(activeWindows(a).flatMap((w) => w.evidenceIds)), 1),
     cite(dated(activeWindows(b).flatMap((w) => w.evidenceIds)), 1),
-    m.timeDetail.inService ? cite(dated(a.completionClaims.slice(0, 1).flatMap((c) => c.evidenceIds)), 1) : "",
-    m.timeDetail.inService ? cite(dated(b.completionClaims.slice(0, 1).flatMap((c) => c.evidenceIds)), 1) : "",
+    // cite the same in-service claims the gap is computed from
+    m.timeDetail.inService ? cite(dated(currentInService(a)?.evidenceIds ?? []), 1) : "",
+    m.timeDetail.inService ? cite(dated(currentInService(b)?.evidenceIds ?? []), 1) : "",
   )}`;
 
   const byScope = new Map<string, (typeof m.coordination)[number]>();
   for (const c of m.coordination) if (!byScope.has(c.scope)) byScope.set(c.scope, c);
   const statusText = m.coordination.length
-    ? [...byScope.values()].map((c) => `${SCOPE_LABEL[c.scope]}: ${firstSentence(c.description, 32)}${cite(c.evidenceIds, 1)}`).join(" ") +
+    ? [...byScope.values()].map((c) => `${SCOPE_LABEL[c.scope]}: ${firstSentence(c.description, Number.POSITIVE_INFINITY)}${cite(c.evidenceIds, 1)}`).join(" ") +
       (m.coordination.some((c) => c.scope === "resource-sharing") ? "" : " Resource sharing (crews, equipment) is not established in the reviewed sources.")
     : "No coordination between these projects was found in the reviewed sources. That is an unknown status, not evidence of a lack of coordination.";
 
   const unresolved: string[] = [];
   for (const c of m.conflicts) {
     const p = IDX.project(c.projectId);
-    // one citation per side, so every value in the sentence has a source
-    const sideEvidence = (claimIds: string[]) =>
-      c.field === "completion"
-        ? p.completionClaims.filter((x) => claimIds.includes(x.id)).flatMap((x) => x.evidenceIds)
-        : p.constructionWindows.filter((x) => claimIds.includes(x.id)).flatMap((x) => x.evidenceIds);
-    unresolved.push(`${p.shortTitle}: ${c.description}${merge(...c.sides.map((side) => cite(dated(sideEvidence(side.claimIds)), 1)))}`);
+    // one citation per side, in the side's claim order: the first claim is the one whose value the sentence shows
+    const claims: { id: string; evidenceIds: string[] }[] = c.field === "completion" ? p.completionClaims : p.constructionWindows;
+    const sideEvidence = (claimIds: string[]) => claimIds.flatMap((id) => dated(claims.find((x) => x.id === id)?.evidenceIds ?? []));
+    unresolved.push(`${displayTitle(p)}: ${c.description}${merge(...c.sides.map((side) => cite(sideEvidence(side.claimIds), 1)))}`);
   }
   if (m.conflicts.length) unresolved.push("Confirm the current phase dates with both planners before discussing shared resources.");
   if (m.time === "unknown") unresolved.push("At least one construction window is not published; schedule overlap cannot be assessed.");

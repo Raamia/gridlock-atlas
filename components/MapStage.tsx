@@ -3,6 +3,7 @@
 import mapboxgl, { type GeoJSONSource, type LngLatBoundsLike, type StyleSpecification } from "mapbox-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
+import { inServicePhrase } from "@/lib/describe";
 import { usePreviewPair, useReducedMotion, useSelectedPair } from "@/lib/hooks";
 import {
   anchorOf,
@@ -428,7 +429,7 @@ export default function MapStage() {
             <div class="mono text-[10px] uppercase tracking-[0.08em]" style="color:#fbbf24">Flagged pair · P${m.priority}</div>
             <div class="mt-0.5 font-medium" style="color:#2fd6f2">${escapeHtml(pa.shortTitle)}</div>
             <div class="font-medium" style="color:#a78bfa">${escapeHtml(pb.shortTitle)}</div>
-            <div class="mono mt-1 text-[10.5px] text-text-2">${c ? `${c.miles < 10 ? c.miles.toFixed(1) : Math.round(c.miles)} mi apart` : "shared site"}${m.timeDetail.inService ? ` · ${m.timeDetail.inService.gapDays.toLocaleString("en-US")} days between in-service dates` : ""}</div>
+            <div class="mono mt-1 text-[10.5px] text-text-2">${c ? `${c.miles < 10 ? c.miles.toFixed(1) : Math.round(c.miles)} mi apart` : "shared site"}${m.timeDetail.inService ? ` · ${escapeHtml(inServicePhrase(m))}` : ""}</div>
             <div class="mt-1 text-[10.5px] text-text-3">Click to inspect</div>
           </div>`;
           if (!popup.current) popup.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 14, maxWidth: "300px" });

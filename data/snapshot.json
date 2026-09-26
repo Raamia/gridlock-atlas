@@ -1,6 +1,6 @@
 {
- "version": "snap-2026-09-26-34288e15",
- "generatedAt": "2026-09-26T08:17:44.427Z",
+ "version": "snap-2026-09-26-abf6709f",
+ "generatedAt": "2026-09-26T09:04:20.919Z",
  "snapshotDate": "2026-09-26",
  "regions": [
   {
@@ -988,7 +988,7 @@
   },
   {
    "id": "psc-wwtc-q2-2026-atc",
-   "publisher": "Public Service Commission of Wisconsin (ERF filing)",
+   "publisher": "American Transmission Company LLC (filed with PSC of Wisconsin)",
    "title": "Q2 2026 Progress Report, docket 5-CE-158 (ATC, filed 2026-07-31)",
    "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=601113",
    "sourceType": "regulator",
@@ -1002,7 +1002,7 @@
   },
   {
    "id": "psc-wwtc-q2-2026-nspw",
-   "publisher": "Public Service Commission of Wisconsin (ERF filing)",
+   "publisher": "Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
    "title": "Q2 2026 Quarterly Progress Report, docket 5-CE-158 (NSPW, filed 2026-07-27)",
    "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=600338",
    "sourceType": "regulator",
@@ -12737,6 +12737,16 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
+  "ev-73dac51b5006": {
+   "id": "ev-73dac51b5006",
+   "sourceId": "gpc-irp-2025-vol3",
+   "page": 313,
+   "exactExcerpt": "Rebuild 9.3 miles of Goshen - Kraft 115kV line from Kraft - Godley J - Rice Hope from 100C 795 ACSR Drake to 200C 1351 ACSS Martin.",
+   "supports": "terminal named in the project scope · length of line work",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
   "ev-8940c083a7c3": {
    "id": "ev-8940c083a7c3",
    "sourceId": "gpc-irp-2025-vol3",
@@ -12763,16 +12773,6 @@
    "page": 313,
    "exactExcerpt": "Teams # 20785",
    "supports": "TEAMS project number",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
-  "ev-73dac51b5006": {
-   "id": "ev-73dac51b5006",
-   "sourceId": "gpc-irp-2025-vol3",
-   "page": 313,
-   "exactExcerpt": "Rebuild 9.3 miles of Goshen - Kraft 115kV line from Kraft - Godley J - Rice Hope from 100C 795 ACSR Drake to 200C 1351 ACSS Martin.",
-   "supports": "length of line work",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -17999,7 +17999,7 @@
    "page": 32,
    "section": "3.1 Right-of-Way Width, Table 3.1-1 (printed page 31)",
    "exactExcerpt": "Table 3.1-1: Right-of-way width AC Transmission (single and double circuit) Voltage class 69 kV 115 kV 138 kV 161 kV 230 kV 345 kV 500 kV 765 kV Feet 80 90 95 100 125 175 200 225",
-   "supports": "MISO indicative right-of-way width, 115 kV (cross-check) · MISO indicative right-of-way width, 230 kV (cross-check) · MISO indicative right-of-way width, 500 kV (cross-check)",
+   "supports": "MISO indicative right-of-way width, 345 kV · MISO indicative right-of-way width, 765 kV · MISO indicative right-of-way width, 115 kV (cross-check) · MISO indicative right-of-way width, 230 kV (cross-check) · MISO indicative right-of-way width, 500 kV (cross-check)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -18065,7 +18065,7 @@
    "page": 39,
    "section": "4.1 Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
    "exactExcerpt": "Louisiana $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.1M $6.3M Michigan $1.8M $2.0M $2.1M $2.2M $2.3M $3.7M $4.6M $5.8M Minnesota $1.8M $2.0M $2.1M $2.1M $2.3M $3.6M $4.5M $5.7M Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M Missouri $1.7M $1.9M $2.0M $2.0M $2.2M $3.5M $4.4M $5.5M Montana $1.6M $1.8M $1.9M $1.9M $2.0M $3.2M $4.1M $5.2M",
-   "supports": "New single-circuit 115 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy) · New single-circuit 230 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy) · New single-circuit 500 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "supports": "New single-circuit 115 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy) · New single-circuit 230 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy) · New single-circuit 345 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy) · New single-circuit 500 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy) · New single-circuit 765 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -18120,7 +18120,7 @@
    "page": 16,
    "section": "4.1.1.3 Mobilization/Demobilization",
    "exactExcerpt": "Single circuit and double circuit Unit detail 69kV 115kV 138kV 161kV 230kV 345kV 500kV Mobilization/Demobilization $100,000 $100,000 $150,000 $150,000 $200,000 $250,000 $300,000",
-   "supports": "Mobilization/demobilization unit cost per line project, 115 kV (MISO 2018) · Mobilization/demobilization unit cost per line project, 230 kV (MISO 2018) · Mobilization/demobilization unit cost per line project, 500 kV (MISO 2018)",
+   "supports": "Mobilization/demobilization unit cost per line project, 115 kV (MISO 2018) · Mobilization/demobilization unit cost per line project, 230 kV (MISO 2018) · Mobilization/demobilization unit cost per line project, 345 kV (MISO 2018) · Mobilization/demobilization unit cost per line project, 500 kV (MISO 2018)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -18439,6 +18439,19 @@
    "completionClaims": [
     {
      "id": "transource-beci:c1",
+     "claimSourceId": "mgs-beci-factsheet",
+     "label": "anticipated in-service (Sept 2026 schedule)",
+     "date": {
+      "earliest": "2033-01-01",
+      "latest": "2033-12-31",
+      "precision": "year"
+     },
+     "evidenceIds": [
+      "ev-e47c7c3c15a4"
+     ]
+    },
+    {
+     "id": "transource-beci:c2",
      "claimSourceId": "miso-beci-selection-2026",
      "label": "required in-service deadline (no later than 2034-06-01; a deadline, not a forecast date)",
      "date": {
@@ -18452,7 +18465,7 @@
      ]
     },
     {
-     "id": "transource-beci:c2",
+     "id": "transource-beci:c3",
      "claimSourceId": "transource-beci-page",
      "label": "required in-service deadline (no later than 2034-06-01; a deadline, not a forecast date)",
      "date": {
@@ -18465,7 +18478,7 @@
      ]
     },
     {
-     "id": "transource-beci:c3",
+     "id": "transource-beci:c4",
      "claimSourceId": "aep-beci-news-2026",
      "label": "target in-service (Jan 2026 announcement)",
      "date": {
@@ -18475,19 +18488,6 @@
      },
      "evidenceIds": [
       "ev-f2633e90e8a3"
-     ]
-    },
-    {
-     "id": "transource-beci:c4",
-     "claimSourceId": "mgs-beci-factsheet",
-     "label": "anticipated in-service (Sept 2026 schedule)",
-     "date": {
-      "earliest": "2033-01-01",
-      "latest": "2033-12-31",
-      "precision": "year"
-     },
-     "evidenceIds": [
-      "ev-e47c7c3c15a4"
      ]
     }
    ],
@@ -19684,7 +19684,7 @@
     "Intended as the 'same region, non-overlapping construction years' (GEO-only) control, but it does NOT meet that case at the default 25-mi threshold: straight-line distance is about 37 mi (60 km) from Alma to North Rochester Substation and about 34 mi (54 km) from Alma to Marion (computed here from OSM/Nominatim points). GEO would be no-match at 25 mi; it only becomes a GEO candidate at a threshold of roughly 40 mi or more.",
     "Both published schedule buckets (2030-2034 and 2031-2034) fall entirely after 2026-2027, so TIME against a 2026-27 project should be no-match.",
     "The schedule buckets are Gopher to Badger Link-wide and mix pre-construction, construction and restoration; they are recorded with phase 'unknown' and continuous=false.",
-    "The owner id xcel-nspm is a normalization: the sources say only 'Xcel Energy'.",
+    "The sources say only 'Xcel Energy'; the owner is attributed to Northern States Power Co.–Minnesota from the Minnesota location.",
     "Xcel's Mankato-Mississippi River project also has work at North Rochester Substation (per g2b-library); it is not modeled in this cluster and shares the Xcel owner."
    ],
    "sourceIds": [
@@ -20695,7 +20695,7 @@
     }
    ],
    "caveats": [
-    "The route geometry is the PSC docket GIS centerline of the application's Proposed Southern Route (3-28-2024 alignment) plus the Segment 6 alternate end point. It is not survey accurate and may be adjusted after approval (see route.caveat). The Northern alternative was not authorized and is not traced.",
+    "The route geometry is the PSC docket GIS centerline of the application's Proposed Southern Route (3-28-2024 alignment) plus the Segment 6 alternate end point. It is not survey accurate and may be adjusted after approval. The Northern alternative was not authorized and is not traced.",
     "The PSC Final Decision gives only a construction start (Q4 2026) and an in-service date (September 2028), not a construction end, so its window is kept as bounds only. The only window with both ends is the Dairyland page (2026-2027); the July 2024 application table (Q4 2026-Q1 2028) is superseded by the decision and kept for history.",
     "The documented Xcel/NSPW interface is an interconnection at a shared switching station (Tremval North, NSPW-owned) plus interface design coordination described in the 2024 application. No source shows shared crews, equipment or other resource sharing.",
     "The Tremval North point comes from the PSC's WWTC (5-CE-158) GIS layer for the candidate 'Tremval Expansion North' site, which the WWTC decision authorized. It marks the site, not a surveyed station footprint.",
@@ -22810,7 +22810,7 @@
     "Completion claims conflict: end of 2030 (project site, landowner page, Biennial Report) vs end of 2031 (OTP and MRES, both October 2024).",
     "South Dakota portion permitted by SD PUC on January 30, 2025; SD counties and SD route not captured from cached sources.",
     "Township waypoints are Census centroids of the townships named in the permit, not the permitted alignment.",
-    "Co-owner of record is Western Minnesota Municipal Power Agency (permittee), represented by MRES; modelled under utility id 'mres'."
+    "Co-owner of record is Western Minnesota Municipal Power Agency (permittee), represented by Missouri River Energy Services (MRES)."
    ],
    "sourceIds": [
     "mnpuc-bssa-route-permit-2026-06",
@@ -24059,7 +24059,7 @@
     "The page does not state that the substation is inside Effingham County; that is inferred from the substation name ('Effingham County Substation') and 'improving reliability in Effingham and surrounding counties'.",
     "No in-service or completion date is published; no line length or line endpoints are published.",
     "Not found in the 2024 GA ITS Ten-Year Plan (gpc-irp-2025-vol3: no 'Effingham' hits). In the 2025 SERTP plan the word appears only on p.226, as a generating-plant name in the modeled-resources table, not as a transmission project. The project appears to post-date both documents.",
-    "Both construction-window ends are open sentinels (2099-12-31), not published dates; the UI should show 'end not published'."
+    "Neither construction window has a published end date."
    ],
    "sourceIds": [
     "gpc-effingham-page"
@@ -24473,11 +24473,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-a92d0dabc947",
       "ev-1313bd289871"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -24615,11 +24616,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-2ef86521734a",
       "ev-2ccf4a09e911"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -24727,12 +24729,13 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-894becd017f0",
       "ev-0fb5cd58d342",
       "ev-3f3d0fb5b933"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -24893,12 +24896,13 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-93524937d3df",
       "ev-de7fdd72bf12",
       "ev-28d00dc6ba54"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -25028,11 +25032,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-543b4254b8b5",
       "ev-619a82764a9b"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -25192,11 +25197,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-d65f57bd917c",
       "ev-47ff437d0bfb"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -25326,11 +25332,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-a6daab42b82e",
       "ev-4a64bcb37ca6"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -25452,11 +25459,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-1ee37d065950",
       "ev-8f96e2e4ab2f"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -25579,11 +25587,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-a5d56b5676e3",
       "ev-70f26d2045d1"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -25711,11 +25720,12 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-9aa0d54203e3",
       "ev-8b6b909a9e6e"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -25853,12 +25863,13 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-15a220b0fad0",
       "ev-62c4f2aef787",
       "ev-59f7b5d387d4"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -26042,11 +26053,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-dda790a4b7aa",
       "ev-b3bc8ec61f2b"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -26197,11 +26209,12 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-bb2f6d082d79",
       "ev-02089c645a2b"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -26309,11 +26322,12 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-559e2a07b4df",
       "ev-89b2de7f52f6"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -26435,12 +26449,13 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-f97ae0687276",
       "ev-9a00153bdcd7",
       "ev-3ffb8844127e"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -26578,13 +26593,14 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-f979b0e21b59",
       "ev-09b9bd992d7d",
       "ev-eb753c18511a",
       "ev-2840f4c7a1d9"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -26706,12 +26722,13 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-ff17d8ac98b5",
       "ev-978de6f5c719",
       "ev-88aa4b640add"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -27246,11 +27263,12 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-61e60c4d64bf",
       "ev-dd84db3e97e0"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -28718,12 +28736,13 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-2fe41ff7459f",
       "ev-2a07deb2f11d",
       "ev-6a2526234072"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026; spending under 5% of the total (2026: $12,000) is treated as preconstruction and does not start the window."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024; spending under 5% of the total (2026: $12,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -29758,6 +29777,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-5ad49ac49264",
       "ev-5e5aaea3d901",
@@ -29765,7 +29785,7 @@
       "ev-eed792c91f72",
       "ev-f9cdbec0c0ca"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024–2028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -31670,6 +31690,7 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidenceIds": [
       "ev-52c49575199e",
       "ev-eb724f09c392",
@@ -31677,7 +31698,7 @@
       "ev-9fe5737cde90",
       "ev-c54c6fc0bb1d"
      ],
-     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026; spending under 5% of the total (2026: $600,000, 2028: $200,000) is treated as preconstruction and does not start the window."
+     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; spending under 5% of the total (2026: $600,000, 2028: $200,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -39304,16 +39325,15 @@
    "places": [
     {
      "id": "gpc-20785-ep1",
-     "label": "Goshen",
-     "detail": "Goshen (SAV)",
+     "label": "Rice Hope",
      "kind": "substation",
      "precision": "named-facility",
-     "lat": 32.2487,
-     "lon": -81.20947,
-     "uncertaintyMeters": 300,
-     "coordinateSource": "OSM way/1008141064 power=substation name=Goshen Substation operator=Georgia Power voltage=115000",
+     "lat": 32.20886,
+     "lon": -81.20821,
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/897598553 power=substation operator=Georgia Power voltage=115000 (unnamed), identified by line topology; SERTP 2025 p.157 (sertp-2025-plan) gives Goshen to Rice Hope as 3.04 mi, equal to OSM way/1015932067 (3.04 mi, Goshen (SAV) to this substation)",
      "evidenceIds": [
-      "ev-8940c083a7c3"
+      "ev-73dac51b5006"
      ],
      "role": "endpoint",
      "confidence": "confirmed"
@@ -39331,6 +39351,22 @@
       "ev-8940c083a7c3"
      ],
      "role": "endpoint",
+     "confidence": "confirmed"
+    },
+    {
+     "id": "gpc-20785-ctx1",
+     "label": "Goshen line terminal",
+     "detail": "Goshen line terminal; outside the rebuilt section",
+     "kind": "substation",
+     "precision": "named-facility",
+     "lat": 32.2487,
+     "lon": -81.20947,
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/1008141064 power=substation name=Goshen Substation operator=Georgia Power voltage=115000",
+     "evidenceIds": [
+      "ev-8940c083a7c3"
+     ],
+     "role": "context",
      "confidence": "confirmed"
     }
    ],
@@ -39374,7 +39410,7 @@
    ],
    "knownCoordination": [],
    "caveats": [
-    "The rebuild runs Kraft - Godley J - Rice Hope, 9.3 mi per the IRP. SERTP 2025 p.157 lists a separate 3.04 mi Goshen - Rice Hope rebuild, and SERTP 2025 describes a 3.48 mi portion. In OSM the full Goshen (SAV) - Kraft 115 kV path is about 9.6 mi. It runs from Goshen through Rice Hope (unnamed way/897598553, 3.04 mi from Goshen), past the Godley Tract tap junction, to Kraft.",
+    "The rebuilt section runs Kraft - Godley J - Rice Hope, so Kraft and Rice Hope are the project's terminals; Goshen is kept as a context place. The IRP gives 9.3 mi. SERTP 2025 describes a 3.48 mi portion (p.93) and lists a separate 3.04 mi Goshen - Rice Hope rebuild (p.157). In OSM the full Goshen (SAV) - Kraft 115 kV path is about 9.6 mi. It runs from Goshen through Rice Hope (unnamed way/897598553, 3.04 mi from Goshen), past the Godley Tract tap junction, to Kraft.",
     "Listed with project sponsor “SAV” (Georgia Power's Savannah area) in the Ten-Year Plan summary table."
    ],
    "sourceIds": [
@@ -50508,6 +50544,26 @@
    "note": "The sheet gives 150-180 ft cross-country and no roadside value. Typical is set to the low end of that range (150 ft) to stay conservative; I did not use a midpoint. The 100-150 ft figure in the structure-height table on the same page is a structure height, not a width. MISO's indicative width is 200 ft (rowWidthFt.500.miso). I found no public DESC 500 kV width."
   },
   {
+   "key": "rowWidthFt.345",
+   "label": "MISO indicative right-of-way width, 345 kV",
+   "typical": 175,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-c8ca107bf721"
+   ],
+   "note": "MISO indicative width; the feet values follow the voltage columns in order, so 345 kV = 175 ft."
+  },
+  {
+   "key": "rowWidthFt.765",
+   "label": "MISO indicative right-of-way width, 765 kV",
+   "typical": 225,
+   "unit": "ft",
+   "evidenceIds": [
+    "ev-c8ca107bf721"
+   ],
+   "note": "MISO indicative width; the eighth value is 765 kV = 225 ft."
+  },
+  {
    "key": "rowWidthFt.115.miso",
    "label": "MISO indicative right-of-way width, 115 kV (cross-check)",
    "typical": 90,
@@ -50642,6 +50698,18 @@
    "note": "The fifth value in each row is 230 kV: typical is Mississippi, $2.6M; low is Montana, $2.0M (the table minimum, shared with North and South Dakota); high is Louisiana and Mississippi, $2.6M (the table maximum). This is a MISO-footprint proxy, not a DESC or Georgia Power figure. It includes right-of-way land and acquisition (see lineCostPerMile.115), so do not add avoided right-of-way land value on top. Compare the DESC-derived examples: lineCostPerMile.230.descNewExample (~$2.97M/mile, which also covers substation work) and lineCostPerMile.230.descRebuildExample (~$1.27M/mile)."
   },
   {
+   "key": "lineCostPerMile.345",
+   "label": "New single-circuit 345 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "low": 3200000,
+   "typical": 4100000,
+   "high": 4100000,
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
+   "evidenceIds": [
+    "ev-1b9aca6e6cdf"
+   ],
+   "note": "The sixth value in each row is 345 kV: typical is Mississippi, $4.1M; low is Montana, $3.2M (the table minimum); high is Louisiana and Mississippi, $4.1M (the table maximum). A MISO proxy that includes right-of-way land and acquisition (see lineCostPerMile.115)."
+  },
+  {
    "key": "lineCostPerMile.500",
    "label": "New single-circuit 500 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
    "low": 4100000,
@@ -50652,6 +50720,18 @@
     "ev-1b9aca6e6cdf"
    ],
    "note": "The seventh value in each row is 500 kV: typical is Mississippi, $5.0M; low is Montana, $4.1M (the table minimum, shared with North and South Dakota); high is Louisiana, $5.1M (the table maximum). This is a MISO proxy, and it includes right-of-way land and acquisition (see lineCostPerMile.115)."
+  },
+  {
+   "key": "lineCostPerMile.765",
+   "label": "New single-circuit 765 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "low": 5200000,
+   "typical": 6300000,
+   "high": 6300000,
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
+   "evidenceIds": [
+    "ev-1b9aca6e6cdf"
+   ],
+   "note": "The eighth value in each row is 765 kV: typical is Mississippi, $6.3M; low is Montana, $5.2M (the table minimum, shared with North and South Dakota); high is Louisiana and Mississippi, $6.3M (the table maximum). A MISO proxy that includes right-of-way land and acquisition (see lineCostPerMile.115)."
   },
   {
    "key": "lineCostPerMile.115.rebuild",
@@ -50754,6 +50834,16 @@
    "note": "The fifth value is 230 kV = $200,000 (2018 $). The same caveats apply as for the 115 kV entry."
   },
   {
+   "key": "mobilizationCostPerProject.345",
+   "label": "Mobilization/demobilization unit cost per line project, 345 kV (MISO 2018)",
+   "typical": 250000,
+   "unit": "USD per project (2018 $, excl. overhead, contingency, AFUDC)",
+   "evidenceIds": [
+    "ev-ed7a221eddf6"
+   ],
+   "note": "The sixth value is 345 kV = $250,000 (2018 $). The same caveats apply as for the 115 kV entry. MISO publishes no 765 kV mobilization value; 765 kV pairs use the 500 kV value and say so."
+  },
+  {
    "key": "mobilizationCostPerProject.500",
    "label": "Mobilization/demobilization unit cost per line project, 500 kV (MISO 2018)",
    "typical": 300000,
@@ -50787,7 +50877,7 @@
  "unresolved": [
   {
    "cluster": "beci-columbia",
-   "note": "plan.md hypothesis (Grid Forward vs BECI at Columbia) - what the sources support: (a) both name the 'Columbia Substation' (PSC 5-CE-157 final decision PDF pp.1, 15; PSC case page; MISO RFP slides 26-27; MGS fact sheet map); (b) MISO assigns the Columbia modification (50950) to ATC - but only in the March 2025 RFP scope slide 27, not in the January 2026 selection report; (c) MISO 'anticipates' coordination with interconnecting TOs (selection report PDF p.9 / printed 2, listed as an aspect developers should address; PDF p.36 / printed 29 on real-time operations). NOT supported by any source: an existing arrangement between the BECI developer and the Grid Forward applicants, a schedule for ATC's Columbia work, or any route. Grid Forward sources never mention BECI, 765 kV, Tranche 2.1, Transource or Sugar Creek. Keep as a needs-review lead, not a headline demo item."
+   "note": "Grid Forward vs BECI at Columbia, what the sources support: (a) both name the 'Columbia Substation' (PSC 5-CE-157 final decision PDF pp.1, 15; PSC case page; MISO RFP slides 26-27; MGS fact sheet map); (b) MISO assigns the Columbia modification (50950) to ATC - but only in the March 2025 RFP scope slide 27, not in the January 2026 selection report; (c) MISO 'anticipates' coordination with interconnecting TOs (selection report PDF p.9 / printed 2, listed as an aspect developers should address; PDF p.36 / printed 29 on real-time operations). NOT supported by any source: an existing arrangement between the BECI developer and the Grid Forward applicants, a schedule for ATC's Columbia work, or any route. Grid Forward sources never mention BECI, 765 kV, Tranche 2.1, Transource or Sugar Creek."
   },
   {
    "cluster": "beci-columbia",
@@ -50796,10 +50886,6 @@
   {
    "cluster": "beci-columbia",
    "note": "Timing at Columbia: Grid Forward's PSC decision expects construction Q4 2026 - by December 2030 (PDF p.54) and to proceed from the Columbia substation north (PDF p.30); BECI's MGS schedule shows tree clearing/construction/restoration late 2029 - late 2033 (approximate, pre-CPCN). Reported windows overlap roughly late 2029-2030 ('confirmed' only if 'completion by December 2030' is encoded as ending in Dec 2030; 'possible' if 'by' is treated as an upper bound only). Whether any BECI or ATC work at the Columbia site itself happens in that overlap is unknown."
-  },
-  {
-   "cluster": "beci-columbia",
-   "note": "Project id 'atc-nspw-grid-forward' is a placeholder shared with the Dairyland cluster; Grid Forward's applicants are ATC, NSPW, SMMPA Wisconsin and WPPI Energy (final decision p.1), so its owner set may need more than atc/xcel-nspw. New utility ids used here: bhe-transmission, comed, gridliance-heartland."
   },
   {
    "cluster": "beci-columbia",
@@ -50851,7 +50937,7 @@
   },
   {
    "cluster": "controls",
-   "note": "plan.md §8 test-matrix row 'Same region, nonoverlapping construction years -> GEO only' is NOT supported by this cluster at the default 25-mi threshold. The best non-Dairyland candidate, Xcel's Gopher to Badger Link North Rochester-Marion segment (schedule buckets 2030-2034 / 2031-2034), is about 34-37 mi straight-line from Alma (computed from OSM/Nominatim points). No non-Dairyland project within 25 mi of Alma/Blair/La Crosse/Eau Claire with a published post-2027 construction window was found."
+   "note": "No pair in this cluster shows the 'same region, non-overlapping construction years' case at the default 25-mi radius. The best non-Dairyland candidate, Xcel's Gopher to Badger Link North Rochester-Marion segment (schedule buckets 2030-2034 / 2031-2034), is about 34-37 mi straight-line from Alma (computed from OSM/Nominatim points). No non-Dairyland project within 25 mi of Alma/Blair/La Crosse/Eau Claire with a published post-2027 construction window was found."
   },
   {
    "cluster": "controls",
@@ -50863,7 +50949,7 @@
   },
   {
    "cluster": "controls",
-   "note": "plan.md §8 row 'County-only geography -> possible GEO' is only partly represented by MariBell: the text names endpoint towns (Marion, Bell Center), and the May 2026 G2B factsheet map shows a schematic green 'Proposed Route' for the Minnesota segment (read visually: south-west from Olmsted County toward the MN-Iowa border, then east near the border to the Mississippi). The map names no towns, so it was not digitized. Only the Houston County 161 kV switching station is truly county-only ('a specific location has not yet been identified')."
+   "note": "County-only geography is only partly represented by MariBell: the text names endpoint towns (Marion, Bell Center), and the May 2026 G2B factsheet map shows a schematic green 'Proposed Route' for the Minnesota segment (read visually: south-west from Olmsted County toward the MN-Iowa border, then east near the border to the Mississippi). The map names no towns, so it was not digitized. Only the Houston County 161 kV switching station is truly county-only ('a specific location has not yet been identified')."
   },
   {
    "cluster": "controls",
@@ -50887,7 +50973,7 @@
   },
   {
    "cluster": "controls",
-   "note": "Owner id normalization: the G2B sources say only 'Xcel Energy'; mapped to xcel-nspm based on the Minnesota location (needs confirmation). New ids introduced: gridliance-heartland, smmpa-wisconsin, wppi-energy."
+   "note": "Owner attribution: the G2B sources say only 'Xcel Energy'; the Minnesota segment is attributed to Northern States Power Co.–Minnesota from its location (needs confirmation)."
   },
   {
    "cluster": "controls",
@@ -50959,7 +51045,7 @@
   },
   {
    "cluster": "dairyland-alma-blair",
-   "note": "WWTC docket numbers differ: the July 2024 application cites 'PSCW Docket No. 4220-CE-188' (Xcel), while both PSC decisions use the joint NSPW/ATC docket 5-CE-158. The partner ids 'xcel-wwtc' and 'atc-nspw-grid-forward' used here are placeholders and must be matched to the ids the WWTC and Grid Forward clusters assign. WWTC's owners are NSPW and ATC; the Tremval North station is NSPW's."
+   "note": "WWTC docket numbers differ: the July 2024 application cites 'PSCW Docket No. 4220-CE-188' (Xcel), while both PSC decisions use the joint NSPW/ATC docket 5-CE-158. WWTC's owners are NSPW and ATC; the Tremval North station is NSPW's."
   },
   {
    "cluster": "dairyland-alma-blair",
@@ -50975,7 +51061,7 @@
   },
   {
    "cluster": "dairyland-alma-blair",
-   "note": "plan.md hypotheses. (1) Supported: the approved South Route ends at the switching station approved for the Western Wisconsin project, and Dairyland's page shows construction in 2026-2027. (2) Supported: the earlier application documents interface coordination only, not shared crews or equipment. (3) Only partly supported for Alma-Blair vs Grid Forward: this cluster's sources show only that Grid Forward (5-CE-157, ATC/NSPW) connects the 'Tremval-Arpin-Columbia Substations' and appears in benefit modeling. They do not say Grid Forward uses the Tremval North station, give Grid Forward's construction window, or document any Dairyland-ATC shared-resource plans. (4) plan.md assumed precise GIS might be unavailable, but official PSC docket GIS exists for the proposed Southern Route and was used."
+   "note": "Hypotheses checked against the sources. (1) Supported: the approved South Route ends at the switching station approved for the Western Wisconsin project, and Dairyland's page shows construction in 2026-2027. (2) Supported: the earlier application documents interface coordination only, not shared crews or equipment. (3) Only partly supported for Alma-Blair vs Grid Forward: this cluster's sources show only that Grid Forward (5-CE-157, ATC/NSPW) connects the 'Tremval-Arpin-Columbia Substations' and appears in benefit modeling. They do not say Grid Forward uses the Tremval North station, give Grid Forward's construction window, or document any Dairyland-ATC shared-resource plans. (4) Official PSC docket GIS exists for the proposed Southern Route and was used."
   },
   {
    "cluster": "dairyland-alma-blair",
@@ -50999,6 +51085,10 @@
   },
   {
    "cluster": "grid-forward",
+   "note": "Superseded schedules: NSPW's as-filed application (Q4 2026 start) is superseded by the final decision, and NSPW's Q1 2026 report (Q4 2026 start) by its Q2 2026 report (Q4 2027 start); ATC's as-filed application is superseded by the final decision. Superseded windows are kept as history and not matched."
+  },
+  {
+   "cluster": "grid-forward",
    "note": "Hypothesis part 1 (Tremval convergence): SUPPORTED only for the NSPW-owned Grid Forward segment, not the ATC portion. Grid Forward segment 1N exits the Tremval Substation Expansion North (authorized); WWTC decision 5-CE-158 authorized the Tremval North site; Dairyland's 1515-CE-103 decision says Alma–Blair connects to the new Tremval North Substation/switching station approved in 5-CE-158; Xcel names it Larkin Valley, ~0.5 mi north of the existing Tremval Substation near Blair. The link is a chain across documents, and Xcel's info sheet says Larkin Valley is 'near' (not 'formerly') Tremval North. The ATC package's nearest documented point (PCO) is ~54 km (~34 mi) straight-line from the existing Tremval Substation, beyond the default 25-mile review radius."
   },
   {
@@ -51008,14 +51098,6 @@
   {
    "cluster": "grid-forward",
    "note": "Hypothesis part 3 (shared-resource plans): CONFIRMED that the cited sources do not establish Dairyland–ATC (or Dairyland–NSPW) shared crews, equipment, laydown yards or schedules. The only related statement is ATC's utility-level, planning-level 'cooperatively working on plans' among ATC, Xcel and Dairyland, which does not name Alma–Blair; it is recorded against the utility id 'dairyland' (reported-coordination, scope unknown) so it does not by itself mark the Alma–Blair pair as known coordination. The Tremval-end work belongs to NSPW (Xcel), not ATC. Status is not-found-in-sources, not 'uncoordinated'."
-  },
-  {
-   "cluster": "grid-forward",
-   "note": "Cross-cluster id mismatch: the dairyland-alma-blair and beci-columbia research files reference a single 'atc-nspw-grid-forward' project, while this cluster splits Grid Forward into grid-forward-atc and grid-forward-nspw (sources clearly split owner packages: ATC PCO–Arpin–Columbia; NSPW with WPPI/SMMPA co-owners Tremval–PCO, each with its own schedule claim and quarterly report). An alias/override is needed: Tremval-site relations map to grid-forward-nspw; Columbia Substation (BECI) relations map to grid-forward-atc."
-  },
-  {
-   "cluster": "grid-forward",
-   "note": "Superseded claims: in grid-forward-nspw, window w2 (as-filed application, Q4 2026) is superseded by the final decision and window w3 (NSPW Q1 2026 report, Q4 2026 start) by NSPW's Q2 2026 report (Q4 2027); in grid-forward-atc, window w2 (as-filed application) by the final decision. This schema has no supersededBy field, so these should be flagged via snapshot windowPatches so the matcher does not treat them as current."
   },
   {
    "cluster": "grid-forward",
@@ -51059,7 +51141,7 @@
   },
   {
    "cluster": "grid-forward",
-   "note": "Columbia Substation (ATC endpoint) also appears in MISO BECI materials (miso-beci-scope-2025 p27, 'Columbia Substation ... modify existing substation') with separate substation modification work; that relation is modeled in the beci-columbia cluster against 'atc-nspw-grid-forward' and is not repeated here."
+   "note": "Columbia Substation (ATC endpoint) also appears in MISO BECI materials (MISO BECI scope, 2025, p.27: 'Columbia Substation ... modify existing substation') with separate substation modification work; that relation is recorded with the BECI project and is not repeated here."
   },
   {
    "cluster": "grid-forward",
@@ -51127,7 +51209,7 @@
   },
   {
    "cluster": "mn-lrtp",
-   "note": "Owner-set overlaps (shared-owner context under plan.md section 8): Northland (MP, GRE) vs ABO (Xcel, GRE, MP, OTP, MRES); ABO vs BSSA (OTP, MRES); ABO vs MMRT Segments 1-2 and 3-4 (Xcel); MMRT 1-2 vs 3-4 (Xcel); MMRT 3-4 vs Alma-Blair (Dairyland). Disjoint-owner pairs available for cross-utility comparison: Northland vs BSSA, Northland vs MMRT 1-2, Northland vs MMRT 3-4, BSSA vs MMRT 1-2, BSSA vs MMRT 3-4, MMRT 1-2 vs dpc-alma-blair."
+   "note": "Owner-set overlaps (shared-owner context, not cross-utility leads): Northland (MP, GRE) vs ABO (Xcel, GRE, MP, OTP, MRES); ABO vs BSSA (OTP, MRES); ABO vs MMRT Segments 1-2 and 3-4 (Xcel); MMRT 1-2 vs 3-4 (Xcel); MMRT 3-4 vs Alma-Blair (Dairyland). Disjoint-owner pairs available for cross-utility comparison: Northland vs BSSA, Northland vs MMRT 1-2, Northland vs MMRT 3-4, BSSA vs MMRT 1-2, BSSA vs MMRT 3-4, MMRT 1-2 vs Alma-Blair."
   },
   {
    "cluster": "mn-lrtp",
@@ -51135,7 +51217,7 @@
   },
   {
    "cluster": "mn-lrtp",
-   "note": "New canonical utility ids introduced: 'smmpa' (Southern Minnesota Municipal Power Agency) and 'rpu' (Rochester Public Utilities / City of Rochester Public Utility Board). 'mres' is used for Missouri River Energy Services acting for Western Minnesota Municipal Power Agency (the permittee/co-owner named by the MN PUC is WMMPA)."
+   "note": "Missouri River Energy Services (MRES) is shown acting for Western Minnesota Municipal Power Agency (the permittee/co-owner named by the MN PUC is WMMPA)."
   },
   {
    "cluster": "mn-lrtp",
@@ -51155,7 +51237,7 @@
   },
   {
    "cluster": "mn-lrtp",
-   "note": "plan.md check: plan.md has no cluster-specific hypothesis for Minnesota LRTP beyond naming the 2025 Minnesota Biennial Report as a multi-utility expansion source. That is supported: this cluster yields five work packages across eight utilities (Xcel NSPM, MP, GRE, OTP, MRES/WMMPA, Dairyland, SMMPA, RPU). The researcher-brief hypotheses that are NOT supported by sources: NSPM as a Northland co-owner (only MP and GRE are named); an MMRT-WWTC direct relation (only indirect via Alma-Blair); Huntley-Wilmarth as a future project (it was completed in 2021)."
+   "note": "The 2025 Minnesota Biennial Report is a multi-utility expansion source: this cluster yields five work packages across eight utilities (Xcel NSPM, MP, GRE, OTP, MRES/WMMPA, Dairyland, SMMPA, RPU). Not supported by the sources: NSPM as a Northland co-owner (only MP and GRE are named); an MMRT-WWTC direct relation (only indirect via Alma-Blair); Huntley-Wilmarth as a future project (it was completed in 2021)."
   },
   {
    "cluster": "potter-beckham",
@@ -51187,7 +51269,7 @@
   },
   {
    "cluster": "potter-beckham",
-   "note": "The Texas-Oklahoma crossing point is undetermined: neither state has a final route, and Transource's map shows several preliminary crossing links. The 'tx-ok-state-line' place is a county-edge placeholder (midpoint of Beckham County's western boundary, +/-27 km), not a sourced point."
+   "note": "The Texas-Oklahoma crossing point is undetermined: neither state has a final route, and Transource's map shows several preliminary crossing links. The mapped state-line point is a county-edge placeholder (midpoint of Beckham County's western boundary, +/-27 km), not a sourced point."
   },
   {
    "cluster": "potter-beckham",
@@ -51195,7 +51277,7 @@
   },
   {
    "cluster": "potter-beckham",
-   "note": "Season-to-date conversion for the Transource construction window is a convention, not a sourced fact: Spring 2028 = 2028-03-01..2028-06-20 and Late 2028 = 2028-09-01..2028-12-31. Under these bounds the two construction windows overlap only as 'possible' (SPS starts in Q3 2028; Transource ends late 2028). The overlap becomes 'confirmed' only if 'Late 2028' is read as starting on or after 2028-09-30. The plan.md framing of this pair as 'another detection case' therefore holds for GEO (textual interconnection) but only as a 'possible' TIME overlap."
+   "note": "Season-to-date conversion for the Transource construction window is a convention, not a sourced fact: Spring 2028 = 2028-03-01..2028-06-20 and Late 2028 = 2028-09-01..2028-12-31. Under these bounds the two construction windows overlap only as 'possible' (SPS starts in Q3 2028; Transource ends late 2028). The overlap becomes 'confirmed' only if 'Late 2028' is read as starting on or after 2028-09-30."
   },
   {
    "cluster": "potter-beckham",
@@ -51275,7 +51357,7 @@
   },
   {
    "cluster": "sc-ga-context",
-   "note": "Effingham County 500 kV: substation site, line endpoints, line length and in-service date are not published, and there is no map. Callaway Road – Thomson has no in-service date. All five construction windows (both preconstruction windows and all three general-construction windows) use a 2099-12-31 open-end sentinel. The UI should show these as 'end not published', not '2099'."
+   "note": "Effingham County 500 kV: substation site, line endpoints, line length and in-service date are not published, and there is no map. Callaway Road – Thomson has no in-service date. None of the five construction windows (two preconstruction, three general-construction) has a published end."
   },
   {
    "cluster": "sc-ga-context",
@@ -51291,7 +51373,7 @@
   },
   {
    "cluster": "xcel-wwtc",
-   "note": "plan.md hypothesis check: 'Planned construction in 2026-27' is supported only by Xcel's web page ('Construction : 2026 -2027') and its Jan 2026 info sheet. The PSC final decision (start Q3 2026, completion by Q3 2029) and NSPW's Q2 2026 filing (start Q4 2026, in-service Q3 2029) imply construction running into 2029. 'Near the Dairyland project around Blair' is supported: the Alma-Blair line terminates at WWTC's Tremval North / Larkin Valley station."
+   "note": "'Planned construction in 2026-27' is supported only by Xcel's web page ('Construction : 2026 -2027') and its Jan 2026 info sheet. The PSC final decision (start Q3 2026, completion by Q3 2029) and NSPW's Q2 2026 filing (start Q4 2026, in-service Q3 2029) imply construction running into 2029. 'Near the Dairyland project around Blair' is supported: the Alma-Blair line terminates at WWTC's Tremval North / Larkin Valley station."
   },
   {
    "cluster": "xcel-wwtc",
@@ -51371,15 +51453,11 @@
   },
   {
    "cluster": "xcel-wwtc",
-   "note": "Owner overlap with Grid Forward: NSPW and ATC are applicants for both WWTC and Grid Forward (5-CE-157, with SMMPA and WPPI). Under plan.md section 8, a WWTC vs Grid Forward pair is shared-owner context, not a cross-utility review lead. Grid Forward also describes 'expanding the Tremval Substation', and how Tremval North / Larkin Valley work is split between 5-CE-157 and 5-CE-158 was not determined."
+   "note": "Owner overlap with Grid Forward: NSPW and ATC are applicants for both WWTC and Grid Forward (5-CE-157, with SMMPA and WPPI). A WWTC vs Grid Forward pair is therefore shared-owner context, not a cross-utility review lead. Grid Forward also describes 'expanding the Tremval Substation', and how Tremval North / Larkin Valley work is split between 5-CE-157 and 5-CE-158 was not determined."
   },
   {
    "cluster": "xcel-wwtc",
    "note": "Cross-cluster coordinate mismatch: the Dairyland cluster places the same Tremval North switching station at the Blair locality centroid (44.2946, -91.2338, precision locality). The PSC GIS point 'Tremval Expansion North' (44.30158, -91.25420) is about 1.8 km away and should be preferred when the clusters are merged."
-  },
-  {
-   "cluster": "xcel-wwtc",
-   "note": "The Xcel Jan 2026 info-sheet schedule excerpt contains U+0007 (BEL) control characters from the PDF text layer. They are kept verbatim so the excerpt checker can match it; the UI may need to strip them for display."
   },
   {
    "cluster": "xcel-wwtc",

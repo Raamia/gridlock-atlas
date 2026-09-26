@@ -8,6 +8,7 @@ import { IDX, SNAPSHOT } from "@/lib/data";
 import { displayTitle, geoShort, timeShort } from "@/lib/describe";
 import type { Match, Project } from "@/lib/domain/types";
 import { pluralize } from "@/lib/format";
+import { overviewRole } from "@/lib/mapdata";
 import { ownerNames, regionPairCounts } from "@/lib/selectors";
 import { overlapTableCsv } from "@/lib/export";
 import { download } from "@/lib/review";
@@ -15,6 +16,8 @@ import { inTab, useAtlas, type FlagFilter, type QueueTab } from "@/lib/store";
 import { Button, Dot, Kbd, MatchBadges, StatusChip } from "./ui";
 
 const ALL_FLAGS: FlagFilter[] = ["BOTH", "GEO", "TIME", "POSSIBLE"];
+/** The overview map's hues for each region's two focal utilities (MapStage u1/u2), so the plan lists double as its key. */
+const FOCAL_HUE: Record<string, string | undefined> = { u1: "#56c7de", u2: "#9d8cf0" };
 
 const TABS: { id: QueueTab; label: string; hint: string }[] = [
   { id: "needs-review", label: "Needs review", hint: "Cross-utility pairs whose resource coordination is not established in the reviewed sources" },
@@ -44,12 +47,12 @@ export function Queue() {
           <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-text-0">Coordination queue</h2>
           {run && counts && (
             <span className="mono text-[10.5px] text-text-3" title={`Cross-utility pairs evaluated ${region === "all" ? "across all regions" : "in this region"}`}>
-              {counts.evaluated.toLocaleString("en-US")} pairs · {run.thresholdMiles} mi
+              {counts.evaluated.toLocaleString("en-US")} {counts.evaluated === 1 ? "pair" : "pairs"} · {run.thresholdMiles} mi
             </span>
           )}
         </div>
         <p className="mt-0.5 text-[12px] text-text-2">
-          Cross-utility project pairs within the review radius, ranked by place first, then timing.
+          Cross-utility project pairs within the review radius or sharing a facility, ranked by place first, then timing.
         </p>
       </div>
       {runError && !running && <EngineError message={runError} hasRun={!!run} />}
@@ -91,7 +94,9 @@ function PreRun() {
     }
     return [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
   }, [inRegion]);
-  const sources = new Set(inRegion.flatMap((p) => p.sourceIds));
+  // every owner counts (joint projects too), and "All" is the whole registry, as in the top bar
+  const utilityCount = useMemo(() => new Set(inRegion.flatMap((p) => p.owners.map((o) => o.utilityId))).size, [inRegion]);
+  const sourceCount = region === "all" ? SNAPSHOT.sources.length : new Set(inRegion.flatMap((p) => p.sourceIds)).size;
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -99,8 +104,8 @@ function PreRun() {
         <div className="eyebrow">Loaded from public sources</div>
         <div className="mt-2 grid grid-cols-3 gap-2">
           <Stat n={inRegion.length} label="plans" />
-          <Stat n={byUtility.length} label="utilities" />
-          <Stat n={sources.size} label="sources" />
+          <Stat n={utilityCount} label="utilities" />
+          <Stat n={sourceCount} label="sources" />
         </div>
         <Button variant="primary" size="lg" className="mt-4 w-full" onClick={() => compare()} disabled={!SNAPSHOT.projects.length}>
           <Play size={14} fill="currentColor" />
@@ -136,7 +141,7 @@ function PreRun() {
                     hovered === p.id ? "bg-bg-3 text-text-0" : "text-text-2",
                   )}
                 >
-                  <Dot color={p.places.length ? "var(--text-2)" : "var(--text-3)"} size={5} />
+                  <Dot color={FOCAL_HUE[overviewRole(p)] ?? (p.places.length ? "var(--text-2)" : "var(--text-3)")} size={5} />
                   <span className="truncate">{p.shortTitle}</span>
                   <span className="mono ml-auto shrink-0 text-[10px] text-text-3">{(p.status.label ?? p.status.value).replace("In the 2025–2034 Ten-Year Plan", "10-yr plan")}</span>
                 </div>
@@ -246,15 +251,15 @@ function RunResults() {
                 title={t.hint}
                 onClick={() => set({ tab: t.id })}
                 className={clsx(
-                  "relative flex h-[30px] flex-auto items-center justify-center gap-1 whitespace-nowrap rounded-[8px] px-1.5 text-[11.5px] font-medium transition-colors",
+                  "relative flex h-[30px] min-w-0 flex-auto items-center justify-center gap-[3px] whitespace-nowrap rounded-[8px] px-1 text-[11px] font-medium transition-colors",
                   tab === t.id ? "text-text-0" : "text-text-2 hover:text-text-1",
                 )}
               >
                 {tab === t.id && (
                   <motion.span layoutId="tab-pill" className="absolute inset-0 rounded-[8px] bg-bg-3 ring-1 ring-line-2" transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }} />
                 )}
-                <span className="relative">{t.label}</span>
-                <span className={clsx("num relative text-[10.5px]", tab === t.id ? "text-text-1" : "text-text-3")}>{counts[t.id]}</span>
+                <span className="relative min-w-0 truncate">{t.label}</span>
+                <span className={clsx("num relative shrink-0 text-[10.5px]", tab === t.id ? "text-text-1" : "text-text-3")}>{counts[t.id]}</span>
               </button>
             ))}
           </div>
@@ -278,17 +283,20 @@ function RunResults() {
           <span className="mono ml-auto text-text-3">{threshold} mi</span>
           <ChevronDown size={12} className={clsx("transition-transform", filtersOpen && "rotate-180")} />
         </button>
-        <AnimatePresence initial={false}>{filtersOpen && <Filters />}</AnimatePresence>
       </div>
 
-      {/* keyed by view: a tab or region switch swaps the list at once (no exiting cards to shift the scroll) */}
-      <div key={`${region}|${tab}`} className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto px-3 pb-3" role="list">
-        {inCurrent.length === 0 && <EmptyTab tab={tab} hidden={hidden} onClear={clearFilters} />}
-        <AnimatePresence initial>
-          {inCurrent.map((m, i) => (
-            <MatchCard key={m.id} m={m} index={i} rank={i + 1} />
-          ))}
-        </AnimatePresence>
+      {/* keyed by view: a tab or region switch swaps the list at once (no exiting cards to shift the scroll).
+          Filters scroll with the cards, so on a short phone sheet they never squeeze the list or push the footer off screen. */}
+      <div key={`${region}|${tab}`} data-queue-scroll className="scroll-thin mt-1 min-h-0 flex-1 overflow-y-auto px-3 pb-3">
+        <AnimatePresence initial={false}>{filtersOpen && <Filters />}</AnimatePresence>
+        <div role="list">
+          {inCurrent.length === 0 && <EmptyTab tab={tab} hidden={hidden} onClear={clearFilters} />}
+          <AnimatePresence initial>
+            {inCurrent.map((m, i) => (
+              <MatchCard key={m.id} m={m} index={i} rank={i + 1} />
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
 
       <ExcludedFooter />
@@ -323,7 +331,7 @@ function Filters() {
       animate={{ height: "auto", opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-      className="overflow-hidden"
+      className="mb-1 overflow-hidden"
     >
       <div className="space-y-3 rounded-lg border border-line bg-bg-2/70 p-3">
         <div>
@@ -428,21 +436,21 @@ function ExcludedFooter() {
     download(`gridlock-overlaps-${region}.csv`, overlapTableCsv(inRegion), "text/csv");
   };
   const archived = run.excludedProjects.filter((x) => region === "all" || IDX.project(x.projectId)?.region === region).length;
-  const { beyond, unlocated } = counts;
+  const { beyond, unlocated, viaFacility } = counts;
   const where = region === "all" ? "" : " in this region";
   return (
-    <div className="flex items-center gap-2 border-t border-line px-3 py-2">
+    <div className="flex items-center gap-1 border-t border-line px-2 py-2">
       <button
         onClick={() => set({ methodOpen: true })}
-        className="flex min-w-0 items-center gap-1.5 rounded-md px-1.5 py-1 text-[11px] text-text-2 hover:bg-bg-2 hover:text-text-1"
+        className="flex min-w-0 items-center gap-1 rounded-md px-1 py-1 text-[11px] text-text-2 hover:bg-bg-2 hover:text-text-1"
         title="See what the engine excluded and why"
       >
         <Archive size={12} className="shrink-0" />
         <span
           className="truncate"
-          title={`${beyond.toLocaleString("en-US")} pairs${where} farther than ${run.thresholdMiles} mi · ${unlocated.toLocaleString("en-US")} where a location is unknown · ${archived} archived projects`}
+          title={`${beyond.toLocaleString("en-US")} ${beyond === 1 ? "pair" : "pairs"}${where} not flagged: farther than ${run.thresholdMiles} mi with no shared facility · ${unlocated.toLocaleString("en-US")} where a location is unknown · ${pluralize(archived, "archived project")}${viaFacility ? ` · ${viaFacility.toLocaleString("en-US")} flagged by a shared facility beyond ${run.thresholdMiles} mi` : ""}`}
         >
-          {beyond.toLocaleString("en-US")} beyond {run.thresholdMiles} mi
+          {beyond.toLocaleString("en-US")} not flagged · &gt;{run.thresholdMiles} mi
           {unlocated > 0 && ` · ${unlocated.toLocaleString("en-US")} unlocated`}
         </span>
       </button>
@@ -473,7 +481,7 @@ function MatchCard({ m, index, rank, dim }: { m: Match; index: number; rank: num
     // after layout settles; a card far out of view is centered, a neighbour (j/k) only nudged into view
     const f = requestAnimationFrame(() => {
       const el = ref.current;
-      const box = el?.closest("[role=list]")?.getBoundingClientRect();
+      const box = el?.closest("[data-queue-scroll]")?.getBoundingClientRect();
       if (!el || !box) return;
       const r = el.getBoundingClientRect();
       const away = r.bottom < box.top || r.top > box.bottom;

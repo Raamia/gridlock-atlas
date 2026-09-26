@@ -102,10 +102,22 @@ test.describe("GridLock Atlas smoke path", () => {
     await page.getByRole("button", { name: /Compare public plans/ }).click();
     await expect(page.locator("[data-match-id]").first()).toBeVisible({ timeout: 15_000 });
     const [dl] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Export overlap table as CSV" }).click()]);
-    const text = await (await dl.createReadStream()).toArray().then((c) => Buffer.concat(c).toString("utf8"));
-    const [head, first] = text.split("\n");
+    const raw = await (await dl.createReadStream()).toArray().then((c) => Buffer.concat(c).toString("utf8"));
+    // UTF-8 byte-order mark, so Excel reads en dashes and accents in project names
+    expect(raw.startsWith("﻿")).toBe(true);
+    const [head, first, ...rest] = raw.replace(/^﻿/, "").trim().split("\n");
     expect(head.startsWith("overlap_id,distance_mi,time_gap (day),utility_a,project_id_a,project_name_a,utility_b,project_id_b,project_name_b")).toBe(true);
+    expect(head).toContain(",priority_rank,queue_rank,");
+    expect(head).toContain(",time_gap_basis,in_service_a,in_service_b,docket_a,docket_b,pair_id");
     expect(first).toMatch(/^OVL_1,\d+\.\d{2},/);
+    // project ids are the app's unique ids: never the same on both sides, and each row opens a distinct pair
+    const cols = head.split(",");
+    const rows = [first, ...rest].map((r) => r.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map((c) => c.replace(/,$/, "")));
+    for (const r of rows) {
+      expect(r[cols.indexOf("project_id_a")]).not.toBe(r[cols.indexOf("project_id_b")]);
+      expect(["exact", "at-least", "ranges-overlap", ""]).toContain(r[cols.indexOf("time_gap_basis")]);
+    }
+    expect(new Set(rows.map((r) => r[cols.indexOf("pair_id")])).size).toBe(rows.length);
   });
 
   test("shortcuts do not act behind the brief; Escape works from inside inputs", async ({ page }) => {

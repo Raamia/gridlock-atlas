@@ -1,5 +1,6 @@
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { ImpactAssumption, Match, Project } from "@/lib/domain/types";
+import { displayTitle } from "@/lib/format";
 
 /**
  * Illustrative impact calculator (sponsor bonus: "a rough cost/impact estimate for at least one
@@ -46,19 +47,34 @@ export function needsNewCorridor(p: Project): boolean {
   return NEW_LINE.test(scope) || !NO_NEW_CORRIDOR.test(scope);
 }
 
-function bucket(kv: number | null): "115" | "230" | "500" {
+export type VoltageClass = "115" | "230" | "345" | "500" | "765";
+
+function bucket(kv: number | null): VoltageClass {
   if (!kv || kv <= 161) return "115";
-  if (kv <= 345) return "230";
-  return "500";
+  if (kv <= 230) return "230";
+  if (kv <= 345) return "345";
+  if (kv <= 500) return "500";
+  return "765";
 }
+
+const DOWN: VoltageClass[] = ["765", "500", "345", "230", "115"];
+/** The class's own published value, else the nearest lower class that has one (never a higher class's value). */
+function pick(prefix: string, cls: VoltageClass): ImpactAssumption | undefined {
+  return DOWN.slice(DOWN.indexOf(cls)).map((c) => assumption(`${prefix}.${c}`)).find(Boolean);
+}
+const classOf = (a: ImpactAssumption | undefined) => a?.key.split(".")[1] as VoltageClass | undefined;
 
 function stateOf(p: Project): string {
   return p.states[0] ?? "";
 }
 
 export interface ImpactDefaults {
-  /** Voltage class whose published defaults are used ("230" for a 345 kV line: nearest published class). */
-  voltageClass: "115" | "230" | "500";
+  /** Voltage class of the pair (the higher voltage). */
+  voltageClass: VoltageClass;
+  /** Class the right-of-way width actually comes from (the nearest lower published class when the pair's own is not published). */
+  widthClass: VoltageClass | undefined;
+  /** Class the mobilization cost actually comes from (MISO publishes none above 500 kV). */
+  mobilClass: VoltageClass | undefined;
   state: string;
   sharedMiles: number;
   sharedMilesNote: string;
@@ -86,32 +102,40 @@ export function impactDefaults(m: Match): ImpactDefaults {
   const lengthA = lengthOf(a);
   const lengthB = lengthOf(b);
   const known = [lengthA, lengthB].filter((x): x is number => x !== null);
-  // a shared corridor needs two new lines of published length; anything less defaults to 0 and the slider stays editable
+  // a shared corridor needs two new lines of published length that are not simply joined end to end; anything less defaults to 0
   const noCorridor = [a, b].filter((p) => !needsNewCorridor(p));
-  const sharedMiles = !noCorridor.length && known.length === 2 ? Math.min(...known) : 0;
+  const endToEnd = m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint";
+  const meetAt = SNAPSHOT.relations.find((r) => m.geoDetail.relationIds.includes(r.id) && r.siteLabel)?.siteLabel ?? m.geoDetail.sharedEndpoint?.labelA ?? "a shared facility";
+  const sharedMiles = !noCorridor.length && !endToEnd && known.length === 2 ? Math.min(...known) : 0;
   const sharedMilesNote =
     noCorridor.length === 2
       ? "Neither project needs a new corridor — set a length to explore."
       : noCorridor.length === 1
-        ? `${noCorridor[0].shortTitle} needs no new corridor (equipment or a rebuild on existing right-of-way) — set a length to explore.`
-        : known.length === 2
-          ? "Default: the shorter of the two published line lengths."
-          : known.length === 1
-            ? "Only one source publishes a line length — set a corridor length to explore."
-            : "Neither source publishes a line length — set a corridor length to explore.";
+        ? `${displayTitle(noCorridor[0])} needs no new corridor (equipment or a rebuild on existing right-of-way) — set a length to explore.`
+        : endToEnd
+          ? `The lines meet at ${meetAt}; no source describes a shared parallel corridor — set a length to explore.`
+          : known.length === 2
+            ? "Default: the shorter of the two published line lengths."
+            : known.length === 1
+              ? "Only one source publishes a line length — set a corridor length to explore."
+              : "Neither source publishes a line length — set a corridor length to explore.";
   const b2 = bucket(voltageKv);
   const state = stateOf(a) || stateOf(b);
+  const rowWidthFt = pick("rowWidthFt", b2);
+  const mobilization = pick("mobilizationCostPerProject", b2);
   return {
     voltageClass: b2,
+    widthClass: classOf(rowWidthFt),
+    mobilClass: classOf(mobilization),
     state,
     sharedMiles,
     sharedMilesNote,
-    rowWidthFt: assumption(`rowWidthFt.${b2}`) ?? assumption("rowWidthFt.115"),
+    rowWidthFt,
     landValue: assumption(`landValuePerAcre.${state}`) ?? assumption(`landValuePerAcre.${stateOf(b)}`),
     easement: assumption("easementShare") ?? assumption("easementShare.misoConvention"),
-    mobilization: assumption(`mobilizationCostPerProject.${b2}`) ?? assumption("mobilizationCostPerProject.230"),
+    mobilization,
     avoidedMobilizations: assumption("avoidedMobilizations"),
-    lineCost: assumption(`lineCostPerMile.${b2}`) ?? assumption("lineCostPerMile.230"),
+    lineCost: pick("lineCostPerMile", b2),
     voltageKv,
     lengthA,
     lengthB,

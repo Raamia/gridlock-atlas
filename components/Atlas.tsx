@@ -25,7 +25,7 @@ export function Atlas() {
   useEffect(() => useReview.getState().hydrate(), []);
   return (
     <MotionConfig reducedMotion="user">
-    <div className="grid h-dvh w-full max-w-[100vw] grid-cols-[minmax(0,1fr)] grid-rows-[56px_minmax(0,1fr)] overflow-hidden bg-bg-0">
+    <div className="atlas-shell grid h-dvh w-full max-w-[100vw] grid-cols-[minmax(0,1fr)] grid-rows-[56px_minmax(0,1fr)] overflow-hidden bg-bg-0">
       <TopBar />
       {/* desktop: queue | map+timeline. narrow: map on top, queue below as a scrollable sheet */}
       <div className="grid min-h-0 grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,55fr)_minmax(0,45fr)] lg:grid-cols-[340px_minmax(0,1fr)] lg:grid-rows-1">

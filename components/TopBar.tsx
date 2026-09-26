@@ -75,11 +75,12 @@ export function TopBar() {
         aria-label="Region"
         value={region}
         onChange={(e) => set({ region: e.target.value, cameraNonce: useAtlas.getState().cameraNonce + 1, selectedMatchId: null, inspectorOpen: false })}
+        title={regions.find((r) => r.id === region)?.label}
         className="ml-auto h-8 min-w-0 max-w-[40vw] rounded-lg border border-line-2 bg-bg-2 px-2 text-[12px] text-text-1 outline-none md:hidden"
       >
         {regions.map((r) => (
           <option key={r.id} value={r.id}>
-            {r.label}
+            {r.short}
           </option>
         ))}
       </select>
@@ -87,7 +88,7 @@ export function TopBar() {
       <div className="flex shrink-0 items-center gap-1 md:ml-0">
         <Button variant="ghost" size="sm" onClick={() => set({ sourcesOpen: true })} title="Source registry" aria-label={`Source registry: ${SNAPSHOT.sources.length} sources, ${utilities.size} utilities`}>
           <Database size={13} />
-          <span className="num">{SNAPSHOT.sources.length}</span>
+          <span className="num max-sm:hidden">{SNAPSHOT.sources.length}</span>
           <span className="hidden xl:inline">sources</span>
           <span className="hidden text-text-3 xl:inline">·</span>
           <span className="num hidden xl:inline">{utilities.size}</span>
@@ -97,11 +98,14 @@ export function TopBar() {
           <BookOpenText size={13} />
           Method
         </Button>
+        <IconButton label="Method & audit" onClick={() => set({ methodOpen: true })} className="sm:hidden">
+          <BookOpenText size={14} />
+        </IconButton>
         <ReviewToggle />
         <IconButton label="Reset view" onClick={resetView} className="max-sm:hidden">
           <RotateCcw size={14} />
         </IconButton>
-        <div className="mx-1 h-5 w-px bg-line-2" />
+        <div className="mx-1 h-5 w-px bg-line-2 max-sm:hidden" />
         <Button
           variant={demoStep === null ? "outline" : "subtle"}
           size="sm"

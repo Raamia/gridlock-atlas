@@ -182,17 +182,17 @@
   {
    "key": "gpc:20785",
    "kind": "line",
-   "notes": "The rebuild runs Kraft - Godley J - Rice Hope, 9.3 mi per the IRP. SERTP 2025 p.157 lists a separate 3.04 mi Goshen - Rice Hope rebuild, and SERTP 2025 describes a 3.48 mi portion. In OSM the full Goshen (SAV) - Kraft 115 kV path is about 9.6 mi. It runs from Goshen through Rice Hope (unnamed way/897598553, 3.04 mi from Goshen), past the Godley Tract tap junction, to Kraft.",
+   "notes": "The rebuilt section runs Kraft - Godley J - Rice Hope, so Kraft and Rice Hope are the project's terminals; Goshen is kept as a context place. The IRP gives 9.3 mi. SERTP 2025 describes a 3.48 mi portion (p.93) and lists a separate 3.04 mi Goshen - Rice Hope rebuild (p.157). In OSM the full Goshen (SAV) - Kraft 115 kV path is about 9.6 mi. It runs from Goshen through Rice Hope (unnamed way/897598553, 3.04 mi from Goshen), past the Godley Tract tap junction, to Kraft.",
    "endpoints": [
     {
-     "name": "Goshen (SAV)",
-     "lat": 32.2487,
-     "lon": -81.20947,
+     "name": "Rice Hope",
+     "lat": 32.20886,
+     "lon": -81.20821,
      "precision": "named-facility",
-     "uncertaintyMeters": 300,
-     "coordinateSource": "OSM way/1008141064 power=substation name=Goshen Substation operator=Georgia Power voltage=115000",
+     "uncertaintyMeters": 500,
+     "coordinateSource": "OSM way/897598553 power=substation operator=Georgia Power voltage=115000 (unnamed), identified by line topology; SERTP 2025 p.157 (sertp-2025-plan) gives Goshen to Rice Hope as 3.04 mi, equal to OSM way/1015932067 (3.04 mi, Goshen (SAV) to this substation)",
      "confidence": "confirmed",
-     "validation": "Fact-check: the gazetteer returns two Georgia Power 'Goshen Substation' features. This is the one near Rincon in Effingham County (Savannah, zone 219), which the '(SAV)' qualifier requires. The other is the Augusta-area Goshen (way/52019569, 230/115 kV, zone 215), which I rejected. Its 115 kV lines run to McIntosh (8.41 mi) and to Rice Hope/Kraft."
+     "validation": "The plan rebuilds only the Kraft - Godley J - Rice Hope section of the Goshen (SAV) - Kraft line; SERTP 2025 p.157 lists Goshen - Rice Hope (3.04 mi) as a separate 2031 rebuild."
     },
     {
      "name": "Kraft",
@@ -203,6 +203,20 @@
      "coordinateSource": "OSM way/121986375 power=substation name=Kraft Substation operator=Georgia Power voltage=115000",
      "confidence": "confirmed",
      "validation": "Fact-check: this is the only Kraft in the export. The operator is Georgia Power and it carries 115 kV. It is in Port Wentworth/Garden City (zone 219). The OSM 115 kV path from Kraft past the Godley Tract tap (way/193440184) reaches Rice Hope (way/897598553) and then Goshen."
+    }
+   ],
+   "otherPlaces": [
+    {
+     "name": "Goshen (SAV)",
+     "lat": 32.2487,
+     "lon": -81.20947,
+     "precision": "named-facility",
+     "uncertaintyMeters": 300,
+     "coordinateSource": "OSM way/1008141064 power=substation name=Goshen Substation operator=Georgia Power voltage=115000",
+     "confidence": "confirmed",
+     "validation": "The Goshen (SAV) - Kraft line starts here, but the Goshen - Rice Hope section is a separate 2031 SERTP rebuild (SERTP 2025 p.157), outside this project. Fact-check: the gazetteer returns two Georgia Power 'Goshen Substation' features. This is the one near Rincon in Effingham County (Savannah, zone 219), which the '(SAV)' qualifier requires. The other is the Augusta-area Goshen (way/52019569, 230/115 kV, zone 215), which I rejected. Its 115 kV lines run to McIntosh (8.41 mi) and to Rice Hope/Kraft.",
+     "role": "context",
+     "label": "Goshen line terminal; outside the rebuilt section"
     }
    ]
   },

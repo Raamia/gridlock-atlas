@@ -7,8 +7,9 @@ import { useMemo, useRef, useState, type ReactNode } from "react";
 import { useDialogFocus } from "@/lib/focus";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { SourceDocument } from "@/lib/domain/types";
-import { formatDate } from "@/lib/format";
+import { formatDate, publicNote } from "@/lib/format";
 import { ENGINE_VERSION, IN_SERVICE_HORIZON_DAYS } from "@/lib/matching/engine";
+import { regionPairCounts } from "@/lib/selectors";
 import { sponsorCheck } from "@/lib/sponsor";
 import { useAtlas } from "@/lib/store";
 import { SourceRow } from "./Evidence";
@@ -44,7 +45,7 @@ function Drawer({ open, onClose, title, eyebrow, children, width = 540 }: { open
                 <X size={16} />
               </IconButton>
             </header>
-            <div className="scroll-thin min-h-0 flex-1 overflow-y-auto px-6 py-5">{children}</div>
+            <div className="scroll-thin min-h-0 flex-1 overflow-y-auto overflow-x-hidden break-words px-6 py-5">{children}</div>
           </motion.aside>
         </motion.div>
       )}
@@ -133,6 +134,14 @@ export function MethodDrawer() {
   const open = useAtlas((s) => s.methodOpen);
   const set = useAtlas((s) => s.set);
   const run = useAtlas((s) => s.run);
+  const region = useAtlas((s) => s.region);
+  // the queue footer that opens this drawer counts the region on screen; show that same count here
+  const regionCounts = useMemo(() => (run && region !== "all" ? regionPairCounts(run, SNAPSHOT.projects, region) : null), [run, region]);
+  const regionName = SNAPSHOT.regions.find((r) => r.id === region)?.label;
+  const inRegion = (id: string) => region === "all" || IDX.project(id)?.region === region;
+  const excludedProjects = run?.excludedProjects.filter((x) => inRegion(x.projectId)) ?? [];
+  const sharedOwner = run?.excludedPairs.filter((p) => p.reason === "shared-owner" && inRegion(p.projectAId)) ?? [];
+  const openQs = useMemo(() => SNAPSHOT.unresolved.map((u) => ({ ...u, note: publicNote(u.note) })).filter((u) => u.note), []);
   return (
     <Drawer open={open} onClose={() => set({ methodOpen: false })} eyebrow="How it works" title="Method & audit" width={600}>
       <Pipeline />
@@ -146,7 +155,7 @@ export function MethodDrawer() {
         <Rule k="Place first">
           Following the sponsor&apos;s method, each project&apos;s center is the midpoint of its two named sub-points (or the one located point); a pair counts when centers are within the
           review radius (default 25 mi). With location uncertainty: <Code>d_low = max(0, d − e_A − e_B)</Code>, <Code>d_high = d + e_A + e_B</Code> — confirmed if{" "}
-          <Code>d_high ≤ 25</Code>, possible if only <Code>d_low ≤ 25</Code>. A source-stated shared facility, or terminals geocoded to the same substation, confirm place regardless of
+          <Code>d_high ≤ 25</Code>, possible if only <Code>d_low ≤ 25</Code>. A shared facility stated in a source (or implied by several sources, flagged as such), or terminals geocoded to the same substation, confirm place regardless of
           line length. County-only evidence is never better than “possible.” Schematic route traces are never measured.
         </Rule>
         <Rule k="Then time">
@@ -174,7 +183,7 @@ export function MethodDrawer() {
         <>
           <H>What the engine excluded</H>
           <div className="space-y-1.5">
-            {run.excludedProjects.map((x) => (
+            {excludedProjects.map((x) => (
               <div key={x.projectId} className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[12px] ring-1 ring-line">
                 <span className="mono mt-0.5 rounded bg-bg-3 px-1.5 text-[10px] uppercase text-text-2">{x.reason}</span>
                 <span>
@@ -183,22 +192,26 @@ export function MethodDrawer() {
                 </span>
               </div>
             ))}
-            {run.excludedPairs
-              .filter((p) => p.reason === "shared-owner")
-              .slice(0, 8)
-              .map((p) => (
-                <div key={`${p.projectAId}-${p.projectBId}`} className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[12px] ring-1 ring-line">
-                  <span className="mono mt-0.5 rounded bg-bg-3 px-1.5 text-[10px] uppercase text-text-2">shared owner</span>
-                  <span>
-                    <span className="text-text-0">
-                      {IDX.project(p.projectAId)?.shortTitle} × {IDX.project(p.projectBId)?.shortTitle}
-                    </span>
-                    <span className="block text-[11px] text-text-3">{p.detail}</span>
+            {sharedOwner.slice(0, 8).map((p) => (
+              <div key={`${p.projectAId}-${p.projectBId}`} className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[12px] ring-1 ring-line">
+                <span className="mono mt-0.5 rounded bg-bg-3 px-1.5 text-[10px] uppercase text-text-2">shared owner</span>
+                <span>
+                  <span className="text-text-0">
+                    {IDX.project(p.projectAId)?.shortTitle} × {IDX.project(p.projectBId)?.shortTitle}
                   </span>
-                </div>
-              ))}
+                  <span className="block text-[11px] text-text-3">{p.detail}</span>
+                </span>
+              </div>
+            ))}
+            {regionCounts && (
+              <p className="pt-1 text-[11px] leading-snug text-text-2">
+                {regionName}: {regionCounts.beyond.toLocaleString("en-US")} {regionCounts.beyond === 1 ? "pair" : "pairs"} not flagged (farther than {run.thresholdMiles} mi, no shared
+                facility) · {regionCounts.unlocated.toLocaleString("en-US")} with a location not yet established.
+              </p>
+            )}
             <p className="pt-1 text-[11px] leading-snug text-text-3">
-              Pair totals: {run.excludedCounts["shared-owner"].toLocaleString("en-US")} shared-owner (internal context; {Math.min(8, run.excludedPairs.filter((p) => p.reason === "shared-owner").length)} nearby ones shown) ·{" "}
+              Pair totals, all regions: {run.excludedCounts["shared-owner"].toLocaleString("en-US")} shared-owner (internal context; {Math.min(8, sharedOwner.length)} nearby{" "}
+              {regionCounts ? "ones in this region" : "ones"} shown) ·{" "}
               {(run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"]).toLocaleString("en-US")} farther than {run.thresholdMiles} mi ·{" "}
               {run.excludedCounts["location-unknown"].toLocaleString("en-US")} with a location not yet established · {run.excludedCounts["different-region"].toLocaleString("en-US")} across regions.
             </p>
@@ -212,13 +225,13 @@ export function MethodDrawer() {
       <H>AI extraction</H>
       <ExtractionRuns />
 
-      {SNAPSHOT.unresolved.length > 0 && (
+      {openQs.length > 0 && (
         <>
           <H>Open research questions</H>
           <p className="mb-2 text-[12px] text-text-2">Gaps recorded during source review. They are shown, not hidden.</p>
           <ul className="space-y-1.5">
-            {SNAPSHOT.unresolved.map((u, i) => (
-              <li key={i} className="rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug text-text-1 ring-1 ring-line">
+            {openQs.map((u, i) => (
+              <li key={i} className="rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug text-text-1 ring-1 ring-line [overflow-wrap:anywhere]">
                 <span className="mono mr-1.5 text-[10px] uppercase text-text-3">{u.cluster}</span>
                 {u.note}
               </li>

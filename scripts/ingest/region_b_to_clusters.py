@@ -293,7 +293,10 @@ def desc_clusters(parsed, geo):
             if 0 < prev and minor(prev):
                 skipped.insert(0, f"before 2026: ${prev:,}")
             started_before = prev > 0 and not minor(prev)
+            # 'Previous' spending: the start year is not published; first - 3 is only a floor for matching and the axis (openStart)
             start = {"earliest": f"{first - 3 if started_before else first}-01-01", "latest": f"{first}-12-31", "precision": "year"}
+            old24 = earlier["desc-scrtp-2024-2028"].get(norm_id(pid))
+            before_2024 = started_before and old24 and (pid not in dup_ids or same_project(old24["title"], r["title"])) and old24["costs"].get("Previous", 0) > 0
             end_iso = iso_fix(r["inService"])[0]["latest"]
             last_spend = f"{years[-1]}-12-31"
             end_latest = max(end_iso, last_spend)
@@ -301,9 +304,11 @@ def desc_clusters(parsed, geo):
             if start["earliest"] <= end["latest"]:
                 windows.append({
                     "claimSourceId": CURRENT, "phase": "unknown", "start": start, "end": end, "continuous": False,
+                    **({"openStart": True} if started_before else {}),
                     "evidence": window_costs(E["costs"], [y for y in years if y < first]) + [E["inService"]],
                     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates"
-                            + ("; spending also occurred before 2026" if started_before else "")
+                            + ("; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published" if started_before else "")
+                            + ("; the 2024–2028 list already shows spending before 2024" if before_2024 else "")
                             + (f"; spending under 5% of the total ({', '.join(skipped)}) is treated as preconstruction and does not start the window" if skipped else "")
                             + ".",
                 })

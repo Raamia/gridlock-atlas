@@ -58,26 +58,39 @@ export function conflictMatches(c: Conflict, key: string): boolean {
 /**
  * Pair totals for the region on screen. The API returns only run-wide exclusion counts, so a region's are
  * recounted here the way the engine forms pairs: eligible projects, same region, no shared owner.
+ * `beyond` counts pairs left unflagged (farther than the radius, no shared facility); `viaFacility` counts
+ * flagged pairs whose centers are beyond the radius but that share a stated or implied facility or terminal.
  */
 export function regionPairCounts(run: MatchRun, projects: Project[], region: string) {
+  const farViaFacility = (m: Match) =>
+    (m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint") && (m.geoDetail.center?.miles ?? 0) > run.thresholdMiles;
   if (region === "all") {
-    return { evaluated: run.pairsEvaluated, beyond: run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"], unlocated: run.excludedCounts["location-unknown"] };
+    return {
+      evaluated: run.pairsEvaluated,
+      beyond: run.excludedCounts["beyond-radius"] + run.excludedCounts["no-signal"],
+      unlocated: run.excludedCounts["location-unknown"],
+      viaFacility: run.matches.filter(farViaFacility).length,
+    };
   }
   const archived = new Set(run.excludedProjects.map((x) => x.projectId));
-  const flagged = new Set(run.matches.map((m) => m.id));
+  const flagged = new Map(run.matches.map((m) => [m.id, m]));
   const ps = projects.filter((p) => p.region === region && !archived.has(p.id));
   const located = (p: Project) => p.places.some((pl) => pl.precision !== "unknown");
   let evaluated = 0;
   let matched = 0;
   let unlocated = 0;
+  let viaFacility = 0;
   for (let i = 0; i < ps.length; i++) {
     for (let j = i + 1; j < ps.length; j++) {
       const [a, b] = [ps[i], ps[j]];
       if (a.owners.some((o) => b.owners.some((x) => x.utilityId === o.utilityId))) continue;
       evaluated++;
-      if (flagged.has(`${a.id}__${b.id}`) || flagged.has(`${b.id}__${a.id}`)) matched++;
-      else if (!located(a) || !located(b)) unlocated++;
+      const m = flagged.get(`${a.id}__${b.id}`) ?? flagged.get(`${b.id}__${a.id}`);
+      if (m) {
+        matched++;
+        if (farViaFacility(m)) viaFacility++;
+      } else if (!located(a) || !located(b)) unlocated++;
     }
   }
-  return { evaluated, beyond: evaluated - matched - unlocated, unlocated };
+  return { evaluated, beyond: evaluated - matched - unlocated, unlocated, viaFacility };
 }

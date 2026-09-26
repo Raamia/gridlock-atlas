@@ -9,9 +9,9 @@ import type {
   Project,
   Snapshot,
 } from "@/lib/domain/types";
-import { formatBound } from "@/lib/format";
+import { displayTitle, formatBound } from "@/lib/format";
 import { DEFAULT_THRESHOLD_MILES, evaluateGeo } from "./geo";
-import { activeWindows, currentInService, evaluateTime, windowsBySource } from "./time";
+import { activeWindows, currentInService, DEADLINE, evaluateTime, windowsBySource } from "./time";
 
 export const ENGINE_VERSION = "gridlock-engine/1.1.0";
 
@@ -41,6 +41,8 @@ interface Dated {
   start: DateBound;
   end: DateBound;
   earlier: boolean;
+  /** The start year is not published (only a floor), so it is never shown. */
+  openStart?: boolean;
 }
 
 /** Group claims whose dates agree (intersect); two or more groups = one disagreement. */
@@ -55,6 +57,20 @@ function cluster(items: Dated[]): Dated[][] {
   return groups;
 }
 
+const span = (b: DateBound) => Date.parse(b.latest) - Date.parse(b.earliest);
+
+/**
+ * Put the member that best states what its group agrees on first: a current claim over an earlier edition,
+ * then the most precise (narrowest) bound, then the later date. Never the first-listed blindly — a coarse
+ * "2028" would hide the "Sep 2028" that actually differs from the other side.
+ */
+function lead<T extends Dated>(g: T[]): T[] {
+  const r = [...g].sort(
+    (x, y) => Number(x.earlier) - Number(y.earlier) || span(x.start) + span(x.end) - (span(y.start) + span(y.end)) || y.start.earliest.localeCompare(x.start.earliest),
+  )[0];
+  return [r, ...g.filter((x) => x !== r)];
+}
+
 /**
  * Source disagreements inside one project, kept side by side and never silently resolved.
  * Several windows or dates from ONE source are components of the work, not competing claims;
@@ -62,45 +78,45 @@ function cluster(items: Dated[]): Dated[][] {
  */
 export function projectConflicts(p: Project, sourceTitle: (id: string) => string, sourceDoc: (id: string) => string = sourceTitle): Conflict[] {
   const out: Conflict[] = [];
+  // groups are led by their representative (lead): g[0] is the value shown, and only members stating exactly that value are named
+  const stating = <T extends Dated>(g: T[], fmt: (d: Dated) => string) => g.filter((x) => fmt(x) === fmt(g[0]));
   const describe = (groups: Dated[][], fmt: (d: Dated) => string) => {
     // when one publisher appears on more than one side, name the documents instead
     const sidesOf = (pub: string) => groups.filter((g) => g.some((x) => sourceTitle(x.sourceId) === pub)).length;
     const label = (id: string) => (sidesOf(sourceTitle(id)) > 1 ? sourceDoc(id) : sourceTitle(id));
     return groups
-      .map((g) => `${[...new Set(g.map((x) => label(x.sourceId)))].join(", ")}${g.every((x) => x.earlier) ? " (earlier edition)" : ""}: ${fmt(g[0])}`)
+      .map((g) => `${[...new Set(stating(g, fmt).map((x) => label(x.sourceId)))].join(", ")}${g.every((x) => x.earlier) ? " (earlier edition)" : ""}: ${fmt(g[0])}`)
       .join(" · ");
   };
 
-  // completion / in-service: one representative claim per source (its latest-listed date)
+  // completion / in-service: one representative claim per source (its latest-listed date); a required-by deadline is not a forecast date
   const perSource = new Map<string, Dated & { label: string }>();
-  for (const c of p.completionClaims.filter((c) => IN_SERVICE_LABEL.test(c.label))) {
+  for (const c of p.completionClaims.filter((c) => IN_SERVICE_LABEL.test(c.label) && !DEADLINE.test(c.label))) {
     if (!perSource.has(c.claimSourceId))
       perSource.set(c.claimSourceId, { id: c.id, sourceId: c.claimSourceId, start: c.date, end: c.date, earlier: c.current === false, label: c.label });
   }
-  const cGroups = cluster([...perSource.values()]);
+  const cGroups = cluster([...perSource.values()]).map(lead);
   if (cGroups.length > 1) {
     const versionOnly = cGroups.filter((g) => !g.every((x) => x.earlier)).length === 1 && cGroups.flat().some((x) => x.earlier);
-    // plan editions read best by edition name: "2024–2028 list: Dec 31, 2025 → current: Dec 1, 2026"
-    const edition = (x: Dated & { label?: string }) => x.label?.match(/\(([^)]*)\)\s*$/)?.[1];
+    // "plan editions" only when one publisher revised its own list; otherwise a later source superseded an earlier one
+    const onePublisher = new Set(cGroups.flat().map((x) => sourceTitle(x.sourceId))).size === 1;
+    // edition names read best: "2024–2028 list: Dec 31, 2025 → current edition: Dec 1, 2026"
+    const edition = (x: Dated & { label?: string }) => x.label?.match(/\(([^)]*\b(?:19|20)\d\d\b[^)]*)\)\s*$/)?.[1];
+    const name = (x: Dated & { label?: string }) => (x.earlier || !onePublisher ? (edition(x) ?? sourceDoc(x.sourceId)) : "current edition");
+    const names = (g: (typeof cGroups)[number]) =>
+      [...new Set(stating(g, (d) => formatBound(d.start)).sort((x, y) => (edition(x) ?? "").localeCompare(edition(y) ?? "")).map(name))];
     const versionText = () =>
       [...cGroups]
-        .sort((g1, g2) => {
-          // earlier editions first (by name), the current one last
-          const cur = (g: typeof g1) => (g.every((x) => x.earlier) ? 0 : 1);
-          const k = (g: typeof g1) => edition(g[0]) ?? sourceDoc(g[0].sourceId);
-          return cur(g1) - cur(g2) || k(g1).localeCompare(k(g2));
-        })
-        .map((g) => {
-          const names = g.map((x) => (x.earlier ? edition(x) : null) ?? (x.earlier ? sourceDoc(x.sourceId) : "current edition"));
-          return `${[...new Set(names)].join(", ")}: ${formatBound(g[0].start)}`;
-        })
+        // earlier editions first (oldest name first), the current one last
+        .sort((g1, g2) => Number(!g1.every((x) => x.earlier)) - Number(!g2.every((x) => x.earlier)) || names(g1)[0].localeCompare(names(g2)[0]))
+        .map((g) => `${names(g).join(", ")}: ${formatBound(g[0].start)}`)
         .join(" → ");
     out.push({
       id: `${p.id}:completion`,
       projectId: p.id,
       field: "completion",
       description: versionOnly
-        ? `Schedule changed between plan editions — ${versionText()}`
+        ? `${onePublisher ? "Schedule changed between plan editions" : "Earlier date superseded by a later source"} — ${versionText()}`
         : "Sources give different completion / in-service dates — " + describe(cGroups, (d) => formatBound(d.start)),
       sides: cGroups.map((g) => ({ value: formatBound(g[0].start), sourceIds: g.map((x) => x.sourceId), claimIds: g.map((x) => x.id), earlier: g.every((x) => x.earlier) })),
       claimIds: cGroups.flat().map((x) => x.id),
@@ -109,22 +125,28 @@ export function projectConflicts(p: Project, sourceTitle: (id: string) => string
   }
 
   // construction windows: one envelope per source
-  const envs: Dated[] = windowsBySource(p).map((ws) => ({
-    id: ws[0].id,
-    sourceId: ws[0].claimSourceId,
-    start: { earliest: ws.map((w) => w.start.earliest).sort()[0], latest: ws.map((w) => w.start.latest).sort()[0], precision: ws[0].start.precision },
-    end: { earliest: ws.map((w) => w.end.earliest).sort().at(-1)!, latest: ws.map((w) => w.end.latest).sort().at(-1)!, precision: ws.at(-1)!.end.precision },
-    earlier: false,
-  }));
-  const wGroups = cluster(envs);
+  const envs: Dated[] = windowsBySource(p).map((ws) => {
+    const earliest = ws.map((w) => w.start.earliest).sort()[0];
+    return {
+      id: ws[0].id,
+      sourceId: ws[0].claimSourceId,
+      start: { earliest, latest: ws.map((w) => w.start.latest).sort()[0], precision: ws[0].start.precision },
+      end: { earliest: ws.map((w) => w.end.earliest).sort().at(-1)!, latest: ws.map((w) => w.end.latest).sort().at(-1)!, precision: ws.at(-1)!.end.precision },
+      earlier: false,
+      openStart: ws.some((w) => w.openStart && w.start.earliest === earliest),
+    };
+  });
+  const wGroups = cluster(envs).map(lead);
   if (wGroups.length > 1) {
-    const fmt = (d: Dated) => `${formatBound(d.start).split("–")[0]}–${formatBound(d.end).split("–").at(-1)}`;
+    const fmt = (d: Dated) => `${d.openStart ? `pre-${d.start.latest.slice(0, 4)}` : formatBound(d.start).split("–")[0]}–${formatBound(d.end).split("–").at(-1)}`;
+    const bySource = windowsBySource(p);
     out.push({
       id: `${p.id}:window`,
       projectId: p.id,
       field: "constructionWindow",
       description: "Sources give different construction windows — " + describe(wGroups, fmt),
-      sides: wGroups.map((g) => ({ value: fmt(g[0]), sourceIds: g.map((x) => x.sourceId), claimIds: windowsBySource(p).filter((ws) => g.some((x) => x.sourceId === ws[0].claimSourceId)).flat().map((w) => w.id) })),
+      // the representative source's windows first, so the side's excerpt matches its value
+      sides: wGroups.map((g) => ({ value: fmt(g[0]), sourceIds: g.map((x) => x.sourceId), claimIds: g.flatMap((x) => bySource.find((ws) => ws[0].claimSourceId === x.sourceId) ?? []).map((w) => w.id) })),
       claimIds: wGroups.flat().map((x) => x.id),
       affectsMatch: true,
     });
@@ -210,9 +232,10 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   const inferredSite = geo.detail.method === "shared-site" && snapshot.relations.filter((r) => geo.detail.relationIds.includes(r.id)).every((r) => r.basis === "inferred");
   if (sameSite && inferredSite) add(50, "Shared facility implied by sources");
   else if (sameSite) add(60, geo.detail.method === "shared-site" ? "Shared facility stated in a source" : "Terminals at the same facility");
-  else if (geo.level === "confirmed" && d !== undefined) add(30 + 30 * Math.max(0, 1 - d / thresholdMiles), `Centers ≈${d < 10 ? d.toFixed(1) : Math.round(d)} mi apart`);
+  else if (geo.level === "confirmed" && d !== undefined)
+    add(30 + 30 * Math.max(0, 1 - d / thresholdMiles), `Centers ≈${d < 10 || Math.abs(d - thresholdMiles) < 1.5 ? d.toFixed(1) : Math.round(d)} mi apart`);
   else if (geo.level === "confirmed") add(30, "Within the review radius");
-  else add(12, "Proximity possible (coarse location)");
+  else add(12, geo.detail.method === "measured" && !geo.detail.center?.localityOnly ? "Near the radius edge (location uncertainty)" : "Proximity possible (coarse location)");
 
   // timing: more evidence never scores lower — confirmed 30 > possible 18–30 > unknown ≤ 15 > no-match 0
   const gap = time.detail.inService?.gapDays;
@@ -221,14 +244,13 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   if (time.level === "confirmed") add(30, "Construction windows overlap");
   else if (time.level === "possible") add(18 + 12 * gapFactor, `Construction windows may overlap${gapText ? `; ${gapText}` : ""}`);
   else if (time.level === "unknown" && gap !== undefined) add(15 * gapFactor, gapText[0].toUpperCase() + gapText.slice(1));
-  else if (time.level === "no-match") reasons.push("Published windows do not overlap");
+  else if (time.level === "no-match") reasons.push("Schedule windows do not overlap");
 
   const evidenceIds = new Set<string>();
   for (const r of snapshot.relations.filter((r) => geo.detail.relationIds.includes(r.id))) r.evidenceIds.forEach((e) => evidenceIds.add(e));
   for (const p of [a, b]) {
     for (const w of activeWindows(p)) w.evidenceIds.forEach((e) => evidenceIds.add(e));
-    const c = p.completionClaims[0];
-    c?.evidenceIds.forEach((e) => evidenceIds.add(e));
+    currentInService(p)?.evidenceIds.forEach((e) => evidenceIds.add(e));
   }
   for (const c of coordination) c.evidenceIds.forEach((e) => evidenceIds.add(e));
   const evs = [...evidenceIds].map((id) => snapshot.evidence[id]).filter(Boolean);
@@ -281,6 +303,7 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
     excludedCounts[x.reason]++;
     if (notable || opts.listExclusions !== false) excludedPairs.push(x);
   };
+  const utilityName = (id: string) => snapshot.utilities.find((u) => u.id === id)?.shortName ?? id;
   let pairsEvaluated = 0;
   for (let i = 0; i < eligible.length; i++) {
     for (let j = i + 1; j < eligible.length; j++) {
@@ -295,7 +318,7 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
             projectAId: a.id,
             projectBId: b.id,
             reason: "shared-owner",
-            detail: `Shared owner (${shared.join(", ")}): internal context, not a cross-utility lead.`,
+            detail: `Shared owner (${shared.map(utilityName).join(", ")}): internal context, not a cross-utility lead.`,
           },
           g === "confirmed" || g === "possible",
         );
@@ -309,7 +332,7 @@ export function runMatching(snapshot: Snapshot, opts: RunOptions = {}): MatchRun
       const m = evaluatePair(a, b, snapshot, thresholdMiles);
       if (m) matches.push(m);
       else if (evaluateGeo(a, b, snapshot.relations, thresholdMiles).level === "unknown") {
-        const missing = [a, b].filter((p) => !p.places.some((pl) => pl.precision !== "unknown")).map((p) => p.shortTitle);
+        const missing = [a, b].filter((p) => !p.places.some((pl) => pl.precision !== "unknown")).map(displayTitle);
         exclude({
           projectAId: a.id,
           projectBId: b.id,

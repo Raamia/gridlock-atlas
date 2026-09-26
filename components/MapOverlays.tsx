@@ -41,7 +41,7 @@ function FocusChip() {
   return (
     <div
       data-map-ui
-      className={clsx("pointer-events-none absolute left-3 top-3 z-10 sm:left-4 sm:top-4", inspectorOpen && "hidden xl:block")}
+      className={clsx("pointer-events-none absolute left-3 top-3 z-10 max-sm:hidden sm:left-4 sm:top-4", inspectorOpen && "hidden xl:block")}
       style={{ maxWidth: inspectorOpen ? "calc(100% - 424px - 280px)" : "calc(100% - 290px)" }}
     >
       <div className="glass glass-solid rounded-xl px-3.5 py-2.5">
@@ -163,7 +163,7 @@ function Legend() {
             <LegendRow swatch={<svg width="28" height="10"><circle cx="14" cy="5" r="4" fill="#9fb3d9" /></svg>} label="Named facility" />
             <LegendRow
               swatch={<svg width="28" height="14"><circle cx="14" cy="7" r="5" fill="#fbbf24" /><circle cx="14" cy="7" r="6.5" fill="none" stroke="#fbbf24" strokeOpacity=".4" strokeWidth="2" /></svg>}
-              label="Shared site stated in a source"
+              label="Shared site or terminal · callout says stated or implied"
             />
             <LegendRow
               swatch={<svg width="28" height="10"><line x1="3" y1="5" x2="25" y2="5" stroke="#fbbf24" strokeWidth="1.6" strokeDasharray="1.5 2.5" strokeLinecap="round" /><circle cx="14" cy="5" r="3" fill="#fbbf24" stroke="#040914" /></svg>}

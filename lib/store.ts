@@ -48,6 +48,8 @@ interface AtlasState {
   cameraNonce: number;
 
   compare: (opts?: { thresholdMiles?: number; quiet?: boolean }) => Promise<MatchRun | null>;
+  /** Back to the pre-run state at the default radius; any in-flight compare is aborted and its reply dropped. */
+  resetRun: () => void;
   setThreshold: (mi: number) => void;
   select: (id: string | null, opts?: { section?: InspectorSection; focusConflict?: string }) => void;
   set: (patch: Partial<AtlasState>) => void;
@@ -124,6 +126,15 @@ export const useAtlas = create<AtlasState>((set, get) => ({
 
   setThreshold(mi) {
     set({ thresholdMiles: mi });
+  },
+
+  resetRun() {
+    seq++;
+    inflight?.abort();
+    inflight = null;
+    latest = Promise.resolve(null);
+    // running must be cleared here: the aborted request sees a newer seq and never clears it
+    set({ run: null, running: false, runError: null, thresholdMiles: 25, tab: "needs-review", selectedMatchId: null, inspectorOpen: false, inspectorSection: null, highlightConflict: false, focusConflict: null });
   },
 
   select(id, opts) {

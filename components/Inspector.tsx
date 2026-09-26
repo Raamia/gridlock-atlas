@@ -7,9 +7,9 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { IDX } from "@/lib/data";
 import { displayTitle, firstSentence, SCOPE_LABEL, whyFlagged } from "@/lib/describe";
 import type { Conflict, ConflictSide, Evidence, Match, Project, SignalLevel } from "@/lib/domain/types";
-import { formatBound, formatDate, formatMiles, formatPoint, formatWindow } from "@/lib/format";
+import { formatBound, formatDate, formatMilesNear, formatPoint, formatWindow, publicNote, year } from "@/lib/format";
 import { useSelectedPair } from "@/lib/hooks";
-import { activeWindows, windowsBySource } from "@/lib/matching/time";
+import { activeWindows, coarsest, displayWindowGroups } from "@/lib/matching/time";
 import { conflictMatches, evidenceHref, matchSourceIds, ownerNames, pageLabel } from "@/lib/selectors";
 import { useAtlas, type InspectorSection } from "@/lib/store";
 import { EvidenceCard, SourceRow, type EvidenceTone } from "./Evidence";
@@ -242,9 +242,12 @@ function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; a
   const c = m.geoDetail.center;
   const radius = m.geoDetail.thresholdMiles;
   const method = m.geoDetail.method;
-  // a stated shared site or terminal confirms place however far apart the centers are; a meter would read as a failed test
+  // a stated or source-implied shared site or terminal confirms place however far apart the centers are; a meter would read as a failed test
   const byFacility = !!c && c.miles > radius && (method === "shared-site" || method === "shared-endpoint");
-  const facility = method === "shared-site" ? rels.find((x) => x.siteLabel)?.siteLabel : m.geoDetail.sharedEndpoint?.labelA;
+  const statedRel = rels.find((r) => r.basis !== "inferred");
+  const implied = method === "shared-site" && rels.length > 0 && !statedRel;
+  const facility = method === "shared-site" ? (statedRel?.siteLabel ?? rels.find((x) => x.siteLabel)?.siteLabel) : m.geoDetail.sharedEndpoint?.labelA;
+  const mi = (x: number) => formatMilesNear(x, radius);
   const evidence = [...rels.flatMap((r) => r.evidenceIds), ...[a, b].flatMap((p) => p.places.filter((pl) => pl.role === "endpoint").flatMap((pl) => pl.evidenceIds))];
   return (
     <Section id="place" icon={<MapPin size={14} />} title="Where they meet" level={<LevelPill label="GEO" level={m.geo} />} active={active}>
@@ -252,18 +255,19 @@ function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; a
       {c && (
         <div className="flex items-center gap-3 rounded-lg bg-bg-2/70 px-3 py-2 ring-1 ring-line">
           <div className="shrink-0">
-            <div className="num text-[20px] leading-none text-text-0">{formatMiles(c.miles)}</div>
+            <div className="num text-[20px] leading-none text-text-0">{mi(c.miles)}</div>
             <div className="mt-1 text-[10.5px] text-text-3">center to center</div>
           </div>
           <div className="h-8 w-px shrink-0 bg-line-2" />
           {byFacility ? (
             <p className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
-              Beyond the <span className="num text-text-1">{radius} mi</span> review radius. Place is confirmed by the {method === "shared-site" ? "stated shared site" : "shared terminal"}
+              Beyond the <span className="num text-text-1">{radius} mi</span> review radius. Place is confirmed by the{" "}
+              {method === "shared-site" ? (implied ? "shared site the sources imply" : "stated shared site") : "shared terminal"}
               {facility ? ` (${facility})` : ""}, so center distance is not the signal here.
             </p>
           ) : (
             <div className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
-              {formatMiles(c.lowMiles) === formatMiles(c.highMiles) ? "±<1 mi location uncertainty" : `Range ${formatMiles(c.lowMiles)}–${formatMiles(c.highMiles)} with location uncertainty`} · review
+              {mi(c.lowMiles) === mi(c.highMiles) ? "±<1 mi location uncertainty" : `Range ${mi(c.lowMiles)}–${mi(c.highMiles)} with location uncertainty`} · review
               radius <span className="num text-text-1">{radius} mi</span>
               <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-bg-4">
                 <div className="h-full rounded-full bg-gradient-to-r from-amber to-amber/40" style={{ width: `${Math.max(3, Math.min(100, (1 - c.miles / radius) * 100))}%` }} />
@@ -330,7 +334,7 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
       <p className="text-[12.5px] leading-[1.5] text-text-1">{m.timeReason}</p>
       <div className="overflow-hidden rounded-lg ring-1 ring-line">
         {rows.map(([p, color]) => {
-          const groups = windowsBySource(p);
+          const groups = displayWindowGroups(p, (id) => IDX.source(id)?.publisher);
           return (
             <div key={p.id} className="flex items-start gap-2.5 border-b border-line bg-bg-2/60 px-3 py-2 last:border-b-0">
               <span className="mt-[5px]">
@@ -339,18 +343,21 @@ function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project
               <div className="min-w-0 flex-1">
                 <div className="truncate text-[11.5px] text-text-2">{p.shortTitle}</div>
                 {groups.length ? (
-                  groups.map((ws) => {
-                    const start = ws.map((w) => w.start.earliest).sort()[0];
-                    const end = ws.map((w) => w.end.latest).sort().at(-1)!;
+                  groups.map(({ ws, sourceIds }) => {
+                    const first = ws.reduce((x, y) => (y.start.earliest < x.start.earliest ? y : x));
+                    const last = ws.reduce((x, y) => (y.end.latest > x.end.latest ? y : x));
                     const coarse = ws.some((w) => !w.continuous);
                     const src = IDX.source(ws[0].claimSourceId)?.publisher;
-                    const meta = `${ws.length > 1 ? `${ws.length} components` : `${ws[0].start.precision} precision`}${coarse ? " · coarse" : ""}`;
+                    const meta = `${sourceIds.length > 1 ? `${sourceIds.length} documents · ` : ""}${ws.length > 1 ? `${ws.length} components` : `${coarsest(ws)} precision`}${coarse ? " · coarse" : ""}`;
+                    const docs = sourceIds.map((id) => IDX.source(id)?.title).filter(Boolean);
                     return (
                       <div key={ws[0].id} className="mt-1.5">
                         <div className="num whitespace-nowrap text-[13px] leading-tight text-text-0">
-                          {ws.length === 1 ? formatWindow(ws[0].start, ws[0].end) : `${formatPoint(start, ws[0].start.precision)}–${formatPoint(end, ws.at(-1)!.end.precision)}`}
+                          {ws.length === 1
+                            ? formatWindow(ws[0].start, ws[0].end, ws[0].openEnded, ws[0].openStart)
+                            : `${first.openStart ? `pre-${year(first.start.latest)}` : formatPoint(first.start.earliest, first.start.precision)}–${formatPoint(last.end.latest, last.end.precision)}`}
                         </div>
-                        <div className="truncate text-[10.5px] text-text-3" title={[`${src} · ${meta}`, ...ws.map((w) => w.note).filter(Boolean)].join("\n")}>
+                        <div className="truncate text-[10.5px] text-text-3" title={[...docs, `${src} · ${meta}`, ...ws.map((w) => w.note).filter(Boolean)].join("\n")}>
                           {src} · {meta}
                         </div>
                       </div>
@@ -518,10 +525,9 @@ function ConflictSection({ m, active }: { m: Match; active: boolean }) {
 }
 
 function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: Conflict["field"] }) {
-  const claimEvidence =
-    field === "completion"
-      ? p.completionClaims.filter((c) => side.claimIds.includes(c.id)).flatMap((c) => c.evidenceIds)
-      : p.constructionWindows.filter((w) => side.claimIds.includes(w.id)).flatMap((w) => w.evidenceIds);
+  // in the side's own claim order, so the excerpt and link come from the claim whose value is shown
+  const claims: { id: string; evidenceIds: string[] }[] = field === "completion" ? p.completionClaims : p.constructionWindows;
+  const claimEvidence = side.claimIds.flatMap((id) => claims.find((c) => c.id === id)?.evidenceIds ?? []);
   const e = claimEvidence.map((id) => IDX.evidence(id)).find(Boolean);
   const srcs = side.sourceIds.map((id) => IDX.source(id)).filter(Boolean);
   const first = e ? IDX.source(e.sourceId) : srcs[0];
@@ -552,12 +558,16 @@ function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: C
 
 function NotesSection({ a, b }: { a: Project; b: Project }) {
   const [open, setOpen] = useState(false);
-  const rows = ([
-    [a, "var(--a)"],
-    [b, "var(--b)"],
-  ] as const).filter(([p]) => p.caveats.length);
+  const rows = (
+    [
+      [a, "var(--a)"],
+      [b, "var(--b)"],
+    ] as const
+  )
+    .map(([p, color]) => ({ p, color, notes: p.caveats.map(publicNote).filter(Boolean) }))
+    .filter((r) => r.notes.length);
   if (!rows.length) return null;
-  const total = rows.reduce((n, [p]) => n + p.caveats.length, 0);
+  const total = rows.reduce((n, r) => n + r.notes.length, 0);
   return (
     <section className="rounded-xl border border-line bg-bg-1/70 p-3.5">
       <button onClick={() => setOpen((o) => !o)} className="flex w-full items-center justify-between gap-2 text-left" aria-expanded={open}>
@@ -570,13 +580,13 @@ function NotesSection({ a, b }: { a: Project; b: Project }) {
       </button>
       {open && (
         <div className="mt-2.5 space-y-2.5">
-          {rows.map(([p, color]) => (
+          {rows.map(({ p, color, notes }) => (
             <div key={p.id}>
               <div className="flex items-center gap-1.5 text-[11px] text-text-2">
                 <Dot color={color} size={5} /> {p.shortTitle}
               </div>
               <ul className="mt-1 space-y-1">
-                {p.caveats.map((c, i) => (
+                {notes.map((c, i) => (
                   <li key={i} className="text-[11.5px] leading-snug text-text-2">
                     — {c}
                   </li>

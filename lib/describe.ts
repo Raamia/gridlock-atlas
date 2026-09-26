@@ -1,6 +1,8 @@
 import { SNAPSHOT } from "@/lib/data/snapshot";
 import type { Match } from "@/lib/domain/types";
-import { formatMiles, formatSpan } from "@/lib/format";
+import { formatMilesNear, formatSpan } from "@/lib/format";
+
+export { displayTitle } from "@/lib/format";
 
 /** The place signal in a few words — the stated site or shared terminal itself, or the distance — plus a full label. */
 export function geoShort(m: Match): { text: string; title: string } {
@@ -10,7 +12,7 @@ export function geoShort(m: Match): { text: string; title: string } {
     return site ? { text: site, title: `Shared site · ${site}` } : { text: "Shared site stated", title: "Shared site stated in a source" };
   }
   if (d.method === "shared-endpoint" && d.sharedEndpoint) return { text: d.sharedEndpoint.labelA, title: `Same terminal · ${d.sharedEndpoint.labelA}` };
-  const text = d.method === "measured" && d.center ? `${formatMiles(d.center.miles)} apart` : d.method === "coarse" ? "County-level only" : "Location unknown";
+  const text = d.method === "measured" && d.center ? `${formatMilesNear(d.center.miles, d.thresholdMiles)} apart` : d.method === "coarse" ? "County-level only" : "Location unknown";
   return { text, title: text };
 }
 
@@ -31,9 +33,12 @@ export function whyFlagged(m: Match): string {
   const parts: string[] = [];
   const d = m.geoDetail.center?.miles;
   const rels = SNAPSHOT.relations.filter((r) => m.geoDetail.relationIds.includes(r.id));
+  // measured between named facilities: "possible" only because the location uncertainty straddles the radius
+  const named = m.geoDetail.method === "measured" && !m.geoDetail.center?.localityOnly;
   if (m.geoDetail.method === "shared-site") parts.push(rels.some((r) => r.basis !== "inferred") ? "a source-stated shared facility" : "a shared facility implied by the sources");
   else if (m.geoDetail.method === "shared-endpoint") parts.push(`terminals at the same facility (${m.geoDetail.sharedEndpoint?.labelA})`);
-  else if (m.geo === "confirmed") parts.push(`centers ${d !== undefined ? formatMiles(d) : ""} apart, inside the ${m.geoDetail.thresholdMiles} mi radius`);
+  else if (m.geo === "confirmed") parts.push(`centers ${d !== undefined ? formatMilesNear(d, m.geoDetail.thresholdMiles) : ""} apart, inside the ${m.geoDetail.thresholdMiles} mi radius`);
+  else if (named && d !== undefined) parts.push(`centers ≈${d.toFixed(1)} mi apart, at the edge of the ${m.geoDetail.thresholdMiles} mi radius`);
   else parts.push("possible proximity");
   if (m.time === "confirmed") parts.push("overlapping published construction windows");
   else if (m.time === "possible") parts.push("possibly overlapping construction windows");
@@ -44,7 +49,9 @@ export function whyFlagged(m: Match): string {
       ? "Coordination is already documented, so this is a known interface, not a new gap."
       : m.reviewStatus === "needs-review"
         ? "No resource-coordination plan was found in the reviewed sources — status unknown, not “uncoordinated.”"
-        : "Evidence is coarse; treat as a lead to verify.";
+        : named
+          ? "Located at named facilities, but the distance is within location uncertainty of the radius; treat as a lead to verify."
+          : "Evidence is coarse; treat as a lead to verify.";
   return `Flagged for ${signals}. ${tail}`;
 }
 
@@ -56,15 +63,6 @@ export const SCOPE_LABEL: Record<string, string> = {
   "resource-sharing": "Resource sharing",
   unknown: "Scope unknown",
 };
-
-/** Headline title: long titles drop their parenthetical detail (the full title stays in tooltips/brief sources). */
-export function displayTitle(p: { title: string }): string {
-  // planning-area prefixes ("SAV: …") are kept in the docket line, not the headline
-  const base = p.title.replace(/^(SAV|GTC|MEAG|DU)\s*:\s*/, "");
-  if (base.length <= 48) return base;
-  const t = base.replace(/\s*\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
-  return t || base;
-}
 
 /** First sentence of a researcher description, capped at ~`words` words. */
 export function firstSentence(text: string, words = 30): string {

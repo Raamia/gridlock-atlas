@@ -6,7 +6,8 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
  *
  * Regression tests for app defects found on 2026-09-26 (they assert the intended behavior and fail until fixed):
  * radius reply race, demo Finish under the brief, demo radius, overview chip count, filtered empty state,
- * engine failure message, 3D overview tilt, reviewer note on Escape, sources "no match" state.
+ * engine failure message, 3D overview tilt, reviewer note on Escape, sources "no match" state, brief print,
+ * demo card vs inspector, demo step 1 reset and tabs, demo keys behind a drawer.
  */
 
 const SE_PAIR = "desc-6888__gpc-20065"; // top Savannah River lead: DESC Deerfield × Georgia Power Goshen–McIntosh rebuild
@@ -217,8 +218,8 @@ test.describe("interactions", () => {
 
     await page.getByRole("button", { name: /^Method$/ }).click();
     const drawer = page.getByRole("dialog", { name: "Method & audit" });
-    await expect(drawer).toContainText(/1\s*pairs labeled/);
-    await expect(drawer).toContainText(/1\s*excerpts human-checked/);
+    await expect(drawer).toContainText(/1\s*pair labeled/);
+    await expect(drawer).toContainText(/1\s*excerpt human-checked/);
     const csvBtn = drawer.getByRole("button", { name: "Labels CSV" });
     const jsonBtn = drawer.getByRole("button", { name: "review-log.json" });
     await expect(csvBtn).toBeEnabled();
@@ -238,8 +239,8 @@ test.describe("interactions", () => {
     await page.reload();
     await expect(inspector).toBeVisible({ timeout: 20_000 });
     await page.getByRole("button", { name: /^Method$/ }).click();
-    await expect(drawer).toContainText(/1\s*pairs labeled/);
-    await expect(drawer).toContainText(/1\s*excerpts human-checked/);
+    await expect(drawer).toContainText(/1\s*pair labeled/);
+    await expect(drawer).toContainText(/1\s*excerpt human-checked/);
     await drawer.getByRole("button", { name: /Turn on reviewer mode/ }).click();
     await page.keyboard.press("Escape");
     await expect(drawer).toBeHidden();
@@ -382,6 +383,51 @@ test.describe("interactions", () => {
     await expect(queue).toContainText("· 25 mi", { timeout: 10_000 });
   });
 
+  test("guided demo: Next stays clear of the evidence inspector on a 1024px laptop", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Start guided demo" }).click();
+    const demo = page.getByRole("region", { name: "Guided demo" });
+    await demo.getByRole("button", { name: "Go to step 5" }).click();
+    await expect(page.getByRole("complementary", { name: "Evidence inspector" })).toContainText("Rough impact estimate", { timeout: 15_000 });
+    await page.waitForTimeout(600);
+    const box = (await demo.getByRole("button", { name: /^Next/ }).boundingBox())!;
+    const hit = await page.evaluate(([x, y]) => document.elementFromPoint(x, y)?.closest("button")?.textContent ?? "", [box.x + box.width / 2, box.y + box.height / 2]);
+    expect(hit).toMatch(/Next/);
+  });
+
+  test("guided demo: step 1 starts from no comparison, and narrated pairs sit under their own tab", async ({ page }) => {
+    await page.goto("/");
+    await compare(page);
+    await openFilters(page);
+    await page.getByRole("slider", { name: "Review radius" }).focus();
+    await page.keyboard.press("End");
+    await expect(page.getByRole("complementary", { name: "Coordination queue" })).toContainText("· 100 mi");
+    await tab(page, /^Conflicts/).click();
+    await page.getByRole("button", { name: "Start guided demo" }).click();
+    const demo = page.getByRole("region", { name: "Guided demo" });
+    await expect(page.getByRole("button", { name: /Compare public plans/ })).toBeVisible();
+    await expect(page.locator("[data-match-id]")).toHaveCount(0);
+
+    await demo.getByRole("button", { name: "Go to step 6" }).click();
+    await expect(page.getByRole("complementary", { name: "Evidence inspector" })).toContainText("Alma-Blair", { timeout: 15_000 });
+    await expect(tab(page, /^Known/)).toHaveAttribute("aria-selected", "true");
+  });
+
+  test("guided demo: arrow keys do not step the demo behind the Method drawer", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Start guided demo" }).click();
+    const demo = page.getByRole("region", { name: "Guided demo" });
+    await demo.getByRole("button", { name: "Go to step 3" }).click();
+    await expect(page.getByRole("complementary", { name: "Evidence inspector" })).toBeVisible({ timeout: 15_000 });
+    await page.getByRole("button", { name: /^Method$/ }).click();
+    await expect(page.getByRole("dialog", { name: "Method & audit" })).toBeVisible();
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("ArrowRight");
+    await expect(demo).toContainText("3/8");
+    await expect(page.getByRole("dialog", { name: "Review brief" })).toHaveCount(0);
+  });
+
   test("overview chip counts the candidate pairs of the region on screen", async ({ page }) => {
     await page.goto("/");
     await compare(page);
@@ -435,6 +481,28 @@ test.describe("interactions", () => {
     await expect(inspector).toBeHidden();
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("gridlock-review-v1") ?? "{}"));
     expect(saved.labels?.[SE_PAIR]?.note).toBe("check McIntosh outage window");
+  });
+
+  test("Print / PDF of a review brief prints only the brief, on as many pages as it needs", async ({ page }) => {
+    const inspector = await openPair(page, "dpc-alma-blair__xcel-wwtc");
+    await inspector.getByRole("button", { name: /Create review brief/ }).click();
+    const brief = page.getByRole("dialog", { name: "Review brief" });
+    await expect(brief).toContainText("Review question");
+    await page.waitForTimeout(500); // enter animation
+    await page.emulateMedia({ media: "print" });
+    // innerText follows the print stylesheet: the brief through its footer, none of the app shell around it
+    const printed = await page.evaluate(() => document.body.innerText);
+    expect(printed).toContain("Generated by GridLock Atlas");
+    expect(printed).not.toContain("Coordination queue");
+    expect(printed).not.toContain("Guided demo");
+    await expect(page.getByRole("banner")).toBeHidden();
+
+    // Chrome writes page objects and link annotations uncompressed
+    const pdf = (await page.pdf({ format: "Letter" })).toString("latin1");
+    expect(pdf.match(/\/Type\s*\/Page(?![a-zA-Z])/g)?.length ?? 0).toBeGreaterThan(1);
+    const citations = await brief.locator("ol > li").count();
+    expect(citations).toBeGreaterThan(5);
+    expect(pdf.match(/\/URI\s*\(/g)?.length ?? 0).toBeGreaterThanOrEqual(citations);
   });
 
   test("sources drawer filter narrows the registry and reports no matches", async ({ page }) => {

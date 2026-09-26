@@ -41,10 +41,12 @@ export function BriefModal() {
       {open && pair && brief && (
         <motion.div
           className={clsx(
-            "fixed inset-0 z-50 flex items-center justify-center bg-bg-0/70 p-3 backdrop-blur-sm sm:p-6 print:static print:bg-white print:p-0",
-            // during the guided demo its card sits bottom-left above this backdrop: center the brief in the space beside it
+            "fixed inset-0 z-50 flex items-center justify-center bg-bg-0/70 p-3 backdrop-blur-sm sm:p-6 print:static print:block print:bg-white print:p-0",
+            // during the guided demo its card sits bottom-left above this backdrop: center the brief beside it
+            // (below lg the card spans the bottom instead; globals.css reserves its height via data-demo)
             demo && "lg:pl-[480px]",
           )}
+          data-demo={demo || undefined}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -60,7 +62,7 @@ export function BriefModal() {
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-            className="flex max-h-full w-full max-w-[780px] flex-col overflow-hidden rounded-2xl border border-line-2 bg-bg-1 shadow-[0_40px_120px_-20px_rgba(0,0,0,.8)] print:max-h-none print:border-0 print:shadow-none"
+            className="flex max-h-full w-full max-w-[780px] flex-col overflow-hidden rounded-2xl border border-line-2 bg-bg-1 shadow-[0_40px_120px_-20px_rgba(0,0,0,.8)] print:block print:max-h-none print:overflow-visible print:rounded-none print:border-0 print:bg-white print:shadow-none"
           >
             <div className="no-print relative flex flex-wrap items-center gap-2 border-b border-line px-5 py-3 pr-14">
               <div className="hidden sm:block">
@@ -116,7 +118,7 @@ export function BriefModal() {
                 )}
                 <div className="grid grid-cols-1 gap-1 sm:grid-cols-[140px_1fr] sm:gap-4">
                   <dt className="eyebrow pt-1 text-text-1">Review question</dt>
-                  <dd className="rounded-xl bg-bg-2 p-4 text-[15.5px] font-medium leading-[1.5] text-text-0 ring-1 ring-line-2 print:text-black">{brief.question}</dd>
+                  <dd className="rounded-xl bg-bg-2 p-4 text-[15.5px] font-medium leading-[1.5] text-text-0 ring-1 ring-line-2 print:bg-transparent print:text-black print:ring-black/20">{brief.question}</dd>
                 </div>
               </dl>
 
@@ -124,7 +126,7 @@ export function BriefModal() {
                 <div className="eyebrow mb-3">Sources</div>
                 <ol className="space-y-2.5">
                   {brief.citations.map((c) => (
-                    <li key={c.n} className="grid grid-cols-[22px_1fr] gap-1 text-[12px] leading-snug">
+                    <li key={c.n} className="grid grid-cols-[22px_1fr] gap-1 text-[12px] leading-snug print:break-inside-avoid">
                       <span className="num text-text-3">{c.n}.</span>
                       <span className="text-text-2 print:text-black">
                         <span className="text-text-1">{c.publisher}</span>, <em>{c.title}</em>

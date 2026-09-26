@@ -3,12 +3,13 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { AlertTriangle } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { CompletionClaim, ConstructionWindow, Match, Project } from "@/lib/domain/types";
-import { formatBound, formatPoint, formatSpan, formatWindow } from "@/lib/format";
+import { formatBound, formatPoint, formatSpan, formatWindow, year } from "@/lib/format";
 import { usePreviewPair, useWidth } from "@/lib/hooks";
-import { activeWindows, windowsBySource } from "@/lib/matching/time";
+import { activeWindows, coarsest, displayWindowGroups } from "@/lib/matching/time";
 import { conflictMatches, ownerNames } from "@/lib/selectors";
 import { useAtlas } from "@/lib/store";
 
@@ -16,6 +17,28 @@ const LABEL_W = 208;
 /** Row = bars in the top BAR_H px, then a lane for completion claims so diamonds and dates never sit on bar text. */
 const BAR_H = 34;
 const LANE_H = 12;
+/** A window whose start the source does not publish fades in from the left instead of showing a hard start. */
+const OPEN_START_FADE = "linear-gradient(90deg, transparent 0, #000 18%)";
+
+/**
+ * Hover card rendered on <body>: fixed, clamped to the viewport, and stacked above the inspector (z-40) but below
+ * the brief (z-50) and the guided demo card (z-[60]), so it is never hidden under a panel or cut off at the edge.
+ */
+function FloatingTip({ anchor, width, align, children }: { anchor: DOMRect; width: number; align: "start" | "center"; children: ReactNode }) {
+  const M = 8;
+  const raw = align === "start" ? anchor.left : anchor.left + anchor.width / 2 - width / 2;
+  const left = Math.max(M, Math.min(raw, window.innerWidth - width - M));
+  return createPortal(
+    <div
+      role="tooltip"
+      className="glass glass-solid pointer-events-none fixed z-[45] rounded-lg p-2.5 text-[11.5px]"
+      style={{ left, width: Math.min(width, window.innerWidth - 2 * M), bottom: window.innerHeight - anchor.top + 8 }}
+    >
+      {children}
+    </div>,
+    document.body,
+  );
+}
 
 function useDomain() {
   return useMemo(() => {
@@ -58,7 +81,7 @@ export function Timeline() {
   const today = pct(SNAPSHOT.snapshotDate, y0, y1);
 
   return (
-    <section aria-label="Construction timeline" className="relative hidden h-[184px] shrink-0 border-t border-line bg-bg-1 md:block">
+    <section aria-label="Construction timeline" className="relative hidden h-[184px] shrink-0 border-t border-line bg-bg-1 lg:block">
       <div className="flex h-8 items-center justify-between px-4">
         <div className="eyebrow whitespace-nowrap">Construction windows · from sources</div>
         <div className="hidden items-center gap-4 text-[10.5px] text-text-3 xl:flex">
@@ -192,7 +215,9 @@ function InServiceGap({ m, y0, y1 }: { m: Match; y0: number; y1: number }) {
       <div className="absolute bottom-0 h-2 w-px bg-b" style={{ left: `${xb}%` }} />
       <div className="absolute bottom-0.5 flex justify-center" style={{ left: `${l}%`, width: `${Math.max(r - l, 0.3)}%` }}>
         <span className="mono translate-y-1/2 whitespace-nowrap rounded bg-bg-1 px-1.5 text-[10px] text-text-1">
-          Δ {g.gapDays.toLocaleString("en-US")} days between in-service dates
+          {g.coarse && g.gapDays === 0
+            ? "In-service ranges overlap at stated precision"
+            : `Δ ${g.coarse ? "≥" : ""}${g.gapDays.toLocaleString("en-US")} days between in-service dates`}
         </span>
       </div>
     </div>
@@ -220,12 +245,8 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
   const color = role === "a" ? "var(--a)" : "var(--b)";
   const track = useRef<HTMLDivElement>(null);
   const width = useWidth(track);
-  // two documents from one publisher with the same window read as one bar
-  const groups = windowsBySource(p).filter((g, i, all) => {
-    const key = (x: ConstructionWindow[]) =>
-      `${IDX.source(x[0].claimSourceId)?.publisher}|${x.map((w) => w.start.earliest + w.end.latest).sort().join()}`;
-    return all.findIndex((h) => key(h) === key(g)) === i;
-  });
+  // two documents from one publisher with the same window read as one bar (same grouping as the inspector)
+  const groups = displayWindowGroups(p, (id) => IDX.source(id)?.publisher).map((g) => g.ws);
   const conflict = m.conflicts.find((c) => c.projectId === p.id && c.field === "completion");
   const claims = p.completionClaims;
   const xs = claims.map((c) => ((pct(c.date.earliest, y0, y1) + pct(c.date.latest, y0, y1)) / 200) * width);
@@ -266,9 +287,11 @@ function PairRow({ p, role, y0, y1, m, emphasize }: { p: Project; role: "a" | "b
 }
 
 function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[]; color: string; y0: number; y1: number; top: number; height: number }) {
-  const [hover, setHover] = useState(false);
-  const startE = ws.map((w) => w.start.earliest).sort()[0];
-  const endL = ws.map((w) => w.end.latest).sort().at(-1)!;
+  const [anchor, setAnchor] = useState<DOMRect | null>(null);
+  const first = ws.reduce((x, y) => (y.start.earliest < x.start.earliest ? y : x));
+  const last = ws.reduce((x, y) => (y.end.latest > x.end.latest ? y : x));
+  const startE = first.start.earliest;
+  const endL = last.end.latest;
   const s0 = pct(startE, y0, y1);
   const e1 = pct(endL, y0, y1);
   const width = Math.max(e1 - s0, 0.4);
@@ -277,74 +300,91 @@ function WindowBar({ ws, color, y0, y1, top, height }: { ws: ConstructionWindow[
   const bounds = ws.every((w) => w.boundsOnly);
   const w0 = ws[0];
   const open = ws.some((w) => w.openEnded);
+  // the earliest start is only a floor ("spending before 2026"): no start year is shown
+  const openStart = !!first.openStart;
+  const startText = openStart ? `pre-${year(first.start.latest)}` : formatPoint(startE, first.start.precision);
+  // a year-precision window inside one calendar year reads as that year; the tooltip keeps the full bounds
+  const oneYear = ws.length === 1 && !openStart && w0.start.precision === "year" && startE.slice(0, 4) === endL.slice(0, 4) && endL.endsWith("-12-31");
   const label = open
-    ? `from ${formatPoint(startE, w0.start.precision)} →`
-    : ws.length === 1 && !w0.boundsOnly
-      ? formatWindow(w0.start, w0.end)
-      : `${formatPoint(startE, w0.start.precision)}–${formatPoint(endL, ws.at(-1)!.end.precision)}`;
+    ? openStart
+      ? `from before ${year(first.start.latest)} →`
+      : `from ${startText} →`
+    : oneYear
+      ? startE.slice(0, 4)
+      : ws.length === 1 && !w0.boundsOnly
+        ? formatWindow(w0.start, w0.end, false, w0.openStart)
+        : `${startText}–${formatPoint(endL, last.end.precision)}`;
+  const note = [ws.length > 1 && `${ws.length} components`, coarse && !open && (bounds ? "bounds only" : "coarse"), open && "end not published", openStart && "start not published"]
+    .filter(Boolean)
+    .map((x) => ` · ${x}`)
+    .join("");
   return (
     <motion.div
       initial={{ scaleX: 0, opacity: 0 }}
       animate={{ scaleX: 1, opacity: 1 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      className="absolute origin-left rounded-[5px]"
-      style={{
-        left: `${s0}%`,
-        width: `${width}%`,
-        top,
-        height,
-        background: coarse
-          ? `repeating-linear-gradient(135deg, color-mix(in oklab, ${color} 30%, transparent) 0 5px, color-mix(in oklab, ${color} 14%, transparent) 5px 10px)`
-          : `color-mix(in oklab, ${color} 16%, transparent)`,
-        boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${color} 55%, transparent)`,
-      }}
+      onMouseEnter={(e) => setAnchor(e.currentTarget.getBoundingClientRect())}
+      onMouseLeave={() => setAnchor(null)}
+      className="absolute origin-left"
+      style={{ left: `${s0}%`, width: `${width}%`, top, height }}
     >
-      {!coarse &&
-        ws.map((w) => {
-          const a0 = ((pct(w.start.earliest, y0, y1) - s0) / width) * 100;
-          const a1 = ((pct(w.start.latest, y0, y1) - s0) / width) * 100;
-          const b0 = ((pct(w.end.earliest, y0, y1) - s0) / width) * 100;
-          const b1 = ((pct(w.end.latest, y0, y1) - s0) / width) * 100;
-          const span = Math.max(b1 - a0, 0.5);
-          const fl = ((a1 - a0) / span) * 100;
-          const fr = ((b1 - b0) / span) * 100;
-          return (
-            <div
-              key={w.id}
-              className="absolute inset-y-0 rounded-[4px]"
-              style={{
-                left: `${a0}%`,
-                width: `${span}%`,
-                background: `linear-gradient(90deg, color-mix(in oklab, ${color} 12%, transparent) 0%, color-mix(in oklab, ${color} 52%, transparent) ${Math.min(fl, 45)}%, color-mix(in oklab, ${color} 52%, transparent) ${100 - Math.min(fr, 45)}%, color-mix(in oklab, ${color} 12%, transparent) 100%)`,
-              }}
-            />
-          );
-        })}
-      <div className="mono relative flex h-full items-center overflow-hidden whitespace-nowrap px-2 text-[10px] font-medium text-text-0">
-        {label}
-        <span className="ml-1.5 truncate font-normal text-text-1/80">
+      <div
+        className="absolute inset-0 rounded-[5px]"
+        style={{
+          background: coarse
+            ? `repeating-linear-gradient(135deg, color-mix(in oklab, ${color} 30%, transparent) 0 5px, color-mix(in oklab, ${color} 14%, transparent) 5px 10px)`
+            : `color-mix(in oklab, ${color} 16%, transparent)`,
+          boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${color} 55%, transparent)`,
+          ...(openStart ? { maskImage: OPEN_START_FADE, WebkitMaskImage: OPEN_START_FADE } : {}),
+        }}
+      >
+        {!coarse &&
+          ws.map((w) => {
+            const a0 = ((pct(w.start.earliest, y0, y1) - s0) / width) * 100;
+            const a1 = ((pct(w.start.latest, y0, y1) - s0) / width) * 100;
+            const b0 = ((pct(w.end.earliest, y0, y1) - s0) / width) * 100;
+            const b1 = ((pct(w.end.latest, y0, y1) - s0) / width) * 100;
+            const span = Math.max(b1 - a0, 0.5);
+            const fl = ((a1 - a0) / span) * 100;
+            const fr = ((b1 - b0) / span) * 100;
+            return (
+              <div
+                key={w.id}
+                className="absolute inset-y-0 rounded-[4px]"
+                style={{
+                  left: `${a0}%`,
+                  width: `${span}%`,
+                  background: `linear-gradient(90deg, color-mix(in oklab, ${color} 12%, transparent) 0%, color-mix(in oklab, ${color} 52%, transparent) ${Math.min(fl, 45)}%, color-mix(in oklab, ${color} 52%, transparent) ${100 - Math.min(fr, 45)}%, color-mix(in oklab, ${color} 12%, transparent) 100%)`,
+                }}
+              />
+            );
+          })}
+      </div>
+      <div className="mono relative flex h-full min-w-0 items-center overflow-hidden whitespace-nowrap px-2 text-[10px] font-medium text-text-0">
+        {/* the source gives up its room before the date does; the date truncates only when it alone overflows the bar */}
+        <span className="max-w-full shrink-0 truncate">{label}</span>
+        <span className="ml-1.5 min-w-0 truncate font-normal text-text-1/80">
           · {src?.publisher ?? w0.claimSourceId}
-          {ws.length > 1 && ` · ${ws.length} components`}
-          {coarse && !open && (bounds ? " · bounds only" : " · coarse")}
-          {open && " · end not published"}
+          {note}
         </span>
       </div>
-      {hover && (
-        <div className="glass absolute bottom-full left-0 z-40 mb-2 w-[320px] rounded-lg p-2.5 text-[11.5px]">
+      {anchor && (
+        <FloatingTip anchor={anchor} width={320} align="start">
           <div className="font-medium text-text-0">{src?.title}</div>
           <div className="text-text-2">{src?.publisher}</div>
           <ul className="mt-1.5 space-y-1">
             {ws.map((w) => (
               <li key={w.id} className="text-text-2">
-                <span className="num text-text-0">{formatWindow(w.start, w.end, w.openEnded)}</span>
-                <span className="text-text-3"> · {w.start.precision} precision</span>
+                <span className="num text-text-0">{formatWindow(w.start, w.end, w.openEnded, w.openStart)}</span>
+                <span className="text-text-3">
+                  {" "}
+                  · {coarsest([w])} precision{w.openStart ? " · start not published" : ""}
+                </span>
                 {w.note && <div className="text-[10.5px] leading-snug text-text-3">{w.note}</div>}
               </li>
             ))}
           </ul>
-        </div>
+        </FloatingTip>
       )}
     </motion.div>
   );
@@ -366,7 +406,8 @@ function CompletionMark({
   /** side the date label fits on; hidden (hover only) when it would collide */
   label?: "l" | "r";
 }) {
-  const [hover, setHover] = useState(false);
+  const [anchor, setAnchor] = useState<DOMRect | null>(null);
+  const hover = !!anchor;
   const x0 = pct(c.date.earliest, y0, y1);
   const x1 = pct(c.date.latest, y0, y1);
   const src = IDX.source(c.claimSourceId);
@@ -376,8 +417,8 @@ function CompletionMark({
     <div
       className={clsx("absolute", hover ? "z-40" : "z-20")}
       style={{ left: `${x0}%`, width: `${Math.max(x1 - x0, 0.4)}%`, top: BAR_H, height: LANE_H }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseEnter={(e) => setAnchor(e.currentTarget.getBoundingClientRect())}
+      onMouseLeave={() => setAnchor(null)}
     >
       <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2" style={{ background: tone, opacity: 0.6 }} />
       <div
@@ -395,15 +436,15 @@ function CompletionMark({
           {formatBound(c.date)}
         </div>
       )}
-      {hover && (
-        <div className="glass absolute bottom-full left-1/2 z-40 mb-1 w-[260px] -translate-x-1/2 rounded-lg p-2.5 text-[11.5px]">
+      {anchor && (
+        <FloatingTip anchor={anchor} width={260} align="center">
           <div className="font-medium text-text-0">
             {c.label[0].toUpperCase() + c.label.slice(1)} · {formatBound(c.date)}
           </div>
           {c.current === false && <div className="text-[10.5px] text-conflict">Superseded by a newer source</div>}
           <div className="text-text-2">{src?.publisher}</div>
           <div className="mt-1 text-text-3">Completion dates never drive the construction-window match.</div>
-        </div>
+        </FloatingTip>
       )}
     </div>
   );
@@ -468,6 +509,7 @@ function OverviewTimeline({ y0, y1 }: { y0: number; y1: number }) {
                     left: `${pct(w.start.earliest, y0, y1)}%`,
                     width: `${pct(w.end.latest, y0, y1) - pct(w.start.earliest, y0, y1)}%`,
                     background: hovered === p.id ? "#eef3fc" : "linear-gradient(90deg, rgba(159,179,217,.25), rgba(159,179,217,.6) 30%, rgba(159,179,217,.6) 70%, rgba(159,179,217,.25))",
+                    ...(w.openStart ? { maskImage: OPEN_START_FADE, WebkitMaskImage: OPEN_START_FADE } : {}),
                   }}
                 />
               ))}

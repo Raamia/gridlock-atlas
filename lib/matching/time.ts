@@ -1,5 +1,5 @@
 import type { ConstructionWindow, DateBound, Project, SignalLevel, TimeDetail } from "@/lib/domain/types";
-import { formatSpan } from "@/lib/format";
+import { displayTitle, formatSpan } from "@/lib/format";
 
 const PRECISION_RANK: Record<DateBound["precision"], number> = { day: 0, month: 1, quarter: 2, year: 3 };
 
@@ -8,7 +8,8 @@ export function activeWindows(project: Project): ConstructionWindow[] {
   return project.constructionWindows.filter((w) => !w.supersededBy && w.phase !== "preconstruction");
 }
 
-function coarsest(windows: ConstructionWindow[]): DateBound["precision"] {
+/** The coarsest precision across every start and end bound of the windows. */
+export function coarsest(windows: ConstructionWindow[]): DateBound["precision"] {
   let best: DateBound["precision"] = "day";
   for (const w of windows) {
     for (const b of [w.start, w.end]) {
@@ -22,10 +23,14 @@ const max = (a: string, b: string) => (a > b ? a : b);
 const min = (a: string, b: string) => (a < b ? a : b);
 
 const IN_SERVICE = /in-service|in service|need date|completion|complete|energiz|operation/i;
+/** A required-by date ("no later than June 1, 2034") bounds the schedule; it is not a forecast in-service date. */
+export const DEADLINE = /deadline|no later than/i;
 
-/** The current in-service / need date claim (claims are stored current-first by the snapshot builder). */
+/** The current in-service / need date claim (claims are stored current-first by the snapshot builder); a forecast beats a deadline. */
 export function currentInService(p: Project) {
-  return p.completionClaims.find((c) => IN_SERVICE.test(c.label)) ?? p.completionClaims[0];
+  const isd = p.completionClaims.filter((c) => IN_SERVICE.test(c.label));
+  const cur = isd.filter((c) => c.current !== false);
+  return cur.find((c) => !DEADLINE.test(c.label)) ?? cur[0] ?? isd[0] ?? p.completionClaims[0];
 }
 
 const DAY = 86_400_000;
@@ -72,6 +77,21 @@ export function windowsBySource(p: Project): ConstructionWindow[][] {
 }
 
 /**
+ * Per-source window groups for display: groups from one publisher with identical bounds are shown once,
+ * keeping every source id (e.g. a page and its info sheet that repeat the same schedule).
+ */
+export function displayWindowGroups(p: Project, publisherOf: (sourceId: string) => string | undefined): { ws: ConstructionWindow[]; sourceIds: string[] }[] {
+  const out = new Map<string, { ws: ConstructionWindow[]; sourceIds: string[] }>();
+  for (const g of windowsBySource(p)) {
+    const key = `${publisherOf(g[0].claimSourceId) ?? g[0].claimSourceId}|${g.map((w) => `${w.start.earliest}/${w.start.latest}/${w.end.earliest}/${w.end.latest}`).sort().join()}`;
+    const hit = out.get(key);
+    if (hit) hit.sourceIds.push(g[0].claimSourceId);
+    else out.set(key, { ws: g, sourceIds: [g[0].claimSourceId] });
+  }
+  return [...out.values()];
+}
+
+/**
  * Reported-window overlap test from plan.md §8.
  *
  * Each window is start ∈ [S_earliest, S_latest], end ∈ [E_earliest, E_latest].
@@ -106,7 +126,7 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
     : "";
 
   if (!wa.length || !wb.length) {
-    const missing = [!wa.length ? a.shortTitle : null, !wb.length ? b.shortTitle : null].filter(Boolean).join(" and ");
+    const missing = [!wa.length ? displayTitle(a) : null, !wb.length ? displayTitle(b) : null].filter(Boolean).join(" and ");
     return {
       level: "unknown",
       reason: `No construction window published for ${missing}; window overlap is unknown, not ruled out.${gapNote}`,
@@ -183,9 +203,14 @@ export function evaluateTime(a: Project, b: Project): TimeResult {
   const aEnd = wa.map((w) => w.end.latest).reduce(max);
   const bEnd = wb.map((w) => w.end.latest).reduce(max);
   const [first, second] = aEnd <= bEnd ? [a, b] : [b, a];
+  // DESC budget-year windows (not continuous, phase unknown) and GPC Start→Need bounds are derived bounds, not published construction dates
+  const derived = [...wa, ...wb].some((w) => w.boundsOnly || !w.continuous || w.phase !== "general-construction");
+  const lead = derived
+    ? "Schedule bounds do not overlap (budget years or start-to-need-date bounds; no construction dates are published)"
+    : "Published construction windows do not overlap";
   return {
     level: "no-match",
-    reason: `Published construction windows do not overlap: ${first.shortTitle} ends before ${second.shortTitle} starts.${gapNote}`,
+    reason: `${lead}: ${displayTitle(first)}'s window ends before ${displayTitle(second)}'s begins.${gapNote}`,
     detail: base,
   };
 }

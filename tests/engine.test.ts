@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 import type { ConstructionWindow, DateBound, Place, Project, Relation, Snapshot } from "@/lib/domain/types";
 import { SNAPSHOT } from "@/lib/data";
+import { buildBrief } from "@/lib/brief";
+import { overlapTableCsv } from "@/lib/export";
+import { formatBound, formatMilesNear, formatWindow, publicNote, year } from "@/lib/format";
 import { impactDefaults } from "@/lib/impact";
-import { evaluatePair, runMatching } from "@/lib/matching/engine";
+import { evaluatePair, projectConflicts, runMatching } from "@/lib/matching/engine";
 import { evaluateGeo } from "@/lib/matching/geo";
-import { currentInService, evaluateTime } from "@/lib/matching/time";
+import { coarsest, currentInService, displayWindowGroups, evaluateTime } from "@/lib/matching/time";
 
 /* ------------------------------- fixture builders ------------------------------- */
 
@@ -572,7 +575,156 @@ describe("snapshot data regressions", () => {
     const d = impactDefaults(pair("desc-6888", "gpc-20065")!);
     expect(d.sharedMiles).toBe(0);
     expect(d.sharedMilesNote).toMatch(/Neither project needs a new corridor/);
-    // two new lines with published lengths keep the shorter length as the default
-    expect(impactDefaults(pair("dpc-alma-blair", "xcel-wwtc")!).sharedMiles).toBe(35);
+    // two new lines that only meet at a substation / handoff point share no parallel corridor
+    const ab = impactDefaults(pair("dpc-alma-blair", "xcel-wwtc")!);
+    expect(ab.sharedMiles).toBe(0);
+    expect(ab.sharedMilesNote).toMatch(/meet at Tremval North/);
+    expect(impactDefaults(pair("sps-potter-beckham-tx", "transource-potter-beckham-ok")!).sharedMiles).toBe(0);
+  });
+
+  it("impact defaults use the pair's own voltage class, falling back only to a lower published class", () => {
+    const ab = impactDefaults(pair("dpc-alma-blair", "xcel-wwtc")!);
+    expect(ab.voltageClass).toBe("345");
+    expect([ab.widthClass, ab.rowWidthFt?.typical, ab.mobilClass, ab.mobilization?.typical]).toEqual(["345", 175, "345", 250000]);
+    const g2b = impactDefaults(pair("dpc-glh-maribell", "xcel-g2b-north-rochester-marion")!);
+    expect(g2b.voltageClass).toBe("765");
+    expect([g2b.widthClass, g2b.rowWidthFt?.typical]).toEqual(["765", 225]);
+    // MISO publishes no 765 kV mobilization value: the 500 kV one is used and labelled as such
+    expect([g2b.mobilClass, g2b.mobilization?.typical]).toEqual(["500", 300000]);
+  });
+
+  const pub = (id: string) => SNAPSHOT.sources.find((x) => x.id === id)?.publisher ?? id;
+  const doc = (id: string) => SNAPSHOT.sources.find((x) => x.id === id)?.title ?? id;
+
+  it("a conflict side shows its most precise current claim and cites that claim first", () => {
+    const m = pair("dpc-alma-blair", "xcel-wwtc")!;
+    const c = m.conflicts.find((x) => x.id === "dpc-alma-blair:completion")!;
+    expect(c.sides.map((x) => x.value)).toEqual(["Sep 2028", "Q2 2028"]);
+    expect(c.sides[0].sourceIds[0]).toBe("psc-1515-ce-103-final");
+    expect(c.description).toContain("Q2 2028 → Final Decision, docket 1515-CE-103: Sep 2028");
+    expect(c.description).not.toContain("current edition: 2028");
+    // the brief's citation for the current side is the PSC excerpt that states Sep 2028
+    const brief = buildBrief(m);
+    const line = brief.unresolved.find((u) => u.startsWith("Alma-Blair"))!;
+    const nums = line.match(/\[([\d, ]+)\]$/)![1].split(", ").map(Number);
+    expect(nums.map((n) => brief.citations[n - 1].title)).toContain("Final Decision, docket 1515-CE-103");
+    expect(brief.citations[nums[0] - 1].excerpt).toMatch(/September 2028/);
+    // sides that are shown as disagreeing never state overlapping dates
+    for (const x of ["abo-alexandria-big-oaks", "badger-coulee-345kv", "xcel-wwtc", "otp-mres-bssa"]) {
+      const p = proj(x);
+      const cc = projectConflicts(p, pub, doc).find((k) => k.field === "completion")!;
+      const dates = cc.sides.map((sd) => p.completionClaims.find((k) => k.id === sd.claimIds[0])!.date);
+      for (let i = 0; i < dates.length; i++)
+        for (let j = i + 1; j < dates.length; j++) expect(dates[i].earliest <= dates[j].latest && dates[j].earliest <= dates[i].latest).toBe(false);
+      cc.sides.forEach((sd, i) => expect(sd.value).toBe(formatBound(dates[i])));
+    }
+  });
+
+  it("'plan editions' only for one publisher's own lists; a later source superseding an earlier one says so", () => {
+    const g = pair("desc-6888", "gpc-20065")!.conflicts.find((c) => c.id === "gpc-20065:completion")!;
+    expect(g.description).toBe("Earlier date superseded by a later source — 2024 Ten-Year Plan: Jun 1, 2027 → SERTP 2025: 2028");
+    const desc = projectConflicts(proj("desc-06005-b"), pub, doc).find((c) => c.field === "completion")!;
+    // edition names oldest first
+    expect(desc.description).toBe("Schedule changed between plan editions — 2024–2028 list, 2025–2029 list: Mar 31, 2027 → current edition: Dec 31, 2028");
+  });
+
+  it("a 'no later than' deadline is not an in-service forecast: BECI uses the Sept 2026 schedule (2033)", () => {
+    const m = pair("grid-forward-atc", "transource-beci")!;
+    expect(m.timeDetail.inService!.gapDays).toBe(732);
+    expect(m.timeDetail.inService!.labelB).toContain("Sept 2026");
+    const c = m.conflicts.find((x) => x.id === "transource-beci:completion")!;
+    expect(c.sides.map((x) => x.value)).not.toContain("Jun 1, 2034");
+    expect(c.sides.map((x) => x.value).sort()).toEqual(["2033", "2034"]);
+  });
+
+  it("measured named-facility centers inside the radius are not called coarse or 'near edge only'", () => {
+    const m = pair("desc-6888", "gpc-20787")!;
+    expect(m.geo).toBe("possible");
+    expect(m.geoDetail.center!.localityOnly).toBe(false);
+    expect(m.geoReason).toMatch(/≈24\.9 mi apart — inside the 25 mi radius/);
+    expect(m.geoReason).not.toMatch(/only at the near edge/);
+    expect(m.priorityReasons).toContain("Near the radius edge (location uncertainty)");
+    expect(formatMilesNear(24.89, 25)).toBe("24.9 mi");
+    expect(formatMilesNear(30.2, 25)).toBe("30 mi");
+    expect(formatMilesNear(6.72, 25)).toBe("6.7 mi");
+  });
+
+  it("DESC budget windows with 'Previous' spending never show an invented start year", () => {
+    const open = SNAPSHOT.projects.flatMap((p) => p.constructionWindows).filter((w) => w.openStart);
+    expect(open.length).toBeGreaterThan(0);
+    for (const w of open) {
+      expect(formatWindow(w.start, w.end, w.openEnded, w.openStart)).not.toContain(String(year(w.start.earliest)));
+      expect(w.note).toMatch(/start year is not published/);
+    }
+    const w = proj("desc-0139-m-n").constructionWindows[0];
+    expect(formatWindow(w.start, w.end, w.openEnded, w.openStart)).toBe("pre-2026–2027");
+  });
+
+  it("utility quarterly reports are attributed to the utility that filed them", () => {
+    expect(pub("psc-wwtc-q2-2026-nspw")).toMatch(/^Northern States Power Company-Wisconsin/);
+    expect(pub("psc-wwtc-q2-2026-atc")).toMatch(/^American Transmission Company/);
+  });
+
+  it("derived schedule bounds that miss each other are not called published construction windows", () => {
+    const t = evaluateTime(proj("desc-6888"), proj("gpc-20785"));
+    expect(t.level).toBe("no-match");
+    expect(t.reason).not.toMatch(/Published construction windows/);
+    expect(t.reason).toMatch(/^Schedule bounds do not overlap/);
+    const a = near2("a", "u1", { constructionWindows: [win(2020, 2021)] });
+    const b = near2("b", "u2", { constructionWindows: [win(2024, 2025)] });
+    expect(evaluateTime(a, b).reason).toMatch(/^Published construction windows do not overlap/);
+  });
+
+  it("Goshen–Kraft rebuild (GPC 20785) is centered on its rebuilt section, Kraft – Rice Hope", () => {
+    const g = proj("gpc-20785");
+    expect(g.places.filter((pl) => pl.role === "endpoint").map((pl) => pl.label)).toEqual(["Rice Hope", "Kraft"]);
+    expect(g.places.find((pl) => pl.role === "context")?.label).toMatch(/^Goshen/);
+    expect(pair("desc-6367-d", "gpc-20785")!.geoDetail.center!.miles).toBeCloseTo(9.7, 1);
+  });
+
+  it("the overlap CSV has unique project ids, per-tab queue ranks and a time-gap basis", () => {
+    const ms = run.matches.filter((m) => proj(m.projectAId).region === "southeast");
+    const [head, ...rows] = overlapTableCsv(ms).trim().split("\n");
+    const cols = head.split(",");
+    expect(cols.slice(0, 9)).toEqual(["overlap_id", "distance_mi", "time_gap (day)", "utility_a", "project_id_a", "project_name_a", "utility_b", "project_id_b", "project_name_b"]);
+    const at = (name: string) => cols.indexOf(name);
+    const parsed = rows.map((r) => r.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map((c) => c.replace(/,$/, "")));
+    const ids = new Set<string>();
+    for (const r of parsed) {
+      expect(r[at("project_id_a")]).not.toBe(r[at("project_id_b")]);
+      ids.add(r[at("pair_id")]);
+      expect(["exact", "at-least", "ranges-overlap", ""]).toContain(r[at("time_gap_basis")]);
+    }
+    expect(ids.size).toBe(rows.length);
+    const top = parsed.find((r) => r[at("pair_id")] === "desc-6888__gpc-20065")!;
+    expect([top[at("time_gap (day)")], top[at("time_gap_basis")]]).toEqual(["0", "ranges-overlap"]);
+    const coarse = parsed.find((r) => r[at("pair_id")] === "desc-06367-d-g__gpc-20065")!;
+    expect([coarse[at("time_gap (day)")], coarse[at("time_gap_basis")]]).toEqual(["396", "at-least"]);
+    // queue_rank restarts at 1 in each review-status tab
+    const firsts = parsed.filter((r) => r[at("queue_rank")] === "1").map((r) => r[at("review_status")]);
+    expect(new Set(firsts).size).toBe(firsts.length);
+  });
+
+  it("briefs quote whole sentences and full titles (no mid-sentence ellipses)", () => {
+    for (const m of run.matches) {
+      const b = buildBrief(m);
+      for (const t of [...b.rows.map((r) => r.text), ...b.unresolved]) expect(t).not.toContain("…");
+    }
+  });
+
+  it("display helpers: coarsest precision, per-publisher window groups, public notes", () => {
+    const wwtc = proj("xcel-wwtc");
+    const groups = displayWindowGroups(wwtc, (id) => SNAPSHOT.sources.find((s) => s.id === id)?.publisher);
+    expect(groups.length).toBeLessThan(wwtc.constructionWindows.filter((w) => !w.supersededBy && w.phase !== "preconstruction").length);
+    expect(groups.some((g) => g.sourceIds.length > 1)).toBe(true);
+    const g = proj("gpc-20065").constructionWindows.filter((w) => !w.supersededBy);
+    expect(coarsest(g)).toBe("year");
+    expect(publicNote("It may be adjusted after approval (see route.caveat). The UI should strip these. Kept.")).toBe("It may be adjusted after approval. Kept.");
+    for (const u of SNAPSHOT.unresolved) expect(u.note).not.toMatch(/atc-nspw-grid-forward|placeholder shared|U\+0007/);
+    // shared-owner exclusions name utilities, not internal ids
+    const short = SNAPSHOT.utilities.map((u) => u.shortName);
+    const shared = run.excludedPairs.filter((e) => e.reason === "shared-owner");
+    expect(shared.length).toBeGreaterThan(0);
+    for (const x of shared) for (const n of x.detail.match(/^Shared owner \((.*)\):/)![1].split(", ")) expect(short).toContain(n);
   });
 });

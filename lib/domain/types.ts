@@ -107,6 +107,9 @@ export interface ConstructionWindow {
   openEnded?: boolean;
   /** The source bounds the work (e.g. start date → need/in-service date) without dating the field work inside it. */
   boundsOnly?: boolean;
+  /** Work began before the earliest year the source itemizes (DESC's 'Previous' column): the start year is not published,
+   *  and start.earliest is only a floor for matching and the timeline axis, never a sourced date. */
+  openStart?: boolean;
 }
 
 export interface CompletionClaim {
@@ -274,11 +277,12 @@ export interface GeoDetail {
     a: [number, number];
     b: [number, number];
     lowConfidence: boolean;
+    /** A center rests only on town/road-level geocodes (at most a "possible" match, never a precise mileage claim). */
+    localityOnly: boolean;
   };
   sharedEndpoint?: { labelA: string; labelB: string; milesApart: number };
   thresholdMiles: number;
   relationIds: string[];
-
 }
 
 export interface TimeDetail {

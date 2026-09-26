@@ -54,6 +54,30 @@
    "note": "The sheet gives 150-180 ft cross-country and no roadside value. Typical is set to the low end of that range (150 ft) to stay conservative; I did not use a midpoint. The 100-150 ft figure in the structure-height table on the same page is a structure height, not a width. MISO's indicative width is 200 ft (rowWidthFt.500.miso). I found no public DESC 500 kV width."
   },
   {
+   "key": "rowWidthFt.345",
+   "label": "MISO indicative right-of-way width, 345 kV",
+   "typical": 175,
+   "unit": "ft",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 32,
+   "section": "3.1 Right-of-Way Width, Table 3.1-1 (printed page 31)",
+   "exactExcerpt": "Table 3.1-1: Right-of-way width AC Transmission (single and double circuit) Voltage class 69 kV 115 kV 138 kV 161 kV 230 kV 345 kV 500 kV 765 kV Feet 80 90 95 100 125 175 200 225",
+   "verifiedByScript": true,
+   "note": "MISO indicative width; the feet values follow the voltage columns in order, so 345 kV = 175 ft."
+  },
+  {
+   "key": "rowWidthFt.765",
+   "label": "MISO indicative right-of-way width, 765 kV",
+   "typical": 225,
+   "unit": "ft",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 32,
+   "section": "3.1 Right-of-Way Width, Table 3.1-1 (printed page 31)",
+   "exactExcerpt": "Table 3.1-1: Right-of-way width AC Transmission (single and double circuit) Voltage class 69 kV 115 kV 138 kV 161 kV 230 kV 345 kV 500 kV 765 kV Feet 80 90 95 100 125 175 200 225",
+   "verifiedByScript": true,
+   "note": "MISO indicative width; the eighth value is 765 kV = 225 ft."
+  },
+  {
    "key": "rowWidthFt.115.miso",
    "label": "MISO indicative right-of-way width, 115 kV (cross-check)",
    "typical": 90,
@@ -214,6 +238,20 @@
    "note": "The fifth value in each row is 230 kV: typical is Mississippi, $2.6M; low is Montana, $2.0M (the table minimum, shared with North and South Dakota); high is Louisiana and Mississippi, $2.6M (the table maximum). This is a MISO-footprint proxy, not a DESC or Georgia Power figure. It includes right-of-way land and acquisition (see lineCostPerMile.115), so do not add avoided right-of-way land value on top. Compare the DESC-derived examples: lineCostPerMile.230.descNewExample (~$2.97M/mile, which also covers substation work) and lineCostPerMile.230.descRebuildExample (~$1.27M/mile)."
   },
   {
+   "key": "lineCostPerMile.345",
+   "label": "New single-circuit 345 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "low": 3200000,
+   "typical": 4100000,
+   "high": 4100000,
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 39,
+   "section": "4.1 Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
+   "exactExcerpt": "Louisiana $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.1M $6.3M Michigan $1.8M $2.0M $2.1M $2.2M $2.3M $3.7M $4.6M $5.8M Minnesota $1.8M $2.0M $2.1M $2.1M $2.3M $3.6M $4.5M $5.7M Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M Missouri $1.7M $1.9M $2.0M $2.0M $2.2M $3.5M $4.4M $5.5M Montana $1.6M $1.8M $1.9M $1.9M $2.0M $3.2M $4.1M $5.2M",
+   "verifiedByScript": true,
+   "note": "The sixth value in each row is 345 kV: typical is Mississippi, $4.1M; low is Montana, $3.2M (the table minimum); high is Louisiana and Mississippi, $4.1M (the table maximum). A MISO proxy that includes right-of-way land and acquisition (see lineCostPerMile.115)."
+  },
+  {
    "key": "lineCostPerMile.500",
    "label": "New single-circuit 500 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
    "low": 4100000,
@@ -226,6 +264,20 @@
    "exactExcerpt": "Louisiana $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.1M $6.3M Michigan $1.8M $2.0M $2.1M $2.2M $2.3M $3.7M $4.6M $5.8M Minnesota $1.8M $2.0M $2.1M $2.1M $2.3M $3.6M $4.5M $5.7M Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M Missouri $1.7M $1.9M $2.0M $2.0M $2.2M $3.5M $4.4M $5.5M Montana $1.6M $1.8M $1.9M $1.9M $2.0M $3.2M $4.1M $5.2M",
    "verifiedByScript": true,
    "note": "The seventh value in each row is 500 kV: typical is Mississippi, $5.0M; low is Montana, $4.1M (the table minimum, shared with North and South Dakota); high is Louisiana, $5.1M (the table maximum). This is a MISO proxy, and it includes right-of-way land and acquisition (see lineCostPerMile.115)."
+  },
+  {
+   "key": "lineCostPerMile.765",
+   "label": "New single-circuit 765 kV line, exploratory cost per mile (MISO; Mississippi as Southeast proxy)",
+   "low": 5200000,
+   "typical": 6300000,
+   "high": 6300000,
+   "unit": "USD/mile (MTEP24 $: guide says data are in 2023 $, escalated 5% to 2024; incl. 30% contingency + 7.5% AFUDC)",
+   "sourceId": "miso-cost-guide-mtep24",
+   "page": 39,
+   "section": "4.1 Table 4.1-1: Exploratory cost estimate - AC transmission, new single circuit transmission line $/mile (printed page 38)",
+   "exactExcerpt": "Louisiana $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.1M $6.3M Michigan $1.8M $2.0M $2.1M $2.2M $2.3M $3.7M $4.6M $5.8M Minnesota $1.8M $2.0M $2.1M $2.1M $2.3M $3.6M $4.5M $5.7M Mississippi $2.0M $2.2M $2.3M $2.4M $2.6M $4.1M $5.0M $6.3M Missouri $1.7M $1.9M $2.0M $2.0M $2.2M $3.5M $4.4M $5.5M Montana $1.6M $1.8M $1.9M $1.9M $2.0M $3.2M $4.1M $5.2M",
+   "verifiedByScript": true,
+   "note": "The eighth value in each row is 765 kV: typical is Mississippi, $6.3M; low is Montana, $5.2M (the table minimum, shared with North and South Dakota); high is Louisiana and Mississippi, $6.3M (the table maximum). A MISO proxy that includes right-of-way land and acquisition (see lineCostPerMile.115)."
   },
   {
    "key": "lineCostPerMile.115.rebuild",
@@ -346,6 +398,18 @@
    "exactExcerpt": "Single circuit and double circuit Unit detail 69kV 115kV 138kV 161kV 230kV 345kV 500kV Mobilization/Demobilization $100,000 $100,000 $150,000 $150,000 $200,000 $250,000 $300,000",
    "verifiedByScript": true,
    "note": "The fifth value is 230 kV = $200,000 (2018 $). The same caveats apply as for the 115 kV entry."
+  },
+  {
+   "key": "mobilizationCostPerProject.345",
+   "label": "Mobilization/demobilization unit cost per line project, 345 kV (MISO 2018)",
+   "typical": 250000,
+   "unit": "USD per project (2018 $, excl. overhead, contingency, AFUDC)",
+   "sourceId": "miso-cost-guide-mtep18",
+   "page": 16,
+   "section": "4.1.1.3 Mobilization/Demobilization",
+   "exactExcerpt": "Single circuit and double circuit Unit detail 69kV 115kV 138kV 161kV 230kV 345kV 500kV Mobilization/Demobilization $100,000 $100,000 $150,000 $150,000 $200,000 $250,000 $300,000",
+   "verifiedByScript": true,
+   "note": "The sixth value is 345 kV = $250,000 (2018 $). The same caveats apply as for the 115 kV entry. MISO publishes no 765 kV mobilization value; 765 kV pairs use the 500 kV value and say so."
   },
   {
    "key": "mobilizationCostPerProject.500",

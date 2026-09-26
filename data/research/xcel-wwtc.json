@@ -41,7 +41,7 @@
   {
    "id": "psc-wwtc-q2-2026-nspw",
    "title": "Q2 2026 Quarterly Progress Report, docket 5-CE-158 (NSPW, filed 2026-07-27)",
-   "publisher": "Public Service Commission of Wisconsin (ERF filing)",
+   "publisher": "Northern States Power Company-Wisconsin (filed with PSC of Wisconsin)",
    "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=600338",
    "sourceType": "regulator",
    "cached": true,
@@ -51,7 +51,7 @@
   {
    "id": "psc-wwtc-q2-2026-atc",
    "title": "Q2 2026 Progress Report, docket 5-CE-158 (ATC, filed 2026-07-31)",
-   "publisher": "Public Service Commission of Wisconsin (ERF filing)",
+   "publisher": "American Transmission Company LLC (filed with PSC of Wisconsin)",
    "url": "https://apps.psc.wi.gov/ERF/ERFview/viewdoc.aspx?docid=601113",
    "sourceType": "regulator",
    "cached": true,
@@ -1549,7 +1549,7 @@
   }
  ],
  "unresolved": [
-  "plan.md hypothesis check: 'Planned construction in 2026-27' is supported only by Xcel's web page ('Construction : 2026 -2027') and its Jan 2026 info sheet. The PSC final decision (start Q3 2026, completion by Q3 2029) and NSPW's Q2 2026 filing (start Q4 2026, in-service Q3 2029) imply construction running into 2029. 'Near the Dairyland project around Blair' is supported: the Alma-Blair line terminates at WWTC's Tremval North / Larkin Valley station.",
+  "'Planned construction in 2026-27' is supported only by Xcel's web page ('Construction : 2026 -2027') and its Jan 2026 info sheet. The PSC final decision (start Q3 2026, completion by Q3 2029) and NSPW's Q2 2026 filing (start Q4 2026, in-service Q3 2029) imply construction running into 2029. 'Near the Dairyland project around Blair' is supported: the Alma-Blair line terminates at WWTC's Tremval North / Larkin Valley station.",
   "Minnesota / Mississippi River end: no WWTC source describes one. WWTC runs entirely inside Wisconsin (Trempealeau, Eau Claire, Chippewa and Clark counties), from Larkin Valley/Tremval North near Blair to Jump River South. Xcel only mentions other projects 'proposed in Minnesota and to the west'. Any Mississippi crossing toward Alma belongs to other projects (e.g., Dairyland Alma-Blair).",
   "Eau Claire Substation expansion: the docket caption still lists 'Expanding the Tremval and Eau Claire Substations', but the Eau Claire expansion was part of Route 1. The authorized Route 2 uses the new Elk Farm Substation instead, and NSPW's Q2 2026 cost table lists only Larkin Valley and Elk Farm substations. No source confirms any remaining Eau Claire Substation work under 5-CE-158.",
   "Completion conflict (not reconciled): the Xcel web page ('Project complete: 2027 - 2028') and the Jan 2026 info sheet ('Project complete and line placed in service', 2027-2028) disagree with the PSC final decision and case page ('completion by the third quarter of 2029') and with NSPW's own Q2 2026 filing ('in-service date of third quarter 2029').",
@@ -1569,9 +1569,8 @@
   "The crossing points at 250th Street (Town of Sigel) and 370th Street (Edson/Worden border) were not geocoded separately; the GIS polyline, which passes through those towns, is used instead.",
   "Schedule dependency (not reconciled): Dairyland's July 2024 application says the new switching station must be completed by the end of 2028 for Dairyland's connection, and the 1515-CE-103 decision gives Alma-Blair a September 2028 in-service date. WWTC sources give only whole-project completion/in-service dates (Q3 2029, or 2027-2028 per Xcel) and no separate completion date for the Larkin Valley / Tremval North station.",
   "No reviewed source documents resource sharing (crews, equipment, laydown yards, outage or construction sequencing) between NSPW and Dairyland, or between WWTC and Grid Forward. Resource-sharing status is 'not found in sources', which is not the same as 'uncoordinated'.",
-  "Owner overlap with Grid Forward: NSPW and ATC are applicants for both WWTC and Grid Forward (5-CE-157, with SMMPA and WPPI). Under plan.md section 8, a WWTC vs Grid Forward pair is shared-owner context, not a cross-utility review lead. Grid Forward also describes 'expanding the Tremval Substation', and how Tremval North / Larkin Valley work is split between 5-CE-157 and 5-CE-158 was not determined.",
+  "Owner overlap with Grid Forward: NSPW and ATC are applicants for both WWTC and Grid Forward (5-CE-157, with SMMPA and WPPI). A WWTC vs Grid Forward pair is therefore shared-owner context, not a cross-utility review lead. Grid Forward also describes 'expanding the Tremval Substation', and how Tremval North / Larkin Valley work is split between 5-CE-157 and 5-CE-158 was not determined.",
   "Cross-cluster coordinate mismatch: the Dairyland cluster places the same Tremval North switching station at the Blair locality centroid (44.2946, -91.2338, precision locality). The PSC GIS point 'Tremval Expansion North' (44.30158, -91.25420) is about 1.8 km away and should be preferred when the clusters are merged.",
-  "The Xcel Jan 2026 info-sheet schedule excerpt contains U+0007 (BEL) control characters from the PDF text layer. They are kept verbatim so the excerpt checker can match it; the UI may need to strip them for display.",
   "psc-wwtc-map (the PSC project map PDF) is image-only with no text layer. It was used only to check the GIS route visually and cannot anchor excerpts.",
   "Only NSPW's Q2 2026 report assigns 'Other T-Line Removal/Installation' (rebuilds of existing lines, $29.2M PSC-approved) to NSPW. Which existing lines are rebuilt (the final decision names W3305 and 3418 near the STH 29 crossing, and W3203 on the common segment), and who owns them, was not fully extracted.",
   "The MISO LRTP Tranche 1 Project 5 documents themselves were not consulted. The parent-initiative label rests on the PSC final decision caption and text and on the PSC case page."

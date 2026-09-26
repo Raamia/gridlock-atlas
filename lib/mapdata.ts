@@ -108,7 +108,8 @@ export function projectCounties(ctx: RoleContext): { name: string; state: string
 export function connectorFeature(m: Match | null): FeatureCollection<LineString, { label: string }> {
   const c = m?.geoDetail.center;
   if (!m || !c || c.miles < 0.3) return { type: "FeatureCollection", features: [] };
-  const mi = c.miles < 10 ? c.miles.toFixed(1) : String(Math.round(c.miles));
+  // one decimal near the review radius, so 24.89 mi never reads as "25 mi"
+  const mi = c.miles < 10 || Math.abs(c.miles - m.geoDetail.thresholdMiles) < 1.5 ? c.miles.toFixed(1) : String(Math.round(c.miles));
   return {
     type: "FeatureCollection",
     features: [{ type: "Feature", properties: { label: `${mi} mi center to center` }, geometry: { type: "LineString", coordinates: [c.a, c.b] } }],

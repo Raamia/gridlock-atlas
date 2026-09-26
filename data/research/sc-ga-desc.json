@@ -164,6 +164,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -180,7 +181,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -371,6 +372,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -387,7 +389,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -539,6 +541,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -562,7 +565,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -788,6 +791,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -811,7 +815,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -999,6 +1003,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -1015,7 +1020,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -1241,6 +1246,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -1257,7 +1263,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -1445,6 +1451,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -1461,7 +1468,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -1635,6 +1642,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -1651,7 +1659,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -1826,6 +1834,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -1842,7 +1851,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -2025,6 +2034,7 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -2041,7 +2051,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -2232,6 +2242,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -2255,7 +2266,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -2525,6 +2536,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -2541,7 +2553,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -2751,6 +2763,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -2767,7 +2780,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -2920,6 +2933,7 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -2936,7 +2950,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -3110,6 +3124,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -3133,7 +3148,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -3329,6 +3344,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -3359,7 +3375,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published."
     }
    ],
    "completionClaims": [
@@ -3533,6 +3549,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -3556,7 +3573,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -4354,6 +4371,7 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -4370,7 +4388,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -6621,6 +6639,7 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -6644,7 +6663,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026; spending under 5% of the total (2026: $12,000) is treated as preconstruction and does not start the window."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024; spending under 5% of the total (2026: $12,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [
@@ -8220,6 +8239,7 @@
       "precision": "year"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -8257,7 +8277,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; the 2024\u20132028 list already shows spending before 2024."
     }
    ],
    "completionClaims": [
@@ -11248,6 +11268,7 @@
       "precision": "day"
      },
      "continuous": false,
+     "openStart": true,
      "evidence": [
       {
        "sourceId": "desc-scrtp-2026-2030",
@@ -11285,7 +11306,7 @@
        "verifiedByScript": true
       }
      ],
-     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026; spending under 5% of the total (2026: $600,000, 2028: $200,000) is treated as preconstruction and does not start the window."
+     "note": "Coarse budget-year window: first budgeted spending year \u2192 planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026 (the list gives only a 'Previous' column), so the start year is not published; spending under 5% of the total (2026: $600,000, 2028: $200,000) is treated as preconstruction and does not start the window."
     }
    ],
    "completionClaims": [

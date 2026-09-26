@@ -92,7 +92,9 @@ export const useReview = create<ReviewState>((set, get) => ({
 }));
 
 export function download(name: string, text: string, type: string) {
-  const blob = new Blob([text], { type });
+  // CSV gets a UTF-8 byte-order mark so Excel reads "–", "é" and "×" in project names correctly
+  const csv = type.startsWith("text/csv");
+  const blob = new Blob(csv ? ["﻿", text] : [text], { type: csv ? "text/csv;charset=utf-8" : type });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = name;

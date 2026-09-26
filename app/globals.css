@@ -162,7 +162,9 @@ body {
 }
 /* logo + attribution slide left of the inspector column, like the map's own controls */
 .mapboxgl-ctrl-bottom-right {
-  transition: right 0.5s var(--ease-out);
+  transition:
+    right 0.5s var(--ease-out),
+    bottom 0.5s var(--ease-out);
 }
 @media (min-width: 640px) {
   [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
@@ -172,6 +174,13 @@ body {
 @media (min-width: 1280px) {
   [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
     right: 424px;
+  }
+}
+/* the legend (16px + 252px) and the inspector (376px) leave the logo too little room on a map stage
+   under ~742px wide (640–741 stacked, 1024–1081 beside the queue): lift it above the collapsed legend */
+@media (min-width: 640px) and (max-width: 767px), (min-width: 1024px) and (max-width: 1099px) {
+  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
+    bottom: 48px;
   }
 }
 .mapboxgl-popup-content {
@@ -234,13 +243,51 @@ body {
   }
 }
 
+/* below lg the guided-demo card rides across the bottom of an open brief: keep the brief's end scrollable clear of it */
+@media screen and (max-width: 1023.98px) {
+  [aria-label="Review brief"][data-demo] {
+    padding-bottom: calc(var(--demo-card-h, 200px) + 28px);
+  }
+}
+
 @media print {
+  html,
   body {
-    overflow: visible;
-    background: #fff;
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
     color: #000;
   }
-  .no-print {
+  .no-print,
+  nextjs-portal {
     display: none !important;
+  }
+  /* with the brief open, print only the brief — no app shell — and let it run onto as many pages as it needs */
+  body:has([aria-label="Review brief"]) .atlas-shell {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+  body:has([aria-label="Review brief"]) .atlas-shell > :not([aria-label="Review brief"]) {
+    display: none !important;
+  }
+  /* ink on paper: the same tokens, darkened for a white page (amber and conflict orange keep their hues) */
+  [aria-label="Review brief"] {
+    padding: 0 !important;
+    backdrop-filter: none !important;
+    --text-0: #0b1220;
+    --text-1: #1f2937;
+    --text-2: #4b5563;
+    --text-3: #6b7280;
+    --line: rgba(15, 23, 42, 0.14);
+    --line-2: rgba(15, 23, 42, 0.22);
+    --a: #0e7490;
+    --b: #6d28d9;
+    --amber: #b45309;
+    --review: #be185d;
+    --known: #047857;
+    --conflict: #c2410c;
+    --possible: #475569;
   }
 }

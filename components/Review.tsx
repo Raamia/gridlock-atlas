@@ -81,7 +81,8 @@ export function ReviewExports() {
     <div className="rounded-xl bg-bg-2 p-3 ring-1 ring-line">
       <div className="flex items-center justify-between gap-2">
         <div className="text-[12px] text-text-1">
-          <span className="num text-text-0">{n}</span> pairs labeled · <span className="num text-text-0">{c}</span> excerpts human-checked
+          <span className="num text-text-0">{n}</span> {n === 1 ? "pair" : "pairs"} labeled · <span className="num text-text-0">{c}</span>{" "}
+          {c === 1 ? "excerpt" : "excerpts"} human-checked
         </div>
         <Button size="sm" variant={enabled ? "subtle" : "outline"} onClick={toggle}>
           <ClipboardCheck size={12} /> {enabled ? "Reviewer mode on" : "Turn on reviewer mode"}

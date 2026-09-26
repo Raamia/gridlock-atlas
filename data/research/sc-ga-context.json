@@ -329,7 +329,7 @@
     "The page does not state that the substation is inside Effingham County; that is inferred from the substation name ('Effingham County Substation') and 'improving reliability in Effingham and surrounding counties'.",
     "No in-service or completion date is published; no line length or line endpoints are published.",
     "Not found in the 2024 GA ITS Ten-Year Plan (gpc-irp-2025-vol3: no 'Effingham' hits). In the 2025 SERTP plan the word appears only on p.226, as a generating-plant name in the modeled-resources table, not as a transmission project. The project appears to post-date both documents.",
-    "Both construction-window ends are open sentinels (2099-12-31), not published dates; the UI should show 'end not published'."
+    "Neither construction window has a published end date."
    ]
   },
   {
@@ -1209,7 +1209,7 @@
   "GPC 20277 (McIntosh \u2013 Purrysburg reactors, need 06/01/2026) and GPC 20793/20794 (Evans Primary \u2013 Thurmond Dam rebuilds, need 2033) do not appear in the 2025 SERTP plan (no 'Purrysburg' or 'Thurmond' hits), although that plan covers 2026-2035. Their current status is unconfirmed.",
   "SERTP 2025 vs GPC 2024 ten-year plan conflicts, kept side by side for the sc-ga-gpc cluster. Goshen (Sav) \u2013 McIntosh 115 kV rebuild (GPC 20065): GPC need 2027-06-01 with 100C 795 ACSR Drake, vs SERTP in-service 2028 with 200\u00b0C 1351 ACSS (p.111). Goshen \u2013 Kraft 115 kV rebuild (GPC 20785): GPC lists 9.3 mi, need 2027-06-01; SERTP splits it into 3.48 mi in 2027 (p.93) and 3.04 mi Goshen\u2013Rice Hope in 2031 (p.157).",
   "SERTP 2025 p.107 'MCINTOSH 230 KV, BREAKER CONTROL RELAY UPGRADES' (2028, for interconnection of a proposed generating facility) has no 'SAV:' prefix, and Alabama also has McIntosh/West McIntosh facilities. Georgia Power ownership and location are unconfirmed, so it is not modeled.",
-  "Effingham County 500 kV: substation site, line endpoints, line length and in-service date are not published, and there is no map. Callaway Road \u2013 Thomson has no in-service date. All five construction windows (both preconstruction windows and all three general-construction windows) use a 2099-12-31 open-end sentinel. The UI should show these as 'end not published', not '2099'.",
+  "Effingham County 500 kV: substation site, line endpoints, line length and in-service date are not published, and there is no map. Callaway Road \u2013 Thomson has no in-service date. None of the five construction windows (two preconstruction, three general-construction) has a published end.",
   "The DESC OASIS 'Message Board - Information Postings' PDF (updated 12/11/2025) could not be retrieved because of a TLS certificate-chain error. It was not bypassed, not cached and not cited.",
   "Other Georgia Power project pages listed on the transmission-projects index (Hatch\u2013Wadley 500 kV, Ashley Park, Tomochichi\u2013Towaliga and others) were not modeled. Only Callaway\u2013Thomson and Effingham are near the SC border.",
   "The GPC ten-year plan names the terminal 'Thurmond Dam (USA)'. The '(USA)' suffix is not explained in the source, so the facility's owner (federal or Georgia Power) is not inferred."

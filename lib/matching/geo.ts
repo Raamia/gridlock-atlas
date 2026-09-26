@@ -1,7 +1,7 @@
 import distance from "@turf/distance";
 import { point } from "@turf/helpers";
 import type { GeoDetail, Place, Project, Relation, SignalLevel } from "@/lib/domain/types";
-import { formatMiles } from "@/lib/format";
+import { displayTitle, formatMiles, formatMilesNear } from "@/lib/format";
 
 const METERS_PER_MILE = 1609.344;
 
@@ -111,6 +111,7 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
       a: ca.lonlat,
       b: cb.lonlat,
       lowConfidence: ca.lowConfidence || cb.lowConfidence,
+      localityOnly: ca.localityOnly || cb.localityOnly,
     };
   }
   const shared = sharedEndpoint(a, b);
@@ -140,26 +141,27 @@ export function evaluateGeo(a: Project, b: Project, relations: Relation[], thres
   }
 
   if (center) {
-    const est = formatMiles(center.miles);
+    const est = formatMilesNear(center.miles, thresholdMiles);
     const detail: GeoDetail = { ...base, method: "measured" };
     const caveat = center.lowConfidence ? " (a location is approximate or lower-confidence)" : "";
     // plan §8.4: locality-only evidence can make a possible match, never a precise mileage claim
     if (ca!.localityOnly || cb!.localityOnly) {
-      const who = [ca!.localityOnly ? a.shortTitle : null, cb!.localityOnly ? b.shortTitle : null].filter(Boolean).join(" and ");
+      const who = [ca!.localityOnly ? displayTitle(a) : null, cb!.localityOnly ? displayTitle(b) : null].filter(Boolean).join(" and ");
       return center.lowMiles <= thresholdMiles
-        ? { level: "possible", reason: `${who} is located only to a town; the areas are roughly ${est} apart, which could be within ${thresholdMiles} mi.`, detail, approxMiles: center.miles }
-        : { level: "no-match", reason: `Even the near edge of the town-level locations is beyond the ${thresholdMiles} mi radius.`, detail, approxMiles: center.miles };
+        ? { level: "possible", reason: `${who} is located only approximately (town or road level); the areas are roughly ${est} apart, which could be within ${thresholdMiles} mi.`, detail, approxMiles: center.miles }
+        : { level: "no-match", reason: `Even the near edge of the approximate locations is beyond the ${thresholdMiles} mi radius.`, detail, approxMiles: center.miles };
     }
     if (center.highMiles <= thresholdMiles) {
       return { level: "confirmed", reason: `Project centers are ≈${est} apart${caveat} — inside the ${thresholdMiles} mi radius.`, detail, approxMiles: center.miles };
     }
     if (center.lowMiles <= thresholdMiles) {
-      return {
-        level: "possible",
-        reason: `Project centers are ≈${est} apart${caveat}; within ${thresholdMiles} mi only at the near edge of the location uncertainty.`,
-        detail,
-        approxMiles: center.miles,
-      };
+      const one = (x: number) => `${x.toFixed(1)} mi`;
+      // named facilities, but the location uncertainty straddles the radius: say which side the point estimate is on
+      const reason =
+        center.miles <= thresholdMiles
+          ? `Project centers are ≈${one(center.miles)} apart${caveat} — inside the ${thresholdMiles} mi radius, but the far edge of the location uncertainty (${one(center.highMiles)}) is beyond it.`
+          : `Project centers are ≈${one(center.miles)} apart${caveat}; within ${thresholdMiles} mi only at the near edge of the location uncertainty (${one(center.lowMiles)}).`;
+      return { level: "possible", reason, detail, approxMiles: center.miles };
     }
     return { level: "no-match", reason: `Project centers are ≈${est} apart — beyond the ${thresholdMiles} mi radius.`, detail, approxMiles: center.miles };
   }

@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { SNAPSHOT } from "@/lib/data";
 import type { Match, MatchRun } from "@/lib/domain/types";
 import { useAtlas, type FlagFilter, type InspectorSection } from "@/lib/store";
@@ -50,7 +50,8 @@ function open(pick: (run: MatchRun | null) => Match | null, section: InspectorSe
     if (!m) return;
     const st = useAtlas.getState();
     if (st.selectedMatchId !== m.id) st.select(m.id, { section: section ?? undefined });
-    useAtlas.setState({ inspectorOpen: true, inspectorSection: section, briefOpen: false, highlightConflict: false, focusConflict: null, ...extra(m) });
+    // the queue shows the pair under its own category, the one the narration names
+    useAtlas.setState({ inspectorOpen: true, inspectorSection: section, tab: m.reviewStatus, briefOpen: false, sourcesOpen: false, methodOpen: false, highlightConflict: false, focusConflict: null, ...extra(m) });
   };
 }
 
@@ -62,8 +63,10 @@ function wwtcCompletion(m: Match) {
 const STEPS: Step[] = [
   {
     title: "Two utilities, two separate plans",
-    body: "Dominion Energy South Carolina and Georgia Power publish their future transmission work in separate documents — an SCRTP project list and an IRP ten-year plan. Here they are on one map for the first time.",
+    body: "Dominion Energy South Carolina (cyan) and Georgia Power (violet) publish their future transmission work in separate documents — an SCRTP project list and an IRP ten-year plan. Here they are on one map for the first time.",
     run: () => {
+      // "for the first time": no earlier comparison, radius or tab carries into the opening beat
+      useAtlas.getState().resetRun();
       const region = SNAPSHOT.regions.some((r) => r.id === "southeast") ? "southeast" : (SNAPSHOT.regions[0]?.id ?? "all");
       useAtlas.setState((s) => ({
         region,
@@ -88,7 +91,7 @@ const STEPS: Step[] = [
       const token = stepToken;
       await useAtlas.getState().compare({ thresholdMiles: DEMO_RADIUS });
       if (stale(token)) return;
-      useAtlas.setState((s) => ({ tab: "needs-review", selectedMatchId: null, inspectorOpen: false, cameraNonce: s.cameraNonce + 1 }));
+      useAtlas.setState((s) => ({ tab: "needs-review", selectedMatchId: null, inspectorOpen: false, sourcesOpen: false, methodOpen: false, cameraNonce: s.cameraNonce + 1 }));
     },
   },
   {
@@ -103,7 +106,7 @@ const STEPS: Step[] = [
   },
   {
     title: "A rough, sourced impact estimate",
-    body: "What one shared corridor could avoid encumbering twice. Equipment work and rebuilds on existing right-of-way start at 0 mi; defaults cite public sources where one exists, anything unsourced is marked, and every input is editable — a scenario, not a saving.",
+    body: "What one shared corridor could avoid encumbering twice. Equipment work, rebuilds on existing right-of-way and lines that only meet at a substation start at 0 mi; defaults cite public sources where one exists, anything unsourced is marked, and every input is editable — a scenario, not a saving.",
     run: open(topSoutheast, "impact"),
   },
   {
@@ -131,7 +134,10 @@ const STEPS: Step[] = [
 export function GuidedDemo() {
   const step = useAtlas((s) => s.demoStep);
   const briefOpen = useAtlas((s) => s.briefOpen);
+  const inspectorOpen = useAtlas((s) => s.inspectorOpen && s.selectedMatchId !== null);
   const set = useAtlas((s) => s.set);
+  const card = useRef<HTMLDivElement>(null);
+  const active = step !== null;
   // the demo opened the brief on its last beat, so leaving the demo closes it too
   const end = () => set({ demoStep: null, briefOpen: false, highlightConflict: false, focusConflict: null });
 
@@ -157,6 +163,9 @@ export function GuidedDemo() {
     if (step === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement) return;
+      // never step the demo behind a drawer: its backdrop covers this card (the brief does not, so no brief guard)
+      const st = useAtlas.getState();
+      if (st.sourcesOpen || st.methodOpen) return;
       if (e.key === "ArrowRight") go(step + 1);
       if (e.key === "ArrowLeft") go(step - 1);
     };
@@ -164,11 +173,25 @@ export function GuidedDemo() {
     return () => window.removeEventListener("keydown", onKey);
   }, [step, go]);
 
+  // with the brief open below lg, the card rides over the brief's bottom: publish its height so the brief can scroll clear of it
+  useEffect(() => {
+    const el = card.current;
+    if (!el || !briefOpen) return;
+    const root = document.documentElement.style;
+    const ro = new ResizeObserver(() => root.setProperty("--demo-card-h", `${el.offsetHeight}px`));
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      root.removeProperty("--demo-card-h");
+    };
+  }, [briefOpen, active]);
+
   return (
     <AnimatePresence>
       {step !== null && (
         <motion.div
           key="demo"
+          ref={card}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}
@@ -177,6 +200,8 @@ export function GuidedDemo() {
             "fixed left-3 right-3 sm:right-auto sm:w-[440px]",
             // with the brief open the card rides above its backdrop, pinned to the viewport corner, so Finish stays reachable
             briefOpen ? "bottom-3 z-[60] sm:bottom-4 sm:left-4" : "top-[60px] z-50 sm:absolute sm:bottom-4 sm:left-4 sm:top-auto sm:z-30",
+            // stay left of the evidence inspector (right-3 + 360/408px) with a 12px gap, so Next is never under it
+            !briefOpen && inspectorOpen && "sm:max-w-[calc(100%-400px)] xl:max-w-[calc(100%-448px)]",
           )}
           role="region"
           aria-label="Guided demo"
@@ -201,7 +226,7 @@ export function GuidedDemo() {
                   <p className="mt-1.5 text-[12.5px] leading-[1.55] text-text-1">{STEPS[step].body}</p>
                 </motion.div>
               </AnimatePresence>
-              <div className="mt-3.5 flex items-center gap-2">
+              <div className="mt-3.5 flex flex-wrap items-center gap-2">
                 <div className="flex gap-1">
                   {STEPS.map((_, i) => (
                     <button
@@ -212,7 +237,7 @@ export function GuidedDemo() {
                     />
                   ))}
                 </div>
-                <span className="ml-2 hidden items-center gap-1 text-[10.5px] text-text-3 sm:flex">
+                <span className={clsx("ml-2 hidden items-center gap-1 text-[10.5px] text-text-3", !inspectorOpen && "sm:flex")}>
                   <Kbd>←</Kbd>
                   <Kbd>→</Kbd>
                 </span>

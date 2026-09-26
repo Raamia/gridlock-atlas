@@ -212,6 +212,7 @@ for (const c of clusters) {
       continuous: openEnded ? false : w.continuous !== false,
       ...(openEnded ? { openEnded: true } : {}),
       ...(w.boundsOnly ? { boundsOnly: true } : {}),
+      ...(w.openStart ? { openStart: true } : {}),
       ...(w.supersededBy ? { supersededBy: w.supersededBy } : {}),
       evidenceIds: ev(w.evidence),
       note: w.note || undefined,

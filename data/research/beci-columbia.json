@@ -790,6 +790,25 @@
    ],
    "completionClaims": [
     {
+     "claimSourceId": "mgs-beci-factsheet",
+     "label": "anticipated in-service (Sept 2026 schedule)",
+     "date": {
+      "earliest": "2033-01-01",
+      "latest": "2033-12-31",
+      "precision": "year"
+     },
+     "evidence": [
+      {
+       "sourceId": "mgs-beci-factsheet",
+       "page": 2,
+       "section": "Project Schedule",
+       "exactExcerpt": "Easement Acquisition, Final Design, and Surveys Summer 2028 - Summer 2030 Tree Clearing, Construction, and Restoration Late 2029 - Late 2033 Project In Service 2033",
+       "supports": "Project In Service 2033",
+       "verifiedByScript": true
+      }
+     ]
+    },
+    {
      "claimSourceId": "miso-beci-selection-2026",
      "label": "required in-service deadline (no later than 2034-06-01; a deadline, not a forecast date)",
      "date": {
@@ -850,25 +869,6 @@
        "section": "Transource and BHE Transmission to Build Nearly 200-Mile 765-kV Transmission Line in Wisconsin",
        "exactExcerpt": "A final line route has not been selected, and the project schedule is under development to meet a 2034 in-service date.",
        "supports": "Schedule under development to meet a 2034 in-service date",
-       "verifiedByScript": true
-      }
-     ]
-    },
-    {
-     "claimSourceId": "mgs-beci-factsheet",
-     "label": "anticipated in-service (Sept 2026 schedule)",
-     "date": {
-      "earliest": "2033-01-01",
-      "latest": "2033-12-31",
-      "precision": "year"
-     },
-     "evidence": [
-      {
-       "sourceId": "mgs-beci-factsheet",
-       "page": 2,
-       "section": "Project Schedule",
-       "exactExcerpt": "Easement Acquisition, Final Design, and Surveys Summer 2028 - Summer 2030 Tree Clearing, Construction, and Restoration Late 2029 - Late 2033 Project In Service 2033",
-       "supports": "Project In Service 2033",
        "verifiedByScript": true
       }
      ]
@@ -1796,10 +1796,9 @@
   }
  ],
  "unresolved": [
-  "plan.md hypothesis (Grid Forward vs BECI at Columbia) - what the sources support: (a) both name the 'Columbia Substation' (PSC 5-CE-157 final decision PDF pp.1, 15; PSC case page; MISO RFP slides 26-27; MGS fact sheet map); (b) MISO assigns the Columbia modification (50950) to ATC - but only in the March 2025 RFP scope slide 27, not in the January 2026 selection report; (c) MISO 'anticipates' coordination with interconnecting TOs (selection report PDF p.9 / printed 2, listed as an aspect developers should address; PDF p.36 / printed 29 on real-time operations). NOT supported by any source: an existing arrangement between the BECI developer and the Grid Forward applicants, a schedule for ATC's Columbia work, or any route. Grid Forward sources never mention BECI, 765 kV, Tranche 2.1, Transource or Sugar Creek. Keep as a needs-review lead, not a headline demo item.",
+  "Grid Forward vs BECI at Columbia, what the sources support: (a) both name the 'Columbia Substation' (PSC 5-CE-157 final decision PDF pp.1, 15; PSC case page; MISO RFP slides 26-27; MGS fact sheet map); (b) MISO assigns the Columbia modification (50950) to ATC - but only in the March 2025 RFP scope slide 27, not in the January 2026 selection report; (c) MISO 'anticipates' coordination with interconnecting TOs (selection report PDF p.9 / printed 2, listed as an aspect developers should address; PDF p.36 / printed 29 on real-time operations). NOT supported by any source: an existing arrangement between the BECI developer and the Grid Forward applicants, a schedule for ATC's Columbia work, or any route. Grid Forward sources never mention BECI, 765 kV, Tranche 2.1, Transource or Sugar Creek.",
   "The shared site is name-based: BECI sources and Grid Forward sources each say 'Columbia Substation'; neither discusses the other project. Grid Forward and the MGS map place it in Columbia County, and OSM has a single ATC 345 kV 'Columbia Station' there, so identity is very likely but not stated by a source.",
   "Timing at Columbia: Grid Forward's PSC decision expects construction Q4 2026 - by December 2030 (PDF p.54) and to proceed from the Columbia substation north (PDF p.30); BECI's MGS schedule shows tree clearing/construction/restoration late 2029 - late 2033 (approximate, pre-CPCN). Reported windows overlap roughly late 2029-2030 ('confirmed' only if 'completion by December 2030' is encoded as ending in Dec 2030; 'possible' if 'by' is treated as an upper bound only). Whether any BECI or ATC work at the Columbia site itself happens in that overlap is unknown.",
-  "Project id 'atc-nspw-grid-forward' is a placeholder shared with the Dairyland cluster; Grid Forward's applicants are ATC, NSPW, SMMPA Wisconsin and WPPI Energy (final decision p.1), so its owner set may need more than atc/xcel-nspw. New utility ids used here: bhe-transmission, comed, gridliance-heartland.",
   "No construction window, cost, docket or in-service date found for ATC's Columbia (50950) or Sugar Creek (51027) work, or for DPC's facilities 50948/50953. BECI's June 1, 2034 deadline applies to the three BECI lines only.",
   "MariBell: Dairyland (May 8, 2025 release) and the MariBell site say Dairyland and GridLiance Heartland will jointly develop and co-own a 765/161 kV double-circuit line from Marion, MN to Bell Center, WI (Wisconsin segment ~32 miles in Vernon and Crawford counties along an existing corridor), the 'middle segment of the North Rochester-Columbia 765 kV line'. This very likely includes MISO facility 50948, but no source says so; GridLiance was not added as an owner and MariBell's schedule (project-details page: construction 2031-2034, in service 2034; Wisconsin CPCN filing anticipated Q4 2026) was not attached to the DPC record. Reconcile with any MariBell cluster (maribell-* sources were cached by another researcher) to avoid a duplicate work package.",
   "No PSCW docket exists yet for BECI (MGS plans to file the CPCN in early 2027; decision anticipated summer 2028); status 'proposed'. Re-check PSC ERF after filing for route alternatives and schedule.",

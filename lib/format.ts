@@ -35,8 +35,11 @@ export function formatSpan(span: { start: string; end: string }, precision: Date
   return a === z ? a : `${a}–${z}`;
 }
 
-export function formatWindow(start: DateBound, end: DateBound, openEnded?: boolean): string {
-  if (openEnded || end.latest >= "2090") return `from ${formatPoint(start.earliest, start.precision)}`;
+/** openStart: the source only says work began before its first itemized year, so no start year is shown. */
+export function formatWindow(start: DateBound, end: DateBound, openEnded?: boolean, openStart?: boolean): string {
+  const open = openEnded || end.latest >= "2090";
+  if (openStart) return open ? `from before ${year(start.latest)}` : `pre-${year(start.latest)}–${formatPoint(end.latest, end.precision)}`;
+  if (open) return `from ${formatPoint(start.earliest, start.precision)}`;
   const a = formatPoint(start.earliest, start.precision);
   const z = formatPoint(end.latest, end.precision);
   return a === z ? a : `${a}–${z}`;
@@ -46,6 +49,11 @@ export function formatMiles(mi: number): string {
   if (mi < 1) return "<1 mi";
   if (mi < 10) return `${mi.toFixed(1)} mi`;
   return `${Math.round(mi)} mi`;
+}
+
+/** One decimal near the review radius, so 24.89 mi never reads as "25 mi" beside a 25 mi threshold. */
+export function formatMilesNear(mi: number, thresholdMiles: number): string {
+  return mi >= 10 && Math.abs(mi - thresholdMiles) < 1.5 ? `${mi.toFixed(1)} mi` : formatMiles(mi);
 }
 
 export function formatDate(iso?: string): string {
@@ -58,4 +66,27 @@ export function formatDate(iso?: string): string {
 
 export function pluralize(n: number, one: string, many = `${one}s`): string {
   return `${n} ${n === 1 ? one : many}`;
+}
+
+/** Headline title: long titles drop their parenthetical detail (the full title stays in tooltips/brief sources). */
+export function displayTitle(p: { title: string }): string {
+  // planning-area prefixes ("SAV: …") are kept in the docket line, not the headline
+  const base = p.title.replace(/^(SAV|GTC|MEAG|DU)\s*:\s*/, "");
+  if (base.length <= 48) return base;
+  const t = base.replace(/\s*\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
+  return t || base;
+}
+
+// researcher-to-developer sentences (schema, ids, placeholders, UI hints) that are not findings about a project
+const INTERNAL_NOTE = /plan\.md|test-matrix|is a placeholder shared|placeholders? and must be matched|id mismatch|\bids? (used|introduced)\b|id normalization|the UI (should|may)\b|This schema/i;
+
+/** A research note or caveat as shown to readers: internal dev sentences and cross-references dropped, findings kept. */
+export function publicNote(t: string): string {
+  return t
+    .replace(/\s*\(see route\.caveat\)/g, "")
+    .replace(/\u0007/g, "")
+    .split(/(?<=\.)\s+(?=[A-Z'(“"])/)
+    .filter((s) => !INTERNAL_NOTE.test(s))
+    .join(" ")
+    .trim();
 }
