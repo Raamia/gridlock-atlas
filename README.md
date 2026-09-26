@@ -143,6 +143,7 @@ npm run sources:fetch -- --local gpc-irp-2025-vol3="path/to/2025 IRP Volume 3 PU
 python3 scripts/ingest/parse_region_b.py
 npm run snapshot:build
 npm run extract -- desc-scrtp-2026-2030 --page 41    # optional model extraction (OPENAI_API_KEY in .env.local)
+python3 scripts/ingest/permit_search.py              # optional: land-disturbance filings near the leads → data/permits/permit-search.json
 ```
 
 API: `GET /api/snapshot`, `GET /api/matches?threshold=25&utilityA=&utilityB=&region=&year=`, `GET /api/matches/:id`.
@@ -167,7 +168,7 @@ Or press **Guided demo** in the top bar.
 
 - No planner labels: no precision or effectiveness is claimed. The 13 documented interfaces used in the evaluation are few, all outside the Savannah River region, and read from the same filings as our shared-facility rule.
 - Public plans are incomplete and change; costs are redacted in the Georgia Power public disclosure, so any Georgia Power cost shown is a labeled mileage proxy.
-- No top Savannah River pair has published field-work dates. A confirmed TIME there is a *published-schedule* overlap (start → in-service), labeled as such; DESC's budget-year window is coarse by design.
+- No top Savannah River pair has published field-work dates. A confirmed TIME there is a *published-schedule* overlap (start → in-service), labeled as such; DESC's budget-year window is coarse by design. State permit filings did not fill the gap. On 26 September 2026, Georgia EPD had no land-disturbance filing for Georgia Power's side of any top-12 lead, and SC DES's only matching filings were the Okatie 230 kV substation boundaries of 2022–2023 ([`data/permits/`](data/permits/README.md)).
 - Five SERTP 2026 projects are filed under "SOCO" with no named owner; Georgia Power is a labeled inference.
 - Most substations are geocoded from OpenStreetMap by name and checked against plan text; some are approximate or lower-confidence and are labeled so.
 - Coordination that is not published cannot be seen. "Needs review" means the reviewed sources are silent.

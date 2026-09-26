@@ -1,0 +1,1045 @@
+{
+ "retrievedAt": "2026-09-26T20:28:23Z",
+ "note": "Utility-like land-disturbance filings near the Savannah River leads. A filing is not a crew schedule; no filing found is not evidence that no work is planned. Not part of the snapshot.",
+ "georgia": {
+  "source": "Georgia EPD GEOS Public Inquiry Portal (NPDES)",
+  "url": "https://geos.epd.georgia.gov/GA/GEOS/Public/Client/GA_GEOS/Public/Pages/PublicApplicationList.aspx",
+  "searches": [
+   {
+    "county": "Effingham",
+    "from": "2024-01-01",
+    "to": "2024-03-30",
+    "results": 25,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2024-03-31",
+    "to": "2024-06-28",
+    "results": 21,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2024-06-29",
+    "to": "2024-09-26",
+    "results": 35,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2024-09-27",
+    "to": "2024-12-25",
+    "results": 69,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2024-12-26",
+    "to": "2025-03-25",
+    "results": 37,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2025-03-26",
+    "to": "2025-06-23",
+    "results": 24,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2025-06-24",
+    "to": "2025-09-21",
+    "results": 15,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2025-09-22",
+    "to": "2025-12-20",
+    "results": 19,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2025-12-21",
+    "to": "2026-03-20",
+    "results": 36,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2026-03-21",
+    "to": "2026-06-18",
+    "results": 27,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2026-06-19",
+    "to": "2026-09-16",
+    "results": 21,
+    "capped": false
+   },
+   {
+    "county": "Effingham",
+    "from": "2026-09-17",
+    "to": "2026-09-26",
+    "results": 2,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2024-01-01",
+    "to": "2024-03-30",
+    "results": 183,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2024-03-31",
+    "to": "2024-06-28",
+    "results": 58,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2024-06-29",
+    "to": "2024-09-26",
+    "results": 108,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2024-09-27",
+    "to": "2024-12-25",
+    "results": 226,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2024-12-26",
+    "to": "2025-03-25",
+    "results": 193,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2025-03-26",
+    "to": "2025-06-23",
+    "results": 56,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2025-06-24",
+    "to": "2025-09-21",
+    "results": 72,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2025-09-22",
+    "to": "2025-12-20",
+    "results": 83,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2025-12-21",
+    "to": "2026-03-20",
+    "results": 216,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2026-03-21",
+    "to": "2026-06-18",
+    "results": 85,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2026-06-19",
+    "to": "2026-09-16",
+    "results": 68,
+    "capped": false
+   },
+   {
+    "county": "Chatham",
+    "from": "2026-09-17",
+    "to": "2026-09-26",
+    "results": 7,
+    "capped": false
+   },
+   {
+    "facilityName": "Goshen",
+    "results": 48,
+    "capped": false
+   },
+   {
+    "facilityName": "McIntosh",
+    "results": 129,
+    "capped": false
+   },
+   {
+    "facilityName": "Rice Hope",
+    "results": 68,
+    "capped": false
+   },
+   {
+    "facilityName": "Kraft",
+    "results": 12,
+    "capped": false
+   },
+   {
+    "facilityName": "Georgia Pacific",
+    "results": 32,
+    "capped": false
+   },
+   {
+    "facilityName": "Rincon",
+    "results": 44,
+    "capped": false
+   },
+   {
+    "facilityName": "Meldrim",
+    "results": 44,
+    "capped": false
+   },
+   {
+    "facilityName": "Ogeechee",
+    "results": 50,
+    "capped": false
+   }
+  ],
+  "utilityFilings": [
+   {
+    "submissionId": "1026911",
+    "facility": "Salt Creek 230KV Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2026-09-21",
+    "status": "Partial Submittal",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "1020284",
+    "facility": "Medical Arts Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2026-08-12",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "1013675",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2026-08-05",
+    "status": "Complete Submittal",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "1018182",
+    "facility": "Little Ogeechee Substation Expansion",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2026-07-30",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "1017265",
+    "facility": "Egypt Tap 46 kV (C81752)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2026-07-24",
+    "status": "Approved",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "1016680",
+    "facility": "Egypt Tap 46 kV (C81752)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2026-07-21",
+    "status": "Revision Archived",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "1005794",
+    "facility": "Newton Road Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2026-06-04",
+    "status": "Approved",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "997706",
+    "facility": "GPC Four Lakes Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2026-04-28",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "997930",
+    "facility": "Little Ogeechee Substation Expansion",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Change of Information",
+    "submitted": "2026-04-22",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "997628",
+    "facility": "Branch Goshen 230kV TL P79457",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Change of Information",
+    "submitted": "2026-04-21",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "983630",
+    "facility": "Branch Goshen 230kV TL P79457",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2026-01-29",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "983096",
+    "facility": "Branch Goshen 230kV TL P79457",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2026-01-27",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "976972",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2026-01-27",
+    "status": "Engineering Review",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "976844",
+    "facility": "GEORGIA POWER - ASH LANDFILL",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2026-01-27",
+    "status": "Engineering Review",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "957102",
+    "facility": "GPC Big Ogeechee Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Change of Information",
+    "submitted": "2025-10-13",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "955648",
+    "facility": "GPC Ogeechee River Road Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2025-10-06",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "941202",
+    "facility": "Hyundai Motors - Meldrim 230 kV Transmission Line Yard",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2025-07-21",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "940544",
+    "facility": "Newton Road Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Change of Information",
+    "submitted": "2025-07-16",
+    "status": "Approved",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "863655",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Individual Industrial NPDES Permit for New or Existing Discharges",
+    "appType": "Industrial NPDES Permit for New or Existing Discharges - 2C",
+    "submitted": "2025-04-14",
+    "status": "Permit Issued",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "916937",
+    "facility": "GPC Ogeechee River Road Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Change of Information",
+    "submitted": "2025-03-21",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "903063",
+    "facility": "GEORGIA POWER - ASH LANDFILL",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2025-01-30",
+    "status": "Engineering Review",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "903057",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2025-01-30",
+    "status": "Engineering Review",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "888114",
+    "facility": "Fort Argyle 230/25 kV Substation P79431",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2024-11-18",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "886774",
+    "facility": "Fort Argyle 230/25 kV Substation P79431",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Re-Issuance Notification",
+    "submitted": "2024-11-13",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "878022",
+    "facility": "Hyundai Motors - Meldrim 115 KV Line (North Loop)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2024-10-14",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "867257",
+    "facility": "GPC Big Ogeechee Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Re-Issuance Notification",
+    "submitted": "2024-09-04",
+    "status": "Revision Archived",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "867251",
+    "facility": "Little Ogeechee Substation Expansion",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Re-Issuance Notification",
+    "submitted": "2024-09-04",
+    "status": "Revision Archived",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "867221",
+    "facility": "GPC Four Lakes Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Re-Issuance Notification",
+    "submitted": "2024-09-04",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "867215",
+    "facility": "GPC Ogeechee River Road Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Re-Issuance Notification",
+    "submitted": "2024-09-04",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "867213",
+    "facility": "Newton Road Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Re-Issuance Notification",
+    "submitted": "2024-09-04",
+    "status": "Revision Archived",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "867195",
+    "facility": "Hyundai Motors - Meldrim 115 KV Line (North Loop)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Re-Issuance Notification",
+    "submitted": "2024-09-04",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "867194",
+    "facility": "Hyundai Motors - Meldrim 230 kV Transmission Line Yard",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Re-Issuance Notification",
+    "submitted": "2024-09-04",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "857481",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2024-07-24",
+    "status": "Revision Archived",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "857389",
+    "facility": "GPC Ogeechee River Road Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2024-07-19",
+    "status": "Renewal Archived"
+   },
+   {
+    "submissionId": "854154",
+    "facility": "GPC Four Lakes Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2024-07-02",
+    "status": "Renewal Archived",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "853590",
+    "facility": "GPC Big Ogeechee Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2024-07-01",
+    "status": "Renewal Archived",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "845898",
+    "facility": "Furgeson Avenue - Little Ogeechee TL",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2024-06-03",
+    "status": "Approved",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "841181",
+    "facility": "Newton Road Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2024-05-13",
+    "status": "Renewal Archived",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "828831",
+    "facility": "Little Ogeechee Substation Expansion",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2024-03-18",
+    "status": "Renewal Archived",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "812764",
+    "facility": "GEORGIA POWER - ASH LANDFILL",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2024-01-29",
+    "status": "Engineering Review",
+    "county": "Chatham"
+   },
+   {
+    "submissionId": "812611",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2024-01-29",
+    "status": "Engineering Review",
+    "county": "Effingham"
+   },
+   {
+    "submissionId": "792665",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2023-10-30",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "781232",
+    "facility": "Hyundai Motors - Meldrim 115 KV Line (North Loop)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2023-08-23",
+    "status": "Renewal Archived"
+   },
+   {
+    "submissionId": "780165",
+    "facility": "Hyundai Motors - Meldrim 115 KV Line (North Loop)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2023-08-18",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "772518",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2023-07-31",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "753261",
+    "facility": "Hyundai Motors - Meldrim 230 kV Transmission Line Yard",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2023-05-03",
+    "status": "Renewal Archived"
+   },
+   {
+    "submissionId": "742398",
+    "facility": "Furgeson Avenue - Little Ogeechee TL",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Change of Information",
+    "submitted": "2023-03-10",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "735291",
+    "facility": "Furgeson Avenue - Little Ogeechee TL",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2023-02-02",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "731634",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2023-01-31",
+    "status": "Engineering Review"
+   },
+   {
+    "submissionId": "674751",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2022-06-29",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "635892",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2022-01-28",
+    "status": "Engineering Review"
+   },
+   {
+    "submissionId": "621642",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2021-12-09",
+    "status": "Complete Submittal"
+   },
+   {
+    "submissionId": "356751",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2021-02-09",
+    "status": "Renewal Archived"
+   },
+   {
+    "submissionId": "546711",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2021-01-31",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "508880",
+    "facility": "Georgia Pacific Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2020-09-10",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "475795",
+    "facility": "Georgia Pacific Sawmill Transmission Line",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Termination",
+    "submitted": "2020-04-07",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "460787",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2020-01-30",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "343898",
+    "facility": "Georgia Pacific Sawmill Transmission Line",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2019-03-11",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "336321",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2019-01-31",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "321202",
+    "facility": "Georgia Pacific Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "Initial Notification",
+    "submitted": "2018-12-18",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "226995",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) Annual Report",
+    "appType": "",
+    "submitted": "2018-01-30",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "57290",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2018-01-12",
+    "status": "Revision Archived"
+   },
+   {
+    "submissionId": "183270",
+    "facility": "Little Ogeechee - Dutchtown 115 KV Transmission Line (Chatham County)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "183238",
+    "facility": "GOSHEN - KRAFT 115kV",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "177259",
+    "facility": "LITTLE OGEECHEE - NEW DUTCHTOWN 115kV",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "176396",
+    "facility": "GOSHEN GODLEY TRACT 115 kV TRANSMISSION LINE",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "176111",
+    "facility": "MELDRIM 230/115 kV SUBSTATION EXPANSION",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "175297",
+    "facility": "KRAFT-MCINTOSH 230 KV TL",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "175215",
+    "facility": "PLANT KRAFT - DEAN FOREST 230 kV",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "174729",
+    "facility": "MCINTOSH-TRUETLEN 115KV TRANSMISSION LINE",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "172734",
+    "facility": "VOGTLE-WEST MCINTOSH 500KV TRANSMISSION LINE",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "171378",
+    "facility": "MCINTOSH - BLANDFORD - MELDRIM 230 kV",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "170150",
+    "facility": "MCINTOSH - BLANDFORD - MELDRIM 230 kV",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "169946",
+    "facility": "Little Ogeechee - NEW DUTCHTOWN 115kV Transmission Line ESPCP",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "165919",
+    "facility": "Goshen - South Augusta 115 kV",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "164849",
+    "facility": "McIntosh - Perryburg 230 kV (Effingham County)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "153240",
+    "facility": "Little Ogeechee - Meldrim (White) 230kV T/L (Chatham County)",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "146447",
+    "facility": "McIntosh Trail Substation",
+    "form": "Stormwater Construction General Permit",
+    "appType": "",
+    "submitted": "2017-09-27",
+    "status": "Approved"
+   },
+   {
+    "submissionId": "51865",
+    "facility": "GEORGIA POWER CO. (PLANT MCINTOSH)",
+    "form": "Industrial Stormwater (GAR050000) NOI / NEE",
+    "appType": "",
+    "submitted": "2017-06-22",
+    "status": "Revision Archived"
+   }
+  ]
+ },
+ "southCarolina": {
+  "source": "SC DES OCRM coastal-zone land-disturbance boundaries (LD_BOUND_CURRENT)",
+  "url": "https://gis.des.sc.gov/gisserver/rest/services/OCRM/CZC_Layers/MapServer/0/query",
+  "bbox": [
+   -81.5,
+   31.9,
+   -80.6,
+   32.8
+  ],
+  "boundariesInRegion": 1269,
+  "utilityBoundaries": [
+   {
+    "objectId": 475818,
+    "project": "Bluffton - Market Place 115kV Line #2",
+    "boundaryFiled": "2026-03-31",
+    "acres": 85.5,
+    "center": [
+     32.2265,
+     -80.7818
+    ]
+   },
+   {
+    "objectId": 475625,
+    "project": "Sherwood Substation",
+    "boundaryFiled": "2026-02-10",
+    "acres": 4.0,
+    "center": [
+     32.23641,
+     -81.09473
+    ]
+   },
+   {
+    "objectId": 475043,
+    "project": "DESC Ritter to Yemassee Rebuild",
+    "boundaryFiled": "2025-09-05",
+    "acres": 484.7,
+    "center": [
+     32.74856,
+     -80.7704
+    ]
+   },
+   {
+    "objectId": 475000,
+    "project": "Varnville-Robertville 115 kV Rebuild",
+    "boundaryFiled": "2025-08-24",
+    "acres": 21.3,
+    "center": [
+     32.72493,
+     -81.02463
+    ]
+   },
+   {
+    "objectId": 473943,
+    "project": "Jasper-Riverport Transmission Line (Hardeeville-Riverport Segment)",
+    "boundaryFiled": "2025-02-28",
+    "acres": 172.9,
+    "center": [
+     32.27701,
+     -81.08507
+    ]
+   },
+   {
+    "objectId": 75060,
+    "project": "Burton to Frogmore 115kV Rebuild",
+    "boundaryFiled": "2023-08-01",
+    "acres": 78.4,
+    "center": [
+     32.40938,
+     -80.68791
+    ]
+   },
+   {
+    "objectId": 74897,
+    "project": "Okatie 230kV Substation Expansion",
+    "boundaryFiled": "2023-06-16",
+    "acres": 20.5,
+    "center": [
+     32.33502,
+     -81.03268
+    ]
+   },
+   {
+    "objectId": 74898,
+    "project": "Okatie - Hardeeville",
+    "boundaryFiled": "2023-06-16",
+    "acres": 71.9,
+    "center": [
+     32.30231,
+     -81.04764
+    ]
+   },
+   {
+    "objectId": 73886,
+    "project": "Hardeeville to Bluffton",
+    "boundaryFiled": "2023-03-08",
+    "acres": 172.6,
+    "center": [
+     32.25504,
+     -80.9131
+    ]
+   },
+   {
+    "objectId": 73650,
+    "project": "Okatie 230kV Substation",
+    "boundaryFiled": "2022-12-20",
+    "acres": 20.5,
+    "center": [
+     32.33437,
+     -81.03302
+    ]
+   },
+   {
+    "objectId": 73016,
+    "project": "22046 Dominion Energy Hardeeville",
+    "boundaryFiled": "2022-07-06",
+    "acres": 1.3,
+    "center": [
+     32.29901,
+     -81.07392
+    ]
+   },
+   {
+    "objectId": 72888,
+    "project": "DESC COOSAWHATCHIE DIG SUBMITTAL",
+    "boundaryFiled": "2022-05-25",
+    "acres": 6.2,
+    "center": [
+     32.59624,
+     -80.98475
+    ]
+   },
+   {
+    "objectId": 1230,
+    "project": "Okatie to Bluffton Tie",
+    "boundaryFiled": "2020-12-17",
+    "acres": 15.3,
+    "center": [
+     32.25184,
+     -80.84867
+    ]
+   },
+   {
+    "objectId": 1082,
+    "project": "May River Substation",
+    "boundaryFiled": "2020-12-02",
+    "acres": 3.1,
+    "center": [
+     32.26031,
+     -80.8604
+    ]
+   },
+   {
+    "objectId": 701,
+    "project": "Yemassee-Burton 115kV #2 & #3 Lines",
+    "boundaryFiled": "2020-09-14",
+    "acres": 56.4,
+    "center": [
+     32.48025,
+     -80.73883
+    ]
+   }
+  ]
+ }
+}
