@@ -169,7 +169,7 @@
    "sourceId": "miso-cost-guide-mtep24",
    "page": 7,
    "section": "2.1 Common Cost Categories - Right-of-Way, Land Acquisition, and Regulatory and Permitting (printed page 6)",
-   "exactExcerpt": "Right-of-way and land acquisition costs cover land easements on yet-to-be-installed projects and are typically charged to FERC plant accounts 350 and 359. MISO assumes that new right-of-way is required for all projects except transmission line rebuild projects. MISO has three categories of land costs: pasture, crop, and urban/suburban. MISO utilizes the annual USDA Land Values summary to estimate the value of pastureland.",
+   "exactExcerpt": "MISO has three categories of land costs: pasture, crop, and urban/suburban. MISO utilizes the annual USDA Land Values summary to estimate the value of pastureland.",
    "verifiedByScript": true,
    "note": "This is a planning convention, not an observed ratio of easement price to fee value. MISO says its right-of-way costs cover land easements and prices them from the USDA land value per acre (pasture; cropland = 3x pasture; urban/suburban = 5x pasture). The same page says 'All land costs are based upon the acreage of land that the new transmission line would traverse' (also verified). The guide applies no easement discount factor, so the implied share is 1.0. That share is my inference; MISO does not state it. MISO adds a separate acquisition cost per acre on top (rowAcquisitionCostPerAcre). No SC or GA source states a typical share."
   },
