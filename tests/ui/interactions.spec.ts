@@ -5,7 +5,7 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
  * Role-based selectors first; `data-match-id` is the queue's stable card hook.
  *
  * Regression tests for app defects found on 2026-09-26 (they assert the intended behavior and fail until fixed):
- * radius reply race, demo Finish under the brief, demo radius, overview chip count, filtered empty state,
+ * radius reply race, demo Finish under the brief, demo radius, headline flagged count (was the overview chip), filtered empty state,
  * engine failure message, 3D overview tilt, reviewer note on Escape, sources "no match" state, brief print,
  * demo card vs inspector, demo step 1 reset and tabs, demo keys behind a drawer, demo focus on start,
  * demo exit during a pending step, deep links at a non-default radius, keyboard presenter through Finish,
@@ -44,10 +44,26 @@ async function tabCount(t: Locator): Promise<number> {
   return Number(m[1]);
 }
 
-async function openFilters(page: Page) {
-  const toggle = page.getByRole("button", { name: /Filters & review radius/ });
-  if ((await toggle.getAttribute("aria-expanded")) !== "true") await toggle.click();
+/** The review radius is always on screen after a run (the old "Filters & review radius" disclosure is gone). */
+async function radiusShown(page: Page) {
   await expect(page.getByRole("slider", { name: "Review radius" })).toBeVisible();
+}
+
+const queue = (page: Page) => page.getByRole("complementary", { name: "Coordination queue" });
+/** The list's rows (the queue's cards; map chips and other surfaces never count). */
+const cards = (page: Page) => queue(page).getByRole("list").locator("[data-match-id]");
+/** Timing chips: "Schedules overlap / May overlap / Timing unknown / No overlap", each ending in its tab-scoped count. */
+const timingChip = (page: Page, name: RegExp) => page.getByRole("group", { name: "Timing" }).getByRole("button", { name });
+const disputedChip = (page: Page) => queue(page).getByRole("button", { name: /^Dates revised or disputed/ });
+
+async function cardIds(page: Page): Promise<string[]> {
+  return cards(page).evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.matchId ?? ""));
+}
+
+/** The engine's own answer at 25 mi, to check what a filter lets through. */
+async function run25(page: Page) {
+  const body = (await (await page.request.get("/api/matches?threshold=25")).json()) as { matches: { id: string; time: string; conflicts: unknown[] }[] };
+  return new Map(body.matches.map((m) => [m.id, m]));
 }
 
 async function mapReady(page: Page) {
@@ -86,7 +102,7 @@ test.describe("interactions", () => {
     const at25 = await tabCount(needs);
     expect(at25).toBeGreaterThan(0);
 
-    await openFilters(page);
+    await radiusShown(page);
     const slider = page.getByRole("slider", { name: "Review radius" });
     const queue = page.getByRole("complementary", { name: "Coordination queue" });
 
@@ -114,7 +130,7 @@ test.describe("interactions", () => {
   test("a faster reply to an older radius never overwrites the newest radius", async ({ page }) => {
     await page.goto("/");
     await compare(page);
-    await openFilters(page);
+    await radiusShown(page);
     // make the 100 mi run slow (as a larger run would be on a real server) so it resolves after the 5 mi run
     await page.route(/\/api\/matches\?threshold=100/, async (route) => {
       await new Promise((r) => setTimeout(r, 1500));
@@ -131,9 +147,10 @@ test.describe("interactions", () => {
     await expect(queue).toContainText("· 5 mi");
   });
 
-  test("signal chips and the utility filter narrow the queue; empty states render", async ({ page }) => {
+  test("timing chips and the utility filter narrow the queue; empty states render", async ({ page }) => {
     await page.goto("/");
     await compare(page);
+    const engine = await run25(page);
     const needs = tab(page, /^Needs review/);
     const possible = tab(page, /^Possible/);
     const n0 = await tabCount(needs);
@@ -141,58 +158,100 @@ test.describe("interactions", () => {
     expect(n0).toBeGreaterThan(0);
     expect(p0).toBeGreaterThan(0);
 
-    await openFilters(page);
-    await page.getByRole("button", { name: "PLACE CONFIRMED" }).click();
-    await expect(page.getByRole("button", { name: "PLACE CONFIRMED" })).toHaveAttribute("aria-pressed", "false");
-    await expect.poll(() => tabCount(needs)).toBeLessThan(n0);
-    if ((await tabCount(needs)) === 0) await expect(page.getByText("No open review leads")).toBeVisible();
+    const schedules = timingChip(page, /^Schedules overlap/);
+    const may = timingChip(page, /^May overlap/);
+    const unknown = timingChip(page, /^Timing unknown/);
+    const none = timingChip(page, /^No overlap/);
+    // none pressed = every pair; the four counts are the tab's facets and add up to it
+    for (const c of [schedules, may, unknown, none]) await expect(c).toHaveAttribute("aria-pressed", "false");
+    let sum = 0;
+    for (const c of [schedules, may, unknown, none]) sum += await tabCount(c);
+    expect(sum).toBe(n0);
 
-    await page.getByRole("button", { name: "PLACE POSSIBLE" }).click();
-    await expect.poll(() => tabCount(possible)).toBe(0);
+    // one chip: only that timing, exactly the chip's count
+    const kSched = await tabCount(schedules);
+    expect(kSched).toBeGreaterThan(0);
+    expect(kSched).toBeLessThan(n0);
+    await schedules.click();
+    await expect(schedules).toHaveAttribute("aria-pressed", "true");
+    await expect.poll(() => tabCount(needs)).toBe(kSched);
+    await expect(cards(page)).toHaveCount(kSched);
+    for (const id of await cardIds(page)) expect(engine.get(id)?.time, id).toBe("confirmed");
+
+    // chips are independent toggles: a second one adds its pairs
+    const kNone = await tabCount(none);
+    await none.click();
+    await expect(none).toHaveAttribute("aria-pressed", "true");
+    await expect.poll(() => tabCount(needs)).toBe(kSched + kNone);
+    await expect(cards(page)).toHaveCount(kSched + kNone);
+    for (const id of await cardIds(page)) expect(["confirmed", "no-match"]).toContain(engine.get(id)?.time);
+
+    // the other tabs count through the same filters
+    await expect.poll(() => tabCount(possible)).toBeLessThan(p0);
     await possible.click();
     await expect(possible).toHaveAttribute("aria-selected", "true");
-    await expect(page.getByText("Nothing only-possible")).toBeVisible();
-    await expect(page.locator("[data-match-id]")).toHaveCount(0);
+    await expect(cards(page)).toHaveCount(await tabCount(possible));
+    for (const id of await cardIds(page)) expect(["confirmed", "no-match"]).toContain(engine.get(id)?.time);
 
-    // restore, then narrow by utility across all regions
-    await page.getByRole("button", { name: "PLACE CONFIRMED" }).click();
-    await page.getByRole("button", { name: "PLACE POSSIBLE" }).click();
+    // Clear restores every pair
+    await queue(page).getByRole("button", { name: "Clear", exact: true }).click();
+    for (const c of [schedules, none]) await expect(c).toHaveAttribute("aria-pressed", "false");
+    await expect.poll(() => tabCount(possible)).toBe(p0);
     await expect.poll(() => tabCount(needs)).toBe(n0);
+
+    // narrow by utility across all regions (options are region-scoped: Dairyland is a Midwest utility)
     await page.getByRole("navigation", { name: "Region" }).getByRole("button", { name: "All" }).click();
     await tab(page, /^Known/).click();
     const knownAll = await tabCount(tab(page, /^Known/));
+    // a timing with no pair in this tab can't be chosen
+    await expect(schedules).toBeDisabled();
     await page.getByLabel("Utility").selectOption({ label: "Dairyland Power Cooperative" });
     await expect.poll(() => tabCount(tab(page, /^Known/))).toBeLessThan(knownAll);
-    const cards = page.locator("[data-match-id]");
     // wait for the exit animation of the previous tab's cards to finish
-    await expect(cards).toHaveCount(await tabCount(tab(page, /^Known/)));
-    await expect(cards.first()).toBeVisible();
-    for (const t of await cards.allTextContents()) expect(t).toContain("Dairyland");
+    await expect(cards(page)).toHaveCount(await tabCount(tab(page, /^Known/)));
+    await expect(cards(page).first()).toBeVisible();
+    for (const t of await cards(page).allTextContents()) expect(t).toContain("Dairyland");
     await page.getByLabel("Utility").selectOption({ label: "All utilities" });
     await expect.poll(() => tabCount(tab(page, /^Known/))).toBe(knownAll);
   });
 
-  test("tabs switch and each empty category explains itself", async ({ page }) => {
+  test("tabs switch, the dates-revised-or-disputed chip narrows the list, and each empty category explains itself", async ({ page }) => {
     await page.goto("/");
     await compare(page);
+    const engine = await run25(page);
     const known = tab(page, /^Known/);
     await known.click();
     await expect(known).toHaveAttribute("aria-selected", "true");
-    if ((await tabCount(known)) === 0) await expect(page.getByText("No documented coordination")).toBeVisible();
+    if ((await tabCount(known)) === 0) {
+      await expect(page.getByText("No documented coordination")).toBeVisible();
+      // …and points to the regions that do have documented interfaces
+      await expect(queue(page).getByRole("button", { name: /Show them/ })).toBeVisible();
+    }
 
-    const conflicts = tab(page, /^Conflicts/);
-    await conflicts.click();
-    await expect(conflicts).toHaveAttribute("aria-selected", "true");
-    await expect(page.locator("[data-match-id]")).toHaveCount(await tabCount(conflicts));
+    // the retired Conflicts tab is the "Dates revised or disputed" chip: pairs with any date conflict, in every tab
+    const needs = tab(page, /^Needs review/);
+    await needs.click();
+    await expect(needs).toHaveAttribute("aria-selected", "true");
+    const n0 = await tabCount(needs);
+    const disputed = disputedChip(page);
+    const k = await tabCount(disputed);
+    expect(k).toBeGreaterThan(0);
+    await disputed.click();
+    await expect(disputed).toHaveAttribute("aria-pressed", "true");
+    await expect.poll(() => tabCount(needs)).toBe(k);
+    await expect(cards(page)).toHaveCount(k);
+    for (const id of await cardIds(page)) expect(engine.get(id)?.conflicts.length, id).toBeGreaterThan(0);
+    await disputed.click();
+    await expect(disputed).toHaveAttribute("aria-pressed", "false");
+    await expect.poll(() => tabCount(needs)).toBe(n0);
 
     // Southern Plains has only a known-coordination pair: Needs review is an honest empty state
     await page.getByRole("navigation", { name: "Region" }).getByRole("button", { name: "Southern Plains" }).click();
-    const needs = tab(page, /^Needs review/);
     await needs.click();
     await expect.poll(() => tabCount(needs)).toBe(0);
     await expect(page.getByText("No open review leads")).toBeVisible();
     await known.click();
-    await expect(page.locator("[data-match-id]")).toHaveCount(await tabCount(known));
+    await expect(cards(page)).toHaveCount(await tabCount(known));
     expect(await tabCount(known)).toBeGreaterThan(0);
   });
 
@@ -291,7 +350,7 @@ test.describe("interactions", () => {
     await expect.poll(pitch, { timeout: 8000 }).toBeGreaterThan(40);
   });
 
-  test("region switcher moves the queue, focus chip and camera", async ({ page }) => {
+  test("region switcher moves the queue, headline and camera", async ({ page }) => {
     const errors = trackErrors(page);
     await page.goto("/");
     await compare(page);
@@ -305,8 +364,13 @@ test.describe("interactions", () => {
     await nav.getByRole("button", { name: "Upper Midwest" }).click();
     await expect(nav.getByRole("button", { name: "Upper Midwest" })).toHaveAttribute("aria-pressed", "true");
     await expect(page.getByRole("complementary", { name: "Evidence inspector" })).toBeHidden();
-    await expect(page.getByText("Overview", { exact: true })).toBeVisible();
+    await expect(page).not.toHaveURL(/pair=/);
     await expect.poll(() => tabCount(tab(page, /^Known/))).toBeGreaterThan(0);
+    // the headline counts the new region's pairs (the old Overview chip is gone)
+    const n = (await tabCount(tab(page, /^Needs review/))) + (await tabCount(tab(page, /^Known/))) + (await tabCount(tab(page, /^Possible/)));
+    await expect(queue(page).getByText(`${n} pairs flagged`, { exact: true })).toBeVisible();
+    // no pair inside 25 mi in the Midwest: the headline says why they are flagged instead
+    await expect(queue(page)).toContainText("flagged through shared facilities beyond 25 mi");
     await page.waitForTimeout(2200);
     const c = await page.evaluate(() => (window as unknown as { __map: MapHandle }).__map.getCenter());
     expect(c.lat).toBeGreaterThan(40); // Wisconsin / Minnesota, not the Savannah River
@@ -374,7 +438,7 @@ test.describe("interactions", () => {
   test("guided demo narrates a 25 mi run even after the radius was changed", async ({ page }) => {
     await page.goto("/");
     await compare(page);
-    await openFilters(page);
+    await radiusShown(page);
     await page.getByRole("slider", { name: "Review radius" }).focus();
     await page.keyboard.press("End");
     const queue = page.getByRole("complementary", { name: "Coordination queue" });
@@ -382,8 +446,11 @@ test.describe("interactions", () => {
     await page.getByRole("button", { name: "Start guided demo" }).click();
     const demo = page.getByRole("region", { name: "Guided demo" });
     await demo.getByRole("button", { name: /^Next/ }).click();
-    await expect(demo).toContainText("within 25 miles");
+    await expect(demo).toContainText("2/8");
+    // the step on screen (every step's text stays in the card's DOM; #demo-body is the current one)
+    await expect(demo.locator("#demo-body")).toContainText("within 25 miles");
     await expect(queue).toContainText("· 25 mi", { timeout: 10_000 });
+    await expect(page.getByRole("slider", { name: "Review radius" })).toHaveValue("25");
   });
 
   test("guided demo: Next stays clear of the evidence inspector on a 1024px laptop", async ({ page }) => {
@@ -402,11 +469,15 @@ test.describe("interactions", () => {
   test("guided demo: step 1 starts from no comparison, and narrated pairs sit under their own tab", async ({ page }) => {
     await page.goto("/");
     await compare(page);
-    await openFilters(page);
+    await radiusShown(page);
     await page.getByRole("slider", { name: "Review radius" }).focus();
     await page.keyboard.press("End");
     await expect(page.getByRole("complementary", { name: "Coordination queue" })).toContainText("· 100 mi");
-    await tab(page, /^Conflicts/).click();
+    // a presenter's leftover list state: Possible tab, conflicts only, and a timing the narrated pairs don't have
+    await tab(page, /^Possible/).click();
+    await disputedChip(page).click();
+    await timingChip(page, /^Schedules overlap/).click();
+    await expect(disputedChip(page)).toHaveAttribute("aria-pressed", "true");
     await page.getByRole("button", { name: "Start guided demo" }).click();
     const demo = page.getByRole("region", { name: "Guided demo" });
     await expect(page.getByRole("button", { name: /Compare public plans/ })).toBeVisible();
@@ -415,6 +486,11 @@ test.describe("interactions", () => {
     await demo.getByRole("button", { name: "Go to step 6" }).click();
     await expect(page.getByRole("complementary", { name: "Evidence inspector" })).toContainText("Alma-Blair", { timeout: 15_000 });
     await expect(tab(page, /^Known/)).toHaveAttribute("aria-selected", "true");
+    // the narrated pair's row is in the list, selected: no leftover filter hides it
+    await expect(page.locator('[data-match-id="dpc-alma-blair__xcel-wwtc"]')).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator('[data-match-id="dpc-alma-blair__xcel-wwtc"]')).toBeVisible();
+    await expect(disputedChip(page)).toHaveAttribute("aria-pressed", "false");
+    await expect(timingChip(page, /^Schedules overlap/)).toHaveAttribute("aria-pressed", "false");
   });
 
   test("guided demo: arrow keys do not step the demo behind the Method drawer", async ({ page }) => {
@@ -541,26 +617,42 @@ test.describe("interactions", () => {
     await expect(notice).toBeHidden();
   });
 
-  test("overview chip counts the candidate pairs of the region on screen", async ({ page }) => {
+  test("the headline counts the region's flagged pairs once, and those within Sperry's 25 miles", async ({ page }) => {
     await page.goto("/");
     await compare(page);
     const n = (await tabCount(tab(page, /^Needs review/))) + (await tabCount(tab(page, /^Known/))) + (await tabCount(tab(page, /^Possible/)));
-    const chip = page.getByText(/candidate pairs/);
-    await expect(chip).toBeVisible();
-    await expect(chip).toContainText(`${n} candidate pairs`);
+    expect(n).toBe(123);
+    // "{n} pairs flagged" appears exactly once on the page (the phone peek's copy is not rendered on desktop)
+    const flagged = page.getByText(`${n} pairs flagged`, { exact: true });
+    await expect(flagged).toBeVisible();
+    await expect(flagged).toHaveCount(1);
+    await expect(queue(page)).toContainText(/111\s*within Sperry.s 25 miles/);
+    await expect(queue(page)).toContainText(/of 7,830 pairs checked/);
+    // the 25 mi rows of the sponsor's overlap table are the headline's number
+    await page.getByRole("button", { name: "Export", exact: true }).click();
+    await expect(page.getByRole("menuitem", { name: "Export overlap table as CSV" })).toContainText("111 rows");
+    await page.keyboard.press("Escape");
   });
 
   test("an empty queue caused by a filter says so instead of calling it an honest result", async ({ page }) => {
     await page.goto("/");
     await compare(page);
-    await openFilters(page);
-    await page.getByLabel("Utility").selectOption({ label: "Dairyland Power Cooperative" });
-    await page.getByRole("button", { name: /Filters & review radius/ }).click(); // collapse, as a presenter would
-    const list = page.getByRole("complementary", { name: "Coordination queue" }).getByRole("list");
-    await expect.poll(() => tabCount(tab(page, /^Needs review/))).toBe(0);
+    // utility options are region-scoped: pick, across all regions, a utility with documented coordination only
+    await page.getByRole("navigation", { name: "Region" }).getByRole("button", { name: "All" }).click();
+    const needs = tab(page, /^Needs review/);
+    await expect(needs).toHaveAttribute("aria-selected", "true");
+    const n0 = await tabCount(needs);
+    expect(n0).toBeGreaterThan(0);
+    await page.getByLabel("Utility").selectOption({ label: "GridLiance Heartland" });
+    const list = queue(page).getByRole("list");
+    await expect.poll(() => tabCount(needs)).toBe(0);
     await expect(list).toContainText("No open review leads");
     await expect(list).not.toContainText("honest result");
     await expect(list).toContainText(/filter/i);
+    await expect(list).toContainText(`${n0} pairs in this tab are hidden`);
+    await list.getByRole("button", { name: "Clear filters" }).click();
+    await expect.poll(() => tabCount(needs)).toBe(n0);
+    await expect(page.getByLabel("Utility")).toHaveValue("");
   });
 
   test("an engine failure is reported instead of silently returning to the start screen", async ({ page }) => {

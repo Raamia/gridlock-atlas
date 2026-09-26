@@ -20,7 +20,14 @@ test.describe("GridLock Atlas smoke path", () => {
     await expect(inspector).toContainText("Western Wisconsin");
     await expect(inspector).toContainText("Known coordination");
     await expect(inspector).toContainText("Tremval North");
-    await expect(page.getByText("PAIR IN VIEW", { exact: false })).toBeVisible();
+    // the map draws the pair in view (its two centers and one connector; the old "Pair in view" chip is gone)
+    const drawn = () =>
+      page.evaluate(() => {
+        const m = (window as unknown as { __map?: { getSource: (id: string) => { serialize: () => { data: { features: unknown[] } } } | undefined } }).__map;
+        const n = (id: string) => m?.getSource(id)?.serialize().data.features.length ?? -1;
+        return { centers: n("gl-centers"), connector: n("gl-connector") };
+      });
+    await expect.poll(drawn, { timeout: 20_000 }).toEqual({ centers: 2, connector: 1 });
     await expect(page.locator(`[data-match-id="${FEATURED}"]`)).toHaveAttribute("aria-pressed", "true");
     const timeline = page.getByRole("region", { name: "Construction timeline" }).or(page.locator('section[aria-label="Construction timeline"]'));
     await expect(timeline).toContainText("Alma-Blair");
@@ -101,8 +108,13 @@ test.describe("GridLock Atlas smoke path", () => {
     await page.goto("/");
     await page.getByRole("button", { name: /Compare public plans/ }).click();
     await expect(page.locator("[data-match-id]").first()).toBeVisible({ timeout: 15_000 });
+    // both tables are items of the Export menu in the Opportunities header
     const grab = async (name: string) => {
-      const [dl] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name }).click()]);
+      await page.getByRole("button", { name: "Export", exact: true }).click();
+      const item = page.getByRole("menuitem", { name });
+      await expect(item).toBeVisible();
+      const [dl] = await Promise.all([page.waitForEvent("download"), item.click()]);
+      await expect(item).toBeHidden(); // choosing an item closes the menu
       return (await (await dl.createReadStream()).toArray().then((c) => Buffer.concat(c).toString("utf8"))) as string;
     };
     const split = (r: string) => r.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map((c) => c.replace(/,$/, ""));
