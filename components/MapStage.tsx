@@ -210,10 +210,10 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     type: "circle",
     source: "gl-points",
     paint: { "circle-emissive-strength": 1,
-      "circle-radius": ["match", ["get", "precision"], "named-facility", 4.5, 3.5],
-      "circle-color": ["match", ["get", "precision"], "named-facility", roleColor, "rgba(12,21,40,0.9)"],
-      "circle-stroke-color": ["match", ["get", "precision"], "named-facility", "rgba(4,9,20,0.9)", roleColor],
-      "circle-stroke-width": ["match", ["get", "precision"], "named-facility", 1.2, 1.8],
+      "circle-radius": ["case", ["==", ["get", "context"], true], 3.5, ["match", ["get", "precision"], "named-facility", 4.5, 3.5]],
+      "circle-color": ["case", ["==", ["get", "context"], true], "rgba(12,21,40,0.9)", ["match", ["get", "precision"], "named-facility", roleColor, "rgba(12,21,40,0.9)"]],
+      "circle-stroke-color": ["case", ["==", ["get", "context"], true], roleColor, ["match", ["get", "precision"], "named-facility", "rgba(4,9,20,0.9)", roleColor]],
+      "circle-stroke-width": ["case", ["==", ["get", "context"], true], 1.4, ["match", ["get", "precision"], "named-facility", 1.2, 1.8]],
       "circle-opacity": roleOpacity(1, 0.35),
       "circle-stroke-opacity": roleOpacity(1, 0.35),
     },
@@ -464,6 +464,8 @@ export default function MapStage() {
     map.on("move", relayout);
     map.on("moveend", relayout);
     map.on("resize", relayout);
+    // place names are placed asynchronously; settle the callouts once the map is idle
+    map.on("idle", relayout);
     void document.fonts?.ready.then(() => relayout());
 
     return () => {
@@ -789,6 +791,16 @@ function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: [number, numb
   for (const d of dots) {
     const p = map.project(d);
     fixed.push({ x: p.x - 9, y: p.y - 9, w: 18, h: 18 });
+  }
+  // the pair's place names (gl-point-labels: 11px, anchored top 1.1em below the dot, wrapped at 10em)
+  const labels = map.getLayer("gl-point-labels") ? map.queryRenderedFeatures({ layers: ["gl-point-labels"] }) : [];
+  for (const f of labels) {
+    if (f.geometry.type !== "Point") continue;
+    const p = map.project(f.geometry.coordinates as [number, number]);
+    const text = String(f.properties?.label ?? "");
+    const w = Math.min(text.length * 6, 116);
+    const h = Math.ceil((text.length * 6) / 116) * 13;
+    fixed.push({ x: p.x - w / 2, y: p.y + 10, w, h });
   }
   const cands = items.map((c) => {
     const p = map.project(c.at);

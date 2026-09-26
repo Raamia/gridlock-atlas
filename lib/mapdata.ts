@@ -41,7 +41,7 @@ export function roleOf(projectId: string, ctx: RoleContext): Role {
   return p ? overviewRole(p) : "all";
 }
 
-type Props = { projectId: string; role: Role; label?: string; precision?: string; kind?: string; title?: string };
+type Props = { projectId: string; role: Role; label?: string; precision?: string; kind?: string; title?: string; context?: boolean };
 
 function fc<G extends Geometry>(features: Feature<G, Props>[]): FeatureCollection<G, Props> {
   return { type: "FeatureCollection", features };
@@ -84,7 +84,8 @@ export function pointFeatures(ctx: RoleContext) {
       if (pl.precision === "county") continue;
       out.push({
         type: "Feature",
-        properties: { projectId: p.id, role: roleOf(p.id, ctx), label: pl.label, precision: pl.precision, kind: pl.kind, title: p.shortTitle },
+        // context places (e.g. the far terminal of a line only partly rebuilt) draw hollow: named, but not where the work is
+        properties: { projectId: p.id, role: roleOf(p.id, ctx), label: pl.label, precision: pl.precision, kind: pl.kind, title: p.shortTitle, context: pl.role === "context" },
         geometry: { type: "Point", coordinates: [pl.lon, pl.lat] },
       });
     }

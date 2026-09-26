@@ -5410,13 +5410,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 26,
-       "exactExcerpt": "2027 $100,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 26,
        "exactExcerpt": "2028 $2,900,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -5426,6 +5419,13 @@
        "page": 26,
        "exactExcerpt": "Total $3,000,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 26,
+       "exactExcerpt": "2027 $100,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -7280,13 +7280,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 35,
-       "exactExcerpt": "2027 $125,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 35,
        "exactExcerpt": "2028 $7,550,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -7296,6 +7289,13 @@
        "page": 35,
        "exactExcerpt": "Total $7,912,400",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 35,
+       "exactExcerpt": "2027 $125,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -7525,13 +7525,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 36,
-       "exactExcerpt": "2027 $100,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 36,
        "exactExcerpt": "2028 $12,722,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -7541,6 +7534,13 @@
        "page": 36,
        "exactExcerpt": "Total $13,285,118",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 36,
+       "exactExcerpt": "2027 $100,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -7993,13 +7993,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 38,
-       "exactExcerpt": "2027 $50,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 38,
        "exactExcerpt": "2028 $3,075,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -8009,6 +8002,13 @@
        "page": 38,
        "exactExcerpt": "Total $3,200,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 38,
+       "exactExcerpt": "2027 $50,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -8471,13 +8471,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 40,
-       "exactExcerpt": "2027 $100,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 40,
        "exactExcerpt": "2028 $11,425,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -8487,6 +8480,13 @@
        "page": 40,
        "exactExcerpt": "Total $11,700,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 40,
+       "exactExcerpt": "2027 $100,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -8697,13 +8697,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 41,
-       "exactExcerpt": "2027 $50,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 41,
        "exactExcerpt": "2028 $5,326,418",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -8713,6 +8706,13 @@
        "page": 41,
        "exactExcerpt": "Total $5,376,418",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 41,
+       "exactExcerpt": "2027 $50,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -9141,13 +9141,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 43,
-       "exactExcerpt": "2027 $125,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 43,
        "exactExcerpt": "2028 $7,800,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -9157,6 +9150,13 @@
        "page": 43,
        "exactExcerpt": "Total $8,125,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 43,
+       "exactExcerpt": "2027 $125,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -9617,13 +9617,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 45,
-       "exactExcerpt": "2027 $200,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 45,
        "exactExcerpt": "2028 $21,665,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -9640,6 +9633,13 @@
        "page": 45,
        "exactExcerpt": "Total $44,517,719",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 45,
+       "exactExcerpt": "2027 $200,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -9880,13 +9880,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 46,
-       "exactExcerpt": "2027 $175,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 46,
        "exactExcerpt": "2028 $18,550,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -9903,6 +9896,13 @@
        "page": 46,
        "exactExcerpt": "Total $42,375,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 46,
+       "exactExcerpt": "2027 $175,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -10110,13 +10110,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 47,
-       "exactExcerpt": "2028 $100,000",
-       "supports": "budgeted spending in 2028",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 47,
        "exactExcerpt": "2029 $5,000,000",
        "supports": "budgeted spending in 2029",
        "verifiedByScript": true
@@ -10126,6 +10119,13 @@
        "page": 47,
        "exactExcerpt": "Total $5,100,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 47,
+       "exactExcerpt": "2028 $100,000",
+       "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -10333,13 +10333,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 48,
-       "exactExcerpt": "2027 $125,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 48,
        "exactExcerpt": "2028 $7,600,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -10356,6 +10349,13 @@
        "page": 48,
        "exactExcerpt": "Total $19,800,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 48,
+       "exactExcerpt": "2027 $125,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -10559,13 +10559,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 49,
-       "exactExcerpt": "2027 $200,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 49,
        "exactExcerpt": "2028 $9,300,000",
        "supports": "budgeted spending in 2028",
        "verifiedByScript": true
@@ -10575,6 +10568,13 @@
        "page": 49,
        "exactExcerpt": "Total $18,200,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 49,
+       "exactExcerpt": "2027 $200,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -10777,20 +10777,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 50,
-       "exactExcerpt": "2027 $100,000",
-       "supports": "budgeted spending in 2027",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 50,
-       "exactExcerpt": "2028 $200,000",
-       "supports": "budgeted spending in 2028",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 50,
        "exactExcerpt": "2029 $9,900,000",
        "supports": "budgeted spending in 2029",
        "verifiedByScript": true
@@ -10800,6 +10786,20 @@
        "page": 50,
        "exactExcerpt": "Total $10,200,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 50,
+       "exactExcerpt": "2027 $100,000",
+       "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 50,
+       "exactExcerpt": "2028 $200,000",
+       "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -10988,13 +10988,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 51,
-       "exactExcerpt": "2028 $350,000",
-       "supports": "budgeted spending in 2028",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 51,
        "exactExcerpt": "2029 $6,350,000",
        "supports": "budgeted spending in 2029",
        "verifiedByScript": true
@@ -11004,6 +10997,13 @@
        "page": 51,
        "exactExcerpt": "$22,400,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 51,
+       "exactExcerpt": "2028 $350,000",
+       "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -11252,13 +11252,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 52,
-       "exactExcerpt": "2028 $200,000",
-       "supports": "budgeted spending in 2028",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 52,
        "exactExcerpt": "2029 $11,450,000",
        "supports": "budgeted spending in 2029",
        "verifiedByScript": true
@@ -11275,6 +11268,13 @@
        "page": 52,
        "exactExcerpt": "Total $18,964,478",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 52,
+       "exactExcerpt": "2028 $200,000",
+       "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -11494,13 +11494,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 53,
-       "exactExcerpt": "2029 $250,000",
-       "supports": "budgeted spending in 2029",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 53,
        "exactExcerpt": "2030 $9,500,000",
        "supports": "budgeted spending in 2030",
        "verifiedByScript": true
@@ -11510,6 +11503,13 @@
        "page": 53,
        "exactExcerpt": "Total $9,750,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 53,
+       "exactExcerpt": "2029 $250,000",
+       "supports": "budgeted spending in 2029 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {
@@ -11713,13 +11713,6 @@
       {
        "sourceId": "desc-scrtp-2026-2030",
        "page": 54,
-       "exactExcerpt": "2029 $850,000",
-       "supports": "budgeted spending in 2029",
-       "verifiedByScript": true
-      },
-      {
-       "sourceId": "desc-scrtp-2026-2030",
-       "page": 54,
        "exactExcerpt": "2030 $18,000,000",
        "supports": "budgeted spending in 2030",
        "verifiedByScript": true
@@ -11729,6 +11722,13 @@
        "page": 54,
        "exactExcerpt": "Total $18,875,000",
        "supports": "total estimated project cost",
+       "verifiedByScript": true
+      },
+      {
+       "sourceId": "desc-scrtp-2026-2030",
+       "page": 54,
+       "exactExcerpt": "2029 $850,000",
+       "supports": "budgeted spending in 2029 (under 5% of the total: treated as preconstruction)",
        "verifiedByScript": true
       },
       {

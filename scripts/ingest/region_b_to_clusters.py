@@ -273,6 +273,13 @@ def desc_clusters(parsed, geo):
                 "continuous": True, "boundsOnly": True, "evidence": [x for x in pe if x["verifiedByScript"]] + [E["inService"]], "note": pw["note"],
             })
         # coarse budget-year window; a year under 5% of the total is preconstruction spending and never starts it
+        def window_costs(costs, skipped_years):
+            """Years that set the window first; skipped (preconstruction) years last, labelled as such."""
+            ok = [x for x in costs if x["verifiedByScript"]]
+            pre = {f"budgeted spending in {y}" for y in skipped_years}
+            return [x for x in ok if x["supports"] not in pre] + [
+                {**x, "supports": x["supports"] + " (under 5% of the total: treated as preconstruction)"} for x in ok if x["supports"] in pre]
+
         total = r["costs"].get("Total") or 0
 
         def minor(v):
@@ -294,7 +301,7 @@ def desc_clusters(parsed, geo):
             if start["earliest"] <= end["latest"]:
                 windows.append({
                     "claimSourceId": CURRENT, "phase": "unknown", "start": start, "end": end, "continuous": False,
-                    "evidence": [x for x in E["costs"] if x["verifiedByScript"]] + [E["inService"]],
+                    "evidence": window_costs(E["costs"], [y for y in years if y < first]) + [E["inService"]],
                     "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates"
                             + ("; spending also occurred before 2026" if started_before else "")
                             + (f"; spending under 5% of the total ({', '.join(skipped)}) is treated as preconstruction and does not start the window" if skipped else "")

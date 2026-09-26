@@ -1,6 +1,6 @@
 {
- "version": "snap-2026-09-26-772540d2",
- "generatedAt": "2026-09-26T08:12:27.400Z",
+ "version": "snap-2026-09-26-34288e15",
+ "generatedAt": "2026-09-26T08:17:44.427Z",
  "snapshotDate": "2026-09-26",
  "regions": [
   {
@@ -7347,16 +7347,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-373d12d5c343": {
-   "id": "ev-373d12d5c343",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 26,
-   "exactExcerpt": "2027 $100,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-9a33f94ff011": {
    "id": "ev-9a33f94ff011",
    "sourceId": "desc-scrtp-2026-2030",
@@ -7373,6 +7363,16 @@
    "page": 26,
    "exactExcerpt": "Total $3,000,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-373d12d5c343": {
+   "id": "ev-373d12d5c343",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 26,
+   "exactExcerpt": "2027 $100,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8007,16 +8007,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-42cfa14be646": {
-   "id": "ev-42cfa14be646",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 35,
-   "exactExcerpt": "2027 $125,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-55839ac59710": {
    "id": "ev-55839ac59710",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8033,6 +8023,16 @@
    "page": 35,
    "exactExcerpt": "Total $7,912,400",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-42cfa14be646": {
+   "id": "ev-42cfa14be646",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 35,
+   "exactExcerpt": "2027 $125,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8097,16 +8097,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-25ff82c70956": {
-   "id": "ev-25ff82c70956",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 36,
-   "exactExcerpt": "2027 $100,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-3b420388723c": {
    "id": "ev-3b420388723c",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8123,6 +8113,16 @@
    "page": 36,
    "exactExcerpt": "Total $13,285,118",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-25ff82c70956": {
+   "id": "ev-25ff82c70956",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 36,
+   "exactExcerpt": "2027 $100,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8277,16 +8277,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-690f522fe8a8": {
-   "id": "ev-690f522fe8a8",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 38,
-   "exactExcerpt": "2027 $50,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-b81f683468c0": {
    "id": "ev-b81f683468c0",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8303,6 +8293,16 @@
    "page": 38,
    "exactExcerpt": "Total $3,200,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-690f522fe8a8": {
+   "id": "ev-690f522fe8a8",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 38,
+   "exactExcerpt": "2027 $50,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8447,16 +8447,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-38644e732b9b": {
-   "id": "ev-38644e732b9b",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 40,
-   "exactExcerpt": "2027 $100,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-c0564bef3312": {
    "id": "ev-c0564bef3312",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8473,6 +8463,16 @@
    "page": 40,
    "exactExcerpt": "Total $11,700,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-38644e732b9b": {
+   "id": "ev-38644e732b9b",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 40,
+   "exactExcerpt": "2027 $100,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8537,16 +8537,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-c819562b864a": {
-   "id": "ev-c819562b864a",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 41,
-   "exactExcerpt": "2027 $50,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-cb21fe5d2403": {
    "id": "ev-cb21fe5d2403",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8563,6 +8553,16 @@
    "page": 41,
    "exactExcerpt": "Total $5,376,418",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-c819562b864a": {
+   "id": "ev-c819562b864a",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 41,
+   "exactExcerpt": "2027 $50,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8687,16 +8687,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-33db8a556160": {
-   "id": "ev-33db8a556160",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 43,
-   "exactExcerpt": "2027 $125,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-a5a8ca223463": {
    "id": "ev-a5a8ca223463",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8713,6 +8703,16 @@
    "page": 43,
    "exactExcerpt": "Total $8,125,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-33db8a556160": {
+   "id": "ev-33db8a556160",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 43,
+   "exactExcerpt": "2027 $125,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8867,16 +8867,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-0e0d6b377b0b": {
-   "id": "ev-0e0d6b377b0b",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 45,
-   "exactExcerpt": "2027 $200,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-b5a1f269146c": {
    "id": "ev-b5a1f269146c",
    "sourceId": "desc-scrtp-2026-2030",
@@ -8903,6 +8893,16 @@
    "page": 45,
    "exactExcerpt": "Total $44,517,719",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-0e0d6b377b0b": {
+   "id": "ev-0e0d6b377b0b",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 45,
+   "exactExcerpt": "2027 $200,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -8977,16 +8977,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-8195b9f92515": {
-   "id": "ev-8195b9f92515",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 46,
-   "exactExcerpt": "2027 $175,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-f65e6105aac5": {
    "id": "ev-f65e6105aac5",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9013,6 +9003,16 @@
    "page": 46,
    "exactExcerpt": "Total $42,375,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-8195b9f92515": {
+   "id": "ev-8195b9f92515",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 46,
+   "exactExcerpt": "2027 $175,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9087,16 +9087,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-71c979a5a5ba": {
-   "id": "ev-71c979a5a5ba",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 47,
-   "exactExcerpt": "2028 $100,000",
-   "supports": "budgeted spending in 2028",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-6938be1c6972": {
    "id": "ev-6938be1c6972",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9113,6 +9103,16 @@
    "page": 47,
    "exactExcerpt": "Total $5,100,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-71c979a5a5ba": {
+   "id": "ev-71c979a5a5ba",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 47,
+   "exactExcerpt": "2028 $100,000",
+   "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9167,16 +9167,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-69c773015f4e": {
-   "id": "ev-69c773015f4e",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 48,
-   "exactExcerpt": "2027 $125,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-7933f730a22d": {
    "id": "ev-7933f730a22d",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9203,6 +9193,16 @@
    "page": 48,
    "exactExcerpt": "Total $19,800,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-69c773015f4e": {
+   "id": "ev-69c773015f4e",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 48,
+   "exactExcerpt": "2027 $125,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9247,16 +9247,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-f397682114e1": {
-   "id": "ev-f397682114e1",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 49,
-   "exactExcerpt": "2027 $200,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-fe832d11907e": {
    "id": "ev-fe832d11907e",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9273,6 +9263,16 @@
    "page": 49,
    "exactExcerpt": "Total $18,200,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-f397682114e1": {
+   "id": "ev-f397682114e1",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 49,
+   "exactExcerpt": "2027 $200,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9327,26 +9327,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-1a051372765c": {
-   "id": "ev-1a051372765c",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 50,
-   "exactExcerpt": "2027 $100,000",
-   "supports": "budgeted spending in 2027",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
-  "ev-dfceb0b98c89": {
-   "id": "ev-dfceb0b98c89",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 50,
-   "exactExcerpt": "2028 $200,000",
-   "supports": "budgeted spending in 2028",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-dd3e5ebcffbb": {
    "id": "ev-dd3e5ebcffbb",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9363,6 +9343,26 @@
    "page": 50,
    "exactExcerpt": "Total $10,200,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-1a051372765c": {
+   "id": "ev-1a051372765c",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 50,
+   "exactExcerpt": "2027 $100,000",
+   "supports": "budgeted spending in 2027 (under 5% of the total: treated as preconstruction)",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-dfceb0b98c89": {
+   "id": "ev-dfceb0b98c89",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 50,
+   "exactExcerpt": "2028 $200,000",
+   "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9417,16 +9417,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-9177af245455": {
-   "id": "ev-9177af245455",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 51,
-   "exactExcerpt": "2028 $350,000",
-   "supports": "budgeted spending in 2028",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-369d400e8b18": {
    "id": "ev-369d400e8b18",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9443,6 +9433,16 @@
    "page": 51,
    "exactExcerpt": "$22,400,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-9177af245455": {
+   "id": "ev-9177af245455",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 51,
+   "exactExcerpt": "2028 $350,000",
+   "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9527,16 +9527,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-9fe5737cde90": {
-   "id": "ev-9fe5737cde90",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 52,
-   "exactExcerpt": "2028 $200,000",
-   "supports": "budgeted spending in 2028",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-52c49575199e": {
    "id": "ev-52c49575199e",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9563,6 +9553,16 @@
    "page": 52,
    "exactExcerpt": "Total $18,964,478",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-9fe5737cde90": {
+   "id": "ev-9fe5737cde90",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 52,
+   "exactExcerpt": "2028 $200,000",
+   "supports": "budgeted spending in 2028 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9627,16 +9627,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-9367c2d3ff8e": {
-   "id": "ev-9367c2d3ff8e",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 53,
-   "exactExcerpt": "2029 $250,000",
-   "supports": "budgeted spending in 2029",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-236917b73b3b": {
    "id": "ev-236917b73b3b",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9653,6 +9643,16 @@
    "page": 53,
    "exactExcerpt": "Total $9,750,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-9367c2d3ff8e": {
+   "id": "ev-9367c2d3ff8e",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 53,
+   "exactExcerpt": "2029 $250,000",
+   "supports": "budgeted spending in 2029 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -9707,16 +9707,6 @@
    "reviewedByHuman": false,
    "verifiedInSource": true
   },
-  "ev-24a08de6476a": {
-   "id": "ev-24a08de6476a",
-   "sourceId": "desc-scrtp-2026-2030",
-   "page": 54,
-   "exactExcerpt": "2029 $850,000",
-   "supports": "budgeted spending in 2029",
-   "extractionMethod": "agent-assisted",
-   "reviewedByHuman": false,
-   "verifiedInSource": true
-  },
   "ev-d1db4ca34d4f": {
    "id": "ev-d1db4ca34d4f",
    "sourceId": "desc-scrtp-2026-2030",
@@ -9733,6 +9723,16 @@
    "page": 54,
    "exactExcerpt": "Total $18,875,000",
    "supports": "total estimated project cost",
+   "extractionMethod": "agent-assisted",
+   "reviewedByHuman": false,
+   "verifiedInSource": true
+  },
+  "ev-24a08de6476a": {
+   "id": "ev-24a08de6476a",
+   "sourceId": "desc-scrtp-2026-2030",
+   "page": 54,
+   "exactExcerpt": "2029 $850,000",
+   "supports": "budgeted spending in 2029 (under 5% of the total: treated as preconstruction)",
    "extractionMethod": "agent-assisted",
    "reviewedByHuman": false,
    "verifiedInSource": true
@@ -27935,9 +27935,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-373d12d5c343",
       "ev-9a33f94ff011",
       "ev-c665ef60ff0f",
+      "ev-373d12d5c343",
       "ev-726cdddaaea4"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $100,000) is treated as preconstruction and does not start the window."
@@ -29150,9 +29150,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-42cfa14be646",
       "ev-55839ac59710",
       "ev-681009292903",
+      "ev-42cfa14be646",
       "ev-f3f13f25cc1e"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2027: $125,000) is treated as preconstruction and does not start the window."
@@ -29308,9 +29308,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-25ff82c70956",
       "ev-3b420388723c",
       "ev-c5683b286e5a",
+      "ev-25ff82c70956",
       "ev-6528cb5d216e"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $463,118, 2027: $100,000) is treated as preconstruction and does not start the window."
@@ -29609,9 +29609,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-690f522fe8a8",
       "ev-b81f683468c0",
       "ev-b23226558d89",
+      "ev-690f522fe8a8",
       "ev-fcfb099f1824"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $75,000, 2027: $50,000) is treated as preconstruction and does not start the window."
@@ -29912,9 +29912,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-38644e732b9b",
       "ev-c0564bef3312",
       "ev-d1d3c6b435cf",
+      "ev-38644e732b9b",
       "ev-b6eb54f09ae4"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $175,000, 2027: $100,000) is treated as preconstruction and does not start the window."
@@ -30056,9 +30056,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-c819562b864a",
       "ev-cb21fe5d2403",
       "ev-beb2931448c7",
+      "ev-c819562b864a",
       "ev-4eb771b934fb"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $50,000) is treated as preconstruction and does not start the window."
@@ -30336,9 +30336,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-33db8a556160",
       "ev-a5a8ca223463",
       "ev-595b2eaff373",
+      "ev-33db8a556160",
       "ev-f12432cb9236"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2026: $175,000, 2027: $125,000) is treated as preconstruction and does not start the window."
@@ -30640,10 +30640,10 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-0e0d6b377b0b",
       "ev-b5a1f269146c",
       "ev-6a32b65ab5ed",
       "ev-b6fdbbf3a537",
+      "ev-0e0d6b377b0b",
       "ev-4142e666e661"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $174,719, 2026: $150,000, 2027: $200,000) is treated as preconstruction and does not start the window."
@@ -30807,10 +30807,10 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-8195b9f92515",
       "ev-f65e6105aac5",
       "ev-603d8bbfde61",
       "ev-3a6597cb8286",
+      "ev-8195b9f92515",
       "ev-74e8f191dac2"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $150,000, 2027: $175,000) is treated as preconstruction and does not start the window."
@@ -30951,9 +30951,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-71c979a5a5ba",
       "ev-6938be1c6972",
       "ev-be73df0b9632",
+      "ev-71c979a5a5ba",
       "ev-9cc680c5433e"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2028: $100,000) is treated as preconstruction and does not start the window."
@@ -31094,10 +31094,10 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-69c773015f4e",
       "ev-7933f730a22d",
       "ev-05619e263062",
       "ev-b6a1c72f538c",
+      "ev-69c773015f4e",
       "ev-26a5627cfef4"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $275,000, 2027: $125,000) is treated as preconstruction and does not start the window."
@@ -31232,9 +31232,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-f397682114e1",
       "ev-fe832d11907e",
       "ev-3d5705c577c8",
+      "ev-f397682114e1",
       "ev-b8a755dd4561"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2026: $100,000, 2027: $200,000) is treated as preconstruction and does not start the window."
@@ -31368,10 +31368,10 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-1a051372765c",
-      "ev-dfceb0b98c89",
       "ev-dd3e5ebcffbb",
       "ev-81531b4eb418",
+      "ev-1a051372765c",
+      "ev-dfceb0b98c89",
       "ev-4ddbb424e855"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2027: $100,000, 2028: $200,000) is treated as preconstruction and does not start the window."
@@ -31498,9 +31498,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-9177af245455",
       "ev-369d400e8b18",
       "ev-c3ca2425d39d",
+      "ev-9177af245455",
       "ev-f2798715099d"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2028: $350,000) is treated as preconstruction and does not start the window."
@@ -31671,10 +31671,10 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-9fe5737cde90",
       "ev-52c49575199e",
       "ev-eb724f09c392",
       "ev-371628cc0ff6",
+      "ev-9fe5737cde90",
       "ev-c54c6fc0bb1d"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending also occurred before 2026; spending under 5% of the total (2026: $600,000, 2028: $200,000) is treated as preconstruction and does not start the window."
@@ -31824,9 +31824,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-9367c2d3ff8e",
       "ev-236917b73b3b",
       "ev-2529515dda2c",
+      "ev-9367c2d3ff8e",
       "ev-94740dca567b"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (2029: $250,000) is treated as preconstruction and does not start the window."
@@ -31961,9 +31961,9 @@
      },
      "continuous": false,
      "evidenceIds": [
-      "ev-24a08de6476a",
       "ev-d1db4ca34d4f",
       "ev-22651669e0dc",
+      "ev-24a08de6476a",
       "ev-cd91b0b971bb"
      ],
      "note": "Coarse budget-year window: first budgeted spending year → planned in-service date. DESC publishes yearly spending, not construction dates; spending under 5% of the total (before 2026: $25,000, 2029: $850,000) is treated as preconstruction and does not start the window."
