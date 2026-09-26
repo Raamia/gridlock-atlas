@@ -34,6 +34,7 @@ import {
 } from "@/lib/sponsor";
 import { useAtlas } from "@/lib/store";
 import { SourceRow } from "./Evidence";
+import { PermitCheck } from "./PermitCheck";
 import { ReviewExports } from "./Review";
 import { Button, IconButton } from "./ui";
 
@@ -261,6 +262,9 @@ export function MethodDrawer() {
 
       <H>Context the challenge names</H>
       <ChallengeContext />
+
+      <H>Field-work dates: state permit check</H>
+      <PermitCheck />
 
       <H>Corpus checks (live)</H>
       <CorpusChecks />
