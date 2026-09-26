@@ -60,9 +60,14 @@ Checks:
 
 ```bash
 npm run check        # type-check, lint, unit tests, data audit
-npm test             # engine tests incl. the sponsor's worked example
-npm run audit        # every fact has evidence; every excerpt re-found in its source
+npm test             # engine unit tests, incl. an exact reproduction of the sponsor's overlap table
+npm run audit        # every fact has evidence; every excerpt re-found verbatim in its cached source
+npm run test:ui      # Playwright smoke tests in Chrome (starts the dev server if needed)
 ```
+
+What the UI tests cover: comparing plans; the featured pair agreeing across queue, map, timeline and inspector; every evidence link being a public URL; brief export and copy; keyboard paths (Escape, focus trap, no shortcuts behind modals); reduced motion; the offline fallback with all Mapbox requests blocked; the sponsor-format CSV export; and a phone viewport (camera, bottom sheet, demo controls, no horizontal scroll). `node scripts/visual/shoot.mjs` captures full-page screenshots of each view for visual review.
+
+The code was also put through a four-lens adversarial review (engine correctness, honesty of claims, UI/accessibility, data pipeline); 46 verified findings were fixed and are covered by regression tests.
 
 Rebuilding data (optional — the snapshot is committed):
 
