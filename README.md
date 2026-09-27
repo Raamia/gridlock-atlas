@@ -1,8 +1,8 @@
-# Atlas
+# GridLock Atlas
 
 **Compare public utility construction plans. Flag where they meet in place or time. Show the evidence.**
 
-Atlas is our ShellHacks 2026 entry for the **Sperry Tech GridLock Challenge**. It ingests the public future-construction plans of neighboring power utilities, finds project pairs whose closest project points sit within 25 miles (the primary signal), weighs their timing (the secondary signal), and ranks the coordination opportunities. Every fact on screen links to a short verbatim excerpt from a public document, with its page.
+GridLock Atlas is our ShellHacks 2026 entry for the **Sperry Tech GridLock Challenge**. It ingests the public future-construction plans of neighboring power utilities, finds project pairs whose closest project points sit within 25 miles (the primary signal), weighs their timing (the secondary signal), and ranks the coordination opportunities. Every fact on screen links to a short verbatim excerpt from a public document, with its page.
 
 > A match is a **review lead**, not a finding that crews or equipment can be shared. Absence of a coordination statement is shown as *unknown*, never as "uncoordinated."
 
@@ -103,7 +103,7 @@ The shared-corridor calculator stays below the channels: acres one shared corrid
 | Close OR on a similar schedule | 4,631 (58.4%) | 4,571 | 13 |
 | Under 25 mi AND a similar schedule | 50 | 50 | 0 |
 | Same facility name in both plans | 24 | 15 | 8 |
-| **Atlas engine** | **133 (1.7%)** | **123** | **10 (physical links 9/9)** |
+| **GridLock engine** | **133 (1.7%)** | **123** | **10 (physical links 9/9)** |
 
 - **Sperry's worked example** is reproduced exactly: 6/6 overlap rows (±0.01 mi, to the day) with 0 extra pairs at every radius up to 50 mi, and 10/10 project-table rows.
 - **Why not a county join:** the Savannah River is the state line. Only 23 of the 111 DESC × Georgia Power pairs under 25 mi share a county; in 90 the DESC project lies entirely in South Carolina counties.

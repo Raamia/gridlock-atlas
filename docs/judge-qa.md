@@ -1,4 +1,4 @@
-# Atlas: likely judge questions
+# GridLock Atlas: likely judge questions
 
 Short, honest answers for Sperry's utility engineers. Numbers are from snapshot `snap-2026-09-26-339ecf7b` (26 September 2026), engine 1.3.0, and `data/eval/*.json`. Page numbers refer to the cited source.
 

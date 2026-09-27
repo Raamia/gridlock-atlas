@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Styleguide from "./Styleguide";
 
 export const metadata: Metadata = {
-  title: "Design system · Atlas",
+  title: "Design system · GridLock Atlas",
   robots: { index: false, follow: false },
 };
 

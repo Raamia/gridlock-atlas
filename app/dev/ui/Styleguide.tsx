@@ -78,7 +78,7 @@ export default function Styleguide() {
           <div className="mx-auto flex h-14 max-w-[1200px] items-center gap-4 px-8">
             <LogoMark size={26} />
             <p className="text-heading font-semibold tracking-tight text-fg-1">
-              <span className="font-display text-[19px] font-normal italic text-fg-2">Atlas</span>
+              GridLock <span className="font-display text-[19px] font-normal italic text-fg-2">Atlas</span>
             </p>
             <span className="eyebrow mt-px">Design system v2</span>
             <nav aria-label="Sections" className="ml-auto hidden items-center gap-0.5 lg:flex">
@@ -648,7 +648,7 @@ function TypeSection() {
             <LogoMark size={28} />
             <span className="leading-none">
               <span className="block text-heading font-semibold text-fg-1">
-                <span className="font-display text-[19px] font-normal italic text-fg-2">Atlas</span>
+                GridLock <span className="font-display text-[19px] font-normal italic text-fg-2">Atlas</span>
               </span>
               <span className="mt-1.5 flex items-center gap-1.5 text-caption text-fg-3">
                 <UtilityDot utility="a" /> Dominion Energy SC <span className="text-fg-4">×</span> <UtilityDot utility="b" /> Georgia Power

@@ -1,4 +1,4 @@
-# Atlas: three-minute pitch
+# GridLock Atlas: three-minute pitch
 
 A timed script for the live demo. It follows the app's **Guided demo** and ends in the **Method & audit** drawer. Every number below comes from snapshot `snap-2026-09-26-339ecf7b`, engine 1.3.0 and `data/eval/*.json`.
 
@@ -13,7 +13,7 @@ A timed script for the live demo. It follows the app's **Guided demo** and ends 
 
 | Time | Screen | Say |
 | --- | --- | --- |
-| 0:00–0:15 | Map, before pressing **Guided demo** | "Neighboring utilities publish their transmission plans in separate documents: Dominion Energy South Carolina through SCRTP, Georgia Power inside its IRP. Nobody puts them on one map. Atlas does, and every fact on screen carries a verbatim quote and page from a public document." |
+| 0:00–0:15 | Map, before pressing **Guided demo** | "Neighboring utilities publish their transmission plans in separate documents: Dominion Energy South Carolina through SCRTP, Georgia Power inside its IRP. Nobody puts them on one map. GridLock Atlas does, and every fact on screen carries a verbatim quote and page from a public document." |
 | 0:15–0:25 | Step 1 · *Two utilities, two separate plans* | "This is Sperry's example, the Savannah River: DESC in cyan, Georgia Power in violet, 199 projects from their current plans." |
 | 0:25–0:50 | Step 2 · *Compare public plans* | "We measure the closest points between project routes and work sites, exactly as the challenge specifies. Official routes, terminal estimates, and site points stay labeled. Across all regions we flag 149 of 7,929 pairs, 1.9 percent; a naive 'close or same time' rule would flag 4,631." |
 | 0:50–1:10 | Step 3 · *The top coordination opportunity* | "Number one: DESC's Jasper–Okatie #2 line and Georgia Power's Goshen–McIntosh rebuild. Their closest mapped points are 4.25 miles apart, in the site-logistics tier. The inspector shows exactly which geometry produced that number." |
@@ -22,7 +22,7 @@ A timed script for the live demo. It follows the app's **Guided demo** and ends 
 | 1:55–2:15 | Step 6 · *Known coordination is kept separate* | "In Wisconsin, the PSC says Dairyland's line ends at Xcel's new Tremval North station. The centers are 37 miles apart, so the 25-mile rule alone misses it; it misses all 13 documented links between two utilities' projects. We keep 10 by reading the filings' own shared-facility statements, and file them as known coordination. One terminal instead of two: about 9 to 12 million dollars." |
 | 2:15–2:25 | Step 7 · *Sources disagree — both are kept* | "When sources disagree, like Xcel's page and the PSC on completion, we keep both, side by side." |
 | 2:25–2:35 | Step 8 · *Export a cited review brief* | "For any pair, one question a planner can act on, every fact numbered to its source." |
-| 2:35–3:00 | Close the demo, open **Method & audit**, scroll to *Sponsor worked example* and *Evaluation* | "The Method drawer reproduces the starter workbook exactly as a legacy check, then applies closest-point geometry to today's plans. OVL_3 is now our number one. GPT-5.5 re-read all 283 plan pages as a cross-check: 2,578 of 2,579 quotes are verbatim. Atlas: public plans, one map, every claim cited." |
+| 2:35–3:00 | Close the demo, open **Method & audit**, scroll to *Sponsor worked example* and *Evaluation* | "The Method drawer reproduces the starter workbook exactly as a legacy check, then applies closest-point geometry to today's plans. OVL_3 is now our number one. GPT-5.5 re-read all 283 plan pages as a cross-check: 2,578 of 2,579 quotes are verbatim. GridLock Atlas: public plans, one map, every claim cited." |
 
 If you are running long, cut step 7 and the last sentence of step 6. If you have time left, add after step 3: "The plan page says the rebuild covers the section to Georgia Pacific, about 1.7 miles short of McIntosh."
 
@@ -35,7 +35,7 @@ If you are running long, cut step 7 and the last sentence of step 6. If you have
 
 ## 30-second fallback
 
-> "Atlas compares Dominion's and Georgia Power's public plans by closest approach. Across 7,929 candidate pairs it flags 149; a naive OR rule flags 4,631. The live result shows the coordination tier and whether the distance came from an official route, a terminal estimate, or work-site points. We still reproduce the starter workbook's legacy center table exactly. All 1,786 facts are quoted verbatim, and GPT-5.5 cross-checked 283 plan pages."
+> "GridLock Atlas compares Dominion's and Georgia Power's public plans by closest approach. Across 7,929 candidate pairs it flags 149; a naive OR rule flags 4,631. The live result shows the coordination tier and whether the distance came from an official route, a terminal estimate, or work-site points. We still reproduce the starter workbook's legacy center table exactly. All 1,786 facts are quoted verbatim, and GPT-5.5 cross-checked 283 plan pages."
 
 ## Numbers to have ready (and where they come from)
 
