@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
 /**
- * The 3D close-up's time axis and "Play the story": the Ground / Time toggle, the five captioned beats (built from the
+ * The 3D close-up's time axis and "Run simulation": the Ground / Time toggle, the five captioned beats (built from the
  * snapshot), jumping between beats, and Esc stopping the story before it closes the close-up. Under automation the
  * time animations jump to their end state, so every assertion here is about state, not timing.
  */
@@ -44,7 +44,7 @@ test.describe("3D close-up: time axis and story", () => {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     const closeup = await openCloseup(page);
-    const play = closeup.getByRole("button", { name: "Play the story" });
+    const play = closeup.getByRole("button", { name: "Run simulation" });
     await play.click();
     const caption = closeup.getByRole("status").filter({ hasText: "/ 05" });
     await expect(caption).toContainText("01 / 05 · The pair");
@@ -53,20 +53,20 @@ test.describe("3D close-up: time axis and story", () => {
     await expect(closeup.getByRole("button", { name: "Ground" })).toHaveAttribute("aria-pressed", "true");
 
     // jump to the time beat: the axis rises and the caption carries the honesty wording
-    await caption.getByRole("button", { name: "Story step 4 of 5" }).click();
+    await caption.getByRole("button", { name: "Simulation step 4 of 5" }).click();
     await expect(caption).toContainText("04 / 05 · Overlapping in time");
     await expect(caption).toContainText("field-work dates are not published");
     await expect(caption).toContainText("at least 396 days apart");
     await expect(closeup.getByRole("button", { name: "Time" })).toHaveAttribute("aria-pressed", "true");
 
-    await caption.getByRole("button", { name: "Story step 5 of 5" }).click();
+    await caption.getByRole("button", { name: "Simulation step 5 of 5" }).click();
     await expect(caption).toContainText("not “uncoordinated.”");
 
     // Esc: the story stops, the close-up stays
     await page.keyboard.press("Escape");
     await expect(caption).toBeHidden();
     await expect(closeup).toBeVisible();
-    await expect(closeup.getByRole("button", { name: "Play the story" })).toBeVisible();
+    await expect(closeup.getByRole("button", { name: "Run simulation" })).toBeVisible();
     // Esc again: the close-up closes
     await page.keyboard.press("Escape");
     await expect(closeup).toBeHidden();
@@ -76,14 +76,14 @@ test.describe("3D close-up: time axis and story", () => {
   test("the story advances on its own and ends by handing the view back", async ({ page }) => {
     test.setTimeout(90_000);
     const closeup = await openCloseup(page);
-    await closeup.getByRole("button", { name: "Play the story" }).click();
+    await closeup.getByRole("button", { name: "Run simulation" }).click();
     const caption = closeup.getByRole("status").filter({ hasText: "/ 05" });
     await expect(caption).toContainText("01 / 05");
     await expect(caption).toContainText("02 / 05 · On the ground", { timeout: 12_000 });
     await expect(caption).toContainText("Closest points 4.3 mi apart");
     // the whole story is about 35 s
     await expect(caption).toBeHidden({ timeout: 45_000 });
-    await expect(closeup.getByRole("button", { name: "Play the story" })).toBeVisible();
+    await expect(closeup.getByRole("button", { name: "Run simulation" })).toBeVisible();
     await expect(closeup.getByRole("button", { name: "Time" })).toHaveAttribute("aria-pressed", "true");
   });
 });

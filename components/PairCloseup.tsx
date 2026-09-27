@@ -246,12 +246,12 @@ export default function PairCloseup() {
       />
       <Button
         variant="secondary"
-        className="chrome w-[8.75rem] justify-center"
+        className="chrome w-[9.5rem] justify-center"
         icon={playing ? <Square size={12} strokeWidth={2} aria-hidden /> : <Play size={13} strokeWidth={2} aria-hidden />}
         aria-pressed={playing}
         onClick={() => (playing ? stopTour() : goStep(0))}
       >
-        {playing ? "Stop the story" : "Play the story"}
+        {playing ? "Stop simulation" : "Run simulation"}
       </Button>
     </div>
   );
@@ -631,7 +631,7 @@ function StoryCaption({
           <button
             key={i}
             type="button"
-            aria-label={`Story step ${i + 1} of ${steps}`}
+            aria-label={`Simulation step ${i + 1} of ${steps}`}
             aria-current={i === step ? "step" : undefined}
             onClick={() => onJump(i)}
             className={clsx(

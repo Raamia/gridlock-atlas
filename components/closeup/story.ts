@@ -6,7 +6,7 @@ import type { CloseupModel } from "./model";
 import type { TimeModel } from "./time";
 
 /*
- * "Play the story": a short guided flight through one pair's close-up for someone who has never read a transmission
+ * "Run simulation" (the story): a short guided flight through one pair's close-up for someone who has never read a transmission
  * filing — the pair, the ground between them, time rising out of the plinth, where they meet (or don't) in time, and
  * the call. Every sentence is built from the snapshot and the engine's result for this pair; the honesty wording is the
  * inspector's (a schedule is start → in-service, never field-work dates; "needs review" is not "uncoordinated").
