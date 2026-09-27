@@ -1,7 +1,8 @@
 "use client";
 
 import clsx from "clsx";
-import { AlertTriangle, Crosshair, X } from "lucide-react";
+import { AlertTriangle, ChevronDown, Crosshair, SlidersHorizontal, X } from "lucide-react";
+import { useState } from "react";
 import { IDX } from "@/lib/data";
 import type { SignalLevel } from "@/lib/domain/types";
 import { useAtlas, type Focus, type TimingFilter } from "@/lib/store";
@@ -26,59 +27,80 @@ export interface FilterCounts {
  * a 336–392px rail) rather than scroll, so none is ever cut off at rest.
  */
 export function Filters({ counts, utilities }: { counts: FilterCounts; utilities: string[] }) {
+  const [open, setOpen] = useState(false);
   const timing = useAtlas((s) => s.timing);
   const conflictsOnly = useAtlas((s) => s.conflictsOnly);
   const utilityFilter = useAtlas((s) => s.utilityFilter);
   const set = useAtlas((s) => s.set);
   const active = timing.length > 0 || conflictsOnly || !!utilityFilter;
+  const activeCount = timing.length + Number(conflictsOnly) + Number(!!utilityFilter);
   const toggle = (t: TimingFilter) => set({ timing: timing.includes(t) ? timing.filter((x) => x !== t) : [...timing, t] });
 
   return (
-    <div className="@container space-y-1.5">
-      <div role="group" aria-label="Timing" className="flex min-w-0 flex-wrap gap-1.5">
-        {TIMING.map((t) => (
-          <Chip key={t.id} size="sm" pressed={timing.includes(t.id)} count={counts.timing[t.id]} tooltip={t.tooltip} onClick={() => toggle(t.id)}>
-            {t.label}
-          </Chip>
-        ))}
-      </div>
-      <div className="flex min-w-0 items-center gap-1.5">
-        <Chip
-          size="sm"
-          pressed={conflictsOnly}
-          count={counts.conflicts}
-          // the triangle gives way first in a narrow rail, so "All utilities" still reads in full beside the chip
-          icon={<AlertTriangle aria-hidden size={12} strokeWidth={2} className={clsx("hidden @min-[324px]:block", conflictsOnly ? "text-warn" : "text-fg-3")} />}
-          tooltip="Pairs where a newer plan edition revised a date, or current sources disagree — every claim is kept"
-          onClick={() => set({ conflictsOnly: !conflictsOnly })}
+    <div className="@container">
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls="opportunity-filters"
+          onClick={() => setOpen((v) => !v)}
+          className="group inline-flex h-7 items-center gap-1.5 rounded-control px-2 text-caption font-medium text-fg-2 transition-colors hover:bg-fill-2 hover:text-fg-1"
         >
-          Dates revised or disputed
-        </Chip>
-        <Select
-          label="Utility"
-          hideLabel
-          value={utilityFilter ?? ""}
-          onChange={(e) => set({ utilityFilter: e.target.value || null })}
-          wrapperClassName="min-w-0 flex-1 [&>span:last-child]:w-full"
-          className="h-6! w-full min-w-0 pr-6! pl-2.5"
-          title={utilityFilter ? (IDX.utility(utilityFilter)?.name ?? utilityFilter) : "Pairs with this utility on either side"}
-        >
-          <option value="">All utilities</option>
-          {utilities.map((id) => (
-            <option key={id} value={id}>
-              {IDX.utility(id)?.name ?? id}
-            </option>
-          ))}
-        </Select>
+          <SlidersHorizontal aria-hidden size={13} strokeWidth={1.75} />
+          Filters
+          {activeCount > 0 && <span className="num rounded-full bg-fill-3 px-1.5 text-fg-1">{activeCount}</span>}
+          <ChevronDown aria-hidden size={13} strokeWidth={1.75} className="transition-transform duration-200 group-aria-expanded:rotate-180" />
+        </button>
         {active && (
           <button
             type="button"
             onClick={() => set({ timing: [], conflictsOnly: false, utilityFilter: null })}
-            className="h-6 shrink-0 animate-fade-in rounded-full px-2 text-caption font-medium text-fg-2 transition-colors hover:bg-fill-2 hover:text-fg-1"
+            className="h-7 shrink-0 animate-fade-in rounded-control px-2 text-caption font-medium text-fg-2 transition-colors hover:bg-fill-2 hover:text-fg-1"
           >
             Clear
           </button>
         )}
+      </div>
+      <div id="opportunity-filters" className="grid transition-[grid-template-rows] duration-300 ease-enter" style={{ gridTemplateRows: open ? "1fr" : "0fr" }}>
+        <div className="min-h-0 overflow-hidden" inert={!open || undefined}>
+          <div className="space-y-1.5 pt-2">
+            <div role="group" aria-label="Timing" className="flex min-w-0 flex-wrap gap-1.5">
+              {TIMING.map((t) => (
+                <Chip key={t.id} size="sm" pressed={timing.includes(t.id)} count={counts.timing[t.id]} tooltip={t.tooltip} onClick={() => toggle(t.id)}>
+                  {t.label}
+                </Chip>
+              ))}
+            </div>
+            <div className="flex min-w-0 items-center gap-1.5">
+              <Chip
+                size="sm"
+                pressed={conflictsOnly}
+                count={counts.conflicts}
+                icon={<AlertTriangle aria-hidden size={12} strokeWidth={2} className={clsx("hidden @min-[324px]:block", conflictsOnly ? "text-warn" : "text-fg-3")} />}
+                tooltip="Pairs where a newer plan edition revised a date, or current sources disagree — every claim is kept"
+                onClick={() => set({ conflictsOnly: !conflictsOnly })}
+              >
+                Dates revised or disputed
+              </Chip>
+              <Select
+                label="Utility"
+                hideLabel
+                value={utilityFilter ?? ""}
+                onChange={(e) => set({ utilityFilter: e.target.value || null })}
+                wrapperClassName="min-w-0 flex-1 [&>span:last-child]:w-full"
+                className="h-6! w-full min-w-0 pr-6! pl-2.5"
+                title={utilityFilter ? (IDX.utility(utilityFilter)?.name ?? utilityFilter) : "Pairs with this utility on either side"}
+              >
+                <option value="">All utilities</option>
+                {utilities.map((id) => (
+                  <option key={id} value={id}>
+                    {IDX.utility(id)?.name ?? id}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

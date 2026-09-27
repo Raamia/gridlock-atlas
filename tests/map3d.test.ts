@@ -95,7 +95,7 @@ describe("honest placement (measured pair desc-6888__gpc-20065)", () => {
   it("says so on the chord: route not published, drawn terminal to terminal", () => {
     const label = s.labels.find((l) => l.kind === "chord");
     expect(label?.text).toBe("route not published\ndrawn terminal to terminal");
-    expect(label?.hue).toBe("#a78bfa");
+    expect(label?.hue).toBe("#ff5263");
   });
 
   it("raises no towers or wires in the Southeast (it has no official-GIS route)", () => {

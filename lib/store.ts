@@ -270,7 +270,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   notice: null,
 
   closeupOpen: false,
-  timelineCollapsed: false,
+  timelineCollapsed: true,
   dockHeight: null,
   railWidth: null,
   inspectorWidth: null,

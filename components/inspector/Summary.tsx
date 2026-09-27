@@ -214,8 +214,8 @@ function Tile({
     // padding follows the inspector's own width (container query): 360px md panel · 384 lg · 418–440 xl
     <div
       className={clsx(
-        "flex min-w-0 flex-col rounded-control bg-fill-1 px-2 @max-[340px]:px-1.5 @min-[380px]:px-2.5",
-        compact ? "py-1.5" : "py-2",
+        "flex min-w-0 flex-col px-2 @max-[340px]:px-1.5 @min-[380px]:px-2.5",
+        compact ? "py-1" : "py-1.5",
       )}
     >
       <span
@@ -238,7 +238,7 @@ export function Tiles({ m, compact }: { m: Match; compact?: boolean }) {
   return (
     <div className="@container">
       {/* the coordination tile is wider: its caveat ("status unknown, not “uncoordinated”") then takes two lines, not four */}
-      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.4fr)] gap-1.5 @max-[340px]:gap-1">
+      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.4fr)] divide-x divide-divider border-y border-divider py-1">
         <Tile label="Distance" sub={d.sub} compact={compact}>
           <FactValue kind="place" fact={d} />
         </Tile>

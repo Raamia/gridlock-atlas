@@ -28,6 +28,12 @@ async function compare(page: Page) {
   await expect(page.locator("[data-match-id]").first()).toBeVisible({ timeout: 15_000 });
 }
 
+async function filtersShown(page: Page) {
+  const group = page.getByRole("group", { name: "Timing" });
+  if (!(await group.isVisible())) await queue(page).getByRole("button", { name: /^Filters/ }).click();
+  await expect(group).toBeVisible();
+}
+
 async function openPair(page: Page, id: string) {
   await page.goto(`/?pair=${id}`);
   const inspector = page.getByRole("complementary", { name: "Evidence inspector" });
@@ -69,6 +75,7 @@ test.describe("revamp", () => {
     await page.evaluate(() => localStorage.removeItem("gridlock-review-v1"));
     await page.reload();
     await compare(page);
+    await filtersShown(page);
     const flagged = await tabTotal(page);
     // a list filter that the export ignores
     await page.getByRole("button", { name: /^Dates revised or disputed/ }).click();
@@ -143,9 +150,10 @@ test.describe("revamp", () => {
     await page.keyboard.press("Escape");
     await expect(method).toBeHidden();
 
-    // post-run: the results panel's proof button lands on the proof again
+    // post-run: proof remains available from Method without occupying the queue
     await compare(page);
-    await page.getByRole("button", { name: proofName }).click();
+    await page.getByRole("button", { name: "Method", exact: true }).click();
+    await toc.getByRole("button", { name: /^Proof at a glance/ }).click();
     await atProof();
     await page.keyboard.press("Escape");
     await expect(method).toBeHidden();
@@ -286,7 +294,7 @@ test.describe("revamp", () => {
         return { gl3d: gl3d.length, shown3d: gl3d.filter(shown).length, points: ids.includes("gl-points") && shown("gl-points") };
       });
     const perspective = page.getByRole("group", { name: "Map perspective" });
-    const caption = page.getByText("3D · symbolic structures", { exact: false });
+    const caption = page.getByRole("button", { name: "About symbolic 3D structures" });
 
     await expect(perspective.getByRole("button", { name: "3D" })).toHaveAttribute("aria-pressed", "true");
     await expect.poll(async () => (await scene()).shown3d, { timeout: 10_000 }).toBeGreaterThan(0);

@@ -39,7 +39,7 @@ function legendName(utilityId: string): string {
 export function TopBar() {
   const { vw } = useViewport();
   const tier = tierOf(vw);
-  return tier === "phone" ? <PhoneHeader /> : <DesktopHeader wide={vw >= 1536} compact={tier !== "xl"} legend={tier !== "md"} />;
+  return tier === "phone" ? <PhoneHeader /> : <DesktopHeader wide={vw >= 1536} compact legend={tier !== "md"} />;
 }
 
 /* ─────────────────────────────────────────────── desktop / tablet ─────────────────────────────────────────────── */

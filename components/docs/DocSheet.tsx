@@ -2,7 +2,7 @@
 
 /**
  * The large reading sheet behind "Method & audit" and "Source registry": a solid dialog (max 1040 × 88dvh, dialog
- * radius) over a dark blurred scrim, a sticky table of contents on the left from 1024px (a horizontal chip scroller
+ * radius) over a soft blurred scrim, a sticky table of contents on the left from 1024px (a horizontal chip scroller
  * below that) and one scrolling reading column. Sections mark themselves with `data-doc-section={id}`; the sheet
  * scroll-spies them and jumps to one on request (`jump`), which is how `openMethod(section)` lands on a section.
  */

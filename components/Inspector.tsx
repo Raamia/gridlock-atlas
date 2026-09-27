@@ -14,7 +14,7 @@ import { FooterBar } from "./inspector/FooterBar";
 import { GUIDANCE } from "./inspector/facts";
 import { SectionNav, scrollInspectorTo, useScrollSpy, type NavItem } from "./inspector/SectionNav";
 import { ConflictSection, CoordinationSection, disagreementsOf, ImpactSection, NotesSection, PlaceSection, ScheduleSection, SourcesSection } from "./inspector/Sections";
-import { Chips, ProjectHeading, ReviewQuestion, Tiles, WhyFlagged, WhyRankButton, WhyRankReasons } from "./inspector/Summary";
+import { Chips, ProjectHeading, ReviewQuestion, Tiles, WhyRankButton, WhyRankReasons } from "./inspector/Summary";
 import { ReviewPanel } from "./Review";
 import { IconButton, Kbd, panelClass, StatusTag } from "./ui";
 
@@ -202,9 +202,8 @@ function InspectorBody({
         <ReviewQuestion m={m} compact={phone} />
         {phone && <Chips m={m} onJump={(id) => jump(id, { pulse: true })} />}
       </div>
-      {/* 5 · why flagged, 6 · reviewer */}
-      <div className="mt-5 space-y-4 pb-5">
-        <WhyFlagged m={m} />
+      {/* Reviewer state is optional; the detailed rationale follows in the evidence sections. */}
+      <div className="mt-4 space-y-4 pb-4">
         <ReviewPanel m={m} />
       </div>
       {/* 7 · section nav, 8 · sections */}

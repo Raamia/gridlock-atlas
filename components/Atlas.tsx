@@ -109,7 +109,7 @@ const VIGNETTE = [
   "linear-gradient(to top, color-mix(in srgb, var(--canvas) 45%, transparent), transparent 18%)",
 ].join(", ");
 
-/** Behind the header: a darkening band with a progressive blur, so basemap labels never read through the wordmark. */
+/** Behind the header: a pale band with a progressive blur, so basemap labels never read through the wordmark. */
 const HEADER_SCRIM: CSSProperties = {
   height: "calc(var(--panel-top, 76px) + 36px)",
   background:

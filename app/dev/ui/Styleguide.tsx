@@ -163,7 +163,7 @@ function Intro() {
         <Eyebrow>Foundation · components/ui.tsx · app/globals.css</Eyebrow>
         <h1 className="mt-4 max-w-[18ch] text-[44px] leading-[1.02] font-semibold tracking-[-0.03em] text-fg-1">The map is the stage. The UI floats, quietly.</h1>
         <p className="mt-5 max-w-[60ch] text-body text-fg-2">
-          Seven type sizes, five radii, three data hues and two status hues. One solid white control per view. Panels are the only bordered things; everything else is
+          Seven type sizes, five radii, three data hues and two status hues. One solid ink control per view. Panels are the only bordered things; everything else is
           a fill, a divider or a word. This page renders every token and primitive — build against it.
         </p>
       </div>
@@ -171,7 +171,7 @@ function Intro() {
         {[
           ["7", "type sizes"],
           ["3 + 2", "data + status hues"],
-          ["1", "white control / view"],
+          ["1", "solid control / view"],
         ].map(([v, l]) => (
           <div key={l} className="rounded-control bg-fill-1 px-3 py-3">
             <dd className="num text-title font-medium text-fg-1">{v}</dd>
@@ -190,17 +190,17 @@ function MapBackdrop() {
     <svg aria-hidden className="absolute inset-0 size-full" viewBox="0 0 1100 620" preserveAspectRatio="xMidYMid slice">
       <defs>
         <radialGradient id="sg-land" cx="58%" cy="45%" r="75%">
-          <stop offset="0%" stopColor="#0d1420" />
-          <stop offset="100%" stopColor="#05080e" />
+          <stop offset="0%" stopColor="#31363f" />
+          <stop offset="100%" stopColor="#1f252d" />
         </radialGradient>
         <radialGradient id="sg-ring" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#f5b83d" stopOpacity="0.02" />
-          <stop offset="100%" stopColor="#f5b83d" stopOpacity="0.08" />
+          <stop offset="0%" stopColor="#d4b875" stopOpacity="0.02" />
+          <stop offset="100%" stopColor="#d4b875" stopOpacity="0.1" />
         </radialGradient>
       </defs>
       <rect width="1100" height="620" fill="url(#sg-land)" />
       {/* county lines */}
-      <g fill="none" stroke="#ffffff" strokeOpacity="0.05" strokeWidth="1">
+      <g fill="none" stroke="#9ca6aa" strokeOpacity="0.15" strokeWidth="1">
         <path d="M430 0 L470 140 L440 260 L520 380 L500 620" />
         <path d="M640 0 L620 120 L700 220 L690 360 L760 470 L740 620" />
         <path d="M360 170 L520 150 L700 220 L900 180 L1100 210" />
@@ -208,39 +208,39 @@ function MapBackdrop() {
         <path d="M880 0 L900 180 L880 400 L930 620" />
       </g>
       {/* river / state line */}
-      <path d="M470 -10 C 540 110, 600 170, 650 260 S 760 430, 860 520 S 980 600, 1110 640" fill="none" stroke="#8a93a4" strokeOpacity="0.28" strokeWidth="1.5" strokeDasharray="4 5" />
+      <path d="M470 -10 C 540 110, 600 170, 650 260 S 760 430, 860 520 S 980 600, 1110 640" fill="none" stroke="#9ca6aa" strokeOpacity="0.34" strokeWidth="1.5" strokeDasharray="4 5" />
       {/* roads */}
-      <g fill="none" stroke="#ffffff" strokeOpacity="0.07" strokeWidth="1.25">
+      <g fill="none" stroke="#9ca6aa" strokeOpacity="0.16" strokeWidth="1.25">
         <path d="M360 520 C 520 470, 640 420, 1100 300" />
         <path d="M560 0 C 600 200, 720 300, 760 620" />
       </g>
       {/* 25-mi ring around A */}
-      <circle cx="700" cy="300" r="150" fill="url(#sg-ring)" stroke="#f5b83d" strokeOpacity="0.55" strokeWidth="1" />
+      <circle cx="700" cy="300" r="150" fill="url(#sg-ring)" stroke="#d4b875" strokeOpacity="0.55" strokeWidth="1" />
       {/* flagged arcs */}
-      <path d="M700 300 Q 760 250 812 318" fill="none" stroke="#f5b83d" strokeWidth="2" strokeLinecap="round" />
-      <path d="M560 420 Q 640 360 700 300" fill="none" stroke="#f5b83d" strokeOpacity="0.45" strokeWidth="1.25" strokeLinecap="round" />
-      <path d="M840 190 Q 900 150 960 210" fill="none" stroke="#f5b83d" strokeOpacity="0.5" strokeWidth="1.25" strokeDasharray="3 4" strokeLinecap="round" />
+      <path d="M700 300 Q 760 250 812 318" fill="none" stroke="#d4b875" strokeWidth="2" strokeLinecap="round" />
+      <path d="M560 420 Q 640 360 700 300" fill="none" stroke="#d4b875" strokeOpacity="0.45" strokeWidth="1.25" strokeLinecap="round" />
+      <path d="M840 190 Q 900 150 960 210" fill="none" stroke="#d4b875" strokeOpacity="0.5" strokeWidth="1.25" strokeDasharray="3 4" strokeLinecap="round" />
       {/* project dots */}
-      <g stroke="#05080e" strokeWidth="1.5">
+      <g stroke="#31363f" strokeWidth="1.5">
         {[
-          [700, 300, "#4cc9f0", 6],
-          [560, 420, "#4cc9f0", 4.5],
-          [840, 190, "#4cc9f0", 4.5],
-          [520, 250, "#4cc9f0", 4],
-          [990, 420, "#4cc9f0", 4],
-          [812, 318, "#a78bfa", 6],
-          [960, 210, "#a78bfa", 4.5],
-          [610, 520, "#a78bfa", 4],
-          [1030, 120, "#a78bfa", 4],
-          [760, 470, "#8b95a7", 3.5],
-          [460, 330, "#8b95a7", 3.5],
+          [700, 300, "#49a8ff", 6],
+          [560, 420, "#49a8ff", 4.5],
+          [840, 190, "#49a8ff", 4.5],
+          [520, 250, "#49a8ff", 4],
+          [990, 420, "#49a8ff", 4],
+          [812, 318, "#ff5263", 6],
+          [960, 210, "#ff5263", 4.5],
+          [610, 520, "#ff5263", 4],
+          [1030, 120, "#ff5263", 4],
+          [760, 470, "#929ca2", 3.5],
+          [460, 330, "#929ca2", 3.5],
         ].map(([x, y, c, r], i) => (
           <circle key={i} cx={x} cy={y} r={r} fill={c as string} />
         ))}
       </g>
-      <circle cx="700" cy="300" r="8.5" fill="none" stroke="#f3f5f9" strokeWidth="1.5" />
-      <circle cx="812" cy="318" r="8.5" fill="none" stroke="#f3f5f9" strokeWidth="1.5" />
-      <g fontFamily="var(--font-geist-mono)" fontSize="11" fill="#b4bccb">
+      <circle cx="700" cy="300" r="8.5" fill="none" stroke="#eeeeee" strokeWidth="1.5" />
+      <circle cx="812" cy="318" r="8.5" fill="none" stroke="#eeeeee" strokeWidth="1.5" />
+      <g fontFamily="var(--font-geist-mono)" fontSize="11" fill="#c7cccf">
         <text x="742" y="262">6.7 mi · closest approach</text>
       </g>
     </svg>
@@ -459,7 +459,7 @@ function StageSection() {
             value={basemap}
             onChange={setBasemap}
             items={[
-              { value: "night", label: "Night" },
+              { value: "night", label: "Day" },
               { value: "satellite", label: "Satellite" },
               { value: "offline", label: "Offline" },
             ]}
@@ -493,11 +493,11 @@ function StageSection() {
         ).map(([cls, spec, use]) => (
           <div key={cls} className="relative h-36 overflow-hidden rounded-card bg-canvas ring-1 ring-edge">
             <svg aria-hidden className="absolute inset-0 size-full" viewBox="0 0 280 144" preserveAspectRatio="xMidYMid slice">
-              <path d="M-10 110 C 60 60, 140 130, 290 40" fill="none" stroke="#f5b83d" strokeWidth="2" />
-              <path d="M40 -10 L 120 160" stroke="#ffffff" strokeOpacity="0.18" strokeWidth="1" />
-              <circle cx="70" cy="44" r="7" fill="#4cc9f0" />
-              <circle cx="200" cy="96" r="7" fill="#a78bfa" />
-              <text x="150" y="30" fontSize="12" fill="#f3f5f9" fillOpacity="0.8" fontFamily="var(--font-geist-sans)">
+              <path d="M-10 110 C 60 60, 140 130, 290 40" fill="none" stroke="#d4b875" strokeWidth="2" />
+              <path d="M40 -10 L 120 160" stroke="#9ca6aa" strokeOpacity="0.22" strokeWidth="1" />
+              <circle cx="70" cy="44" r="7" fill="#49a8ff" />
+              <circle cx="200" cy="96" r="7" fill="#ff5263" />
+              <text x="150" y="30" fontSize="12" fill="#eeeeee" fillOpacity="0.8" fontFamily="var(--font-geist-sans)">
                 Hardeeville
               </text>
             </svg>
@@ -531,31 +531,31 @@ function ColourSection() {
     <Section id="colour" index="01" title="Colour" lede="Classes: text-fg-1…4, bg-surface-*, bg-fill-1…3, border-edge, bg-util-a/b/other, text-overlap, text-ok, text-warn, bg-inverse / text-on-inverse.">
       <Block label="Surfaces">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-5">
-          <Swatch name="canvas" value="#05080e" cls="bg-canvas" note="page, behind the map" />
-          <Swatch name="surface-chrome" value="rgb(14 19 29/.62)" cls="bg-surface-chrome" note="+ blur 12" />
-          <Swatch name="surface-panel" value="rgb(11 16 25/.86)" cls="bg-surface-panel" note="+ blur 22 sat 1.3" />
-          <Swatch name="surface-solid" value="#0b1019" cls="bg-surface-solid" note="dialogs, sheets" />
-          <Swatch name="surface-raised" value="#111824" cls="bg-surface-raised" note="menus, tooltips" />
+          <Swatch name="canvas" value="#1f252d" cls="bg-canvas" note="page, behind the map" />
+          <Swatch name="surface-chrome" value="#272c33 / .92" cls="bg-surface-chrome" note="+ blur 12" />
+          <Swatch name="surface-panel" value="#272c33 / .97" cls="bg-surface-panel" note="+ blur 22 sat 1.3" />
+          <Swatch name="surface-solid" value="#272c33" cls="bg-surface-solid" note="dialogs, sheets" />
+          <Swatch name="surface-raised" value="#30363e" cls="bg-surface-raised" note="menus, tooltips" />
         </div>
       </Block>
-      <Block label="Fills & edges" note="white at low alpha — they work on any surface">
+      <Block label="Fills & edges" note="soft white and teal at low alpha on charcoal surfaces">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-6">
-          <Swatch name="fill-1" value="white .04" cls="bg-fill-1" note="wells, rest" />
-          <Swatch name="fill-2" value="white .07" cls="bg-fill-2" note="hover" />
-          <Swatch name="fill-3" value="white .11" cls="bg-fill-3" note="pressed" />
-          <Swatch name="edge" value="white .09" cls="bg-edge" note="panel hairline" />
-          <Swatch name="edge-strong" value="white .16" cls="bg-edge-strong" note="inputs, rings" />
-          <Swatch name="divider" value="white .06" cls="bg-divider" note="inside panels" />
+          <Swatch name="fill-1" value="ink .04" cls="bg-fill-1" note="wells, rest" />
+          <Swatch name="fill-2" value="ink .07" cls="bg-fill-2" note="hover" />
+          <Swatch name="fill-3" value="ink .11" cls="bg-fill-3" note="pressed" />
+          <Swatch name="edge" value="ink .12" cls="bg-edge" note="panel hairline" />
+          <Swatch name="edge-strong" value="ink .21" cls="bg-edge-strong" note="inputs, rings" />
+          <Swatch name="divider" value="ink .08" cls="bg-divider" note="inside panels" />
         </div>
       </Block>
       <Block label="Foreground">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {(
             [
-              ["fg-1", "#f3f5f9", "text-fg-1", "Primary text, values"],
-              ["fg-2", "#b4bccb", "text-fg-2", "Secondary text, prose"],
-              ["fg-3", "#8a93a4", "text-fg-3", "Labels, meta — AA everywhere"],
-              ["fg-4", "#5a6272", "text-fg-4", "Decorative only, never information"],
+              ["fg-1", "#eeeeee", "text-fg-1", "Primary text, values"],
+              ["fg-2", "#c7cccf", "text-fg-2", "Secondary text, prose"],
+              ["fg-3", "#9ca6aa", "text-fg-3", "Labels, meta — AA everywhere"],
+              ["fg-4", "#6f7a80", "text-fg-4", "Decorative only, never information"],
             ] as const
           ).map(([n, v, cls, use]) => (
             <div key={n} className="flex items-baseline gap-4 rounded-control bg-fill-1 px-4 py-3">
@@ -568,15 +568,15 @@ function ColourSection() {
           ))}
         </div>
       </Block>
-      <Block label="Data & status hues" note="amber = source-supported overlap, nothing else">
+      <Block label="Data & status hues" note="saffron = source-supported overlap, nothing else">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
-          <Swatch name="util-a" value="#4cc9f0" cls="bg-util-a" note="utility A" />
-          <Swatch name="util-b" value="#a78bfa" cls="bg-util-b" note="utility B" />
-          <Swatch name="util-other" value="#8b95a7" cls="bg-util-other" note="other utilities" />
-          <Swatch name="overlap" value="#f5b83d" cls="bg-overlap" note="flagged overlap" />
-          <Swatch name="overlap-wash" value="amber .12" cls="bg-overlap-wash" note="ring fill, band" />
-          <Swatch name="ok" value="#5ccf97" cls="bg-ok" note="known coordination" />
-          <Swatch name="warn" value="#f08a6c" cls="bg-warn" note="sources disagree" />
+          <Swatch name="util-a" value="#49a8ff" cls="bg-util-a" note="utility A" />
+          <Swatch name="util-b" value="#ff5263" cls="bg-util-b" note="utility B" />
+          <Swatch name="util-other" value="#929ca2" cls="bg-util-other" note="other utilities" />
+          <Swatch name="overlap" value="#d4b875" cls="bg-overlap" note="flagged overlap" />
+          <Swatch name="overlap-wash" value="saffron .12" cls="bg-overlap-wash" note="ring fill, band" />
+          <Swatch name="ok" value="#8fc5a8" cls="bg-ok" note="known coordination" />
+          <Swatch name="warn" value="#e19b87" cls="bg-warn" note="sources disagree" />
         </div>
       </Block>
       <Block label="Inverse">
@@ -687,7 +687,7 @@ function ShapeSection() {
         </div>
       </Block>
       <Block label="Elevation">
-        <div className="grid gap-6 rounded-card bg-[linear-gradient(180deg,#0a0f18,#05080e)] p-8 sm:grid-cols-3">
+        <div className="grid gap-6 rounded-card bg-[linear-gradient(180deg,#30363e,#1f252d)] p-8 sm:grid-cols-3">
           {(
             [
               ["shadow-float", "Floating panels and chrome (with a 1px top glint)"],
@@ -735,7 +735,7 @@ function ButtonsSection() {
     window.setTimeout(() => setLoading(false), 1600);
   };
   return (
-    <Section id="buttons" index="04" title="Buttons" lede="Pills. primary = the one white control per view · secondary = glass pill · ghost = text until hovered. Loading keeps the exact width.">
+    <Section id="buttons" index="04" title="Buttons" lede="Pills. primary = the one dark-ink control per view · secondary = glass pill · ghost = text until hovered. Loading keeps the exact width.">
       <Block label="Variants × sizes">
         <div className="space-y-4">
           {(["primary", "secondary", "ghost"] as const).map((v) => (
@@ -805,7 +805,7 @@ function ButtonsSection() {
           <Meta>chrome</Meta>
           <div
             className="relative flex items-center gap-2 rounded-card p-3"
-            style={{ background: "radial-gradient(120% 140% at 15% 0%, rgb(76 201 240 / 0.22), transparent 60%), radial-gradient(90% 120% at 100% 100%, rgb(167 139 250 / 0.2), transparent 60%), #0a0f18" }}
+            style={{ background: "linear-gradient(145deg, rgb(8 127 122 / 0.12), rgb(212 95 115 / 0.1)), #eef4f4" }}
           >
             <IconButton label="Reset view" variant="chrome" size="lg">
               <RotateCcw size={16} />

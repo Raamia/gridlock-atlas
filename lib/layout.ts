@@ -73,9 +73,9 @@ export interface Layout {
   vh: number;
   tier: Tier;
   railMode: RailMode;
-  /** The rail is docked on the left as a full-height panel (xl always; lg/md while the inspector is closed). */
+  /** The rail is docked on the left while the inspector is closed. */
   railDocked: boolean;
-  /** The "Opportunities · N" pill shows at the panel top-left (lg/md with the inspector open); focal.t clears it. */
+  /** The "Opportunities · N" pill shows at the panel top-left when the inspector is open; focal.t clears it. */
   pillVisible: boolean;
   gutter: number;
   headerH: number;
@@ -187,9 +187,9 @@ export function computeLayout(vw: number, vh: number, o: LayoutOptions): Layout 
     };
   }
 
-  // lg and md alike (SPEC §13): docked while the inspector is closed (the pre-run hero and Compare stay on screen),
-  // the "Opportunities · N" pill while it is open
-  const railMode: RailMode = tier === "xl" || !o.inspectorOpen ? "panel" : "pill";
+  // The queue is primary while browsing. Once a pair opens it becomes a compact pill on every desktop width, leaving
+  // the map and evidence enough room to explain the selected opportunity without three competing columns.
+  const railMode: RailMode = !o.inspectorOpen ? "panel" : "pill";
   const railDocked = railMode === "panel" && !hidden;
   const pillVisible = railMode === "pill" && !hidden;
   const inspectorShown = o.inspectorOpen && !hidden;

@@ -56,7 +56,7 @@ export const MAP3D_LAYER_PREFIX = "gl3d-";
 // ---------------------------------------------------------------------------------------------------------------
 // palette (map paint: the only place raw hex is allowed; mirrors the tokens in app/globals.css)
 
-const HUE = { a: "#4cc9f0", b: "#a78bfa", other: "#8b95a7", overlap: "#f5b83d", fg1: "#f3f5f9", canvas: "#05080e" } as const;
+const HUE = { a: "#49a8ff", b: "#ff5263", other: "#929ca2", overlap: "#d4b875", fg1: "#eeeeee", canvas: "#1f252d" } as const;
 
 /** Each region's two focal utilities take the A / B hues in overview (same rule as the 2D map and the header legend). */
 const FOCAL: Record<string, [string, string]> = {
@@ -722,7 +722,7 @@ function structureScaleExpr(cls: LayerClass): Expr {
 /** Dimmed spires darken toward the canvas (model opacity is per layer, and spires are too thin to need translucency). */
 function dimHex(hex: string, t: number): string {
   const n = (i: number) => parseInt(hex.slice(i, i + 2), 16);
-  const base = [0x14, 0x1a, 0x26];
+  const base = [0x1f, 0x25, 0x2d];
   return `#${[1, 3, 5].map((i, j) => Math.round(n(i) + (base[j] - n(i)) * t).toString(16).padStart(2, "0")).join("")}`;
 }
 
@@ -1266,8 +1266,8 @@ export function install3D(map: MapboxMap, opts: { standard: boolean }): void {
     // the offline style has no lights of its own: without these, models render black
     safe(() =>
       map.setLights([
-        { id: "gl3d-ambient", type: "ambient", properties: { color: "#b9c3d6", intensity: 0.55 } },
-        { id: "gl3d-sun", type: "directional", properties: { color: "#ffffff", intensity: 0.65, direction: [200, 40], "cast-shadows": false } },
+        { id: "gl3d-ambient", type: "ambient", properties: { color: "#c7d7d8", intensity: 0.62 } },
+        { id: "gl3d-sun", type: "directional", properties: { color: "#eeeeee", intensity: 0.68, direction: [200, 40], "cast-shadows": false } },
       ] as never),
     );
   }

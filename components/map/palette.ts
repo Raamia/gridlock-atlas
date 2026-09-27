@@ -5,19 +5,19 @@ import type { ExpressionSpecification } from "mapbox-gl";
  * app/globals.css (--canvas, --fg-*, --util-*, --overlap …). Change both together.
  */
 export const C = {
-  canvas: "#05080e",
-  solid: "#0b1019",
-  raised: "#111824",
-  fg1: "#f3f5f9",
-  fg2: "#b4bccb",
-  fg3: "#8a93a4",
-  fg4: "#5a6272",
-  a: "#4cc9f0",
-  b: "#a78bfa",
-  other: "#8b95a7",
-  overlap: "#f5b83d",
-  ok: "#5ccf97",
-  warn: "#f08a6c",
+  canvas: "#1f252d",
+  solid: "#272c33",
+  raised: "#30363e",
+  fg1: "#eeeeee",
+  fg2: "#c7cccf",
+  fg3: "#9ca6aa",
+  fg4: "#6f7a80",
+  a: "#49a8ff",
+  b: "#ff5263",
+  other: "#929ca2",
+  overlap: "#d4b875",
+  ok: "#8fc5a8",
+  warn: "#e19b87",
 } as const;
 
 /** Dot/route/halo colour by role: A and the region's first focal utility share --util-a, B and the second --util-b. */

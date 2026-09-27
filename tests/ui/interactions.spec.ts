@@ -44,9 +44,11 @@ async function tabCount(t: Locator): Promise<number> {
   return Number(m[1]);
 }
 
-/** The review radius is always on screen after a run (the old "Filters & review radius" disclosure is gone). */
+/** Secondary controls are disclosed on demand so the queue stays scannable. */
 async function radiusShown(page: Page) {
-  await expect(page.getByRole("slider", { name: "Review radius" })).toBeVisible();
+  const slider = page.getByRole("slider", { name: "Review radius" });
+  if (!(await slider.isVisible())) await queue(page).getByRole("button", { name: /^Review radius/ }).click();
+  await expect(slider).toBeVisible();
 }
 
 const queue = (page: Page) => page.getByRole("complementary", { name: "Coordination queue" });
@@ -55,6 +57,12 @@ const cards = (page: Page) => queue(page).getByRole("list").locator("[data-match
 /** Timing chips: "Schedules overlap / May overlap / Timing unknown / No overlap", each ending in its tab-scoped count. */
 const timingChip = (page: Page, name: RegExp) => page.getByRole("group", { name: "Timing" }).getByRole("button", { name });
 const disputedChip = (page: Page) => queue(page).getByRole("button", { name: /^Dates revised or disputed/ });
+
+async function filtersShown(page: Page) {
+  const group = page.getByRole("group", { name: "Timing" });
+  if (!(await group.isVisible())) await queue(page).getByRole("button", { name: /^Filters/ }).click();
+  await expect(group).toBeVisible();
+}
 
 async function cardIds(page: Page): Promise<string[]> {
   return cards(page).evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.matchId ?? ""));
@@ -150,6 +158,7 @@ test.describe("interactions", () => {
   test("timing chips and the utility filter narrow the queue; empty states render", async ({ page }) => {
     await page.goto("/");
     await compare(page);
+    await filtersShown(page);
     const engine = await run25(page);
     const needs = tab(page, /^Needs review/);
     const possible = tab(page, /^Possible/);
@@ -218,6 +227,7 @@ test.describe("interactions", () => {
   test("tabs switch, the dates-revised-or-disputed chip narrows the list, and each empty category explains itself", async ({ page }) => {
     await page.goto("/");
     await compare(page);
+    await filtersShown(page);
     const engine = await run25(page);
     const known = tab(page, /^Known/);
     await known.click();
@@ -320,7 +330,7 @@ test.describe("interactions", () => {
     expect(before.markers).toBeGreaterThanOrEqual(3);
 
     const basemap = page.getByRole("group", { name: "Basemap" });
-    for (const name of ["Satellite", "Offline", "Night"]) {
+    for (const name of ["Satellite", "Offline", "Dusk"]) {
       await basemap.getByRole("button", { name, exact: true }).click();
       await expect(basemap.getByRole("button", { name, exact: true })).toHaveAttribute("aria-pressed", "true");
       await page.waitForTimeout(400);
@@ -470,6 +480,7 @@ test.describe("interactions", () => {
     await page.goto("/");
     await compare(page);
     await radiusShown(page);
+    await filtersShown(page);
     await page.getByRole("slider", { name: "Review radius" }).focus();
     await page.keyboard.press("End");
     await expect(page.getByRole("complementary", { name: "Coordination queue" })).toContainText("· 100 mi");

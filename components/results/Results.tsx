@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { ChevronUp, Info, RotateCw } from "lucide-react";
+import { ChevronDown, ChevronUp, Info, RotateCw, SlidersHorizontal } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
@@ -18,7 +18,6 @@ import { Filters, FocusChip, type FilterCounts } from "./Filters";
 import { Footer, type Unflagged } from "./Footer";
 import { PAIRS_LAYOUT_ID } from "./Hero";
 import { fmt, headline, knownElsewhere, sperryTags, TAB_TOOLTIP, type Headline } from "./model";
-import { ProofButton } from "./ProofButton";
 import { RadiusControl } from "./RadiusControl";
 import { Row } from "./Row";
 
@@ -33,6 +32,7 @@ const COMPACT_BELOW_VH = 860;
  * the controls unfold at half / full.
  */
 export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSnap; error?: ReactNode }) {
+  const [radiusOpen, setRadiusOpen] = useState(false);
   const run = useAtlas((s) => s.run)!;
   const running = useAtlas((s) => s.running);
   const region = useAtlas((s) => s.region);
@@ -159,10 +159,26 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
   const header = <HeaderRow radius={run.thresholdMiles} running={running} />;
   const body = (
     <>
-      <HeadlineBlock h={head} omitFlagged={phone} compact={compact} />
-      <ProofButton stacked={!compact} className={compact ? "mt-2.5" : "mt-3"} />
-      <div className={compact ? "mt-3" : "mt-4"}>
-        <RadiusControl compact={compact} />
+      <HeadlineBlock h={head} omitFlagged={phone} compact />
+      <div className="mt-2">
+        <button
+          type="button"
+          aria-expanded={radiusOpen}
+          aria-controls="review-radius-control"
+          onClick={() => setRadiusOpen((v) => !v)}
+          className="group inline-flex h-7 items-center gap-1.5 rounded-control px-2 text-caption font-medium text-fg-2 transition-colors hover:bg-fill-2 hover:text-fg-1"
+        >
+          <SlidersHorizontal aria-hidden size={13} strokeWidth={1.75} />
+          Review radius <span className="num text-fg-1">{run.thresholdMiles} mi</span>
+          <ChevronDown aria-hidden size={13} strokeWidth={1.75} className="transition-transform duration-200 group-aria-expanded:rotate-180" />
+        </button>
+        <div id="review-radius-control" className="grid transition-[grid-template-rows] duration-300 ease-enter" style={{ gridTemplateRows: radiusOpen ? "1fr" : "0fr" }}>
+          <div className="min-h-0 overflow-hidden" inert={!radiusOpen || undefined}>
+            <div className="pt-2">
+              <RadiusControl compact={compact} />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
