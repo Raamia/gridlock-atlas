@@ -28,7 +28,7 @@ const FOG = {
 export function offlineStyle(): StyleSpecification {
   return {
     version: 8,
-    name: "Atlas offline",
+    name: "GridLock offline",
     sources: {
       "ctx-states": { type: "geojson", data: "/geo/states.json" },
     },

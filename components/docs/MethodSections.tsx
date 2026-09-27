@@ -622,7 +622,7 @@ const BASELINES: [string, string][] = [
   ["B3", "Close OR on a similar schedule"],
   ["B5", "Centers under 25 mi AND a similar schedule"],
   ["B6", "Same facility name in both plans"],
-  ["B4", "Atlas engine"],
+  ["B4", "GridLock engine"],
 ];
 
 /** The committed `npm run eval` report (data/eval), with its snapshot shown: it is not recomputed in the browser. */
@@ -800,7 +800,7 @@ export function ReviewerMode() {
         </Button>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Button size="sm" variant="secondary" icon={<Download size={14} strokeWidth={1.75} />} disabled={!pairs} onClick={() => download("atlas-labels.csv", labelsCsv(labels, meta), "text/csv")}>
+        <Button size="sm" variant="secondary" icon={<Download size={14} strokeWidth={1.75} />} disabled={!pairs} onClick={() => download("gridlock-labels.csv", labelsCsv(labels, meta), "text/csv")}>
           Labels CSV
         </Button>
         <Button

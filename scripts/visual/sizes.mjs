@@ -4,7 +4,7 @@ import { chromium } from "playwright-core";
 import fs from "node:fs";
 
 const base = process.argv[2] ?? "http://localhost:3217";
-const out = process.argv[3] ?? "/tmp/atlas-shots";
+const out = process.argv[3] ?? "/tmp/gridlock-shots";
 if (!/^https?:\/\//i.test(base)) {
   console.error(`baseUrl must be an http(s) URL, got "${base}"`);
   process.exit(1);

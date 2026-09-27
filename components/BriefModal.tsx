@@ -118,7 +118,7 @@ function Toolbar({ md, matchId, onClose }: { md: string; matchId: string; onClos
     const blob = new Blob([md], { type: "text/markdown" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `atlas-brief-${matchId}.md`;
+    a.download = `gridlock-brief-${matchId}.md`;
     a.click();
     window.setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   };
@@ -217,7 +217,7 @@ function BriefDocument({ pair, brief }: { pair: SelectedPair; brief: Brief }) {
         <div className="flex items-center justify-between gap-4">
           <span className="flex items-center gap-2">
             <LogoMark size={20} />
-            <span className="eyebrow text-fg-2">Atlas · Cited review brief</span>
+            <span className="eyebrow text-fg-2">GridLock Atlas · Cited review brief</span>
           </span>
           <span className="eyebrow hidden text-right sm:inline">Snapshot {formatDate(SNAPSHOT.snapshotDate)}</span>
         </div>

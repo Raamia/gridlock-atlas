@@ -82,7 +82,7 @@ export function ExportMenu({ size = "sm", labelled = false }: { size?: "sm" | "m
         icon={<Tags />}
         disabled={!nLabels}
         hint={nLabels ? "Saved in this browser" : "Label pairs in reviewer mode"}
-        onSelect={() => download("atlas-labels.csv", labelsCsv(labels, meta), "text/csv")}
+        onSelect={() => download("gridlock-labels.csv", labelsCsv(labels, meta), "text/csv")}
       >
         Reviewer labels (CSV) · <span className="num">{nLabels}</span> labeled
       </MenuItem>

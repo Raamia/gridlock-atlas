@@ -1,5 +1,5 @@
 /**
- * Atlas domain model.
+ * GridLock Atlas domain model.
  *
  * We store source *claims*, not one flattened truth: every displayed fact points at
  * evidence ids, and every evidence object is a short verbatim excerpt from a cached
