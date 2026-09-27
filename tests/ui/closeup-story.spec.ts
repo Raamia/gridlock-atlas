@@ -62,6 +62,16 @@ test.describe("3D close-up: time axis and story", () => {
     await caption.getByRole("button", { name: "Simulation step 5 of 5" }).click();
     await expect(caption).toContainText("not “uncoordinated.”");
 
+    // arrow keys step without waiting: ← back, → ahead
+    await page.keyboard.press("ArrowLeft");
+    await expect(caption).toContainText("04 / 05 · Overlapping in time");
+    await page.keyboard.press("ArrowLeft");
+    await expect(caption).toContainText("03 / 05 · Time rises");
+    await page.keyboard.press("ArrowRight");
+    await expect(caption).toContainText("04 / 05");
+    await page.keyboard.press("ArrowRight");
+    await expect(caption).toContainText("05 / 05 · The call");
+
     // Esc: the story stops, the close-up stays
     await page.keyboard.press("Escape");
     await expect(caption).toBeHidden();
@@ -71,6 +81,23 @@ test.describe("3D close-up: time axis and story", () => {
     await page.keyboard.press("Escape");
     await expect(closeup).toBeHidden();
     expect(errors).toEqual([]);
+  });
+
+  test("→ on the last beat ends the story; ← on the first stays there", async ({ page }) => {
+    const closeup = await openCloseup(page);
+    await closeup.getByRole("button", { name: "Run simulation" }).click();
+    const caption = closeup.getByRole("status").filter({ hasText: "/ 05" });
+    await expect(caption).toContainText("01 / 05");
+    await page.keyboard.press("ArrowLeft");
+    await expect(caption).toContainText("01 / 05 · The pair");
+    for (let i = 2; i <= 5; i++) {
+      await page.keyboard.press("ArrowRight");
+      await expect(caption).toContainText(`0${i} / 05`);
+    }
+    await page.keyboard.press("ArrowRight");
+    await expect(caption).toBeHidden();
+    await expect(closeup).toBeVisible();
+    await expect(closeup.getByRole("button", { name: "Run simulation" })).toBeVisible();
   });
 
   test("the story advances on its own and ends by handing the view back", async ({ page }) => {

@@ -13,7 +13,7 @@ import { CloseupCanvas, type Frame } from "./closeup/Scene";
 import { buildStory, type Shot } from "./closeup/story";
 import { buildTimeModel, type TimeModel } from "./closeup/time";
 import { TimeDriver } from "./closeup/TimeLayer";
-import { Button, IconButton, Segmented, Tooltip } from "./ui";
+import { Button, IconButton, Kbd, Segmented, Tooltip } from "./ui";
 
 /*
  * 3D pair close-up (SPEC §7). Mounted by Atlas (next/dynamic, ssr:false, after a WebGL2 pre-check, inside an error
@@ -93,6 +93,8 @@ export default function PairCloseup() {
   const [tour, setTour] = useState<number | null>(null);
   const [shot, setShot] = useState<{ key: string; shot: Shot } | null>(null);
   const tourTimer = useRef<number | null>(null);
+  /** The beat on screen, for key presses that land before React re-renders (fast ← / →). */
+  const tourAt = useRef<number | null>(null);
   const shotSeq = useRef(0);
   const stepRef = useRef<(i: number) => void>(() => {});
   const clearTimer = () => {
@@ -101,6 +103,7 @@ export default function PairCloseup() {
   };
   const stopTour = useCallback(() => {
     clearTimer();
+    tourAt.current = null;
     setTour(null);
   }, []);
   const goStep = useCallback(
@@ -108,9 +111,11 @@ export default function PairCloseup() {
       clearTimer();
       const step = story[i];
       if (!step || !model) {
+        tourAt.current = null;
         setTour(null);
         return;
       }
+      tourAt.current = i;
       setInteracted(true);
       setTour(i);
       setTimeOn(step.time);
@@ -132,18 +137,31 @@ export default function PairCloseup() {
     setTour(null);
   }
   useEffect(() => clearTimer(), [pairId]);
-  // Esc stops the story first (capture phase: before Atlas's chain closes the close-up)
+  // while it runs: ← / → step back / ahead without waiting (→ on the last beat ends it); Esc stops it first
+  // (capture phase: before Atlas's chain closes the close-up)
   useEffect(() => {
     if (tour === null) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key !== "Escape") return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        // immediate: also when the event targets window itself, where Atlas's own listener sits
+        e.stopImmediatePropagation();
+        stopTour();
+        return;
+      }
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "SELECT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
       e.preventDefault();
-      e.stopPropagation();
-      stopTour();
+      e.stopImmediatePropagation();
+      const at = tourAt.current;
+      if (e.repeat || at === null) return;
+      goStep(e.key === "ArrowRight" ? at + 1 : Math.max(0, at - 1));
     };
     window.addEventListener("keydown", onKey, true);
     return () => window.removeEventListener("keydown", onKey, true);
-  }, [tour, stopTour]);
+  }, [tour, stopTour, goStep]);
   const setMode = useCallback(
     (v: "ground" | "time") => {
       stopTour();
@@ -619,9 +637,16 @@ function StoryCaption({
             }
       }
     >
-      <p key={`k${step}`} className="eyebrow num animate-[fade-in_300ms_ease-out] text-overlap!">
-        {String(step + 1).padStart(2, "0")} / {String(steps).padStart(2, "0")} · {kicker}
-      </p>
+      <div className="flex items-center justify-between gap-3">
+        <p key={`k${step}`} className="eyebrow num animate-[fade-in_300ms_ease-out] text-overlap!">
+          {String(step + 1).padStart(2, "0")} / {String(steps).padStart(2, "0")} · {kicker}
+        </p>
+        <span className="inline-flex shrink-0 items-center gap-1 text-label text-fg-3 coarse:hidden" aria-hidden>
+          <Kbd size="sm">←</Kbd>
+          <Kbd size="sm">→</Kbd>
+          <span className="ml-0.5">step</span>
+        </span>
+      </div>
       <p key={`t${step}`} className="mt-1.5 animate-[fade-in_400ms_ease-out] text-body text-balance text-fg-1">
         {text}
       </p>
