@@ -82,6 +82,15 @@ describe("computeLayout tiers", () => {
     expect(demo).toMatchObject({ dockH: 44, keyCollapsed: true });
   });
 
+  it("xl under the 3D close-up: the rail folds to its pill, so the diorama gets the rail's width", () => {
+    const cu = computeLayout(1440, 900, { ...pair, closeupOpen: true });
+    expect(cu).toMatchObject({ tier: "xl", railMode: "pill", railDocked: false, pillVisible: true });
+    expect(cu.focal).toEqual({ l: 16, t: 120, r: 446, b: 224 });
+    // without an open inspector the rail stays docked, and closing the close-up docks it again
+    expect(computeLayout(1440, 900, { ...base, closeupOpen: true }).railDocked).toBe(true);
+    expect(computeLayout(1440, 900, pair).railDocked).toBe(true);
+  });
+
   it("768–1023 behaves like lg: docked rail before a pair (hero + Compare visible), pill with it; 360 inspector, dock summary only", () => {
     const pre = computeLayout(800, 1100, base);
     expect(pre).toMatchObject({ tier: "md", railMode: "panel", railDocked: true, pillVisible: false, railW: 336, dockH: 44, dockForced: true });

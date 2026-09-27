@@ -1,8 +1,9 @@
 import type mapboxgl from "mapbox-gl";
+import type { FilterSpecification } from "mapbox-gl";
 import { getLayout } from "@/lib/layout";
 import { useAtlas } from "@/lib/store";
 import { demoCardRect } from "./camera";
-import { hasLayer } from "./layers";
+import { hasLayer, POINT_LABEL_FILTER } from "./layers";
 
 /**
  * The selected pair's HTML callouts (Mapbox markers holding a `[data-callout]` box) and their placement.
@@ -34,12 +35,25 @@ function root() {
 
 const BOX = "pointer-events-none absolute left-0 top-0 chrome rounded-control";
 
-export function projectLabel(title: string, owner: string, role: "a" | "b") {
+/**
+ * A project's callout: owner (mono, utility colour) over its short title. Phones keep the owner as an inline prefix
+ * (colour is always reinforced with text) in a narrower box; `pill` (a phone's strip of map under 160px, the inspector
+ * carrying the full titles) shrinks it to the owner alone.
+ */
+export function projectLabel(title: string, owner: string, role: "a" | "b", opts: { pill?: boolean } = {}) {
   const color = role === "a" ? "var(--util-a)" : "var(--util-b)";
   const el = root();
-  // phones: title only and narrower, so the pair's callouts fit the strip of map above the inspector sheet
-  el.innerHTML = `<div data-callout data-role="${role}" class="${BOX} w-max py-1.5 pl-3 pr-2.5 ${phone() ? "max-w-[150px]" : "max-w-[216px]"}" style="box-shadow: inset 2px 0 0 ${color}, var(--elev-chip)">
-    ${phone() ? "" : `<div class="mb-0.5 truncate font-mono text-[11px] font-medium uppercase leading-none tracking-[0.06em]" style="color:${color}">${escapeHtml(owner)}</div>`}
+  const ownerTag = `<span class="font-mono text-[11px] font-medium uppercase tracking-[0.06em]" style="color:${color}">${escapeHtml(owner)}</span>`;
+  if (opts.pill) {
+    el.innerHTML = `<div data-callout data-role="${role}" title="${escapeHtml(`${owner} · ${title}`)}" class="${BOX} w-max whitespace-nowrap rounded-full py-1 pl-2.5 pr-2.5 leading-[1.3]" style="box-shadow: inset 2px 0 0 ${color}, var(--elev-chip)">${ownerTag}</div>`;
+    return el;
+  }
+  el.innerHTML = phone()
+    ? `<div data-callout data-role="${role}" class="${BOX} w-max max-w-[164px] py-1.5 pl-3 pr-2.5" style="box-shadow: inset 2px 0 0 ${color}, var(--elev-chip)">
+    <div class="line-clamp-3 text-[12px] font-medium leading-[1.3] text-fg-1" title="${escapeHtml(title)}">${ownerTag}<span class="text-fg-3"> · </span>${escapeHtml(title)}</div>
+  </div>`
+    : `<div data-callout data-role="${role}" class="${BOX} w-max max-w-[216px] py-1.5 pl-3 pr-2.5" style="box-shadow: inset 2px 0 0 ${color}, var(--elev-chip)">
+    <div class="mb-0.5 truncate font-mono text-[11px] font-medium uppercase leading-none tracking-[0.06em]" style="color:${color}">${escapeHtml(owner)}</div>
     <div class="line-clamp-2 text-[12px] font-medium leading-[1.3] text-fg-1" title="${escapeHtml(title)}">${escapeHtml(title)}</div>
   </div>`;
   return el;
@@ -122,6 +136,8 @@ export interface Callout {
   optional: boolean;
   /** Keep exactly to the listed spots (no slid-into-view variants): a ring label must stay outside its ring. */
   noSlide?: boolean;
+  /** An optional callout's worth: what hiding it costs the layout (px² of overlap), so a mandatory one leaves it room. */
+  hideCost?: number;
 }
 
 type Box = { x: number; y: number; w: number; h: number };
@@ -197,18 +213,25 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
     };
   });
   const sites = dotBoxes.filter((d) => d.site).map((d) => ({ x: d.px, y: d.py }));
-  // the pair's place names (gl-point-labels: 11px, anchored top below the dot, wrapped at 10em); the one on the shared
-  // site is left out, since the site callout already names that place
-  const names: Box[] = [];
-  const labels = hasLayer(map, "gl-point-labels") ? map.queryRenderedFeatures({ layers: ["gl-point-labels"] }) : [];
+  // the pair's place names (gl-point-labels: 11px, anchored top 1.15em below the dot, wrapped at 10em), read from the
+  // rendered dots rather than the rendered symbols, so a name this layout masks still counts as one; the one on the shared site
+  // is left out, since the site callout already names that place
+  const names: (Box & { label: string })[] = [];
+  const seen = new Set<string>();
+  const labels = hasLayer(map, "gl-point-labels")
+    ? map.queryRenderedFeatures({ layers: ["gl-points"] }).filter((f) => ["a", "b", "hover"].includes(String(f.properties?.role)) && f.properties?.onSite !== true)
+    : [];
   for (const f of labels) {
     if (f.geometry.type !== "Point") continue;
+    const text = String(f.properties?.label ?? "");
+    const key = `${text}|${(f.geometry.coordinates as number[]).map((v) => v.toFixed(4)).join(",")}`;
+    if (!text || seen.has(key)) continue;
+    seen.add(key);
     const p = map.project(f.geometry.coordinates as [number, number]);
     if (sites.some((s) => Math.hypot(s.x - p.x, s.y - p.y) < 2)) continue;
-    const text = String(f.properties?.label ?? "");
-    const w = Math.min(text.length * 6, 116);
-    const h = Math.ceil((text.length * 6) / 116) * 13;
-    names.push({ x: p.x - w / 2, y: p.y + 10, w, h });
+    const w = Math.min(text.length * 6.2, 112);
+    const h = Math.ceil((text.length * 6.2) / 112) * 14;
+    names.push({ x: p.x - w / 2, y: p.y + 11, w, h, label: text });
   }
   // map-3d's own rendered map text (the gl3d-labels layer: hotspot counts, 11.5px centred on their point)
   const chips: Box[] = [];
@@ -243,12 +266,13 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
     w: r.w + 8,
     h: r.h + 8,
   });
-  // clipped or hidden text is lost outright; covering map UI costs as much as covering another callout; the shared
-  // site's dot is weighted near a hard rule; a pair's own place names cost least
+  // clipped or hidden text is lost outright; covering map UI (the controls, the Map key, the Mapbox logo and (i)) is
+  // nearly as bad, so a mandatory callout flips or slides rather than sit under one; the shared site's dot is weighted
+  // near a hard rule; the map's own place names and hotspot counts are real text, so covering them costs too
   const cost = (r: Box, placed: Box[]) =>
     (r.w * r.h - overlapArea(r, view)) * 16 +
-    panels.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0) +
-    names.reduce((sum, t) => sum + overlapArea(r, t), 0) +
+    panels.reduce((sum, t) => sum + 14 * overlapArea(r, t), 0) +
+    names.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0) +
     chips.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0) +
     dotBoxes.reduce((sum, t) => sum + t.weight * overlapArea(r, t), 0) +
     placed.reduce((sum, t) => sum + 3 * overlapArea(r, t), 0);
@@ -308,7 +332,8 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
       }
       if (items[i].optional) {
         cur[i] = bestOptional(cands[i], placed);
-        return walk(i + 1, cur[i] >= 0 ? [...placed, grow(cands[i][cur[i]].r)] : placed, total);
+        const k = cur[i];
+        return walk(i + 1, k >= 0 ? [...placed, grow(cands[i][k].r)] : placed, total + (k < 0 ? (items[i].hideCost ?? 0) : 0));
       }
       cands[i].forEach((c, k) => {
         cur[i] = k;
@@ -343,4 +368,20 @@ export function layoutCallouts(map: mapboxgl.Map, items: Callout[], dots: Dot[],
     c.box.style.opacity = k < 0 || off ? "0" : "";
     if (k >= 0 || !shown) c.box.dataset.spot = String(Math.max(0, k));
   });
+  // a map place name that a callout still covers is masked, never left half-hidden ("orgia Pacific"); settled layouts
+  // only, so names do not blink while the camera flies
+  if (!moving) maskPlaceNames(map, names.filter((n) => drawn.some((t) => overlapArea(n, t) > 0.2 * n.w * n.h)).map((n) => n.label));
+}
+
+/** Hide these gl-point-labels names (by text); `[]` restores them all. A no-op when the filter already says so. */
+export function maskPlaceNames(map: mapboxgl.Map, hidden: string[]) {
+  if (!hasLayer(map, "gl-point-labels")) return;
+  const names = [...new Set(hidden)].sort();
+  const want: FilterSpecification = names.length ? ["all", POINT_LABEL_FILTER, ["!", ["in", ["get", "label"], ["literal", names]]]] : POINT_LABEL_FILTER;
+  try {
+    if (JSON.stringify(map.getFilter("gl-point-labels")) === JSON.stringify(want)) return;
+    map.setFilter("gl-point-labels", want);
+  } catch {
+    /* presentation-only */
+  }
 }

@@ -20,7 +20,8 @@ type GroupId = "utility" | "regulator" | "rto" | "public";
 const GROUPS: { id: GroupId; label: string; toc: string; lede: string }[] = [
   { id: "utility", label: "Utilities", toc: "Utilities", lede: "Plans, project pages and filings published by the utilities themselves." },
   { id: "regulator", label: "State regulators", toc: "State regulators", lede: "Commission dockets, orders and the utility filings made to them." },
-  { id: "rto", label: "Regional transmission organizations", toc: "Regional planning", lede: "Regional planning processes: MISO, SPP, SERTP and SCRTP." },
+  // SERTP and SCRTP are planning processes, not RTOs: the group is named for what it holds, the same in the contents
+  { id: "rto", label: "Regional planning", toc: "Regional planning", lede: "RTOs (MISO, SPP) and the SERTP and SCRTP planning processes." },
   { id: "public", label: "Federal and other public agencies", toc: "Federal & other", lede: "Federal rules, reliability standards and public statistics." },
 ];
 

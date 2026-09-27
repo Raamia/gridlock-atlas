@@ -329,8 +329,8 @@ export type ButtonVariant = "primary" | "secondary" | "ghost" | "outline" | "sub
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
 
 const BUTTON_SIZE: Record<ButtonSize, string> = {
-  sm: "h-7 gap-1.5 px-3 text-caption",
-  md: "h-8 gap-2 px-3.5 text-ui",
+  sm: "h-7 gap-1.5 px-3 text-caption tap-44",
+  md: "h-8 gap-2 px-3.5 text-ui tap-44",
   lg: "h-10 gap-2 px-4 text-ui",
   xl: "h-11 gap-2 px-5 text-body",
 };
@@ -434,7 +434,7 @@ export type IconButtonProps = ComponentProps<"button"> & {
   variant?: "ghost" | "chrome" | "secondary";
 };
 
-const ICON_SIZE = { sm: "size-7", md: "size-8", lg: "size-10", xl: "size-11" } as const;
+const ICON_SIZE = { sm: "size-7 tap-44-round", md: "size-8 tap-44-round", lg: "size-10 tap-44-round", xl: "size-11" } as const;
 const ICON_VARIANT = {
   ghost: "text-fg-2 hover:bg-fill-2 hover:text-fg-1 aria-pressed:bg-fill-3 aria-pressed:text-fg-1 aria-expanded:bg-fill-2 aria-expanded:text-fg-1",
   chrome: "chrome text-fg-1 hover:bg-surface-raised aria-pressed:bg-inverse aria-pressed:text-on-inverse",
@@ -704,15 +704,14 @@ export function Segmented<V extends string>({
             }}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={clsx(
-              "relative inline-flex min-w-0 select-none items-center justify-center whitespace-nowrap rounded-full font-medium transition-[color,background-color,opacity] duration-200 ease-enter disabled:pointer-events-none disabled:opacity-40",
+              "relative inline-flex min-w-0 select-none items-center justify-center whitespace-nowrap rounded-full font-medium transition-[color,background-color,opacity] duration-200 ease-enter disabled:pointer-events-none disabled:opacity-40 tap-44",
               size === "sm" ? "h-7 px-3 text-caption" : "h-8 px-3.5 text-ui",
               fill && "flex-auto",
               active
                 ? look === "inverse"
                   ? "text-on-inverse"
                   : "text-fg-1"
-                : "text-fg-2 hover:bg-fill-2 hover:text-fg-1",
-              it.count === 0 && !active && "opacity-50 hover:opacity-80",
+                : clsx(it.count === 0 ? "text-fg-3" : "text-fg-2", "hover:bg-fill-2 hover:text-fg-1"),
               it.className,
             )}
           >
@@ -777,7 +776,7 @@ export function Chip({ children, pressed, count, icon, tooltip, size = "md", dis
       aria-pressed={pressed}
       disabled={inert}
       className={clsx(
-        "inline-flex shrink-0 select-none items-center whitespace-nowrap rounded-full font-medium ring-1 ring-inset transition-[background-color,color,box-shadow] duration-200 ease-enter disabled:pointer-events-none disabled:opacity-40 [&_svg]:shrink-0",
+        "relative inline-flex shrink-0 select-none items-center whitespace-nowrap rounded-full font-medium ring-1 ring-inset transition-[background-color,color,box-shadow] duration-200 ease-enter disabled:pointer-events-none disabled:opacity-40 tap-44 [&_svg]:shrink-0",
         size === "sm" ? "h-6 gap-1 px-2 text-caption" : "h-7 gap-1.5 px-2.5 text-caption",
         pressed ? "bg-fg-1/[0.13] text-fg-1 ring-fg-1/30 hover:bg-fg-1/[0.17]" : "bg-fill-1 text-fg-2 ring-transparent hover:bg-fill-2 hover:text-fg-1",
         className,
@@ -831,7 +830,7 @@ export function Tag({ children, tone = "neutral", icon, mono, title, onClick, cl
     "inline-flex h-5 max-w-full shrink-0 items-center gap-1 whitespace-nowrap rounded-chip px-1.5 ring-1 ring-inset [&_svg]:shrink-0",
     mono ? "num text-[11px] font-medium tracking-[0.01em]" : "text-caption font-medium",
     TAG_TONE[tone],
-    onClick && "transition-colors duration-150 hover:bg-fill-2",
+    onClick && "relative transition-colors duration-150 hover:bg-fill-2 tap-44",
     className,
   );
   const body = (
@@ -1230,7 +1229,7 @@ export function MenuItem({ children, hint, icon, shortcut, disabled, checked, on
       }}
       onPointerLeave={() => ctx?.focusMenu()}
       className={clsx(
-        "flex w-full items-start gap-2.5 rounded-[8px] px-2.5 py-2 text-left outline-none transition-colors duration-100 focus:bg-fill-2 aria-disabled:cursor-default aria-disabled:opacity-40 [&_svg]:shrink-0",
+        "flex w-full items-start gap-2.5 rounded-[8px] px-2.5 py-2 text-left outline-none transition-[background-color,box-shadow] duration-100 focus:bg-fill-2 focus-visible:ring-2 focus-visible:ring-fg-1/80 focus-visible:ring-inset aria-disabled:cursor-default aria-disabled:opacity-40 coarse:min-h-11 coarse:items-center [&_svg]:shrink-0",
         className,
       )}
     >

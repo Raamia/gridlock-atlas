@@ -99,7 +99,7 @@ function DesktopHeader({ wide, compact, legend }: { wide: boolean; compact: bool
                   variant="ghost"
                   size="md"
                   icon={<Library size={16} strokeWidth={1.75} />}
-                  aria-label={SOURCES_LABEL}
+                  aria-label={`Sources ${SOURCE_COUNT} — ${SOURCES_LABEL}`}
                   onClick={() => set({ sourcesOpen: true, methodOpen: false })}
                 >
                   Sources

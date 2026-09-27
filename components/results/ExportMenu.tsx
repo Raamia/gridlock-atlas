@@ -38,7 +38,7 @@ export function ExportMenu({ size = "sm", labelled = false }: { size?: "sm" | "m
       align="end"
       minWidth={288}
       label="Export"
-      header={<span className="eyebrow block leading-[1.5]">{scope}</span>}
+      header={<span className="block text-caption text-pretty text-fg-3">{scope}</span>}
       trigger={
         labelled ? (
           <Button variant="ghost" size={size} icon={<Download size={14} strokeWidth={1.75} />} iconRight={<ChevronDown size={12} strokeWidth={2} className="-ml-0.5 text-fg-3" />} className="px-2.5">
@@ -52,15 +52,15 @@ export function ExportMenu({ size = "sm", labelled = false }: { size?: "sm" | "m
       }
     >
       <MenuItem
-        aria-label="Export overlap table as CSV"
+        aria-label="Sperry overlap table (CSV) — Export overlap table as CSV"
         icon={<Table2 />}
-        hint={<span className="num">{fmt(files.overlaps.rows)} rows · pairs under 25 mi, closest first</span>}
+        hint={<span className="num">{fmt(files.overlaps.rows)} rows · under 25 mi, closest first</span>}
         onSelect={() => download(files.overlaps.name, files.overlaps.csv(), "text/csv")}
       >
         Sperry overlap table (CSV)
       </MenuItem>
       <MenuItem
-        aria-label="Export project table as CSV"
+        aria-label="Sperry project table (CSV) — Export project table as CSV"
         icon={<Table2 />}
         hint={<span className="num">{fmt(files.projects.rows)} projects · overlap_1…n</span>}
         onSelect={() => download(files.projects.name, files.projects.csv(), "text/csv")}
@@ -69,7 +69,7 @@ export function ExportMenu({ size = "sm", labelled = false }: { size?: "sm" | "m
       </MenuItem>
       <MenuItem
         icon={<Table2 />}
-        hint={<span className="num">{fmt(files.flagged.rows)} rows · every flagged pair, with reasons</span>}
+        hint={<span className="num">{fmt(files.flagged.rows)} rows · with reasons</span>}
         onSelect={() => download(files.flagged.name, files.flagged.csv(), "text/csv")}
       >
         All flagged pairs (CSV)

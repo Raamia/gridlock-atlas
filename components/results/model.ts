@@ -29,6 +29,11 @@ export function regionProjects(region: string): Project[] {
   return SNAPSHOT.projects.filter((p) => region === "all" || p.region === region);
 }
 
+/** The region's planned projects the engine compares (completed / no-longer-listed and duplicate records left out). */
+export function plannedProjects(region: string): Project[] {
+  return regionProjects(region).filter(eligible);
+}
+
 const pairsCache = new Map<string, number>();
 /**
  * Cross-utility pairs the engine will check in the region (eligible projects, same region, no shared owner) — the same
@@ -118,7 +123,8 @@ export function statusLabel(p: Project): string {
     return l.charAt(0).toUpperCase() + l.slice(1).toLowerCase();
   }
   const v = p.status.value;
-  return v === "construction" ? "In construction" : v.charAt(0).toUpperCase() + v.slice(1);
+  // the inspector's word for it too (inspector/facts statusText)
+  return v === "construction" ? "In progress" : v.charAt(0).toUpperCase() + v.slice(1);
 }
 
 /* ─────────────────────────────── the result headline ─────────────────────────────── */
@@ -129,7 +135,7 @@ export interface Headline {
   label: string;
   evaluated: number;
   flagged: number;
-  /** Why the rest are flagged although outside the rule, e.g. "12 possible, on uncertain locations". */
+  /** Why the rest are flagged although outside the rule, e.g. "12 more on uncertain locations". */
   rest: string[];
   /** "A naive close-or-same-time rule flags 4,563 of these pairs (58%)." — only where the committed baseline covers the region at 25 mi. */
   naive: string | null;
@@ -148,9 +154,11 @@ export function headline(run: MatchRun, region: string, evaluated: number): Head
   const uncertain = others.filter((m) => !viaFacility(m) && m.geo === "possible").length;
   const wider = others.length - facility - uncertain;
   const rest: string[] = [];
-  if (wider) rest.push(`${fmt(wider)} at ${SPONSOR_RADIUS_MILES}–${r}\u00a0mi`);
-  if (uncertain) rest.push(`${fmt(uncertain)} possible, on uncertain locations`);
-  if (facility && inside.length) rest.push(`${fmt(facility)} through shared facilities beyond ${rule}\u00a0mi`);
+  // "more": these are counted on top of the display number (111 within · +12 beyond · 123 flagged), never a tab's count
+  if (wider) rest.push(`${fmt(wider)} more at ${SPONSOR_RADIUS_MILES}–${r}\u00a0mi`);
+  // not "beyond N mi": some of these are county-level only and carry no distance at all (G3)
+  if (uncertain) rest.push(`${fmt(uncertain)} more on uncertain locations`);
+  if (facility && inside.length) rest.push(`${fmt(facility)} more through shared facilities beyond ${rule}\u00a0mi`);
 
   let big = inside.length;
   let label = r >= SPONSOR_RADIUS_MILES ? `within Sperry’s ${SPONSOR_RADIUS_MILES} miles` : `within ${r} miles`;
@@ -174,7 +182,7 @@ function naiveLine(region: string, r: number, evaluated: number): string | null 
   else return null;
   // the committed baseline must describe exactly the pairs on screen
   if (n !== evaluated) return null;
-  return `A naive close-or-same-time rule flags ${fmt(k)} of these pairs (${Math.round((k / n) * 100)}%).`;
+  return `A naive close-or-same-time rule flags ${fmt(k)} of these pairs (${((k / n) * 100).toFixed(1)}%).`;
 }
 
 /* ─────────────────────────────── Sperry proof + replay ─────────────────────────────── */
@@ -277,7 +285,8 @@ export function placeFact(m: Match): Fact {
     const range = `${c.lowMiles.toFixed(1)}–${c.highMiles.toFixed(1)} mi with location uncertainty`;
     return {
       state,
-      text: `${miles} apart`,
+      // approximate, as everywhere else (G3): "≈6.7 mi apart"
+      text: `≈${miles} apart`,
       value: miles,
       tooltip: `Centers ${g.text} · ${state === "possible" ? `range ${range}; treat as a lead to verify` : range}`,
     };
@@ -350,7 +359,7 @@ export const TAB_TOOLTIP: Record<ReviewStatus, string> = {
   possible: "Possible — thin evidence; verify location and timing before any outreach",
 };
 
-/** "8 documented interfaces are in Upper Midwest and Southern Plains" — where Known coordination lives when this region has none. */
+/** "8 known-coordination pairs are in Upper Midwest and Southern Plains" — where Known coordination lives when this region has none. */
 export function knownElsewhere(run: MatchRun, region: string): { text: string; region: string } | null {
   if (region === "all") return null;
   const others = SNAPSHOT.regions
@@ -362,5 +371,5 @@ export function knownElsewhere(run: MatchRun, region: string): { text: string; r
   const total = others.reduce((s, r) => s + r.n, 0);
   const names = others.map((r) => r.label);
   const where = names.length === 1 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
-  return { text: `${total} documented ${total === 1 ? "interface is" : "interfaces are"} in ${where}`, region: others[0].id };
+  return { text: `${total} known-coordination ${total === 1 ? "pair is" : "pairs are"} in ${where}`, region: others[0].id };
 }

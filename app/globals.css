@@ -31,6 +31,12 @@
 
 @custom-variant coarse (@media (pointer: coarse));
 @custom-variant fine (@media (pointer: fine));
+/*
+ * Short desktop/tablet screens: panels tighten so their first answers fit above sticky footers. short = 1024×768 and
+ * 1280×720 (spacing, type steps); shorter = 1280×720 projectors only (one-line titles, the last resort).
+ */
+@custom-variant short (@media (min-width: 768px) and (max-height: 799px));
+@custom-variant shorter (@media (min-width: 768px) and (max-height: 759px));
 
 /* registered as lengths so their computed value is px: lib/layout.ts reads the safe-area insets from them */
 @property --safe-t {
@@ -494,6 +500,39 @@
 @utility fade-x {
   -webkit-mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 16px), transparent);
   mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 16px), transparent);
+}
+
+/*
+ * Touch targets (SPEC §3 phone, §13): on coarse pointers a dense control keeps its visual size but its hit area grows to
+ * 44px tall (a transparent ::before, centred on it — ::after stays free for callers). tap-44 grows height only, so rows of
+ * neighbours never steal each other's taps sideways; tap-44-round (icon buttons) also grows the width to 40px. The
+ * control must be positioned (relative / absolute) — the utility never sets position, so a caller's `absolute` wins.
+ */
+@utility tap-44 {
+  @media (pointer: coarse) {
+    &::before {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      top: 50%;
+      height: max(100%, 44px);
+      translate: 0 -50%;
+    }
+  }
+}
+@utility tap-44-round {
+  @media (pointer: coarse) {
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: max(100%, 40px);
+      height: max(100%, 44px);
+      translate: -50% -50%;
+      border-radius: 999px;
+    }
+  }
 }
 
 @utility scroll-thin {

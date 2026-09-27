@@ -12,7 +12,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { AlertTriangle, BadgeCheck, CalendarRange, Check, Copy, Download, MapPin, Printer, ShieldQuestion, X } from "lucide-react";
-import { Fragment, useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode, type RefObject } from "react";
 import { buildBrief, briefToMarkdown, type Brief, type BriefCitation } from "@/lib/brief";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import { displayTitle, geoShort, timeShort } from "@/lib/describe";
@@ -41,6 +41,15 @@ export function BriefModal() {
   // during the guided demo its card rides above the scrim: Tab reaches its Previous / Finish, and Space on Next stays there
   useDialogFocus(dialog, open && !!pair, demo ? DEMO_COMPANION : undefined);
   const close = () => set({ briefOpen: false });
+  // the paper has scrolled under the toolbar: a scrim band fades in behind the pill
+  const [scrolled, setScrolled] = useState(false);
+  // a fresh brief opens at its top, band hidden
+  const [wasOpen, setWasOpen] = useState(open);
+  if (wasOpen !== open) {
+    setWasOpen(open);
+    if (open) setScrolled(false);
+  }
+  useQuestionClearOfDemoCard(dialog, open && demo && !!brief);
 
   return (
     <AnimatePresence>
@@ -59,15 +68,20 @@ export function BriefModal() {
           transition={{ duration: 0.22 }}
           // the scrim (and the empty gutters beside the document) close it; the document and toolbar never do
           onMouseDown={(e) => (e.target as HTMLElement).dataset.scrim !== undefined && close()}
+          onScroll={(e) => {
+            const on = e.currentTarget.scrollTop > 8;
+            if (on !== scrolled) setScrolled(on);
+          }}
           className={clsx(
-            "scroll-thin fixed inset-0 z-(--z-dialog) overflow-y-auto overscroll-contain bg-canvas/75 px-2 pb-8 backdrop-blur-md sm:px-6 sm:pb-12",
+            // overflow-x hidden: the toolbar's band spans wider than the column, and the sheet never scrolls sideways
+            "scroll-thin fixed inset-0 z-(--z-dialog) overflow-x-hidden overflow-y-auto overscroll-contain bg-canvas/75 px-2 pb-8 backdrop-blur-md sm:px-6 sm:pb-12",
             // step 8 of the guided demo: its card is pinned bottom-left (gutter, 400 wide); the document moves right of it
             demo && "lg:pl-[calc(var(--gutter)+416px)]",
             "print:static print:overflow-visible print:bg-white print:p-0 print:backdrop-blur-none",
           )}
         >
           <div data-scrim="" className="mx-auto w-full max-w-[760px] print:max-w-none">
-            <Toolbar md={md} matchId={pair.match.id} onClose={close} />
+            <Toolbar md={md} matchId={pair.match.id} onClose={close} band={scrolled} />
             <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }} transition={{ duration: 0.38, ease: EASE }}>
               <BriefDocument pair={pair} brief={brief} />
             </motion.div>
@@ -78,9 +92,36 @@ export function BriefModal() {
   );
 }
 
+/**
+ * Guided demo, step 8: its card pins over the brief (bottom edge on phones and tablets). Once the sheet has settled,
+ * scroll the brief just enough that the Review question — what the step narrates — ends above the card (or, if it
+ * can't fit between the toolbar and the card, starts under the toolbar). Nothing moves when it is already clear.
+ */
+function useQuestionClearOfDemoCard(dialog: RefObject<HTMLDivElement | null>, on: boolean) {
+  useEffect(() => {
+    if (!on) return;
+    const t = window.setTimeout(() => {
+      const box = dialog.current;
+      const q = box?.querySelector<HTMLElement>("[data-brief-question]");
+      const card = document.querySelector<HTMLElement>('[aria-label="Guided demo"]');
+      const bar = box?.querySelector<HTMLElement>(".no-print.sticky");
+      if (!box || !q || !card) return;
+      const qr = q.getBoundingClientRect();
+      const cr = card.getBoundingClientRect();
+      // beside the brief (lg+), the card covers none of it
+      if (cr.right <= qr.left || cr.left >= qr.right) return;
+      const top = (bar?.getBoundingClientRect().bottom ?? 0) + 8;
+      const dy = Math.min(qr.bottom - (cr.top - 12), qr.top - top);
+      if (dy <= 0) return;
+      box.scrollBy({ top: dy, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }, 520);
+    return () => window.clearTimeout(t);
+  }, [dialog, on]);
+}
+
 /* ─────────────────────────────────────────────── toolbar ─────────────────────────────────────────────── */
 
-function Toolbar({ md, matchId, onClose }: { md: string; matchId: string; onClose: () => void }) {
+function Toolbar({ md, matchId, onClose, band }: { md: string; matchId: string; onClose: () => void; band: boolean }) {
   const [state, setState] = useState<CopyState>("idle");
   const timer = useRef(0);
   useEffect(() => () => window.clearTimeout(timer.current), []);
@@ -125,6 +166,16 @@ function Toolbar({ md, matchId, onClose }: { md: string; matchId: string; onClos
 
   return (
     <div data-scrim="" className="no-print sticky top-0 z-10 pt-[max(12px,var(--safe-t))] pb-3 sm:pt-6">
+      {/* once the paper scrolls beneath: a band of the scrim (dialog-wide, top edge to 12px below the pill) keeps the
+          paper's text from showing above and around the pill */}
+      <div
+        aria-hidden
+        data-scrim=""
+        className={clsx(
+          "absolute inset-y-0 left-1/2 -z-10 w-[200vw] -translate-x-1/2 bg-canvas/85 backdrop-blur-md transition-opacity duration-(--dur-2) [mask-image:linear-gradient(to_bottom,black_calc(100%-10px),transparent)]",
+          band ? "opacity-100" : "opacity-0",
+        )}
+      />
       {/* solid enough to stay dark over the paper as it scrolls beneath */}
       <div className="flex items-center gap-1 rounded-full border border-edge bg-surface-solid/90 p-1.5 shadow-[0_10px_28px_-14px_rgb(0_0_0/0.7)] backdrop-blur-chrome">
 
@@ -137,10 +188,10 @@ function Toolbar({ md, matchId, onClose }: { md: string; matchId: string; onClos
         >
           {state === "copied" ? "Copied" : "Copy Markdown"}
         </Button>
-        <Button variant="ghost" size="md" onClick={download} icon={<Download size={14} strokeWidth={1.75} />} aria-label="Download .md" className="max-sm:w-8 max-sm:px-0">
+        <Button variant="ghost" size="md" onClick={download} icon={<Download size={14} strokeWidth={1.75} />} aria-label="Download .md" className="max-sm:w-10 max-sm:px-0">
           <span className="max-sm:hidden">Download .md</span>
         </Button>
-        <Button variant="ghost" size="md" onClick={() => window.print()} icon={<Printer size={14} strokeWidth={1.75} />} aria-label="Print / PDF" className="max-sm:w-8 max-sm:px-0">
+        <Button variant="ghost" size="md" onClick={() => window.print()} icon={<Printer size={14} strokeWidth={1.75} />} aria-label="Print / PDF" className="max-sm:w-10 max-sm:px-0">
           <span className="max-sm:hidden">Print / PDF</span>
         </Button>
         <span role="status" aria-live="polite" className={clsx("min-w-0 flex-1 truncate px-2 text-right text-caption", state === "failed" ? "text-warn" : "text-fg-3")}>
@@ -211,29 +262,30 @@ function BriefDocument({ pair, brief }: { pair: SelectedPair; brief: Brief }) {
   const other = brief.rows.filter((r) => !["Pair", "Why flagged", "Coordination status"].includes(r.label));
 
   return (
-    <article className="theme-paper relative rounded-dialog bg-surface-solid px-5 pt-7 pb-8 shadow-[0_2px_0_rgb(255_255_255/0.5)_inset,0_40px_120px_-30px_rgb(0_0_0/0.85),0_12px_32px_-12px_rgb(0_0_0/0.5)] sm:px-10 sm:pt-10 sm:pb-10 print:rounded-none print:bg-white print:p-0 print:shadow-none">
+    <article className="theme-paper @container relative rounded-dialog bg-surface-solid px-5 pt-7 pb-8 shadow-[0_2px_0_rgb(255_255_255/0.5)_inset,0_40px_120px_-30px_rgb(0_0_0/0.85),0_12px_32px_-12px_rgb(0_0_0/0.5)] sm:px-10 sm:pt-10 sm:pb-10 print:rounded-none print:bg-white print:p-0 print:shadow-none">
       {/* masthead */}
       <header>
-        <div className="flex items-center justify-between gap-4">
+        {/* the snapshot date never splits; on a narrow sheet (the demo's step 8 at 1024) it stacks under the eyebrow */}
+        <div className="flex flex-col items-start gap-x-4 gap-y-1.5 @min-[600px]:flex-row @min-[600px]:items-center @min-[600px]:justify-between">
           <span className="flex items-center gap-2">
             <LogoMark size={20} />
             <span className="eyebrow text-fg-2">GridLock Atlas · Cited review brief</span>
           </span>
-          <span className="eyebrow hidden text-right sm:inline">Snapshot {formatDate(SNAPSHOT.snapshotDate)}</span>
+          <span className="eyebrow hidden whitespace-nowrap sm:inline @max-[600px]:pl-7">Snapshot {formatDate(SNAPSHOT.snapshotDate)}</span>
         </div>
         <h2 className="mt-6 font-display text-[40px] leading-none font-normal tracking-[-0.01em] text-fg-1 sm:text-[44px]">Review brief</h2>
         <p className="mt-3 max-w-[64ch] text-caption text-pretty text-fg-3">{provenance.join(" · ")}.</p>
       </header>
 
       {/* the pair: who to call, owner first */}
-      <div className="mt-7 grid grid-cols-1 gap-x-8 gap-y-4 border-t border-divider pt-6 sm:grid-cols-2">
+      <div className="mt-7 grid grid-cols-1 gap-x-8 gap-y-4 border-t border-divider pt-6 @min-[600px]:grid-cols-2">
         <PairSide role="a" owners={ownerNames(pair.a, IDX)} title={displayTitle(pair.a)} />
         <PairSide role="b" owners={ownerNames(pair.b, IDX)} title={displayTitle(pair.b)} />
       </div>
       <Chips m={m} />
 
       {/* the ask first */}
-      <section aria-label="Review question" className="mt-7 rounded-r-card border-l-[3px] border-overlap bg-overlap-wash py-4 pr-5 pl-5 print:break-inside-avoid">
+      <section aria-label="Review question" data-brief-question="" className="mt-7 rounded-r-card border-l-[3px] border-overlap bg-overlap-wash py-4 pr-5 pl-5 print:break-inside-avoid">
         <h3 className="eyebrow text-overlap">Review question</h3>
         <p className="mt-2.5 text-heading leading-[1.5] font-medium text-pretty text-fg-1">{brief.question}</p>
       </section>
@@ -281,10 +333,13 @@ function BriefDocument({ pair, brief }: { pair: SelectedPair; brief: Brief }) {
 
       {/* sources: numbered, each one a real link (print keeps them clickable) */}
       <section aria-labelledby="brief-sources" className="mt-9 border-t border-divider pt-6">
-        <h3 id="brief-sources" className="flex items-baseline gap-2">
-          <span className="eyebrow text-fg-2">Sources</span>
+        {/* the count sits beside the heading, not in it: the heading reads "Sources", never "Sources7" */}
+        <div className="flex items-baseline gap-2">
+          <h3 id="brief-sources" className="eyebrow text-fg-2">
+            Sources
+          </h3>
           <span className="num text-caption text-fg-3">{cites}</span>
-        </h3>
+        </div>
         <ol className="mt-3">
           {brief.citations.map((c) => (
             <li
@@ -311,7 +366,8 @@ function BriefDocument({ pair, brief }: { pair: SelectedPair; brief: Brief }) {
                   </a>
                   <span className="inline-flex items-center gap-1 text-fg-3">
                     {c.provenance.startsWith("located verbatim") ? (
-                      <BadgeCheck aria-hidden size={12} strokeWidth={1.75} className="text-ok" />
+                      // found by a script is not checked by a person (P1): green only once a human, or you, checked it (as in the inspector)
+                      <BadgeCheck aria-hidden size={12} strokeWidth={1.75} className={/human-checked/.test(c.provenance) || mine.has(c.n) ? "text-ok" : "text-fg-3"} />
                     ) : (
                       <ShieldQuestion aria-hidden size={12} strokeWidth={1.75} className="text-warn" />
                     )}
@@ -344,7 +400,8 @@ function PairSide({ role, owners, title }: { role: "a" | "b"; owners: string; ti
 
 /** Plain-word chips: status, place, time, and the caveats that change the call. */
 function Chips({ m }: { m: Match }) {
-  const place = geoShort(m).text;
+  // approximate, as in the row, the inspector and the body below (G3): "≈6.7 mi apart"
+  const place = m.geoDetail.method === "measured" && m.geoDetail.center ? `≈${geoShort(m).text}` : geoShort(m).text;
   const t = timeShort(m);
   const timeText = ["Schedule unknown", "No window overlap", "—"].includes(t) ? "" : m.time === "unknown" ? `in-service ${t}` : t;
   const disputed = m.conflicts.some((c) => !c.versionOnly);

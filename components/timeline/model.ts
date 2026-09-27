@@ -98,9 +98,12 @@ function rowLabels(region: string): Record<RowKey, { label: string; title: strin
   const names = (i: 0 | 1) => [...new Set(focal.map((f) => utilityShort(f[i])))];
   const a = names(0);
   const b = names(1);
+  // region "All" joins three regions' utilities: the 120px label column shows the first short name + a count ("DESC +2"),
+  // the title every name
+  const label = (n: string[], fallback: string) => (n.length > 1 ? `${n[0]} +${n.length - 1}` : (n[0] ?? fallback));
   return {
-    a: { label: a.join(" · ") || "Utility A", title: a.join(" · ") },
-    b: { label: b.join(" · ") || "Utility B", title: b.join(" · ") },
+    a: { label: label(a, "Utility A"), title: a.join(" · ") },
+    b: { label: label(b, "Utility B"), title: b.join(" · ") },
     other: { label: "Other", title: "Other utilities (grey on the map)" },
   };
 }
@@ -257,7 +260,10 @@ export function pairCaption(m: Match, shortOf: (id: string) => string): string[]
     if (g.coarse && g.gapDays === 0) out.push("In-service ranges overlap at stated precision");
     else out.push(`In-service ${g.coarse ? "≥" : ""}${dayCount(g.gapDays)} apart`);
   }
-  for (const d of m.pastDue ?? []) out.push(`Date passed for ${shortOf(d.projectId)}: completion not confirmed`);
+  const due = m.pastDue ?? [];
+  // both sides past due: one line, so the dock caption keeps to two lines
+  if (due.length > 1) out.push("Dates passed for both projects: completion not confirmed");
+  else for (const d of due) out.push(`Date passed for ${shortOf(d.projectId)}: completion not confirmed`);
   return out;
 }
 

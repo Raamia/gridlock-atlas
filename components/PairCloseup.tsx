@@ -94,6 +94,16 @@ export default function PairCloseup() {
     return hover ? [...base, { id: "hover", at: hover.pos, anchor: "above", alts: ["below", "right", "left"], priority: 50, always: true, content: <HoverTip info={hover} /> }] : base;
   }, [model, hover, phone]);
 
+  // the close-up is the showcase: while it is open the timeline dock folds to its 44px summary, giving the diorama its
+  // height back on laptops; on close it reopens (unless the reader unfolded or folded it meanwhile)
+  useEffect(() => {
+    if (phone || useAtlas.getState().timelineCollapsed) return;
+    useAtlas.getState().set({ timelineCollapsed: true });
+    return () => {
+      if (useAtlas.getState().timelineCollapsed) useAtlas.getState().set({ timelineCollapsed: false });
+    };
+  }, [phone]);
+
   // keyboard: focus lands on "Back to map"; closing returns focus to whatever opened the close-up
   const backRef = useRef<HTMLButtonElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -145,7 +155,7 @@ export default function PairCloseup() {
   }, [phone, demoOn, layout.focal.t, layout.focal.b, layout.focal.l, layout.focal.r, model]);
 
   const frame = useMemo<Frame>(() => {
-    if (phone) return { l: 12, r: 12, t: chrome.top + 12, b: chrome.bottom + 12, compact: true };
+    if (phone) return { l: 16, r: 16, t: chrome.top + 12, b: chrome.bottom + 12, compact: true };
     const pad = cameraPadding(layout, demoRect);
     return { l: pad.left, r: pad.right, t: Math.max(pad.top, chrome.top + 20), b: Math.max(pad.bottom, chrome.bottom + 16) };
   }, [phone, layout, demoRect, chrome.top, chrome.bottom]);
@@ -222,7 +232,7 @@ export default function PairCloseup() {
                 <div className="min-w-0 flex-1">{caption}</div>
               </div>
             )}
-            <Legend model={model} compact={demoOn} />
+            <Legend model={model} />
           </div>
         </>
       )}
@@ -335,9 +345,10 @@ function Legend({ model, compact }: { model: CloseupModel; compact?: boolean }) 
   return (
     <div
       className={clsx(
-        "chrome flex max-w-full items-center gap-x-3.5 gap-y-1.5 rounded-control px-3 text-caption text-fg-2",
-        // phone: one line that scrolls sideways instead of four wrapped rows
-        compact ? "pointer-events-auto scroll-thin h-9 flex-nowrap justify-start overflow-x-auto" : "flex-wrap justify-center py-2",
+        // every entry stays readable (the honesty keys — route not published, approximate — included): the key wraps,
+        // tighter on phones, instead of scrolling sideways out of sight
+        "chrome flex max-w-full flex-wrap items-center justify-center rounded-control text-caption text-fg-2",
+        compact ? "gap-x-3 gap-y-1 px-2.5 py-1.5" : "gap-x-3.5 gap-y-1.5 px-3 py-2",
       )}
     >
       {keys.map((k) => (

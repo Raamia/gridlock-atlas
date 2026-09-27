@@ -67,12 +67,12 @@ export function ReviewPanel({ m }: { m: Match }) {
           onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
           placeholder="Optional note"
           aria-label="Reviewer note"
-          className="mt-2 h-8 w-full rounded-control bg-fill-1 px-3 text-ui text-fg-1 ring-1 ring-edge ring-inset transition-[background-color,box-shadow] duration-150 placeholder:text-fg-4 hover:bg-fill-2 focus-visible:bg-fill-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg-1/80 coarse:h-11"
+          className="mt-2 h-8 w-full rounded-control bg-fill-1 px-3 text-ui text-fg-1 ring-1 ring-edge ring-inset transition-[background-color,box-shadow] duration-150 placeholder:text-fg-3 hover:bg-fill-2 focus-visible:bg-fill-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg-1/80 coarse:h-11"
         />
       )}
       {saved && (
         <p className="mt-2 text-caption text-fg-3">
-          Saved in this browser after <span className="num">{saved.seconds}s</span> · export from the Method drawer
+          Saved in this browser after <span className="num">{saved.seconds}s</span> · export from the Export menu or Method &amp; audit
         </p>
       )}
     </div>

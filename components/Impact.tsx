@@ -138,7 +138,7 @@ function Portfolio({ m }: { m: Match }) {
     <div className="rounded-card bg-fill-1 p-3.5" data-testid="impact-portfolio">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <p className="text-ui font-medium text-fg-1">Region portfolio · upper bound, never summed</p>
+          <p className="text-ui font-medium text-pretty text-fg-1">Region portfolio · upper bound · channels never added together</p>
           <p className="mt-0.5 text-caption text-fg-3">
             {SNAPSHOT.regions.find((r) => r.id === region)?.label ?? region} · <span className="num">{run.thresholdMiles} mi</span>
           </p>
@@ -146,19 +146,23 @@ function Portfolio({ m }: { m: Match }) {
         <BasisTag basis="conditional" text="upper bound" />
       </div>
       <p className="mt-2 text-caption text-pretty text-fg-2">
-        {pf.eligiblePairs} needs-review lead{pf.eligiblePairs === 1 ? "" : "s"} whose windows could overlap. Each project is counted once, in its highest-ranked pair; nothing
-        is added across rows. Scenario ceilings, not savings.
+        {pf.eligiblePairs} needs-review lead{pf.eligiblePairs === 1 ? "" : "s"} whose windows could overlap. Each project is counted once, in its highest-ranked pair; only
+        the staging ceilings of those disjoint pairs are combined, and different channels are never added together. Scenario ceilings, not savings.
       </p>
       <dl className="mt-2.5 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-caption">
         <dt className="text-fg-3">Staging together</dt>
         <dd className="text-fg-2">
-          <span className="num text-fg-1">up to ≈ {formatUsd(pf.stagingUsd)}</span> · {pf.pairs.length} disjoint pair{pf.pairs.length === 1 ? "" : "s"} · MISO 2018 $
+          <span className="num text-fg-1">up to ≈ {formatUsd(pf.stagingUsd)}</span> combined staging ceiling across {pf.pairs.length} disjoint pair
+          {pf.pairs.length === 1 ? "" : "s"} (one mobilization each) · MISO 2018 $
         </dd>
         <dt className="text-fg-3">New right-of-way</dt>
         <dd className="text-fg-2">
           <span className="num text-fg-1">{pf.corridorAcres < 10 ? pf.corridorAcres.toFixed(1) : Math.round(pf.corridorAcres)}</span> acres shared by default
         </dd>
-        <dt className="text-fg-3">Capital in scope</dt>
+        <dt className="text-fg-3">
+          Capital in scope
+          <span className="block">(per owner, not a saving)</span>
+        </dt>
         <dd className="space-y-0.5 text-fg-2">
           {pf.capital.map((l) => (
             <div key={`${l.owner}|${l.kind}|${l.sourceId ?? ""}`} title={l.sourceId ? IDX.source(l.sourceId)?.title : undefined}>

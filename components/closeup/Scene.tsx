@@ -9,7 +9,7 @@ import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import type { Precision } from "@/lib/domain/types";
 import { buildLatticeTower, buildMarkerPylon, buildSubstation, towerAttachments, towerTotalHeight } from "@/lib/models/structures";
-import { anchorBox, arcHeight, BEACON_H, PIN_H, type Anchor, type AnchorSpec, type Band, type HoverInfo, type LabelSpec } from "./Labels";
+import { anchorBox, arcHeight, BEACON_H, labelObstacles, PIN_H, type Anchor, type AnchorSpec, type Band, type HoverInfo, type LabelSpec, type Obstacle } from "./Labels";
 import { alongPolyline, PLINTH_R, polyLength, type CloseupModel, type CuProject } from "./model";
 import { arcPoints, backdropTexture, Bag, beamTexture, catenary, circlePoints, COLOR, floorTexture, gridSegments, hash01, tint } from "./three-helpers";
 
@@ -23,7 +23,7 @@ export interface Frame {
   t: number;
   r: number;
   b: number;
-  /** Phone: full-screen, a steeper first view and the plinth allowed slightly wider than the screen. */
+  /** Phone: full-screen, a steeper first view, the plinth fitted across the portrait width. */
   compact?: boolean;
 }
 
@@ -51,9 +51,9 @@ const POLAR0_COMPACT = 0.18 * Math.PI;
 const AZIMUTH0 = 0.26;
 const TARGET = new THREE.Vector3(0, 0.35, 0);
 /** Symbolic structure scale: scene units per metre of the procedural models (the plinth radius is always PLINTH_R). */
-const STRUCT_SCALE = 0.03;
+const STRUCT_SCALE = 0.036;
 /** Towers are drawn smaller and sparser than yards so a line reads as a line, not a fence (spacing is symbolic). */
-const TOWER_SCALE = 0.02;
+const TOWER_SCALE = 0.024;
 const TOWER_SPACING = 1.15;
 const TOWER_H = 40;
 const TOWER_SPAN = 14;
@@ -87,6 +87,7 @@ interface FocusGoal {
 
 export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, labels, labelEls, onInteract, onHover, onFail }: CloseupCanvasProps) {
   // click a structure → glide the orbit target to it; click empty space → back to the whole plinth
+  const obstacles = useMemo(() => labelObstacles(model), [model]);
   const focusRef = useRef<FocusGoal | null>(null);
   const homeRef = useRef(0);
   const focusOn = useCallback((at: [number, number, number] | null) => {
@@ -135,7 +136,7 @@ export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, l
       <Structures model={model} onHover={onHover} onPick={focusOn}>
         <Links model={model} boost={post ? 1.7 : 1} />
       </Structures>
-      <LabelSync labels={labels} els={labelEls} frame={frame} />
+      <LabelSync labels={labels} els={labelEls} frame={frame} obstacles={obstacles} />
       <OrbitControls
         makeDefault
         enableDamping
@@ -192,7 +193,8 @@ function fitDistance(frame: Frame, w: number, h: number, polar: number): number 
   const k = h / (2 * Math.tan((FOV * DEG) / 2)); // px per unit at distance 1
   // phone / tall holes: let the plinth run a little past the sides rather than float small in a tall column
   const tall = THREE.MathUtils.clamp((fh / fw - 0.8) / 0.5, 0, 1);
-  const spanW = 2 * PLINTH_R * (frame.compact ? 0.8 : THREE.MathUtils.lerp(1.0, 0.88, tall));
+  // phones fit the whole plinth across the portrait width (16px margins): its rim and edge labels never clip
+  const spanW = 2 * PLINTH_R * (frame.compact ? 1.0 : THREE.MathUtils.lerp(1.0, 0.88, tall));
   const spanH = (2 * PLINTH_R * Math.cos(polar) + 2.2 * Math.sin(polar)) * 1.08;
   return Math.max((spanW * k) / fw, (spanH * k) / fh);
 }
@@ -313,8 +315,10 @@ const LABEL_GAP = 4;
  * label already placed (sticking with last frame's anchor when it still fits, so labels don't flicker while orbiting).
  * A label that fits nowhere is hidden unless it is `always` (then it takes the least-overlapping anchor). Labels stay
  * inside the frame hole; one whose anchor leaves the hole is hidden. Callout placements draw their leader line.
+ * Scene obstacles (structures, pins, the beacon, tower tops, the raised links) count too: a facility name steps to
+ * another side or a short hop away rather than print over one, and hides when it can only sit on top of something.
  */
-function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<string, Element>; frame: Frame }) {
+function LabelSync({ labels, els, frame, obstacles }: { labels: LabelSpec[]; els: Map<string, Element>; frame: Frame; obstacles: Obstacle[] }) {
   const v = useMemo(() => new THREE.Vector3(), []);
   const latest = useRef(labels);
   const sizes = useRef(new WeakMap<Element, [number, number]>());
@@ -404,9 +408,46 @@ function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<strin
       v.set(x, y, z).project(camera);
       return [((v.x + 1) / 2) * size.width, ((1 - v.y) / 2) * size.height, v.z > -1 && v.z < 1];
     };
+    // the scene's standing things as screen boxes, and the plinth's rim as a screen polygon
+    const things: [number, number, number, number, number, number][] = [];
+    for (const o of obstacles) {
+      const [sx, sy, ok] = toScreen(...o.at);
+      if (ok) things.push([sx - o.w / 2, sy - o.h / 2, o.w, o.h, sx, sy]);
+    }
+    /** Area of a box over scene obstacles, ignoring the one the label names (its anchor point is on or right by it). */
+    const onThings = (l: number, t: number, w: number, h: number, ax: number, ay: number) => {
+      let area = 0;
+      for (const [L, T, W, H, sx, sy] of things) {
+        if (Math.abs(sx - ax) < 8 && Math.abs(sy - ay) < 40) continue;
+        const ox = Math.min(l + w, L + W) - Math.max(l, L);
+        const oy = Math.min(t + h, T + H) - Math.max(t, T);
+        if (ox > 0 && oy > 0) area += ox * oy;
+      }
+      return area;
+    };
+    const rim: [number, number][] = [];
+    for (let i = 0; i < 64; i++) {
+      const a = (i / 64) * Math.PI * 2;
+      const [sx, sy, ok] = toScreen(Math.cos(a) * PLINTH_R, 0, Math.sin(a) * PLINTH_R);
+      if (ok) rim.push([sx, sy]);
+    }
+    const front = rim.reduce<[number, number] | null>((best, p) => (!best || p[1] > best[1] ? p : best), null);
     for (const it of items) {
+      if (it.s.rim && front) {
+        // the plaque: centred on the plinth's front rim, just inside it (just below it when that spot is taken)
+        const cx = rim.reduce((s, p) => s + p[0], 0) / rim.length;
+        const x = clampX(cx - it.w / 2, it.w);
+        const inside = clampY(front[1] - it.h - 12, it.h);
+        const outside = clampY(front[1] + 10, it.h);
+        const y = overlap(x, inside, it.w, it.h) + onThings(x, inside, it.w, it.h, -999, -999) <= overlap(x, outside, it.w, it.h) ? inside : outside;
+        placed.push([x, y, it.w, it.h]);
+        it.el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+        it.el.style.visibility = "visible";
+        hideLeader(it.s.id);
+        continue;
+      }
       if (it.s.ring) {
-        const box = placeOnRing(it, it.s.ring, toScreen, placed, overlap, lastRing.current, { minX, maxX, minY: f.t + 4, maxY: size.height - f.b - 4 });
+        const box = placeOnRing(it, it.s.ring, toScreen, placed, overlap, lastRing.current, { minX, maxX, minY: f.t + 4, maxY: size.height - f.b - 4 }, rim);
         if (!box) {
           it.el.style.visibility = "hidden";
           continue;
@@ -421,21 +462,26 @@ function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<strin
       const tries = [...new Set<Anchor>([...(prev && options.includes(prev) ? [prev] : []), ...options])];
       let pick: Anchor | null = null;
       let box: [number, number] = [0, 0];
-      let best: { an: Anchor; box: [number, number]; cost: number } | null = null;
+      let best: { an: Anchor; box: [number, number]; cost: number; labels: number; scene: number } | null = null;
+      // cards in the callout band sit above the diorama by design; everything else weighs what it would cover
+      const sceneWeight = it.s.always ? 0.5 : 1;
       for (const an of tries) {
         const [bl, bt] = anchorBox(an, it.x, it.y, it.w, it.h, band);
         const b: [number, number] = [clampX(bl, it.w), clampY(bt, it.h)];
         // a callout must sit above its anchor, or the leader would run up through the card
         if (an.startsWith("callout") && it.y < b[1] + it.h + 16) continue;
-        const cost = overlap(b[0], b[1], it.w, it.h);
+        const labelsHit = overlap(b[0], b[1], it.w, it.h);
+        const sceneHit = an.startsWith("callout") ? 0 : onThings(b[0], b[1], it.w, it.h, it.x, it.y);
+        const cost = labelsHit * 4 + sceneHit * sceneWeight;
         if (cost === 0) {
           pick = an;
           box = b;
           break;
         }
-        if (!best || cost < best.cost) best = { an, box: b, cost };
+        if (!best || cost < best.cost) best = { an, box: b, cost, labels: labelsHit, scene: sceneHit };
       }
-      if (!pick && it.s.always && best) {
+      // a name that can only sit on another label, or mostly on a structure or the link, waits (hidden) for a clearer view
+      if (!pick && best && (it.s.always || (best.labels === 0 && best.scene <= 0.18 * it.w * it.h))) {
         pick = best.an;
         box = best.box;
       }
@@ -488,7 +534,22 @@ function placeOnRing(
   overlap: (l: number, t: number, w: number, h: number) => number,
   lastRing: Map<string, number>,
   view: { minX: number; maxX: number; minY: number; maxY: number },
+  rim: [number, number][] = [],
 ): [number, number] | null {
+  // the label stays on the plinth: every corner of its box inside the rim's screen outline (winding test)
+  const insideRim = (x: number, y: number) => {
+    if (rim.length < 3) return true;
+    let wn = 0;
+    for (let i = 0; i < rim.length; i++) {
+      const [x1, y1] = rim[i];
+      const [x2, y2] = rim[(i + 1) % rim.length];
+      const cross = (x2 - x1) * (y - y1) - (x - x1) * (y2 - y1);
+      if (y1 <= y) {
+        if (y2 > y && cross > 0) wn++;
+      } else if (y2 <= y && cross < 0) wn--;
+    }
+    return wn !== 0;
+  };
   const { center: c, r, y } = ring;
   const at = (a: number) => toScreen(c.x + Math.cos(a) * r, y, c.z + Math.sin(a) * r);
   const onPlinth = (a: number) => Math.hypot(c.x + Math.cos(a) * r, c.z + Math.sin(a) * r) <= PLINTH_R - 0.1;
@@ -504,13 +565,15 @@ function placeOnRing(
   const things = ring.avoid.map(([x, yy, z]) => toScreen(x, yy, z)).filter(([, , ok]) => ok);
   const clear = (l: number, t: number) => {
     if (l < view.minX || t < view.minY || l + it.w > view.maxX || t + it.h > view.maxY) return false;
+    if (![l + 2, l + it.w - 2].every((x) => [t + 2, t + it.h - 2].every((y) => insideRim(x, y)))) return false;
     if (overlap(l, t, it.w, it.h) > 0) return false;
     for (const [sx, sy] of stroke) if (sx > l - 3 && sx < l + it.w + 3 && sy > t - 3 && sy < t + it.h + 3) return false;
     // a structure stands up from its point: keep ~22px either side and ~30px above it clear
     for (const [sx, sy] of things) if (sx > l - 22 && sx < l + it.w + 22 && sy > t - 8 && sy < t + it.h + 30) return false;
     return true;
   };
-  const boxAt = (a: number): [number, number] | null => {
+  /** The box just past the ring at angle `a`: outside it (side 1) or, when the plinth rim leaves no room, inside (-1). */
+  const boxAt = (a: number, side: 1 | -1 = 1): [number, number] | null => {
     if (!onPlinth(a)) return null;
     const [qx, qy, ok] = at(a);
     if (!ok) return null;
@@ -520,15 +583,18 @@ function placeOnRing(
     const len = Math.hypot(nx, ny) || 1;
     [nx, ny] = [nx / len, ny / len];
     if (nx * (qx - cx) + ny * (qy - cy) < 0) [nx, ny] = [-nx, -ny];
+    [nx, ny] = [nx * side, ny * side];
     const reach = 8 + (it.w / 2) * Math.abs(nx) + (it.h / 2) * Math.abs(ny);
     return [qx + nx * reach - it.w / 2, qy + ny * reach - it.h / 2];
   };
   const prev = lastRing.get(it.s.id);
-  const tries = prev != null ? [prev, ...RING_STEPS.map((d) => ring.prefer + d)] : RING_STEPS.map((d) => ring.prefer + d);
-  for (const a of tries) {
-    const b = boxAt(a);
+  const angles = prev != null ? [prev, ...RING_STEPS.map((d) => ring.prefer + d)] : RING_STEPS.map((d) => ring.prefer + d);
+  // outside the ring first at every angle, then inside; a remembered inside placement is stored as angle + 100
+  const tries: [number, 1 | -1][] = [...angles.map((a): [number, 1 | -1] => (a >= 50 ? [a - 100, -1] : [a, 1])), ...angles.map((a): [number, 1 | -1] => [a >= 50 ? a - 100 : a, -1])];
+  for (const [a, side] of tries) {
+    const b = boxAt(a, side);
     if (b && clear(b[0], b[1])) {
-      lastRing.set(it.s.id, a);
+      lastRing.set(it.s.id, side === 1 ? a : a + 100);
       return b;
     }
   }
@@ -623,7 +689,7 @@ function buildLayer(model: CloseupModel, bag: Bag): Built {
         const pylon = p.heightMul == null;
         const g = pylon ? buildMarkerPylon() : buildSubstation({ width: 60, depth: 40 });
         bag.adopt(g); // the builder's own materials/geometries (materials are swapped for tinted clones below)
-        const mats = tint(g, pl.shared ? COLOR.neutral : color, bag, { mix: pl.shared ? 0 : 0.72, emissive: pl.shared ? 0.08 : 0.25 });
+        const mats = tint(g, pl.shared ? COLOR.neutral : color, bag, { mix: pl.shared ? 0 : 0.8, emissive: pl.shared ? 0.12 : 0.32 });
         g.scale.set(STRUCT_SCALE, STRUCT_SCALE * (pylon ? 1.4 : mul * 1.25), STRUCT_SCALE);
         g.position.set(pl.pos.x, 0, pl.pos.z);
         g.rotation.y = (hash01(pl.id) - 0.5) * 0.8;
@@ -675,7 +741,7 @@ function buildLayer(model: CloseupModel, bag: Bag): Built {
       const count = THREE.MathUtils.clamp(Math.round(len / TOWER_SPACING) + 1, 5, 18);
       const template = buildLatticeTower({ height: TOWER_H, armSpan: TOWER_SPAN });
       bag.adopt(template);
-      const mats = tint(template, color, bag, { mix: 0.62, emissive: 0.25 });
+      const mats = tint(template, color, bag, { mix: 0.7, emissive: 0.3 });
       const s = TOWER_SCALE * mul;
       template.scale.setScalar(s);
       const hover: HoverData = { text: `Symbolic line · ${p.title}`, sub: "towers along the official GIS route · spacing symbolic", y: towerTotalHeight(TOWER_H) * s, mats };

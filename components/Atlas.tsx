@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { catchError, type ErrorInfo } from "next/error";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { SNAPSHOT } from "@/lib/data";
+import { formatDate } from "@/lib/format";
 import type { MatchRun } from "@/lib/domain/types";
 import { INSPECTOR, PHONE_SHEET, PILL, RAIL, useLayout } from "@/lib/layout";
 import { regionMatches } from "@/lib/rank";
@@ -236,7 +237,9 @@ function FocalSlot({ children }: { children: ReactNode }) {
   );
 }
 
-/** lg/md with the inspector open: the rail collapses to this glass pill at the panel top-left (--focal-t clears it); it opens the rail as an overlay. */
+const SNAPSHOT_DATE = formatDate(SNAPSHOT.snapshotDate);
+
+/** lg/md with the inspector open (xl under the 3D close-up): the rail collapses to this glass pill at the panel top-left (--focal-t clears it); it opens the rail as an overlay. */
 function RailPill() {
   const layout = useLayout();
   const run = useAtlas((s) => s.run);
@@ -254,7 +257,7 @@ function RailPill() {
       aria-controls="opportunities-rail"
       onClick={() => set({ railOpen: !railOpen })}
       className={clsx(
-        "chrome absolute z-(--z-panel) inline-flex animate-fade-in items-center gap-2 rounded-full pr-2.5 pl-3 text-ui font-medium whitespace-nowrap text-fg-1 transition-colors duration-150 hover:bg-surface-raised",
+        "chrome absolute z-(--z-panel) inline-flex animate-fade-in items-center gap-2 rounded-full pr-2.5 pl-3 text-ui font-medium whitespace-nowrap text-fg-1 transition-colors duration-150 tap-44 hover:bg-surface-raised",
         railOpen && "bg-surface-raised",
       )}
       style={{ left: "var(--gutter)", top: "var(--panel-top)", height: PILL.h }}
@@ -262,6 +265,10 @@ function RailPill() {
       <ListOrdered size={16} strokeWidth={1.75} className="text-fg-2" />
       Opportunities
       <span className="num text-fg-3">· {count}</span>
+      {/* P6: the provenance stays on screen while the rail (and its footer caption) is collapsed */}
+      <span className="text-caption font-normal text-fg-3">
+        · <span className="max-lg:hidden">Public planning data · </span>Snapshot {SNAPSHOT_DATE}
+      </span>
       <ChevronDown size={14} strokeWidth={2} className={clsx("text-fg-3 transition-transform duration-200", railOpen && "rotate-180")} />
     </button>
   );
@@ -370,10 +377,15 @@ function RailSlot({ children }: { children: ReactNode }) {
       { left: "var(--gutter)", top: overlay ? "var(--focal-t)" : "var(--panel-top)", bottom: "var(--gutter)", width: "var(--rail-w)" };
 
   return (
-    <div
-      ref={slot}
-      id="opportunities-rail"
-      data-slot="rail"
+    <>
+      {/* lg/md overlay open: the map behind it (and a pair callout it half-covers) dims, so the overlap reads as an overlay */}
+      {overlay && railOpen && shown && (
+        <div aria-hidden className="pointer-events-none fixed inset-0 z-[calc(var(--z-chrome)-1)] animate-fade-in bg-canvas/45" />
+      )}
+      <div
+        ref={slot}
+        id="opportunities-rail"
+        data-slot="rail"
       {...(shown ? mapUi(sheet ? "bottom" : overlay ? undefined : "left") : {})}
       inert={!shown}
       className={clsx(
@@ -421,7 +433,8 @@ function RailSlot({ children }: { children: ReactNode }) {
       {layout.resizable && layout.railDocked && (
         <ResizeHandle edge="right" sizeKey="railWidth" current={layout.railW} min={RAIL.min} max={layout.railMaxW} label="Resize coordination queue" />
       )}
-    </div>
+      </div>
+    </>
   );
 }
 
@@ -585,19 +598,24 @@ function regionName(region: string): string {
   return region === "all" ? "all regions" : (SNAPSHOT.regions.find((r) => r.id === region)?.label ?? region);
 }
 
-/** Polite, visually hidden: what a finished comparison or radius change produced for the region on screen. */
+/**
+ * Polite, visually hidden: what a finished comparison or radius change produced for the region on screen — and, when the
+ * region changes under an existing run (a deep link's final region, the demo's region steps, a manual switch), that
+ * region's count, so the live text never describes a region that is no longer shown.
+ */
 function RunAnnouncer() {
   const run = useAtlas((s) => s.run);
   const region = useAtlas((s) => s.region);
-  const [seen, setSeen] = useState<{ run: MatchRun | null; text: string }>({ run: null, text: "" });
-  if (run !== seen.run) {
+  const [seen, setSeen] = useState<{ run: MatchRun | null; region: string; text: string }>({ run: null, region, text: "" });
+  if (run !== seen.run || region !== seen.region) {
     let text = "";
     if (run) {
       const n = regionMatches(run, region).length;
       const results = `${n.toLocaleString("en-US")} ${n === 1 ? "result" : "results"}`;
-      text = seen.run && seen.run.thresholdMiles !== run.thresholdMiles ? `Radius ${run.thresholdMiles} mi: ${results}` : `Comparison finished: ${results} in ${regionName(region)}`;
+      if (run === seen.run) text = `${results} in ${regionName(region)}`;
+      else text = seen.run && seen.run.thresholdMiles !== run.thresholdMiles ? `Radius ${run.thresholdMiles} mi: ${results}` : `Comparison finished: ${results} in ${regionName(region)}`;
     }
-    setSeen({ run, text });
+    setSeen({ run, region, text });
   }
   return (
     <div aria-live="polite" aria-atomic="true" className="sr-only">

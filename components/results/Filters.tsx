@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { AlertTriangle, Crosshair, X } from "lucide-react";
+import { AlertTriangle, Crosshair, FilterX, X } from "lucide-react";
 import { IDX } from "@/lib/data";
 import type { SignalLevel } from "@/lib/domain/types";
 import { useAtlas, type Focus, type TimingFilter } from "@/lib/store";
@@ -15,6 +15,9 @@ const TIMING: { id: TimingFilter; label: string; tooltip: string }[] = [
   { id: "no-match", label: "No overlap", tooltip: "Published windows do not overlap" },
 ];
 
+/** Fingers get 36px chips with a 6px gap between rows (the rows sit in the phone sheet's folded "Filters" row). */
+const TOUCH = "coarse:h-9 coarse:px-3";
+
 export interface FilterCounts {
   timing: Record<SignalLevel, number>;
   conflicts: number;
@@ -23,7 +26,8 @@ export interface FilterCounts {
 /**
  * Timing chips (independent toggles on `m.time`; none pressed = all; counts are tab-scoped), "Dates revised or disputed"
  * (store.conflictsOnly), the native Utility select (region-scoped options) and Clear. The timing chips wrap (two lines in
- * a 336–392px rail) rather than scroll, so none is ever cut off at rest.
+ * a 336–392px rail) rather than scroll, so none is ever cut off at rest. Clear is a small icon button at the top right
+ * of the chips (name "Clear", tooltip "Clear filters"): it appears without reflowing any chip or squeezing the select.
  */
 export function Filters({ counts, utilities }: { counts: FilterCounts; utilities: string[] }) {
   const timing = useAtlas((s) => s.timing);
@@ -35,22 +39,37 @@ export function Filters({ counts, utilities }: { counts: FilterCounts; utilities
 
   return (
     <div className="@container space-y-1.5">
-      <div role="group" aria-label="Timing" className="flex min-w-0 flex-wrap gap-1.5">
-        {TIMING.map((t) => (
-          <Chip key={t.id} size="sm" pressed={timing.includes(t.id)} count={counts.timing[t.id]} tooltip={t.tooltip} onClick={() => toggle(t.id)}>
-            {t.label}
-          </Chip>
-        ))}
+      <div className="flex min-w-0 items-start gap-1.5">
+        <div role="group" aria-label="Timing" className="flex min-w-0 flex-1 flex-wrap gap-1.5">
+          {TIMING.map((t) => (
+            <Chip key={t.id} size="sm" pressed={timing.includes(t.id)} count={counts.timing[t.id]} tooltip={t.tooltip} onClick={() => toggle(t.id)} className={TOUCH}>
+              {t.label}
+            </Chip>
+          ))}
+        </div>
+        {active && (
+          <IconButton
+            label="Clear"
+            tooltip="Clear filters"
+            tooltipSide="left"
+            onClick={() => set({ timing: [], conflictsOnly: false, utilityFilter: null })}
+            className="size-6! animate-fade-in coarse:size-9!"
+          >
+            <FilterX size={14} strokeWidth={1.75} />
+          </IconButton>
+        )}
       </div>
-      <div className="flex min-w-0 items-center gap-1.5">
+      {/* the select keeps a readable width ("All utilities", "Dairyland…") beside the chip */}
+      <div className="flex min-w-0 flex-wrap items-center gap-1.5">
         <Chip
           size="sm"
           pressed={conflictsOnly}
           count={counts.conflicts}
           // the triangle gives way first in a narrow rail, so "All utilities" still reads in full beside the chip
-          icon={<AlertTriangle aria-hidden size={12} strokeWidth={2} className={clsx("hidden @min-[324px]:block", conflictsOnly ? "text-warn" : "text-fg-3")} />}
+          icon={<AlertTriangle aria-hidden size={12} strokeWidth={2} className={clsx("hidden @min-[344px]:block", conflictsOnly ? "text-warn" : "text-fg-3")} />}
           tooltip="Pairs where a newer plan edition revised a date, or current sources disagree — every claim is kept"
           onClick={() => set({ conflictsOnly: !conflictsOnly })}
+          className={TOUCH}
         >
           Dates revised or disputed
         </Chip>
@@ -59,8 +78,8 @@ export function Filters({ counts, utilities }: { counts: FilterCounts; utilities
           hideLabel
           value={utilityFilter ?? ""}
           onChange={(e) => set({ utilityFilter: e.target.value || null })}
-          wrapperClassName="min-w-0 flex-1 [&>span:last-child]:w-full"
-          className="h-6! w-full min-w-0 pr-6! pl-2.5"
+          wrapperClassName="min-w-[104px] flex-1 [&>span:last-child]:w-full"
+          className="h-6! w-full min-w-0 pr-[22px]! pl-2 coarse:h-9!"
           title={utilityFilter ? (IDX.utility(utilityFilter)?.name ?? utilityFilter) : "Pairs with this utility on either side"}
         >
           <option value="">All utilities</option>
@@ -70,15 +89,6 @@ export function Filters({ counts, utilities }: { counts: FilterCounts; utilities
             </option>
           ))}
         </Select>
-        {active && (
-          <button
-            type="button"
-            onClick={() => set({ timing: [], conflictsOnly: false, utilityFilter: null })}
-            className="h-6 shrink-0 animate-fade-in rounded-full px-2 text-caption font-medium text-fg-2 transition-colors hover:bg-fill-2 hover:text-fg-1"
-          >
-            Clear
-          </button>
-        )}
       </div>
     </div>
   );

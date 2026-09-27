@@ -66,6 +66,20 @@ function projectOpacity(full: number, other: number, unflagged: number): Express
   ];
 }
 
+/**
+ * Project dots: a dimmed dot (another pair in view, or unflagged after a run) keeps only a hairline ring in its utility
+ * colour over an almost clear fill, so under the 3D pitch it reads as a quiet outline, never a dark pothole.
+ */
+function dotFill(unflagged: number): ExpressionSpecification {
+  return ["case", ["==", ["get", "role"], "other"], ["case", ["==", ["get", "hot"], true], 1, 0.1], ["==", ["get", "flagged"], false], unflagged * unflagged, 1];
+}
+function dotRing(unflagged: number): ExpressionSpecification {
+  return ["case", ["==", ["get", "role"], "other"], ["case", ["==", ["get", "hot"], true], 1, 0.5], ["==", ["get", "flagged"], false], 0.3 + 0.7 * unflagged, 1];
+}
+
+/** The pair's place names (gl-point-labels): its two projects' places and a hovered project's, minus the shared site. */
+export const POINT_LABEL_FILTER: FilterSpecification = ["all", ["match", ["get", "role"], ["a", "b", "hover"], true, false], ["!=", ["get", "onSite"], true]];
+
 const hollow: ExpressionSpecification = ["any", ["==", ["get", "context"], true], ["==", ["get", "precision"], "locality"]];
 const inPair: ExpressionSpecification = ["match", ["get", "role"], ["a", "b"], true, false];
 
@@ -95,8 +109,9 @@ export function addDataLayers(map: mapboxgl.Map, standard: boolean) {
     paint: {
       "line-emissive-strength": 1,
       "line-color": C.fg3,
-      "line-opacity": standard ? 0 : 0.09,
-      "line-width": 0.5,
+      // offline: the bundled county net is the only geography at pair zoom, so it firms up as the map zooms in
+      "line-opacity": standard ? 0 : ["interpolate", ["linear"], ["zoom"], 5, 0.08, 8, 0.22, 10, 0.32],
+      "line-width": standard ? 0.5 : ["interpolate", ["linear"], ["zoom"], 5, 0.5, 10, 0.9],
     },
     ...middle,
   });
@@ -309,10 +324,21 @@ export function addDataLayers(map: mapboxgl.Map, standard: boolean) {
         ["case", inPair, 9, ["==", ["get", "context"], true], 5, 7],
       ],
       "circle-color": ["case", hollow, C.canvas, roleColor],
-      "circle-stroke-color": ["case", inPair, ["case", hollow, roleColor, C.fg1], ["==", ["get", "hot"], true], C.fg1, hollow, roleColor, C.canvas],
+      "circle-stroke-color": [
+        "case",
+        inPair,
+        ["case", hollow, roleColor, C.fg1],
+        ["==", ["get", "hot"], true],
+        C.fg1,
+        hollow,
+        roleColor,
+        ["any", ["==", ["get", "role"], "other"], ["==", ["get", "flagged"], false]],
+        roleColor,
+        C.canvas,
+      ],
       "circle-stroke-width": ["case", inPair, 1.75, ["==", ["get", "hot"], true], 1.5, hollow, 1.5, 1],
-      "circle-opacity": projectOpacity(1, 0.3, 1),
-      "circle-stroke-opacity": projectOpacity(1, 0.3, 1),
+      "circle-opacity": dotFill(1),
+      "circle-stroke-opacity": dotRing(1),
     },
     ...top,
   });
@@ -340,9 +366,10 @@ export function addDataLayers(map: mapboxgl.Map, standard: boolean) {
     paint: {
       "circle-emissive-strength": 1,
       "circle-pitch-alignment": "map",
+      // a tinted disc in the utility colour with a bright ring: a center reads as a lit marker, never a dark hole
       "circle-radius": zoomed(5, 7.5),
-      "circle-color": C.canvas,
-      "circle-opacity": 0.85,
+      "circle-color": ["match", ["get", "role"], "a", C.a, C.b],
+      "circle-opacity": 0.28,
       "circle-stroke-color": ["match", ["get", "role"], "a", C.a, C.b],
       "circle-stroke-width": 2,
     },
@@ -355,8 +382,8 @@ export function addDataLayers(map: mapboxgl.Map, standard: boolean) {
     paint: {
       "circle-emissive-strength": 1,
       "circle-pitch-alignment": "map",
-      "circle-radius": zoomed(1.5, 2.25),
-      "circle-color": ["match", ["get", "role"], "a", C.a, C.b],
+      "circle-radius": zoomed(2, 2.75),
+      "circle-color": C.fg1,
     },
     ...top,
   });
@@ -417,7 +444,7 @@ export function addDataLayers(map: mapboxgl.Map, standard: boolean) {
       id: "gl-point-labels",
       type: "symbol",
       source: "gl-points",
-      filter: ["all", ["match", ["get", "role"], ["a", "b", "hover"], true, false], ["!=", ["get", "onSite"], true]],
+      filter: POINT_LABEL_FILTER,
       layout: {
         "text-field": ["get", "label"],
         "text-font": font,
@@ -477,8 +504,8 @@ export function visibility(map: mapboxgl.Map, layer: string, visible: boolean) {
 /** Apply the animated values (cheap: a handful of paint/filter calls, fine per frame for a short tween). */
 export function applyAnimated(map: mapboxgl.Map, s: Animated) {
   const u = s.unflagged;
-  paint(map, "gl-points", "circle-opacity", projectOpacity(1, 0.3, u));
-  paint(map, "gl-points", "circle-stroke-opacity", projectOpacity(1, 0.3, u));
+  paint(map, "gl-points", "circle-opacity", dotFill(u));
+  paint(map, "gl-points", "circle-stroke-opacity", dotRing(u));
   paint(map, "gl-routes", "line-opacity", projectOpacity(0.95, 0.28, u));
   paint(map, "gl-routes-casing", "line-opacity", projectOpacity(0.55, 0.2, u));
   paint(map, "gl-halos-fill", "fill-opacity", projectOpacity(0.08, 0.02, u));
@@ -494,11 +521,12 @@ export function applyAnimated(map: mapboxgl.Map, s: Animated) {
   ]);
   visibility(map, "gl-overlaps", s.arcs2D);
 
-  // raised arcs (map-3d) carry the selected pair in 3D: the ground connector becomes a faint shadow of it
-  paint(map, "gl-connector", "line-opacity", ["*", s.raised ? 0.35 : 1, ["case", ["get", "beyond"], 0.5, ["==", ["get", "geo"], "confirmed"], 1, 0.6]]);
+  // raised arcs (map-3d) carry the selected pair in 3D: the ground connector (kept, with its feature, for the hit
+  // tests and Flat map) and the flat site legs step out of sight, so the pair never reads as two links
+  paint(map, "gl-connector", "line-opacity", ["*", s.raised ? 0 : 1, ["case", ["get", "beyond"], 0.5, ["==", ["get", "geo"], "confirmed"], 1, 0.6]]);
   // trim [p, 1] hides the part not yet drawn: the link grows from A's center to B's (and each leg toward the site)
   const p = Math.max(0, Math.min(1, s.trim));
   paint(map, "gl-connector", "line-trim-offset", [p, 1]);
   paint(map, "gl-site-legs", "line-trim-offset", [p, 1]);
-  paint(map, "gl-site-legs", "line-opacity", s.raised ? 0.35 : 0.9);
+  paint(map, "gl-site-legs", "line-opacity", s.raised ? 0 : 0.9);
 }

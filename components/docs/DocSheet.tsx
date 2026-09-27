@@ -10,7 +10,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from "react";
 import { useDialogFocus } from "@/lib/focus";
 import { IconButton } from "../ui";
 
@@ -88,6 +88,28 @@ export function DocSheet({ open, onClose, title, eyebrow, meta, toc, tocLabel, j
 function SheetBody({ title, eyebrow, meta, toc, tocLabel, jump, onJumped, onClose, children }: Omit<DocSheetProps, "open">) {
   const scroller = useRef<HTMLDivElement>(null);
   const chips = useRef<HTMLDivElement>(null);
+  const heading = useRef<HTMLHeadingElement>(null);
+
+  // on open the sheet's title takes focus, not the close button (whose ring read as a stray circle); a control that
+  // claims focus itself afterwards (the registry's filter on desktop) still does
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      const h = heading.current;
+      const panel = h?.closest<HTMLElement>('[role="dialog"]');
+      const el = document.activeElement;
+      if (h && panel && (!el || el === document.body || el === panel || el.getAttribute("aria-label") === `Close ${title}`)) h.focus({ preventScroll: true });
+    }, 40);
+    return () => window.clearTimeout(t);
+  }, [title]);
+  // Shift+Tab from the title wraps to the sheet's last control (the title sits outside the dialog's own Tab cycle)
+  const onHeadingKey = (e: ReactKeyboardEvent<HTMLHeadingElement>) => {
+    if (e.key !== "Tab" || !e.shiftKey) return;
+    const panel = e.currentTarget.closest<HTMLElement>('[role="dialog"]');
+    const items = [...(panel?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])') ?? [])].filter((x) => x.offsetParent !== null);
+    if (!items.length) return;
+    e.preventDefault();
+    items[items.length - 1].focus();
+  };
   const [active, setActive] = useState<string | null>(toc[0]?.id ?? null);
   const lockUntil = useRef(0);
   const tocKey = toc.map((t) => t.id).join("|");
@@ -172,10 +194,12 @@ function SheetBody({ title, eyebrow, meta, toc, tocLabel, jump, onJumped, onClos
       <header className="flex shrink-0 items-start gap-4 px-5 pt-5 pb-4 sm:px-7 sm:pt-6">
         <div className="min-w-0 flex-1">
           <span className="eyebrow">{eyebrow}</span>
-          <h2 className="mt-2 text-title font-semibold text-fg-1">{title}</h2>
+          <h2 ref={heading} tabIndex={-1} onKeyDown={onHeadingKey} className="mt-2 text-title font-semibold text-fg-1 outline-none">
+            {title}
+          </h2>
           {meta && <p className="mt-1.5 text-caption text-fg-3">{meta}</p>}
         </div>
-        <IconButton label="Close" tooltip={false} onClick={onClose} className="-mt-1 -mr-1.5">
+        <IconButton label={`Close ${title}`} tooltip={false} onClick={onClose} className="-mt-1 -mr-1.5">
           <X size={16} strokeWidth={1.75} />
         </IconButton>
       </header>
@@ -218,14 +242,15 @@ function SheetBody({ title, eyebrow, meta, toc, tocLabel, jump, onJumped, onClos
                       aria-current={on ? "true" : undefined}
                       onClick={() => goTo(t.id, false)}
                       className={clsx(
-                        "group relative flex w-full items-center gap-2.5 rounded-control py-[7px] pr-2.5 pl-3 text-left text-ui transition-colors duration-150",
+                        "group relative flex w-full items-baseline gap-2.5 rounded-control py-[7px] pr-2.5 pl-3 text-left text-ui transition-colors duration-150",
                         on ? "bg-fill-2 text-fg-1" : "text-fg-2 hover:bg-fill-1 hover:text-fg-1",
                       )}
                     >
                       <span aria-hidden className={clsx("num w-5 shrink-0 text-label", on ? "text-fg-2" : "text-fg-4")}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="min-w-0 flex-1 truncate">{t.label}</span>
+                      {/* a long entry ("Open research questions") wraps to a second line instead of being cut */}
+                      <span className="min-w-0 flex-1 text-pretty leading-[1.3]">{t.label}</span>
                       {t.meta !== undefined && <span className="num shrink-0 text-caption text-fg-3">{t.meta}</span>}
                     </button>
                   </li>

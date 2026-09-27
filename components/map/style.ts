@@ -72,8 +72,8 @@ export function offlineStyle(): StyleSpecification {
         source: "ctx-states",
         paint: {
           "line-emissive-strength": 1,
-          "line-color": "#223047",
-          "line-width": 0.9,
+          "line-color": "#2c3d5a",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.9, 9, 1.8],
         },
       },
     ],

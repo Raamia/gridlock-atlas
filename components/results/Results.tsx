@@ -11,7 +11,7 @@ import { useReview, type PairReview } from "@/lib/review";
 import { regionPairCounts } from "@/lib/selectors";
 import { useViewport } from "@/lib/layout";
 import { passesFilters, useAtlas, type SheetSnap } from "@/lib/store";
-import { Button, Eyebrow, Segmented, Tooltip } from "../ui";
+import { Button, Disclosure, Eyebrow, IconButton, Segmented, Tooltip } from "../ui";
 import { EmptyTab } from "./EmptyTab";
 import { ExportMenu } from "./ExportMenu";
 import { Filters, FocusChip, type FilterCounts } from "./Filters";
@@ -20,12 +20,19 @@ import { PAIRS_LAYOUT_ID } from "./Hero";
 import { fmt, headline, knownElsewhere, sperryTags, TAB_TOOLTIP, type Headline } from "./model";
 import { ProofButton } from "./ProofButton";
 import { RadiusControl } from "./RadiusControl";
-import { Row } from "./Row";
+import { Row, type RowProps } from "./Row";
 
 const TAB_LABEL: Record<ReviewStatus, string> = { "needs-review": "Needs review", "known-coordination": "Known", possible: "Possible" };
 export const LIST_ID = "opportunities-list";
-/** Below this viewport height (1280×800, 1024×768 laptops) the rail's top block tightens so more rows show at rest. */
-const COMPACT_BELOW_VH = 860;
+/**
+ * Below this viewport height (1440×900, 1280×800, 1280×720 projectors, 1024×768) the rail's top block tightens so the
+ * list starts higher: the naive-rule line and the radius hint move into (i) tooltips, the proof button takes one line.
+ */
+const COMPACT_BELOW_VH = 1000;
+/** Below this (1280×720 projectors) the proof button leaves the rail too: it stays one click away in Method, the hero and demo step 8. */
+const SHORT_BELOW_VH = 760;
+/** Honesty line (SPEC §1 sub): the list is ranked leads for a planner to review, never a finding. */
+export const LEADS_NOT_FINDINGS = "Ranked review leads — not findings.";
 
 /**
  * State C (SPEC §4 C): header row, headline, proof, review radius, status tabs, filters, focus, the ranked list
@@ -51,6 +58,7 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
   // short laptop screens: the naive-rule line and the radius hint move into tooltips, the proof button takes one line
   const { vh } = useViewport();
   const compact = !phone && vh < COMPACT_BELOW_VH;
+  const short = !phone && vh < SHORT_BELOW_VH;
 
   // the retired "Conflicts" tab lives on as the "Dates revised or disputed" chip
   const tab: ReviewStatus = storeTab === "conflicts" ? firstNonEmptyTab(run, region) : storeTab;
@@ -81,6 +89,26 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
 
   // J/K and the inspector's Pair above/below walk the list as shown
   useEffect(() => setVisibleOrder(view.rows.map((m) => m.id)), [view.rows, setVisibleOrder]);
+
+  // phone: opening the sheet from its peek lands on the tabs, so the half snap shows rows (SPEC §3: "tabs, chips, list");
+  // the headline is one short scroll up, and the summary row above keeps the flagged count in view
+  const sheetScroll = useRef<HTMLDivElement>(null);
+  const tabsBox = useRef<HTMLDivElement>(null);
+  const lastSnap = useRef(snap);
+  useEffect(() => {
+    const from = lastSnap.current;
+    lastSnap.current = snap;
+    if (!phone || from !== "peek" || snap === "peek") return;
+    const t = window.setTimeout(() => {
+      const sc = sheetScroll.current;
+      const el = tabsBox.current;
+      if (!sc || !el || sc.scrollTop > 0) return;
+      const top = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - 4;
+      const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      sc.scrollTo({ top: Math.max(0, top), behavior: smooth ? "smooth" : "auto" });
+    }, 380);
+    return () => window.clearTimeout(t);
+  }, [snap, phone]);
 
   const utilities = useMemo(() => {
     const ids = new Set(SNAPSHOT.projects.filter((p) => region === "all" || p.region === region).flatMap((p) => p.owners.map((o) => o.utilityId)));
@@ -115,7 +143,7 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
       value={tab}
       onChange={(t) => set({ tab: t })}
       // tighter than the default sm padding: the three tabs (label + count) fit a 336px rail at the desktop type size
-      items={REVIEW_TABS.map((t) => ({ value: t, label: TAB_LABEL[t], count: view.tabCounts[t], tooltip: TAB_TOOLTIP[t], controls: LIST_ID, className: "px-2!" }))}
+      items={REVIEW_TABS.map((t) => ({ value: t, label: TAB_LABEL[t], count: view.tabCounts[t], tooltip: TAB_TOOLTIP[t], controls: LIST_ID, className: "px-2! coarse:h-10" }))}
     />
   );
 
@@ -130,6 +158,7 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
   const list = (
     <List
       key={`${region}|${tab}`}
+      variant={phone ? (snap === "peek" ? "dense" : "compact") : "card"}
       rows={view.rows}
       ranks={ranks}
       repeats={view.repeats}
@@ -159,8 +188,8 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
   const header = <HeaderRow radius={run.thresholdMiles} running={running} />;
   const body = (
     <>
-      <HeadlineBlock h={head} omitFlagged={phone} compact={compact} />
-      <ProofButton stacked={!compact} className={compact ? "mt-2.5" : "mt-3"} />
+      <HeadlineBlock h={head} compact={compact} />
+      {!short && <ProofButton stacked={!compact} className={compact ? "mt-2.5" : "mt-3"} />}
       <div className={compact ? "mt-3" : "mt-4"}>
         <RadiusControl compact={compact} />
       </div>
@@ -177,6 +206,7 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
 
   if (phone) {
     const peek = snap === "peek";
+    const nFilters = timing.length + (conflictsOnly ? 1 : 0) + (utilityFilter ? 1 : 0);
     return (
       <div className="flex min-h-0 flex-1 flex-col">
         <button
@@ -197,18 +227,35 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
           </span>
           <ChevronUp aria-hidden size={16} strokeWidth={1.75} className={clsx("ml-auto shrink-0 text-fg-3 transition-transform duration-300", !peek && "rotate-180")} />
         </button>
-        <div data-queue-scroll className={clsx("min-h-0 flex-1 overscroll-contain [overflow-anchor:none]", peek ? "overflow-hidden" : "scroll-thin overflow-y-auto")}>
+        <div ref={sheetScroll} data-queue-scroll className={clsx("min-h-0 flex-1 overscroll-contain [overflow-anchor:none]", peek ? "overflow-hidden" : "scroll-thin overflow-y-auto")}>
+          {/* half / full: the answer in two short lines, the tabs, then filters, radius and proof folded into one row —
+              so the half sheet (52dvh) shows rows, not settings */}
           <div className="grid transition-[grid-template-rows] duration-(--dur-4) ease-enter" style={{ gridTemplateRows: peek ? "0fr" : "1fr" }}>
             <div className="min-h-0 overflow-hidden" inert={peek || undefined}>
-              {header}
-              <div className="px-(--panel-pad) pb-3">
+              <div className="px-(--panel-pad) pb-1">
                 {error && <div className="mb-3 [&>[role=alert]]:mt-0">{error}</div>}
-                {body}
-                <div className="mt-4">{controls}</div>
+                <PhoneHeadline h={head} radius={run.thresholdMiles} running={running} />
+                <div ref={tabsBox} className="mt-2.5">
+                  {tabs}
+                </div>
+                <Disclosure
+                  className="mt-1.5"
+                  buttonClassName="h-11 py-0! text-caption! text-fg-2!"
+                  summary="Filters, radius and proof"
+                  meta={`${run.thresholdMiles} mi${nFilters ? ` · ${nFilters} on` : ""}`}
+                  contentClassName="space-y-3 pt-1 pb-2"
+                >
+                  <Filters counts={view.filterCounts} utilities={utilities} />
+                  <RadiusControl />
+                  <ProofButton stacked />
+                  {head.naive && <p className="text-caption text-fg-3">{head.naive}</p>}
+                </Disclosure>
+                {focus && <div className="mt-1.5"><FocusChip focus={focus} /></div>}
+                {reviewer && <div className="mt-2"><LabeledMeter n={labeled} of={view.inTab.length} /></div>}
               </div>
             </div>
           </div>
-          <div className={clsx("px-1 pb-2", running && "opacity-60")} aria-busy={running || undefined}>
+          <div className={clsx("px-2 pb-2", running && "opacity-60")} aria-busy={running || undefined}>
             {list}
           </div>
           {!peek && <Footer unflagged={unflagged} />}
@@ -226,7 +273,7 @@ export function Results({ phone, snap, error }: { phone: boolean; snap: SheetSna
           {body}
         </div>
         <StickyControls>{controls}</StickyControls>
-        <div className={clsx("px-1 pt-1 pb-2 transition-opacity duration-200", running && "opacity-60")} aria-busy={running || undefined}>
+        <div className={clsx("px-1.5 pt-1 pb-2 transition-opacity duration-200", running && "opacity-60")} aria-busy={running || undefined}>
           {list}
         </div>
       </div>
@@ -271,10 +318,10 @@ function HeaderRow({ radius, running }: { radius: number; running: boolean }) {
 }
 
 /**
- * "111 within Sperry's 25 miles" · "of 7,830 pairs checked · 123 pairs flagged · 12 possible, …" · the naive-rule line
- * (`compact`: behind an (i) at the end of the sub-line).
+ * "111 within Sperry's 25 miles" · "of 7,830 pairs checked · 123 pairs flagged · 12 more …" · "Ranked review leads — not
+ * findings." · the naive-rule line (`compact`: behind an (i) at the end of the sub-line).
  */
-function HeadlineBlock({ h, omitFlagged, compact }: { h: Headline; omitFlagged?: boolean; compact?: boolean }) {
+function HeadlineBlock({ h, compact }: { h: Headline; compact?: boolean }) {
   return (
     <div className="pt-0.5">
       <p className="flex items-baseline gap-2.5">
@@ -287,37 +334,95 @@ function HeadlineBlock({ h, omitFlagged, compact }: { h: Headline; omitFlagged?:
         >
           {fmt(h.big)}
         </motion.span>
-        <span className="min-w-0 text-ui text-fg-2">{h.label}</span>
+        <span className="min-w-0 text-ui text-balance text-fg-2">{keepMilesTogether(h.label)}</span>
       </p>
       <p className="mt-1.5 text-caption text-fg-2">
-        of{" "}
-        <motion.span layoutId={PAIRS_LAYOUT_ID} className="num inline-block leading-none font-medium text-fg-1">
-          {fmt(h.evaluated)}
-        </motion.span>{" "}
-        {h.evaluated === 1 ? "pair" : "pairs"} checked
-        {!omitFlagged && (
-          <>
-            {" · "}
-            <span className="font-medium text-fg-1">
-              <span className="num">{fmt(h.flagged)}</span> {h.flagged === 1 ? "pair" : "pairs"} flagged
-            </span>
-          </>
-        )}
+        of <PairsChecked n={h.evaluated} /> {h.evaluated === 1 ? "pair" : "pairs"} checked
+        {" · "}
+        <span className="font-medium whitespace-nowrap text-fg-1">
+          <span className="num">{fmt(h.flagged)}</span> {h.flagged === 1 ? "pair" : "pairs"} flagged
+        </span>
         {h.rest.map((r) => (
           <span key={r}> · {r}</span>
         ))}
         {compact && h.naive && (
           <>
             {" "}
-            <Tooltip content={h.naive} side="bottom" align="start">
-              <button type="button" aria-label="Compared with a naive rule" className="-my-1 inline-grid size-5 translate-y-[3px] place-items-center rounded-full text-fg-3 transition-colors hover:text-fg-1 coarse:size-6">
-                <Info aria-hidden size={13} strokeWidth={1.75} />
-              </button>
-            </Tooltip>
+            <NaiveInfo text={h.naive} />
           </>
         )}
       </p>
+      <p className="mt-1 text-caption text-fg-3">{LEADS_NOT_FINDINGS}</p>
       {!compact && h.naive && <p className="mt-1 text-caption text-fg-3">{h.naive}</p>}
+    </div>
+  );
+}
+
+/**
+ * "… beyond 25 mi" never leaves "25 mi" alone on a line: the last words wrap as one unit (a nowrap span, so the text keeps
+ * plain spaces for anything that reads it).
+ */
+function keepMilesTogether(s: string): ReactNode {
+  const m = /^(.*) (beyond \d+ mi)$/.exec(s);
+  if (!m) return s;
+  return (
+    <>
+      {m[1]} <span className="whitespace-nowrap">{m[2]}</span>
+    </>
+  );
+}
+
+/**
+ * The 7,830 that flew in from the hero's stat (shared layout). Position only: a size morph would scale the number over
+ * the words beside it mid-flight; the box it lands in never changes size, so the sentence never reflows under it.
+ */
+function PairsChecked({ n }: { n: number }) {
+  return (
+    <motion.span layoutId={PAIRS_LAYOUT_ID} layout="position" className="num inline-block leading-none font-medium text-fg-1">
+      {fmt(n)}
+    </motion.span>
+  );
+}
+
+function NaiveInfo({ text }: { text: string }) {
+  return (
+    <Tooltip content={text} side="bottom" align="start">
+      <button type="button" aria-label="Compared with a naive rule" className="-my-1 inline-grid size-5 translate-y-[3px] place-items-center rounded-full text-fg-3 transition-colors hover:text-fg-1 coarse:size-6">
+        <Info aria-hidden size={13} strokeWidth={1.75} />
+      </button>
+    </Tooltip>
+  );
+}
+
+/**
+ * Phone half / full: the answer on two short lines — "111 within Sperry's 25 miles" with Re-run and Export beside it,
+ * then the checked count and the honesty line (the flagged count is already on the sheet's summary row).
+ */
+function PhoneHeadline({ h, radius, running }: { h: Headline; radius: number; running: boolean }) {
+  const compare = useAtlas((s) => s.compare);
+  return (
+    <div>
+      <h2 className="sr-only">Coordination opportunities · {radius} mi</h2>
+      <div className="flex items-center gap-2">
+        <p className="flex min-w-0 flex-1 items-baseline gap-2">
+          <span className="num text-title font-medium text-fg-1">{fmt(h.big)}</span>
+          <span className="min-w-0 truncate text-ui text-fg-2">{h.label}</span>
+        </p>
+        <span className="-mr-2 flex shrink-0 items-center">
+          <IconButton label="Re-run comparison" size="xl" tooltip={false} aria-disabled={running || undefined} onClick={() => !running && void compare()}>
+            <RotateCw size={16} strokeWidth={1.75} className={clsx(running && "animate-spin [animation-duration:900ms]")} />
+          </IconButton>
+          <ExportMenu size="md" />
+        </span>
+      </div>
+      <p className="-mt-1 text-caption text-pretty text-fg-3">
+        of <span className="num text-fg-2">{fmt(h.evaluated)}</span> {h.evaluated === 1 ? "pair" : "pairs"} checked
+        {h.rest.map((r) => (
+          <span key={r}> · {r}</span>
+        ))}
+        {" · "}
+        {LEADS_NOT_FINDINGS}
+      </p>
     </div>
   );
 }
@@ -343,7 +448,7 @@ function StickyControls({ children }: { children: ReactNode }) {
   }, []);
   return (
     <>
-      <div ref={sentinel} aria-hidden className="h-3" />
+      <div ref={sentinel} aria-hidden data-sticky-sentinel="" className="h-3" />
       <div
         ref={box}
         className={clsx(
@@ -375,6 +480,7 @@ function LabeledMeter({ n, of }: { n: number; of: number }) {
 const PAGE = 120;
 
 function List({
+  variant,
   rows,
   ranks,
   repeats,
@@ -384,6 +490,8 @@ function List({
   empty,
   endNote,
 }: {
+  /** Row look: cards in the rail; compact on the phone sheet (dense at its peek, so the top card fits the 132px sheet whole). */
+  variant: RowProps["variant"];
   rows: Match[];
   ranks: Map<string, number>;
   repeats: Map<string, number>;
@@ -416,7 +524,7 @@ function List({
 
   return (
     <>
-      <div role="list" id={LIST_ID} aria-label="Coordination opportunities" className="@container space-y-2">
+      <div role="list" id={LIST_ID} aria-label="Coordination opportunities" className="@container space-y-1.5">
         {rows.length === 0
           ? empty
           : rows.slice(0, shown).map((m, i) => (
@@ -430,6 +538,7 @@ function List({
                 focusId={focusId}
                 sperry={sperry.get(m.id)}
                 label={labels?.[m.id]?.label}
+                variant={variant}
               />
             ))}
       </div>

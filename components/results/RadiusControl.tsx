@@ -15,7 +15,8 @@ const DEBOUNCE_MS = 160;
 
 /** Where a value sits on the track, accounting for the 16px thumb (its centre never reaches the ends). */
 const at = (v: number) => `calc(8px + (100% - 16px) * ${(v - MIN) / (MAX - MIN)})`;
-const HINT = "Project centers within · a review heuristic, not a regulatory standard. Re-runs the engine.";
+/** G2, verbatim after the radius it describes: "Project centers within 25 mi · a review heuristic, not a regulatory standard. Re-runs the engine." */
+const hint = (r: number) => `Project centers within ${r}\u00a0mi · a review heuristic, not a regulatory standard. Re-runs the engine.`;
 
 /**
  * Review radius: one row — label · native range (Home/End, toHaveValue) · value — that quietly re-runs the engine.
@@ -53,7 +54,7 @@ export function RadiusControl({ compact }: { compact?: boolean }) {
             Review radius
           </label>
           {compact && (
-            <Tooltip content={HINT} side="bottom" align="start">
+            <Tooltip content={hint(local)} side="bottom" align="start">
               <button type="button" aria-label="About the review radius" className="-my-1 grid size-5 place-items-center rounded-full text-fg-3 transition-colors hover:text-fg-1 coarse:size-6">
                 <Info aria-hidden size={13} strokeWidth={1.75} />
               </button>
@@ -94,7 +95,7 @@ export function RadiusControl({ compact }: { compact?: boolean }) {
           </output>
         </span>
       </div>
-      {!compact && <p className="mt-5 text-caption text-fg-3">{HINT}</p>}
+      {!compact && <p className="mt-5 text-caption text-fg-3">{hint(local)}</p>}
     </div>
   );
 }

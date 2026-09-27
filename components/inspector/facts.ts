@@ -3,7 +3,7 @@
  * helpers vitest pins (lib/format, describe, selectors, brief, impact) are used as-is, never re-worded here.
  */
 import { IDX, SNAPSHOT } from "@/lib/data";
-import { SCOPE_LABEL } from "@/lib/describe";
+import { displayTitle, SCOPE_LABEL } from "@/lib/describe";
 import type { Evidence, Match, Project, ReviewStatus } from "@/lib/domain/types";
 import { formatMilesNear, formatSpan, precisionLabel } from "@/lib/format";
 import { costRange, formatUsdRange, lengthOf, voltageOf } from "@/lib/impact";
@@ -38,6 +38,24 @@ export function ownerShort(p: Project): string {
 
 export function ownerFull(p: Project): string {
   return p.owners.map((o) => IDX.utility(o.utilityId)?.name ?? o.utilityId).join(" · ");
+}
+
+/* ── heading title ──────────────────────────────────────────────────────────── */
+
+/** A plan's trailing scope verb ("Jasper – Okatie 230 kV #2: Construct", "Wateree-Killian 230kV: Rebuild"). */
+const TRAILING_VERB = /\s*:\s*(Construct|Rebuild|Tap|Upgrade|Reconductor|Replace|Install|Build)\s*$/i;
+
+/**
+ * displayTitle (pinned wording) for a heading, without a dangling verb: "…: Construct" → "…" (a planned project is being
+ * built), "…: Rebuild" → "… rebuild" (the kind of work stays). The full title is always in the heading's title attribute.
+ */
+export function headingTitle(p: Project): string {
+  const t = displayTitle(p);
+  const m = t.match(TRAILING_VERB);
+  if (!m || m.index === undefined || m.index === 0) return t;
+  const head = t.slice(0, m.index).trim();
+  const verb = m[1].toLowerCase();
+  return verb === "construct" || verb === "build" ? head : `${head} ${verb}`;
 }
 
 /* ── project facts line ─────────────────────────────────────────────────────── */
@@ -137,8 +155,8 @@ export function distanceTile(m: Match): TileFact {
   }
   if (d.center) {
     const mi = formatMilesNear(d.center.miles, d.thresholdMiles);
-    const approx = m.geo === "possible" || d.center.lowConfidence || d.center.anyLocality;
-    return { state, value: `${approx ? "≈" : ""}${mi}`, mono: true, sub: "centers apart", tooltip: "Distance between the two project centers (Sperry's rule: under 25 mi)" };
+    // distances are approximate everywhere (G3): the row, the tile, why-flagged and the brief all read "≈6.7 mi"
+    return { state, value: `≈${mi}`, mono: true, sub: "centers apart", tooltip: "Distance between the two project centers (Sperry's rule: under 25 mi)" };
   }
   if (d.method === "coarse") return { state, value: "County-level", mono: false, sub: "no site published · no mileage" };
   return { state: "none", value: "Unknown", mono: false, sub: "location not established" };

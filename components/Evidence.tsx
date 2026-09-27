@@ -111,7 +111,8 @@ function ProvenanceIcon({ e }: { e: Evidence }) {
         </span>
       }
     >
-      <span tabIndex={0} role="img" aria-label={label} className="inline-grid shrink-0 place-items-center rounded-full">
+      {/* not a Tab stop: the section's provenance line says the same once; screen readers still read the label */}
+      <span role="img" aria-label={label} className="inline-grid shrink-0 place-items-center rounded-full">
         <Icon aria-hidden size={12} strokeWidth={1.75} className={clsx(e.verifiedInSource ? (e.reviewedByHuman || mine ? "text-ok" : "text-fg-3") : "text-warn")} />
       </span>
     </Tooltip>
@@ -204,7 +205,7 @@ export function SourceRow({ s, count }: { s: SourceDocument; count?: number }) {
           {s.publishedAt && ` · ${formatDate(s.publishedAt)}`}
         </span>
         <span className="num mt-0.5 block truncate text-[11px] text-fg-3">
-          {s.mimeType === "application/pdf" ? `PDF${s.pageCount ? ` · ${s.pageCount} pp` : ""}` : "HTML"} · retrieved {formatDate(s.retrievedAt)} · sha256 {s.sha256.slice(0, 6)}…
+          {s.mimeType === "application/pdf" ? `PDF${s.pageCount ? ` · ${s.pageCount} pp` : ""}` : "HTML"} · retrieved {formatDate(s.retrievedAt)} · sha256 {s.sha256.slice(0, 10)}…
           {count !== undefined && ` · ${count} excerpt${count === 1 ? "" : "s"}`}
         </span>
       </span>

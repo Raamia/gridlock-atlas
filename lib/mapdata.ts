@@ -186,7 +186,8 @@ export function connectorFeature(m: Match | null): FeatureCollection<LineString,
       {
         type: "Feature",
         properties: {
-          label: `${mi} mi · center to center`,
+          // approximate, as every distance in the app (G3)
+          label: `≈${mi} mi · center to center`,
           geo: m.geo,
           beyond: c.miles > m.geoDetail.thresholdMiles,
         },
@@ -360,17 +361,23 @@ export function projectCoords(p: Project): [number, number][] {
 /** Terminals (non-context places), centers and the shared site of a pair: what the pair camera frames. */
 export function pairFrameCoords(m: Match): [number, number][] {
   const out: [number, number][] = [];
+  const c = m.geoDetail.center;
+  const site = sharedSite(m);
+  // a pair that meets at a shared site is about that meeting point: frame both centers and the site, plus only the
+  // terminals near it (long lines such as WWTC run on off-screen), so the site's structures and towers read at size
+  const near =
+    site && c
+      ? (xy: [number, number]) => Math.hypot((xy[0] - site.lon) * Math.cos((site.lat * Math.PI) / 180), xy[1] - site.lat) * 69.05 <= 15
+      : () => true;
   for (const id of [m.projectAId, m.projectBId]) {
     const p = project(id);
     if (!p) continue;
     const places = p.places.filter((pl) => pl.precision !== "county" && pl.role !== "context");
-    if (places.length) out.push(...places.map((pl) => [pl.lon, pl.lat] as [number, number]));
-    else out.push(...projectCoords(p));
-    if (p.route) out.push(p.route.coordinates[0], p.route.coordinates[p.route.coordinates.length - 1]);
+    const pts: [number, number][] = places.length ? places.map((pl) => [pl.lon, pl.lat] as [number, number]) : projectCoords(p);
+    if (p.route) pts.push(p.route.coordinates[0], p.route.coordinates[p.route.coordinates.length - 1]);
+    out.push(...pts.filter(near));
   }
-  const c = m.geoDetail.center;
   if (c) out.push(c.a, c.b);
-  const site = sharedSite(m);
   if (site) out.push([site.lon, site.lat]);
   return out;
 }

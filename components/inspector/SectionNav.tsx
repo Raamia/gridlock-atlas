@@ -45,9 +45,11 @@ export function SectionNav({ items, active, onJump, stuck }: { items: NavItem[];
               type="button"
               data-nav={it.id}
               aria-current={on ? "location" : undefined}
+              // "Disagree (2)", not "Disagree2": the count badge has no space before it in the text
+              aria-label={it.count !== undefined ? `${it.label} (${it.count})` : undefined}
               onClick={() => onJump(it.id)}
               className={clsx(
-                "relative inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-caption font-medium whitespace-nowrap transition-colors duration-150",
+                "relative inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-caption font-medium whitespace-nowrap transition-colors duration-150 tap-44",
                 on ? "text-fg-1" : "bg-fill-1 text-fg-2 hover:bg-fill-2 hover:text-fg-1",
               )}
             >

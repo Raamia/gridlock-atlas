@@ -16,8 +16,8 @@ const BIG_STEP = 64;
  * A resize handle on one edge of a floating panel (`role="separator"`, focusable): drag it, or use the arrow keys (Shift =
  * bigger steps); Home or Enter, or a double-click, go back to the default size. The raw size goes to the store and
  * lib/layout clamps it against the viewport, so `min` / `max` here only mirror the layout's range (aria-value*).
- * The grip is always visible (a resize you have to discover by hovering is a resize nobody finds) and brightens on hover,
- * drag and keyboard focus.
+ * The grip is always there (a resize you have to discover by hovering is a resize nobody finds) but quiet at rest (45%),
+ * so three grips never compete with the panels on a projector; it turns fully opaque and brightens on hover, drag and focus.
  */
 export function ResizeHandle({ edge, sizeKey, current, min, max, label }: { edge: Edge; sizeKey: SizeKey; current: number; min: number; max: number; label: string }) {
   const set = useAtlas((s) => s.set);
@@ -104,7 +104,8 @@ export function ResizeHandle({ edge, sizeKey, current, min, max, label }: { edge
       <span
         aria-hidden
         className={clsx(
-          "rounded-full bg-fg-4/80 shadow-[0_0_0_1px_rgb(0_0_0/0.35)] transition-[background-color,width,height] duration-(--dur-1) ease-enter",
+          "rounded-full bg-fg-4/80 opacity-45 shadow-[0_0_0_1px_rgb(0_0_0/0.35)] transition-[background-color,width,height,opacity] duration-(--dur-1) ease-enter",
+          "group-hover:opacity-100 group-active:opacity-100 group-focus-visible:opacity-100",
           "group-hover:bg-fg-2 group-active:bg-fg-1 group-focus-visible:bg-fg-1 group-focus-visible:shadow-[0_0_0_2px_var(--canvas),0_0_0_4px_var(--fg-1)]",
           vertical ? "h-1 w-10 group-hover:w-12 group-focus-visible:w-12" : "h-10 w-1 group-hover:h-12 group-focus-visible:h-12",
         )}

@@ -127,7 +127,7 @@ export function InServiceMicro({ className }: { className?: string }) {
   );
 }
 
-/** "44 of 197 in flagged pairs" / "197 projects · 2 undated" */
+/** "44 of 197 projects in flagged pairs" / "197 projects · 2 undated" */
 export function useInServiceMeta(): { text: string; title: string } {
   const { model, flagged } = useStrip();
   const focus = useAtlas((s) => s.focus);
@@ -135,7 +135,7 @@ export function useInServiceMeta(): { text: string; title: string } {
   const title = `${model.dated} planned projects with a published in-service or need date${model.undated ? `; ${model.undated} publish none and are not drawn` : ""}.`;
   if (!flagged) return { text: `${model.dated} projects${undated}`, title };
   const lit = model.rows.reduce((n, r) => n + r.ticks.filter((t) => flagged.has(t.project.id)).length, 0);
-  return { text: `${lit} of ${model.dated} in ${focus ? "focused" : "flagged"} pairs`, title };
+  return { text: `${lit} of ${model.dated} projects in ${focus ? "focused" : "flagged"} pairs`, title };
 }
 
 /* ──────────────────────────────────────────────── full strip ──────────────────────────────────────────────── */
@@ -320,7 +320,8 @@ export function Axis({ d, width, className }: { d: Domain; width: number; classN
   const labels = ys
     .map((y, i) => ({ y, cx: ((pct(`${y}-01-01`, d) + pct(`${y + 1}-01-01`, d)) / 200) * width, keep: (ys.length - 1 - i) % every === 0 }))
     .filter((l) => l.keep);
-  const clashes = ([a, b]: [number, number]) => labels.filter((l) => l.cx + YEAR_W / 2 > a - 6 && l.cx - YEAR_W / 2 < b + 6).map((l) => l.y);
+  // 10px clear of the label (the dashed marker runs between them): "2026 ¦Snapshot" never reads as one run of text
+  const clashes = ([a, b]: [number, number]) => labels.filter((l) => l.cx + YEAR_W / 2 > a - 10 && l.cx - YEAR_W / 2 < b + 10).map((l) => l.y);
   // the label sits beside the marker on the side that hides fewer year labels; a tie hides the snapshot's own year
   // (the marker stands inside that year), so the future years a planner reads stay labelled
   const right: [number, number] = [snapX + 4, snapX + 4 + SNAP_W];
@@ -356,18 +357,18 @@ function StripLegend({ run }: { run: boolean }) {
   return (
     // after a run the flagged / not flagged key matters most; the precision key shows when there's room for it too
     <div aria-hidden className="flex items-center gap-3 text-caption text-fg-3">
-      <span className={clsx("items-center gap-1.5", run ? "hidden @min-[1060px]:flex" : "hidden @min-[640px]:flex")}>
+      <span className={clsx("items-center gap-1.5", run ? "hidden @min-[1160px]:flex" : "hidden @min-[640px]:flex")}>
         <span className="h-2.5 w-[2px] rounded-full bg-fg-2" /> stated date
       </span>
-      <span className={clsx("items-center gap-1.5", run ? "hidden @min-[1060px]:flex" : "hidden @min-[640px]:flex")}>
+      <span className={clsx("items-center gap-1.5", run ? "hidden @min-[1160px]:flex" : "hidden @min-[640px]:flex")}>
         <span className="h-2.5 w-4 rounded-full" style={{ background: "linear-gradient(90deg, transparent, var(--fg-2), transparent)" }} /> year precision
       </span>
       {run && (
         <>
-          <span className="hidden items-center gap-1.5 @min-[700px]:flex">
+          <span className="hidden items-center gap-1.5 @min-[800px]:flex">
             <span className="h-2.5 w-[2px] rounded-full bg-fg-1" /> in a flagged pair
           </span>
-          <span className="hidden items-center gap-1.5 @min-[700px]:flex">
+          <span className="hidden items-center gap-1.5 @min-[800px]:flex">
             <span className="h-2.5 w-[2px] rounded-full bg-fg-1/25" /> not flagged
           </span>
         </>

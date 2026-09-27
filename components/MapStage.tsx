@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import type { Match } from "@/lib/domain/types";
 import { useReducedMotion } from "@/lib/hooks";
-import { bearingDeg, destination, install3D, lineChord, modelsLoading, pause3D, sceneStructurePoints, update3D, type Map3DInput } from "@/lib/map3d";
+import { bearingDeg, destination, install3D, lineChord, modelsLoading, pause3D, sceneStructurePoints, SEL_BOOST, update3D, type Map3DInput } from "@/lib/map3d";
 import {
   anchorOf,
   boundsOf,
@@ -25,14 +25,16 @@ import {
   siteLegFeatures,
   type RoleContext,
 } from "@/lib/mapdata";
-import { queueRank, rankLabel, regionMatches } from "@/lib/rank";
+import { firstNonEmptyTab, queueRank, rankLabel, regionMatches } from "@/lib/rank";
 import { ownerNames } from "@/lib/selectors";
-import { useAtlas, type Basemap } from "@/lib/store";
+import { getLayout } from "@/lib/layout";
+import { passesFilters, useAtlas, type Basemap } from "@/lib/store";
 import { CameraDirector, DEMO_CARD, type CameraIntent } from "./map/camera";
 import {
   caveatCallout,
   distanceLabel,
   layoutCallouts,
+  maskPlaceNames,
   projectLabel,
   rankChip,
   ringCallout,
@@ -99,9 +101,16 @@ const isTouchEvent = (oe: Event | undefined) =>
 const UTIL_VAR = { a: "var(--util-a)", b: "var(--util-b)" } as const;
 const MI_M = 1609.344;
 
-/** The selected pair's 3D structures as callout obstacles (yards ≈24×18 px, towers ≈12×16 px, standing on their point). */
+/**
+ * The selected pair's 3D structures as callout obstacles, standing on their point (map-3d draws them SEL_BOOST× the
+ * overview size: yards ≈46×34 px, towers ≈20×28 px at pair zoom). A yard is weighted like a hard rule for the optional
+ * callouts (a "route not published" note never sits on a structure).
+ */
 function structureDots(map: mapboxgl.Map): Dot[] {
-  return sceneStructurePoints(map).map((s) => (s.kind === "yard" ? { at: s.at, weight: 2, w: 26, h: 18, rise: true } : { at: s.at, weight: 1, w: 12, h: 16, rise: true }));
+  const k = SEL_BOOST;
+  return sceneStructurePoints(map).map((s) =>
+    s.kind === "yard" ? { at: s.at, weight: 3, w: Math.round(24 * k), h: Math.round(18 * k), rise: true } : { at: s.at, weight: 1, w: Math.round(11 * k), h: Math.round(15 * k), rise: true },
+  );
 }
 
 /* ------------------------------------------------ component ------------------------------------------------ */
@@ -148,6 +157,8 @@ export default function MapStage() {
   const demoOn = useAtlas((s) => s.demoStep !== null);
   const closeupOpen = useAtlas((s) => s.closeupOpen);
   const inspectorOpen = useAtlas((s) => s.inspectorOpen);
+  // a phone mid-demo with the inspector sheet up leaves a ~120px strip of map: the project callouts shrink to owner pills
+  const tightPhone = typeof window !== "undefined" && window.innerWidth < 768 && demoOn && inspectorOpen;
 
   const selected: Match | null = useMemo(() => run?.matches.find((m) => m.id === selectedMatchId) ?? null, [run, selectedMatchId]);
   const hovered: Match | null = useMemo(() => (hoveredMatchId ? (run?.matches.find((m) => m.id === hoveredMatchId) ?? null) : null), [run, hoveredMatchId]);
@@ -155,6 +166,25 @@ export default function MapStage() {
   const preview = selected ?? hovered;
 
   const regionRun = useMemo(() => (run ? regionMatches(run, region) : []), [run, region]);
+
+  // what the list shows right now (tab, timing / conflict / utility filters, focus): the rank chips and the full-weight
+  // links follow it, so the map never points at pairs the list has filtered away
+  const timing = useAtlas((s) => s.timing);
+  const conflictsOnly = useAtlas((s) => s.conflictsOnly);
+  const utilityFilter = useAtlas((s) => s.utilityFilter);
+  const flags = useAtlas((s) => s.flags);
+  const listVisible = useMemo(() => {
+    if (!run) return new Set<string>();
+    const status = tab === "conflicts" ? firstNonEmptyTab(run, region) : tab;
+    const f = { region, timing, conflictsOnly, utilityFilter, focus, flags };
+    return new Set(regionRun.filter((m) => m.reviewStatus === status && passesFilters(m, f)).map((m) => m.id));
+  }, [run, region, regionRun, tab, timing, conflictsOnly, utilityFilter, focus, flags]);
+  /** List filters beyond the tab and focus are on (null = the map shows every flagged pair at its usual weight). */
+  const filteredIds = useMemo(() => {
+    if (!run || (!timing.length && !conflictsOnly && !utilityFilter)) return null;
+    const f = { region, timing, conflictsOnly, utilityFilter, focus, flags };
+    return new Set(regionRun.filter((m) => passesFilters(m, f)).map((m) => m.id));
+  }, [run, region, regionRun, timing, conflictsOnly, utilityFilter, focus, flags]);
 
   const visibleProjectIds = useMemo(() => {
     const ids = new Set<string>();
@@ -203,11 +233,12 @@ export default function MapStage() {
       projection: "mercator",
       antialias: true,
       attributionControl: false,
-      // logo bottom-left, attribution (i) bottom-right: the map-controls column sits just above the (i)
+      // logo and attribution (i) side by side at the focal bottom-left: the bottom-right corner belongs to the map controls
       logoPosition: "bottom-left",
       maxPitch: 70,
     });
-    map.addControl(new mapboxgl.AttributionControl({ compact: true }), "bottom-right");
+    map.addControl(new mapboxgl.AttributionControl({ compact: true }), "bottom-left");
+    for (const ctl of el.current.querySelectorAll<HTMLElement>(".mapboxgl-ctrl-bottom-left > .mapboxgl-ctrl")) ctl.style.clear = "none";
     mapRef.current = map;
     const cam = new CameraDirector(map);
     director.current = cam;
@@ -266,6 +297,17 @@ export default function MapStage() {
       popup.current.getElement()?.classList.toggle("gl-card-touch", touch);
     };
     const closeCard = () => popup.current?.remove();
+    // a tap card rides its dot: one opened while the camera flies on its own (the first framing, a region change) would
+    // slide off-screen with it, so a programmatic move closes it, and a tap mid-flight opens its card once the camera lands
+    let autoMove = false;
+    map.on("movestart", (e: { originalEvent?: Event }) => {
+      if (e.originalEvent) return;
+      autoMove = true;
+      if (popup.current?.getElement()?.classList.contains("gl-card-touch")) closeCard();
+    });
+    map.on("moveend", () => {
+      autoMove = false;
+    });
     const pairAt = (point: mapboxgl.Point) => {
       const f = map.queryRenderedFeatures(
         [
@@ -311,14 +353,17 @@ export default function MapStage() {
       if (touch) {
         const label = (f.properties?.label as string | undefined) ?? p.shortTitle;
         const precision = (f.properties?.precision as string | undefined) ?? "";
-        showCard(
-          projectTapCard(p, label, precision, pairs, () => {
-            closeCard();
-            useAtlas.getState().focusProject(p.id);
-          }),
-          ev.lngLat,
-          true,
-        );
+        const open = () =>
+          showCard(
+            projectTapCard(p, label, precision, pairs, () => {
+              closeCard();
+              useAtlas.getState().focusProject(p.id);
+            }),
+            ev.lngLat,
+            true,
+          );
+        if (autoMove && map.isMoving()) map.once("moveend", open);
+        else open();
         return;
       }
       // desktop: a dot click focuses the list on that project's pairs (and flies to it)
@@ -389,6 +434,11 @@ export default function MapStage() {
     map.on("resize", relayout);
     // place names are placed asynchronously; settle the callouts once the map is idle
     map.on("idle", relayout);
+    // the selected pair's ring pulse keeps the map from ever going idle, and the pair's place names only exist once the
+    // gl-points tiles for the new zoom are parsed: settle the callouts (and their place-name mask) when those land
+    map.on("sourcedata", (e: { sourceId?: string; isSourceLoaded?: boolean; sourceDataType?: string }) => {
+      if (e.sourceId === "gl-points" && e.isSourceLoaded && !map.isMoving()) relayout();
+    });
     void document.fonts?.ready.then(() => relayout());
 
     return () => {
@@ -512,7 +562,7 @@ export default function MapStage() {
     const ranks = run ? queueRank(run, region) : null;
     const ov = overlapFeatures(
       regionRun.filter((m) => visibleProjectIds.has(m.projectAId) && visibleProjectIds.has(m.projectBId)),
-      { selectedId: selected?.id ?? null, hoverId: hovered?.id ?? null, ranks, focusIds: focus ? new Set(focus.pairIds) : null },
+      { selectedId: selected?.id ?? null, hoverId: hovered?.id ?? null, ranks, focusIds: filteredIds ?? (focus ? new Set(focus.pairIds) : null) },
     );
     setData(map, "gl-overlaps", ov.lines as FC);
     setData(map, "gl-overlap-dots", ov.dots as FC);
@@ -536,7 +586,7 @@ export default function MapStage() {
         if (mapRef.current === map && hasLayer(map, "gl-stateline") && st.region === "southeast" && !st.selectedMatchId && !st.focus)
           setData(map, "gl-stateline", fc);
       });
-  }, [styleReady, selected, hovered, preview, hoveredProjectId, visibleProjectIds, flaggedProjectIds, regionRun, run, region, focus]);
+  }, [styleReady, selected, hovered, preview, hoveredProjectId, visibleProjectIds, flaggedProjectIds, regionRun, run, region, focus, filteredIds]);
 
   /* ---------------------------------------------- 3D scene (lib/map3d.ts owns every gl3d-* layer) ---------------------------------------------- */
   useEffect(() => {
@@ -550,6 +600,7 @@ export default function MapStage() {
       selectedMatchId,
       hoveredMatchId,
       focusProjectIds,
+      visiblePairIds: filteredIds ? [...filteredIds] : null,
       mapMode,
       basemap,
       reducedMotion: reduced,
@@ -571,7 +622,7 @@ export default function MapStage() {
     };
     applyAnimated(map, anim.current);
     for (const id of ["gl-ring-fill", "gl-ring-glow", "gl-ring", "gl-ring-label"]) visibility(map, id, !covers.current.ring);
-  }, [styleReady, run, region, selectedMatchId, hoveredMatchId, focus, mapMode, basemap, reduced, revealNonce, running]);
+  }, [styleReady, run, region, selectedMatchId, hoveredMatchId, focus, filteredIds, mapMode, basemap, reduced, revealNonce, running]);
 
   /* ---------------------------------------------- reveal choreography (2D) ---------------------------------------------- */
   const lastReveal = useRef(revealNonce);
@@ -669,6 +720,7 @@ export default function MapStage() {
     markers.current = [];
     callouts.current = { items: [], dots: [] };
     const m = selected;
+    if (map && styleReady) maskPlaceNames(map, []);
     if (!map || !styleReady || !m) return;
     const items: Callout[] = [];
     const dots: Dot[] = [];
@@ -736,7 +788,7 @@ export default function MapStage() {
       if (!at) continue;
       if (c) dots.push({ at, weight: 1 });
       const above = role === "a" ? aAbove : !aAbove;
-      add(projectLabel(p.shortTitle, ownerNames(p, IDX, true), role), at, 2, (w, h) => {
+      add(projectLabel(p.shortTitle, ownerNames(p, IDX, true), role, { pill: tightPhone }), at, 2, (w, h) => {
         const up = [
           { x: -w / 2, y: -14 - h },
           { x: -16, y: -14 - h },
@@ -781,6 +833,8 @@ export default function MapStage() {
         },
         true,
       );
+      // the pair's distance is the map's headline fact: the project labels make room for it before it is ever dropped
+      items[items.length - 1].hideCost = 12000;
     }
     // Sperry's rule: "25 mi from {A}" just outside the ring, where it is clear — near B first (B sits inside it)
     if (c) {
@@ -814,6 +868,7 @@ export default function MapStage() {
         true,
       );
       items[items.length - 1].noSlide = true;
+      items[items.length - 1].hideCost = 2500;
     }
     // 3D: a line without a published route is a ghosted chord terminal to terminal, and says so — on the chord, away
     // from its middle (the project's own center and callout). Phones leave the caveat to the inspector ("Where they
@@ -846,10 +901,11 @@ export default function MapStage() {
           },
           true,
         );
+        items[items.length - 1].hideCost = 2000;
       }
     callouts.current = { items, dots };
     layoutCallouts(map, items, [...dots, ...structureDots(map)]);
-  }, [styleReady, selected, mapMode]);
+  }, [styleReady, selected, mapMode, tightPhone]);
 
   /* ---------------------------------------------- rank chips 01–03 (post-run overview) ---------------------------------------------- */
   useEffect(() => {
@@ -857,10 +913,10 @@ export default function MapStage() {
     chips.current.forEach((c) => c.marker.remove());
     chips.current = [];
     if (!map || !styleReady || !run || selectedMatchId) return;
-    const status = tab === "conflicts" ? "needs-review" : tab;
     const ranks = queueRank(run, region);
+    // the list's first three visible rows (tab, filters and focus applied), under their unchanged queue ranks
     const top = regionRun
-      .filter((m) => m.reviewStatus === status && m.geoDetail.center && (!focus || focus.pairIds.includes(m.id)))
+      .filter((m) => m.geoDetail.center && listVisible.has(m.id))
       .sort((x, y) => (ranks.get(x.id) ?? 0) - (ranks.get(y.id) ?? 0))
       .slice(0, 3);
     for (const m of top) {
@@ -891,7 +947,7 @@ export default function MapStage() {
       // a removed chip never leaves its pair lit
       if (placed.length && placed.some((c) => c.el.matches(":hover"))) useAtlas.getState().set({ hoveredMatchId: null });
     };
-  }, [styleReady, run, region, regionRun, tab, selectedMatchId, focus]);
+  }, [styleReady, run, region, regionRun, selectedMatchId, listVisible]);
 
   /* ---------------------------------------------- camera ---------------------------------------------- */
   const cameraRegion = useRef(region);
@@ -987,6 +1043,16 @@ export default function MapStage() {
     }
     relayoutRef.current();
   }, [closeupOpen, mapReady]);
+
+  /* phones with the list sheet at full height: the map is a sliver under the header, so the Mapbox logo and (i) step
+     away instead of floating over the header's edge (they return with any lower snap) */
+  const sheetSnap = useAtlas((s) => s.sheetSnap);
+  useEffect(() => {
+    const root = el.current;
+    if (!root || !mapReady) return;
+    const hide = sheetSnap === "full" && !inspectorOpen && window.innerWidth < 768;
+    root.querySelectorAll<HTMLElement>(".mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right").forEach((c) => (c.style.visibility = hide ? "hidden" : ""));
+  }, [sheetSnap, inspectorOpen, mapReady]);
 
   /* ---------------------------------------------- a project title clicked in the inspector ---------------------------------------------- */
   useEffect(() => {
@@ -1094,9 +1160,17 @@ const CHIP_GAP = 4;
  * chip's width form a group and sit side by side in rank order ("01 02 03"), centred on the group; a group that would
  * still touch an earlier one steps up a row.
  */
-function spreadChips(map: mapboxgl.Map, list: { marker: mapboxgl.Marker; at: [number, number] }[]) {
+function spreadChips(map: mapboxgl.Map, list: { marker: mapboxgl.Marker; at: [number, number]; el?: HTMLElement }[]) {
   if (!list.length) return;
+  // zoomed out to a national view the chips would sit on the hotspot counts and each other: they wait for z5
+  const far = map.getZoom() < 5;
+  for (const c of list) c.marker.getElement().style.visibility = far ? "hidden" : "";
+  if (far) return;
   const pts = list.map((c) => map.project(c.at));
+  // a row of chips stays inside the focal hole (a phone's narrow map included): it slides in, never runs off an edge
+  const l = getLayout();
+  const minX = l.focal.l + 8 + CHIP_W / 2;
+  const maxX = l.vw - l.focal.r - 8 - CHIP_W / 2;
   // groups: transitive closeness (in rank order)
   const group = list.map((_, i) => i);
   const find = (i: number): number => (group[i] === i ? i : (group[i] = find(group[i])));
@@ -1106,13 +1180,28 @@ function spreadChips(map: mapboxgl.Map, list: { marker: mapboxgl.Marker; at: [nu
   const groups = new Map<number, number[]>();
   list.forEach((_, i) => groups.set(find(i), [...(groups.get(find(i)) ?? []), i]));
   const placed: { x: number; y: number }[] = [];
-  const clash = (x: number, y: number) => placed.some((q) => Math.abs(q.x - x) < CHIP_W + CHIP_GAP && Math.abs(q.y - y) < CHIP_H + 2);
+  // map-3d's hotspot counts ("79 pairs") are text on the map: a chip row that would sit on one steps up past it
+  const counts: { l: number; t: number; r: number; b: number }[] = [];
+  if (hasLayer(map, "gl3d-labels"))
+    for (const f of map.queryRenderedFeatures({ layers: ["gl3d-labels"] })) {
+      if (f.geometry.type !== "Point") continue;
+      const p = map.project(f.geometry.coordinates as [number, number]);
+      const w = String(f.properties?.t ?? "").length * 6.6 + 8;
+      const a = String(f.properties?.a ?? "center");
+      const left = a === "right" ? p.x - w : a === "left" ? p.x : p.x - w / 2;
+      const top = a === "top" ? p.y : a === "bottom" ? p.y - 18 : p.y - 9;
+      counts.push({ l: left, t: top, r: left + w, b: top + 18 });
+    }
+  const onCount = (x: number, y: number) => counts.some((c) => x + CHIP_W / 2 > c.l && x - CHIP_W / 2 < c.r && y > c.t && y - CHIP_H < c.b);
+  const clash = (x: number, y: number) => onCount(x, y) || placed.some((q) => Math.abs(q.x - x) < CHIP_W + CHIP_GAP && Math.abs(q.y - y) < CHIP_H + 2);
   for (const members of groups.values()) {
     const cx = members.reduce((sum, i) => sum + pts[i].x, 0) / members.length;
     const cy = Math.min(...members.map((i) => pts[i].y));
     const n = members.length;
     let dy = -6;
-    const xs = members.map((_, k) => cx + (k - (n - 1) / 2) * (CHIP_W + CHIP_GAP));
+    const half = ((n - 1) / 2) * (CHIP_W + CHIP_GAP);
+    const gx = maxX - minX >= 2 * half ? Math.min(Math.max(cx, minX + half), maxX - half) : cx;
+    const xs = members.map((_, k) => gx + (k - (n - 1) / 2) * (CHIP_W + CHIP_GAP));
     while (xs.some((x) => clash(x, cy + dy)) && dy > -6 - 4 * (CHIP_H + 4)) dy -= CHIP_H + 4;
     members.forEach((i, k) => {
       list[i].marker.setOffset([Math.round(xs[k] - pts[i].x), Math.round(cy + dy - pts[i].y)]);

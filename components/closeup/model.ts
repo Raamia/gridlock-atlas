@@ -9,8 +9,9 @@ import { ownerNames } from "@/lib/selectors";
 /*
  * The 3D pair close-up's scene model (SPEC §7, honesty rules of §6.2), derived purely from the snapshot:
  *
- * - positions are TO SCALE: a local equirectangular projection around the frame center (centroid of both project
- *   centers and the shared site), x = east, z = south, then uniformly scaled so the plinth always has radius PLINTH_R.
+ * - positions are TO SCALE: a local equirectangular projection around the centroid of both project centers and the
+ *   shared site, x = east, z = south, re-centred on the middle of the drawn extent and uniformly scaled so the plinth
+ *   always has radius PLINTH_R.
  * - structures are SYMBOLIC: one constant size in scene units whatever the plinth covers (the caption says so).
  * - kind comes from workKind() (lib/impact.ts): line-* → line, substation-* → substation (same as the map scene).
  * - named-facility / official-GIS endpoints get a structure; other precise places a small hollow marker; locality or
@@ -21,8 +22,12 @@ import { ownerNames } from "@/lib/selectors";
 
 export const PLINTH_R = 10;
 export const KM_PER_MILE = 1.609344;
-/** Plinth radius = max(1.25 × the farthest drawn element from the frame center, 3 mi). */
-const PLINTH_FACTOR = 1.25;
+/**
+ * Plinth radius = max(1.15 × the farthest drawn element from the plinth center, 3 mi). The plinth centres on the drawn
+ * extent (the middle of everything drawn), not on the pair's centroid, so a pair whose routes run one way (WWTC north
+ * of Tremval) fills the disc instead of leaving half of it bare.
+ */
+const PLINTH_FACTOR = 1.15;
 const PLINTH_MIN_MILES = 3;
 /** Two structures closer than this are one site (one model, shared tint). */
 const SAME_SITE_KM = 0.35;
@@ -187,10 +192,10 @@ export function buildCloseupModel(m: Match, pa: Project, pb: Project, thresholdM
   const kz = 110.574;
   const km = (lonlat: [number, number]): V2 => ({ x: (lonlat[0] - lon0) * kx, z: -(lonlat[1] - lat0) * kz });
 
-  // ---- pass 1: everything in km, and the farthest drawn extent ----
-  let far = 0;
+  // ---- pass 1: everything in km, and the drawn extent ----
+  const drawn: { v: V2; extra: number }[] = [];
   const reach = (v: V2, extra = 0) => {
-    far = Math.max(far, Math.hypot(v.x, v.z) + extra);
+    drawn.push({ v, extra });
   };
 
   interface Raw {
@@ -248,9 +253,19 @@ export function buildCloseupModel(m: Match, pa: Project, pb: Project, thresholdM
   const siteKm = site ? km([site.lon, site.lat]) : null;
   if (siteKm) reach(siteKm);
 
+  // the plinth center: the middle of the drawn extent's bounding box (the origin, the pair's centroid, when nothing is)
+  let [x0, x1, z0, z1] = [Infinity, -Infinity, Infinity, -Infinity];
+  for (const { v, extra } of drawn) {
+    x0 = Math.min(x0, v.x - extra);
+    x1 = Math.max(x1, v.x + extra);
+    z0 = Math.min(z0, v.z - extra);
+    z1 = Math.max(z1, v.z + extra);
+  }
+  const [ox, oz] = drawn.length ? [(x0 + x1) / 2, (z0 + z1) / 2] : [0, 0];
+  const far = drawn.reduce((f, { v, extra }) => Math.max(f, Math.hypot(v.x - ox, v.z - oz) + extra), 0);
   const plinthKm = Math.max(PLINTH_FACTOR * far, PLINTH_MIN_MILES * KM_PER_MILE);
   const u = PLINTH_R / plinthKm; // scene units per km
-  const toU = (v: V2): V2 => ({ x: v.x * u, z: v.z * u });
+  const toU = (v: V2): V2 => ({ x: (v.x - ox) * u, z: (v.z - oz) * u });
 
   // ---- pass 2: dedupe structures / markers that stand on the same site ----
   const kept: { km: V2; place: Raw["places"][number] }[] = [];
@@ -349,7 +364,7 @@ export function buildCloseupModel(m: Match, pa: Project, pb: Project, thresholdM
   }
 
   // shared-site pairs beyond the radius name the facility, never a bare center distance (G1)
-  const rulerText = miles != null && a.center && b.center && (!site || within) ? `${approx ? "≈" : ""}${formatMilesNear(miles, thresholdMiles)} of ${thresholdMiles} mi` : null;
+  const rulerText = miles != null && a.center && b.center && (!site || within) ? `≈${formatMilesNear(miles, thresholdMiles)} of ${thresholdMiles} mi` : null;
 
   const siteBasis = site ? (gd.method === "shared-endpoint" ? "both projects end here" : site.implied ? "implied by sources" : "stated in source") : "";
 

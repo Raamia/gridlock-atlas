@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 import type { Match } from "@/lib/domain/types";
 import { useReview } from "@/lib/review";
 import { useAtlas } from "@/lib/store";
-import { Button, IconButton } from "../ui";
+import { Button, IconButton, Tooltip } from "../ui";
 import { scrollInspectorTo } from "./SectionNav";
 
 /** The URL "Link" copies: this pair, and its radius when it is not the default 25 mi (Atlas reads ?pair=&r=). */
@@ -86,8 +86,15 @@ export function FooterBar({ m, scroller, phone }: { m: Match; scroller: RefObjec
           </IconButton>
         </div>
       )}
-      <div className={clsx("flex items-center px-(--panel-pad)", phone ? "gap-1 pt-2 pb-[calc(8px+var(--safe-b))]" : "gap-2 py-3")}>
-        <Button variant="primary" size={phone ? "xl" : "md"} className={phone ? "min-w-0 flex-1 px-4!" : "min-w-0 flex-1"} icon={phone ? undefined : <FileOutput size={14} strokeWidth={1.75} />} onClick={() => set({ briefOpen: true })}>
+      {/* a size container: "3D close-up" earns a visible label as the inspector widens (360 md · 384 lg · 418+ xl) */}
+      <div className={clsx("@container flex items-center px-(--panel-pad)", phone ? "gap-1 pt-2 pb-[calc(8px+var(--safe-b))]" : "gap-1.5 py-3")}>
+        <Button
+          variant="primary"
+          size={phone ? "xl" : "md"}
+          className={phone ? "min-w-0 flex-1 px-4!" : "min-w-0 flex-1 [&>span>svg]:hidden @min-[380px]:[&>span>svg]:block"}
+          icon={phone ? undefined : <FileOutput size={14} strokeWidth={1.75} />}
+          onClick={() => set({ briefOpen: true })}
+        >
           Create review brief
         </Button>
         <Button
@@ -100,9 +107,20 @@ export function FooterBar({ m, scroller, phone }: { m: Match; scroller: RefObjec
         >
           {isCopied ? "Copied" : "Link"}
         </Button>
-        <IconButton label="3D close-up" tooltip="3D close-up · presentation only, symbolic structures" size={phone ? "xl" : "md"} onClick={openCloseup}>
-          <Box size={16} strokeWidth={1.75} />
-        </IconButton>
+        {phone ? (
+          <IconButton label="3D close-up" tooltip="3D close-up · presentation only, symbolic structures" size="xl" onClick={openCloseup}>
+            <Box size={16} strokeWidth={1.75} />
+          </IconButton>
+        ) : (
+          // labelled, so it never reads as a second mystery icon beside "Label this pair": "3D" from 340px, in full from 420px
+          <Tooltip content="3D close-up · presentation only, symbolic structures">
+            <Button variant="ghost" size="md" aria-label="3D close-up" icon={<Box size={16} strokeWidth={1.75} />} onClick={openCloseup} className="gap-1.5! px-2! @min-[340px]:px-2.5!">
+              <span className="hidden @min-[340px]:inline">
+                3D<span className="hidden @min-[420px]:inline"> close-up</span>
+              </span>
+            </Button>
+          </Tooltip>
+        )}
         <IconButton label="Label this pair" tooltip={reviewOn ? "Label this pair" : "Label this pair (turns reviewer mode on)"} size={phone ? "xl" : "md"} onClick={labelPair}>
           <ClipboardCheck size={16} strokeWidth={1.75} />
         </IconButton>

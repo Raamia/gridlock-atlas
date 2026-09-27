@@ -88,6 +88,13 @@ function phoneSheetTop(vh: number): number {
   return Math.max(vh * 0.36, Number.isFinite(cardBottom) ? cardBottom + 120 : 0);
 }
 
+/** The map-controls block (components/map/MapControls) as it sits now, or null when it is hidden (close-up, H, cramped). */
+function controlsRect(): RectLike | null {
+  if (typeof document === "undefined" || useAtlas.getState().closeupOpen) return null;
+  const r = document.querySelector<HTMLElement>("[data-map-controls]")?.getBoundingClientRect();
+  return r && r.width > 0 && r.height > 0 ? { top: r.top, bottom: r.bottom, left: r.left, right: r.right } : null;
+}
+
 function fitAxis(a: number, b: number, total: number): [number, number] {
   const max = Math.max(0, total - MIN_FRAME);
   const k = a + b > max ? max / (a + b) : 1;
@@ -99,7 +106,8 @@ export function currentPadding(kind: "pair" | "overview" = "overview", layout: L
   const st = useAtlas.getState();
   // layout insets first; the phone sheet and the demo card are applied after, so neither is pre-shrunk by the other
   const pad = cameraPadding(layout);
-  if (layout.tier === "phone" && st.inspectorOpen && !st.uiHidden) pad.bottom = Math.round(layout.vh - phoneSheetTop(layout.vh) + 16);
+  // (+40 clears the Mapbox logo and (i) on the sheet's top edge; mid-demo the strip under the card is too short for it)
+  if (layout.tier === "phone" && st.inspectorOpen && !st.uiHidden) pad.bottom = Math.round(layout.vh - phoneSheetTop(layout.vh) + (st.demoStep === null ? 40 : 16));
   const card = demoCardRect();
   if (card) {
     if ((card.top + card.bottom) / 2 < layout.vh / 2) pad.top = Math.max(pad.top, Math.round(card.bottom + 16));
@@ -107,10 +115,20 @@ export function currentPadding(kind: "pair" | "overview" = "overview", layout: L
   }
   // phones: a region is wider than tall, so the overview uses the full width (dots may run to the gutter)
   if (kind === "overview" && layout.tier === "phone") pad.left = pad.right = layout.gutter + 4;
-  // wide overviews (a region, the flagged pairs) keep their corners clear of the map-controls column at the bottom-right
-  if (kind === "overview" && layout.tier !== "phone" && typeof document !== "undefined") {
-    const w = Math.min(360, document.querySelector<HTMLElement>("[data-map-controls]")?.offsetWidth ?? 0);
-    if (w > 0 && layout.focalW - w > 480) pad.right += w;
+  // every frame (pair, project, overview) keeps clear of the map-controls block at the focal bottom-right: as a bottom
+  // band or a right column, whichever leaves the larger frame (phones: always the band above the sheet)
+  const ctl = controlsRect();
+  if (ctl) {
+    // framed points are centers: their rings and dots reach a little past them, so keep a real gap above the block
+    const gap = layout.tier === "phone" ? 28 : 16;
+    const bottom = Math.max(pad.bottom, Math.round(layout.vh - ctl.top + gap));
+    const right = Math.max(pad.right, Math.round(layout.vw - ctl.left + gap));
+    const frameW = layout.vw - pad.left - pad.right;
+    const frameH = layout.vh - pad.top - pad.bottom;
+    const asBand = frameW * Math.max(0, layout.vh - pad.top - bottom);
+    const asColumn = Math.max(0, layout.vw - pad.left - right) * frameH;
+    if (layout.tier === "phone" || asBand >= asColumn) pad.bottom = bottom;
+    else pad.right = right;
   }
   [pad.left, pad.right] = fitAxis(pad.left, pad.right, layout.vw);
   [pad.top, pad.bottom] = fitAxis(pad.top, pad.bottom, layout.vh);
@@ -168,6 +186,41 @@ export function overviewTarget(): { bounds: Bounds | null; maxZoom: number } {
     if (b) return { bounds: b, maxZoom: 8.5 };
   }
   return { bounds: regionBounds(st.region), maxZoom: 8.5 };
+}
+
+/**
+ * The post-run hub: the midpoint centroid of the region's first wave (engine order, the 12 links that draw in first).
+ * The overview still frames every flagged pair center; the hub only decides where the horizontal slack goes.
+ */
+function revealHub(): [number, number] | null {
+  const st = useAtlas.getState();
+  if (!st.run || st.focus) return null;
+  const mids = regionMatches(st.run, st.region)
+    .flatMap((m) => (m.geoDetail.center ? [[(m.geoDetail.center.a[0] + m.geoDetail.center.b[0]) / 2, (m.geoDetail.center.a[1] + m.geoDetail.center.b[1]) / 2] as [number, number]] : []))
+    .slice(0, 12);
+  if (!mids.length) return null;
+  return [mids.reduce((s, p) => s + p[0], 0) / mids.length, mids.reduce((s, p) => s + p[1], 0) / mids.length];
+}
+
+/**
+ * fitBounds centres the flagged pairs' box, which puts a hub at the box's corner (Savannah at the bottom-right of the
+ * Augusta–Savannah diagonal). When the frame is wider than the box, slide the camera sideways (at the fitted zoom) so
+ * the hub sits as near the frame's centre as the box still allows: nothing leaves the frame, the payoff reads centred.
+ */
+function hubBiased(map: mapboxgl.Map, bounds: Bounds, padding: CameraPadding, pitch: number, maxZoom: number): { center: [number, number]; zoom: number } | null {
+  const hub = revealHub();
+  if (!hub) return null;
+  const cam = map.cameraForBounds(bounds as LngLatBoundsLike, { padding, pitch, bearing: 0, maxZoom });
+  if (!cam || cam.zoom == null || !cam.center) return null;
+  const c = cam.center as { lng: number; lat: number } | [number, number];
+  const [lng, lat] = Array.isArray(c) ? c : [c.lng, c.lat];
+  const ws = 512 * 2 ** cam.zoom;
+  const mx = (lon: number) => ((lon + 180) / 360) * ws;
+  const frameW = map.getContainer().clientWidth - padding.left - padding.right;
+  const slack = Math.max(0, (frameW - (mx(bounds[1][0]) - mx(bounds[0][0]))) / 2) * 0.9;
+  const dx = Math.max(-slack, Math.min(slack, mx(hub[0]) - mx(lng)));
+  if (Math.abs(dx) < 8) return null;
+  return { center: [lng + (dx / ws) * 360, lat], zoom: cam.zoom };
 }
 
 /* ------------------------------------------------ director ------------------------------------------------ */
@@ -255,6 +308,23 @@ export class CameraDirector {
     const { bounds, maxZoom } = overviewTarget();
     if (!bounds) return;
     const reveal = intent.kind === "reveal";
+    const angles = this.pitchFor("overview");
+    const biased = hubBiased(map, bounds, padding, angles.pitch, maxZoom);
+    if (biased) {
+      const camera = {
+        center: biased.center,
+        zoom: biased.zoom,
+        padding,
+        ...angles,
+        duration: animate ? (opts.duration ?? (reveal ? 1400 : 1600)) : 0,
+        easing: easeCamera,
+        essential: true,
+      };
+      // the reveal eases in place; region / reset moves fly
+      if (reveal) map.easeTo(camera);
+      else map.flyTo({ ...camera, curve: 1.3 });
+      return;
+    }
     map.fitBounds(bounds as LngLatBoundsLike, {
       padding,
       ...this.pitchFor("overview"),

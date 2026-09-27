@@ -15,7 +15,20 @@ import { alongPolyline, PLINTH_R, polyLength, type CloseupModel, type CuPlace, t
  * leader line, so the diorama itself stays clear. When a slot is taken they fall back to sitting beside the pin.
  */
 
-export type Anchor = "above" | "below" | "center" | "left" | "right" | "above-left" | "above-right" | "callout-left" | "callout-right" | "callout-top" | "callout-mid";
+export type Anchor =
+  | "above"
+  | "below"
+  | "above-far"
+  | "below-far"
+  | "center"
+  | "left"
+  | "right"
+  | "above-left"
+  | "above-right"
+  | "callout-left"
+  | "callout-right"
+  | "callout-top"
+  | "callout-mid";
 /**
  * Resolved per frame: "outward" = above-left/right of the pin, away from the other project; "callout" = the top-band
  * slot on this project's side of the screen (the shared site: centred).
@@ -43,7 +56,16 @@ export interface LabelSpec {
    * unused for placement.
    */
   ring?: { center: V2; r: number; y: number; prefer: number; avoid: [number, number, number][] };
+  /** A plaque on the plinth: set just inside its front rim (the rim's lowest point on screen), clear of the scene. */
+  rim?: boolean;
   content: ReactNode;
+}
+
+/** Something standing in the scene that a label should not print over: a screen box of `w`×`h` px centred on `at`. */
+export interface Obstacle {
+  at: [number, number, number];
+  w: number;
+  h: number;
 }
 
 /** The callout band: horizontal limits of the frame hole and the band's top edge (px). */
@@ -60,6 +82,10 @@ export function anchorBox(anchor: Anchor, x: number, y: number, w: number, h: nu
       return [x - w / 2, y - h - 10];
     case "below":
       return [x - w / 2, y + 8];
+    case "above-far":
+      return [x - w / 2, y - h - 34];
+    case "below-far":
+      return [x - w / 2, y + 26];
     case "center":
       return [x - w / 2, y - h / 2];
     case "left":
@@ -102,7 +128,8 @@ export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}
         id: `pl-${pl.id}`,
         at: [pl.pos.x, 0.01, pl.pos.z],
         anchor: disc ? "center" : "below",
-        alts: disc ? ["above", "below"] : ["above", "right", "left"],
+        // stepping further off (a short hop down or up) before giving up: names declutter instead of overprinting
+        alts: disc ? ["above", "below", "below-far", "above-far"] : ["right", "left", "below-far", "above", "above-far"],
         priority: pl.shared ? 45 : 40,
         content: <FacilityLabel pl={pl} />,
       });
@@ -141,11 +168,14 @@ export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}
     });
   }
   if (!site && a.center && b.center && model.rulerText) {
+    // Sperry's rule as a plaque on the plinth's front rim: never on the amber link it measures (the ground ruler with
+    // its ticks runs along the link itself)
     out.push({
       id: "ruler",
       at: [(a.center.x + b.center.x) / 2, 0.01, (a.center.z + b.center.z) / 2],
       anchor: "below",
       alts: ["above", "right", "left"],
+      rim: true,
       priority: 85,
       always: true,
       content: <RulerChip model={model} />,
@@ -192,7 +222,23 @@ export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}
   return out;
 }
 
-/** Where the diorama has something standing (structures, markers, pins, the beacon, towers, chords): scene points. */
+/** The raised amber links (center to center, or each center to the shared site), sampled along their arcs. */
+function linkSamples(model: CloseupModel): [number, number, number][] {
+  const { a, b, site } = model;
+  const legs: [V2, V2, number][] = [];
+  if (site) {
+    for (const p of [a, b]) if (p.center && Math.hypot(p.center.x - site.pos.x, p.center.z - site.pos.z) > 0.08) legs.push([p.center, site.pos, arcHeight(p.center, site.pos, 0.24)]);
+  } else if (a.center && b.center) legs.push([a.center, b.center, arcHeight(a.center, b.center)]);
+  const out: [number, number, number][] = [];
+  for (const [p, q, h] of legs)
+    for (let i = 1; i < 12; i++) {
+      const t = i / 12;
+      out.push([p.x + (q.x - p.x) * t, 0.01 + h * Math.sin(Math.PI * t), p.z + (q.z - p.z) * t]);
+    }
+  return out;
+}
+
+/** Where the diorama has something standing (structures, markers, pins, the beacon, towers, chords, links): scene points. */
 function sceneObstacles(model: CloseupModel): [number, number, number][] {
   const out: [number, number, number][] = [];
   const add = (v: V2, y = 0.3) => out.push([v.x, y, v.z]);
@@ -206,7 +252,27 @@ function sceneObstacles(model: CloseupModel): [number, number, number][] {
     if (p.chord) for (const t of [0, 0.25, 0.5, 0.75, 1]) add({ x: p.chord[0].x + (p.chord[1].x - p.chord[0].x) * t, z: p.chord[0].z + (p.chord[1].z - p.chord[0].z) * t }, 0.02);
   }
   if (model.site) add(model.site.pos, BEACON_H * 0.5);
+  out.push(...linkSamples(model));
   return out.filter(([x, , z]) => Math.hypot(x, z) <= PLINTH_R + 0.5);
+}
+
+/**
+ * What the facility names, the plaque and the cards should not print over, as screen boxes: each structure (standing
+ * up from its point), the pins, the beacon, tower tops along official routes, and the raised amber links.
+ */
+export function labelObstacles(model: CloseupModel): Obstacle[] {
+  const out: Obstacle[] = [];
+  for (const p of [model.a, model.b]) {
+    for (const pl of p.places) if (!pl.hidden && pl.treatment === "structure") out.push({ at: [pl.pos.x, 0.32, pl.pos.z], w: 34, h: 34 });
+    if (p.center) out.push({ at: [p.center.x, PIN_H * 0.55, p.center.z], w: 12, h: 34 });
+    if (p.route?.precision === "official-gis") {
+      const n = Math.max(2, Math.min(24, Math.round(polyLength(p.route.pts) / 1.15)));
+      for (const { p: q } of alongPolyline(p.route.pts, n)) out.push({ at: [q.x, 0.45, q.z], w: 16, h: 24 });
+    }
+  }
+  if (model.site) out.push({ at: [model.site.pos.x, BEACON_H * 0.5, model.site.pos.z], w: 18, h: 44 });
+  for (const at of linkSamples(model)) out.push({ at, w: 12, h: 12 });
+  return out;
 }
 
 function FacilityLabel({ pl }: { pl: CuPlace }) {
@@ -229,7 +295,8 @@ function ProjectCard({ p, compact }: { p: CuProject; compact?: boolean }) {
           <span className="truncate">{p.owner}</span>
           {!compact && <span className="shrink-0 whitespace-pre"> · center</span>}
         </div>
-        <div className="mt-1 truncate text-ui font-medium text-fg-1">{p.title}</div>
+        {/* two lines before an ellipsis: the voltage and the project's identity stay whole */}
+        <div className="mt-1 line-clamp-2 text-ui font-medium text-fg-1">{p.title}</div>
       </div>
     </div>
   );

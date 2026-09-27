@@ -8,6 +8,7 @@ import { IDX } from "@/lib/data";
 import type { Match } from "@/lib/domain/types";
 import { DOCK, useLayout } from "@/lib/layout";
 import { ownerNames } from "@/lib/selectors";
+import { rowOwner } from "./results/model";
 import { useAtlas } from "@/lib/store";
 import { Eyebrow, IconButton, Panel, SignalFact, signalState } from "./ui";
 import { InServiceMicro, InServiceStrip, useInServiceMeta } from "./timeline/InServiceStrip";
@@ -79,43 +80,56 @@ function Collapsed({ pair, toggle }: { pair: Match | null; toggle: ReactNode }) 
   );
 }
 
+/**
+ * "PLANNED IN-SERVICE YEARS ▮▮ ▮ ▮▮▮ … 42 of 197 projects in flagged pairs": the ticks fill the whole width between the
+ * title and the count. Below 640px the count tucks under the title, so neither is ever cut.
+ */
 function OverviewSummary() {
   const meta = useInServiceMeta();
   return (
     <>
-      <Eyebrow as="h2" className="shrink-0">
-        In-service years
-      </Eyebrow>
-      <InServiceMicro className="h-full min-w-[80px] max-w-[520px] flex-1" />
-      <span className="num ml-auto min-w-0 shrink truncate text-caption text-fg-3" title={meta.title}>
+      <div className="flex min-w-0 shrink-0 flex-col justify-center gap-1.5 @min-[640px]:flex-row @min-[640px]:items-center @min-[640px]:gap-4">
+        <Eyebrow as="h2" className="shrink-0">
+          Planned in-service years
+        </Eyebrow>
+        <span className="num text-caption leading-none whitespace-nowrap text-fg-3 @min-[640px]:hidden" title={meta.title}>
+          {meta.text}
+        </span>
+      </div>
+      <InServiceMicro className="h-full min-w-0 flex-1 @max-[380px]:hidden" />
+      <span className="num hidden shrink-0 text-caption whitespace-nowrap text-fg-3 @min-[640px]:inline" title={meta.title}>
         {meta.text}
       </span>
     </>
   );
 }
 
-/** "Possible overlap 2028 · year precision · ● Okatie – McIntosh 115kV Tie × ● Goshen – McIntosh 115 kV Line Rebuild" */
+/**
+ * "Possible overlap 2028 · year precision · ● Okatie – McIntosh 115kV Tie × ● Goshen – McIntosh 115 kV Line Rebuild".
+ * Below 600px the pair reads as its owners ("● DESC × ● GPC"); below 460px the statement alone (the inspector names them).
+ */
 function PairSummary({ m }: { m: Match }) {
   const st = overlapStatement(m);
   const a = IDX.project(m.projectAId);
   const b = IDX.project(m.projectBId);
-  const title = (p: typeof a, color: string) => (
+  const side = (p: typeof a, color: string) => (
     <span className="flex min-w-0 items-center gap-1.5" title={`${ownerNames(p, IDX, true)} · ${p.title}`}>
       <span aria-hidden className="size-1.5 shrink-0 rounded-full" style={{ background: color }} />
-      <span className="min-w-0 truncate">{p.shortTitle}</span>
+      <span className="min-w-0 truncate @max-[600px]:hidden">{p.shortTitle}</span>
+      <span className="num hidden shrink-0 whitespace-nowrap @max-[600px]:inline">{rowOwner(p).label}</span>
     </span>
   );
   return (
     <>
-      <SignalFact kind="time" state={signalState(m.time)} mono={false} className="max-w-[55%] shrink-0" tooltip={m.timeReason}>
+      <SignalFact kind="time" state={signalState(m.time)} mono={false} className="max-w-[55%] shrink-0 @max-[460px]:max-w-none @max-[460px]:shrink" tooltip={m.timeReason}>
         {st.text}
       </SignalFact>
-      <span className="flex min-w-0 flex-1 items-center gap-2 text-caption text-fg-2">
-        {title(a, "var(--util-a)")}
+      <span className="flex min-w-0 flex-1 items-center gap-2 text-caption text-fg-2 @max-[460px]:hidden">
+        {side(a, "var(--util-a)")}
         <span aria-hidden className="shrink-0 text-fg-4">
           ×
         </span>
-        {title(b, "var(--util-b)")}
+        {side(b, "var(--util-b)")}
       </span>
     </>
   );

@@ -9,7 +9,7 @@ import { useAtlas } from "@/lib/store";
 import { Button, Disclosure, Divider, Eyebrow, Spinner, UtilityDot } from "../ui";
 import { Footer } from "./Footer";
 import { ProofButton } from "./ProofButton";
-import { fmt, pairsToCheck, regionLabel, regionProjects, regionSourceCount, SNAPSHOT_DATE, SOURCE_COUNT, statusLabel, utilityName, utilityPlans, type UtilityPlans } from "./model";
+import { fmt, pairsToCheck, plannedProjects, regionLabel, regionProjects, regionSourceCount, SNAPSHOT_DATE, SOURCE_COUNT, statusLabel, utilityName, utilityPlans, type UtilityPlans } from "./model";
 
 /** Shared with the results sub-line: the eye follows 7,830 → "of 7,830 pairs checked". */
 export const PAIRS_LAYOUT_ID = "opportunities-pairs-checked";
@@ -28,6 +28,8 @@ export function Hero({ phone, error }: { phone: boolean; error?: ReactNode }) {
   const compare = useAtlas((s) => s.compare);
 
   const projects = regionProjects(region);
+  // the stat counts what the engine compares: completed / no-longer-listed plans stay in the plans list, not in "planned"
+  const planned = plannedProjects(region).length;
   const pairs = pairsToCheck(region);
   const plans = utilityPlans(region);
   const n = plans.length;
@@ -55,8 +57,8 @@ export function Hero({ phone, error }: { phone: boolean; error?: ReactNode }) {
 
   const stats = (
     <div className="grid grid-cols-3 gap-1.5">
-      <HeroStat value={fmt(projects.length)} label="planned projects" />
-      <HeroStat value={fmt(pairs)} label="cross-utility pairs to check" layoutId={PAIRS_LAYOUT_ID} />
+      <HeroStat value={fmt(planned)} label="planned projects" />
+      <HeroStat value={fmt(pairs)} label="pairs to check" layoutId={PAIRS_LAYOUT_ID} title="Cross-utility pairs: two planned projects in the region with no owner in common" />
       <HeroStat
         value={fmt(SOURCE_COUNT)}
         label="public sources"
@@ -252,7 +254,7 @@ function UtilityRow({ u }: { u: UtilityPlans }) {
           <span className="min-w-0">
             <span className="block truncate text-ui font-medium text-fg-1">{u.name}</span>
             {u.doc && (
-              <span className="block truncate text-caption font-normal text-fg-3" title={u.doc}>
+              <span className="line-clamp-2 text-caption font-normal text-pretty text-fg-3" title={u.doc}>
                 {u.doc}
               </span>
             )}

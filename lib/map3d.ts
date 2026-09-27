@@ -42,6 +42,8 @@ export type Map3DInput = {
   selectedMatchId: string | null;
   hoveredMatchId: string | null;
   focusProjectIds: string[] | null;
+  /** The list's filters (timing, conflicts, utility): pairs outside them dim like an out-of-focus pair. Null = none. */
+  visiblePairIds?: string[] | null;
   mapMode: "3d" | "flat";
   basemap: "night" | "satellite" | "offline";
   reducedMotion: boolean;
@@ -524,11 +526,14 @@ export function build3DState(input: Map3DInput): Map3DState {
 
   // arcs: every flagged pair with centers, both projects visible, in engine priority order
   const visibleIds = new Set(visible.map((p) => p.id));
+  const listed = input.visiblePairIds ? new Set(input.visiblePairIds) : null;
   const arcs: Map3DArc[] = [];
+  let listedSeen = 0;
   regionMatches.forEach((m) => {
     const c = m.geoDetail.center;
     if (!c || !visibleIds.has(m.projectAId) || !visibleIds.has(m.projectBId)) return;
     if (selectedMatch && m.id === selectedMatch.id) return;
+    const inList = !!listed?.has(m.id) && ++listedSeen <= OVERVIEW_BRIGHT;
     const site = m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint" ? sharedSiteOf(m) : null;
     const legs = site ? [metersBetween(c.a, site.lonlat), metersBetween(site.lonlat, c.b)] : [metersBetween(c.a, c.b)];
     arcs.push({
@@ -540,10 +545,12 @@ export function build3DState(input: Map3DInput): Map3DState {
       h: overviewArcHeight(Math.max(...legs)),
       possible: m.geo !== "confirmed",
       hovered: hoveredMatch?.id === m.id,
-      bright: arcs.length + 1 <= OVERVIEW_BRIGHT || (!!focus && (focus.has(m.projectAId) || focus.has(m.projectBId))),
+      bright: listed
+        ? inList
+        : arcs.length + 1 <= OVERVIEW_BRIGHT || (!!focus && (focus.has(m.projectAId) || focus.has(m.projectBId))),
       dim: selectedMatch
         ? 0.07
-        : focus && !(focus.has(m.projectAId) || focus.has(m.projectBId))
+        : (focus && !(focus.has(m.projectAId) || focus.has(m.projectBId))) || (listed && !listed.has(m.id))
           ? 0.16
           : hoveredMatch && hoveredMatch.id !== m.id
             ? 0.35
@@ -616,12 +623,16 @@ export function build3DState(input: Map3DInput): Map3DState {
     // the count sits just outside its ring, west first (the top pairs' rank chips ride above a hub and the city name is
     // often below it), on a side that is not inside a neighbouring ring or on top of a count already placed
     const counts: LonLat[] = [];
+    const dots = visible.flatMap((p) => p.places.map((pl) => [pl.lon, pl.lat] as LonLat));
     for (const h of hotspots) {
+      // west first (map-core's "01 02 03" chips ride above a hub and step clear of this count; the city name is often
+      // below it)
       const sides = [270, 180, 90, 0].map((b) => destination(h.center, h.radiusMeters, b));
-      const at =
-        sides.find(
-          (p) => hotspots.every((o) => o === h || metersBetween(p, o.center) > o.radiusMeters + 1.5 * MI) && counts.every((q) => metersBetween(p, q) > 6 * MI),
-        ) ?? sides[0];
+      const fits = (p: LonLat) =>
+        hotspots.every((o) => o === h || metersBetween(p, o.center) > o.radiusMeters + 1.5 * MI) && counts.every((q) => metersBetween(p, q) > 6 * MI);
+      // and off the project dots where it can be (a count on a dot reads as that project's)
+      const clear = (p: LonLat) => dots.every((d) => metersBetween(p, d) > 2.2 * MI);
+      const at = sides.find((p) => fits(p) && clear(p)) ?? sides.find(fits) ?? sides[0];
       counts.push(at);
       labels.push({ lonlat: at, text: `${h.count} pairs`, kind: "hotspot", z: 0 });
     }
@@ -697,9 +708,15 @@ function spireScaleExpr(cls: LayerClass): Expr {
   return steppedScale(4, 8.75, (z) => spireScale(cls, spireStopAt(z)));
 }
 
-function structureScaleExpr(cls: LayerClass): Expr {
-  return steppedScale(6.5, 16, (z) => structureScale(cls, z));
+function structureScaleExpr(cls: LayerClass, boost = 1): Expr {
+  return steppedScale(6.5, 16, (z) => structureScale(cls, z).map((v) => v * boost) as [number, number, number]);
 }
+
+/**
+ * The selected pair's structures (its yards, towers and the shared-site beacon) stand this much taller and wider than
+ * the rest: at pair zoom they are the subject, and they are symbolic either way (the 3D caption and the Map key say so).
+ */
+export const SEL_BOOST = 1.9;
 
 /** Dimmed spires darken toward the canvas (model opacity is per layer, and spires are too thin to need translucency). */
 function dimHex(hex: string, t: number): string {
@@ -750,7 +767,7 @@ function wireFeatures(s: Map3DState, zoom: number) {
   for (const r of s.routes) {
     const shown = r.towers.filter((_, i) => i % step === 0 || i === r.towers.length - 1);
     // the tower layers step their scale every 1/8 zoom (see steppedScale): wires use the same quantized zoom
-    const [sx, , sz] = structureScale(structureClass(r.cls), wireZoomOf(zoom));
+    const [sx, , sz] = structureScale(structureClass(r.cls), wireZoomOf(zoom)).map((v) => v * (r.selected ? SEL_BOOST : 1));
     const hz = TOWER_CONDUCTOR * sz;
     const reach = TOWER_REACH * sx;
     for (let i = 0; i < shown.length - 1; i++) {
@@ -959,6 +976,26 @@ function layerSpecs(standard: boolean): LayerDef[] {
       },
     },
     {
+      // a soft dark contact shadow under each of the selected pair's yards, so the symbolic structures sit on the
+      // ground instead of floating as glowing smudges (towers are too thin to need one)
+      ground: true,
+      spec: {
+        id: "gl3d-contact",
+        type: "circle",
+        source: SRC.structures,
+        filter: ["all", ["==", ["get", "g"], "sel"], ["!=", ["get", "m"], MODEL_ID.tower]],
+        paint: {
+          "circle-radius": ["interpolate", ["exponential", 1.6], ["zoom"], 7, 5, 9, 11, 10.5, 20, 12, 30],
+          "circle-color": "#000000",
+          "circle-opacity": 0.55,
+          "circle-blur": 0.85,
+          "circle-pitch-alignment": "map",
+          "circle-pitch-scale": "map",
+          "circle-emissive-strength": 1,
+        },
+      },
+    },
+    {
       spec: {
         id: "gl3d-wires",
         type: "line",
@@ -1039,7 +1076,7 @@ function layerSpecs(standard: boolean): LayerDef[] {
         filter: ["all", ["==", ["get", "g"], g], ["==", ["get", "k"], cls]],
         layout: { "model-id": ["get", "m"], "model-allow-density-reduction": false },
         paint: {
-          "model-scale": structureScaleExpr(cls),
+          "model-scale": structureScaleExpr(cls, g === "sel" ? SEL_BOOST : 1),
           "model-rotation": arr3("r"),
           "model-color": ["get", "c"],
           "model-color-mix-intensity": 1,
@@ -1062,7 +1099,7 @@ function layerSpecs(standard: boolean): LayerDef[] {
         filter: ["==", ["get", "g"], "beacon"],
         layout: { "model-id": MODEL_ID.beacon, "model-allow-density-reduction": false },
         paint: {
-          "model-scale": structureScaleExpr("v2"),
+          "model-scale": structureScaleExpr("v2", 1.4),
           "model-color": HUE.overlap,
           "model-color-mix-intensity": 1,
           "model-emissive-strength": 0.6,
@@ -1305,7 +1342,7 @@ export function uninstall3D(map: MapboxMap): void {
 }
 
 function inputKey(i: Map3DInput): string {
-  return [i.region, i.selectedMatchId, i.hoveredMatchId, (i.focusProjectIds ?? []).join(","), i.mapMode, i.run?.ranAt ?? "", i.run?.thresholdMiles ?? "", i.run?.matches.length ?? ""].join("|");
+  return [i.region, i.selectedMatchId, i.hoveredMatchId, (i.focusProjectIds ?? []).join(","), i.visiblePairIds ? `v${i.visiblePairIds.join(",")}` : "", i.mapMode, i.run?.ranAt ?? "", i.run?.thresholdMiles ?? "", i.run?.matches.length ?? ""].join("|");
 }
 
 function apply(map: MapboxMap, rt: Runtime, input: Map3DInput, fresh: boolean): void {

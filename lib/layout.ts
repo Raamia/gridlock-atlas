@@ -46,6 +46,8 @@ export interface LayoutOptions {
   isPhone: boolean;
   /** Pair selected → the dock shows the pair Gantt (196) instead of the overview (96). */
   pairSelected: boolean;
+  /** The 3D close-up is open: on xl the rail folds to its pill too (as on lg), so the diorama gets the rail's width. */
+  closeupOpen?: boolean;
   /** 0-based demo step: the dock stays open on steps 1 and 4 (indices 0 and 3); unknown → collapsed while the demo runs. */
   demoStep?: number | null;
   /** Phone bottom-sheet snap (ignored while the inspector sheet is open). */
@@ -73,9 +75,9 @@ export interface Layout {
   vh: number;
   tier: Tier;
   railMode: RailMode;
-  /** The rail is docked on the left as a full-height panel (xl always; lg/md while the inspector is closed). */
+  /** The rail is docked on the left as a full-height panel (xl unless the 3D close-up is open; lg/md while the inspector is closed). */
   railDocked: boolean;
-  /** The "Opportunities · N" pill shows at the panel top-left (lg/md with the inspector open); focal.t clears it. */
+  /** The "Opportunities · N" pill shows at the panel top-left (lg/md with the inspector open, xl under the close-up); focal.t clears it. */
   pillVisible: boolean;
   gutter: number;
   headerH: number;
@@ -188,8 +190,9 @@ export function computeLayout(vw: number, vh: number, o: LayoutOptions): Layout 
   }
 
   // lg and md alike (SPEC §13): docked while the inspector is closed (the pre-run hero and Compare stay on screen),
-  // the "Opportunities · N" pill while it is open
-  const railMode: RailMode = tier === "xl" || !o.inspectorOpen ? "panel" : "pill";
+  // the "Opportunities · N" pill while it is open. xl keeps the rail docked, except under the 3D close-up (the showcase
+  // takes the rail's width; the pill brings the list back as an overlay)
+  const railMode: RailMode = !o.inspectorOpen || (tier === "xl" && !o.closeupOpen) ? "panel" : "pill";
   const railDocked = railMode === "panel" && !hidden;
   const pillVisible = railMode === "pill" && !hidden;
   const inspectorShown = o.inspectorOpen && !hidden;
@@ -390,7 +393,7 @@ function writeVars(l: Layout) {
 }
 
 type LayoutInputs = Pick<AtlasState, "inspectorOpen" | "railOpen" | "demoStep" | "timelineCollapsed" | "selectedMatchId" | "sheetSnap" | "uiHidden"> &
-  Partial<Pick<AtlasState, "dockHeight" | "railWidth" | "inspectorWidth">>;
+  Partial<Pick<AtlasState, "dockHeight" | "railWidth" | "inspectorWidth" | "closeupOpen">>;
 
 /** Layout options from the store fields that drive the layout (shared by useLayout and getLayout, so they always agree). */
 export function layoutOptions(s: LayoutInputs, vw: number, safe?: { top: number; bottom: number }): LayoutOptions {
@@ -402,6 +405,8 @@ export function layoutOptions(s: LayoutInputs, vw: number, safe?: { top: number;
     timelineCollapsed: s.timelineCollapsed,
     isPhone: vw < 768,
     pairSelected: s.selectedMatchId !== null,
+    // the close-up only shows for a selected pair (Atlas's Closeup)
+    closeupOpen: !!s.closeupOpen && s.selectedMatchId !== null,
     sheetSnap: s.sheetSnap,
     uiHidden: s.uiHidden,
     safeTop: safe?.top ?? 0,
@@ -448,6 +453,7 @@ export function useLayout(): Layout {
   const dockHeight = useAtlas((s) => s.dockHeight);
   const railWidth = useAtlas((s) => s.railWidth);
   const inspectorWidth = useAtlas((s) => s.inspectorWidth);
+  const closeupOpen = useAtlas((s) => s.closeupOpen);
 
   const layout = useMemo(
     () =>
@@ -455,12 +461,12 @@ export function useLayout(): Layout {
         vw,
         vh,
         layoutOptions(
-          { inspectorOpen, railOpen, demoStep, timelineCollapsed, selectedMatchId: pairSelected ? "" : null, sheetSnap, uiHidden, dockHeight, railWidth, inspectorWidth },
+          { inspectorOpen, railOpen, demoStep, timelineCollapsed, selectedMatchId: pairSelected ? "" : null, sheetSnap, uiHidden, dockHeight, railWidth, inspectorWidth, closeupOpen },
           vw,
           { top: safeTop, bottom: safeBottom },
         ),
       ),
-    [vw, vh, safeTop, safeBottom, inspectorOpen, railOpen, demoStep, timelineCollapsed, pairSelected, sheetSnap, uiHidden, dockHeight, railWidth, inspectorWidth],
+    [vw, vh, safeTop, safeBottom, inspectorOpen, railOpen, demoStep, timelineCollapsed, pairSelected, sheetSnap, uiHidden, dockHeight, railWidth, inspectorWidth, closeupOpen],
   );
 
   useLayoutEffect(() => {

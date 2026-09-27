@@ -17,6 +17,7 @@ import { regionExports } from "@/lib/export";
 import { formatDate, pluralize } from "@/lib/format";
 import { IN_SERVICE_HORIZON_DAYS, PAST_DUE_PENALTY, runMatching } from "@/lib/matching/engine";
 import { MIN_SCHEDULE_OVERLAP_DAYS } from "@/lib/matching/time";
+import { rankLabel } from "@/lib/rank";
 import { download, labelsCsv, useReview } from "@/lib/review";
 import { readableNote, regionPairCounts } from "@/lib/selectors";
 import {
@@ -65,13 +66,29 @@ const OPEN = <CircleDashed strokeWidth={1.75} className="text-fg-3" aria-hidden 
 
 /* ───────────────────────────────────────────── 01 Proof at a glance ───────────────────────────────────────────── */
 
+/**
+ * The committed eval's "flagged vs naive" numbers for the region the sheet's header names: Savannah River (the eval's
+ * focus region) has its own counts; every other view says plainly that the numbers cover all regions.
+ */
+function flaggedScope(region: string) {
+  const q = EVAL.queue;
+  const b3 = EVAL.baselines.find((b) => b.id === "B3");
+  if (region === EVAL.meta.focusRegion)
+    return { scope: null, pct: q.descGpcFlagged.pct, k: q.descGpcFlagged.k, n: q.descGpcFlagged.n, naive: b3 ? b3.descGpc : undefined };
+  return { scope: region === "all" ? null : "All regions", pct: q.flagged.pct, k: q.flagged.k, n: q.flagged.n, naive: b3 ? b3.flagged : undefined };
+}
+
+/** Stat labels wrap to a second line in a narrow tile ("Sperry's example" at 1024px) instead of being cut. */
+const WRAP_LABEL = "[&_.eyebrow]:whitespace-normal [&_.eyebrow]:leading-[1.3]";
+
 export function ProofAtAGlance() {
   const run = useAtlas((s) => s.run);
+  const region = useAtlas((s) => s.region);
   const check = useMemo(() => sponsorCheck(), []);
   const sheet = useMemo(() => sponsorSheetCheck(), []);
   const ceii = CEII;
   const q = EVAL.queue;
-  const naive = EVAL.baselines.find((b) => b.id === "B3");
+  const flagged = flaggedScope(region);
   const current = EVAL.meta.snapshot === SNAPSHOT.version;
   const x = XEVAL;
   const model = modelName(Object.keys(x.models)[0] ?? "model");
@@ -98,15 +115,17 @@ export function ProofAtAGlance() {
           tone={check.allOk ? "ok" : "warn"}
           value={`${okRows}/${check.rows.length}`}
           sub={`overlap rows · ${sheetOk}/${sheet.length} project rows · ${check.extra.length} extra`}
+          className={WRAP_LABEL}
         />
         <Stat
           size="lg"
           label="Flagged"
-          value={`${q.flagged.pct}%`}
-          sub={`${n(q.flagged.k)} of ${n(q.flagged.n)}${naive ? ` vs ${n(naive.flagged)} (${((naive.flagged / q.flagged.n) * 100).toFixed(1)}%) naive` : ""}`}
+          value={`${flagged.pct}%`}
+          sub={`${flagged.scope ? `${flagged.scope} · ` : ""}${n(flagged.k)} of ${n(flagged.n)}${flagged.naive !== undefined ? ` vs ${n(flagged.naive)} (${((flagged.naive / flagged.n) * 100).toFixed(1)}%) naive` : ""}`}
+          className={WRAP_LABEL}
         />
-        <Stat size="lg" label="Verbatim quotes" value={n(x.verbatimQuote.all.k)} sub={`of ${n(x.verbatimQuote.all.n)} ${model} quotes · ${n(x.pagesScored)} pages`} />
-        <Stat size="lg" label="CEII excerpts" tone={ceii ? "warn" : "default"} value={ceii} sub={`of ${n(EXCERPTS)} stored`} />
+        <Stat size="lg" label="Verbatim quotes" value={n(x.verbatimQuote.all.k)} sub={`of ${n(x.verbatimQuote.all.n)} ${model} quotes · ${n(x.pagesScored)} pages`} className={WRAP_LABEL} />
+        <Stat size="lg" label="CEII excerpts" tone={ceii ? "warn" : "default"} value={ceii} sub={`of ${n(EXCERPTS)} stored`} className={WRAP_LABEL} />
       </div>
 
       <SubHead meta="live" className="mt-7">
@@ -224,7 +243,7 @@ export function SponsorRowsToday() {
             {inQueue[0] && (
               <>
                 {" "}
-                — <B>{inQueue[0].id}</B> is <B>#{inQueue[0].rank}</B>
+                — <B>{inQueue[0].id}</B> is <B>#{inQueue[0].rank !== undefined ? rankLabel(inQueue[0].rank) : "—"}</B>
               </>
             )}
           </span>
@@ -257,7 +276,7 @@ export function SponsorRowsToday() {
                 {r.status === "in-queue" && (
                   <Line icon={OK}>
                     <span>
-                      In our queue: <B>#{r.rank}</B> · {TAB_LABEL[r.tab ?? "possible"]} · {regionOf(r.matchId!.split("__")[0])} — today{" "}
+                      In our queue: <B>#{r.rank !== undefined ? rankLabel(r.rank) : "—"}</B> · {TAB_LABEL[r.tab ?? "possible"]} · {regionOf(r.matchId!.split("__")[0])} — today{" "}
                       <span className="num">{r.miles?.toFixed(2)} mi</span> · <span className="num">{days(r.days, r.daysAtLeast)}</span> on current plan dates.
                       {r.pastDue && ` Kept although a planned date has passed — ${r.pastDue.join(" ")}`}
                     </span>
@@ -563,7 +582,7 @@ export function CorpusChecks() {
     const add = (label: string, expect: string, a: string, b: string, test: (m: NonNullable<ReturnType<typeof find>>) => boolean) => {
       if (!IDX.project(a) || !IDX.project(b)) return;
       const m = find(a, b);
-      out.push({ label, expect, ok: m ? test(m) : false, got: m ? `${m.badge} · ${m.reviewStatus}` : "not flagged" });
+      out.push({ label, expect, ok: m ? test(m) : false, got: m ? `${m.badge} · ${TAB_LABEL[m.reviewStatus]}` : "not flagged" });
     };
     add("Dairyland Alma–Blair × Xcel WWTC", "GEO confirmed · known coordination", "dpc-alma-blair", "xcel-wwtc", (m) => m.geo === "confirmed" && m.time !== "no-match" && m.reviewStatus === "known-coordination");
     add("Potter–Beckham TX × OK segments", "known coordination", "sps-potter-beckham-tx", "transource-potter-beckham-ok", (m) => m.reviewStatus === "known-coordination");
@@ -576,7 +595,7 @@ export function CorpusChecks() {
         label: "Xcel vs PSC completion dates",
         expect: "conflict shown, every source's window evaluated",
         ok: m ? m.conflicts.some((c) => c.projectId === "xcel-wwtc" && c.field === "completion" && c.sides.length > 1) && m.time !== "no-match" : null,
-        got: m ? `${m.conflicts.length} conflict(s) · TIME ${m.time}` : "—",
+        got: m ? `${pluralize(m.conflicts.length, "conflict")} · TIME ${m.time}` : "—",
       });
     }
     return out;
@@ -849,7 +868,7 @@ export function ExtractionRuns() {
           <article key={r.id} className="py-4 first:pt-0">
             <div className="flex items-start gap-2.5">
               <Bot aria-hidden size={14} strokeWidth={1.75} className={clsx("mt-[3px] shrink-0", r.status === "completed" ? "text-ok" : "text-fg-3")} />
-              <h5 className="min-w-0 flex-1 text-ui font-medium text-fg-1">{IDX.source(r.sourceId)?.title ?? r.sourceId}</h5>
+              <h4 className="min-w-0 flex-1 text-ui font-medium text-fg-1">{IDX.source(r.sourceId)?.title ?? r.sourceId}</h4>
               <Tag mono tone={r.status === "completed" ? "ok" : "muted"}>
                 {r.status}
               </Tag>
@@ -911,10 +930,10 @@ export function OpenQuestions() {
       <Prose className="mb-2">Gaps recorded during source review. They are shown, not hidden.</Prose>
       {groups.map(([cluster, notes]) => (
         <div key={cluster} className="mt-6">
-          <h4 className="flex items-baseline gap-2 border-b border-divider pb-2">
-            <span className="eyebrow">{CLUSTER_LABEL[cluster] ?? cluster}</span>
+          <div className="flex items-baseline gap-2 border-b border-divider pb-2">
+            <h4 className="eyebrow">{CLUSTER_LABEL[cluster] ?? cluster}</h4>
             <span className="num text-caption text-fg-3">{notes.length}</span>
-          </h4>
+          </div>
           <ul>
             {notes.map((note, i) => (
               <li key={i} className="border-b border-divider py-2.5 text-ui text-pretty text-fg-2 [overflow-wrap:anywhere] last:border-b-0">

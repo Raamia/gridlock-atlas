@@ -9,9 +9,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { SNAPSHOT } from "@/lib/data";
+import { IDX, SNAPSHOT } from "@/lib/data";
 import { buildBrief } from "@/lib/brief";
-import { displayTitle, whyFlagged } from "@/lib/describe";
+import { whyFlagged } from "@/lib/describe";
 import type { Match, Project } from "@/lib/domain/types";
 import { rankLabel } from "@/lib/rank";
 import { sponsorReplay } from "@/lib/sponsor";
@@ -22,6 +22,7 @@ import {
   conflictSplit,
   coordinationTile,
   distanceTile,
+  headingTitle,
   ownerFull,
   ownerShort,
   projectFacts,
@@ -60,14 +61,16 @@ export function ProjectHeading({
       new CustomEvent("atlas:fly-to-project", { detail: { projectId: p.id } }),
     );
   };
+  const short = ownerShort(p);
+  const full = ownerFull(p);
   const owner = (
     <span
       className="eyebrow min-w-0 truncate"
       style={{ color: `var(--util-${role})` }}
-      title={ownerFull(p)}
+      title={full}
     >
-      {ownerShort(p)}
-      <span className="sr-only"> ({ownerFull(p)})</span>
+      {short}
+      {full.toLowerCase() !== short.toLowerCase() && <span className="sr-only"> ({full})</span>}
     </span>
   );
   const allPairs = pairs >= 2 && (
@@ -79,7 +82,7 @@ export function ProjectHeading({
         if (focused) st.setFocus(null);
         else st.focusProject(p.id);
       }}
-      className="-mr-1 ml-auto shrink-0 rounded-chip px-1 text-caption font-medium text-fg-3 transition-colors duration-150 hover:text-fg-1 aria-pressed:text-fg-1"
+      className="relative -mr-1 ml-auto shrink-0 rounded-chip px-1 text-caption font-medium text-fg-3 transition-colors duration-150 tap-44 hover:text-fg-1 aria-pressed:text-fg-1"
     >
       All {pairs} pairs
       <span className={compact ? "sr-only" : undefined}>
@@ -93,11 +96,12 @@ export function ProjectHeading({
       type="button"
       onClick={flyTo}
       className={clsx(
-        "rounded-chip text-left transition-colors duration-150 hover:text-white",
+        "max-w-full rounded-chip text-left transition-colors duration-150 hover:text-white",
         compact && "block w-full truncate",
       )}
     >
-      {displayTitle(p)}
+      {/* the clamp sits inside the button: a button is an atomic inline, so a clamp on the h2 could not cut its lines */}
+      {compact ? headingTitle(p) : <span className="line-clamp-2 shorter:line-clamp-1">{headingTitle(p)}</span>}
     </button>
   );
   if (compact)
@@ -125,7 +129,7 @@ export function ProjectHeading({
         {allPairs}
       </div>
       <h2
-        className="mt-1 line-clamp-2 text-heading leading-[1.25] font-semibold text-balance text-fg-1"
+        className="mt-1 text-heading leading-[1.25] font-semibold text-balance text-fg-1 short:mt-0.5"
         title={p.title}
       >
         {title}
@@ -198,7 +202,7 @@ function FactValue({ kind, fact }: { kind: "place" | "time"; fact: TileFact }) {
   );
 }
 
-/** A static Stat tile (label · value · sub) whose value may wrap. */
+/** A static Stat tile (label · value · sub) whose value and sub wrap (never an ellipsis). */
 function Tile({
   label,
   children,
@@ -215,16 +219,16 @@ function Tile({
     <div
       className={clsx(
         "flex min-w-0 flex-col rounded-control bg-fill-1 px-2 @max-[340px]:px-1.5 @min-[380px]:px-2.5",
-        compact ? "py-1.5" : "py-2",
+        compact ? "py-1.5" : "py-2 short:py-1.5",
       )}
     >
       <span
-        className={clsx("eyebrow block truncate", compact ? "mb-1" : "mb-1.5")}
+        className={clsx("eyebrow block truncate", compact ? "mb-1" : "mb-1.5 short:mb-1")}
       >
         {label}
       </span>
       {children}
-      <span className={clsx("block text-caption text-pretty text-fg-3", compact ? "mt-0.5" : "mt-1")}>
+      <span className={clsx("block text-caption text-pretty text-fg-3", compact ? "mt-0.5" : "mt-1 short:mt-0.5")}>
         {sub}
       </span>
     </div>
@@ -295,7 +299,17 @@ export function Chips({
   const ovl = replay.find((r) => r.status === "in-queue" && r.matchId === m.id);
   const { live, revised } = conflictSplit(m);
   const beyond = beyondChip(m);
-  if (!ovl && !live && !revised && !m.pastDue?.length && !beyond) return null;
+  const differs = [IDX.project(m.projectAId), IDX.project(m.projectBId)].flatMap((p) => p?.disagreements ?? []);
+  // only when the date chip doesn't already say "Sources disagree" (that chip jumps to the same section, scope items included)
+  const differsLabel =
+    differs.length && !live
+      ? differs.every((d) => d.field === "owner")
+        ? "Owner differs"
+        : differs.every((d) => d.field !== "owner")
+          ? "Scope differs"
+          : "Scope and owner differ"
+      : null;
+  if (!ovl && !live && !revised && !m.pastDue?.length && !beyond && !differsLabel) return null;
   return (
     <div className="flex flex-wrap items-center gap-1.5">
       {ovl && (
@@ -335,6 +349,13 @@ export function Chips({
           </Tag>
         </Tooltip>
       ) : null}
+      {differsLabel && (
+        <Tooltip content="Sources describe this project differently; both versions are kept side by side">
+          <Tag tone="neutral" onClick={() => onJump("conflicts")}>
+            {differsLabel}
+          </Tag>
+        </Tooltip>
+      )}
       {!!m.pastDue?.length && (
         <Tooltip content="Planned date passed; completion not confirmed">
           <Tag tone="neutral" tabIndex={0}>
@@ -439,14 +460,14 @@ export function ReviewQuestion({
     <div
       className={clsx(
         "rounded-card bg-fill-1",
-        compact ? "px-3 pt-2 pb-2.5" : "px-3.5 pt-2.5 pb-3",
+        compact ? "px-3 pt-2 pb-2.5" : "px-3.5 pt-2.5 pb-3 short:pt-1.5 short:pb-2",
       )}
     >
       <Eyebrow>Question for the planners</Eyebrow>
       <p
         className={clsx(
           "text-pretty text-fg-1",
-          compact ? "mt-1 text-ui" : "mt-1.5 text-body leading-[1.45]",
+          compact ? "mt-1 text-ui" : "mt-1.5 text-body leading-[1.45] short:mt-1 short:text-ui",
         )}
       >
         {q}
@@ -487,9 +508,10 @@ export function WhyFlagged({ m }: { m: Match }) {
           type="button"
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
-          className="-mx-1 mt-1 rounded-chip px-1 text-caption font-medium text-fg-2 hover:text-fg-1"
+          className="relative -mx-1 mt-1 rounded-chip px-1 text-caption font-medium text-fg-2 tap-44 hover:text-fg-1"
         >
           {open ? "less" : "more"}
+          <span className="sr-only"> of why this pair is flagged</span>
         </button>
       )}
     </div>

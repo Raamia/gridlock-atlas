@@ -43,14 +43,18 @@ export function MapKey() {
   const phone = layout.tier === "phone";
   const collapsed = layout.keyCollapsed;
   const inspectorOpen = useAtlas((s) => s.inspectorOpen);
+  const hasRun = useAtlas((s) => s.run !== null);
   const setOpen = (v: boolean) => set({ mapKeyOpen: v });
 
-  // during the demo the card owns the top of the focal hole: the key waits bottom-left, above the Mapbox logo
+  // during the demo the card owns the top of the focal hole: the open key waits bottom-left, above the Mapbox logo
   const place = demo ? "bottom-10 left-0" : "top-0 left-0";
 
   if (open) return <MapKeyCard className={place} onClose={() => setOpen(false)} phone={phone} />;
   // phones mid-demo with the inspector sheet up: the strip of map between card and sheet belongs to the pair's callouts
   if (phone && demo && inspectorOpen) return null;
+  // desktop mid-demo: the collapsed key lives in the map-controls bar (its 3D caption, or an (i) in Flat map), so the
+  // bottom-left of the hole stays clear for the pair's callouts
+  if (collapsed && demo && !phone) return null;
 
   if (collapsed)
     return (
@@ -79,13 +83,18 @@ export function MapKey() {
             <span className="text-fg-3">other</span>
           </span>
         )}
-        <span aria-hidden className="h-3.5 w-px shrink-0 bg-edge" />
-        <span className="flex shrink-0 items-center gap-2 whitespace-nowrap">
-          <svg width="18" height="6" aria-hidden className="shrink-0">
-            <line x1="1" y1="3" x2="17" y2="3" strokeWidth="1.75" strokeLinecap="round" style={{ stroke: "var(--overlap)" }} />
-          </svg>
-          flagged pair
-        </span>
+        {/* nothing is flagged before a run */}
+        {hasRun && (
+          <>
+            <span aria-hidden className="h-3.5 w-px shrink-0 bg-edge" />
+            <span className="flex shrink-0 items-center gap-2 whitespace-nowrap">
+              <svg width="18" height="6" aria-hidden className="shrink-0">
+                <line x1="1" y1="3" x2="17" y2="3" strokeWidth="1.75" strokeLinecap="round" style={{ stroke: "var(--overlap)" }} />
+              </svg>
+              flagged pair
+            </span>
+          </>
+        )}
         <IconButton label="Map key" size="sm" aria-expanded={false} onClick={() => setOpen(true)} tooltipSide="bottom">
           <Info className="size-3.5" strokeWidth={1.75} />
         </IconButton>
@@ -109,10 +118,27 @@ function MapKeyCard({ className, onClose, phone }: { className: string; onClose:
   const utils = useKeyUtilities();
   const threshold = useAtlas((s) => s.thresholdMiles);
   const mapMode = useAtlas((s) => s.mapMode);
+  const hasRun = useAtlas((s) => s.run !== null);
   const ref = useRef<HTMLDivElement>(null);
+  // whatever opened the card (the chip's (i), the collapsed (i), the 3D caption): focus goes back there on close
+  const opener = useRef<HTMLElement | null>(null);
+  const close = () => {
+    const back = opener.current;
+    onClose();
+    // after the card unmounts: a trigger that remounted in its place is found again by its name
+    requestAnimationFrame(() => {
+      const target = back?.isConnected
+        ? back
+        : document.querySelector<HTMLElement>('[data-map-ui] button[aria-label="Map key"], [data-map-controls] button[aria-haspopup="dialog"]');
+      target?.focus({ preventScroll: true });
+    });
+  };
 
-  // focus moves into the card when it opens; Esc closes it and hands focus back to the map-key trigger's place
+  // focus moves into the card when it opens; Esc or the close button hands it back to the trigger
   useEffect(() => {
+    const active = document.activeElement;
+    // once, and never an element of the card itself (a re-run effect would otherwise remember the card's own button)
+    if (!opener.current && active instanceof HTMLElement && active !== document.body && !ref.current?.contains(active)) opener.current = active;
     ref.current?.querySelector<HTMLElement>("button")?.focus({ preventScroll: true });
   }, []);
 
@@ -126,7 +152,7 @@ function MapKeyCard({ className, onClose, phone }: { className: string; onClose:
       onKeyDown={(e) => {
         if (e.key !== "Escape") return;
         e.stopPropagation();
-        onClose();
+        close();
       }}
       className={clsx(
         "popover absolute flex max-h-full animate-pop-in flex-col overflow-hidden rounded-card",
@@ -136,7 +162,7 @@ function MapKeyCard({ className, onClose, phone }: { className: string; onClose:
     >
       <div className="flex items-center justify-between gap-2 py-2 pr-1.5 pl-3.5">
         <Eyebrow as="h2">Map key</Eyebrow>
-        <IconButton label="Close map key" size={phone ? "xl" : "sm"} onClick={onClose} tooltip={false}>
+        <IconButton label="Close map key" size={phone ? "xl" : "sm"} onClick={close} tooltip={false}>
           <X className="size-3.5" strokeWidth={1.75} />
         </IconButton>
       </div>
@@ -163,9 +189,19 @@ function MapKeyCard({ className, onClose, phone }: { className: string; onClose:
         <Divider />
         <ul className="space-y-2 pt-3">
           <Row swatch={<Line dash={false} amber />}>
-            Flagged pair · center to center, not a route <span className="text-fg-3">(solid = place confirmed, dashed = possible)</span>
+            Flagged pair · center to center, not a route{" "}
+            <span className="text-fg-3">{mapMode === "3d" ? "(solid = place confirmed, faded = possible)" : "(solid = place confirmed, dashed = possible)"}</span>
           </Row>
-          <Row swatch={<Ring />}>{threshold}-mile ring = Sperry&apos;s rule around one project&apos;s center</Row>
+          <Row swatch={<Ring />}>
+            {threshold === 25 ? (
+              <>25-mile ring = Sperry&apos;s rule around one project&apos;s center</>
+            ) : (
+              <>
+                {threshold}-mile ring = your review radius around one project&apos;s center <span className="text-fg-3">(Sperry&apos;s rule is 25 mi)</span>
+              </>
+            )}
+          </Row>
+          {hasRun && <Row swatch={<Hotspot />}>Amber ring + count = flagged pairs whose midpoints cluster within ~12 mi</Row>}
           <Row swatch={<Beacon />}>Shared site or terminal · callout says stated or implied</Row>
           <Row swatch={<Line dash={false} />}>Official GIS route</Row>
           <Row swatch={<Line dash />}>Digitized from official map · schematic</Row>
@@ -217,6 +253,15 @@ function Ring() {
     <svg width="28" height="16">
       <circle cx="14" cy="8" r="6.5" strokeWidth="1.25" style={{ stroke: "var(--overlap)", fill: "var(--overlap-wash)" }} />
       <circle cx="14" cy="8" r="1.75" style={{ fill: "var(--util-a)" }} />
+    </svg>
+  );
+}
+
+function Hotspot() {
+  return (
+    <svg width="28" height="16">
+      <circle cx="10" cy="8" r="6.5" strokeWidth="1.25" style={{ stroke: "var(--overlap)", fill: "var(--overlap-wash)" }} />
+      <path d="M19.5 5 H26 M19.5 8 H24 M19.5 11 H25" strokeWidth="1.25" strokeLinecap="round" style={{ stroke: "var(--overlap)", opacity: 0.7 }} />
     </svg>
   );
 }

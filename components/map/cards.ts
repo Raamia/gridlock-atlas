@@ -39,7 +39,7 @@ export function pairPlaceText(m: Match): string {
   const thr = m.geoDetail.thresholdMiles;
   const byFacility = m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint";
   if (byFacility) return `${geoShort(m).title}${c && c.miles > thr ? ` · beyond ${thr} mi center to center` : ""}`;
-  return c ? `${formatMilesNear(c.miles, thr)} apart · center to center` : geoShort(m).text;
+  return c ? `≈${formatMilesNear(c.miles, thr)} apart · center to center` : geoShort(m).text;
 }
 
 export function pairCardHtml(m: Match, rank: string | null) {

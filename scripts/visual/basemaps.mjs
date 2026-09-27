@@ -8,6 +8,9 @@ page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
 await page.goto("http://localhost:3217/?pair=dpc-alma-blair__xcel-wwtc", { waitUntil: "load" });
 await page.waitForTimeout(7000);
 for (const b of ["Satellite", "Offline", "Night"]) {
+  // a short or narrow focal hole folds the Basemap group into the "Basemap options" menu: open it first
+  const menu = page.getByRole("button", { name: "Basemap options" });
+  if (await menu.isVisible().catch(() => false)) await menu.click();
   await page.getByRole("button", { name: b, exact: true }).click();
   await page.waitForFunction(() => window.__map?.isStyleLoaded() && window.__map.getStyle()?.layers, null, { timeout: 30000 }).catch(() => {});
   await page.waitForTimeout(2500);

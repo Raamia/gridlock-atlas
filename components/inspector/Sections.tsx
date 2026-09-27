@@ -304,7 +304,7 @@ function Windows({ p, role }: { p: Project; role: "a" | "b" }) {
                     </span>
                   </Tooltip>
                 </div>
-                {ws.length === 1 && notes[0] && <ClampedNote text={notes[0]} />}
+                {ws.length === 1 && notes[0] && <ClampedNote text={notes[0]} about={p.shortTitle} />}
               </div>
             );
           })
@@ -317,7 +317,7 @@ function Windows({ p, role }: { p: Project; role: "a" | "b" }) {
 }
 
 /** A window's note under its schedule row: two lines, the rest on demand (full text stays in the DOM). */
-function ClampedNote({ text }: { text: string }) {
+function ClampedNote({ text, about }: { text: string; about: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [open, setOpen] = useState(false);
   const [clipped, setClipped] = useState(false);
@@ -331,8 +331,15 @@ function ClampedNote({ text }: { text: string }) {
         {text}
       </span>
       {(clipped || open) && (
-        <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="rounded-chip font-medium text-fg-2 hover:text-fg-1">
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          className="rounded-chip font-medium text-fg-2 hover:text-fg-1"
+        >
           {open ? "less" : "more"}
+          {/* the visible word starts the name; the rest tells this toggle from the others */}
+          <span className="sr-only"> of the window note for {about}</span>
         </button>
       )}
     </p>
@@ -386,7 +393,7 @@ export function CoordinationSection({ m, a, b, pulse }: { m: Match; a: Project; 
         <>
           <p className="text-ui text-pretty text-fg-2">No coordination between {who} was found in the reviewed sources.</p>
           <p className="text-caption text-pretty text-fg-3">
-            That is an <em>unknown</em> status — not evidence that the utilities are uncoordinated. Planners should check unpublished arrangements before outreach.
+            Planners should check unpublished arrangements before outreach.
           </p>
         </>
       )}
@@ -404,8 +411,14 @@ function CoordinationItem({ scope, text }: { scope: string; text: string }) {
       </span>
       {more ? text : short}
       {short !== text && (
-        <button type="button" onClick={() => setMore((x) => !x)} aria-expanded={more} className="ml-1 rounded-chip text-caption font-medium text-fg-3 hover:text-fg-1">
+        <button
+          type="button"
+          onClick={() => setMore((x) => !x)}
+          aria-expanded={more}
+          className="ml-1 rounded-chip text-caption font-medium text-fg-3 hover:text-fg-1"
+        >
           {more ? "less" : "more"}
+          <span className="sr-only"> of the {scope.toLowerCase()} note</span>
         </button>
       )}
     </li>
@@ -455,7 +468,7 @@ export function ConflictSection({ m, a, b, pulse }: { m: Match; a: Project; b: P
   const roleOf = (projectId: string): "a" | "b" => (projectId === a.id ? "a" : "b");
   const counts = [
     `${revised} date${revised === 1 ? "" : "s"} revised by a newer edition`,
-    `${live} current disagreement${live === 1 ? "" : "s"}`,
+    `${live} date disagreement${live === 1 ? "" : "s"}`,
     ...(others.length ? [`${others.length} ${others.length === 1 ? `${others[0].d.field} disagreement` : "scope or owner disagreements"}`] : []),
   ];
   return (
@@ -475,13 +488,12 @@ export function ConflictSection({ m, a, b, pulse }: { m: Match; a: Project; b: P
             key={c.id}
             ref={focusedHere && c === list[0] ? focused : undefined}
             data-conflict-id={c.id}
-            className={clsx("relative", focusedHere && "pl-3.5")}
+            className={clsx("relative", focusedHere && "-mx-2.5 rounded-control bg-warn/[0.07] px-2.5 py-2 ring-1 ring-warn/25 ring-inset")}
             onMouseEnter={() => set({ highlightConflict: true })}
             onMouseLeave={() => set({ highlightConflict: false })}
             onFocusCapture={() => set({ highlightConflict: true })}
             onBlurCapture={() => set({ highlightConflict: false })}
           >
-            {focusedHere && <span aria-hidden className="absolute top-0 bottom-0 left-0 w-0.5 rounded-full bg-warn" />}
             <div className="flex min-w-0 items-center gap-2">
               <UtilityDot utility={roleOf(c.projectId)} />
               <span className="min-w-0 truncate text-caption text-fg-2">
@@ -503,7 +515,7 @@ export function ConflictSection({ m, a, b, pulse }: { m: Match; a: Project; b: P
               ))}
             </div>
             <p className="mt-2 text-caption text-pretty text-fg-3">
-              {c.field === "constructionWindow" ? "Windows differ by source; the engine evaluated every source combination before calling the TIME signal." : completionNote(c, p)}
+              {c.field === "constructionWindow" ? "Windows differ by source; the engine evaluated every source combination before calling the timing signal." : completionNote(c, p)}
             </p>
           </div>
         );
@@ -529,7 +541,7 @@ export function ConflictSection({ m, a, b, pulse }: { m: Match; a: Project; b: P
               return (
                 <div key={s.value} className="flex min-w-0 flex-col gap-1.5 p-3">
                   <div className="text-ui font-medium text-fg-1">{s.value}</div>
-                  <div className="truncate text-caption text-fg-3" title={s.sourceIds.map((id) => IDX.source(id)?.title).join("\n")}>
+                  <div className="line-clamp-2 text-caption text-pretty text-fg-3" title={s.sourceIds.map((id) => IDX.source(id)?.title).join("\n")}>
                     {[...new Set(s.sourceIds.map((id) => IDX.source(id)?.publisher ?? id))].join(" · ")}
                   </div>
                   {href && (
@@ -548,7 +560,7 @@ export function ConflictSection({ m, a, b, pulse }: { m: Match; a: Project; b: P
   );
 }
 
-/** What a completion disagreement does to TIME: a date that ends a current window feeds the window match; the in-service gap always uses the current date. */
+/** What a completion disagreement does to the timing match: a date that ends a current window feeds the window match; the in-service gap always uses the current date. */
 function completionNote(c: Conflict, p: Project): string {
   const cur = currentInService(p);
   const gap = cur ? `the in-service gap (secondary signal) uses the current date, ${formatBound(cur.date)}` : "no in-service gap is computed";
@@ -557,14 +569,14 @@ function completionNote(c: Conflict, p: Project): string {
   const history = `the superseded date${old.length > 1 ? "s" : ""} from the older source${old.length > 1 ? "s" : ""} (${old.join(", ")}) ${old.length > 1 ? "are" : "is"} kept as version history`;
   if (!c.affectsMatch || !bound.length) return `All claims are kept. These dates do not bound a construction window; ${gap}${c.versionOnly ? `, and ${history}` : ""}.`;
   if (c.versionOnly)
-    return `All claims are kept. The current date, ${bound[0].value}, also falls within the end of this project's current schedule window, so it feeds the TIME match and the in-service gap; ${history}.`;
+    return `All claims are kept. The current date, ${bound[0].value}, also falls within the end of this project's current schedule window, so it feeds the timing match and the in-service gap; ${history}.`;
   // a side whose sources publish no window is kept for review but never matched (e.g. AEP's 2034 for BECI)
   const windowed = new Set(activeWindows(p).map((w) => w.claimSourceId));
   const unwindowed = c.sides.filter((s) => !s.sourceIds.some((id) => windowed.has(id)));
   if (unwindowed.length) {
     const vals = (xs: typeof c.sides) => xs.map((s) => s.value).join(" and ");
     const many = unwindowed.length > 1;
-    return `All claims are kept. Only ${vals(bound)} comes with a schedule window, so the TIME match uses it; ${vals(unwindowed)} ${many ? "have" : "has"} no window of ${many ? "their" : "its"} own and ${many ? "are" : "is"} kept for review but not matched. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
+    return `All claims are kept. Only ${vals(bound)} comes with a schedule window, so the timing match uses it; ${vals(unwindowed)} ${many ? "have" : "has"} no window of ${many ? "their" : "its"} own and ${many ? "are" : "is"} kept for review but not matched. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
   }
   const n = new Set(bound.flatMap((s) => s.sourceIds)).size;
   return `All claims are kept. ${bound.map((s) => s.value).join(" and ")} also falls within the end of ${n > 1 ? "those sources' own schedule windows" : "its source's own schedule window"}; the window match evaluates every source combination, so ${c.sides.length > 2 ? "no date is picked over the others" : "neither date is picked over the other"}. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
@@ -591,7 +603,7 @@ function SideCell({ p, side, field }: { p: Project; side: ConflictSide; field: C
         {pubs.map((pub) => {
           const docs = srcs.filter((s) => s!.publisher === pub);
           return (
-            <div key={pub} className="truncate text-caption text-fg-3" title={docs.map((d) => d!.title).join("\n")}>
+            <div key={pub} className="line-clamp-2 text-caption text-pretty text-fg-3" title={docs.map((d) => d!.title).join("\n")}>
               {pub}
               {docs.length > 1 && ` · ${docs.length} docs`}
             </div>

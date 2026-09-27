@@ -8,12 +8,14 @@ import { buildBrief } from "@/lib/brief";
 import { IDX, SNAPSHOT } from "@/lib/data";
 import { geoShort } from "@/lib/describe";
 import type { Match, MatchRun } from "@/lib/domain/types";
+import { precisionLabel } from "@/lib/format";
 import { formatUsd, formatUsdRange, impactChannels } from "@/lib/impact";
-import { useLayout } from "@/lib/layout";
-import { rankOf, regionMatches } from "@/lib/rank";
+import { getLayout, useLayout } from "@/lib/layout";
+import { rankLabel, rankOf, regionMatches } from "@/lib/rank";
 import { regionPairCounts } from "@/lib/selectors";
 import { sponsorCheck, sponsorReplay, SPONSOR_RADIUS_MILES, withinSponsorRule } from "@/lib/sponsor";
 import { useAtlas, type InspectorSection } from "@/lib/store";
+import { overlapStatement } from "./timeline/model";
 import { Button, IconButton, Kbd, mapUi, panelClass, Spinner, Tooltip, UtilityDot } from "./ui";
 
 /*
@@ -100,12 +102,13 @@ function inspectorToTop() {
 
 /**
  * One mono line per step, computed from the run and the lib helpers; null when unavailable (never a made-up number).
- * A part may carry a shorter phone wording (`phone`), or none (`phone: null` drops it there), so the honesty tag at the
- * end ("stated", "never summed", "both kept") always fits a 375px line.
+ * A part may carry a shorter wording (`short`: phones, a narrow tablet card, the short laptop card), or none
+ * (`short: null` drops it there), so the honesty tag at the end ("stated", "never summed", "both kept") always fits.
  */
-type KeyPart = { text: string; phone?: string | null };
+type KeyPart = { text: string; short?: string | null };
 type KeyLine = KeyPart[] | null;
-const kp = (text: string, phone?: string | null): KeyPart => (phone === undefined ? { text } : { text, phone });
+const kp = (text: string, short?: string | null): KeyPart => (short === undefined ? { text } : { text, short });
+const keyParts = (key: KeyLine, short: boolean) => (key ?? []).map((part) => (short && part.short !== undefined ? part.short : part.text)).filter((t): t is string => !!t);
 
 const n = (x: number) => x.toLocaleString("en-US");
 const yearOf = (iso: string | undefined) => (iso ? iso.slice(0, 4) : null);
@@ -122,10 +125,15 @@ function prerunLine(): KeyLine {
   const name = (id: string) => IDX.utility(id)?.shortName ?? id;
   // focal pair in their header order (DESC first), then the plan count
   const shown = top.slice(0, 2).sort(([a], [b]) => a.localeCompare(b));
-  return [kp(`${n(plans.length)} plans`), ...shown.map(([id, c]) => kp(`${name(id)} ${n(c)}`))];
+  // the short card keeps the two plans' counts (their sum is the total)
+  return [kp(`${n(plans.length)} plans`, null), ...shown.map(([id, c]) => kp(`${name(id)} ${n(c)}`))];
 }
 
-function keyLines(run: MatchRun | null): KeyLine[] {
+/**
+ * `docked`: the list is on screen beside the map. Step 4 then points at Sperry's OVL_3 row (#02) and holds a spotlight on
+ * it; without the list (phones, the tablet pill) it speaks about the pair the inspector shows instead.
+ */
+function keyLines(run: MatchRun | null, docked: boolean): KeyLine[] {
   const lines: KeyLine[] = [prerunLine(), null, null, null, null, null, null, null];
   if (!run || run.thresholdMiles !== DEMO_RADIUS) return lines;
   try {
@@ -134,12 +142,14 @@ function keyLines(run: MatchRun | null): KeyLine[] {
     lines[1] = [kp(`${n(counts.evaluated)} → ${n(inRule)} within ${DEMO_RADIUS} mi`)];
 
     const top = topSoutheast(run);
+    const topRank = top ? rankOf(run, regionOfPair(top), top.id) : undefined;
     if (top) {
-      const rank = rankOf(run, regionOfPair(top), top.id);
       const ip = top.timeDetail.inService;
       const [ya, yb] = [yearOf(ip?.a), yearOf(ip?.b)];
-      const when = ya && yb ? (ya === yb ? `both in service ${ya}` : `in service ${ya} · ${yb}`) : null;
-      lines[2] = [rank ? `#${rank}` : null, geoShort(top).text, when].filter((x): x is string => !!x).map((t) => kp(t));
+      const when = ya && yb ? (ya === yb ? kp(`both in service ${ya}`, `in service ${ya}`) : kp(`in service ${ya} · ${yb}`)) : null;
+      // approximate, as in the row and the inspector tile (G3): "≈6.7 mi apart"
+      const place = top.geoDetail.method === "measured" && top.geoDetail.center ? `≈${geoShort(top).text}` : geoShort(top).text;
+      lines[2] = [topRank ? kp(`#${rankLabel(topRank)}`) : null, kp(place), when].filter((x): x is KeyPart => !!x);
 
       const staging = impactChannels(top).find((c) => c.key === "staging");
       if (staging?.usd) lines[4] = [kp(`Staging up to ≈ ${formatUsd(staging.usd[1])}`), kp("never summed")];
@@ -150,10 +160,14 @@ function keyLines(run: MatchRun | null): KeyLine[] {
 
     const ovl3 = sponsorReplay(run, SNAPSHOT).find((r) => r.id === "OVL_3" && r.status === "in-queue");
     const m3 = ovl3?.matchId ? run.matches.find((m) => m.id === ovl3.matchId) : undefined;
-    if (ovl3?.rank && m3) {
+    if (docked && ovl3?.rank && m3) {
       const sched = m3.timeDetail.schedule;
       const overlap = sched?.confirmed && sched.days >= 30 ? `schedules overlap ${Math.round(sched.days / 30.44)} mo` : null;
-      lines[3] = [kp(`#${ovl3.rank} is Sperry's OVL_3`, `#${ovl3.rank} = OVL_3`), ...(overlap ? [kp(overlap)] : [])];
+      const r = rankLabel(ovl3.rank);
+      lines[3] = [kp(`Row #${r} is Sperry's OVL_3`, `#${r} = OVL_3`), ...(overlap ? [kp(overlap)] : [])];
+    } else if (top) {
+      // the pair on screen, in the timeline's own words ("Possible overlap 2028 · year precision")
+      lines[3] = [...(topRank ? [kp(`#${rankLabel(topRank)}`, null)] : []), ...overlapStatement(top).text.split(" · ").map((t) => kp(t))];
     }
 
     const feat = featured(run);
@@ -171,8 +185,22 @@ function keyLines(run: MatchRun | null): KeyLine[] {
   return lines;
 }
 
-/** The row / button / section a step talks about, found once it exists (the narration moves the UI first). */
-type Target = { find: () => HTMLElement | null; inset?: boolean; scroll?: boolean };
+/** Step 4's second sentence, from the top lead's own TIME signal (never a claim its data doesn't make). */
+function leadTiming(run: MatchRun | null): string | null {
+  const top = run?.thresholdMiles === DEMO_RADIUS ? topSoutheast(run) : null;
+  if (!top) return null;
+  const t = top.timeDetail;
+  if (top.time === "possible" && t.possibleOverlap) return `This lead may overlap only at ${precisionLabel(t.precision)} precision.`;
+  if (top.time === "confirmed" && t.basis === "schedule") return "This lead's published schedules overlap.";
+  if (top.time === "confirmed") return "This lead's construction windows overlap.";
+  return null;
+}
+
+/**
+ * The row / button / section a step talks about, found once it exists (the narration moves the UI first). `hold`: the
+ * ring stays (with a soft glow) for the whole step instead of pulsing once, so a projector audience can find it.
+ */
+type Target = { find: () => HTMLElement | null; inset?: boolean; scroll?: boolean; hold?: boolean };
 
 function visible(el: HTMLElement | null): el is HTMLElement {
   if (!el || el.offsetParent === null) return false;
@@ -219,14 +247,20 @@ function inInspector(selector: string): Target {
 interface Step {
   title: string;
   body: ReactNode;
+  /** Plain-text narration for the live region when `body` is not a string. */
+  say?: string;
+  /** Narration computed from the run (it replaces `body` once the run can say it). */
+  bodyFor?: (run: MatchRun | null) => string | null;
   run: () => Promise<Outcome>;
   /** The pair the step opens (steps 3–8), to tell a missing pair from a slow engine. */
   pick?: (run: MatchRun | null) => Match | null;
   /** Card action on the left of the footer. */
   action?: "closeup" | "proof";
-  /** What the step points at, given the current run. */
-  spotlight?: (run: MatchRun | null) => Target | null;
+  /** What the step points at, given the current run and whether the list is on screen. */
+  spotlight?: (run: MatchRun | null, docked: boolean) => Target | null;
 }
+
+const TIMING = "Timing is secondary: published schedules, never field-work dates.";
 
 const STEPS: Step[] = [
   {
@@ -237,6 +271,7 @@ const STEPS: Step[] = [
         <UtilityDot utility="b" className="mx-0.5 -translate-y-px" /> publish their plans in separate documents. Here they are on one map.
       </>
     ),
+    say: "Dominion Energy South Carolina and Georgia Power publish their plans in separate documents. Here they are on one map.",
     run: async () => {
       // "one map": no earlier comparison, radius, filter or tab carries into the opening beat
       const st = useAtlas.getState();
@@ -248,7 +283,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Compare public plans",
-    body: `Every DESC × Georgia Power pair is measured center to center; those within ${DEMO_RADIUS} miles, or sharing a facility, turn amber.`,
+    body: `Pairs whose centers are within ${DEMO_RADIUS} miles turn amber, plus a few beyond that share a facility or sit on uncertain locations.`,
     run: async () => {
       const token = stepToken;
       const st = useAtlas.getState();
@@ -279,12 +314,19 @@ const STEPS: Step[] = [
   },
   {
     title: "When they build",
-    body: "Timing is secondary: published schedules, never field-work dates, which are not published. 30+ days of overlap confirms it.",
+    body: `${TIMING} Schedules that overlap by 30+ days confirm a timing match.`,
+    bodyFor: (run) => {
+      const lead = leadTiming(run);
+      return lead ? `${TIMING} ${lead}` : null;
+    },
     run: open(topSoutheast, "schedule"),
     pick: topSoutheast,
-    spotlight: (run) => {
+    // the key line names Sperry's OVL_3 row: it keeps a ring for the whole step (only while the list is on screen)
+    spotlight: (run, docked) => {
+      if (!docked) return null;
       const row = run ? sponsorReplay(run, SNAPSHOT).find((r) => r.id === "OVL_3" && r.status === "in-queue") : undefined;
-      return byMatchId(row?.matchId);
+      const t = byMatchId(row?.matchId);
+      return t && { ...t, hold: true };
     },
   },
   {
@@ -296,12 +338,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Known coordination is kept separate",
-    body: (
-      <>
-        Dairyland&apos;s line ends at Xcel&apos;s Tremval North station: a known interface, not a new gap. Official GIS routes:{" "}
-        <span className="whitespace-nowrap text-fg-1">3D close-up</span>.
-      </>
-    ),
+    body: "Dairyland's line ends at Xcel's Tremval North: a known interface, not a new gap. The 3D close-up shows its official GIS routes.",
     run: open(featured, "coordination"),
     pick: featured,
     spotlight: () => closeupButton,
@@ -332,6 +369,11 @@ const STEPS: Step[] = [
   },
 ];
 
+/** The card itself offers "3D close-up" on this step (MapControls then drops its own pill, so it never shows twice). */
+export function demoCardOffersCloseup(step: number | null): boolean {
+  return step !== null && STEPS[step]?.action === "closeup";
+}
+
 /* ─────────────────────────────────────────────── spotlight ─────────────────────────────────────────────── */
 
 let ringColor: string | null = null;
@@ -359,6 +401,32 @@ function pulse(el: HTMLElement, inset: boolean) {
         { boxShadow: `${edge(0)}, ${halo(0, 12)}`, offset: 1 },
       ];
   el.animate(frames, { id: "demo-spotlight", duration: reduced ? 1600 : 1500, easing: "cubic-bezier(0.22, 1, 0.36, 1)" });
+}
+
+/** The spotlight a step holds (step 4's row): released when the step changes or the demo ends. */
+let held: Animation | null = null;
+function release() {
+  held?.cancel();
+  held = null;
+}
+
+/**
+ * A steady 2px white ring with a soft inner glow, held until `release()` (it eases in once; static with reduced motion).
+ * No side stripe: cards never carry a coloured left edge.
+ */
+function hold(el: HTMLElement) {
+  release();
+  const c = ring();
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const on = `inset 0 0 0 2px rgb(${c} / 0.95), inset 0 0 12px 0 rgb(${c} / 0.16)`;
+  const frames: Keyframe[] = reduced
+    ? [{ boxShadow: on }, { boxShadow: on }]
+    : [
+        { boxShadow: `inset 0 0 0 2px rgb(${c} / 0), inset 0 0 0 0 rgb(${c} / 0)`, offset: 0 },
+        { boxShadow: `inset 0 0 0 2px rgb(${c} / 0.95), inset 0 0 18px 0 rgb(${c} / 0.3)`, offset: 0.35 },
+        { boxShadow: on, offset: 1 },
+      ];
+  held = el.animate(frames, { id: "demo-spotlight", duration: reduced ? 1 : 900, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "forwards" });
 }
 
 /** The nearest ancestor that scrolls vertically (the list), or null. */
@@ -400,7 +468,7 @@ function spotlightWhenReady(target: Target, token: number) {
         return;
       }
     }
-    if (visible(el)) return pulse(el, !!target.inset);
+    if (visible(el)) return target.hold ? hold(el) : pulse(el, !!target.inset);
     if (performance.now() - started < 3200) window.setTimeout(tick, 160);
   };
   // after the inspector and camera have started moving, so the ring lands where the eye already is
@@ -451,20 +519,31 @@ export function GuidedDemo() {
   const layout = useLayout();
   const phone = layout.tier === "phone";
   const wide = layout.tier === "xl" || layout.tier === "lg";
+  const docked = layout.railDocked;
   const active = step !== null;
   // last step: the card rides above the brief's scrim, pinned bottom-left (bottom edge below lg), so Finish stays reachable
   const pinned = active && briefOpen;
   // phones with the inspector sheet up: title, two lines and the buttons, so the pair keeps a strip of map
   const compact = phone && pairOpen && !briefOpen;
+  // phones over the brief: title and the buttons only (the narration one tap away), so the review question stays in view
+  const phoneBrief = phone && pinned;
+  // short laptop screens (720–800px tall): the buttons join the key-number line and the title steps down, so the pair keeps
+  // its map (≈170px instead of ≈232px); --demo-card-h and the camera padding follow on their own
+  const short = !phone && !pinned && layout.vh < 800;
+  // a narrow tablet card: the shorter key-number wording, so "≈ $9.0M–$12.4M · stated" is never cut
+  const shortKeys = phone || short || (!pinned && layout.demoCardW < 480);
 
   const [more, setMore] = useState(false);
   const card = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const wasActive = useRef(false);
+  /** Focus is (or was last) on one of the card's controls. */
+  const focusInCard = useRef(false);
   /** The engine let this step down; a run arriving later (the Opportunities panel's Retry, C) picks the narration up again. */
   const stalled = useRef(false);
 
-  const keys = useMemo(() => (active ? keyLines(run) : NO_KEYS), [active, run]);
+  const keys = useMemo(() => (active ? keyLines(run, docked) : NO_KEYS), [active, run, docked]);
+  const bodies = useMemo(() => STEPS.map((s) => (active && s.bodyFor?.(run)) || s.body), [active, run]);
   const proof = active && step === STEPS.length - 1 && sponsorProofOk();
   // derived from the store, never narrated over: no 25 mi run after the engine answered with an error, or no such pair in it
   const demoRun = run?.thresholdMiles === DEMO_RADIUS ? run : null;
@@ -478,12 +557,13 @@ export function GuidedDemo() {
   const runStep = useCallback(async (k: number) => {
     const token = ++stepToken;
     stalled.current = false;
+    release();
     useAtlas.setState({ closeupOpen: false });
     const out = await STEPS[k].run();
     if (stale(token)) return;
     // the card reads the failure from the store (runError / the run), so it can say so instead of narrating a missing pair
     if (out !== "ok") return void (stalled.current = true);
-    const target = STEPS[k].spotlight?.(useAtlas.getState().run);
+    const target = STEPS[k].spotlight?.(useAtlas.getState().run, getLayout().railDocked);
     if (target) spotlightWhenReady(target, token);
   }, []);
 
@@ -508,6 +588,7 @@ export function GuidedDemo() {
       const id = requestAnimationFrame(() => nextRef.current?.focus({ preventScroll: true }));
       return () => cancelAnimationFrame(id);
     }
+    release();
     // the card's buttons leave with it: hand focus back to the toggle rather than dropping it to <body>
     const el = document.activeElement;
     if (was && (!el || el === document.body || card.current?.contains(el))) document.getElementById("demo-toggle")?.focus({ preventScroll: true });
@@ -530,6 +611,16 @@ export function GuidedDemo() {
     });
     return () => cancelAnimationFrame(id);
   }, [step]);
+
+  // the card changes shape (the short card's key row → the footer beside the brief, the phone's compact cards): a focused
+  // Next can be re-mounted and focus drops to <body>. Put it back on Next at once, before the brief's own first focus
+  const mode = phoneBrief ? "phone-brief" : short ? "short" : compact ? "compact" : pinned ? "pinned" : "full";
+  useLayoutEffect(() => {
+    if (step === null || !focusInCard.current) return;
+    const el = document.activeElement;
+    if (!el || el === document.body) nextRef.current?.focus({ preventScroll: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
 
   useEffect(() => {
     if (step === null) return;
@@ -572,7 +663,7 @@ export function GuidedDemo() {
       root.removeProperty("--demo-card-h");
       root.removeProperty("--demo-card-bottom");
     };
-  }, [active, pinned, compact, phone, layout.pillVisible, layout.focal.t]);
+  }, [active, pinned, compact, phone, short, layout.pillVisible, layout.focal.t]);
 
   // geometry (SPEC §3): only from the layout variables
   const cardW = "var(--demo-card-w, 520px)";
@@ -593,224 +684,288 @@ export function GuidedDemo() {
     ? "The engine didn't return a comparison, so this step has no pairs to show. The Opportunities panel has the details."
     : "This pair isn't in the current comparison, so this step has nothing to show.";
 
+  if (step === null) return <AnimatePresence />;
+
+  const last = step === STEPS.length - 1;
+  const closeupButton = (size: "sm" | "lg", tight?: boolean) => (
+    <Button
+      variant="ghost"
+      size={size}
+      className={clsx("bg-fill-1", tight && "px-3!")}
+      icon={<Box size={14} strokeWidth={1.75} />}
+      disabled={!selected || !pairOpen}
+      onClick={() => useAtlas.getState().openCloseup()}
+    >
+      3D close-up
+    </Button>
+  );
+  const proofButton = (
+    <Button
+      variant="ghost"
+      size={phone ? "lg" : "sm"}
+      className="bg-fill-1"
+      onClick={() => {
+        end();
+        useAtlas.getState().openMethod("proof");
+      }}
+    >
+      Sperry&apos;s worked example <span className="text-ok">✓</span> <span className="num">6/6</span>
+    </Button>
+  );
+  const retryButton = (
+    <Button variant="secondary" size={phone ? "lg" : "sm"} icon={<RotateCw size={14} />} onClick={() => void runStep(step)} aria-label="Retry this step">
+      Retry
+    </Button>
+  );
+  const moreButton = (
+    <button
+      type="button"
+      onClick={() => setMore(!more)}
+      aria-expanded={more}
+      aria-controls="demo-body"
+      className="h-11 rounded-control px-1 text-caption text-fg-2 underline decoration-fg-4 underline-offset-2 hover:text-fg-1"
+    >
+      {more ? "Less" : "More"}
+    </button>
+  );
+  // Previous · Next / Finish (the same element on every step, so focus stays on it)
+  const stepButtons = (
+    <div className="ml-auto flex shrink-0 items-center gap-1.5">
+      <IconButton label="Previous step" tooltip="Previous step · ←" size={phone ? "xl" : "md"} variant="secondary" onClick={() => go(step - 1)} disabled={step === 0}>
+        <ArrowLeft size={phone ? 18 : 15} strokeWidth={1.75} />
+      </IconButton>
+      <Tooltip content={short && !last ? "Next step" : null} shortcut="→" side="bottom" describe={false}>
+        <Button
+          ref={nextRef}
+          variant="primary"
+          size={phone ? "xl" : "md"}
+          onClick={() => (!last ? go(step + 1) : end())}
+          iconRight={!last ? <ArrowRight size={phone ? 17 : 15} strokeWidth={1.75} /> : undefined}
+          className={phone ? "min-w-[104px]" : "min-w-[92px]"}
+        >
+          {!last ? "Next" : "Finish"}
+        </Button>
+      </Tooltip>
+    </div>
+  );
+
+  /** The key number well of step i (one grid cell per step, so its height never jumps). */
+  const keyWell = (i: number, className?: string) => {
+    const on = i === step;
+    const key = keys[i];
+    const showFailure = on && failed;
+    const parts = keyParts(key, shortKeys);
+    return (
+      <div
+        className={clsx(
+          "num flex min-h-9 min-w-0 items-center gap-2 rounded-card bg-fill-1 px-3 py-1.5 text-fg-2",
+          // the 400px card pinned beside the brief takes the caption size, so step 8's line reads in full
+          phone || pinned || short ? "text-caption" : "text-ui",
+          !showFailure && (key || (on && running)) ? "" : "invisible",
+          className,
+        )}
+      >
+        {key && !(on && running && i > 0) ? (
+          // up to two lines (a narrow card), never cut mid-figure
+          <span className="line-clamp-2 min-w-0 text-pretty">
+            {parts.map((t, j) => (
+              <Fragment key={j}>
+                {j > 0 && <span className="px-1.5 text-fg-4">·</span>}
+                <KeyText text={t} />
+              </Fragment>
+            ))}
+          </span>
+        ) : on && running ? (
+          <span className="flex items-center gap-2 text-fg-2">
+            <Spinner size={13} /> Running the comparison…
+          </span>
+        ) : (
+          <span aria-hidden>&nbsp;</span>
+        )}
+      </div>
+    );
+  };
+
+  /** The per-step cell classes: the outgoing step clears quickly, the incoming one settles in just after it. */
+  const cell = (i: number) =>
+    clsx(
+      "col-start-1 row-start-1 flex min-w-0 flex-col transition-[opacity,transform,visibility] ease-enter",
+      i === step
+        ? "visible translate-x-0 opacity-100 delay-(--dur-1) duration-(--dur-3)"
+        : clsx("invisible opacity-0 duration-(--dur-1)", i < step ? "-translate-x-2" : "translate-x-2"),
+    );
+
+  const keySay = keyParts(keys[step], shortKeys).join(" · ");
+  const bodySay = failed ? failureText : typeof bodies[step] === "string" ? (bodies[step] as string) : (STEPS[step].say ?? "");
+
   return (
     <AnimatePresence>
-      {step !== null && (
-        <motion.div
-          key="demo"
-          ref={card}
-          role="region"
-          aria-label="Guided demo"
-          data-demo-card=""
-          {...mapUi(pinned ? "bottom" : "top")}
-          initial={{ opacity: 0, y: pinned ? 12 : -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6, transition: { duration: 0.18 } }}
-          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-          style={style}
-          className={clsx(
-            "fixed flex flex-col print:hidden",
-            // over the brief's light paper a frosted card turns muddy grey: solid there
-            panelClass(pinned ? "solid" : "panel"),
-            phone ? "p-3" : "p-4",
-            // above the brief's scrim, and on phones above the sheets and the full-screen close-up; behind an open drawer (its
-            // scrim covers the card); on desktop under the panels, so the lg/md rail overlay is never covered
-            drawerOpen ? "z-(--z-chrome)" : pinned || phone ? "z-(--z-demo)" : "z-(--z-chrome)",
-            !pinned && !phone && "transition-[left,width] duration-(--dur-4) ease-enter",
-          )}
-        >
-          {/* header: counter · progress (Go to step N) · exit */}
-          <div className="flex items-center gap-3">
-            <span className="eyebrow shrink-0 text-fg-2">
-              Guided demo · <span className="num text-fg-1">{step + 1}/{STEPS.length}</span>
-            </span>
-            {compact ? (
-              <div aria-hidden className="flex h-6 flex-1 items-center">
-                <div className="h-[3px] w-full overflow-hidden rounded-pill bg-fill-3">
-                  <div className="h-full rounded-pill bg-fg-1 transition-[width] duration-(--dur-3) ease-enter" style={{ width: `${((step + 1) / STEPS.length) * 100}%` }} />
-                </div>
-              </div>
-            ) : (
-              <div className="flex min-w-0 flex-1 items-center gap-1">
-                {STEPS.map((s, i) => (
-                  <Tooltip key={i} content={`${i + 1} · ${s.title}`} side="bottom" delay={250}>
-                    <button
-                      type="button"
-                      onClick={() => go(i)}
-                      aria-label={`Go to step ${i + 1}`}
-                      aria-current={i === step ? "step" : undefined}
-                      className={clsx("group relative flex flex-1 items-center rounded-chip", phone ? "h-8" : "h-5")}
-                    >
-                      <span
-                        className={clsx(
-                          "h-[3px] w-full rounded-pill transition-colors duration-(--dur-2)",
-                          i === step ? "bg-fg-1" : i < step ? "bg-fg-3 group-hover:bg-fg-2" : "bg-fill-3 group-hover:bg-edge-strong",
-                        )}
-                      />
-                    </button>
-                  </Tooltip>
-                ))}
-              </div>
-            )}
-            <IconButton label="Exit demo" tooltip="Exit demo · Esc" size={phone ? "lg" : "sm"} onClick={end} className={phone ? "-my-2 -mr-2" : "-my-1 -mr-1.5"}>
-              <X size={phone ? 18 : 14} strokeWidth={1.75} />
-            </IconButton>
-          </div>
-
-          {/* every step in one grid cell: the card is always as tall as its tallest step */}
-          <div className={clsx("grid", phone ? "mt-2" : "mt-2.5")}>
-            {STEPS.map((s, i) => {
-              const on = i === step;
-              const key = keys[i];
-              const showFailure = on && failed;
-              return (
-                <div
-                  key={i}
-                  aria-hidden={!on || undefined}
-                  inert={!on}
-                  className={clsx(
-                    "col-start-1 row-start-1 flex min-w-0 flex-col transition-[opacity,transform,visibility] ease-enter",
-                    // the outgoing step clears quickly, the incoming one settles in just after it: never two titles at once
-                    on
-                      ? "visible translate-x-0 opacity-100 delay-(--dur-1) duration-(--dur-3)"
-                      : clsx("invisible opacity-0 duration-(--dur-1)", i < step ? "-translate-x-2" : "translate-x-2"),
-                  )}
-                >
-                  <h2 className={clsx("font-semibold text-balance text-fg-1", phone ? "text-heading" : "text-title")}>{s.title}</h2>
-                  {showFailure ? (
-                    <p className={clsx("mt-1 flex gap-2 text-fg-2", phone ? "mb-2 text-ui" : "mb-3 text-body")}>
-                      <CircleAlert size={16} strokeWidth={1.75} className="mt-0.5 shrink-0 text-warn" aria-hidden />
-                      <span>{failureText}</span>
-                    </p>
-                  ) : (
-                    <p
-                      id={on ? "demo-body" : undefined}
-                      className={clsx("mt-1 text-pretty text-fg-2", phone ? "mb-2 text-ui" : "mb-3 text-body", compact && !(on && more) && "line-clamp-2")}
-                    >
-                      {s.body}
-                    </p>
-                  )}
-                  {/* the key number: one mono line, reserved on every step so the height never jumps (phones leave it out
-                      while the card rides over the brief, which says the same thing in full) */}
-                  <div
-                    className={clsx(
-                      "num mt-auto flex h-9 min-w-0 items-center gap-2 rounded-card bg-fill-1 px-3 text-fg-2",
-                      // the 400px card pinned beside the brief takes the caption size, so step 8's line reads in full
-                      phone || pinned ? "text-caption" : "text-ui",
-                      phone && pinned && "hidden",
-                      !showFailure && (key || (on && running)) ? "" : "invisible",
-                    )}
-                  >
-                    {key && !(on && running && i > 0) ? (
-                      <span className="min-w-0 truncate">
-                        {key
-                          .map((part) => (phone && part.phone !== undefined ? part.phone : part.text))
-                          .filter((t): t is string => !!t)
-                          .map((t, j) => (
-                            <Fragment key={j}>
-                              {j > 0 && <span className="px-1.5 text-fg-4">·</span>}
-                              <KeyText text={t} />
-                            </Fragment>
-                          ))}
-                      </span>
-                    ) : on && running ? (
-                      <span className="flex items-center gap-2 text-fg-2">
-                        <Spinner size={13} /> Running the comparison…
-                      </span>
-                    ) : (
-                      <span aria-hidden>&nbsp;</span>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* footer: the step's own action (or the keys) · Previous · Next / Finish (the same element, so focus stays on it) */}
-          <div className={clsx("flex flex-wrap items-center gap-2", phone ? "mt-2" : "mt-3")}>
-            {failed ? (
-              <Button variant="secondary" size={phone ? "lg" : "sm"} icon={<RotateCw size={14} />} onClick={() => void runStep(step)} aria-label="Retry this step">
-                Retry
-              </Button>
-            ) : compact ? (
-              // phones with the sheet up: the step's "3D close-up" (tighter, so it fits beside the text toggle and the step
-              // buttons on a 375px line) and the rest of the body one tap away
-              <>
-                {STEPS[step].action === "closeup" && (
-                  <Button
-                    variant="ghost"
-                    size="lg"
-                    className="bg-fill-1 px-3!"
-                    icon={<Box size={14} strokeWidth={1.75} />}
-                    disabled={!selected || !pairOpen}
-                    onClick={() => useAtlas.getState().openCloseup()}
-                  >
-                    3D close-up
-                  </Button>
-                )}
+      <motion.div
+        key="demo"
+        ref={card}
+        role="region"
+        aria-label="Guided demo"
+        data-demo-card=""
+        {...mapUi(pinned ? "bottom" : "top")}
+        initial={{ opacity: 0, y: pinned ? 12 : -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -6, transition: { duration: 0.18 } }}
+        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+        style={style}
+        onFocusCapture={() => (focusInCard.current = true)}
+        onBlurCapture={(e) => {
+          const to = e.relatedTarget as Node | null;
+          if (to && !card.current?.contains(to)) focusInCard.current = false;
+        }}
+        className={clsx(
+          "fixed flex flex-col print:hidden",
+          // over the brief's light paper a frosted card turns muddy grey: solid there
+          panelClass(pinned ? "solid" : "panel"),
+          phone ? "p-3" : "p-4",
+          // above the brief's scrim, and on phones above the sheets and the full-screen close-up; behind an open drawer (its
+          // scrim covers the card); on desktop under the panels, so the lg/md rail overlay is never covered
+          drawerOpen ? "z-(--z-chrome)" : pinned || phone ? "z-(--z-demo)" : "z-(--z-chrome)",
+          !pinned && !phone && "transition-[left,width] duration-(--dur-4) ease-enter",
+        )}
+      >
+        {/* header: counter · progress (Go to step N, the same segmented dashes on every step and tier) · exit */}
+        <div className="flex items-center gap-3">
+          <span className="eyebrow shrink-0 text-fg-2">
+            Guided demo · <span className="num text-fg-1">{step + 1}/{STEPS.length}</span>
+          </span>
+          <div className="flex min-w-0 flex-1 items-center gap-1">
+            {STEPS.map((s, i) => (
+              <Tooltip key={i} content={`${i + 1} · ${s.title}`} side="bottom" delay={250}>
                 <button
                   type="button"
-                  onClick={() => setMore(!more)}
-                  aria-expanded={more}
-                  aria-controls="demo-body"
-                  className="-ml-1 h-11 rounded-control px-1 text-caption text-fg-2 underline decoration-fg-4 underline-offset-2 hover:text-fg-1"
+                  onClick={() => go(i)}
+                  aria-label={`Go to step ${i + 1}`}
+                  aria-current={i === step ? "step" : undefined}
+                  // the phone card over the inspector sheet keeps its 24px header, so the pair's strip of map never shrinks
+                  className={clsx("group tap-44 relative flex flex-1 items-center rounded-chip", phone ? (compact ? "h-6" : "h-8") : "h-5")}
                 >
-                  {more ? "Less" : "More"}
+                  <span
+                    className={clsx(
+                      "h-[3px] w-full rounded-pill transition-colors duration-(--dur-2)",
+                      i === step ? "bg-fg-1" : i < step ? "bg-fg-3 group-hover:bg-fg-2" : "bg-fill-3 group-hover:bg-edge-strong",
+                    )}
+                  />
                 </button>
-              </>
-            ) : STEPS[step].action === "closeup" ? (
-              <Button
-                variant="ghost"
-                size={phone ? "lg" : "sm"}
-                className="bg-fill-1"
-                icon={<Box size={14} strokeWidth={1.75} />}
-                disabled={!selected || !pairOpen}
-                onClick={() => useAtlas.getState().openCloseup()}
-              >
-                3D close-up
-              </Button>
-            ) : STEPS[step].action === "proof" && proof ? (
-              <Button
-                variant="ghost"
-                size={phone ? "lg" : "sm"}
-                className="bg-fill-1"
-                onClick={() => {
-                  end();
-                  useAtlas.getState().openMethod("proof");
-                }}
-              >
-                Sperry&apos;s worked example <span className="text-ok">✓</span> <span className="num">6/6</span>
-              </Button>
-            ) : (
-              !phone && (
-                <span className="fine:flex hidden items-center gap-1 text-caption text-fg-3" aria-hidden>
-                  <Kbd size="sm">←</Kbd>
-                  <Kbd size="sm">→</Kbd>
-                  <span className="ml-1">to step</span>
-                </span>
-              )
-            )}
-            <div className="ml-auto flex items-center gap-1.5">
-              <IconButton label="Previous step" tooltip="Previous step · ←" size={phone ? "xl" : "md"} variant="secondary" onClick={() => go(step - 1)} disabled={step === 0}>
-                <ArrowLeft size={phone ? 18 : 15} strokeWidth={1.75} />
-              </IconButton>
-              <Button
-                ref={nextRef}
-                variant="primary"
-                size={phone ? "xl" : "md"}
-                onClick={() => (step < STEPS.length - 1 ? go(step + 1) : end())}
-                iconRight={step < STEPS.length - 1 ? <ArrowRight size={phone ? 17 : 15} strokeWidth={1.75} /> : undefined}
-                className={phone ? "min-w-[104px]" : "min-w-[92px]"}
-              >
-                {step < STEPS.length - 1 ? "Next" : "Finish"}
-              </Button>
-            </div>
+              </Tooltip>
+            ))}
           </div>
-          <p className="sr-only" aria-live="polite">
-            Step {step + 1} of {STEPS.length}: {STEPS[step].title}
-          </p>
-        </motion.div>
-      )}
+          <IconButton label="Exit demo" tooltip="Exit demo · Esc" size={phone ? "lg" : "sm"} onClick={end} className={phone ? "-my-2 -mr-2" : "-my-1 -mr-1.5"}>
+            <X size={phone ? 18 : 14} strokeWidth={1.75} />
+          </IconButton>
+        </div>
+
+        {phoneBrief ? (
+          // phones over the brief: title + Previous / Finish on one row; the narration and the proof behind "More"
+          <>
+            <div className="mt-2 flex items-center gap-2">
+              <div className="min-w-0 flex-1">
+                <h2 className="text-heading font-semibold text-balance text-fg-1">{STEPS[step].title}</h2>
+                {!failed && <span className="-ml-1 -my-3 block">{moreButton}</span>}
+              </div>
+              {failed ? retryButton : null}
+              {stepButtons}
+            </div>
+            {(more || failed) && (
+              <div className="mt-1.5 flex flex-col gap-2">
+                <p id="demo-body" className="text-ui text-pretty text-fg-2">
+                  {failed ? failureText : bodies[step]}
+                </p>
+                {!failed && proof && <div>{proofButton}</div>}
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            {/* every step in one grid cell: the card is always as tall as its tallest step */}
+            <div className={clsx("grid", phone || short ? "mt-2" : "mt-2.5")}>
+              {STEPS.map((s, i) => {
+                const on = i === step;
+                const showFailure = on && failed;
+                return (
+                  <div key={i} aria-hidden={!on || undefined} inert={!on} className={cell(i)}>
+                    <div className="flex min-w-0 items-start gap-3">
+                      <h2 className={clsx("min-w-0 flex-1 font-semibold text-balance text-fg-1", phone || short ? "text-heading" : "text-title")}>{s.title}</h2>
+                      {/* the short card has no footer: the step's own action rides beside its title */}
+                      {short && s.action === "closeup" && !showFailure && <span className="-my-0.5 shrink-0">{closeupButton("sm")}</span>}
+                    </div>
+                    {showFailure ? (
+                      <p className={clsx("mt-1 flex gap-2 text-fg-2", phone ? "mb-2 text-ui" : short ? "mb-2.5 text-body" : "mb-3 text-body")}>
+                        <CircleAlert size={16} strokeWidth={1.75} className="mt-0.5 shrink-0 text-warn" aria-hidden />
+                        <span>{failureText}</span>
+                      </p>
+                    ) : (
+                      <p
+                        id={on ? "demo-body" : undefined}
+                        className={clsx(
+                          "mt-1 text-pretty text-fg-2",
+                          phone ? "mb-2 text-ui" : short ? "mb-2.5 text-body" : "mb-3 text-body",
+                          compact && !(on && more) && "line-clamp-2",
+                        )}
+                      >
+                        {bodies[i]}
+                      </p>
+                    )}
+                    {/* the key number: one mono line (two on a narrow card), reserved on every step so the height never
+                        jumps; the short card sets it beside the buttons instead */}
+                    {!short && keyWell(i, "mt-auto")}
+                  </div>
+                );
+              })}
+            </div>
+
+            {short ? (
+              // short laptop screens: key number · (Retry) · Previous · Next on one line, no footer
+              <div className="flex items-center gap-2">
+                <div className="grid min-w-0 flex-1">
+                  {STEPS.map((_, i) => (
+                    <div key={i} aria-hidden={i !== step || undefined} className={cell(i)}>
+                      {keyWell(i)}
+                    </div>
+                  ))}
+                </div>
+                {failed && retryButton}
+                {stepButtons}
+              </div>
+            ) : (
+              // footer: the step's own action (or the keys) · Previous · Next / Finish
+              <div className={clsx("flex flex-wrap items-center gap-2", phone ? "mt-2" : "mt-3")}>
+                {failed ? (
+                  retryButton
+                ) : compact ? (
+                  // phones with the sheet up: the step's "3D close-up" (tighter, so it fits beside the text toggle and the step
+                  // buttons on a 375px line) and the rest of the body one tap away
+                  <>
+                    {STEPS[step].action === "closeup" && closeupButton("lg", true)}
+                    <span className="-ml-1">{moreButton}</span>
+                  </>
+                ) : STEPS[step].action === "closeup" ? (
+                  closeupButton(phone ? "lg" : "sm")
+                ) : STEPS[step].action === "proof" && proof ? (
+                  proofButton
+                ) : (
+                  !phone && (
+                    <span className="fine:flex hidden items-center gap-1 text-caption text-fg-3" aria-hidden>
+                      <Kbd size="sm">←</Kbd>
+                      <Kbd size="sm">→</Kbd>
+                      <span className="ml-1">to step</span>
+                    </span>
+                  )
+                )}
+                {stepButtons}
+              </div>
+            )}
+          </>
+        )}
+        {/* the narration itself, not only the title: a screen reader hears what the card says */}
+        <p className="sr-only" aria-live="polite">
+          {`Step ${step + 1} of ${STEPS.length}: ${STEPS[step].title}. ${bodySay}${keySay ? ` ${keySay}.` : ""}`}
+        </p>
+      </motion.div>
     </AnimatePresence>
   );
 }

@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { AlertTriangle, Info } from "lucide-react";
 import { motion } from "motion/react";
-import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { IDX } from "@/lib/data";
 import type { CompletionClaim, Conflict, ConstructionWindow, Match, Project } from "@/lib/domain/types";
 import { formatBound, formatWindow, precisionLabel } from "@/lib/format";
@@ -32,8 +32,12 @@ import { frac, isCoarseGroup, labelPx, overlapStatement, pairCaption, pairDomain
 const ROLE_COLOR = { a: "var(--util-a)", b: "var(--util-b)" } as const;
 type Role = keyof typeof ROLE_COLOR;
 
-/** The claims lane under each row's bars (schedule line + diamonds). */
-const LANE_H = 16;
+/** The claims lane under each row's bars (schedule line + diamonds; a 12px date label fits). */
+const LANE_H = 14;
+/** Vertical gap between two stacked window bars in one row, so their labels never touch. */
+const STACK_GAP = 4;
+/** Bars' track height: one bar, or two stacked bars with the gap between them. */
+const barsH = (p: Project, bar: number) => (Math.min(2, displayWindowGroups(p, (id) => IDX.source(id)?.publisher).length) > 1 ? bar + STACK_GAP : bar);
 const OPEN_START_FADE = "linear-gradient(90deg, transparent 0, black 22%)";
 const HATCH = (c: string, a = 30, b = 12) => `repeating-linear-gradient(135deg, color-mix(in oklab, ${c} ${a}%, transparent) 0 4px, color-mix(in oklab, ${c} ${b}%, transparent) 4px 8px)`;
 const BAND_HATCH = "repeating-linear-gradient(135deg, color-mix(in oklab, var(--overlap) 20%, transparent) 0 5px, color-mix(in oklab, var(--overlap) 5%, transparent) 5px 10px)";
@@ -62,7 +66,7 @@ function Gantt({ m, compact, headerRight, extra }: { m: Match; compact: boolean;
     [b, "b"],
   ];
   const bar = compact ? 28 : 28 + Math.min(20, Math.max(0, Math.floor(extra / 2)));
-  const lanes = rows.map(([p]) => laneModel(p, m, d, width));
+  const lanes = rows.map(([p]) => laneModel(p, m, d, width, st));
   // a disagreement the lane had no room to label is said in the caption instead (never silently dropped)
   const unlabeled = width > 0 ? rows.filter((_, i) => lanes[i].conflictUnlabeled).map(([p]) => p.shortTitle) : [];
   const captionParts: CaptionPart[] = [
@@ -99,9 +103,11 @@ function Gantt({ m, compact, headerRight, extra }: { m: Match; compact: boolean;
     );
   }
 
+  // the 196px dock's budget: header 24 · axis 12 · two rows of bars + claims lane (a row with two stacked bars takes 4px
+  // more) · a caption that may wrap to two lines, so neither a row label nor the in-service gap is ever cut
   return (
-    <div className="flex min-h-full min-w-0 flex-col px-4 pb-2.5 pt-2.5">
-      <header className="flex h-7 min-w-0 shrink-0 items-center gap-3">
+    <div className="flex min-h-full min-w-0 flex-col px-4 pb-2 pt-2">
+      <header className="flex h-6 min-w-0 shrink-0 items-center gap-3">
         <Eyebrow as="h2" className="shrink-0 @max-[560px]:hidden">
           Construction windows
         </Eyebrow>
@@ -112,17 +118,17 @@ function Gantt({ m, compact, headerRight, extra }: { m: Match; compact: boolean;
           {headerRight && <div className="-mr-2">{headerRight}</div>}
         </div>
       </header>
-      <div className="mt-1.5 grid min-h-0 grid-cols-[132px_minmax(0,1fr)] @min-[560px]:grid-cols-[164px_minmax(0,1fr)]">
+      <div className="mt-1 grid min-h-0 grid-cols-[132px_minmax(0,1fr)] @min-[560px]:grid-cols-[164px_minmax(0,1fr)]">
         <span aria-hidden />
-        <div ref={axisRef} className="mb-1.5">
+        <div ref={axisRef} className="mb-1">
           <Axis d={d} width={width} />
         </div>
-        <div className="flex flex-col gap-1.5 pr-3">
+        <div className="flex flex-col gap-1 pr-3">
           {rows.map(([p, role]) => (
-            <RowLabel key={p.id} p={p} role={role} height={bar + LANE_H} />
+            <RowLabel key={p.id} p={p} role={role} height={barsH(p, bar) + LANE_H} />
           ))}
         </div>
-        <div className="relative flex flex-col gap-1.5">
+        <div className="relative flex flex-col gap-1">
           <Grid d={d} />
           {st.band && <Band st={st} d={d} />}
           {rows.map(([p, role], i) => (
@@ -140,9 +146,10 @@ function Gantt({ m, compact, headerRight, extra }: { m: Match; compact: boolean;
 function RowLabel({ p, role, height, inline }: { p: Project; role: Role; height?: number; inline?: boolean }) {
   const groups = displayWindowGroups(p, (id) => IDX.source(id)?.publisher).length;
   const more = groups - 2;
+  // joint owners close up ("XCEL·NSPW") in the dock's narrow label column, so a "+1" still fits beside them
   const owner = (
-    <span className="num min-w-0 truncate text-label uppercase leading-none tracking-[0.06em]" style={{ color: ROLE_COLOR[role] }}>
-      {ownerNames(p, IDX, true)}
+    <span className="num min-w-0 truncate text-label uppercase leading-none tracking-[0.06em]" style={{ color: ROLE_COLOR[role] }} title={ownerNames(p, IDX)}>
+      {inline ? ownerNames(p, IDX, true) : ownerNames(p, IDX, true).replace(/ · /g, "·")}
     </span>
   );
   if (inline) {
@@ -161,16 +168,18 @@ function RowLabel({ p, role, height, inline }: { p: Project; role: Role; height?
       <span className="flex min-w-0 items-center gap-1.5">
         <span aria-hidden className="size-1.5 shrink-0 rounded-full" style={{ background: ROLE_COLOR[role] }} />
         {owner}
+        {/* windows beyond the two drawn: a short tag on the owner line, so the title keeps both of its lines */}
+        {more > 0 && (
+          <span className="num shrink-0 text-label leading-none text-fg-3" title={`${more} more ${more === 1 ? "window" : "windows"} in the inspector`}>
+            +{more}
+            <span className="sr-only"> more {more === 1 ? "window" : "windows"}</span>
+          </span>
+        )}
       </span>
-      {/* owner + two title lines fit the 44px row at the desktop type size; with a "+N more" line the title takes one */}
-      <span className={clsx("text-ui font-medium leading-[1.1] text-fg-1", more > 0 ? "line-clamp-1" : "line-clamp-2")} title={p.title}>
+      {/* owner + two title lines fit the 42px row at the caption size (the full title in its tooltip) */}
+      <span className="line-clamp-2 text-caption font-medium leading-[1.08] text-fg-1" title={p.title}>
         {p.shortTitle}
       </span>
-      {more > 0 && (
-        <span className="text-caption leading-none text-fg-3">
-          +{more} more {more === 1 ? "window" : "windows"}
-        </span>
-      )}
     </div>
   );
 }
@@ -180,12 +189,12 @@ interface CaptionPart {
   warn?: boolean;
 }
 
-/** One quiet line under the Gantt (the phone version may wrap): basis caveat, in-service gap, passed dates. */
+/** Quiet lines under the Gantt (up to two in the dock; the phone version wraps freely): basis caveat, in-service gap, passed dates. */
 function Caption({ parts, className, wrap }: { parts: CaptionPart[]; className?: string; wrap?: boolean }) {
   if (!parts.length) return null;
   const text = parts.map((p) => p.text).join(" · ");
   return (
-    <p className={clsx("min-w-0 pt-1.5 text-caption text-fg-3", wrap ? "text-pretty" : "truncate", className)} title={wrap ? undefined : text}>
+    <p className={clsx("min-w-0 text-caption text-pretty text-fg-3", wrap ? "pt-1.5" : "line-clamp-2 pt-1 leading-[1.3]", className)} title={wrap ? undefined : text}>
       {parts.map((p, i) => (
         <span key={p.text} className={clsx(p.warn && "text-warn")}>
           {i > 0 && <span className="text-fg-3"> · </span>}
@@ -201,9 +210,9 @@ function Caption({ parts, className, wrap }: { parts: CaptionPart[]; className?:
 function Grid({ d, local }: { d: Domain; local?: boolean }) {
   // dock: one grid behind both rows, the marker reaching up to its axis label · phone: one per track, clear of the row labels
   return (
-    <span aria-hidden className={clsx("pointer-events-none absolute inset-x-0", local ? "-inset-y-0.5" : "-top-[18px] -bottom-1")}>
+    <span aria-hidden className={clsx("pointer-events-none absolute inset-x-0", local ? "-inset-y-0.5" : "-top-4 -bottom-1")}>
       {years(d).map((y) => (
-        <span key={y} className={clsx("absolute bottom-0 w-px bg-divider", local ? "top-0" : "top-[18px]")} style={{ left: `${pct(`${y}-01-01`, d)}%` }} />
+        <span key={y} className={clsx("absolute bottom-0 w-px bg-divider", local ? "top-0" : "top-4")} style={{ left: `${pct(`${y}-01-01`, d)}%` }} />
       ))}
       <span className="absolute inset-y-0 z-[5] w-px border-l border-dashed border-fg-2/70" style={{ left: `${pct(SNAP_ISO, d)}%` }} />
     </span>
@@ -241,7 +250,7 @@ function Band({ st, d }: { st: OverlapStatement; d: Domain }) {
 /** Legend as a hover card (the dock is rarely wide enough for it inline). */
 function GanttKey() {
   return (
-    <IconButton size="sm" label="Timeline key" tooltip={<KeyList />} tooltipSide="top" className="@min-[980px]:hidden">
+    <IconButton size="sm" label="Timeline key" tooltip={<KeyList />} tooltipSide="top" className="@min-[1200px]:hidden">
       <Info size={14} strokeWidth={1.75} />
     </IconButton>
   );
@@ -264,7 +273,7 @@ function KeyList() {
 
 function InlineKey() {
   return (
-    <span aria-hidden className="hidden items-center gap-3 text-caption text-fg-3 @min-[980px]:flex">
+    <span aria-hidden className="hidden items-center gap-3 text-caption text-fg-3 @min-[1200px]:flex">
       <KeyRow swatch={<Swatch kind="stated" />}>stated</KeyRow>
       <KeyRow swatch={<Swatch kind="fuzzy" />}>date precision</KeyRow>
       <KeyRow swatch={<Swatch kind="bounds" />}>bounds only</KeyRow>
@@ -312,9 +321,11 @@ function Track({ p, role, lane, d, bar, st, bandSlice }: { p: Project; role: Rol
   // two documents from one publisher with the same window read as one bar (same grouping as the inspector)
   const groups = displayWindowGroups(p, (id) => IDX.source(id)?.publisher);
   const shown = groups.slice(0, 2);
-  const half = (bar - 2) / 2;
+  // two stacked bars keep `bar / 2` each with a 4px gap between them (the row grows by the gap)
+  const h = barsH(p, bar);
+  const half = bar / 2;
   return (
-    <div className="relative z-10" style={{ height: bar + LANE_H }}>
+    <div className="relative z-10" style={{ height: h + LANE_H }}>
       {bandSlice && st.band && (
         <span
           aria-hidden
@@ -323,7 +334,7 @@ function Track({ p, role, lane, d, bar, st, bandSlice }: { p: Project; role: Rol
             left: `${pct(st.band.start, d)}%`,
             width: `${Math.max(pct(st.band.end, d) - pct(st.band.start, d), 0.6)}%`,
             top: -2,
-            height: bar + 4,
+            height: h + 4,
             background: BAND_HATCH,
             boxShadow: "inset 0 0 0 1px color-mix(in oklab, var(--overlap) 45%, transparent)",
           }}
@@ -335,9 +346,9 @@ function Track({ p, role, lane, d, bar, st, bandSlice }: { p: Project; role: Rol
         </div>
       )}
       {shown.map((g, i) => (
-        <WindowBar key={g.ws[0].id} ws={g.ws} sourceIds={g.sourceIds} color={color} d={d} top={shown.length === 1 ? 0 : i * (half + 2)} height={shown.length === 1 ? bar : half} owner={ownerNames(p, IDX, true)} />
+        <WindowBar key={g.ws[0].id} ws={g.ws} sourceIds={g.sourceIds} color={color} d={d} top={shown.length === 1 ? 0 : i * (half + STACK_GAP)} height={shown.length === 1 ? bar : half} owner={ownerNames(p, IDX, true)} />
       ))}
-      <Lane p={p} lane={lane} d={d} top={bar} color={color} st={st} />
+      <Lane p={p} lane={lane} d={d} top={h} color={color} st={st} />
     </div>
   );
 }
@@ -362,10 +373,36 @@ function WindowBar({ ws, sourceIds, color, d, top, height, owner }: { ws: Constr
     .filter(Boolean)
     .map((x) => ` · ${x}`)
     .join("");
-  const small = height < 16;
   const show = (el: HTMLElement) => setAnchor(el.getBoundingClientRect());
+  // the inline label is drawn only where it fits inside the bar with 8px either side: date and source, else the date
+  // alone, else nothing (hover or focus shows the full card). Hidden parts keep their width (visibility), so re-measuring
+  // on a resize never flips back and forth.
+  const barRef = useRef<HTMLDivElement>(null);
+  const dateRef = useRef<HTMLSpanElement>(null);
+  const creditRef = useRef<HTMLSpanElement>(null);
+  const [fit, setFit] = useState<"full" | "date" | "none">("none");
+  useLayoutEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+    const measure = () => {
+      const room = el.offsetWidth - 16;
+      const dw = dateRef.current?.offsetWidth ?? 0;
+      const cw = creditRef.current?.offsetWidth ?? 0;
+      setFit(dw + cw <= room ? "full" : dw <= room ? "date" : "none");
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    let live = true;
+    void document.fonts?.ready.then(() => live && measure());
+    return () => {
+      live = false;
+      ro.disconnect();
+    };
+  }, [label, credit, note]);
   return (
     <motion.div
+      ref={barRef}
       initial={{ scaleX: 0, opacity: 0 }}
       animate={{ scaleX: 1, opacity: 1 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -410,10 +447,12 @@ function WindowBar({ ws, sourceIds, color, d, top, height, owner }: { ws: Constr
             );
           })}
       </div>
-      <div className={clsx("relative flex h-full min-w-0 items-center overflow-hidden whitespace-nowrap text-label leading-none", small ? "px-1.5" : "px-2")}>
+      <div aria-hidden className="relative flex h-full min-w-0 items-center overflow-hidden whitespace-nowrap px-2 text-label leading-none">
         {/* the source gives up its room before the date does */}
-        <span className="num max-w-full shrink-0 truncate font-medium text-fg-1">{label}</span>
-        <span className="ml-1.5 min-w-0 truncate text-fg-2">
+        <span ref={dateRef} className={clsx("num shrink-0 font-medium text-fg-1", fit === "none" && "invisible")}>
+          {label}
+        </span>
+        <span ref={creditRef} className={clsx("shrink-0 pl-1.5 text-fg-2", fit !== "full" && "invisible")}>
           · {credit}
           {note}
         </span>
@@ -450,19 +489,25 @@ function WindowBar({ ws, sourceIds, color, d, top, height, owner }: { ws: Constr
 
 /* ───────────────────────────────── lane: schedule line + completion claims ───────────────────────────────── */
 
-/** Put each lane label right of its anchor, else left, else leave it to hover — never over a diamond or another label. */
-function placeLabels(width: number, marks: number[], items: { key: string; lo: number; hi: number; w: number }[], blocked: [number, number][] = []) {
+/**
+ * Put each lane label right of its anchor, else left, else leave it to hover — never over a diamond or another label.
+ * A side clear of `avoid` (the amber overlap band) wins over one that would sit on it.
+ */
+function placeLabels(width: number, marks: number[], items: { key: string; lo: number; hi: number; w: number }[], blocked: [number, number][] = [], avoid: [number, number][] = []) {
   const taken: [number, number][] = [...marks.map((x): [number, number] => [x - 6, x + 6]), ...blocked];
   const out = new Map<string, "l" | "r" | "c">();
   if (!width) return out;
   const free = ([a, b]: [number, number]) => a >= 0 && b <= width && taken.every(([x, y]) => b + 2 <= x || a - 2 >= y);
+  const clear = ([a, b]: [number, number]) => avoid.every(([x, y]) => b <= x || a >= y);
   for (const it of items) {
-    const r: [number, number] = [it.hi + 8, it.hi + 8 + it.w];
-    const l: [number, number] = [it.lo - 8 - it.w, it.lo - 8];
-    const side = free(r) ? "r" : free(l) ? "l" : null;
-    if (!side) continue;
-    out.set(it.key, side);
-    taken.push(side === "r" ? r : l);
+    const sides: ["r" | "l", [number, number]][] = [
+      ["r", [it.hi + 8, it.hi + 8 + it.w]],
+      ["l", [it.lo - 8 - it.w, it.lo - 8]],
+    ];
+    const pick = sides.find(([, s]) => free(s) && clear(s)) ?? sides.find(([, s]) => free(s));
+    if (!pick) continue;
+    out.set(it.key, pick[0]);
+    taken.push(pick[1]);
   }
   return out;
 }
@@ -487,8 +532,12 @@ export interface LaneModel {
   mid: (c: CompletionClaim) => number;
 }
 
-/** Where each lane mark and label goes at this width (shared by the lane and the caption fallback). */
-function laneModel(p: Project, m: Match, d: Domain, width: number): LaneModel {
+/**
+ * Where each lane mark and label goes at this width (shared by the lane and the caption fallback). "Completion dates
+ * disagree" rides on its own dashed link when the link has room for it; otherwise the caption says it (never a label
+ * laid across the bars or the overlap band).
+ */
+function laneModel(p: Project, m: Match, d: Domain, width: number, st: OverlapStatement): LaneModel {
   const conflict = m.conflicts.find((c) => c.projectId === p.id && c.field === "completion");
   const disputed = !!conflict && !conflict.versionOnly;
   const claims = p.completionClaims;
@@ -507,14 +556,13 @@ function laneModel(p: Project, m: Match, d: Domain, width: number): LaneModel {
   const CONFLICT_LABEL_W = conflictLabelW();
   const onLink = spread && hi - lo >= CONFLICT_LABEL_W + 20 && xs.every((x) => x < c0 - CONFLICT_LABEL_W / 2 - 6 || x > c0 + CONFLICT_LABEL_W / 2 + 6);
   const onLinkSpan: [number, number][] = onLink ? [[(lo + hi) / 2 - CONFLICT_LABEL_W / 2, (lo + hi) / 2 + CONFLICT_LABEL_W / 2]] : [];
+  const band: [number, number][] = st.band ? [[frac(st.band.start, d) * width, frac(st.band.end, d) * width]] : [];
   const labels: Map<string, "l" | "r" | "c"> = placeLabels(
     width,
     xs,
-    [
-      ...(spread && !onLink ? [{ key: "conflict", lo, hi, w: CONFLICT_LABEL_W }] : []),
-      ...(current ? [{ key: current.id, lo: mid(current) * width, hi: mid(current) * width, w: dateText.length * charW() + 4 }] : []),
-    ],
+    current ? [{ key: current.id, lo: mid(current) * width, hi: mid(current) * width, w: dateText.length * charW() + 8 }] : [],
     onLinkSpan,
+    band,
   );
   if (onLink) labels.set("conflict", "c");
   return { conflict, disputed, live, spread, current, dateText, labels, conflictUnlabeled: disputed && !labels.has("conflict"), mid };
@@ -641,8 +689,9 @@ function ClaimMark({
       {label && (
         <div
           className={clsx(
-            "num pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-chip bg-surface-solid/80 px-0.5 text-label leading-none",
-            label === "r" ? "left-[calc(50%+8px)]" : "right-[calc(50%+8px)]",
+            // a solid chip: legible over the hatched overlap band and the schedule line
+            "num pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-chip bg-surface-solid px-1 py-px text-label leading-none",
+            label === "r" ? "left-[calc(50%+6px)]" : "right-[calc(50%+6px)]",
           )}
           style={{ color: tone === "disputed" ? "var(--warn)" : "var(--fg-2)" }}
         >

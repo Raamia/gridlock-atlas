@@ -32,10 +32,13 @@ export function DocSection({ id, index, title, kicker, lede, children, className
         <span aria-hidden className="num text-caption text-fg-4">
           {String(index).padStart(2, "0")}
         </span>
-        <h3 id={`doc-${id}-title`} className="mt-1.5 flex flex-wrap items-baseline gap-x-2.5 gap-y-1 text-title font-semibold text-fg-1">
-          {title}
+        {/* the kicker sits beside the heading, not inside it: the heading's name stays "Evaluation", never "Evaluationnpm run eval" */}
+        <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+          <h3 id={`doc-${id}-title`} className="text-title font-semibold text-fg-1">
+            {title}
+          </h3>
           {kicker && <span className="num text-caption font-normal tracking-normal text-fg-3">{kicker}</span>}
-        </h3>
+        </div>
         {lede && <p className="mt-2.5 max-w-[68ch] text-body text-pretty text-fg-2">{lede}</p>}
       </header>
       {children}
@@ -43,13 +46,13 @@ export function DocSection({ id, index, title, kicker, lede, children, className
   );
 }
 
-/** Subsection heading inside a DocSection. */
+/** Subsection heading inside a DocSection (its mono meta beside the heading, outside its accessible name). */
 export function SubHead({ children, meta, className }: { children: ReactNode; meta?: ReactNode; className?: string }) {
   return (
-    <h4 className={clsx("mt-8 mb-3 flex items-baseline gap-2 text-heading font-semibold text-fg-1", className)}>
-      {children}
+    <div className={clsx("mt-8 mb-3 flex items-baseline gap-2", className)}>
+      <h4 className="text-heading font-semibold text-fg-1">{children}</h4>
       {meta && <span className="num text-caption font-normal text-fg-3">{meta}</span>}
-    </h4>
+    </div>
   );
 }
 
