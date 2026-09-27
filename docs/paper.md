@@ -1,10 +1,10 @@
-# GridLock Atlas: Evidence-Grounded Matching of Public Utility Construction Plans
+# Atlas: Evidence-Grounded Matching of Public Utility Construction Plans
 
-*GridLock Atlas team, ShellHacks 2026, Sperry Tech GridLock Challenge. Snapshot `snap-2026-09-26-339ecf7b` (26 September 2026), engine `gridlock-engine/1.3.0`. Every number below is produced by a command in Appendix A.*
+*Atlas team, ShellHacks 2026, Sperry Tech GridLock Challenge. Snapshot `snap-2026-09-26-339ecf7b` (26 September 2026), engine `gridlock-engine/1.3.0`. Every number below is produced by a command in Appendix A.*
 
 ## Abstract
 
-Neighboring electric utilities publish future transmission work in separate documents, obscuring where their projects meet. GridLock Atlas ingests public plans, measures the closest points between cross-utility project geometries, weighs published timing, and ranks the result as review leads. Official routes, digitized routes, terminal-segment estimates, and work-site points retain distinct provenance. On a frozen snapshot of 103 public sources, the engine evaluates 7,929 candidate pairs and flags 149 (1.9%); a literal "close *or* at the same time" rule flags 4,631 (58.4%). The supplied center-based workbook remains a legacy benchmark and is reproduced exactly (6/6 overlap rows and 10/10 project rows), but its center metric does not control live flags. The engine keeps 10 of 13 documented interfaces; this relies on shared-facility statements from the same filings and is therefore reported as circular rather than as precision. GPT-5.5 independently re-read 283 plan pages: 2,578 of 2,579 quoted fields are verbatim, with 98.5% agreement where both systems return a value.
+Neighboring electric utilities publish future transmission work in separate documents, obscuring where their projects meet. Atlas ingests public plans, measures the closest points between cross-utility project geometries, weighs published timing, and ranks the result as review leads. Official routes, digitized routes, terminal-segment estimates, and work-site points retain distinct provenance. On a frozen snapshot of 103 public sources, the engine evaluates 7,929 candidate pairs and flags 149 (1.9%); a literal "close *or* at the same time" rule flags 4,631 (58.4%). The supplied center-based workbook remains a legacy benchmark and is reproduced exactly (6/6 overlap rows and 10/10 project rows), but its center metric does not control live flags. The engine keeps 10 of 13 documented interfaces; this relies on shared-facility statements from the same filings and is therefore reported as circular rather than as precision. GPT-5.5 independently re-read 283 plan pages: 2,578 of 2,579 quoted fields are verbatim, with 98.5% agreement where both systems return a value.
 
 ## 1. Introduction
 
@@ -83,7 +83,7 @@ All 6 rows match (±0.01 mi, to the day), with 0 extra pairs at every radius fro
 | B3 | close OR on a similar schedule (literal reading of "either … or") | 4,631 (58.4%) | 4,571 | 13 |
 | B5 | B2 AND time possible or confirmed | 50 (0.6%) | 50 | 0 |
 | B6 | same facility name in both plan texts | 24 (0.3%) | 15 | 8 |
-| **B4** | **GridLock engine** | **149 (1.9%)** | **137** | **10** |
+| **B4** | **Atlas engine** | **149 (1.9%)** | **137** | **10** |
 
 - **B2 ⊆ B4.** None of the 111 sponsor-rule pairs is missing from the engine's queue, at every radius from 5 to 100 mi. The engine adds 22 leads: 10 shared facilities, 6 county-level possibles and 6 where location uncertainty reaches inside the radius.
 - **Why a county join fails here.** The Savannah River is the state line. Of the 111 DESC × GPC pairs under 25 mi, only 23 share a county, and in 90 the DESC project lies entirely in South Carolina counties. Across all 7,830 DESC × GPC pairs, 25 share any county.

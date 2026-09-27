@@ -22,7 +22,7 @@ export const SPONSOR_OVERLAP_HEAD = ["overlap_id", "distance_mi", "time_gap (day
 export const SPONSOR_PROJECT_HEAD = ["project_id", "utility", "state", "project_name", "name_a", "lat_a", "lon_a", "name_b", "lat_b", "lon_b", "lat_center", "lon_center", "in_service_date", "overlap_count"];
 
 /**
- * The overlap table in the sponsor's columns, followed by GridLock's own.
+ * The overlap table in the sponsor's columns, followed by Atlas's own.
  *
  * sponsorOnly: exactly the challenge rule — pairs whose closest project points are under 25 mi apart, closest first, numbered
  * OVL_1… in that order (as in the starter file). Otherwise every flagged pair in priority order: rows inside the rule keep
@@ -114,7 +114,7 @@ export function overlapTableCsv(matches: Match[], opts: { sponsorOnly?: boolean 
 }
 
 /**
- * The project table in the sponsor's columns (Projects_Overlaps.xlsx → "projects" sheet), then GridLock's own. name_a/name_b
+ * The project table in the sponsor's columns (Projects_Overlaps.xlsx → "projects" sheet), then Atlas's own. name_a/name_b
  * are the two points the engine centers the project on (its two named terminals, or its one located point) and
  * lat_center/lon_center follow the starter file's formula. overlap_1..n are partner project ids in the order of the
  * sponsor-format overlap table (overlap_ids gives those rows' OVL ids), so only pairs under 25 mi count. engine_status is
@@ -177,8 +177,8 @@ export function regionExports(run: MatchRun, region: string) {
   const projects = SNAPSHOT.projects.filter((p) => inRegion(p.id));
   const tag = `${region}${run.thresholdMiles !== 25 ? `-${run.thresholdMiles}mi` : ""}`;
   return {
-    overlaps: { name: `gridlock-overlaps-${tag}.csv`, rows: sponsorRows(matches).length, csv: () => overlapTableCsv(matches, { sponsorOnly: true }) },
-    flagged: { name: `gridlock-flagged-pairs-${tag}.csv`, rows: matches.length, csv: () => overlapTableCsv(matches) },
-    projects: { name: `gridlock-projects-${tag}.csv`, rows: projects.length, csv: () => projectTableCsv(projects, matches, run.excludedProjects) },
+    overlaps: { name: `atlas-overlaps-${tag}.csv`, rows: sponsorRows(matches).length, csv: () => overlapTableCsv(matches, { sponsorOnly: true }) },
+    flagged: { name: `atlas-flagged-pairs-${tag}.csv`, rows: matches.length, csv: () => overlapTableCsv(matches) },
+    projects: { name: `atlas-projects-${tag}.csv`, rows: projects.length, csv: () => projectTableCsv(projects, matches, run.excludedProjects) },
   };
 }

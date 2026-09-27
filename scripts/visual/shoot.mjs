@@ -4,7 +4,7 @@ import { chromium } from "playwright-core";
 import fs from "node:fs";
 
 const base = process.argv[2] ?? "http://localhost:3217";
-const out = process.argv[3] ?? "/tmp/gridlock-shots";
+const out = process.argv[3] ?? "/tmp/atlas-shots";
 fs.mkdirSync(out, { recursive: true });
 
 const browser = await chromium.launch({

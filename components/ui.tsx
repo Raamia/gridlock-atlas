@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * GridLock Atlas primitives (design system v2). The living reference is /dev/ui (app/dev/ui).
+ * Atlas primitives (design system v2). The living reference is /dev/ui (app/dev/ui).
  *
  * Rules every consumer inherits:
  *  - One solid ink control per view (Button variant="primary", Segmented look="inverse" active pill).
@@ -1447,7 +1447,7 @@ export const Toast = Notice;
  * LogoMark
  * ════════════════════════════════════════════════════════════════════════════ */
 
-/** GridLock mark: two utility strokes converging on the saffron overlap node. Crisp at 16–32px. */
+/** Atlas mark: two utility strokes converging on the saffron overlap node. Crisp at 16–32px. */
 export function LogoMark({ size = 28, className, title }: { size?: number; className?: string; title?: string }) {
   return (
     <svg
