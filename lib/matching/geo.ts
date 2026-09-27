@@ -154,7 +154,7 @@ function scopedWorkSites(p: Project, workSites: Place[]): Place[] {
   return roleSites.length ? roleSites : workSites;
 }
 
-function geometryOf(p: Project): ProjectGeometry | null {
+export function geometryOf(p: Project): ProjectGeometry | null {
   if (p.route?.coordinates.length) {
     return {
       kind: p.route.coordinates.length > 1 ? "line" : "points",

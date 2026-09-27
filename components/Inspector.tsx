@@ -2,679 +2,224 @@
 
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
-import { AlertTriangle, Calculator, CalendarRange, Check, FileOutput, FileSearch, Handshake, Link2, Library, MapPin, X } from "lucide-react";
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { ChevronDown, ChevronUp, X } from "lucide-react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type RefObject } from "react";
 import { IDX } from "@/lib/data";
-import { displayTitle, firstSentence, SCOPE_LABEL, whyFlagged } from "@/lib/describe";
-import type { Conflict, ConflictSide, Evidence, Match, Project, SignalLevel } from "@/lib/domain/types";
-import { formatBound, formatDate, formatMilesNear, precisionLabel } from "@/lib/format";
+import type { Match, Project } from "@/lib/domain/types";
 import { useSelectedPair } from "@/lib/hooks";
-import { centerOf } from "@/lib/matching/geo";
-import { activeWindows, coarsest, currentInService, dayWord, displayWindowGroups } from "@/lib/matching/time";
-import { conflictMatches, evidenceHref, matchSourceIds, ownerNames, pageLabel, readableNote, windowGroupText, windowSourceText } from "@/lib/selectors";
+import { useTier } from "@/lib/layout";
+import { rankLabel, rankOf, tabTotal } from "@/lib/rank";
 import { useAtlas, type InspectorSection } from "@/lib/store";
-import { EvidenceCard, SourceRow, type EvidenceTone } from "./Evidence";
-import { ImpactEstimate } from "./Impact";
+import { FooterBar } from "./inspector/FooterBar";
+import { GUIDANCE } from "./inspector/facts";
+import { SectionNav, scrollInspectorTo, useScrollSpy, type NavItem } from "./inspector/SectionNav";
+import { ConflictSection, CoordinationSection, disagreementsOf, ImpactSection, NotesSection, PlaceSection, ScheduleSection, SourcesSection } from "./inspector/Sections";
+import { Chips, ProjectHeading, ReviewQuestion, Tiles, WhyFlagged, WhyRankButton, WhyRankReasons } from "./inspector/Summary";
 import { ReviewPanel } from "./Review";
-import { Button, ConflictChip, Dot, IconButton, Kbd, MatchBadges, PrecisionTag, StatusChip, windowDocs, windowNote } from "./ui";
+import { IconButton, Kbd, panelClass, StatusTag } from "./ui";
 
+/**
+ * Evidence inspector (SPEC §5.3): `<aside aria-label="Evidence inspector">`, filling the shell's inspector slot (a right
+ * panel, or the phone sheet). Verdict line → owner-first titles → tiles, chips, "Why #01?" → the review question → why
+ * flagged → reviewer block → sticky section nav → sections → disclaimer; a sticky footer bar holds the actions.
+ * Everything stays in the DOM (collapsed parts are hidden with CSS), so tests and the guided demo can reach it.
+ */
 export function Inspector() {
   const open = useAtlas((s) => s.inspectorOpen);
   const pair = useSelectedPair();
+  const phone = useTier() === "phone";
   return (
     <AnimatePresence>
       {open && pair && (
         <motion.aside
           key="inspector"
-          initial={{ opacity: 0, x: 28 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 28 }}
-          transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-          className="glass fixed inset-x-0 bottom-0 top-[max(46vh,calc(var(--demo-card-bottom,0px)_+_120px))] z-40 flex flex-col overflow-hidden rounded-t-2xl !bg-bg-1 sm:!bg-bg-1/[0.94] sm:absolute sm:inset-x-auto sm:bottom-3 sm:right-3 sm:top-3 sm:w-[360px] sm:rounded-2xl xl:w-[408px]"
           aria-label="Evidence inspector"
+          initial={phone ? { opacity: 0, y: 24 } : { opacity: 0, x: 16 }}
+          animate={phone ? { opacity: 1, y: 0 } : { opacity: 1, x: 0 }}
+          exit={phone ? { opacity: 0, y: 24 } : { opacity: 0, x: 16 }}
+          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+          className={clsx(panelClass(phone ? "solid" : "panel"), "flex flex-col overflow-hidden")}
         >
-          <InspectorBody key={pair.match.id} m={pair.match} a={pair.a} b={pair.b} />
+          <InspectorFrame m={pair.match} a={pair.a} b={pair.b} phone={phone} />
         </motion.aside>
       )}
     </AnimatePresence>
   );
 }
 
-function InspectorBody({ m, a, b }: { m: Match; a: Project; b: Project }) {
-  const select = useAtlas((s) => s.select);
-  const set = useAtlas((s) => s.set);
-  const section = useAtlas((s) => s.inspectorSection);
+function InspectorFrame({ m, a, b, phone }: { m: Match; a: Project; b: Project; phone: boolean }) {
   const scroller = useRef<HTMLDivElement>(null);
-  const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (!section) return;
-    const el = scroller.current?.querySelector<HTMLElement>(`[data-section="${section}"]`);
-    el?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-  }, [section]);
-
-  const copyLink = async () => {
-    const url = new URL(window.location.href);
-    url.searchParams.set("pair", m.id);
-    // a pair flagged only at a non-default radius opens at that radius (Atlas useUrlSync reads r)
-    const r = m.geoDetail.thresholdMiles;
-    if (r !== 25) url.searchParams.set("r", String(r));
-    else url.searchParams.delete("r");
-    await navigator.clipboard.writeText(url.toString());
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1400);
-  };
-
+  const [scrolled, setScrolled] = useState(false);
   return (
     <>
-      <header className="flex items-center gap-2 border-b border-line px-4 py-2.5">
-        <div className="min-w-0 flex-1">
-          <div className="eyebrow">Pair under review</div>
-          <div className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[12px] font-medium">
-            <span className="truncate text-a">{a.shortTitle}</span>
-            <span className="shrink-0 text-text-3">×</span>
-            <span className="truncate text-b">{b.shortTitle}</span>
-          </div>
-        </div>
-        <span className="hidden items-center gap-1 text-[10.5px] text-text-3 sm:flex">
-          <Kbd>Esc</Kbd>
-        </span>
-        <IconButton label="Close inspector" onClick={() => select(null)}>
-          <X size={15} />
-        </IconButton>
-      </header>
-
-      <div ref={scroller} className="scroll-thin min-h-0 flex-1 space-y-3 overflow-y-auto px-4 pb-4">
-        <div className="px-1 pb-1 pt-4">
-          <div className="space-y-2.5">
-            <PairTitle p={a} color="var(--a)" />
-            <div className="flex items-center gap-2 pl-[18px] text-[11px] text-text-3">
-              <span className="h-px w-4 bg-line-3" />×<span className="h-px flex-1 bg-line" />
-            </div>
-            <PairTitle p={b} color="var(--b)" />
-          </div>
-          <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
-            <MatchBadges m={m} />
-            <StatusChip status={m.reviewStatus} />
-            <ConflictChip count={m.conflicts.length} />
-          </div>
-          <p className="mt-3 text-[13px] leading-[1.5] text-text-1">{whyFlagged(m)}</p>
-        </div>
-        <ReviewPanel m={m} />
-        <PlaceSection m={m} a={a} b={b} active={section === "place"} />
-        <ScheduleSection m={m} a={a} b={b} active={section === "schedule"} />
-        <CoordinationSection m={m} active={section === "coordination"} />
-        <Section id="impact" icon={<Calculator size={14} />} title="Rough impact estimate" level={<span className="text-[10px] text-text-3">illustrative</span>} active={section === "impact"}>
-          <ImpactEstimate m={m} />
-        </Section>
-        {m.conflicts.length > 0 && <ConflictSection m={m} active={section === "conflicts"} />}
-        <NotesSection a={a} b={b} />
-        <SourcesSection m={m} a={a} b={b} active={section === "sources"} />
-        <p className="px-1 pb-2 text-[10.5px] leading-snug text-text-3">
-          A match is a review lead, not a finding that crews or equipment can be shared. Engine {m.engineVersion}; ordering P{m.priority} is explainable priority, not a
-          probability.
-        </p>
-      </div>
-
-      <footer className="flex items-center gap-2 border-t border-line bg-bg-1/60 px-4 py-3">
-        <Button variant="primary" size="md" className="flex-1" onClick={() => set({ briefOpen: true })}>
-          <FileOutput size={14} />
-          Create review brief
-        </Button>
-        <Button variant="outline" size="md" onClick={copyLink} aria-live="polite">
-          {copied ? <Check size={14} className="text-known" /> : <Link2 size={14} />}
-          {copied ? "Copied" : "Link"}
-        </Button>
-      </footer>
+      <Verdict m={m} phone={phone} scrolled={scrolled} />
+      <InspectorBody key={m.id} m={m} a={a} b={b} phone={phone} scroller={scroller} onScrolled={setScrolled} />
+      <FooterBar m={m} scroller={scroller} phone={phone} />
     </>
   );
 }
 
-function PairTitle({ p, color }: { p: Project; color: string }) {
-  return (
-    <div className="flex items-start gap-2.5">
-      <span className="mt-[7px]">
-        <Dot color={color} size={8} ring />
-      </span>
-      <div className="min-w-0">
-        <h3 className="text-[17px] font-semibold leading-[1.22] tracking-[-0.015em] text-text-0" title={p.title}>
-          {displayTitle(p)}
-        </h3>
-        <div className="mt-1 flex flex-wrap items-center gap-x-1.5 text-[11.5px] text-text-2">
-          <span>{ownerNames(p, IDX)}</span>
-          <span className="text-text-3">·</span>
-          <span className={p.status.label ? "" : "capitalize"}>{p.status.label ?? p.status.value}</span>
-          {p.docketId && (
-            <>
-              <span className="text-text-3">·</span>
-              <span className="mono text-[10.5px]">{p.docketId}</span>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
+/* ─────────────────────────────── 1 · verdict line ─────────────────────────────── */
 
-/* --------------------------------- sections --------------------------------- */
+function Verdict({ m, phone, scrolled }: { m: Match; phone: boolean; scrolled: boolean }) {
+  const run = useAtlas((s) => s.run);
+  const region = useAtlas((s) => s.region);
+  const order = useAtlas((s) => s.visibleOrder);
+  const select = useAtlas((s) => s.select);
+  const selectNeighbor = useAtlas((s) => s.selectNeighbor);
+  // the list's number: position in the region's unfiltered tab (lib/rank), the same "#01" as the row and the CSV
+  const { rank, total } = useMemo(() => {
+    if (!run) return { rank: undefined, total: 0 };
+    let r = region;
+    let k = rankOf(run, r, m.id);
+    if (k === undefined) {
+      r = IDX.project(m.projectAId)?.region ?? "all";
+      k = rankOf(run, r, m.id);
+    }
+    return { rank: k, total: tabTotal(run, r, m.reviewStatus) };
+  }, [run, region, m.id, m.projectAId, m.reviewStatus]);
+  const i = order.indexOf(m.id);
+  const atTop = i === 0;
+  const atEnd = i >= 0 && i === order.length - 1;
+  const size = phone ? "xl" : "sm";
+  // "Why #01?" is open for the pair it was opened on; stepping to another pair closes it
+  const [whyFor, setWhy] = useState<string | null>(null);
+  const why = whyFor === m.id;
+  const whyId = useId();
 
-function Section({
-  id,
-  icon,
-  title,
-  level,
-  active,
-  children,
-}: {
-  id: InspectorSection;
-  icon: ReactNode;
-  title: string;
-  level?: ReactNode;
-  active?: boolean;
-  children: ReactNode;
-}) {
   return (
-    <section
-      data-section={id}
+    <header
       className={clsx(
-        "scroll-mt-3 rounded-xl border bg-bg-1/70 p-3.5 transition-[border-color,box-shadow] duration-500",
-        active ? "border-text-2/50 shadow-[0_0_0_3px_rgba(193,203,224,.10)]" : "border-line",
+        // a size container: the 360px md inspector drops the Esc hint so a long status ("Known coordination") still fits
+        "@container shrink-0 px-(--panel-pad) transition-shadow duration-200",
+        // phone: the sheet's grabber sits in the top 20px
+        phone ? "pt-4 pb-2" : "pt-3 pb-2.5",
+        scrolled && "shadow-[0_1px_0_var(--divider)]",
       )}
     >
-      <div className="flex items-center justify-between gap-2">
-        <h4 className="flex items-center gap-2 text-[12.5px] font-semibold text-text-0">
-          <span className="text-text-2">{icon}</span>
-          {title}
-        </h4>
-        {level}
-      </div>
-      <div className="mt-2.5 space-y-2.5">{children}</div>
-    </section>
-  );
-}
-
-function LevelPill({ label, level }: { label: string; level: SignalLevel }) {
-  const styles: Record<SignalLevel, string> = {
-    confirmed: "text-amber bg-amber/12 ring-amber/35",
-    possible: "text-text-1 ring-text-3 ring-dashed",
-    "no-match": "text-text-3 ring-line-2",
-    unknown: "text-text-3 ring-line-2",
-  };
-  return (
-    <span className={clsx("mono inline-flex h-5 items-center rounded-md px-1.5 text-[10px] uppercase tracking-wide ring-1", styles[level])}>
-      {label} · {level.replace("-", " ")}
-    </span>
-  );
-}
-
-function toneFor(e: Evidence, a: Project, b: Project): EvidenceTone {
-  const inProject = (p: Project) =>
-    [
-      ...p.titleEvidenceIds,
-      ...p.status.evidenceIds,
-      ...p.places.flatMap((x) => x.evidenceIds),
-      ...p.constructionWindows.flatMap((x) => x.evidenceIds),
-      ...p.completionClaims.flatMap((x) => x.evidenceIds),
-      ...p.knownCoordination.flatMap((x) => x.evidenceIds),
-      ...(p.route?.evidenceIds ?? []),
-    ].includes(e.id);
-  if (inProject(a) && !inProject(b)) return "a";
-  if (inProject(b) && !inProject(a)) return "b";
-  return "amber";
-}
-
-function EvidenceList({ ids, a, b, tone, limit = 3 }: { ids: string[]; a: Project; b: Project; tone?: EvidenceTone; limit?: number }) {
-  const [all, setAll] = useState(false);
-  const list = [...new Set(ids)].map((id) => IDX.evidence(id)).filter(Boolean) as Evidence[];
-  if (!list.length) return <p className="text-[11.5px] text-text-3">No excerpt attached.</p>;
-  const shown = all ? list : list.slice(0, limit);
-  return (
-    <div className="space-y-2">
-      {shown.map((e) => (
-        <EvidenceCard key={e.id} e={e} tone={tone ?? toneFor(e, a, b)} compact />
-      ))}
-      {list.length > limit && (
-        <button onClick={() => setAll((x) => !x)} className="text-[11px] text-text-2 hover:text-text-0">
-          {all ? "Show fewer" : `Show ${list.length - limit} more excerpt${list.length - limit > 1 ? "s" : ""}`}
-        </button>
-      )}
-    </div>
-  );
-}
-
-const tierLabel = (tier: NonNullable<Match["geoDetail"]["closest"]>["tier"]) =>
-  ({
-    "touching-crossing": "Touching / crossing",
-    "shared-land": "Shared land potential (<1.6 km)",
-    "site-logistics": "Shared site logistics (<8 km)",
-    "crews-equipment": "Shared crews / equipment (<40 km)",
-    outside: "Outside review radius",
-  })[tier];
-
-function PlaceSection({ m, a, b, active }: { m: Match; a: Project; b: Project; active: boolean }) {
-  const rels = IDX.relations(m.geoDetail.relationIds);
-  const c = m.geoDetail.closest;
-  const radius = m.geoDetail.thresholdMiles;
-  const method = m.geoDetail.method;
-  const statedRel = rels.find((r) => r.basis !== "inferred");
-  const implied = method === "shared-site" && rels.length > 0 && !statedRel;
-  const facility = method === "shared-site" ? (statedRel?.siteLabel ?? rels.find((x) => x.siteLabel)?.siteLabel) : m.geoDetail.sharedEndpoint?.labelA;
-  const mi = (x: number) => formatMilesNear(x, radius);
-  const evidence = [...rels.flatMap((r) => r.evidenceIds), ...[a, b].flatMap((p) => p.places.filter((pl) => pl.role === "endpoint").flatMap((pl) => pl.evidenceIds))];
-  return (
-    <Section id="place" icon={<MapPin size={14} />} title="Where they meet" level={<LevelPill label="GEO" level={m.geo} />} active={active}>
-      <p className="text-[12.5px] leading-[1.5] text-text-1">{m.geoReason}</p>
-      {c && (
-        <div className="flex items-center gap-3 rounded-lg bg-bg-2/70 px-3 py-2 ring-1 ring-line">
-          <div className="shrink-0">
-            <div className="num text-[20px] leading-none text-text-0">{mi(c.miles)}</div>
-            <div className="mt-1 text-[10.5px] text-text-3">closest approach</div>
-          </div>
-          <div className="h-8 w-px shrink-0 bg-line-2" />
-          <div className="min-w-0 flex-1 text-[11px] leading-snug text-text-2">
-            <b className="font-medium text-text-1">{tierLabel(c.tier)}</b>
-            {c.approximate ? " · estimated from mapped/digitized geometry" : " · measured from located work geometry"}
-            {facility ? ` · ${method === "shared-site" ? (implied ? "source-implied" : "source-stated") : "shared terminal"}: ${facility}` : ""}
-            <div className="mt-1">{mi(c.lowMiles) === mi(c.highMiles) ? "±<1 mi location uncertainty" : `Range ${mi(c.lowMiles)}–${mi(c.highMiles)} with location uncertainty`} · radius <span className="num text-text-1">{radius} mi</span></div>
-          </div>
+      <div className="flex items-center gap-2">
+        <StatusTag status={m.reviewStatus} size="md" />
+        {rank !== undefined && (
+          <span className="num text-caption whitespace-nowrap text-fg-2">
+            #{rankLabel(rank)} <span className="text-fg-3">of {total}</span>
+          </span>
+        )}
+        <div className={clsx("ml-auto flex items-center", phone ? "-mr-2.5" : "gap-0.5")}>
+          {/* aria-disabled, not disabled: stepping onto the first/last pair keeps keyboard focus on the button */}
+          <IconButton label="Pair above" shortcut="K" size={size} aria-disabled={atTop || undefined} className="aria-disabled:opacity-40" onClick={() => !atTop && selectNeighbor(-1)}>
+            <ChevronUp size={16} strokeWidth={1.75} />
+          </IconButton>
+          <IconButton label="Pair below" shortcut="J" size={size} aria-disabled={atEnd || undefined} className="aria-disabled:opacity-40" onClick={() => !atEnd && selectNeighbor(1)}>
+            <ChevronDown size={16} strokeWidth={1.75} />
+          </IconButton>
+          <span aria-hidden className="mx-1 h-4 w-px bg-divider coarse:hidden @max-[340px]:hidden" />
+          <Kbd size="sm" className="mr-0.5 @max-[340px]:hidden" aria-hidden>
+            Esc
+          </Kbd>
+          <IconButton label="Close inspector" size={size} onClick={() => select(null)}>
+            <X size={16} strokeWidth={1.75} />
+          </IconButton>
         </div>
-      )}
-      {m.geoDetail.center && (
-        <p className="text-[10.5px] text-text-3">
-          Legacy starter-file center distance: <span className="num text-text-2">{mi(m.geoDetail.center.miles)}</span>. Shown for benchmark comparison; it does not control the flag.
-        </p>
-      )}
-      <div className="space-y-1.5">
-        {[
-          [a, "var(--a)"],
-          [b, "var(--b)"],
-        ].map(([p, color]) => (
-          <EndpointList key={(p as Project).id} p={p as Project} color={color as string} />
-        ))}
       </div>
-      {(a.route || b.route) && (
-        <p className="text-[11px] leading-snug text-text-3">
-          Dashed routes are digitized from official route-options maps. They are used for closest approach only as an explicitly labeled estimate.
-        </p>
-      )}
-      <EvidenceList ids={evidence} a={a} b={b} tone={rels.length ? "amber" : undefined} limit={2} />
-    </Section>
+      <div className={clsx("flex items-start justify-between gap-3", phone ? "-mt-1" : "mt-1")}>
+        <p className="min-w-0 pt-[3px] text-caption text-fg-2">{GUIDANCE[m.reviewStatus]}</p>
+        <WhyRankButton rank={rank} open={why} onToggle={() => setWhy((o) => (o === m.id ? null : m.id))} controls={whyId} />
+      </div>
+      <WhyRankReasons m={m} open={why} id={whyId} />
+    </header>
   );
 }
 
-function EndpointList({ p, color }: { p: Project; color: string }) {
-  const eps = p.places.filter((pl) => pl.role === "endpoint");
-  const list = eps.length ? eps : p.places.filter((pl) => pl.precision !== "county").slice(0, 2);
-  // Keep the starter-workbook center visible as a secondary benchmark.
-  const used = centerOf(p)?.places ?? [];
-  const extra = list.some((pl) => !used.some((u) => u.id === pl.id));
-  const center =
-    used.length === 2 ? (extra ? `legacy center = midpoint of ${used[0].label} & ${used[1].label}` : "legacy center = midpoint") : used.length === 1 ? (extra ? `legacy center = ${used[0].label}` : "legacy center = this point") : "";
-  return (
-    <div className="rounded-lg bg-bg-2/60 px-3 py-2 ring-1 ring-line">
-      <div className="flex items-center gap-2 text-[11px] text-text-2">
-        <Dot color={color} size={6} /> <span className="min-w-0 truncate">{p.shortTitle}</span>
-        <span className="ml-auto max-w-[62%] shrink-0 truncate text-[10px] text-text-3" title={center}>
-          {center}
-        </span>
-      </div>
-      {list.length === 0 && <div className="mt-1 text-[11.5px] text-text-3">No located terminal</div>}
-      {list.map((pl) => (
-        <div key={pl.id} className="mt-1.5 flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <div className="truncate text-[12px] text-text-0" title={pl.detail ?? pl.label}>
-              {pl.label}
-            </div>
-            <div className="mono truncate text-[9.5px] text-text-3" title={pl.coordinateSource}>
-              {pl.lat.toFixed(4)}, {pl.lon.toFixed(4)} · {pl.coordinateSource}
-            </div>
-          </div>
-          <div className="flex shrink-0 flex-col items-end gap-1">
-            <PrecisionTag precision={pl.precision} />
-            {pl.confidence === "lower-confidence" && <span className="text-[10px] text-conflict">lower confidence</span>}
-            {extra && !used.some((u) => u.id === pl.id) && <span className="text-[10px] text-text-3">not used for center</span>}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+/* ─────────────────────────────── body ─────────────────────────────── */
 
-function ScheduleSection({ m, a, b, active }: { m: Match; a: Project; b: Project; active: boolean }) {
-  const rows: [Project, string][] = [
-    [a, "var(--a)"],
-    [b, "var(--b)"],
+function InspectorBody({
+  m,
+  a,
+  b,
+  phone,
+  scroller,
+  onScrolled,
+}: {
+  m: Match;
+  a: Project;
+  b: Project;
+  phone: boolean;
+  scroller: RefObject<HTMLDivElement | null>;
+  onScrolled: (v: boolean) => void;
+}) {
+  const section = useAtlas((s) => s.inspectorSection);
+  const others = disagreementsOf(a, b).length;
+  const nConflicts = m.conflicts.length + others;
+  const items: NavItem[] = [
+    { id: "place", label: "Where" },
+    { id: "schedule", label: "When" },
+    { id: "coordination", label: "Coordination" },
+    { id: "impact", label: "Impact" },
+    ...(nConflicts ? [{ id: "conflicts" as const, label: "Disagree", count: nConflicts }] : []),
+    { id: "sources", label: "Sources" },
   ];
-  return (
-    <Section id="schedule" icon={<CalendarRange size={14} />} title="When they build" level={<LevelPill label="TIME" level={m.time} />} active={active}>
-      <p className="text-[12.5px] leading-[1.5] text-text-1">{m.timeReason}</p>
-      <div className="overflow-hidden rounded-lg ring-1 ring-line">
-        {rows.map(([p, color]) => {
-          const groups = displayWindowGroups(p, (id) => IDX.source(id)?.publisher);
-          return (
-            <div key={p.id} className="flex items-start gap-2.5 border-b border-line bg-bg-2/60 px-3 py-2 last:border-b-0">
-              <span className="mt-[5px]">
-                <Dot color={color} size={6} />
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="truncate text-[11.5px] text-text-2">{p.shortTitle}</div>
-                {groups.length ? (
-                  groups.map(({ ws, sourceIds }) => {
-                    const coarse = ws.some((w) => !w.continuous);
-                    const src = windowSourceText(ws, IDX);
-                    const meta = `${sourceIds.length > 1 ? `${sourceIds.length} documents · ` : ""}${ws.length > 1 ? `${ws.length} components` : `${ws.some((w) => w.start.label || w.end.label) ? "season" : precisionLabel(coarsest(ws))} precision`}${coarse ? " · coarse" : ""}`;
-                    const notes = ws.map(windowNote).filter(Boolean);
-                    return (
-                      <div key={ws[0].id} className="mt-1.5">
-                        <div className="num whitespace-nowrap text-[13px] leading-tight text-text-0">{windowGroupText(ws)}</div>
-                        <div className="text-[10.5px] leading-snug text-text-3" title={[...windowDocs(ws, sourceIds), `${src} · ${meta}`, ...notes].join("\n")}>
-                          {src} · {meta}
-                        </div>
-                        {ws.length === 1 && notes[0] && <ClampedNote text={notes[0]} />}
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="text-[12px] text-text-3">No published construction window</div>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      {m.timeDetail.inService && (
-        <div className="flex items-center gap-3 rounded-lg bg-bg-2/70 px-3 py-2 ring-1 ring-line">
-          <div className="w-[92px] shrink-0">
-            <div className="num text-[20px] leading-none text-text-0">
-              {m.timeDetail.inService.coarse && m.timeDetail.inService.gapDays > 0 ? "≥" : ""}
-              {m.timeDetail.inService.gapDays.toLocaleString("en-US")}
-            </div>
-            <div className="mt-1 text-[10.5px] leading-tight text-text-3">
-              {m.timeDetail.inService.coarse
-                ? m.timeDetail.inService.gapDays === 0
-                  ? "days · ranges overlap"
-                  : `${dayWord(m.timeDetail.inService.gapDays)} · nearest edges`
-                : `${dayWord(m.timeDetail.inService.gapDays)} between in-service dates`}
-            </div>
-          </div>
-          <div className="w-px self-stretch bg-line-2" />
-          <div className="min-w-0 flex-1 space-y-1">
-            {(
-              [
-                [m.timeDetail.inService.boundA, m.timeDetail.inService.labelA, "var(--a)"],
-                [m.timeDetail.inService.boundB, m.timeDetail.inService.labelB, "var(--b)"],
-              ] as const
-            ).map(([bound, label, color]) => (
-              <div key={color} className="flex items-start gap-1.5">
-                <span className="mt-[5px]">
-                  <Dot color={color} size={5} />
-                </span>
-                <div className="min-w-0">
-                  <div className="num whitespace-nowrap text-[11.5px] leading-tight text-text-1">{formatBound(bound)}</div>
-                  <div className="truncate text-[10.5px] text-text-3" title={label}>
-                    {label}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      {m.timeDetail.continuityCaveat && (
-        <p className="text-[11px] text-text-3">A source does not describe one continuous construction phase, so overlap is only “possible.”</p>
-      )}
-      <EvidenceList ids={[...activeWindows(a), ...activeWindows(b)].flatMap((w) => w.evidenceIds)} a={a} b={b} limit={2} />
-    </Section>
+  const spy = useScrollSpy(
+    scroller,
+    items.map((x) => x.id),
   );
-}
+  useEffect(() => onScrolled(spy.scrolled), [spy.scrolled, onScrolled]);
+  useEffect(() => () => onScrolled(false), [onScrolled]);
 
-function CoordinationSection({ m, active }: { m: Match; active: boolean }) {
-  const a = IDX.project(m.projectAId);
-  const b = IDX.project(m.projectBId);
-  const hasResourceSharing = m.coordination.some((c) => c.scope === "resource-sharing");
-  return (
-    <Section id="coordination" icon={<Handshake size={14} />} title="Coordination on record" active={active}>
-      {m.coordination.length ? (
-        <>
-          <div className="rounded-lg bg-known/8 p-3 ring-1 ring-known/30">
-            <div className="flex items-center gap-1.5 text-[12px] font-medium text-known">
-              <Check size={13} /> Documented — this is a known interface, not a new discovery
-            </div>
-            <ul className="mt-2 space-y-1.5">
-              {m.coordination.map((c, i) => (
-                <CoordinationItem key={i} scope={SCOPE_LABEL[c.scope]} text={c.description} />
-              ))}
-            </ul>
-          </div>
-          {!hasResourceSharing && (
-            <div className="flex items-start gap-2 rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug text-text-2 ring-1 ring-line">
-              <span className="mt-0.5 text-text-3">?</span>
-              <span>
-                <span className="text-text-1">Shared crews or equipment: not established</span> in the reviewed sources. The existing coordination covers what is quoted — nothing more.
-              </span>
-            </div>
-          )}
-          <EvidenceList ids={m.coordination.flatMap((c) => c.evidenceIds)} a={a} b={b} tone="known" limit={2} />
-        </>
-      ) : (
-        <div className="rounded-lg bg-review/8 p-3 text-[12px] leading-snug text-text-1 ring-1 ring-review/25">
-          <div className="font-medium text-review">No coordination found in reviewed sources</div>
-          <p className="mt-1 text-text-2">
-            That is an <em>unknown</em> status — not evidence that the utilities are uncoordinated. Planners should check unpublished arrangements before outreach.
-          </p>
-        </div>
-      )}
-    </Section>
+  const [pulse, setPulse] = useState<Partial<Record<InspectorSection, number>>>({});
+  const jump = useCallback(
+    (id: InspectorSection, opts?: { pulse?: boolean }) => {
+      const el = scroller.current;
+      const target = el?.querySelector<HTMLElement>(`[data-section="${id}"]`);
+      if (!el || !target) return;
+      scrollInspectorTo(el, target, !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      if (opts?.pulse) setPulse((p) => ({ ...p, [id]: (p[id] ?? 0) + 1 }));
+    },
+    [scroller],
   );
-}
 
-function CoordinationItem({ scope, text }: { scope: string; text: string }) {
-  const [more, setMore] = useState(false);
-  const short = firstSentence(text, 28);
-  return (
-    <li className="text-[12px] leading-snug text-text-1">
-      <span className="mono mr-1.5 rounded bg-bg-3 px-1 py-0.5 text-[10px] uppercase tracking-wide text-text-2">{scope}</span>
-      {more ? text : short}
-      {short !== text && (
-        <button onClick={() => setMore((x) => !x)} className="ml-1 text-[11px] text-text-3 hover:text-text-1">
-          {more ? "less" : "more"}
-        </button>
-      )}
-    </li>
-  );
-}
-
-function ConflictSection({ m, active }: { m: Match; active: boolean }) {
-  const set = useAtlas((s) => s.set);
-  const focus = useAtlas((s) => s.focusConflict);
-  const focused = useRef<HTMLDivElement>(null);
-  const hit = (c: Conflict) => !!focus && conflictMatches(c, focus);
-  // the conflict a caller points at (e.g. the guided demo) leads the list and is scrolled to
-  const list = [...m.conflicts].sort((x, y) => Number(hit(y)) - Number(hit(x)));
-  const hasFocus = !!list[0] && hit(list[0]);
+  // the guided demo (and select(id, {section})) points at a section: scroll the inspector to it and pulse its title once
   useEffect(() => {
-    if (!hasFocus) return;
-    const t = setTimeout(
-      () => focused.current?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }),
-      80,
-    );
-    return () => clearTimeout(t);
-  }, [focus, hasFocus]);
-  return (
-    <Section
-      id="conflicts"
-      icon={<AlertTriangle size={14} />}
-      title="Sources disagree"
-      level={<span className="text-[10.5px] text-conflict">{m.conflicts.length} preserved</span>}
-      active={active}
-    >
-      {list.map((c) => {
-        const p = IDX.project(c.projectId);
-        return (
-          <div
-            key={c.id}
-            ref={hit(c) && c === list[0] ? focused : undefined}
-            data-conflict-id={c.id}
-            className={clsx("scroll-mt-14", hit(c) && "-mx-2 rounded-lg bg-conflict/5 p-2 ring-1 ring-conflict/30")}
-            onMouseEnter={() => set({ highlightConflict: true })}
-            onMouseLeave={() => set({ highlightConflict: false })}
-          >
-            <div className="text-[11.5px] text-text-2">
-              {p.shortTitle} · <span className="text-text-1">{c.field === "completion" ? "completion / in-service date" : "construction window"}</span>
-            </div>
-            <div className={clsx("mt-1.5 grid gap-2", c.sides.length === 2 ? "grid-cols-2" : "grid-cols-1")}>
-              {c.sides.map((side) => (
-                <SideCard key={side.value + side.sourceIds.join()} p={p} side={side} field={c.field} />
-              ))}
-            </div>
-            <p className="mt-2 text-[11px] leading-snug text-text-3">
-              {c.field === "constructionWindow" ? "Windows differ by source; the engine evaluated every source combination before calling the TIME signal." : completionNote(c, p)}
-            </p>
-          </div>
-        );
-      })}
-    </Section>
-  );
-}
+    if (!section) return;
+    const t = window.setTimeout(() => jump(section, { pulse: true }), 80);
+    return () => window.clearTimeout(t);
+  }, [section, jump]);
 
-/** What a completion disagreement does to TIME: a date that ends a current window feeds the window match; the in-service gap always uses the current date. */
-function completionNote(c: Conflict, p: Project): string {
-  const cur = currentInService(p);
-  const gap = cur ? `the in-service gap (secondary signal) uses the current date, ${formatBound(cur.date)}` : "no in-service gap is computed";
-  const bound = c.sides.filter((s) => s.claimIds.some((id) => c.boundClaimIds?.includes(id)));
-  const old = c.sides.filter((s) => s.earlier).map((s) => s.value);
-  const history = `the superseded date${old.length > 1 ? "s" : ""} from the older source${old.length > 1 ? "s" : ""} (${old.join(", ")}) ${old.length > 1 ? "are" : "is"} kept as version history`;
-  if (!c.affectsMatch || !bound.length) return `All claims are kept. These dates do not bound a construction window; ${gap}${c.versionOnly ? `, and ${history}` : ""}.`;
-  if (c.versionOnly)
-    return `All claims are kept. The current date, ${bound[0].value}, also falls within the end of this project's current schedule window, so it feeds the TIME match and the in-service gap; ${history}.`;
-  // a side whose sources publish no window is kept for review but never matched (e.g. AEP's 2034 for BECI)
-  const windowed = new Set(activeWindows(p).map((w) => w.claimSourceId));
-  const unwindowed = c.sides.filter((s) => !s.sourceIds.some((id) => windowed.has(id)));
-  if (unwindowed.length) {
-    const vals = (xs: typeof c.sides) => xs.map((s) => s.value).join(" and ");
-    const many = unwindowed.length > 1;
-    return `All claims are kept. Only ${vals(bound)} comes with a schedule window, so the TIME match uses it; ${vals(unwindowed)} ${many ? "have" : "has"} no window of ${many ? "their" : "its"} own and ${many ? "are" : "is"} kept for review but not matched. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
-  }
-  const n = new Set(bound.flatMap((s) => s.sourceIds)).size;
-  return `All claims are kept. ${bound.map((s) => s.value).join(" and ")} also falls within the end of ${n > 1 ? "those sources' own schedule windows" : "its source's own schedule window"}; the window match evaluates every source combination, so ${c.sides.length > 2 ? "no date is picked over the others" : "neither date is picked over the other"}. ${gap[0].toUpperCase()}${gap.slice(1)}.`;
-}
-
-/** A window's note under its schedule row: two lines, the rest on demand. */
-function ClampedNote({ text }: { text: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [open, setOpen] = useState(false);
-  const [clipped, setClipped] = useState(false);
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (el && !open) setClipped(el.scrollHeight > el.clientHeight + 1);
-  }, [text, open]);
   return (
-    <p className="mt-0.5 text-[10.5px] leading-snug text-text-3">
-      <span ref={ref} className={open ? "block" : "line-clamp-2"}>
-        {text}
-      </span>
-      {(clipped || open) && (
-        <button onClick={() => setOpen((o) => !o)} aria-expanded={open} className="text-text-2 hover:text-text-0">
-          {open ? "less" : "more"}
-        </button>
-      )}
-    </p>
-  );
-}
-
-function SideCard({ p, side, field }: { p: Project; side: ConflictSide; field: Conflict["field"] }) {
-  // in the side's own claim order, so the excerpt and link come from the claim whose value is shown
-  const claims: { id: string; evidenceIds: string[] }[] = field === "completion" ? p.completionClaims : p.constructionWindows;
-  const evs = IDX.evidenceList(side.claimIds.flatMap((id) => claims.find((c) => c.id === id)?.evidenceIds ?? []));
-  // the quote shown is one that states the value: it names the side's year (and, for a completion, says in-service/complete)
-  const yr = side.value.match(/\b(?:19|20)\d\d\b/g)?.at(-1);
-  const states = (x: Evidence) => !!yr && (x.exactExcerpt.includes(yr) || new RegExp(`\\d/${yr.slice(2)}(?![\\d/])`).test(x.exactExcerpt));
-  const e = evs.find((x) => states(x) && (field !== "completion" || /in[- ]?service|complet/i.test(x.exactExcerpt))) ?? evs.find(states) ?? evs[0];
-  const srcs = side.sourceIds.map((id) => IDX.source(id)).filter(Boolean);
-  const first = e ? IDX.source(e.sourceId) : srcs[0];
-  return (
-    <div className="flex flex-col rounded-lg bg-bg-2 p-2.5 ring-1 ring-conflict/30">
-      <div className="num text-[17px] leading-none text-text-0">{side.value}</div>
-      <div className="mt-1.5 space-y-0.5">
-        {[...new Set(srcs.map((s) => s!.publisher))].map((pub) => {
-          const docs = srcs.filter((s) => s!.publisher === pub);
-          return (
-            <div key={pub} className="mono truncate text-[9.5px] uppercase tracking-[0.05em] text-text-3" title={docs.map((d) => d!.title).join("\n")}>
-              {pub}
-              {docs.length > 1 && ` · ${docs.length} docs`}
-              {side.earlier && " · superseded"}
-            </div>
-          );
-        })}
+    <div ref={scroller} data-inspector-scroll="" className="scroll-thin relative min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-(--panel-pad)">
+      {/* 2 · titles */}
+      {/* phone: spacing tight enough that the question box clears the footer at the 64dvh opening height */}
+      <div className={clsx(phone ? "space-y-2 pt-0.5" : "space-y-3 pt-0.5")}>
+        <ProjectHeading p={a} role="a" compact={phone} />
+        <ProjectHeading p={b} role="b" compact={phone} />
       </div>
-      {e && <div className="mt-2 text-[11.5px] italic leading-snug text-text-1">“{e.exactExcerpt}”</div>}
-      {first && e && (
-        <a href={evidenceHref(e, first)} target="_blank" rel="noreferrer" className="mt-auto pt-2 text-[10.5px] text-text-2 hover:text-a">
-          Open source{pageLabel(e) ? ` · ${pageLabel(e)}` : ""} ↗
-        </a>
-      )}
+      {/* 3 · tiles + chips ("Why #01?" sits on the verdict line) */}
+      <div className={clsx(phone ? "mt-2.5" : "mt-3 space-y-2")}>
+        <Tiles m={m} compact={phone} />
+        {!phone && <Chips m={m} onJump={(id) => jump(id, { pulse: true })} />}
+      </div>
+      {/* 4 · the ask (phone: before the chips, so the 64dvh sheet shows it) */}
+      <div className={phone ? "mt-2 space-y-2.5" : "mt-2.5"}>
+        <ReviewQuestion m={m} compact={phone} />
+        {phone && <Chips m={m} onJump={(id) => jump(id, { pulse: true })} />}
+      </div>
+      {/* 5 · why flagged, 6 · reviewer */}
+      <div className="mt-5 space-y-4 pb-5">
+        <WhyFlagged m={m} />
+        <ReviewPanel m={m} />
+      </div>
+      {/* 7 · section nav, 8 · sections */}
+      <SectionNav items={items} active={spy.active} onJump={(id) => jump(id)} stuck={spy.stuck} />
+      <PlaceSection m={m} a={a} b={b} pulse={pulse.place} />
+      <ScheduleSection m={m} a={a} b={b} pulse={pulse.schedule} />
+      <CoordinationSection m={m} a={a} b={b} pulse={pulse.coordination} />
+      <ImpactSection m={m} pulse={pulse.impact} />
+      {nConflicts > 0 && <ConflictSection m={m} a={a} b={b} pulse={pulse.conflicts} />}
+      <NotesSection a={a} b={b} />
+      <SourcesSection m={m} a={a} b={b} pulse={pulse.sources} />
+      {/* 10 · disclaimer, once */}
+      <p className="border-t border-divider pt-4 pb-6 text-caption text-pretty text-fg-3">
+        A match is a review lead, not a finding that resources can be shared. Engine <span className="num">{m.engineVersion}</span>.
+      </p>
     </div>
-  );
-}
-
-function NotesSection({ a, b }: { a: Project; b: Project }) {
-  const [open, setOpen] = useState(false);
-  const rows = (
-    [
-      [a, "var(--a)"],
-      [b, "var(--b)"],
-    ] as const
-  )
-    .map(([p, color]) => ({ p, color, notes: p.caveats.map((c) => readableNote(c, IDX)).filter(Boolean) }))
-    .filter((r) => r.notes.length);
-  if (!rows.length) return null;
-  const total = rows.reduce((n, r) => n + r.notes.length, 0);
-  return (
-    <section className="rounded-xl border border-line bg-bg-1/70 p-3.5">
-      <button onClick={() => setOpen((o) => !o)} className="flex w-full items-center justify-between gap-2 text-left" aria-expanded={open}>
-        <span className="flex items-center gap-2 text-[12.5px] font-semibold text-text-0">
-          <FileSearch size={14} className="text-text-2" /> Research notes
-        </span>
-        <span className="text-[10.5px] text-text-3">
-          {total} note{total === 1 ? "" : "s"} · {open ? "hide" : "show"}
-        </span>
-      </button>
-      {open && (
-        <div className="mt-2.5 space-y-2.5">
-          {rows.map(({ p, color, notes }) => (
-            <div key={p.id}>
-              <div className="flex items-center gap-1.5 text-[11px] text-text-2">
-                <Dot color={color} size={5} /> {p.shortTitle}
-              </div>
-              <ul className="mt-1 space-y-1">
-                {notes.map((c, i) => (
-                  <li key={i} className="text-[11.5px] leading-snug text-text-2">
-                    — {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <p className="text-[10.5px] text-text-3">Qualifications recorded while reading and geocoding the sources.</p>
-        </div>
-      )}
-    </section>
-  );
-}
-
-function SourcesSection({ m, a, b, active }: { m: Match; a: Project; b: Project; active: boolean }) {
-  const ids = new Set([...matchSourceIds(m, IDX), ...a.sourceIds, ...b.sourceIds]);
-  const sources = [...ids].map((id) => IDX.source(id)).filter(Boolean);
-  const counts = new Map<string, number>();
-  for (const e of Object.values(IDX.allEvidence())) counts.set(e.sourceId, (counts.get(e.sourceId) ?? 0) + 1);
-  return (
-    <Section id="sources" icon={<Library size={14} />} title="Public sources" level={<span className="num text-[10.5px] text-text-3">{sources.length}</span>} active={active}>
-      <div className="-mx-1.5">
-        {sources.map((s) => (
-          <SourceRow key={s!.id} s={s!} count={counts.get(s!.id)} />
-        ))}
-      </div>
-      <p className="text-[10.5px] text-text-3">Snapshot {formatDate(IDX.snapshotDate)} · excerpts are short quotations with page anchors; full documents stay with their publishers.</p>
-    </Section>
   );
 }

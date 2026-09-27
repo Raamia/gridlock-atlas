@@ -13,7 +13,8 @@
  *               border-edge-strong · border-divider · bg-util-a/b/other · text-overlap · bg-overlap-wash
  *               text-ok · text-warn · bg-inverse · text-on-inverse
  *   type        text-label 11 · text-caption 12 · text-ui 13 · text-body 14 · text-heading 16 · text-title 20
- *               text-display 32 · font-sans · font-mono · font-display (Instrument Serif; wordmark + brief title only)
+ *               text-display 32 (one step up on desktop, ≥1024px: 12 · 13 · 14 · 15 · 17 · 21 · 32 — see below)
+ *               font-sans · font-mono · font-display (Instrument Serif; wordmark + brief title only)
  *   radius      rounded-chip 6 · rounded-control 10 · rounded-card 12 · rounded-panel 18 · rounded-dialog 22 · rounded-pill
  *   elevation   shadow-float · shadow-pop · shadow-chip
  *   blur        backdrop-blur-chrome 12 · backdrop-blur-panel 22
@@ -23,13 +24,25 @@
  *   variants    coarse: / fine: (pointer), e.g. `coarse:hidden` for keyboard hints
  *   z-layers    z-(--z-panel) etc. — see --z-* below
  *
- * Legacy names (--bg-*, --line*, --text-0..3, --a, --b, --amber, --review, --known, --conflict, --possible, --danger,
- * --glass, .glass, .glass-solid, .mono, …) are ALIASES onto this palette so not-yet-rewritten components keep
- * rendering. Integration removes them once nothing uses them. Do not use them in new code.
+ * Legacy names (--bg-0..2, --line, --line-2, --text-0..2, --a, --b, --amber, --review, --known, --conflict, --possible,
+ * --danger, --glass, .glass, .glass-solid, …) remain as plain CSS variables/classes aliased onto this palette (the dev
+ * styleguide still reads a few); their Tailwind colour classes are gone. Do not use them in new code.
  */
 
 @custom-variant coarse (@media (pointer: coarse));
 @custom-variant fine (@media (pointer: fine));
+
+/* registered as lengths so their computed value is px: lib/layout.ts reads the safe-area insets from them */
+@property --safe-t {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+@property --safe-b {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
 
 :root {
   color-scheme: dark;
@@ -85,9 +98,11 @@
   --dur-4: 480ms; /* sheet / drawer */
   --dur-camera: 1400ms;
 
-  /* ── z-order (fixed layers; popovers/tooltips are portalled so they clear dialogs) ─ */
-  --z-map: 0;
-  --z-vignette: 1;
+  /* ── z-order (fixed layers; popovers/tooltips are portalled so they clear dialogs) ─
+     The map and its vignettes sit BELOW zero inside the isolated .atlas-shell: they come last in the DOM (so Tab starts
+     in the header) yet still paint under the z-less focal slot (key chip, map controls). */
+  --z-map: -2;
+  --z-vignette: -1;
   --z-marker: 5;
   --z-chrome: 20;
   --z-panel: 30;
@@ -114,21 +129,14 @@
   --bg-0: var(--canvas);
   --bg-1: var(--surface-solid);
   --bg-2: var(--surface-raised);
-  --bg-3: #19202b;
-  --bg-4: #222a36;
   --line: var(--edge);
   --line-2: var(--edge-strong);
-  --line-3: rgb(255 255 255 / 0.26);
   --text-0: var(--fg-1);
   --text-1: var(--fg-2);
   --text-2: var(--fg-3);
-  --text-3: #6d7586;
   --a: var(--util-a);
-  --a-deep: #2aa6cf;
   --b: var(--util-b);
-  --b-deep: #7f63e6;
   --amber: var(--overlap);
-  --amber-deep: #d99a1e;
   --review: var(--fg-2);
   --known: var(--ok);
   --conflict: var(--warn);
@@ -146,7 +154,85 @@
 }
 @media (max-width: 767.98px) {
   :root {
+    --gutter: 12px;
     --panel-pad: 12px;
+  }
+}
+
+/*
+ * Layout variables before hydration (SPEC §3). lib/layout.ts writes the live values inline on <html> and .atlas-shell
+ * as soon as it knows the real viewport; until then these per-breakpoint defaults describe the pre-run layout, so a
+ * tablet or phone never paints the desktop geometry first. Keep them in step with computeLayout().
+ */
+:root,
+.atlas-shell {
+  --panel-top: calc(var(--gutter) + var(--header-h) + 12px);
+  --rail-w: clamp(336px, 25vw, 392px);
+  --inspector-w: clamp(384px, 29vw, 440px);
+  --dock-h: 96px;
+  --sheet-h: 0px;
+  --focal-l: calc(var(--gutter) + var(--rail-w) + 12px);
+  --focal-t: var(--panel-top);
+  --focal-r: var(--gutter);
+  --focal-b: calc(var(--gutter) + var(--dock-h) + 12px);
+  --focal-w: calc(100vw - var(--focal-l) - var(--focal-r));
+  --focal-h: calc(100dvh - var(--focal-t) - var(--focal-b));
+  --demo-card-w: min(520px, calc(var(--focal-w) - 24px));
+}
+/* lg and md: minimum widths, the dock starts collapsed */
+@media (max-width: 1279.98px) {
+  :root,
+  .atlas-shell {
+    --rail-w: 336px;
+    --inspector-w: 384px;
+    --dock-h: 44px;
+  }
+  /* the server renders the xl header actions (text buttons) and the open dock face: wait for hydration */
+  .atlas-shell:not([data-tier]) [data-header-actions],
+  .atlas-shell:not([data-tier]) > [data-slot="dock"] {
+    visibility: hidden;
+  }
+}
+@media (max-width: 1023.98px) {
+  :root,
+  .atlas-shell {
+    --inspector-w: 360px;
+  }
+}
+/* phone: the header row sits at max(12px, safe-area top); the peek sheet (132px + home indicator) at the bottom */
+@media (max-width: 767.98px) {
+  :root,
+  .atlas-shell {
+    --panel-top: calc(max(12px, env(safe-area-inset-top, 0px)) + 56px);
+    --rail-w: 100vw;
+    --inspector-w: 100vw;
+    --dock-h: 0px;
+    --sheet-h: calc(132px + env(safe-area-inset-bottom, 0px));
+    --focal-l: var(--gutter);
+    --focal-b: calc(var(--sheet-h) + 8px);
+    --demo-card-w: calc(100vw - 2 * var(--gutter));
+  }
+  /* the server renders the desktop header and rail; on a phone they wait for hydration (the map shows meanwhile) */
+  .atlas-shell:not([data-tier]) > [role="banner"],
+  .atlas-shell:not([data-tier]) > [data-slot],
+  .atlas-shell:not([data-tier]) > [data-rail-pill] {
+    visibility: hidden;
+  }
+}
+
+/*
+ * Desktop tiers (lg/xl, ≥1024px wide): the type scale steps up 1px, for reading at laptop and projector distance.
+ * Phones and tablets keep the base scale. The tokens are theme variables, so every text-* class, the eyebrow and
+ * anything sized with var(--text-*) follows; display (the headline number) stays 32.
+ */
+@media (min-width: 1024px) {
+  :root {
+    --text-label: 12px;
+    --text-caption: 13px;
+    --text-ui: 14px;
+    --text-body: 15px;
+    --text-heading: 17px;
+    --text-title: 21px;
   }
 }
 
@@ -177,29 +263,8 @@
   --color-inverse: var(--inverse);
   --color-on-inverse: var(--on-inverse);
 
-  /* legacy colour classes (bg-bg-2, text-text-1, ring-line, text-a, bg-amber/12, text-known …) */
-  --color-bg-0: var(--canvas);
-  --color-bg-1: var(--surface-solid);
-  --color-bg-2: var(--surface-raised);
-  --color-bg-3: var(--bg-3);
-  --color-bg-4: var(--bg-4);
-  --color-line: var(--edge);
-  --color-line-2: var(--edge-strong);
-  --color-line-3: var(--line-3);
-  --color-text-0: var(--fg-1);
-  --color-text-1: var(--fg-2);
-  --color-text-2: var(--fg-3);
-  --color-text-3: var(--text-3);
-  --color-a: var(--util-a);
-  --color-a-deep: var(--a-deep);
-  --color-b: var(--util-b);
-  --color-b-deep: var(--b-deep);
-  --color-amber: var(--overlap);
-  --color-review: var(--fg-2);
-  --color-known: var(--ok);
-  --color-conflict: var(--warn);
-  --color-possible: var(--fg-3);
-  --color-danger: var(--warn);
+  /* (the legacy colour classes — bg-bg-2, text-text-1, ring-line, text-a, text-known … — are gone: nothing used them,
+     and a theme colour named "b" turned every bare `border-b` violet) */
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -309,7 +374,7 @@
     background: var(--canvas);
     color: var(--fg-1);
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -360,10 +425,18 @@
 
 /* ── utilities ────────────────────────────────────────────────── */
 
+/* a panel edge is being dragged (components/ResizeHandle): the edges follow the pointer, no slide transitions */
+.atlas-shell[data-resizing],
+.atlas-shell[data-resizing] * {
+  transition: none !important;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 /* mono uppercase micro-label that names a block */
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-label);
   line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -471,12 +544,8 @@
   --text-0: #15181e;
   --text-1: #3a404b;
   --text-2: #5b626f;
-  --text-3: #6b7280;
   --line: rgb(0 0 0 / 0.1);
   --line-2: rgb(0 0 0 / 0.18);
-  --line-3: rgb(0 0 0 / 0.26);
-  --bg-3: rgb(0 0 0 / 0.05);
-  --bg-4: rgb(0 0 0 / 0.08);
   --a: #0e7490;
   --b: #6d28d9;
   --amber: #b45309;
@@ -644,8 +713,8 @@
 .mapboxgl-ctrl-logo {
   opacity: 0.5;
 }
-/* logo + attribution stay inside the focal area (the map region no panel covers).
-   --focal-l/r/b are the px insets lib/layout.ts writes on .atlas-shell; the fallbacks are the old grid layout. */
+/* logo + attribution stay inside the focal area (the map region no panel covers): --focal-l/r/b are the insets
+   lib/layout.ts writes (CSS defaults above until hydration) */
 .mapboxgl-ctrl-bottom-left,
 .mapboxgl-ctrl-bottom-right {
   transition:
@@ -654,27 +723,12 @@
     bottom var(--dur-4) var(--ease-enter);
 }
 .mapboxgl-ctrl-bottom-left {
-  left: var(--focal-l, 0px);
-  bottom: var(--focal-b, 0px);
+  left: var(--focal-l);
+  bottom: var(--focal-b);
 }
 .mapboxgl-ctrl-bottom-right {
-  right: var(--focal-r, 0px);
-  bottom: var(--focal-b, 0px);
-}
-@media (min-width: 640px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    right: var(--focal-r, 376px);
-  }
-}
-@media (min-width: 1280px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    right: var(--focal-r, 424px);
-  }
-}
-@media (min-width: 640px) and (max-width: 767px), (min-width: 1024px) and (max-width: 1099px) {
-  [data-inspector="true"] .mapboxgl-ctrl-bottom-right {
-    bottom: var(--focal-b, 48px);
-  }
+  right: var(--focal-r);
+  bottom: var(--focal-b);
 }
 .mapboxgl-popup-content {
   background: transparent !important;
@@ -684,8 +738,27 @@
 .mapboxgl-popup-tip {
   display: none !important;
 }
+/* no map (WebGL off, map crashed): its key and 3D/basemap controls mean nothing; the guided-demo card stays */
+.atlas-shell:has([data-map-unavailable]) > [data-slot="focal"] > :not([role="region"]) {
+  display: none;
+}
+/* keyboard focus on the map (arrow keys pan it): the canvas itself runs under the panels, so the ring outlines the
+   focal hole — the part of the map the reader can see — as an inset hairline in the panel radius */
 .mapboxgl-canvas:focus-visible {
   outline: none;
+}
+.mapboxgl-canvas-container:has(> .mapboxgl-canvas:focus-visible)::after {
+  content: "";
+  position: fixed;
+  left: var(--focal-l);
+  top: var(--focal-t);
+  right: var(--focal-r);
+  bottom: var(--focal-b);
+  border-radius: var(--radius-panel);
+  box-shadow:
+    inset 0 0 0 2px var(--fg-1),
+    inset 0 0 0 4px color-mix(in srgb, var(--canvas) 50%, transparent);
+  pointer-events: none;
 }
 
 /* ── reduced motion: nothing animates, fades collapse to instant ─ */

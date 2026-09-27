@@ -45,8 +45,9 @@ export interface Notice {
 
 /**
  * Method & audit TOC anchors, in order: Proof at a glance · Sperry's six rows today · Matching rules · Exports ·
- * Location workflow · Context · Corpus checks · Evaluation · What the engine excluded · Reviewer mode · AI extraction ·
- * Open research questions. The Method drawer renders `data-method-section={id}` (or `id="method-{id}"`) per section.
+ * Location workflow · Context · State permit check · Corpus checks · Evaluation · What the engine excluded · Reviewer
+ * mode · AI extraction · Open research questions. The Method drawer renders `data-method-section={id}` (or
+ * `id="method-{id}"`) per section.
  */
 export type MethodSection =
   | "proof"
@@ -55,6 +56,7 @@ export type MethodSection =
   | "exports"
   | "location"
   | "context"
+  | "permits"
   | "corpus"
   | "evaluation"
   | "excluded"
@@ -113,6 +115,15 @@ export interface AtlasState {
   closeupOpen: boolean;
   /** The user's timeline-dock toggle; lib/layout may still force it collapsed. useLayout sets the tier default. */
   timelineCollapsed: boolean;
+  /**
+   * User-dragged panel sizes in px (null = the layout's default); lib/layout clamps them so the map keeps a usable focal
+   * hole, and applies them on the xl/lg tiers only. Persisted per browser (components/ResizeHandle).
+   */
+  dockHeight: number | null;
+  railWidth: number | null;
+  inspectorWidth: number | null;
+  /** A resize handle is being dragged: panel transitions switch off (data-resizing on .atlas-shell); the camera waits for the drop. */
+  resizing: boolean;
   mapKeyOpen: boolean;
   /** lg/md: the Opportunities pill's overlay rail is open (select() closes it). */
   railOpen: boolean;
@@ -260,6 +271,10 @@ export const useAtlas = create<AtlasState>((set, get) => ({
 
   closeupOpen: false,
   timelineCollapsed: false,
+  dockHeight: null,
+  railWidth: null,
+  inspectorWidth: null,
+  resizing: false,
   mapKeyOpen: false,
   railOpen: false,
   sheetSnap: "peek",

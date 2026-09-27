@@ -241,7 +241,7 @@ function MapBackdrop() {
       <circle cx="700" cy="300" r="8.5" fill="none" stroke="#f3f5f9" strokeWidth="1.5" />
       <circle cx="812" cy="318" r="8.5" fill="none" stroke="#f3f5f9" strokeWidth="1.5" />
       <g fontFamily="var(--font-geist-mono)" fontSize="11" fill="#b4bccb">
-        <text x="742" y="262">6.7 mi · center to center</text>
+        <text x="742" y="262">6.7 mi · closest approach</text>
       </g>
     </svg>
   );
@@ -995,7 +995,7 @@ function SelectionSection() {
                 Sperry rule
               </span>
             </div>
-            <p className="mt-2.5 text-caption text-fg-3">Project centers within · a review heuristic, not a regulatory standard.</p>
+            <p className="mt-2.5 text-caption text-fg-3">Closest project points within · a review heuristic, not a regulatory standard.</p>
           </div>
         </div>
       </Block>
@@ -1124,7 +1124,7 @@ function StatsSection() {
                 6.7 mi
               </SignalFact>
             }
-            sub="centers apart"
+            sub="closest approach"
           />
           <Stat
             label="Timing"
@@ -1160,6 +1160,7 @@ function StatsSection() {
 
 function OverlaysSection() {
   const [picked, setPicked] = useState<string | null>(null);
+  const [reviewer, setReviewer] = useState(false);
   const [why, setWhy] = useState(false);
   return (
     <Section
@@ -1211,9 +1212,21 @@ function OverlaysSection() {
               </IconButton>
             }
           >
-            <MenuItem onSelect={() => setPicked("Sources")}>Sources</MenuItem>
+            <MenuItem onSelect={() => setPicked("Sources")} hint="103 public documents · 19 utilities">
+              Sources
+            </MenuItem>
             <MenuItem onSelect={() => setPicked("Method")}>Method</MenuItem>
-            <MenuItem onSelect={() => setPicked("Reviewer mode")}>Reviewer mode</MenuItem>
+            {/* checked → role=menuitemcheckbox + aria-checked; the hint is a description (aria-describedby), not part of the name */}
+            <MenuItem
+              checked={reviewer}
+              hint="Label pairs as you review"
+              onSelect={() => {
+                setReviewer((v) => !v);
+                setPicked("Reviewer mode");
+              }}
+            >
+              Reviewer mode
+            </MenuItem>
             <MenuItem onSelect={() => setPicked("Reset view")}>Reset view</MenuItem>
           </Menu>
           <span className="text-caption text-fg-3">{picked ? `Selected: ${picked}` : "Try the keyboard: ↓ opens, ↑↓ move, Esc closes"}</span>
@@ -1255,7 +1268,7 @@ function OverlaysSection() {
             <Disclosure variant="inline" summary="Why #01?" open={why} onOpenChange={setWhy}>
               <ul className="mt-2 space-y-1 text-caption text-fg-2">
                 <li>Both projects located at named facilities</li>
-                <li>Centers 6.7 mi apart, well inside 25 mi</li>
+                <li>Closest points 6.7 mi apart, well inside 25 mi</li>
                 <li>No coordination found in reviewed sources</li>
               </ul>
               <p className="mt-2 text-caption text-fg-3">Priority 92 — an explainable ordering, not a probability.</p>

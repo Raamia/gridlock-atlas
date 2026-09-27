@@ -12,7 +12,7 @@
  */
 
 import clsx from "clsx";
-import { AlertTriangle, CalendarRange, ChevronDown, Handshake, MapPin, X } from "lucide-react";
+import { AlertTriangle, CalendarRange, Check, ChevronDown, Handshake, MapPin, X } from "lucide-react";
 import { motion } from "motion/react";
 import {
   cloneElement,
@@ -26,7 +26,7 @@ import {
   useRef,
   useState,
   type ComponentProps,
-  type ElementType,
+  type ComponentType,
   type FocusEvent as ReactFocusEvent,
   type HTMLAttributes,
   type KeyboardEvent as ReactKeyboardEvent,
@@ -107,6 +107,12 @@ function useFloating(anchor: HTMLElement | null, ref: RefObject<HTMLElement | nu
 }
 
 const FLOATING_STYLE = { position: "fixed", left: 0, top: 0, visibility: "hidden" } as const;
+
+/**
+ * A polymorphic tag ("span" | "h2" | "nav" …) typed as a plain HTML component. Not `ElementType`: that union also
+ * spans every JSX intrinsic other packages register (react-three-fiber's <mesh>, <line> …), which types children as never.
+ */
+type AnyTag = ComponentType<HTMLAttributes<HTMLElement> & { ref?: Ref<HTMLElement> }>;
 
 /* ════════════════════════════════════════════════════════════════════════════
  * Tooltip
@@ -299,7 +305,7 @@ export function Divider({ orientation = "horizontal", className }: { orientation
 type EyebrowTag = "span" | "p" | "div" | "h2" | "h3" | "h4" | "dt" | "label" | "legend";
 /** Mono uppercase micro-label naming a block (11px, +.08em, fg-3). Use `as="h2"` when it is the block's heading. */
 export function Eyebrow({ as = "span", className, children, ...rest }: HTMLAttributes<HTMLElement> & { as?: EyebrowTag }) {
-  const Tag = as as ElementType;
+  const Tag = as as unknown as AnyTag;
   return (
     <Tag {...rest} className={clsx("eyebrow", className)}>
       {children}
@@ -493,7 +499,7 @@ export type PanelProps = HTMLAttributes<HTMLElement> & {
 
 /** Floating frosted surface with hairline edge + float shadow + panel radius. Adds data-map-ui / data-map-pad. */
 export function Panel({ as = "div", mapPad, material = "panel", mapUi: onMap = true, className, children, ...rest }: PanelProps) {
-  const Tag = as as ElementType;
+  const Tag = as as unknown as AnyTag;
   return (
     <Tag {...rest} {...(onMap ? mapUi(mapPad) : {})} className={clsx(panelClass(material), className)}>
       {children}
@@ -659,7 +665,7 @@ export function Segmented<V extends string>({
     moveTo(i, next ? 1 : prev ? -1 : e.key === "Home" ? "first" : "last");
   };
 
-  const Wrapper = (variant === "pressed" && as === "nav" ? "nav" : "div") as ElementType;
+  const Wrapper = (variant === "pressed" && as === "nav" ? "nav" : "div") as unknown as AnyTag;
   const groupRole = variant === "tablist" ? "tablist" : variant === "radiogroup" ? "radiogroup" : as === "nav" ? undefined : "group";
 
   return (
@@ -734,7 +740,8 @@ export function Segmented<V extends string>({
           </button>
         );
         return it.tooltip ? (
-          <Tooltip key={it.value} content={it.tooltip}>
+          // a tooltip that only repeats the accessible name (full region name behind a short label) is not a description
+          <Tooltip key={it.value} content={it.tooltip} describe={it.tooltip !== it.ariaLabel}>
             {btn}
           </Tooltip>
         ) : (
@@ -798,7 +805,7 @@ const TAG_TONE: Record<TagTone, string> = {
   overlap: "bg-overlap-wash text-overlap ring-overlap/35",
 };
 
-export interface TagProps {
+export interface TagProps extends TriggerProps {
   children: ReactNode;
   tone?: TagTone;
   icon?: ReactNode;
@@ -809,11 +816,17 @@ export interface TagProps {
   /** Makes the tag a button (e.g. "Sperry OVL_3" → opens Method). */
   onClick?: (e: ReactMouseEvent<HTMLButtonElement>) => void;
   "aria-label"?: string;
+  /** A static tag that carries a Tooltip can join the Tab order (0) so the tooltip also opens on keyboard focus. */
+  tabIndex?: number;
   className?: string;
 }
 
-/** Small outline label (20px, chip radius) for the chips line: Sperry OVL_n, Sources disagree, Date passed, Beyond 25 mi. */
-export function Tag({ children, tone = "neutral", icon, mono, title, onClick, className, ...rest }: TagProps) {
+/**
+ * Small outline label (20px, chip radius) for the chips line: Sperry OVL_n, Sources disagree, Date passed, Beyond 25 mi.
+ * Forwards pointer/focus handlers and aria-describedby, so `<Tooltip><Tag …/></Tooltip>` works directly (hover and keyboard focus).
+ */
+export function Tag({ children, tone = "neutral", icon, mono, title, onClick, className, tabIndex, ...rest }: TagProps) {
+  const { "aria-label": ariaLabel, ...trigger } = rest;
   const cls = clsx(
     "inline-flex h-5 max-w-full shrink-0 items-center gap-1 whitespace-nowrap rounded-chip px-1.5 ring-1 ring-inset [&_svg]:shrink-0",
     mono ? "num text-[11px] font-medium tracking-[0.01em]" : "text-caption font-medium",
@@ -829,12 +842,12 @@ export function Tag({ children, tone = "neutral", icon, mono, title, onClick, cl
   );
   if (onClick)
     return (
-      <button type="button" onClick={onClick} title={title} aria-label={rest["aria-label"]} className={cls}>
+      <button type="button" onClick={onClick} title={title} aria-label={ariaLabel} tabIndex={tabIndex} className={cls} {...trigger}>
         {body}
       </button>
     );
   return (
-    <span title={title} aria-label={rest["aria-label"]} className={cls}>
+    <span title={title} aria-label={ariaLabel} tabIndex={tabIndex} className={cls} {...trigger}>
       {body}
     </span>
   );
@@ -911,32 +924,40 @@ export interface SignalFactProps {
   state: SignalState;
   /** The fact ("6.7 mi", "2028", a facility name, "timing unknown"). */
   children: ReactNode;
-  /** Text size: caption 12 (rows) · ui 13 · body 14. */
-  size?: "caption" | "ui" | "body";
+  /** Text size: caption 12 (rows) · ui 13 · body 14 · heading 16 (inspector tiles). */
+  size?: "caption" | "ui" | "body" | "heading";
   /** Mono text (default true: distances, years). Turn off for facility names. */
   mono?: boolean;
+  /** Let a word value (a facility name) wrap to two lines instead of truncating; the icon stays on the first line. */
+  wrap?: boolean;
   /** Reserve the 12px icon slot when state is "none" so stacked facts align. */
   alignIcon?: boolean;
   /** Hover tooltip (portal). */
   tooltip?: ReactNode;
+  /** Native title (e.g. the full value when a shortened one is shown). */
+  title?: string;
   className?: string;
 }
 
 const SIGNAL_ICON = { place: MapPin, time: CalendarRange } as const;
-const SIGNAL_SIZE = { caption: "text-caption", ui: "text-ui", body: "text-body" } as const;
+const SIGNAL_SIZE = { caption: "text-caption", ui: "text-ui", body: "text-body", heading: "text-heading" } as const;
 
 /**
  * One pair fact led by its signal icon. Confirmed = amber filled MapPin/CalendarRange + fg-1 text ·
  * possible = fg-3 outline icon + fg-2 text · none = no icon, fg-3 text. The icon carries an accessible name
  * ("Place confirmed"), so meaning never rests on colour alone.
  */
-export function SignalFact({ kind, state, children, size = "caption", mono = true, alignIcon, tooltip, className }: SignalFactProps) {
+export function SignalFact({ kind, state, children, size = "caption", mono = true, wrap, alignIcon, tooltip, title, className }: SignalFactProps) {
   const Icon = SIGNAL_ICON[kind];
   const word = kind === "place" ? "Place" : "Time";
+  // wrapping facts top-align; the icon is centred on the first line box (1lh = the fact's own line height)
+  const iconCls = wrap ? "shrink-0 mt-[calc((1lh_-_12px)/2)]" : "shrink-0";
   const fact = (
     <span
+      title={title}
       className={clsx(
-        "inline-flex min-w-0 max-w-full items-center gap-1.5",
+        "inline-flex min-w-0 max-w-full gap-1.5",
+        wrap ? "items-start" : "items-center",
         SIGNAL_SIZE[size],
         mono && "num",
         state === "confirmed" ? "text-fg-1" : state === "possible" ? "text-fg-2" : "text-fg-3",
@@ -944,13 +965,13 @@ export function SignalFact({ kind, state, children, size = "caption", mono = tru
       )}
     >
       {state === "confirmed" ? (
-        <Icon role="img" aria-label={`${word} confirmed`} size={12} strokeWidth={2} className="text-overlap" fill="currentColor" fillOpacity={0.3} />
+        <Icon role="img" aria-label={`${word} confirmed`} size={12} strokeWidth={2} className={clsx(iconCls, "text-overlap")} fill="currentColor" fillOpacity={0.3} />
       ) : state === "possible" ? (
-        <Icon role="img" aria-label={`${word} possible`} size={12} strokeWidth={1.75} className="text-fg-3" />
+        <Icon role="img" aria-label={`${word} possible`} size={12} strokeWidth={1.75} className={clsx(iconCls, "text-fg-3")} />
       ) : alignIcon ? (
         <span aria-hidden className="w-3 shrink-0" />
       ) : null}
-      <span className="min-w-0 truncate">{children}</span>
+      <span className={clsx("min-w-0", wrap ? "line-clamp-2 break-words" : "truncate")}>{children}</span>
     </span>
   );
   return tooltip ? <Tooltip content={tooltip}>{fact}</Tooltip> : fact;
@@ -989,6 +1010,8 @@ export function StatusTag({ status, size = "sm", label, className }: { status: R
  * ════════════════════════════════════════════════════════════════════════════ */
 
 const MenuCtx = createContext<{ close: (restoreFocus: boolean) => void; focusMenu: () => void } | null>(null);
+/** Every activatable item of a menu (plain, checkbox), skipping aria-disabled ones. */
+const MENU_ITEMS = ':is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]):not([aria-disabled="true"])';
 
 export interface MenuProps {
   /** A Button or IconButton element; it receives aria-haspopup/expanded/controls + click/keyboard handlers. */
@@ -1057,7 +1080,7 @@ export function Menu({ trigger, children, header, label, side = "bottom", align 
     if (!anchor) return;
     const menu = menuRef.current;
     if (!menu) return;
-    const items = [...menu.querySelectorAll<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])')];
+    const items = [...menu.querySelectorAll<HTMLElement>(MENU_ITEMS)];
     const target = initial === "first" ? items[0] : initial === "last" ? items[items.length - 1] : undefined;
     (target ?? menu).focus({ preventScroll: true });
   }, [anchor, initial]);
@@ -1076,7 +1099,7 @@ export function Menu({ trigger, children, header, label, side = "bottom", align 
   const onMenuKey = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     const menu = menuRef.current;
     if (!menu) return;
-    const items = [...menu.querySelectorAll<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])')];
+    const items = [...menu.querySelectorAll<HTMLElement>(MENU_ITEMS)];
     const i = items.indexOf(document.activeElement as HTMLElement);
     const go = (n: number) => items[(n + items.length) % items.length]?.focus({ preventScroll: true });
     if (e.key === "ArrowDown") {
@@ -1164,25 +1187,37 @@ export function Menu({ trigger, children, header, label, side = "bottom", align 
 
 export type MenuItemProps = Omit<ComponentProps<"button">, "onSelect" | "children"> & {
   children: ReactNode;
-  /** Second line (caption, fg-3) — e.g. a mono "111 rows · pairs under 25 mi". */
+  /** Second line (caption, fg-3) — e.g. a mono "111 rows · pairs under 25 mi". Exposed as the item's description
+   *  (aria-describedby), never as part of its name. */
   hint?: ReactNode;
   icon?: ReactNode;
   shortcut?: string;
   /** aria-disabled (stays in the DOM, skipped by arrow keys, not activatable). */
   disabled?: boolean;
+  /** Makes it a `menuitemcheckbox` with aria-checked (e.g. "Reviewer mode"); a check shows at the end while on. */
+  checked?: boolean;
   onSelect?: () => void;
   /** Keep the menu open after selecting. */
   keepOpen?: boolean;
 };
 
-export function MenuItem({ children, hint, icon, shortcut, disabled, onSelect, keepOpen, className, onClick, ...rest }: MenuItemProps) {
+export function MenuItem({ children, hint, icon, shortcut, disabled, checked, onSelect, keepOpen, className, onClick, ...rest }: MenuItemProps) {
   const ctx = useContext(MenuCtx);
+  const id = useId();
+  const labelId = `${id}-label`;
+  const hintId = `${id}-hint`;
+  // the name is the label line only; an explicit aria-label / aria-labelledby from the caller still wins
+  const named = rest["aria-label"] !== undefined || rest["aria-labelledby"] !== undefined;
+  const isCheckbox = checked !== undefined;
   return (
     <button
       type="button"
-      role="menuitem"
+      role={isCheckbox ? "menuitemcheckbox" : "menuitem"}
+      aria-checked={isCheckbox ? checked : undefined}
       tabIndex={-1}
       {...rest}
+      aria-labelledby={named ? rest["aria-labelledby"] : labelId}
+      aria-describedby={clsx(hint && hintId, rest["aria-describedby"]) || undefined}
       aria-disabled={disabled || undefined}
       onClick={(e) => {
         onClick?.(e);
@@ -1201,9 +1236,26 @@ export function MenuItem({ children, hint, icon, shortcut, disabled, onSelect, k
     >
       {icon && <span className="mt-px text-fg-3 [&_svg]:size-3.5">{icon}</span>}
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <span className="text-ui font-medium text-fg-1">{children}</span>
-        {hint && <span className="text-caption text-fg-3">{hint}</span>}
+        <span id={labelId} className="text-ui font-medium text-fg-1">
+          {children}
+        </span>
+        {hint && (
+          <span id={hintId} className="text-caption text-fg-3">
+            {hint}
+          </span>
+        )}
       </span>
+      {isCheckbox && (
+        <span
+          aria-hidden
+          className={clsx(
+            "mt-0.5 grid size-4 shrink-0 place-items-center rounded-full transition-colors duration-150",
+            checked ? "bg-ok/15 text-ok" : "ring-1 ring-edge-strong ring-inset",
+          )}
+        >
+          {checked && <Check size={11} strokeWidth={2.5} />}
+        </span>
+      )}
       {shortcut && <Kbd className="mt-px">{shortcut}</Kbd>}
     </button>
   );
@@ -1301,12 +1353,13 @@ export function Disclosure({
       />
     </button>
   );
-  const Heading = headingLevel ? (`h${headingLevel}` as ElementType) : null;
+  const Heading = headingLevel ? (`h${headingLevel}` as unknown as AnyTag) : null;
 
   return (
     <div className={className} data-open={isOpen || undefined}>
       {Heading ? <Heading>{button}</Heading> : button}
-      <div id={regionId} className="grid transition-[grid-template-rows] duration-300 ease-enter" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}>
+      {/* minmax(0,1fr): truncated children can't widen the column past the panel */}
+      <div id={regionId} className="grid grid-cols-[minmax(0,1fr)] transition-[grid-template-rows] duration-300 ease-enter" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}>
         <div className={clsx("min-h-0", !(isOpen && settled) && "overflow-hidden")} inert={!isOpen}>
           <div className={contentClassName}>{children}</div>
         </div>
@@ -1373,13 +1426,14 @@ export function Notice({ children, tone = "neutral", icon, actionLabel, onAction
         <button
           type="button"
           onClick={onAction}
-          className="h-7 shrink-0 rounded-full bg-fill-2 px-3 text-caption font-medium text-fg-1 transition-colors duration-150 hover:bg-fill-3"
+          className="relative h-7 shrink-0 rounded-full bg-fill-2 px-3 text-caption font-medium text-fg-1 transition-colors duration-150 after:absolute after:inset-x-0 after:-inset-y-2 hover:bg-fill-3"
         >
           {actionLabel}
         </button>
       )}
       {onDismiss && (
-        <IconButton label={dismissLabel} size="sm" onClick={onDismiss} tooltip={false}>
+        // 28px to the eye, 44px to a finger (the pseudo-element reaches 8px past each edge)
+        <IconButton label={dismissLabel} size="sm" onClick={onDismiss} tooltip={false} className="after:absolute after:-inset-2 after:rounded-full">
           <X size={14} strokeWidth={2} />
         </IconButton>
       )}

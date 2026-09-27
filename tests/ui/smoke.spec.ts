@@ -20,7 +20,15 @@ test.describe("GridLock Atlas smoke path", () => {
     await expect(inspector).toContainText("Western Wisconsin");
     await expect(inspector).toContainText("Known coordination");
     await expect(inspector).toContainText("Tremval North");
-    await expect(page.getByText("PAIR IN VIEW", { exact: false })).toBeVisible();
+    // the map draws the pair in view: its two closest points (they touch at Tremval North, so no ruler) and a leg from
+    // each project to the shared site (the old "Pair in view" chip is gone)
+    const drawn = () =>
+      page.evaluate(() => {
+        const m = (window as unknown as { __map?: { getSource: (id: string) => { serialize: () => { data: { features: unknown[] } } } | undefined } }).__map;
+        const n = (id: string) => m?.getSource(id)?.serialize().data.features.length ?? -1;
+        return { centers: n("gl-centers"), connector: n("gl-connector"), legs: n("gl-site-legs") };
+      });
+    await expect.poll(drawn, { timeout: 20_000 }).toEqual({ centers: 2, connector: 0, legs: 2 });
     await expect(page.locator(`[data-match-id="${FEATURED}"]`)).toHaveAttribute("aria-pressed", "true");
     const timeline = page.getByRole("region", { name: "Construction timeline" }).or(page.locator('section[aria-label="Construction timeline"]'));
     await expect(timeline).toContainText("Alma-Blair");
@@ -101,8 +109,13 @@ test.describe("GridLock Atlas smoke path", () => {
     await page.goto("/");
     await page.getByRole("button", { name: /Compare public plans/ }).click();
     await expect(page.locator("[data-match-id]").first()).toBeVisible({ timeout: 15_000 });
+    // both tables are items of the Export menu in the Opportunities header
     const grab = async (name: string) => {
-      const [dl] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name }).click()]);
+      await page.getByRole("button", { name: "Export", exact: true }).click();
+      const item = page.getByRole("menuitem", { name });
+      await expect(item).toBeVisible();
+      const [dl] = await Promise.all([page.waitForEvent("download"), item.click()]);
+      await expect(item).toBeHidden(); // choosing an item closes the menu
       return (await (await dl.createReadStream()).toArray().then((c) => Buffer.concat(c).toString("utf8"))) as string;
     };
     const split = (r: string) => r.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map((c) => c.replace(/,$/, ""));
@@ -113,11 +126,14 @@ test.describe("GridLock Atlas smoke path", () => {
     const [head, first, ...rest] = raw.replace(/^\uFEFF/, "").trim().split("\n");
     expect(head.startsWith("overlap_id,distance_mi,time_gap (day),utility_a,project_id_a,project_name_a,utility_b,project_id_b,project_name_b,")).toBe(true);
     expect(head).toContain(",priority_rank,queue_rank,");
-    // the radius each row was flagged at, so geo_signal reads against it
-    expect(head).toContain(",geo_method,location_confidence,review_radius_mi,time_signal,");
+    // how each distance was measured (tier, geometry basis, estimated, the legacy center figure) and the radius each row
+    // was flagged at, so geo_signal reads against it
+    expect(head).toContain(
+      ",geo_method,coordination_tier,distance_basis_a,distance_basis_b,distance_estimated,legacy_center_distance_mi,location_confidence,review_radius_mi,time_signal,",
+    );
     expect(head.endsWith(",time_gap_basis,in_service_a,in_service_b,docket_a,docket_b,pair_id")).toBe(true);
     expect(first).toMatch(/^OVL_1,\d+\.\d{2},/);
-    // Sperry's rule exactly: centers under 25 mi, closest first, OVL_n in that order; project ids unique per row
+    // the challenge rule exactly: closest points under 25 mi, closest first, OVL_n in that order; project ids unique per row
     const cols = head.split(",");
     const rows = [first, ...rest].map(split);
     const miles = rows.map((r) => Number(r[cols.indexOf("distance_mi")]));
@@ -129,7 +145,7 @@ test.describe("GridLock Atlas smoke path", () => {
       expect(r[cols.indexOf("review_radius_mi")]).toBe("25");
     }
     expect(new Set(rows.map((r) => r[cols.indexOf("pair_id")])).size).toBe(rows.length);
-    // a county-level pair (no project center) is outside the sponsor's rule
+    // a county-level pair (no closest approach) is outside the sponsor's rule
     expect(rows.find((r) => r[cols.indexOf("pair_id")] === "desc-6888__gpc-effingham-500")).toBeUndefined();
 
     const projects = await grab("Export project table as CSV");
