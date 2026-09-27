@@ -1,0 +1,194 @@
+[
+ {
+  "id": "s01",
+  "caption": "Power utilities plan their construction years in advance.",
+  "seconds": 3.208,
+  "pauses": [
+   2.43
+  ]
+ },
+ {
+  "id": "s02",
+  "caption": "But neighbors plan alone. Each in its own document. On its own map.",
+  "seconds": 3.917,
+  "pauses": [
+   1.43,
+   2.96
+  ]
+ },
+ {
+  "id": "s03",
+  "caption": "Along the Savannah River, Dominion Energy South Carolina and Georgia Power plan nearly 200 projects. Some, just miles apart.",
+  "seconds": 8.784,
+  "pauses": [
+   1.37,
+   6.61,
+   7.4
+  ]
+ },
+ {
+  "id": "s04",
+  "caption": "In 2024, federal regulators issued a rule, because planning in isolation leads to waste and delays.",
+  "seconds": 6.974,
+  "pauses": [
+   1.28,
+   3.43,
+   6.16
+  ]
+ },
+ {
+  "id": "s05",
+  "caption": "So we built GridLock Atlas.",
+  "seconds": 1.726,
+  "pauses": []
+ },
+ {
+  "id": "s06",
+  "caption": "It reads 103 public documents and puts both plans on one map, with every fact tied to a verbatim quote and its page.",
+  "seconds": 8.107,
+  "pauses": [
+   2.51,
+   4.59,
+   7.08
+  ]
+ },
+ {
+  "id": "s07",
+  "caption": "Then it measures the closest points between every cross-utility pair of projects. 7,929 pairs.",
+  "seconds": 8.068,
+  "pauses": [
+   4.68,
+   6.0
+  ]
+ },
+ {
+  "id": "s08",
+  "caption": "A naive rule, \u201cclose or same time\u201d, flags more than half of them. GridLock flags 149. Just 1.9%.",
+  "seconds": 9.126,
+  "pauses": [
+   2.54,
+   4.34,
+   7.21
+  ]
+ },
+ {
+  "id": "s09",
+  "caption": "One click compares the plans, and ranks every lead. Place first, then timing, then the strength of the evidence.",
+  "seconds": 6.425,
+  "pauses": [
+   2.91,
+   3.97,
+   4.84
+  ]
+ },
+ {
+  "id": "s10",
+  "caption": "Number one: Dominion\u2019s Jasper\u2013Okatie line and Georgia Power\u2019s Goshen\u2013McIntosh rebuild. Their closest points are 4.25 miles apart.",
+  "seconds": 10.392,
+  "pauses": [
+   0.76,
+   3.32,
+   6.75
+  ]
+ },
+ {
+  "id": "s11",
+  "caption": "And their published schedules overlap for 18 months.",
+  "seconds": 2.916,
+  "pauses": [
+   1.86
+  ]
+ },
+ {
+  "id": "s12",
+  "caption": "It's the pair from Sperry's own worked example. On today's plans, it ranks first.",
+  "seconds": 4.578,
+  "pauses": [
+   2.41
+  ]
+ },
+ {
+  "id": "s13",
+  "caption": "In 3D, you can watch the two projects meet. On the ground, and in time.",
+  "seconds": 4.317,
+  "pauses": [
+   2.55
+  ]
+ },
+ {
+  "id": "s14",
+  "caption": "And it never overstates. Field-work dates aren\u2019t published, so it says so. No coordination on record means \u201cunknown\u201d. Never \u201cuncoordinated\u201d.",
+  "seconds": 8.93,
+  "pauses": [
+   1.42,
+   4.2,
+   7.03,
+   7.75
+  ]
+ },
+ {
+  "id": "s15",
+  "caption": "For any pair, one click writes a review brief. The question to ask, with every fact numbered to its source.",
+  "seconds": 5.919,
+  "pauses": [
+   2.52,
+   3.84
+  ]
+ },
+ {
+  "id": "s16",
+  "caption": "It estimates impact too, and cites every number. In Wisconsin, the state commission says two utilities\u2019 lines meet at one new substation.",
+  "seconds": 8.935,
+  "pauses": [
+   1.77,
+   3.4,
+   4.74,
+   7.5
+  ]
+ },
+ {
+  "id": "s17",
+  "caption": "One terminal instead of two: an estimated $9\u201312 million.",
+  "seconds": 4.502,
+  "pauses": [
+   1.8
+  ]
+ },
+ {
+  "id": "s18",
+  "caption": "And it\u2019s auditable. Sperry\u2019s worked example is reproduced exactly: 6 of 6 rows.",
+  "seconds": 5.437,
+  "pauses": [
+   1.0,
+   3.92
+  ]
+ },
+ {
+  "id": "s19",
+  "caption": "As a cross-check, GPT-5.5 went through all 283 plan pages. All but one of its 2,579 quotes were verbatim.",
+  "seconds": 11.259,
+  "pauses": [
+   1.01,
+   3.22,
+   6.36,
+   8.47
+  ]
+ },
+ {
+  "id": "s20",
+  "caption": "GridLock Atlas. Public plans. One map. Every claim cited.",
+  "seconds": 4.223,
+  "pauses": [
+   2.19,
+   2.97
+  ]
+ },
+ {
+  "id": "s21",
+  "caption": "So neighboring utilities can plan together, and build together.",
+  "seconds": 3.316,
+  "pauses": [
+   2.23
+  ]
+ }
+]

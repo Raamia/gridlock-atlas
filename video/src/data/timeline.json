@@ -1,0 +1,226 @@
+{
+ "fps": 30,
+ "bpm": 100,
+ "total": 4987,
+ "scenes": [
+  {
+   "name": "cold",
+   "from": 0,
+   "to": 288
+  },
+  {
+   "name": "problem",
+   "from": 288,
+   "to": 828
+  },
+  {
+   "name": "title",
+   "from": 828,
+   "to": 1008
+  },
+  {
+   "name": "pipeline",
+   "from": 1008,
+   "to": 1296
+  },
+  {
+   "name": "grid",
+   "from": 1296,
+   "to": 1890
+  },
+  {
+   "name": "compare",
+   "from": 1890,
+   "to": 2124
+  },
+  {
+   "name": "toplead",
+   "from": 2124,
+   "to": 2574
+  },
+  {
+   "name": "ovl3",
+   "from": 2574,
+   "to": 2754
+  },
+  {
+   "name": "closeup",
+   "from": 2754,
+   "to": 3006
+  },
+  {
+   "name": "honest",
+   "from": 3006,
+   "to": 3312
+  },
+  {
+   "name": "brief",
+   "from": 3312,
+   "to": 3546
+  },
+  {
+   "name": "impact",
+   "from": 3546,
+   "to": 4014
+  },
+  {
+   "name": "proof",
+   "from": 4014,
+   "to": 4572
+  },
+  {
+   "name": "outro",
+   "from": 4572,
+   "to": 4987
+  }
+ ],
+ "cues": [
+  {
+   "id": "s01",
+   "scene": "cold",
+   "from": 36,
+   "frames": 97,
+   "caption": "Power utilities plan their construction years in advance."
+  },
+  {
+   "id": "s02",
+   "scene": "cold",
+   "from": 147,
+   "frames": 118,
+   "caption": "But neighbors plan alone. Each in its own document. On its own map."
+  },
+  {
+   "id": "s03",
+   "scene": "problem",
+   "from": 309,
+   "frames": 264,
+   "caption": "Along the Savannah River, Dominion Energy South Carolina and Georgia Power plan nearly 200 projects. Some, just miles apart."
+  },
+  {
+   "id": "s04",
+   "scene": "problem",
+   "from": 594,
+   "frames": 210,
+   "caption": "In 2024, federal regulators issued a rule, because planning in isolation leads to waste and delays."
+  },
+  {
+   "id": "s05",
+   "scene": "title",
+   "from": 867,
+   "frames": 52,
+   "caption": "So we built GridLock Atlas."
+  },
+  {
+   "id": "s06",
+   "scene": "pipeline",
+   "from": 1020,
+   "frames": 244,
+   "caption": "It reads 103 public documents and puts both plans on one map, with every fact tied to a verbatim quote and its page."
+  },
+  {
+   "id": "s07",
+   "scene": "grid",
+   "from": 1308,
+   "frames": 243,
+   "caption": "Then it measures the closest points between every cross-utility pair of projects. 7,929 pairs."
+  },
+  {
+   "id": "s08",
+   "scene": "grid",
+   "from": 1571,
+   "frames": 274,
+   "caption": "A naive rule, \u201cclose or same time\u201d, flags more than half of them. GridLock flags 149. Just 1.9%."
+  },
+  {
+   "id": "s09",
+   "scene": "compare",
+   "from": 1902,
+   "frames": 193,
+   "caption": "One click compares the plans, and ranks every lead. Place first, then timing, then the strength of the evidence."
+  },
+  {
+   "id": "s10",
+   "scene": "toplead",
+   "from": 2133,
+   "frames": 312,
+   "caption": "Number one: Dominion\u2019s Jasper\u2013Okatie line and Georgia Power\u2019s Goshen\u2013McIntosh rebuild. Their closest points are 4.25 miles apart."
+  },
+  {
+   "id": "s11",
+   "scene": "toplead",
+   "from": 2460,
+   "frames": 88,
+   "caption": "And their published schedules overlap for 18 months."
+  },
+  {
+   "id": "s12",
+   "scene": "ovl3",
+   "from": 2583,
+   "frames": 138,
+   "caption": "It's the pair from Sperry's own worked example. On today's plans, it ranks first."
+  },
+  {
+   "id": "s13",
+   "scene": "closeup",
+   "from": 2766,
+   "frames": 130,
+   "caption": "In 3D, you can watch the two projects meet. On the ground, and in time."
+  },
+  {
+   "id": "s14",
+   "scene": "honest",
+   "from": 3018,
+   "frames": 268,
+   "caption": "And it never overstates. Field-work dates aren\u2019t published, so it says so. No coordination on record means \u201cunknown\u201d. Never \u201cuncoordinated\u201d."
+  },
+  {
+   "id": "s15",
+   "scene": "brief",
+   "from": 3321,
+   "frames": 178,
+   "caption": "For any pair, one click writes a review brief. The question to ask, with every fact numbered to its source."
+  },
+  {
+   "id": "s16",
+   "scene": "impact",
+   "from": 3558,
+   "frames": 269,
+   "caption": "It estimates impact too, and cites every number. In Wisconsin, the state commission says two utilities\u2019 lines meet at one new substation."
+  },
+  {
+   "id": "s17",
+   "scene": "impact",
+   "from": 3841,
+   "frames": 136,
+   "caption": "One terminal instead of two: an estimated $9\u201312 million."
+  },
+  {
+   "id": "s18",
+   "scene": "proof",
+   "from": 4026,
+   "frames": 164,
+   "caption": "And it\u2019s auditable. Sperry\u2019s worked example is reproduced exactly: 6 of 6 rows."
+  },
+  {
+   "id": "s19",
+   "scene": "proof",
+   "from": 4207,
+   "frames": 338,
+   "caption": "As a cross-check, GPT-5.5 went through all 283 plan pages. All but one of its 2,579 quotes were verbatim."
+  },
+  {
+   "id": "s20",
+   "scene": "outro",
+   "from": 4602,
+   "frames": 127,
+   "caption": "GridLock Atlas. Public plans. One map. Every claim cited."
+  },
+  {
+   "id": "s21",
+   "scene": "outro",
+   "from": 4750,
+   "frames": 100,
+   "caption": "So neighboring utilities can plan together, and build together."
+  }
+ ]
+}

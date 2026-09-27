@@ -13,6 +13,8 @@ GridLock Atlas is our ShellHacks 2026 entry for the **Sperry Tech GridLock Chall
 - **Sperry's worked example reproduced exactly** (6/6 overlap rows, 10/10 project rows, no extra pairs), then replayed on today's plans.
 - **Every fact cited:** 1,786 verbatim excerpts from 103 public sources, each re-found in its cached source by script. GPT-5.5 re-read all 283 plan pages as a cross-check: 2,578 of 2,579 of its quotes are verbatim.
 
+**Demo video (2:46):** [`video/out/gridlock-atlas-demo.mp4`](video/out/gridlock-atlas-demo.mp4), narrated, with real app footage; its Remotion source and rebuild steps are in [`video/`](video/README.md).
+
 ![A selected Savannah River lead with its mapped projects, closest approach, evidence, and timeline](docs/screenshots/top-lead.jpg)
 
 | Where plans meet (Savannah River) | Known coordination (Wisconsin) |

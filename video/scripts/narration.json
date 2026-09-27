@@ -1,0 +1,100 @@
+[
+  {
+    "id": "s01",
+    "text": "Power utilities plan their construction years in advance."
+  },
+  {
+    "id": "s02",
+    "text": "But neighbors plan alone. Each in its own document. On its own map."
+  },
+  {
+    "id": "s03",
+    "text": "Along the Savannah River, Dominion Energy South Carolina and Georgia Power plan nearly two hundred projects. Some, just miles apart.",
+    "caption": "Along the Savannah River, Dominion Energy South Carolina and Georgia Power plan nearly 200 projects. Some, just miles apart."
+  },
+  {
+    "id": "s04",
+    "text": "In twenty twenty-four, federal regulators issued a rule, because planning in isolation leads to waste, and delays.",
+    "caption": "In 2024, federal regulators issued a rule, because planning in isolation leads to waste and delays."
+  },
+  {
+    "id": "s05",
+    "text": "So we built GridLock Atlas."
+  },
+  {
+    "id": "s06",
+    "text": "It reads a hundred and three public documents, and puts both plans on one map, with every fact tied to a verbatim quote, and its page.",
+    "caption": "It reads 103 public documents and puts both plans on one map, with every fact tied to a verbatim quote and its page."
+  },
+  {
+    "id": "s07",
+    "text": "Then it measures the closest points between every cross-utility pair of projects. Seven thousand, nine hundred and twenty-nine pairs.",
+    "caption": "Then it measures the closest points between every cross-utility pair of projects. 7,929 pairs."
+  },
+  {
+    "id": "s08",
+    "text": "A naive rule, close, or same time, flags more than half of them. GridLock flags one hundred and forty-nine. Just one point nine percent.",
+    "caption": "A naive rule, “close or same time”, flags more than half of them. GridLock flags 149. Just 1.9%."
+  },
+  {
+    "id": "s09",
+    "text": "One click compares the plans, and ranks every lead. Place first, then timing, then the strength of the evidence."
+  },
+  {
+    "id": "s10",
+    "text": "Number one: Dominion's Jasper to Oh-Katie line, and Georgia Power's Goshen to Mackintosh rebuild. Their closest points are four point two five miles apart.",
+    "caption": "Number one: Dominion’s Jasper–Okatie line and Georgia Power’s Goshen–McIntosh rebuild. Their closest points are 4.25 miles apart."
+  },
+  {
+    "id": "s11",
+    "text": "And their published schedules overlap, for eighteen months.",
+    "caption": "And their published schedules overlap for 18 months."
+  },
+  {
+    "id": "s12",
+    "text": "It's the pair from Sperry's own worked example. On today's plans, it ranks first."
+  },
+  {
+    "id": "s13",
+    "text": "In 3D, you can watch the two projects meet. On the ground, and in time.",
+    "caption": "In 3D, you can watch the two projects meet. On the ground, and in time."
+  },
+  {
+    "id": "s14",
+    "text": "And it never overstates. Field work dates aren't published, so it says so. No coordination on record means unknown. Never, uncoordinated.",
+    "caption": "And it never overstates. Field-work dates aren’t published, so it says so. No coordination on record means “unknown”. Never “uncoordinated”."
+  },
+  {
+    "id": "s15",
+    "text": "For any pair, one click writes a review brief. The question to ask, with every fact numbered to its source."
+  },
+  {
+    "id": "s16",
+    "text": "It estimates impact too, and cites every number. In Wisconsin, the state commission says two utilities' lines meet at one new substation.",
+    "caption": "It estimates impact too, and cites every number. In Wisconsin, the state commission says two utilities’ lines meet at one new substation."
+  },
+  {
+    "id": "s17",
+    "text": "One terminal instead of two: an estimated nine to twelve million dollars.",
+    "caption": "One terminal instead of two: an estimated $9–12 million."
+  },
+  {
+    "id": "s18",
+    "text": "And it's auditable. Sperry's worked example is reproduced exactly. Six of six rows.",
+    "caption": "And it’s auditable. Sperry’s worked example is reproduced exactly: 6 of 6 rows."
+  },
+  {
+    "id": "s19",
+    "text": "As a cross-check, GPT five point five went through all two hundred and eighty-three plan pages. All but one of its two thousand, five hundred and seventy-nine quotes were verbatim.",
+    "caption": "As a cross-check, GPT-5.5 went through all 283 plan pages. All but one of its 2,579 quotes were verbatim."
+  },
+  {
+    "id": "s20",
+    "text": "GridLock Atlas. Public plans. One map. Every claim cited.",
+    "caption": "GridLock Atlas. Public plans. One map. Every claim cited."
+  },
+  {
+    "id": "s21",
+    "text": "So neighboring utilities can plan together, and build together."
+  }
+]
