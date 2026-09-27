@@ -14,7 +14,7 @@ import { TOKEN } from "./style";
  *   [3D close-up]                        with a pair selected (desktop)
  *   [3D · symbolic structures ⓘ]         while 3D is on (opens the Map key)
  *   [◭ 3D | ▢ Flat map]                  group "Map perspective"
- *   [Night | Satellite | Offline]        group "Basemap"
+ *   [Dusk | Satellite | Offline]         group "Basemap"
  * Phones: one 44px "Map options" button opening the same groups (hidden while the inspector sheet or the demo owns
  * the screen).
  */
@@ -53,7 +53,7 @@ function useBasemap() {
   const set = useAtlas((s) => s.set);
   const noToken = !TOKEN;
   const items: SegmentedItem<Basemap>[] = [
-    { value: "night", label: "Night", disabled: noToken },
+    { value: "night", label: "Dusk", disabled: noToken },
     { value: "satellite", label: "Satellite", disabled: noToken },
     {
       value: "offline",
@@ -67,19 +67,6 @@ function useBasemap() {
     noToken,
     onChange: (v: Basemap) => set({ basemap: v, basemapFailed: false }),
   };
-}
-
-function ThreeDCaption({ onOpenKey }: { onOpenKey: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpenKey}
-      className="chrome inline-flex h-7 items-center gap-1.5 rounded-full pr-2 pl-2.5 text-caption text-fg-2 transition-colors duration-(--dur-1) hover:text-fg-1"
-    >
-      3D · symbolic structures
-      <Info aria-hidden className="size-3.5 text-fg-3" strokeWidth={1.75} />
-    </button>
-  );
 }
 
 function BasemapNotice({ className }: { className?: string }) {
@@ -114,9 +101,7 @@ function DesktopMapControls() {
           3D close-up
         </Button>
       )}
-      {/* the caption sits outside the group: the group's buttons stay exactly "3D" and "Flat map" */}
       <div className="flex items-center gap-2">
-        {persp.mapMode === "3d" && <ThreeDCaption onOpenKey={() => set({ mapKeyOpen: true })} />}
         <Segmented
           variant="pressed"
           label="Map perspective"
@@ -127,6 +112,11 @@ function DesktopMapControls() {
           value={persp.mapMode}
           onChange={persp.onChange}
         />
+        {persp.mapMode === "3d" && (
+          <IconButton label="About symbolic 3D structures" variant="chrome" size="sm" onClick={() => set({ mapKeyOpen: true })}>
+            <Info className="size-3.5" strokeWidth={1.75} />
+          </IconButton>
+        )}
       </div>
       <div className="flex flex-col items-end gap-1">
         <Segmented

@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Review brief: a light paper document over a dark blurred scrim. The role=dialog element is the full-screen scroll
- * wrapper, so the dark toolbar (Copy Markdown FIRST, Download .md, Print / PDF, Close brief) lives inside the dialog and
+ * Review brief: a light paper document over a soft blurred scrim. The role=dialog element is the full-screen scroll
+ * wrapper, so the toolbar (Copy Markdown FIRST, Download .md, Print / PDF, Close brief) lives inside the dialog and
  * its focus trap. It stays a DIRECT child of .atlas-shell: the print CSS prints `.atlas-shell > [aria-label="Review brief"]`
  * alone, on as many pages as it needs, with every source a clickable <a href> inside `ol > li`.
  * During the guided demo (step 8) its card pins bottom-left above this dialog: the document shifts right by the card's
@@ -125,8 +125,8 @@ function Toolbar({ md, matchId, onClose }: { md: string; matchId: string; onClos
 
   return (
     <div data-scrim="" className="no-print sticky top-0 z-10 pt-[max(12px,var(--safe-t))] pb-3 sm:pt-6">
-      {/* solid enough to stay dark over the paper as it scrolls beneath */}
-      <div className="flex items-center gap-1 rounded-full border border-edge bg-surface-solid/90 p-1.5 shadow-[0_10px_28px_-14px_rgb(0_0_0/0.7)] backdrop-blur-chrome">
+      {/* solid enough to stay distinct over the paper as it scrolls beneath */}
+      <div className="flex items-center gap-1 rounded-full border border-edge bg-surface-solid/90 p-1.5 shadow-[0_10px_28px_-14px_rgb(34_61_67/0.28)] backdrop-blur-chrome">
 
         <Button
           variant="primary"
@@ -211,7 +211,7 @@ function BriefDocument({ pair, brief }: { pair: SelectedPair; brief: Brief }) {
   const other = brief.rows.filter((r) => !["Pair", "Why flagged", "Coordination status"].includes(r.label));
 
   return (
-    <article className="theme-paper relative rounded-dialog bg-surface-solid px-5 pt-7 pb-8 shadow-[0_2px_0_rgb(255_255_255/0.5)_inset,0_40px_120px_-30px_rgb(0_0_0/0.85),0_12px_32px_-12px_rgb(0_0_0/0.5)] sm:px-10 sm:pt-10 sm:pb-10 print:rounded-none print:bg-white print:p-0 print:shadow-none">
+    <article className="theme-paper relative rounded-dialog bg-surface-solid px-5 pt-7 pb-8 shadow-[0_2px_0_rgb(255_255_255/0.8)_inset,0_40px_120px_-34px_rgb(34_61_67/0.38),0_12px_32px_-14px_rgb(34_61_67/0.22)] sm:px-10 sm:pt-10 sm:pb-10 print:rounded-none print:bg-white print:p-0 print:shadow-none">
       {/* masthead */}
       <header>
         <div className="flex items-center justify-between gap-4">

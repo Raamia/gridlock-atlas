@@ -200,7 +200,7 @@ export default function MapStage() {
     const set = useAtlas.getState().set;
     mapboxgl.accessToken = TOKEN;
     const startOffline = typeof navigator !== "undefined" && !navigator.onLine;
-    // no token: say so on the switcher (Offline pressed) instead of showing Night over the bundled style
+    // no token: say so on the switcher (Offline pressed) instead of showing Dusk over the bundled style
     if (!TOKEN && useAtlas.getState().basemap !== "offline") set({ basemap: "offline", basemapFailed: false });
     if (startOffline) set({ basemap: "offline", basemapFailed: true });
     const initialBasemap: Basemap = useAtlas.getState().basemap;
@@ -361,9 +361,11 @@ export default function MapStage() {
         if (st.hoveredMatchId !== pairId) st.set({ hoveredMatchId: pairId });
         mapHoverPair = true;
         const m = st.run?.matches.find((x) => x.id === pairId);
-        if (m) {
+        if (m && !st.selectedMatchId) {
           const rank = st.run ? queueRank(st.run, st.region).get(m.id) : undefined;
           showCard(pairCardHtml(m, rank ? rankLabel(rank) : null), ev.lngLat);
+        } else {
+          closeCard();
         }
         return;
       }
@@ -380,10 +382,12 @@ export default function MapStage() {
         return;
       }
       if (st.hoveredProjectId !== p.id && !st.selectedMatchId) st.set({ hoveredProjectId: p.id });
-      showCard(
-        projectCardHtml(p, (f.properties?.label as string | undefined) ?? p.shortTitle, (f.properties?.precision as string | undefined) ?? ""),
-        ev.lngLat,
-      );
+      if (!st.selectedMatchId)
+        showCard(
+          projectCardHtml(p, (f.properties?.label as string | undefined) ?? p.shortTitle, (f.properties?.precision as string | undefined) ?? ""),
+          ev.lngLat,
+        );
+      else closeCard();
     });
     map.on("mouseout", (ev) => {
       // a tap's emulated mouse events leave the canvas for the card itself: keep the card (its button is next)

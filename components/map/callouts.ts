@@ -65,7 +65,7 @@ export function siteDot() {
   const el = root();
   el.innerHTML = `
     <span class="site-pulse absolute left-1/2 top-1/2 block size-9 rounded-full" style="border:1.5px solid var(--overlap)"></span>
-    <span class="absolute left-1/2 top-1/2 block size-3 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:var(--overlap);box-shadow:0 0 0 3px rgb(245 184 61 / .22),0 0 14px rgb(245 184 61 / .55)"></span>`;
+    <span class="absolute left-1/2 top-1/2 block size-3 -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:var(--overlap);box-shadow:0 0 0 3px rgb(212 184 117 / .18),0 0 14px rgb(212 184 117 / .32)"></span>`;
   return el;
 }
 

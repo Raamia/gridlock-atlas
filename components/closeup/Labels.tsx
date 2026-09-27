@@ -88,7 +88,7 @@ export const BEACON_H = 1.7;
 export const arcHeight = (a: V2, b: V2, k = 0.28) => Math.min(2.6, Math.max(0.7, Math.hypot(b.x - a.x, b.z - a.z) * k));
 
 const UTIL = { a: "var(--util-a)", b: "var(--util-b)" } as const;
-const SHADOW: CSSProperties = { textShadow: "0 1px 2px rgb(0 0 0 / 0.9), 0 0 12px rgb(5 8 14 / 0.95)" };
+const SHADOW: CSSProperties = { textShadow: "0 1px 2px rgb(0 0 0 / 0.9), 0 0 12px rgb(34 40 49 / 0.95)" };
 
 export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}): LabelSpec[] {
   const { a, b, site, ring } = model;

@@ -8,23 +8,23 @@ export const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
 /** Terrain relief in 3D: modest, so the tilted overview still reads as a map (presentation only). */
 export const TERRAIN_EXAGGERATION = 1.35;
 
-/** Standard night look (SPEC §5.8). Kept in one place so the screenshot comparisons change one value. */
+/** Standard dusk look: dark enough for the shell, lifted enough to keep roads and terrain readable. */
 export const LOOK = {
-  lightPreset: "night" as "night" | "dusk",
+  lightPreset: "dusk" as "day" | "dusk",
   theme: "faded" as "default" | "faded" | "monochrome",
   satellitePreset: "dusk" as "night" | "dusk" | "day",
 };
 
 const FOG = {
   range: [1.5, 12] as [number, number],
-  color: "rgb(9, 13, 22)",
-  "high-color": "rgb(19, 27, 50)",
+  color: "rgb(31, 37, 45)",
+  "high-color": "rgb(43, 48, 56)",
   "horizon-blend": 0.14,
-  "space-color": "rgb(5, 8, 14)",
-  "star-intensity": 0.1,
+  "space-color": "rgb(24, 29, 36)",
+  "star-intensity": 0.04,
 };
 
-/** Bundled fallback: Census states (+ counties added by the data layers), lit so the 3D models stay readable. */
+/** Bundled fallback: Census states (+ counties added by the data layers), softly lit for the charcoal palette. */
 export function offlineStyle(): StyleSpecification {
   return {
     version: 8,
@@ -37,14 +37,14 @@ export function offlineStyle(): StyleSpecification {
       {
         id: "ambient",
         type: "ambient",
-        properties: { color: "#aab6cc", intensity: 0.55 },
+        properties: { color: "#c7d7d8", intensity: 0.62 },
       },
       {
         id: "key",
         type: "directional",
         properties: {
-          color: "#ffffff",
-          intensity: 0.6,
+          color: "#eeeeee",
+          intensity: 0.68,
           direction: [210, 40],
           "cast-shadows": false,
         },
@@ -54,7 +54,7 @@ export function offlineStyle(): StyleSpecification {
       {
         id: "bg",
         type: "background",
-        paint: { "background-color": "#04070c" },
+        paint: { "background-color": "#1f252d" },
       },
       {
         id: "ctx-states-fill",
@@ -62,7 +62,7 @@ export function offlineStyle(): StyleSpecification {
         source: "ctx-states",
         paint: {
           "fill-emissive-strength": 1,
-          "fill-color": "#0a111c",
+          "fill-color": "#272d35",
           "fill-opacity": 1,
         },
       },
@@ -72,7 +72,7 @@ export function offlineStyle(): StyleSpecification {
         source: "ctx-states",
         paint: {
           "line-emissive-strength": 1,
-          "line-color": "#223047",
+          "line-color": "#596770",
           "line-width": 0.9,
         },
       },
@@ -89,7 +89,7 @@ export function styleFor(basemap: Basemap): string | StyleSpecification {
   return basemap === "satellite" ? "mapbox://styles/mapbox/standard-satellite" : "mapbox://styles/mapbox/standard";
 }
 
-/** Mapbox Standard configuration: quiet, dark, only the labels a planner needs (unknown keys are ignored by 3.31). */
+/** Mapbox Standard configuration: quiet dusk, only the labels a planner needs (unknown keys are ignored by 3.31). */
 export function configureStandard(map: mapboxgl.Map, basemap: Basemap) {
   if (!isStandard(basemap)) return;
   const set = (k: string, v: unknown) => {
@@ -110,13 +110,13 @@ export function configureStandard(map: mapboxgl.Map, basemap: Basemap) {
   if (basemap === "night") {
     set("lightPreset", LOOK.lightPreset);
     set("theme", LOOK.theme);
-    set("colorPlaceLabels", "#838c9d");
-    set("colorAdminBoundaries", "#3a4560");
-    set("roadsBrightness", 0.35);
+    set("colorPlaceLabels", "#c7cccf");
+    set("colorAdminBoundaries", "#68777e");
+    set("roadsBrightness", 0.5);
   } else {
     set("lightPreset", LOOK.satellitePreset);
-    set("colorPlaceLabels", "#dfe3ea");
-    set("colorAdminBoundaries", "#8a93a4");
+    set("colorPlaceLabels", "#eeeeee");
+    set("colorAdminBoundaries", "#9ca6aa");
   }
   map.setFog(FOG);
 }

@@ -4,7 +4,7 @@
  * GridLock Atlas primitives (design system v2). The living reference is /dev/ui (app/dev/ui).
  *
  * Rules every consumer inherits:
- *  - One solid white control per view (Button variant="primary", Segmented look="inverse" active pill).
+ *  - One solid ink control per view (Button variant="primary", Segmented look="inverse" active pill).
  *  - Colour is always reinforced by text or shape; 6px dots only ever mean utilities (UtilityDot).
  *  - Tooltips live in a portal and only while hovered/focused — never inside a trigger's text, so accessible
  *    names and textContent (tab counts!) stay exactly what the markup says.
@@ -335,9 +335,9 @@ const BUTTON_SIZE: Record<ButtonSize, string> = {
   xl: "h-11 gap-2 px-5 text-body",
 };
 const BUTTON_VARIANT: Record<ButtonVariant, string> = {
-  // the one solid-white control per view
+  // the one solid-ink control per view
   primary:
-    "bg-inverse text-on-inverse shadow-[inset_0_1px_0_rgb(255_255_255/0.6),0_1px_2px_rgb(0_0_0/0.35)] hover:bg-white [&_kbd]:bg-on-inverse/[0.07] [&_kbd]:text-on-inverse/60 [&_kbd]:ring-on-inverse/10 [&_kbd]:shadow-none",
+    "bg-inverse text-on-inverse shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_1px_2px_rgb(23_49_55/0.22)] hover:bg-fg-1 [&_kbd]:bg-on-inverse/[0.07] [&_kbd]:text-on-inverse/60 [&_kbd]:ring-on-inverse/10 [&_kbd]:shadow-none",
   // glass pill: frosted on the map, a quiet raised pill inside panels
   secondary: "bg-fill-2 text-fg-1 ring-1 ring-edge ring-inset backdrop-blur-chrome hover:bg-fill-3 aria-pressed:bg-fill-3 aria-pressed:ring-edge-strong",
   ghost: "text-fg-2 hover:bg-fill-2 hover:text-fg-1 aria-pressed:bg-fill-3 aria-pressed:text-fg-1 aria-expanded:bg-fill-2 aria-expanded:text-fg-1",
@@ -609,7 +609,7 @@ export interface SegmentedProps<V extends string = string> {
    * radiogroup → role=radiogroup/radio + aria-checked, roving tabindex, arrow keys.
    */
   variant?: "tablist" | "pressed" | "radiogroup";
-  /** inverse = white active pill (the view's one white control) · subtle = fill-3 pill. */
+  /** inverse = dark active pill (the view's one solid control) · subtle = fill-3 pill. */
   look?: "inverse" | "subtle";
   /** Accessible name of the group. */
   label: string;
@@ -1447,7 +1447,7 @@ export const Toast = Notice;
  * LogoMark
  * ════════════════════════════════════════════════════════════════════════════ */
 
-/** GridLock mark: two utility strokes converging on the amber overlap node, inside a dark tile. Crisp at 16–32px. */
+/** GridLock mark: two utility strokes converging on the saffron overlap node. Crisp at 16–32px. */
 export function LogoMark({ size = 28, className, title }: { size?: number; className?: string; title?: string }) {
   return (
     <svg
@@ -1459,11 +1459,11 @@ export function LogoMark({ size = 28, className, title }: { size?: number; class
       aria-hidden={title ? undefined : true}
       className={clsx("shrink-0", className)}
     >
-      <rect x="0.5" y="0.5" width="31" height="31" rx="8.5" fill="#0b1019" stroke="rgb(255 255 255 / 0.14)" />
-      <circle cx="20" cy="16" r="7.5" fill="none" stroke="#f5b83d" strokeOpacity="0.28" strokeWidth="1.25" />
-      <path d="M7 7.5C10 12.6 12.6 15.1 17 15.6" fill="none" stroke="#4cc9f0" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M7 24.5C10 19.4 12.6 16.9 17 16.4" fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
-      <circle cx="20" cy="16" r="3.5" fill="#f5b83d" />
+      <rect x="0.5" y="0.5" width="31" height="31" rx="8.5" fill="#31363f" stroke="rgb(238 238 238 / 0.18)" />
+      <circle cx="20" cy="16" r="7.5" fill="none" stroke="#d4b875" strokeOpacity="0.36" strokeWidth="1.25" />
+      <path d="M7 7.5C10 12.6 12.6 15.1 17 15.6" fill="none" stroke="#49a8ff" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M7 24.5C10 19.4 12.6 16.9 17 16.4" fill="none" stroke="#ff5263" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="20" cy="16" r="3.5" fill="#d4b875" />
     </svg>
   );
 }

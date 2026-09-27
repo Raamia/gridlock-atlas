@@ -123,15 +123,15 @@ export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, l
       <Rig frame={frame} homeRef={homeRef} focusRef={focusRef} />
       <FocusGlide focusRef={focusRef} instant={reducedMotion} />
       <Lights />
-      <Environment resolution={128} frames={1} environmentIntensity={0.65}>
-        <Lightformer form="rect" intensity={2.6} position={[0, 10, 0]} rotation-x={Math.PI / 2} scale={[16, 16, 1]} />
-        <Lightformer form="rect" intensity={1.7} color="#a9c8ff" position={[-14, 3, 3]} rotation-y={Math.PI / 2} scale={[12, 2.2, 1]} />
-        <Lightformer form="rect" intensity={1.3} color="#ffe0ba" position={[14, 2.5, -5]} rotation-y={-Math.PI / 2} scale={[10, 1.8, 1]} />
+      <Environment resolution={128} frames={1} environmentIntensity={0.55}>
+        <Lightformer form="rect" intensity={2.1} position={[0, 10, 0]} rotation-x={Math.PI / 2} scale={[16, 16, 1]} />
+        <Lightformer form="rect" intensity={1.35} color="#9fc7c9" position={[-14, 3, 3]} rotation-y={Math.PI / 2} scale={[12, 2.2, 1]} />
+        <Lightformer form="rect" intensity={1.05} color="#ff5263" position={[14, 2.5, -5]} rotation-y={-Math.PI / 2} scale={[10, 1.8, 1]} />
         <Lightformer form="ring" intensity={0.7} position={[0, 5, 14]} scale={7} />
       </Environment>
       <Floor />
       <Plinth model={model} onClick={() => focusOn(null)} />
-      <ContactShadows key={model.id} position={[0, Y.shadows, 0]} scale={PLINTH_R * 2} resolution={1024} blur={1.6} far={1.6} opacity={0.8} frames={1} color="#000000" />
+      <ContactShadows key={model.id} position={[0, Y.shadows, 0]} scale={PLINTH_R * 2} resolution={1024} blur={1.7} far={1.6} opacity={0.72} frames={1} color="#000000" />
       <Structures model={model} onHover={onHover} onPick={focusOn}>
         <Links model={model} boost={post ? 1.7 : 1} />
       </Structures>
@@ -177,7 +177,7 @@ function Effects() {
     <EffectComposer multisampling={0} enableNormalPass={false}>
       <Bloom mipmapBlur luminanceThreshold={0.85} luminanceSmoothing={0.18} intensity={0.55} radius={0.7} />
       <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-      <Vignette offset={0.28} darkness={0.55} />
+      <Vignette offset={0.3} darkness={0.42} />
       <SMAA />
     </EffectComposer>
   );
@@ -284,11 +284,11 @@ function Backdrop({ frame }: { frame: Frame }) {
 function Lights() {
   return (
     <>
-      <hemisphereLight args={["#dfe7f5", "#07090d", 0.6]} />
-      <directionalLight position={[8, 13, 7]} intensity={2.1} color="#fff1de" />
-      <directionalLight position={[-10, 6, -11]} intensity={1.5} color="#8fb6ff" />
+      <hemisphereLight args={["#d9e2e3", "#151a21", 0.62]} />
+      <directionalLight position={[8, 13, 7]} intensity={1.8} color="#eeeeee" />
+      <directionalLight position={[-10, 6, -11]} intensity={1.1} color="#8bb8ba" />
       {/* a soft pool of light on the plinth top: the product-shot key */}
-      <spotLight position={[2, 22, 8]} angle={0.4} penumbra={1} intensity={1.5} decay={0} distance={0} color="#dce6f7" />
+      <spotLight position={[2, 22, 8]} angle={0.4} penumbra={1} intensity={1.2} decay={0} distance={0} color="#eeeeee" />
     </>
   );
 }
@@ -558,9 +558,9 @@ function Plinth({ model, onClick }: { model: CloseupModel; onClick: () => void }
   const rings = useMemo(() => [0.25, 0.5, 0.75].map((k) => circlePoints(0, 0, PLINTH_R * k, Y.grid, 160)), []);
   const materials = useMemo(
     () => [
-      new THREE.MeshStandardMaterial({ color: "#0b111b", metalness: 0.7, roughness: 0.3, envMapIntensity: 1.2 }), // side
-      new THREE.MeshStandardMaterial({ color: "#0f1724", metalness: 0.22, roughness: 0.6, envMapIntensity: 0.55 }), // satin top
-      new THREE.MeshStandardMaterial({ color: "#05080e", roughness: 1 }), // bottom
+      new THREE.MeshStandardMaterial({ color: "#1b2028", metalness: 0.62, roughness: 0.34, envMapIntensity: 1 }), // side
+      new THREE.MeshStandardMaterial({ color: "#31363f", metalness: 0.18, roughness: 0.64, envMapIntensity: 0.5 }), // satin top
+      new THREE.MeshStandardMaterial({ color: "#171c23", roughness: 1 }), // bottom
     ],
     [],
   );
@@ -582,16 +582,16 @@ function Plinth({ model, onClick }: { model: CloseupModel; onClick: () => void }
       {/* the crisp top edge that catches the key light */}
       <mesh rotation-x={Math.PI / 2} position={[0, -0.004, 0]}>
         <torusGeometry args={[PLINTH_R, 0.02, 8, 320]} />
-        <meshStandardMaterial color="#c9d2df" metalness={0.9} roughness={0.22} emissive="#c9d2df" emissiveIntensity={0.14} />
+        <meshStandardMaterial color="#49a8ff" metalness={0.72} roughness={0.26} emissive="#49a8ff" emissiveIntensity={0.12} />
       </mesh>
       <lineSegments renderOrder={1}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[grid, 3]} />
         </bufferGeometry>
-        <lineBasicMaterial color="#ffffff" transparent opacity={0.04} depthWrite={false} />
+        <lineBasicMaterial color="#eeeeee" transparent opacity={0.05} depthWrite={false} />
       </lineSegments>
       {rings.map((pts, i) => (
-        <Line key={i} points={pts} color="#ffffff" lineWidth={1} transparent opacity={0.055} depthWrite={false} renderOrder={1} />
+        <Line key={i} points={pts} color="#eeeeee" lineWidth={1} transparent opacity={0.065} depthWrite={false} renderOrder={1} />
       ))}
     </group>
   );

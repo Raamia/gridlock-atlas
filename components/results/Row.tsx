@@ -84,7 +84,7 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
         className={clsx(
           // a separated card: rank gutter · two owner-labelled titles · a divider · the pair's facts in plain words.
           // --row-lh: one line box for the rank, dots and first title lines, so they share a first line
-          "group relative grid w-full scroll-mt-(--sticky-h,8px) scroll-mb-2 grid-cols-[22px_minmax(0,1fr)] gap-x-2 rounded-card border px-3 py-3 text-left transition-[background-color,border-color] duration-150 ease-enter [--row-lh:calc(var(--text-ui)*1.3)]",
+          "group relative grid w-full scroll-mt-(--sticky-h,8px) scroll-mb-2 grid-cols-[22px_minmax(0,1fr)] gap-x-2 rounded-card border px-3 py-2.5 text-left transition-[background-color,border-color] duration-150 ease-enter [--row-lh:calc(var(--text-ui)*1.3)]",
           selected
             ? "border-edge-strong bg-fill-3"
             : "border-edge bg-fill-1 hover:border-edge-strong hover:bg-fill-2 data-hovered:border-edge-strong data-hovered:bg-fill-2",
@@ -96,9 +96,9 @@ export const Row = memo(function Row({ m, rank, index, stagger, repeats, focusId
         </span>
         <span className="min-w-0">
           <TitleLine p={a} role={selected ? "a" : undefined} times={a.id === focusId ? 0 : (repeats.get(a.id) ?? 0)} />
-          <TitleLine p={b} role={selected ? "b" : undefined} times={b.id === focusId ? 0 : (repeats.get(b.id) ?? 0)} className="mt-2.5" />
+          <TitleLine p={b} role={selected ? "b" : undefined} times={b.id === focusId ? 0 : (repeats.get(b.id) ?? 0)} className="mt-2" />
           {/* pair-level facts in plain words: the distance between the closest points, then the timing (never per project) */}
-          <span className="mt-3 flex flex-wrap items-start gap-x-3 gap-y-1 border-t border-divider pt-2.5 text-caption text-fg-2">
+          <span className="mt-2 flex flex-wrap items-start gap-x-3 gap-y-1 border-t border-divider pt-2 text-caption text-fg-2">
             <SignalFact kind="place" state={place.state} mono={false} wrap alignIcon tooltip={place.tooltip} className="gap-1! leading-[1.3]">
               <FactText f={place} />
             </SignalFact>

@@ -159,7 +159,7 @@ export default function PairCloseup() {
       </Button>
     </Tooltip>
   );
-  const caption = <p className="text-caption text-balance text-fg-2 [text-shadow:0_1px_2px_rgb(0_0_0/0.85)]">{CAPTION}</p>;
+  const caption = <p className="text-caption text-balance text-fg-2 [text-shadow:0_1px_2px_rgb(0_0_0/0.9)]">{CAPTION}</p>;
 
   return (
     <div ref={rootRef} data-closeup role="region" aria-label="3D close-up" className={clsx("fixed inset-0 overflow-hidden bg-canvas", phone ? "z-(--z-scrim)" : "z-(--z-marker)")}>

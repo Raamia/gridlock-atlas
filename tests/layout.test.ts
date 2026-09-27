@@ -21,7 +21,7 @@ describe("computeLayout tiers", () => {
     expect(computeLayout(1535, 960, base).gutter).toBe(16);
   });
 
-  it("1440×900: rail and overview dock, then inspector + pair dock, then demo", () => {
+  it("1440×900: rail and overview dock, then queue pill + inspector + pair dock, then demo", () => {
     const pre = computeLayout(1440, 900, base);
     expect(pre).toMatchObject({ tier: "xl", railMode: "panel", railDocked: true, gutter: 16, panelTop: 76, railW: 360, inspectorW: 418, dockH: 96 });
     expect(pre.focal).toEqual({ l: 388, t: 76, r: 16, b: 124 });
@@ -31,14 +31,15 @@ describe("computeLayout tiers", () => {
 
     const sel = computeLayout(1440, 900, pair);
     expect(sel.dockH).toBe(196);
-    expect(sel.focal).toEqual({ l: 388, t: 76, r: 446, b: 224 });
-    expect([sel.focalW, sel.focalH]).toEqual([606, 600]);
-    expect(sel.keyCollapsed).toBe(true);
+    expect(sel).toMatchObject({ railMode: "pill", railDocked: false, pillVisible: true });
+    expect(sel.focal).toEqual({ l: 16, t: 120, r: 446, b: 224 });
+    expect([sel.focalW, sel.focalH]).toEqual([978, 556]);
+    expect(sel.keyCollapsed).toBe(false);
 
     const demo = computeLayout(1440, 900, demoPair);
     expect(demo).toMatchObject({ dockH: 44, dockCollapsed: true, dockForced: true, keyCollapsed: true });
     expect(demo.focal.b).toBe(72);
-    expect(demo.focalH).toBe(752);
+    expect(demo.focalH).toBe(708);
     // steps 1 and 4 keep the dock open
     expect(computeLayout(1440, 900, { ...demoPair, demoStep: 3 }).dockH).toBe(196);
     expect(computeLayout(1440, 900, { ...base, demoOn: true, demoStep: 0 }).dockH).toBe(96);
@@ -52,13 +53,13 @@ describe("computeLayout tiers", () => {
     expect(pre.keyCollapsed).toBe(false);
 
     const sel = computeLayout(1280, 800, pair);
-    expect(sel.focal).toEqual({ l: 364, t: 76, r: 412, b: 224 });
-    expect([sel.focalW, sel.focalH]).toEqual([504, 500]);
-    expect(sel.demoCardW).toBe(480);
+    expect(sel.focal).toEqual({ l: 16, t: 120, r: 412, b: 224 });
+    expect([sel.focalW, sel.focalH]).toEqual([852, 456]);
+    expect(sel.demoCardW).toBe(520);
 
     const demo = computeLayout(1280, 800, demoPair);
-    expect(demo.focalH).toBe(652);
-    expect(demo.demoCardW).toBe(480);
+    expect(demo.focalH).toBe(608);
+    expect(demo.demoCardW).toBe(520);
   });
 
   it("1024×768: the rail docks until the inspector opens, then becomes the pill", () => {
@@ -148,7 +149,7 @@ describe("computeLayout tiers", () => {
   it("applies dragged sizes on xl, clamped so the map keeps a usable focal hole", () => {
     const l = computeLayout(1440, 900, { ...pair, railWidth: 480, inspectorWidth: 520, dockHeight: 320 });
     expect(l).toMatchObject({ resizable: true, railW: 480, inspectorW: 520, dockH: 320, dockCollapsed: false });
-    expect(l.focal).toEqual({ l: 508, t: 76, r: 548, b: 348 });
+    expect(l.focal).toEqual({ l: 16, t: 120, r: 548, b: 348 });
     expect(l.focalW).toBeGreaterThanOrEqual(MIN_FOCAL_W);
     // each width stops at its drag limit (rail 540, inspector 620) and at its minimum
     const wide = computeLayout(2560, 1440, { ...pair, railWidth: 9999, inspectorWidth: 9999 });
@@ -158,16 +159,16 @@ describe("computeLayout tiers", () => {
 
   it("dragged widths yield until the focal hole is MIN_FOCAL_W wide (the rail first), never below their minimums", () => {
     const both = computeLayout(1280, 800, { ...pair, railWidth: 540, inspectorWidth: 620 });
-    expect(both).toMatchObject({ railW: 336, inspectorW: 528, focalW: MIN_FOCAL_W });
+    expect(both).toMatchObject({ railW: 336, inspectorW: 620, focalW: 616 });
     // the handles' range is what the clamps allow right now
-    expect(both).toMatchObject({ railMaxW: 336, inspectorMaxW: 528 });
+    expect(both).toMatchObject({ railMaxW: 336, inspectorMaxW: 620 });
     // rail alone (inspector closed): it may take everything but the 360px hole, up to its own limit
     const rail = computeLayout(1280, 800, { ...base, railWidth: 540 });
     expect(rail).toMatchObject({ railW: 540, focalW: 1280 - 16 - 540 - 12 - 16 });
     expect(rail.focalW).toBeGreaterThanOrEqual(MIN_FOCAL_W);
-    // a wide rail makes room for the inspector when a pair opens (the inspector keeps its automatic width)
+    // a wide queue overlay no longer takes map width when a pair opens
     const opened = computeLayout(1280, 800, { ...pair, railWidth: 540 });
-    expect(opened).toMatchObject({ inspectorW: 384, railW: 480, focalW: MIN_FOCAL_W });
+    expect(opened).toMatchObject({ inspectorW: 384, railW: 480, focalW: 852 });
     // lg: the dragged inspector width applies; the pill's overlay rail shrinks back beside it
     const lg = computeLayout(1024, 768, { ...pair, inspectorWidth: 620, railWidth: 540 });
     expect(lg).toMatchObject({ tier: "lg", railMode: "pill", inspectorW: 620, railW: 336, focalW: MIN_FOCAL_W });
@@ -176,17 +177,17 @@ describe("computeLayout tiers", () => {
   it("a dragged dock serves both faces and gives way before the map drops under MIN_FOCAL_H", () => {
     // too tall: stops where the focal hole is exactly 300px tall
     const tall = computeLayout(1440, 900, { ...pair, dockHeight: 900 });
-    expect(tall).toMatchObject({ dockH: 496, dockMaxH: 496, dockCollapsed: false });
+    expect(tall).toMatchObject({ dockH: 452, dockMaxH: 452, dockCollapsed: false });
     expect(tall.focalH).toBe(MIN_FOCAL_H);
     // too short: the pair face floors at DOCK.min; the 96px overview strip never drags below its default
     expect(computeLayout(1440, 900, { ...pair, dockHeight: 50 })).toMatchObject({ dockH: DOCK.min, dockMinH: DOCK.min });
     expect(computeLayout(1440, 900, { ...base, dockHeight: 50 })).toMatchObject({ dockH: DOCK.overview, dockMinH: DOCK.overview });
     expect(computeLayout(1440, 900, { ...base, dockHeight: 150 }).dockH).toBe(150);
-    // a short window: the dragged pair dock shrinks to keep 300px of map instead of collapsing (the default 196 would)
+    // a short window: the queue pill also needs vertical clearance, so the dock stays collapsed
     expect(computeLayout(1440, 560, pair)).toMatchObject({ dockForced: true, dockH: DOCK.collapsed });
     const short = computeLayout(1440, 560, { ...pair, dockHeight: 300 });
-    expect(short).toMatchObject({ dockH: 156, dockForced: false });
-    expect(short.focalH).toBe(MIN_FOCAL_H);
+    expect(short).toMatchObject({ dockH: DOCK.collapsed, dockForced: true });
+    expect(short.focalH).toBeGreaterThanOrEqual(MIN_FOCAL_H);
     // …until even DOCK.min would cost the map its 300px: then it collapses as before
     expect(computeLayout(1440, 520, { ...pair, dockHeight: 300 })).toMatchObject({ dockForced: true, dockH: DOCK.collapsed });
     // collapsed by the user or the demo: the dragged height waits
@@ -205,13 +206,13 @@ describe("computeLayout tiers", () => {
 
   it("writes px custom properties", () => {
     const vars = layoutCssVars(computeLayout(1440, 900, pair));
-    expect(vars).toMatchObject({ "--rail-w": "360px", "--inspector-w": "418px", "--dock-h": "196px", "--focal-l": "388px", "--focal-r": "446px", "--focal-b": "224px", "--panel-top": "76px", "--gutter": "16px" });
+    expect(vars).toMatchObject({ "--rail-w": "360px", "--inspector-w": "418px", "--dock-h": "196px", "--focal-l": "16px", "--focal-r": "446px", "--focal-b": "224px", "--panel-top": "76px", "--gutter": "16px" });
   });
 });
 
 describe("cameraPadding", () => {
   it("pads the focal hole plus breathing room (top clears the key chip)", () => {
-    expect(cameraPadding(computeLayout(1440, 900, pair))).toEqual({ top: 120, right: 470, bottom: 248, left: 412 });
+    expect(cameraPadding(computeLayout(1440, 900, pair))).toEqual({ top: 164, right: 470, bottom: 248, left: 40 });
     expect(cameraPadding(computeLayout(1440, 900, base))).toEqual({ top: 120, right: 40, bottom: 148, left: 412 });
   });
 
@@ -233,7 +234,7 @@ describe("cameraPadding", () => {
 describe("getLayout", () => {
   it("reads the store at call time (outside React; 1440×900 without a window)", () => {
     const initial = useAtlas.getState();
-    expect(getLayout()).toEqual(computeLayout(1440, 900, base));
+    expect(getLayout()).toEqual(computeLayout(1440, 900, { ...base, timelineCollapsed: true }));
     useAtlas.setState({ selectedMatchId: "desc-6888__gpc-20065", inspectorOpen: true, demoStep: 2 });
     expect(getLayout()).toEqual(computeLayout(1440, 900, demoPair));
     useAtlas.setState(initial, true);
@@ -241,10 +242,10 @@ describe("getLayout", () => {
 
   it("includes the dragged sizes, so camera padding follows a resized panel", () => {
     const initial = useAtlas.getState();
-    useAtlas.setState({ selectedMatchId: "desc-6888__gpc-20065", inspectorOpen: true, railWidth: 480, inspectorWidth: 520, dockHeight: 320 });
+    useAtlas.setState({ selectedMatchId: "desc-6888__gpc-20065", inspectorOpen: true, railWidth: 480, inspectorWidth: 520, dockHeight: 320, timelineCollapsed: false });
     const l = getLayout();
     expect(l).toMatchObject({ railW: 480, inspectorW: 520, dockH: 320 });
-    expect(cameraPadding(l)).toEqual({ top: 120, right: 572, bottom: 372, left: 532 });
+    expect(cameraPadding(l)).toEqual({ top: 164, right: 572, bottom: 372, left: 40 });
     useAtlas.setState(initial, true);
   });
 });

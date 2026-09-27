@@ -6,9 +6,9 @@ import * as THREE from "three";
  *
  * Units and frame: metres, Y-up, origin at the base centre (the model stands on y = 0, centred on x = z = 0).
  * Every model is at most three meshes, one per material part:
- *   - "structure": steel, MeshStandardMaterial #d9dde3, roughness 0.6 (the part a renderer tints per utility)
- *   - "accent":    insulators, transformer tanks, footings (a darker satin grey that keeps the silhouette legible)
- *   - "ground":    substation gravel pad / firewall (darkest, matte)
+ *   - "structure": steel, a pale satin grey (the part a renderer tints per utility)
+ *   - "accent":    insulators, transformer tanks, footings (a mid grey that keeps the silhouette legible)
+ *   - "ground":    substation gravel pad / firewall (muted, matte)
  * Geometry is flat-shaded (per-face normals), indexed, with no UVs and no textures.
  *
  * These are symbolic structures, not survey geometry: the map and the close-up say so.
@@ -33,9 +33,9 @@ export interface SubstationOptions {
 }
 
 /** Base colour of every structure's "structure" part (tinted per utility at render time). */
-export const STRUCTURE_COLOR = "#d9dde3";
-const ACCENT_COLOR = "#a3abb7";
-const GROUND_COLOR = "#4a515c";
+export const STRUCTURE_COLOR = "#c7cccf";
+const ACCENT_COLOR = "#8f999f";
+const GROUND_COLOR = "#4b555d";
 
 /** Heights in metres of the three conductor attachment points (bottom of each insulator string), low → high. */
 export function towerConductorHeights(height = 40): [number, number, number] {
@@ -655,10 +655,9 @@ export function buildMarkerPylon(): THREE.Group {
  */
 export function buildSpire(): THREE.Group {
   const steel = new Builder();
-  const accent = new Builder();
-  accent.prism([0, 0, 0], [0, 1.6, 0], 8, 7.2, 8, { end: true }, Math.PI / 8);
+  steel.prism([0, 0, 0], [0, 1.6, 0], 8, 7.2, 8, { end: true }, Math.PI / 8);
   steel.prism([0, 1.6, 0], [0, 31.5, 0], 5.6, 1.7, 8, { end: true }, Math.PI / 8);
-  accent.prism([0, 28.2, 0], [0, 29.6, 0], 3.6, 3.4, 8, { start: true, end: true }, Math.PI / 8);
+  steel.prism([0, 28.2, 0], [0, 29.6, 0], 3.6, 3.4, 8, { start: true, end: true }, Math.PI / 8);
   steel.diamond([0, 34.4, 0], 3.1, 2.9, 5.6, 4);
-  return assemble("spire", { structure: steel, accent });
+  return assemble("spire", { structure: steel });
 }
