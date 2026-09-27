@@ -1,29 +1,54 @@
-import { chromium } from "playwright-core";
-const out = process.argv[2];
-const browser = await chromium.launch({ executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", headless: true, args: ["--use-angle=metal", "--ignore-gpu-blocklist"] });
-const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1.5 });
-const errors = [];
-page.on("pageerror", (e) => errors.push(e.message));
-page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
-await page.goto("http://localhost:3217/?pair=dpc-alma-blair__xcel-wwtc", { waitUntil: "load" });
-await page.waitForTimeout(7000);
-for (const b of ["Satellite", "Offline", "Night"]) {
-  // a short or narrow focal hole folds the Basemap group into the "Basemap options" menu: open it first
-  const menu = page.getByRole("button", { name: "Basemap options" });
-  if (await menu.isVisible().catch(() => false)) await menu.click();
-  await page.getByRole("button", { name: b, exact: true }).click();
-  await page.waitForFunction(() => window.__map?.isStyleLoaded() && window.__map.getStyle()?.layers, null, { timeout: 30000 }).catch(() => {});
-  await page.waitForTimeout(2500);
-  const info = await page.evaluate(() => {
+// Switches the basemap (Satellite, Offline, Night) and the perspective (Flat map, 3D) on the Wisconsin pair, and reports
+// what the map drew after each switch: loaded style, GridLock layers, callouts and terrain.
+//   node scripts/visual/basemaps.mjs [outDir]      default outDir: /tmp/gridlock-shots
+//   BASE=http://localhost:3000 node scripts/visual/basemaps.mjs   or PORT=3000 … (default http://localhost:3218)
+import { baseUrl, collectErrors, launch, outDir, settle } from "./common.mjs";
+
+const base = baseUrl();
+const out = outDir(process.argv[2], "/tmp/gridlock-shots");
+const browser = await launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+const errors = collectErrors(page);
+
+await page.goto(`${base}/?pair=dpc-alma-blair__xcel-wwtc`, { waitUntil: "load" });
+await page.locator('aside[aria-label="Evidence inspector"]').waitFor({ state: "visible", timeout: 30000 });
+await settle(page, 1500);
+
+const report = () =>
+  page.evaluate(() => {
     const m = window.__map;
     const st = m.getStyle();
-    return { loaded: m.isStyleLoaded(), layers: st ? st.layers.filter((l) => l.id.startsWith("gl-")).length : -1, markers: document.querySelectorAll(".mapboxgl-marker").length, terrain: !!m.getTerrain() };
+    const ids = st ? st.layers.map((l) => l.id) : [];
+    return {
+      loaded: m.isStyleLoaded(),
+      layers2d: ids.filter((id) => id.startsWith("gl-")).length,
+      layers3d: ids.filter((id) => id.startsWith("gl3d-")).length,
+      callouts: document.querySelectorAll("[data-callout]").length,
+      terrain: !!m.getTerrain(),
+      pitch: Math.round(m.getPitch()),
+    };
   });
-  console.log(b, JSON.stringify(info));
+
+const basemap = page.getByRole("group", { name: "Basemap" });
+for (const b of ["Satellite", "Offline", "Night"]) {
+  // a short focal hole folds the Basemap group into the "Basemap options" menu: open it first
+  const menu = page.getByRole("button", { name: "Basemap options" });
+  if (await menu.isVisible().catch(() => false)) await menu.click();
+  await basemap.getByRole("button", { name: b, exact: true }).click();
+  await page.waitForFunction(() => window.__map?.isStyleLoaded() && window.__map.getStyle()?.layers, null, { timeout: 30000 }).catch(() => {});
+  await settle(page, 1500);
+  console.log(b, JSON.stringify(await report()));
   await page.screenshot({ path: `${out}/basemap-${b.toLowerCase()}.png` });
 }
-await page.getByRole("button", { name: "Flat map" }).click();
-await page.waitForTimeout(1500);
-console.log("flat pitch", await page.evaluate(() => window.__map.getPitch()));
-console.log(errors.length ? "ERRORS: " + errors.join(" | ") : "no errors");
+
+const perspective = page.getByRole("group", { name: "Map perspective" });
+await perspective.getByRole("button", { name: "Flat map", exact: true }).click();
+await settle(page, 800);
+console.log("Flat map", JSON.stringify(await report()));
+await page.screenshot({ path: `${out}/basemap-flat.png` });
+await perspective.getByRole("button", { name: "3D", exact: true }).click();
+await settle(page, 800);
+console.log("3D", JSON.stringify(await report()));
+
+console.log(errors.length ? `ERRORS: ${errors.join(" | ")}` : "no errors");
 await browser.close();
