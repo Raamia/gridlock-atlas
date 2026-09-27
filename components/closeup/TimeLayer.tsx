@@ -44,15 +44,18 @@ export class TimeDriver implements TimeAnimState {
   private goal: number;
   private sweepStart: number | null = null;
   private lastEvent = "";
-  private hideTimer = 0;
+  /** A sweep ran to its end: its final year stays on the counter while the axis stands. */
+  swept = false;
 
   constructor(on: boolean) {
     this.riseLin = this.rise = this.goal = on ? 1 : 0;
   }
 
-  setGoal(on: boolean, instant: boolean): void {
+  setGoal(on: boolean, instant: boolean, counter: HTMLElement | null): void {
     this.goal = on ? 1 : 0;
     if (instant) this.riseLin = this.rise = this.goal;
+    // the year counter belongs to the standing axis: the flat view hides it, raising the axis again brings it back
+    if (counter) counter.dataset.on = on && (this.sweeping || this.swept) ? "1" : "0";
   }
 
   startSweep(): void {
@@ -67,6 +70,7 @@ export class TimeDriver implements TimeAnimState {
     this.sweepStart = null;
     this.sweep = Infinity;
     this.sweeping = false;
+    this.swept = false;
     if (counter) counter.dataset.on = "0";
   }
 
@@ -85,13 +89,18 @@ export class TimeDriver implements TimeAnimState {
       this.sweepStart = null;
       this.sweep = Infinity;
       this.sweeping = false;
-      window.clearTimeout(this.hideTimer);
-      if (counter) this.hideTimer = window.setTimeout(() => (counter.dataset.on = this.sweeping ? "1" : "0"), 1400);
+      this.swept = true;
+      // the counter stays up on the sweep's last year (hidden only by the flat view or a stopped sweep)
+      if (counter) {
+        counter.dataset.on = this.rise > 0 && this.goal === 1 ? "1" : "0";
+        const y = counter.querySelector("[data-year]");
+        if (y) y.textContent = String(Math.min(tm.epoch + tm.years - 1, Math.floor(yearAt(tm, tm.height))));
+      }
       return true;
     }
     this.sweep = Math.max(0, t) * (tm.height + tm.unitsPerYear * 0.15);
     if (counter) {
-      counter.dataset.on = "1";
+      counter.dataset.on = this.goal === 1 ? "1" : "0";
       const year = String(Math.min(tm.epoch + tm.years - 1, Math.floor(yearAt(tm, Math.min(this.sweep, tm.height)))));
       const y = counter.querySelector("[data-year]");
       if (y && y.textContent !== year) y.textContent = year;
@@ -131,9 +140,9 @@ export function TimeAnim({
 }) {
   const get = useThree((s) => s.get);
   useEffect(() => {
-    anim.setGoal(timeOn, instant);
+    anim.setGoal(timeOn, instant, counter.current);
     get().invalidate();
-  }, [timeOn, instant, anim, get]);
+  }, [timeOn, instant, anim, counter, get]);
   useEffect(() => {
     if (!sweepKey || instant) anim.stopSweep(counter.current);
     else anim.startSweep();
