@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import type { CSSProperties, ReactNode } from "react";
 import { alongPolyline, PLINTH_R, polyLength, type CloseupModel, type CuPlace, type CuProject, type V2 } from "./model";
+import { GAP_OFFSET, type TimeModel, type TimePillar } from "./time";
 
 /*
  * Close-up labels: plain DOM in ONE overlay layer (rendered by PairCloseup in the app's React root), each tracking a
@@ -43,6 +44,15 @@ export interface LabelSpec {
    * unused for placement.
    */
   ring?: { center: V2; r: number; y: number; prefer: number; avoid: [number, number, number][] };
+  /**
+   * The anchor's height once the time axis is fully raised: the label rides from `at[1]` up to it as the axis rises
+   * (a project card follows its pillar's top).
+   */
+  lift?: number;
+  /** "only": shown only while the time axis stands (years, snapshot, gap); "ground": only while it is flat. */
+  time?: "only" | "ground";
+  /** Hidden until the time sweep has reached this axis height (the label appears with the thing it names). */
+  reveal?: number;
   content: ReactNode;
 }
 
@@ -90,9 +100,11 @@ export const arcHeight = (a: V2, b: V2, k = 0.28) => Math.min(2.6, Math.max(0.7,
 const UTIL = { a: "var(--util-a)", b: "var(--util-b)" } as const;
 const SHADOW: CSSProperties = { textShadow: "0 1px 2px rgb(0 0 0 / 0.9), 0 0 12px rgb(34 40 49 / 0.95)" };
 
-export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}): LabelSpec[] {
+export function labelSpecs(model: CloseupModel, opts: { compact?: boolean; time?: TimeModel | null } = {}): LabelSpec[] {
   const { a, b, site, ring } = model;
   const out: LabelSpec[] = [];
+  const tm = opts.time ?? null;
+  if (tm) out.push(...timeLabels(tm, opts.compact));
 
   // facility names (structures and approximate places), then unpublished-route notes
   for (const p of [a, b]) {
@@ -178,16 +190,104 @@ export function labelSpecs(model: CloseupModel, opts: { compact?: boolean } = {}
   const both = !!(a.center && b.center);
   for (const p of [a, b]) {
     if (!p.center) continue;
+    const pillar = tm?.pillars.find((x) => x.side === p.side);
     out.push({
       id: `p-${p.side}`,
       at: [p.center.x, PIN_H, p.center.z],
+      // with the time axis: the card's leader runs to the top of the project's pillar
+      lift: pillar ? pillar.top + 0.08 : undefined,
       anchor: "callout",
       alts: both ? ["outward", "left", "right", "above"] : ["above", "left", "right"],
       priority: 100,
       always: true,
       side: p.side,
       leader: UTIL[p.side],
-      content: <ProjectCard p={p} compact={opts.compact} />,
+      content: <ProjectCard p={p} compact={opts.compact} pillar={pillar} />,
+    });
+  }
+  return out;
+}
+
+const MONO_SHADOW: CSSProperties = { textShadow: "0 1px 2px rgb(0 0 0 / 0.95), 0 0 10px rgb(20 24 30 / 0.95)" };
+
+/** The time axis's labels: the year ruler, the snapshot sheet, the overlap span and the in-service gap. */
+function timeLabels(tm: TimeModel, compact?: boolean): LabelSpec[] {
+  const out: LabelSpec[] = [];
+  const { x, z } = tm.axis.at;
+  for (const tk of tm.axis.ticks) {
+    if (!tk.label) continue;
+    out.push({
+      id: `yr-${tk.year}`,
+      at: [x, 0, z],
+      lift: tk.y,
+      // one side only: a year that cannot sit right of the ruler is skipped, never flipped to the other side
+      anchor: "right",
+      priority: 22,
+      time: "only",
+      content: (
+        <span className="num block whitespace-nowrap text-label text-fg-3" style={MONO_SHADOW}>
+          {tk.year}
+        </span>
+      ),
+    });
+  }
+  out.push({
+    id: "snapshot",
+    at: [x, 0, z],
+    lift: tm.snapshot.y,
+    anchor: "left",
+    alts: ["above", "below"],
+    priority: 58,
+    time: "only",
+    reveal: tm.snapshot.y,
+    content: (
+      <span className="block whitespace-nowrap rounded-pill border border-white/15 bg-black/35 px-2 py-0.5 text-label text-fg-1" style={MONO_SHADOW}>
+        {compact ? "Snapshot" : tm.snapshot.text}
+      </span>
+    ),
+  });
+  if (tm.overlap) {
+    const o = tm.overlap;
+    out.push({
+      id: "t-overlap",
+      at: [tm.mid.x, 0, tm.mid.z],
+      lift: (o.from + o.to) / 2,
+      anchor: "center",
+      alts: ["above", "below", "right", "left"],
+      priority: 82,
+      time: "only",
+      reveal: o.to,
+      content: (
+        <span
+          className="block whitespace-nowrap rounded-pill border px-2 py-0.5 text-caption text-overlap"
+          style={{ ...MONO_SHADOW, borderColor: "rgb(212 184 117 / 0.45)", background: "rgb(20 22 26 / 0.72)", borderStyle: o.confirmed ? "solid" : "dashed" }}
+        >
+          {o.text}
+        </span>
+      ),
+    });
+  }
+  if (tm.gap) {
+    const g = tm.gap;
+    const [pA, pB] = [tm.pillars.find((p) => p.side === "a"), tm.pillars.find((p) => p.side === "b")];
+    const dx = pA && pB ? pB.at.x - pA.at.x : 1;
+    const dz = pA && pB ? pB.at.z - pA.at.z : 0;
+    const len = Math.hypot(dx, dz) || 1;
+    const [ux, uz] = len > 0.3 ? [dx / len, dz / len] : [1, 0];
+    out.push({
+      id: "t-gap",
+      at: [tm.mid.x - uz * GAP_OFFSET, 0, tm.mid.z + ux * GAP_OFFSET],
+      lift: (g.from + g.to) / 2,
+      anchor: "right",
+      alts: ["left", "above", "below"],
+      priority: 80,
+      time: "only",
+      reveal: g.to,
+      content: (
+        <span className="num block whitespace-nowrap rounded-pill px-2 py-0.5 text-caption text-overlap" style={{ ...MONO_SHADOW, background: "rgb(20 22 26 / 0.72)" }}>
+          {g.text}
+        </span>
+      ),
     });
   }
   return out;
@@ -222,8 +322,9 @@ function FacilityLabel({ pl }: { pl: CuPlace }) {
   );
 }
 
-function ProjectCard({ p, compact }: { p: CuProject; compact?: boolean }) {
+function ProjectCard({ p, compact, pillar }: { p: CuProject; compact?: boolean; pillar?: TimePillar }) {
   const color = UTIL[p.side];
+  const isd = pillar?.isd?.text;
   return (
     <div className={clsx("chrome flex items-stretch gap-2 rounded-control py-1.5 pl-1.5 pr-2.5", compact ? "max-w-[166px]" : "max-w-[220px]")}>
       <span aria-hidden className="w-0.5 shrink-0 rounded-pill" style={{ background: color }} />
@@ -234,6 +335,9 @@ function ProjectCard({ p, compact }: { p: CuProject; compact?: boolean }) {
           {!compact && <span className="shrink-0 whitespace-pre"> · center</span>}
         </div>
         <div className="mt-1 truncate text-ui font-medium text-fg-1">{p.title}</div>
+        {pillar && (
+          <div className="num mt-0.5 truncate text-caption text-fg-3">{isd ? `In service ${isd}` : "No in-service date published"}</div>
+        )}
       </div>
     </div>
   );

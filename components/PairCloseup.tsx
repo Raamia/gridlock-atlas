@@ -1,8 +1,8 @@
 "use client";
 
 import clsx from "clsx";
-import { ArrowLeft, X } from "lucide-react";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { ArrowLeft, Play, Square, X } from "lucide-react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type Ref } from "react";
 import { IDX } from "@/lib/data";
 import { cameraPadding, useLayout, type RectLike } from "@/lib/layout";
 import { buildLatticeTower, buildSubstation } from "@/lib/models/structures";
@@ -10,7 +10,10 @@ import { useAtlas } from "@/lib/store";
 import { HoverTip, LabelLayer, labelSpecs, type HoverInfo, type LabelSpec } from "./closeup/Labels";
 import { buildCloseupModel, type CloseupModel, type LegendKey } from "./closeup/model";
 import { CloseupCanvas, type Frame } from "./closeup/Scene";
-import { Button, IconButton, Tooltip } from "./ui";
+import { buildStory, type Shot } from "./closeup/story";
+import { buildTimeModel, type TimeModel } from "./closeup/time";
+import { TimeDriver } from "./closeup/TimeLayer";
+import { Button, IconButton, Kbd, Segmented, Tooltip } from "./ui";
 
 /*
  * 3D pair close-up (SPEC §7). Mounted by Atlas (next/dynamic, ssr:false, after a WebGL2 pre-check, inside an error
@@ -22,6 +25,7 @@ import { Button, IconButton, Tooltip } from "./ui";
  */
 
 const CAPTION = "Illustrative close-up · centers, terminals and closest points placed to scale from the snapshot · structures are symbolic, not survey geometry";
+const TIME_CAPTION = " · height is time, not elevation";
 const UNAVAILABLE = "3D close-up unavailable on this device";
 
 /** Called by preloadCloseup() once this chunk is fetched: warms the structure builders (JIT) off the critical path. */
@@ -61,6 +65,8 @@ export default function PairCloseup() {
 
   const match = useMemo(() => run?.matches.find((m) => m.id === selectedId) ?? null, [run, selectedId]);
   const model = useMemo(() => (match ? buildCloseupModel(match, IDX.project(match.projectAId), IDX.project(match.projectBId), threshold) : null), [match, threshold]);
+  const time = useMemo(() => (match && model ? buildTimeModel(match, IDX.project(match.projectAId), IDX.project(match.projectBId), model) : null), [match, model]);
+  const story = useMemo(() => (match && model && time ? buildStory(match, model, time) : []), [match, model, time]);
 
   const close = useCallback(() => useAtlas.getState().set({ closeupOpen: false }), []);
   const fail = useCallback(() => {
@@ -74,8 +80,98 @@ export default function PairCloseup() {
   const reduced = usePrefersReducedMotion();
   const [interacted, setInteracted] = useState(false);
   const automated = typeof navigator !== "undefined" && navigator.webdriver;
-  const autoRotate = !reduced && !automated && !interacted;
   const [post] = useState(() => !reduced);
+  const instant = reduced || !!automated;
+
+  // time: the axis rises out of the plinth on open (a sweep grows each pillar in date order); Ground flattens it
+  const [timeOn, setTimeOn] = useState(true);
+  const [anim] = useState(() => new TimeDriver(false));
+  const [sweepKey, setSweepKey] = useState(() => (instant ? 0 : 1));
+  const counterRef = useRef<HTMLDivElement>(null);
+
+  // the story: captioned steps that fly the camera, flatten / raise the axis and replay the sweep
+  const [tour, setTour] = useState<number | null>(null);
+  const [shot, setShot] = useState<{ key: string; shot: Shot } | null>(null);
+  const tourTimer = useRef<number | null>(null);
+  /** The beat on screen, for key presses that land before React re-renders (fast ← / →). */
+  const tourAt = useRef<number | null>(null);
+  const shotSeq = useRef(0);
+  const stepRef = useRef<(i: number) => void>(() => {});
+  const clearTimer = () => {
+    if (tourTimer.current !== null) window.clearTimeout(tourTimer.current);
+    tourTimer.current = null;
+  };
+  const stopTour = useCallback(() => {
+    clearTimer();
+    tourAt.current = null;
+    setTour(null);
+  }, []);
+  const goStep = useCallback(
+    (i: number) => {
+      clearTimer();
+      const step = story[i];
+      if (!step || !model) {
+        tourAt.current = null;
+        setTour(null);
+        return;
+      }
+      tourAt.current = i;
+      setInteracted(true);
+      setTour(i);
+      setTimeOn(step.time);
+      if (step.sweep && !instant) setSweepKey((k) => k + 1);
+      setShot({ key: `${model.id}:${i}:${++shotSeq.current}`, shot: step.shot });
+      tourTimer.current = window.setTimeout(() => stepRef.current(i + 1), step.ms);
+    },
+    [story, model, instant],
+  );
+  useEffect(() => {
+    stepRef.current = goStep;
+  }, [goStep]);
+  useEffect(() => clearTimer, []);
+  // another pair (J/K) ends the story (the canvas replays the sweep for the new pair)
+  const pairId = model?.id;
+  const [storyPair, setStoryPair] = useState(pairId);
+  if (storyPair !== pairId) {
+    setStoryPair(pairId);
+    setTour(null);
+  }
+  useEffect(() => clearTimer(), [pairId]);
+  // while it runs: ← / → step back / ahead without waiting (→ on the last beat ends it); Esc stops it first
+  // (capture phase: before Atlas's chain closes the close-up)
+  useEffect(() => {
+    if (tour === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        // immediate: also when the event targets window itself, where Atlas's own listener sits
+        e.stopImmediatePropagation();
+        stopTour();
+        return;
+      }
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "SELECT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const at = tourAt.current;
+      if (e.repeat || at === null) return;
+      goStep(e.key === "ArrowRight" ? at + 1 : Math.max(0, at - 1));
+    };
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  }, [tour, stopTour, goStep]);
+  const setMode = useCallback(
+    (v: "ground" | "time") => {
+      stopTour();
+      setTimeOn(v === "time");
+    },
+    [stopTour],
+  );
+
+  const orbiting = tour !== null && !!story[tour]?.orbit;
+  const autoRotate = !reduced && !automated && (tour === null ? !interacted : orbiting);
 
   // labels: DOM elements in one layer, positioned by the canvas every rendered frame
   const [labelEls] = useState(() => new Map<string, Element>());
@@ -90,9 +186,9 @@ export default function PairCloseup() {
   const onHover = useCallback((h: HoverInfo | null) => setHover((prev) => (prev?.text === h?.text && prev?.pos.join() === h?.pos.join() ? prev : h)), []);
   const specs = useMemo<LabelSpec[]>(() => {
     // phone: narrower project cards so both fit the callout band side by side
-    const base = model ? labelSpecs(model, { compact: phone }) : [];
+    const base = model ? labelSpecs(model, { compact: phone, time }) : [];
     return hover ? [...base, { id: "hover", at: hover.pos, anchor: "above", alts: ["below", "right", "left"], priority: 50, always: true, content: <HoverTip info={hover} /> }] : base;
-  }, [model, hover, phone]);
+  }, [model, hover, phone, time]);
 
   // keyboard: focus lands on "Back to map"; closing returns focus to whatever opened the close-up
   const backRef = useRef<HTMLButtonElement>(null);
@@ -150,7 +246,33 @@ export default function PairCloseup() {
     return { l: pad.left, r: pad.right, t: Math.max(pad.top, chrome.top + 20), b: Math.max(pad.bottom, chrome.bottom + 16) };
   }, [phone, layout, demoRect, chrome.top, chrome.bottom]);
 
-  if (!model) return null;
+  if (!model || !time) return null;
+
+  const playing = tour !== null;
+  const controls = (
+    <div className="pointer-events-auto flex items-center gap-2">
+      <Segmented
+        label="Close-up view"
+        size="sm"
+        surface="map"
+        value={timeOn ? "time" : "ground"}
+        onChange={setMode}
+        items={[
+          { value: "ground", label: "Ground", tooltip: "Flat: the to-scale map only" },
+          { value: "time", label: "Time", tooltip: "Height is time: each project rises to its in-service date" },
+        ]}
+      />
+      <Button
+        variant="secondary"
+        className="chrome w-[9.5rem] justify-center"
+        icon={playing ? <Square size={12} strokeWidth={2} aria-hidden /> : <Play size={13} strokeWidth={2} aria-hidden />}
+        aria-pressed={playing}
+        onClick={() => (playing ? stopTour() : goStep(0))}
+      >
+        {playing ? "Stop simulation" : "Run simulation"}
+      </Button>
+    </div>
+  );
 
   const back = (
     <Tooltip content="Leave the close-up" shortcut="Esc" describe={false}>
@@ -159,7 +281,12 @@ export default function PairCloseup() {
       </Button>
     </Tooltip>
   );
-  const caption = <p className="text-caption text-balance text-fg-2 [text-shadow:0_1px_2px_rgb(0_0_0/0.9)]">{CAPTION}</p>;
+  const caption = (
+    <p className="text-caption text-balance text-fg-2 [text-shadow:0_1px_2px_rgb(0_0_0/0.9)]">
+      {CAPTION}
+      {timeOn && TIME_CAPTION}
+    </p>
+  );
 
   return (
     <div ref={rootRef} data-closeup role="region" aria-label="3D close-up" className={clsx("fixed inset-0 overflow-hidden bg-canvas", phone ? "z-(--z-scrim)" : "z-(--z-marker)")}>
@@ -175,8 +302,28 @@ export default function PairCloseup() {
         onInteract={() => setInteracted(true)}
         onHover={onHover}
         onFail={fail}
+        time={time}
+        timeOn={timeOn}
+        anim={anim}
+        sweepKey={sweepKey}
+        counter={counterRef}
+        instant={instant}
+        shot={shot}
       />
       <LabelLayer specs={specs} register={register} />
+      <SweepCounter ref={counterRef} phone={phone} />
+      {playing && story[tour] && (
+        <StoryCaption
+          step={tour}
+          steps={story.length}
+          kicker={story[tour].kicker}
+          text={story[tour].text}
+          names={story[tour].names}
+          onJump={goStep}
+          bottom={chrome.bottom + (phone ? 10 : 14)}
+          phone={phone}
+        />
+      )}
 
       {phone ? (
         <>
@@ -191,7 +338,8 @@ export default function PairCloseup() {
             </IconButton>
           </div>
           <div ref={bottomRef} className="pointer-events-none absolute inset-x-3 flex flex-col items-center gap-2 text-center" style={{ bottom: "calc(12px + var(--safe-b, 0px))" }}>
-            <Legend model={model} compact />
+            {controls}
+            <Legend model={model} time={timeOn ? time : null} compact />
             {caption}
           </div>
         </>
@@ -206,8 +354,11 @@ export default function PairCloseup() {
               style={{ left: "calc(var(--focal-l) + 12px)", right: "calc(var(--focal-r) + 12px)", top: "calc(var(--focal-t) + 12px)" }}
             >
               <div className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2">
-                {back}
-                <div className="min-w-0 flex-[1_1_380px] @[560px]:pt-1.5 @[560px]:text-right">{caption}</div>
+                <div className="flex flex-wrap items-center gap-2">
+                  {back}
+                  {controls}
+                </div>
+                <div className="min-w-0 flex-[1_1_320px] @[560px]:pt-1.5 @[560px]:text-right">{caption}</div>
               </div>
             </div>
           )}
@@ -217,12 +368,13 @@ export default function PairCloseup() {
             style={{ left: "calc(var(--focal-l) + 12px)", right: "calc(var(--focal-r) + 12px)", bottom: "calc(var(--focal-b) + 12px)" }}
           >
             {demoOn && (
-              <div className="flex w-full items-center gap-4">
+              <div className="flex w-full flex-wrap items-center gap-x-4 gap-y-2">
                 {back}
+                {controls}
                 <div className="min-w-0 flex-1">{caption}</div>
               </div>
             )}
-            <Legend model={model} compact={demoOn} />
+            <Legend model={model} time={timeOn ? time : null} compact={demoOn} />
           </div>
         </>
       )}
@@ -234,8 +386,45 @@ export default function PairCloseup() {
 
 const SW = "h-2.5 w-[18px] shrink-0 overflow-visible";
 
-function Swatch({ k }: { k: LegendKey | "grid" }): ReactNode {
+type TimeKey = "t-axis" | "t-isd" | "t-bar" | "t-overlap" | "t-sheet";
+
+function Swatch({ k }: { k: LegendKey | TimeKey | "grid" }): ReactNode {
   switch (k) {
+    case "t-axis":
+      return (
+        <svg viewBox="0 0 18 10" className={SW} aria-hidden>
+          <path d="M9 10 V0 M9 1 H12 M9 5 H11 M9 9 H12" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.1" />
+        </svg>
+      );
+    case "t-isd":
+      return (
+        <svg viewBox="0 0 18 10" className={SW} aria-hidden>
+          <path d="M5 10 V3" stroke="var(--util-a)" strokeWidth="1" />
+          <circle cx="5" cy="3" r="2.2" fill="var(--util-a)" />
+          <path d="M13 10 V1" stroke="var(--util-b)" strokeWidth="1" />
+          <rect x="11.6" y="1" width="2.8" height="5" rx="1.4" fill="var(--util-b)" />
+        </svg>
+      );
+    case "t-bar":
+      return (
+        <svg viewBox="0 0 18 10" className={SW} aria-hidden>
+          <rect x="6.5" y="0.5" width="5" height="9" rx="2.5" fill="currentColor" fillOpacity="0.28" />
+          <path d="M9 0.5 V9.5" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1" />
+        </svg>
+      );
+    case "t-overlap":
+      return (
+        <svg viewBox="0 0 18 10" className={SW} aria-hidden>
+          <rect x="2" y="2" width="14" height="6" fill="var(--overlap)" fillOpacity="0.3" />
+          <path d="M2 2 H16 M2 8 H16" stroke="var(--overlap)" strokeWidth="1" />
+        </svg>
+      );
+    case "t-sheet":
+      return (
+        <svg viewBox="0 0 18 10" className={SW} aria-hidden>
+          <ellipse cx="9" cy="5" rx="8" ry="3" fill="currentColor" fillOpacity="0.12" stroke="currentColor" strokeOpacity="0.5" strokeWidth="0.9" />
+        </svg>
+      );
     case "substation":
       return (
         <svg viewBox="0 0 18 10" className={SW} aria-hidden>
@@ -338,8 +527,18 @@ function legendText(k: LegendKey, m: CloseupModel): string {
   }
 }
 
-function Legend({ model, compact }: { model: CloseupModel; compact?: boolean }) {
+function timeKeys(tm: TimeModel): { k: TimeKey; text: string }[] {
+  const out: { k: TimeKey; text: string }[] = [{ k: "t-axis", text: `Height = time · ${tm.epoch}–${tm.epoch + tm.years}` }];
+  if (tm.pillars.some((p) => p.isd)) out.push({ k: "t-isd", text: "In service · dot = a day, bar = a period" });
+  if (tm.pillars.some((p) => p.bar)) out.push({ k: "t-bar", text: tm.pillars.every((p) => !p.bar || p.bar.tone === "schedule") ? "Published schedule" : "Published work window" });
+  if (tm.overlap) out.push({ k: "t-overlap", text: tm.overlap.confirmed ? "Overlap in time" : "Possible overlap in time" });
+  out.push({ k: "t-sheet", text: "Snapshot date" });
+  return out;
+}
+
+function Legend({ model, time, compact }: { model: CloseupModel; time?: TimeModel | null; compact?: boolean }) {
   const keys = LEGEND_ORDER.filter((k) => model.legend.includes(k));
+  const tkeys = time ? timeKeys(time) : [];
   const county = [model.a, model.b].filter((p) => p.countyOnly);
   return (
     <div
@@ -359,6 +558,12 @@ function Legend({ model, compact }: { model: CloseupModel; compact?: boolean }) 
         <Swatch k="grid" />
         Grid {model.gridMiles} mi
       </span>
+      {tkeys.map(({ k, text }) => (
+        <span key={k} className="inline-flex items-center gap-1.5 whitespace-nowrap">
+          <Swatch k={k} />
+          {text}
+        </span>
+      ))}
       {model.beyondRadius && model.site && (
         <span className="whitespace-nowrap font-medium text-fg-1">
           Beyond {model.thresholdMiles} mi · shared site
@@ -369,6 +574,98 @@ function Legend({ model, compact }: { model: CloseupModel; compact?: boolean }) 
           {p.owner} project: county-level only · not drawn
         </span>
       ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────── story + sweep ─────────────────────────────────────────── */
+
+/**
+ * The sweep's running year (written every frame by the canvas: TimeLayer's TimeAnim) — shown while the axis grows, in
+ * date order, out of the plinth. Left edge of the frame hole, clear of the callout band at the top.
+ */
+function SweepCounter({ ref, phone }: { ref: Ref<HTMLDivElement>; phone: boolean }) {
+  return (
+    <div
+      ref={ref}
+      aria-hidden
+      data-on="0"
+      className="pointer-events-none absolute opacity-0 transition-opacity duration-500 data-[on=1]:opacity-100 [text-shadow:0_2px_12px_rgb(0_0_0/0.85)]"
+      style={phone ? { left: 16, top: "38%" } : { left: "calc(var(--focal-l) + 24px)", top: "calc(var(--focal-t) + (100% - var(--focal-t) - var(--focal-b)) * 0.52)" }}
+    >
+      <div data-year className={clsx("num font-display leading-none text-fg-1", phone ? "text-[40px]" : "text-[64px]")} />
+      <div
+        data-event
+        className="mt-2 max-w-[240px] text-caption text-fg-2 data-[side=a]:text-util-a data-[side=b]:text-util-b data-[side=both]:text-overlap"
+      />
+    </div>
+  );
+}
+
+function StoryCaption({
+  step,
+  steps,
+  kicker,
+  text,
+  names,
+  onJump,
+  bottom,
+  phone,
+}: {
+  step: number;
+  steps: number;
+  kicker: string;
+  text: string;
+  names?: string;
+  onJump: (i: number) => void;
+  bottom: number;
+  phone: boolean;
+}) {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className={clsx("chrome pointer-events-auto absolute rounded-card px-4 pb-3 pt-3", phone ? "inset-x-3" : "-translate-x-1/2")}
+      style={
+        phone
+          ? { bottom }
+          : {
+              bottom,
+              // centred in the focal hole, never wider than it
+              left: "calc(var(--focal-l) + (100% - var(--focal-l) - var(--focal-r)) / 2)",
+              width: "min(560px, calc(100% - var(--focal-l) - var(--focal-r) - 48px))",
+            }
+      }
+    >
+      <div className="flex items-center justify-between gap-3">
+        <p key={`k${step}`} className="eyebrow num animate-[fade-in_300ms_ease-out] text-overlap!">
+          {String(step + 1).padStart(2, "0")} / {String(steps).padStart(2, "0")} · {kicker}
+        </p>
+        <span className="inline-flex shrink-0 items-center gap-1 text-label text-fg-3 coarse:hidden" aria-hidden>
+          <Kbd size="sm">←</Kbd>
+          <Kbd size="sm">→</Kbd>
+          <span className="ml-0.5">step</span>
+        </span>
+      </div>
+      <p key={`t${step}`} className="mt-1.5 animate-[fade-in_400ms_ease-out] text-body text-balance text-fg-1">
+        {text}
+      </p>
+      {names && <p className="mt-1 truncate text-caption text-fg-3">{names}</p>}
+      <div className="mt-2.5 flex items-center gap-1.5">
+        {Array.from({ length: steps }, (_, i) => (
+          <button
+            key={i}
+            type="button"
+            aria-label={`Simulation step ${i + 1} of ${steps}`}
+            aria-current={i === step ? "step" : undefined}
+            onClick={() => onJump(i)}
+            className={clsx(
+              "h-1 flex-1 rounded-pill transition-colors duration-300",
+              i < step ? "bg-fg-2" : i === step ? "bg-overlap" : "bg-fill-3 hover:bg-fill-2",
+            )}
+          />
+        ))}
+      </div>
     </div>
   );
 }

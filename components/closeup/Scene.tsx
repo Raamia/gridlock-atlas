@@ -11,7 +11,10 @@ import type { Precision } from "@/lib/domain/types";
 import { buildLatticeTower, buildMarkerPylon, buildSubstation, towerAttachments, towerTotalHeight } from "@/lib/models/structures";
 import { anchorBox, arcHeight, BEACON_H, PIN_H, type Anchor, type AnchorSpec, type Band, type HoverInfo, type LabelSpec } from "./Labels";
 import { alongPolyline, PLINTH_R, polyLength, type CloseupModel, type CuProject } from "./model";
+import type { Shot } from "./story";
 import { arcPoints, backdropTexture, Bag, beamTexture, catenary, circlePoints, COLOR, floorTexture, gridSegments, hash01, tint } from "./three-helpers";
+import type { TimeModel } from "./time";
+import { TimeAnim, TimeLayer, type TimeAnimState, type TimeDriver } from "./TimeLayer";
 
 /*
  * The close-up diorama (SPEC §7): a to-scale plinth with symbolic structures, framed inside the focal hole with
@@ -43,13 +46,38 @@ export interface CloseupCanvasProps {
   onHover: (h: HoverInfo | null) => void;
   /** The WebGL context was lost or is not WebGL2. */
   onFail: () => void;
+  /** The vertical time axis (./time.ts) and whether it is raised. */
+  time: TimeModel;
+  timeOn: boolean;
+  /** Rise / sweep state shared by the time layer, the label sync and the pins. */
+  anim: TimeDriver;
+  /** Changing this (> 0) replays the time sweep. */
+  sweepKey: number;
+  /** The sweep's year counter (DOM, outside the canvas). */
+  counter: RefObject<HTMLDivElement | null>;
+  /** Reduced motion or automation: time animations jump to their end state. */
+  instant: boolean;
+  /** A camera goal from the story; a new `key` starts a new glide. */
+  shot: { key: string; shot: Shot } | null;
 }
 
 const FOV = 30;
 const POLAR0 = 0.29 * Math.PI;
+/** First view with the time axis raised: lower, so heights read. */
+const POLAR0_TIME = 0.35 * Math.PI;
 const POLAR0_COMPACT = 0.18 * Math.PI;
+/** Phone with time raised: tilted enough that the pillars read as height, not dots. */
+const POLAR0_COMPACT_TIME = 0.3 * Math.PI;
 const AZIMUTH0 = 0.26;
 const TARGET = new THREE.Vector3(0, 0.35, 0);
+/** First view with time raised: a three-quarter turn off the side-on view (A left, B right, the ruler beyond B). */
+const SIDE_TURN = 0.5;
+/** With time raised, the orbit target sits this far up the column. */
+const TIME_TARGET_K = 0.4;
+const MAX_POLAR = 0.42 * Math.PI;
+const MAX_POLAR_TIME = 0.47 * Math.PI;
+/** Story glides are slower than click-to-focus. */
+const SHOT_SPEED = 2.3;
 /** Symbolic structure scale: scene units per metre of the procedural models (the plinth radius is always PLINTH_R). */
 const STRUCT_SCALE = 0.03;
 /** Towers are drawn smaller and sparser than yards so a line reads as a line, not a fence (spacing is symbolic). */
@@ -83,14 +111,40 @@ const PRECISION_TEXT: Record<Precision, string> = {
 interface FocusGoal {
   target: THREE.Vector3;
   dist: number;
+  /** Optional orbit angles to glide to as well (the story's shots). */
+  polar?: number;
+  azimuth?: number;
+  /** Glide rate (per second, exponential); click-to-focus is 5. */
+  speed?: number;
+  /** Frames spent gliding (internal). */
+  frames?: number;
 }
 
-export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, labels, labelEls, onInteract, onHover, onFail }: CloseupCanvasProps) {
+export function CloseupCanvas({
+  model,
+  frame,
+  post,
+  autoRotate,
+  reducedMotion,
+  labels,
+  labelEls,
+  onInteract,
+  onHover,
+  onFail,
+  time,
+  timeOn,
+  anim,
+  sweepKey,
+  counter,
+  instant,
+  shot,
+}: CloseupCanvasProps) {
   // click a structure → glide the orbit target to it; click empty space → back to the whole plinth
   const focusRef = useRef<FocusGoal | null>(null);
   const homeRef = useRef(0);
+  const homeTargetRef = useRef(TARGET.clone());
   const focusOn = useCallback((at: [number, number, number] | null) => {
-    focusRef.current = at ? { target: new THREE.Vector3(at[0], 0.25, at[2]), dist: homeRef.current * 0.55 } : { target: TARGET.clone(), dist: homeRef.current };
+    focusRef.current = at ? { target: new THREE.Vector3(at[0], at[1] || 0.25, at[2]), dist: homeRef.current * 0.55 } : { target: homeTargetRef.current.clone(), dist: homeRef.current };
   }, []);
   // R3F force-loses the context when the canvas unmounts: only a loss while we are still open is a failure
   const alive = useRef(true);
@@ -120,8 +174,10 @@ export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, l
       }}
     >
       <Backdrop frame={frame} />
-      <Rig frame={frame} homeRef={homeRef} focusRef={focusRef} />
+      <Rig frame={frame} lift={timeOn ? time.height : 0} azimuth0={timeOn ? time.sideAzimuth + SIDE_TURN : AZIMUTH0} homeRef={homeRef} homeTargetRef={homeTargetRef} focusRef={focusRef} />
+      <ShotDirector shot={shot} homeRef={homeRef} homeTargetRef={homeTargetRef} focusRef={focusRef} />
       <FocusGlide focusRef={focusRef} instant={reducedMotion} />
+      <TimeAnim anim={anim} timeOn={timeOn} sweepKey={sweepKey} instant={instant} tm={time} counter={counter} />
       <Lights />
       <Environment resolution={128} frames={1} environmentIntensity={0.55}>
         <Lightformer form="rect" intensity={2.1} position={[0, 10, 0]} rotation-x={Math.PI / 2} scale={[16, 16, 1]} />
@@ -132,10 +188,11 @@ export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, l
       <Floor />
       <Plinth model={model} onClick={() => focusOn(null)} />
       <ContactShadows key={model.id} position={[0, Y.shadows, 0]} scale={PLINTH_R * 2} resolution={1024} blur={1.7} far={1.6} opacity={0.72} frames={1} color="#000000" />
-      <Structures model={model} onHover={onHover} onPick={focusOn}>
+      <Structures model={model} anim={anim} onHover={onHover} onPick={focusOn}>
         <Links model={model} boost={post ? 1.7 : 1} />
+        <TimeLayer tm={time} anim={anim} />
       </Structures>
-      <LabelSync labels={labels} els={labelEls} frame={frame} />
+      <LabelSync labels={labels} els={labelEls} frame={frame} anim={anim} />
       <OrbitControls
         makeDefault
         enableDamping
@@ -144,11 +201,15 @@ export function CloseupCanvas({ model, frame, post, autoRotate, reducedMotion, l
         rotateSpeed={0.55}
         zoomSpeed={0.7}
         minPolarAngle={0.15 * Math.PI}
-        maxPolarAngle={0.42 * Math.PI}
+        maxPolarAngle={timeOn ? MAX_POLAR_TIME : MAX_POLAR}
         autoRotate={autoRotate}
         autoRotateSpeed={AUTO_ROTATE_SPEED}
         target={TARGET}
-        onStart={onInteract}
+        onStart={() => {
+          // a drag takes the camera back from any glide in progress (click-to-focus sets its goal after this)
+          focusRef.current = null;
+          onInteract();
+        }}
       />
       {autoRotate && <AutoRotatePace />}
       {post && <Effects />}
@@ -185,25 +246,48 @@ function Effects() {
 
 /* ───────────────────────────────────────── camera + backdrop ───────────────────────────────────────── */
 
-/** Distance at which the plinth (plus the tallest structures) fits the frame hole at the given polar angle. */
-function fitDistance(frame: Frame, w: number, h: number, polar: number): number {
+/**
+ * Distance at which the plinth (plus the tallest structures, or the raised time axis) fits the frame hole at the given
+ * polar angle. `lift` is the time axis height (0 = flat).
+ */
+function fitDistance(frame: Frame, w: number, h: number, polar: number, lift = 0): number {
   const fw = Math.max(120, w - frame.l - frame.r);
   const fh = Math.max(120, h - frame.t - frame.b);
   const k = h / (2 * Math.tan((FOV * DEG) / 2)); // px per unit at distance 1
   // phone / tall holes: let the plinth run a little past the sides rather than float small in a tall column
   const tall = THREE.MathUtils.clamp((fh / fw - 0.8) / 0.5, 0, 1);
   const spanW = 2 * PLINTH_R * (frame.compact ? 0.8 : THREE.MathUtils.lerp(1.0, 0.88, tall));
-  const spanH = (2 * PLINTH_R * Math.cos(polar) + 2.2 * Math.sin(polar)) * 1.08;
+  const spanH = (2 * PLINTH_R * Math.cos(polar) + Math.max(2.2, lift + 0.6) * Math.sin(polar)) * 1.08;
   return Math.max((spanW * k) / fw, (spanH * k) / fh);
 }
 
-/** Frames the plinth inside the focal hole: off-axis projection (setViewOffset) + fitted orbit distance. */
-function Rig({ frame, homeRef, focusRef }: { frame: Frame; homeRef: RefObject<number>; focusRef: RefObject<FocusGoal | null> }) {
+/**
+ * Frames the plinth inside the focal hole: off-axis projection (setViewOffset) + fitted orbit distance. Raising or
+ * lowering the time axis (`lift`) glides to the new fit instead of jumping.
+ */
+function Rig({
+  frame,
+  lift,
+  azimuth0,
+  homeRef,
+  homeTargetRef,
+  focusRef,
+}: {
+  frame: Frame;
+  lift: number;
+  /** Azimuth of the first view only (later refits keep the current direction). */
+  azimuth0: number;
+  homeRef: RefObject<number>;
+  homeTargetRef: RefObject<THREE.Vector3>;
+  focusRef: RefObject<FocusGoal | null>;
+}) {
   const get = useThree((s) => s.get);
+  const first = useRef(azimuth0);
   const width = useThree((s) => s.size.width);
   const height = useThree((s) => s.size.height);
   const controlsReady = useThree((s) => s.controls !== null);
   const placed = useRef(false);
+  const lastLift = useRef(lift);
   const { l, t, r, b, compact } = frame;
 
   useLayoutEffect(() => {
@@ -219,42 +303,105 @@ function Rig({ frame, homeRef, focusRef }: { frame: Frame; homeRef: RefObject<nu
     const cy = t + fh / 2;
     camera.setViewOffset(w, h, w / 2 - cx, h / 2 - cy, w, h);
     camera.updateProjectionMatrix();
+    const home = lift ? new THREE.Vector3(0, lift * TIME_TARGET_K, 0) : TARGET.clone();
+    homeTargetRef.current = home;
+    const liftChanged = placed.current && lastLift.current !== lift;
+    lastLift.current = lift;
     // first view: a tall frame hole (tablet portrait, phone) looks down more steeply so the plinth fills its height
     const tall = THREE.MathUtils.clamp((fh / fw - 0.8) / 0.5, 0, 1);
-    const polar0 = compact ? POLAR0_COMPACT : THREE.MathUtils.lerp(POLAR0, 0.2 * Math.PI, tall);
-    const dir = placed.current ? camera.position.clone().sub(TARGET).normalize() : new THREE.Vector3().setFromSphericalCoords(1, polar0, AZIMUTH0);
+    const polar0 = compact ? (lift ? POLAR0_COMPACT_TIME : POLAR0_COMPACT) : THREE.MathUtils.lerp(lift ? POLAR0_TIME : POLAR0, 0.2 * Math.PI, tall);
+    const from = controls?.target ?? TARGET;
+    const dir = placed.current ? camera.position.clone().sub(from).normalize() : new THREE.Vector3().setFromSphericalCoords(1, polar0, first.current);
     const polar = Math.acos(THREE.MathUtils.clamp(dir.y, -1, 1));
-    const d = fitDistance({ l, t, r, b, compact }, w, h, Math.max(polar, 0.15 * Math.PI));
-    camera.position.copy(TARGET).addScaledVector(dir, d);
-    camera.lookAt(TARGET);
-    placed.current = true;
+    const d = fitDistance({ l, t, r, b, compact }, w, h, Math.max(polar, 0.15 * Math.PI), lift);
+    const before = homeRef.current;
     homeRef.current = d;
-    focusRef.current = null;
     if (controls) {
       controls.minDistance = d * 0.42;
-      controls.maxDistance = d * 1.3;
-      controls.target.copy(TARGET);
+      controls.maxDistance = d * 1.35;
+    }
+    if (liftChanged) {
+      // the axis is rising or settling: glide to the new fit (a story shot may replace this goal right after)
+      focusRef.current = { target: home.clone(), dist: d, speed: 3 };
+      invalidate();
+      return;
+    }
+    const goal = focusRef.current;
+    if (placed.current && goal?.speed === SHOT_SPEED && before > 0) {
+      // the chrome around the hole changed mid-shot (a caption or key re-wrapped): keep the story's glide, rescaled
+      goal.dist *= d / before;
+      invalidate();
+      return;
+    }
+    camera.position.copy(home).addScaledVector(dir, d);
+    camera.lookAt(home);
+    placed.current = true;
+    focusRef.current = null;
+    if (controls) {
+      controls.target.copy(home);
       controls.update();
     }
     invalidate();
-  }, [get, width, height, l, t, r, b, compact, controlsReady, homeRef, focusRef]);
+  }, [get, width, height, l, t, r, b, compact, lift, controlsReady, homeRef, homeTargetRef, focusRef]);
   return null;
 }
 
-/** Eases the orbit target and distance toward a picked structure (or back home); renders only while it moves. */
+/** Turns a story shot into a glide goal (after Rig has refitted for the shot's mode: layout effects run first). */
+function ShotDirector({
+  shot,
+  homeRef,
+  homeTargetRef,
+  focusRef,
+}: {
+  shot: { key: string; shot: Shot } | null;
+  homeRef: RefObject<number>;
+  homeTargetRef: RefObject<THREE.Vector3>;
+  focusRef: RefObject<FocusGoal | null>;
+}) {
+  const get = useThree((s) => s.get);
+  useEffect(() => {
+    if (!shot) return;
+    const s = shot.shot;
+    focusRef.current = {
+      target: s.home ? homeTargetRef.current.clone() : new THREE.Vector3(...s.target),
+      dist: homeRef.current * s.distK,
+      polar: s.polar,
+      azimuth: s.azimuth ?? undefined,
+      speed: SHOT_SPEED,
+    };
+    get().invalidate();
+  }, [shot, get, homeRef, homeTargetRef, focusRef]);
+  return null;
+}
+
+/** Shortest signed angle from a to b (radians). */
+const turn = (a: number, b: number) => Math.atan2(Math.sin(b - a), Math.cos(b - a));
+
+/**
+ * Eases the orbit target, distance and (for story shots) orbit angles toward a goal: a picked structure, home, or a
+ * shot. Renders only while it moves.
+ */
 function FocusGlide({ focusRef, instant }: { focusRef: RefObject<FocusGoal | null>; instant: boolean }) {
   useFrame((state, delta) => {
     const goal = focusRef.current;
     const controls = state.controls as unknown as OrbitControlsImpl | null;
     if (!goal || !controls) return;
-    const k = instant ? 1 : 1 - Math.exp(-Math.min(delta, 0.05) * 5);
-    const offset = state.camera.position.clone().sub(controls.target);
-    const len = offset.length();
+    const sph = new THREE.Spherical();
+    const off = new THREE.Vector3();
+    const k = instant ? 1 : 1 - Math.exp(-Math.min(delta, 0.05) * (goal.speed ?? 5));
+    sph.setFromVector3(off.copy(state.camera.position).sub(controls.target));
     controls.target.lerp(goal.target, k);
-    const next = len + (goal.dist - len) * k;
-    state.camera.position.copy(controls.target).addScaledVector(offset.normalize(), next);
+    sph.radius += (goal.dist - sph.radius) * k;
+    const dPhi = goal.polar == null ? 0 : goal.polar - sph.phi;
+    const dTheta = goal.azimuth == null ? 0 : turn(sph.theta, goal.azimuth);
+    sph.phi += dPhi * k;
+    sph.theta += dTheta * k;
+    state.camera.position.copy(controls.target).add(off.setFromSpherical(sph));
     controls.update();
-    if (controls.target.distanceTo(goal.target) < 0.005 && Math.abs(next - goal.dist) < 0.01) focusRef.current = null;
+    // a goal the controls cannot reach (a polar angle outside their band) is dropped after a few seconds
+    goal.frames = (goal.frames ?? 0) + 1;
+    const done = controls.target.distanceTo(goal.target) < 0.005 && Math.abs(sph.radius - goal.dist) < 0.01 && Math.abs(dPhi) < 0.002 && Math.abs(dTheta) < 0.002;
+    if (done || goal.frames > 900) focusRef.current = null;
     else state.invalidate();
   });
   return null;
@@ -314,7 +461,7 @@ const LABEL_GAP = 4;
  * A label that fits nowhere is hidden unless it is `always` (then it takes the least-overlapping anchor). Labels stay
  * inside the frame hole; one whose anchor leaves the hole is hidden. Callout placements draw their leader line.
  */
-function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<string, Element>; frame: Frame }) {
+function LabelSync({ labels, els, frame, anim }: { labels: LabelSpec[]; els: Map<string, Element>; frame: Frame; anim: TimeAnimState }) {
   const v = useMemo(() => new THREE.Vector3(), []);
   const latest = useRef(labels);
   const sizes = useRef(new WeakMap<Element, [number, number]>());
@@ -358,10 +505,21 @@ function LabelSync({ labels, els, frame }: { labels: LabelSpec[]; els: Map<strin
     };
 
     const items: Placing[] = [];
+    const rise = anim.rise;
     for (const s of latest.current) {
       const el = els.get(s.id) as HTMLElement | undefined;
       if (!el) continue;
-      v.set(...s.at).project(camera);
+      // time labels: only while the axis stands, and only once the sweep has reached them; ground-only labels step aside
+      const off = (s.time === "only" && rise < 0.6) || (s.time === "ground" && rise > 0.4) || (s.reveal != null && anim.sweep < s.reveal);
+      if (off) {
+        el.style.visibility = "hidden";
+        hideLeader(s.id);
+        last.current.delete(s.id);
+        continue;
+      }
+      // anchors that ride the time axis move with it as it rises
+      const ay = s.lift == null ? s.at[1] : s.at[1] + (s.lift - s.at[1]) * rise;
+      v.set(s.at[0], ay, s.at[2]).project(camera);
       const x = ((v.x + 1) / 2) * size.width;
       const y = ((1 - v.y) / 2) * size.height;
       // behind the camera, or outside the frame hole (zoomed in / under a panel): the label would point at nothing
@@ -604,6 +762,8 @@ interface HoverData {
   sub?: string;
   y: number;
   mats: THREE.MeshStandardMaterial[];
+  /** Click-to-focus keeps the clicked height (the time axis stands in the air). */
+  keepY?: boolean;
 }
 
 interface Built {
@@ -714,11 +874,13 @@ function hoverTarget(o: THREE.Object3D | null): THREE.Object3D | null {
 
 function Structures({
   model,
+  anim,
   onHover,
   onPick,
   children,
 }: {
   model: CloseupModel;
+  anim: TimeAnimState;
   onHover: (h: HoverInfo | null) => void;
   onPick: (at: [number, number, number] | null) => void;
   /** More hoverable scene parts (links, beacon) that share the hover/click handling. */
@@ -779,9 +941,10 @@ function Structures({
     }
     const wp = new THREE.Vector3();
     hit.target.getWorldPosition(wp);
-    // flat things (discs, markers, lines) focus where they were clicked; structures and pins on their base
+    // flat things (discs, markers, lines) focus where they were clicked; structures and pins on their base; things
+    // standing on the time axis at the height that was clicked
     const flat = !hit.h.mats.length && hit.h.y < 0.5;
-    onPick(flat ? [hit.point.x, 0, hit.point.z] : [wp.x, 0, wp.z]);
+    onPick(flat ? [hit.point.x, hit.h.keepY ? hit.point.y : 0, hit.point.z] : [wp.x, 0, wp.z]);
     get().invalidate();
   };
   // a click anywhere else (plinth, backdrop): back to the whole plinth
@@ -795,7 +958,7 @@ function Structures({
     <>
       <group onPointerMove={move} onPointerOut={out} onClick={click} onPointerMissed={missed}>
         <primitive object={built.root} />
-        {[model.a, model.b].map((p) => p.center && <CenterPin key={p.side} p={p} />)}
+        {[model.a, model.b].map((p) => p.center && <CenterPin key={p.side} p={p} anim={anim} />)}
         {[model.a, model.b].map((p) => (
           <Routes key={p.side} p={p} />
         ))}
@@ -864,19 +1027,30 @@ function Routes({ p }: { p: CuProject }) {
   return null;
 }
 
-function CenterPin({ p }: { p: CuProject }) {
+/** The project's pin: a stalk and a glowing head that sink into the plinth as the time axis rises (its pillar takes over). */
+function CenterPin({ p, anim }: { p: CuProject; anim: TimeAnimState }) {
   const color = utilColor(p);
+  const head = useRef<THREE.Group>(null);
+  useFrame(() => {
+    const g = head.current;
+    if (!g) return;
+    const k = 1 - anim.rise;
+    g.visible = k > 0.01;
+    g.scale.set(1, Math.max(0.001, k), 1);
+  });
   if (!p.center) return null;
   return (
     <group position={[p.center.x, 0, p.center.z]} userData={{ hover: { text: `Project center · ${p.title}`, sub: `${p.centerNote} · a pin, not the measured point`, y: PIN_H, mats: [] } satisfies HoverData }}>
-      <mesh position={[0, PIN_H / 2, 0]}>
-        <cylinderGeometry args={[0.014, 0.014, PIN_H, 8]} />
-        <meshBasicMaterial color={color} transparent opacity={0.75} toneMapped={false} />
-      </mesh>
-      <mesh position={[0, PIN_H, 0]}>
-        <sphereGeometry args={[0.06, 24, 16]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2.4} toneMapped={false} />
-      </mesh>
+      <group ref={head}>
+        <mesh position={[0, PIN_H / 2, 0]}>
+          <cylinderGeometry args={[0.014, 0.014, PIN_H, 8]} />
+          <meshBasicMaterial color={color} transparent opacity={0.75} toneMapped={false} />
+        </mesh>
+        <mesh position={[0, PIN_H, 0]}>
+          <sphereGeometry args={[0.06, 24, 16]} />
+          <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2.4} toneMapped={false} />
+        </mesh>
+      </group>
       <mesh rotation-x={-Math.PI / 2} position={[0, Y.marker, 0]} renderOrder={3}>
         <ringGeometry args={[0.07, 0.1, 40]} />
         <meshBasicMaterial color={color} toneMapped={false} depthWrite={false} />

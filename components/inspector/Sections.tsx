@@ -20,6 +20,7 @@ import { PairGantt } from "../timeline/PairGantt";
 import { Disclosure, SignalFact, signalState, Tag, Tooltip, UtilityDot, windowDocs, windowNote } from "../ui";
 import { conflictSplit, ownerFull, TIER_LABEL } from "./facts";
 import { scrollInspectorTo } from "./SectionNav";
+import { WhatIf } from "./WhatIf";
 
 /* ────────────────────────────────────────── shell ────────────────────────────────────────── */
 
@@ -227,6 +228,8 @@ function Endpoints({ p, role }: { p: Project; role: "a" | "b" }) {
 
 /** The phone's compact pair Gantt is a bonus view: if it throws, the section keeps its dated list below. */
 const GanttBoundary = catchError(() => null);
+/** The schedule what-if is a bonus view too: if it throws, the section above it is untouched. */
+const WhatIfBoundary = catchError(() => null);
 
 export function ScheduleSection({ m, a, b, pulse }: { m: Match; a: Project; b: Project; pulse?: number }) {
   const phone = useTier() === "phone";
@@ -284,6 +287,10 @@ export function ScheduleSection({ m, a, b, pulse }: { m: Match; a: Project; b: P
       )}
       {m.timeDetail.continuityCaveat && <p className="text-caption text-fg-3">A source does not describe one continuous construction phase, so overlap is only “possible.”</p>}
       <EvidenceList ids={[...activeWindows(a), ...activeWindows(b)].flatMap((w) => w.evidenceIds)} toneOf={(e) => ROLE_TONE(e, a, b)} />
+      {/* keyed by pair: each pair's what-if starts "as planned" */}
+      <WhatIfBoundary key={m.id}>
+        <WhatIf key={m.id} m={m} />
+      </WhatIfBoundary>
     </Section>
   );
 }
