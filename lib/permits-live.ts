@@ -12,7 +12,7 @@ const COUNTIES: Record<string, string> = { "51": "Effingham", "25": "Chatham" };
 const SC_LAYER = "https://gis.des.sc.gov/gisserver/rest/services/OCRM/CZC_Layers/MapServer/0/query";
 const SC_BBOX = "-81.5,31.9,-80.6,32.8";
 const MAX_PAGES = 40; // 15 rows a page; the portal itself stops at 500 results
-const UA = "Mozilla/5.0 (GridLock Atlas permit check)";
+const UA = "Mozilla/5.0 (Atlas permit check)";
 
 const decode = (s: string) =>
   s

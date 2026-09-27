@@ -6,7 +6,10 @@ import "./globals.css";
 // Geist for words, Geist Mono for every number, Instrument Serif italic only in the wordmark and the brief title.
 // All three are cached by next/font at build/dev time, so the app runs offline.
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   subsets: ["latin"],
@@ -15,10 +18,10 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "GridLock Atlas — compare public utility construction plans",
+  title: "Atlas",
   description:
-    "GridLock Atlas compares public future construction plans from different power utilities, flags geographic proximity or schedule overlap, and shows the cited evidence behind every match.",
-  applicationName: "GridLock Atlas",
+    "Atlas compares public future construction plans from different power utilities, flags geographic proximity or schedule overlap, and shows the cited evidence behind every match.",
+  applicationName: "Atlas",
 };
 
 export const viewport: Viewport = {
@@ -29,7 +32,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
+    >
       <body className="h-full">{children}</body>
     </html>
   );

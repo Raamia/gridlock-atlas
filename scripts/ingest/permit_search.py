@@ -64,7 +64,7 @@ def geos_rows(soup):
 def geos_search(county="", name="", start="", end=""):
     """All result pages of one GEOS search (NPDES program)."""
     s = requests.Session()
-    s.headers["User-Agent"] = "Mozilla/5.0 (GridLock Atlas research)"
+    s.headers["User-Agent"] = "Mozilla/5.0 (Atlas research)"
     d = geos_form(BeautifulSoup(s.get(GEOS, timeout=60).text, "html.parser"))
     d.update({GEOS_FIELD + "ddlSiteCounty": county, GEOS_FIELD + "txtFacilityName": name, GEOS_FIELD + "txtStartDate": start,
               GEOS_FIELD + "txtEndDate": end, GEOS_FIELD + "ddlProgram": "1", GEOS_FIELD + "btnSearch": "Search"})

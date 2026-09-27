@@ -1,14 +1,14 @@
-# GridLock Atlas — full project specification
+# Atlas — full project specification
 
-**Working name:** GridLock Atlas: The Shared Window  
+**Working name:** Atlas: The Shared Window  
 **Version:** 1.0, 26 September 2026  
 **Format:** Browser-based software project; no hardware  
 **Primary target:** ShellHacks Sperry Tech GridLock Challenge  
-**Research title:** *GridLock: Evidence-Grounded Spatiotemporal Matching of Public Utility Construction Plans*
+**Research title:** *Atlas: Evidence-Grounded Spatiotemporal Matching of Public Utility Construction Plans*
 
 ## 1. Product in one sentence
 
-GridLock Atlas compares public **future construction plans** from different power utilities, reveals geographic proximity **or** schedule overlap, and gives a planner a source-cited brief explaining whether a pair needs outreach, is already coordinated, or lacks enough evidence.
+Atlas compares public **future construction plans** from different power utilities, reveals geographic proximity **or** schedule overlap, and gives a planner a source-cited brief explaining whether a pair needs outreach, is already coordinated, or lacks enough evidence.
 
 The visual centerpiece is a synchronized map and construction timeline. Selecting a candidate brings two public plans together in one view: where they work, when they work, why the match was flagged, and exactly which source supports each claim.
 
@@ -257,7 +257,7 @@ An editorial command center with the map as the stage: midnight navy canvas, cya
 
 ```text
 ┌───────────────────────────────────────────────────────────────────────────┐
-│ GridLock Atlas | region / utilities | public-plan snapshot | legend      │
+│ Atlas | region / utilities | public-plan snapshot | legend      │
 ├──────────────────┬──────────────────────────────────────┬─────────────────┤
 │ Opportunity Queue│                                      │ Evidence         │
 │ Needs review     │              2.5D MAP                │ Inspector        │
@@ -339,7 +339,7 @@ Sources: direct URLs, document dates, excerpt/page anchors, snapshot date.
 ### Proposed repository layout
 
 ```text
-gridlock-atlas/
+atlas/
   app/                    # pages and route handlers
   components/             # queue, map, timeline, evidence, brief
   lib/domain/             # types, provenance rules, statuses
@@ -412,7 +412,7 @@ Do not spend the remaining hackathon time writing tests that simply restate styl
 | 2:05–2:35 | Reveal Xcel vs PSC completion-date claims | It preserves conflicting source versions instead of inventing certainty. |
 | 2:35–3:00 | Export review brief; optionally show a separately validated review lead | The output is an actionable, cited question for planners. |
 
-Suggested opening line: **“Two utility plans can describe the same work area in different documents. GridLock puts the geography, schedule, and original evidence on one screen.”**
+Suggested opening line: **“Two utility plans can describe the same work area in different documents. Atlas puts the geography, schedule, and original evidence on one screen.”**
 
 Suggested closing line: **“The goal is a better conversation between planners. This tool tells them where to look and shows why.”**
 

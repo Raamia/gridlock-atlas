@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const FEATURED = "dpc-alma-blair__xcel-wwtc";
 
-test.describe("GridLock Atlas smoke path", () => {
+test.describe("Atlas smoke path", () => {
   test("compare, inspect the featured pair, open sources and export a brief", async ({ page, context }) => {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));

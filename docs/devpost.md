@@ -1,4 +1,4 @@
-# GridLock Atlas
+# Atlas
 
 **Compare public utility construction plans. Flag where they meet in place or time. Show the evidence.**
 
@@ -12,7 +12,7 @@ FERC Order No. 1920 (effective August 12, 2024) pushes utilities toward coordina
 
 ## What it does
 
-GridLock Atlas puts two utilities' public plans on one interactive map. It measures the closest points between every cross-utility pair of project geometries, flags those **under 25 miles**, weighs their published timing, and ranks the results as review leads.
+Atlas puts two utilities' public plans on one interactive map. It measures the closest points between every cross-utility pair of project geometries, flags those **under 25 miles**, weighs their published timing, and ranks the results as review leads.
 
 - **Compare.** Across all regions the engine measures 7,929 pairs and flags 149 (1.9%). The legacy starter-workbook center baseline finds 111 pairs; the live queue instead follows the challenge's closest-point rule. A naive “close *or* same time” rule would flag 4,631 pairs.
 - **Rank.** The queue has four tabs: *Needs review*, *Known coordination*, *Source conflicts* and *Possible*. The ordering is explainable: closest approach first, then time, then evidence completeness. The top needs-review lead is the Jasper–Okatie #2 line and Georgia Power's Goshen–McIntosh rebuild, with a 4.25-mile closest approach.
@@ -58,7 +58,7 @@ GridLock Atlas puts two utilities' public plans on one interactive map. It measu
 - Evaluation without labels still says a lot when every denominator is stated. It also means naming the circularity: our shared-facility rule reads the same filings that define the documented interfaces.
 - Newest-source checks matter. SERTP's June 2026 plan changed Georgia Power in-service years and added five projects at McIntosh and Meldrim. It contains no DESC project, so our reading, labeled as such in the app, is that DESC's current list is still SCRTP's.
 
-## What's next for GridLock Atlas
+## What's next for Atlas
 
 - Planner labels in the existing reviewer mode, which would turn our protocol into a real precision estimate.
 - More utilities in the same region: Duke Energy's Carolinas plan (already cached; it lists DESC's Bush River tie), Santee Cooper, GTC and MEAG.
