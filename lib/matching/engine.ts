@@ -10,11 +10,11 @@ import type {
   Project,
   Snapshot,
 } from "@/lib/domain/types";
-import { displayTitle, formatBound, formatMilesNear } from "@/lib/format";
+import { displayTitle, formatBound } from "@/lib/format";
 import { DEFAULT_THRESHOLD_MILES, evaluateGeo } from "./geo";
 import { activeWindows, currentInService, dayCount, DEADLINE, endsWindow, evaluateTime, scheduleWindows, windowsBySource } from "./time";
 
-export const ENGINE_VERSION = "gridlock-engine/1.2.0";
+export const ENGINE_VERSION = "gridlock-engine/1.3.0";
 
 const ELIGIBLE = new Set(["proposed", "approved", "construction"]);
 
@@ -261,24 +261,9 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   const reviewStatus: Match["reviewStatus"] = coordination.length ? "known-coordination" : geo.level === "confirmed" ? "needs-review" : "possible";
 
   const sameSite = geo.detail.method === "shared-site" || geo.detail.method === "shared-endpoint";
-  const d = geo.detail.center?.miles;
-  // the sponsor's rule is "under 25 miles": a shared facility keeps a farther pair visible, but never above pairs inside the radius
+  const d = geo.detail.closest?.miles;
   const beyondRadius = sameSite && !(d !== undefined && d < thresholdMiles);
-  let geoReason = geo.reason;
-  if (beyondRadius) {
-    const rels = snapshot.relations.filter((r) => geo.detail.relationIds.includes(r.id));
-    const stated = rels.find((r) => r.basis !== "inferred");
-    const pub = (stated ?? rels[0])?.evidenceIds.map((id) => snapshot.evidence[id]?.sourceId).map((id) => id && source(id)?.publisher).find(Boolean);
-    const site = (stated ?? rels[0])?.siteLabel ?? geo.detail.sharedEndpoint?.labelA ?? "a shared facility";
-    const because =
-      geo.detail.method === "shared-endpoint"
-        ? `both projects have a terminal at ${site} (geocoded to the same facility)`
-        : stated
-          ? `${pub ?? "a source"} states a shared facility (${site})`
-          : `the sources, taken together, imply a shared facility (${site})`;
-    const where = d !== undefined ? `Beyond the ${thresholdMiles} mi radius (centers ≈${formatMilesNear(d, thresholdMiles)} apart)` : `No project center to measure against the ${thresholdMiles} mi radius`;
-    geoReason = `${where}; flagged because ${because}.`;
-  }
+  const geoReason = geo.reason;
   const relevance: Match["relevance"] =
     geo.level !== "confirmed" ? "low" : sameSite || (d !== undefined && d <= 10) ? "high" : "medium";
 
@@ -293,9 +278,9 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   if (sameSite && inferredSite) add(50, "Shared facility implied by sources");
   else if (sameSite) add(60, geo.detail.method === "shared-site" ? "Shared facility stated in a source" : "Terminals at the same facility");
   else if (geo.level === "confirmed" && d !== undefined)
-    add(30 + 30 * Math.max(0, 1 - d / thresholdMiles), `Centers ≈${d < 10 || Math.abs(d - thresholdMiles) < 1.5 ? d.toFixed(1) : Math.round(d)} mi apart`);
+    add(30 + 30 * Math.max(0, 1 - d / thresholdMiles), `Closest approach ≈${d < 10 || Math.abs(d - thresholdMiles) < 1.5 ? d.toFixed(1) : Math.round(d)} mi`);
   else if (geo.level === "confirmed") add(30, "Within the review radius");
-  else add(12, geo.detail.method === "measured" && !geo.detail.center?.localityOnly ? "Near the radius edge (location uncertainty)" : "Proximity possible (coarse location)");
+  else add(12, geo.detail.method === "measured" && !geo.detail.closest?.localityOnly ? "Closest approach is estimated or near the radius edge" : "Proximity possible (coarse location)");
 
   // timing: more evidence never scores lower — confirmed 30 > possible 18–30 > unknown ≤ 15 > no-match 0
   const gap = time.detail.inService?.gapDays;
@@ -321,7 +306,7 @@ export function evaluatePair(a: Project, b: Project, snapshot: Snapshot, thresho
   const completeness = evs.length ? evs.filter((e) => e.verifiedInSource).length / evs.length : 0;
   priority += Math.round(completeness * 10);
   if (completeness === 1 && evs.length) reasons.push("Every cited excerpt located verbatim in its source");
-  if (geo.detail.center?.lowConfidence) {
+  if (geo.detail.closest?.lowConfidence) {
     priority -= 5;
     reasons.push("A location is approximate or lower-confidence");
   }

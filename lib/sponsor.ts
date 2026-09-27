@@ -11,27 +11,27 @@ import { centerOf, SAME_SITE_MILES } from "@/lib/matching/geo";
  * in-service dates), the sponsor's distance rule, and what became of the example's six overlap rows in today's plans.
  */
 
-/** Sperry's distance rule, literally: "Any pair under 25 miles apart", project center to project center. */
+/** Current challenge radius: closest project points must be under 25 miles. */
 export const SPONSOR_RADIUS_MILES = 25;
 
-export const withinSponsorRule = (m: Match) => !!m.geoDetail.center && m.geoDetail.center.miles < SPONSOR_RADIUS_MILES;
+export const withinSponsorRule = (m: Match) => !!m.geoDetail.closest && m.geoDetail.closest.miles < SPONSOR_RADIUS_MILES;
 
 /** The rows of the sponsor's overlap table: pairs inside the rule, closest first (OVL_1 is the closest, as in the starter file). */
 export function sponsorRows(matches: Match[]): Match[] {
-  return matches.filter(withinSponsorRule).sort((x, y) => x.geoDetail.center!.miles - y.geoDetail.center!.miles || x.id.localeCompare(y.id));
+  return matches.filter(withinSponsorRule).sort((x, y) => x.geoDetail.closest!.miles - y.geoDetail.closest!.miles || x.id.localeCompare(y.id));
 }
 
 /** Why a flagged pair is outside the sponsor's rule; null when it is inside. */
 export function beyondRuleReason(m: Match, relations: Relation[]): string | null {
   if (withinSponsorRule(m)) return null;
-  const c = m.geoDetail.center;
-  const apart = c ? `centers ${c.miles.toFixed(1)} mi apart` : "no project center";
+  const c = m.geoDetail.closest;
+  const apart = c ? `closest points ${c.miles.toFixed(1)} mi apart` : "no measurable project geometry";
   if (m.geoDetail.method === "shared-site") {
     const stated = relations.some((r) => m.geoDetail.relationIds.includes(r.id) && r.basis !== "inferred");
     return `${stated ? "shared facility stated in a source" : "shared facility implied by several sources"} (${apart})`;
   }
   if (m.geoDetail.method === "shared-endpoint") return `terminals geocoded to the same facility (${apart})`;
-  if (!c) return "county-level location only (no project center)";
+  if (!c) return "county-level location only (no measurable project geometry)";
   if (m.geo === "possible") return `location uncertainty: ${apart}, near edge ${c.lowMiles.toFixed(1)} mi`;
   return `flagged at the ${m.geoDetail.thresholdMiles} mi review radius (${apart})`;
 }
@@ -158,7 +158,16 @@ export function sponsorCheck(radius = SPONSOR_RADIUS_MILES): { rows: SponsorChec
 /** The starter file's "projects" sheet recomputed: center (its IF(ISBLANK…) midpoint formula), overlap_count and overlap_1..n in order. */
 export function sponsorSheetCheck(): { id: string; ok: boolean }[] {
   const { projects, matches } = sponsorStarter();
-  const overlaps = sponsorOverlaps(matches);
+  const legacy = matches
+    .filter((m) => m.geoDetail.center && m.geoDetail.center.miles < SPONSOR_RADIUS_MILES)
+    .sort((x, y) => x.geoDetail.center!.miles - y.geoDetail.center!.miles || x.id.localeCompare(y.id));
+  const overlaps = new Map<string, { partner: string; overlapId: string }[]>();
+  legacy.forEach((m, i) => {
+    for (const [project, partner] of [[m.projectAId, m.projectBId], [m.projectBId, m.projectAId]]) {
+      if (!overlaps.has(project)) overlaps.set(project, []);
+      overlaps.get(project)!.push({ partner, overlapId: `OVL_${i + 1}` });
+    }
+  });
   return STARTER.map((s, i) => {
     const c = centerOf(projects[i]);
     const partners = (overlaps.get(s.id) ?? []).map((o) => o.partner);
@@ -244,14 +253,14 @@ export function sponsorReplay(run: MatchRun | null, snapshot: Snapshot): ReplayR
     const rel = RELATED[o.id];
     if (rel) {
       const m = find(rel.pair[0], rel.pair[1]);
-      row.related = { ...rel, matchId: m?.id, tab: m?.reviewStatus, rank: m && run ? queueRank(run, m, regionOf) : undefined, miles: m?.geoDetail.center?.miles };
+      row.related = { ...rel, matchId: m?.id, tab: m?.reviewStatus, rank: m && run ? queueRank(run, m, regionOf) : undefined, miles: m?.geoDetail.closest?.miles };
     }
     if (!a.projectId || !b.projectId) return { ...row, status: a.notListed || b.notListed ? "not-listed" : "not-run" };
     const [pa, pb] = [byId.get(a.projectId)!, byId.get(b.projectId)!];
     // today's numbers, whatever the radius or eligibility
     const probe = evaluatePair(pa, pb, snapshot, 1e6);
     const ip = probe?.timeDetail.inService;
-    Object.assign(row, { miles: probe?.geoDetail.center?.miles, days: ip?.gapDays, daysAtLeast: ip?.coarse });
+    Object.assign(row, { miles: probe?.geoDetail.closest?.miles, days: ip?.gapDays, daysAtLeast: ip?.coarse });
     if (!run) return row;
     const m = find(pa.id, pb.id);
     const due = m?.pastDue?.map((x) => `${displayTitle(byId.get(x.projectId)!)}: ${x.detail}`);

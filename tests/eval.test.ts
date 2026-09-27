@@ -1,11 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import distance from "@turf/distance";
-import { point } from "@turf/helpers";
 import { describe, expect, it } from "vitest";
 import { SNAPSHOT } from "@/lib/data";
 import { runMatching } from "@/lib/matching/engine";
-import { centerOf } from "@/lib/matching/geo";
+import { evaluateGeo } from "@/lib/matching/geo";
 import { ABLATIONS, evaluate, markdown, R0, RADII } from "@/scripts/evaluate";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -32,25 +30,21 @@ describe("evaluation invariants", () => {
     expect(e.ablations[0]).toMatchObject({ flagged: run.matches.length, lost: 0, gained: 0 });
   });
 
-  it("flags every pair whose centers are under the radius (ours ⊇ center distance alone), at every radius", () => {
-    expect(e.b2notB4).toEqual([]);
+  it("reports the closest-point sweep and preserves differences from the legacy center baseline", () => {
     expect(e.sweep.map((s) => s.R)).toEqual(RADII);
-    for (const s of e.sweep) expect(s.B2notInB4).toBe(0);
-    // independent of the evaluation code: recompute the sponsor rule from project centers
+    for (const s of e.sweep) expect(s.flagged).toBeGreaterThan(0);
+    // A center can be close while the scoped equipment work site is not; those differences are listed, not hidden.
     const flagged = new Set(run.matches.map((m) => m.id));
     const archived = new Set(run.excludedProjects.map((x) => x.projectId));
     const ps = SNAPSHOT.projects.filter((p) => !archived.has(p.id)).sort((x, y) => x.id.localeCompare(y.id));
-    let near = 0;
     for (let i = 0; i < ps.length; i++)
       for (let j = i + 1; j < ps.length; j++) {
         const [a, b] = [ps[i], ps[j]];
         if (a.region !== b.region || a.owners.some((o) => b.owners.some((q) => q.utilityId === o.utilityId))) continue;
-        const [ca, cb] = [centerOf(a), centerOf(b)];
-        if (!ca || !cb || distance(point(ca.lonlat), point(cb.lonlat), { units: "miles" }) >= R0) continue;
-        near++;
-        expect(flagged.has(`${a.id}__${b.id}`)).toBe(true);
+        const g = evaluateGeo(a, b, SNAPSHOT.relations, R0);
+        if (g.detail.closest && g.detail.closest.highMiles < R0 && !g.detail.closest.approximate) expect(flagged.has(`${a.id}__${b.id}`)).toBe(true);
       }
-    expect(near).toBe(e.baselines.find((x) => x.id === "B2")!.flagged);
+    expect(e.b4notB2.pairs.length).toBeGreaterThan(0);
   });
 
   it("the literal OR rule contains the engine's flags, and the engine is far more selective", () => {
@@ -59,7 +53,7 @@ describe("evaluation invariants", () => {
     expect(or.flagged).toBeGreaterThan(10 * e.queue.flagged.k);
   });
 
-  it("negative controls: nothing archived is flagged, past-due plans never confirm TIME, far pairs need a shared facility", () => {
+  it("negative controls: nothing archived is flagged, past-due plans never confirm TIME, far closest-point pairs are excluded", () => {
     const nc = e.negativeControls;
     expect(nc.archived.B4).toBe(0);
     expect(run.matches.some((m) => run.excludedProjects.some((x) => x.projectId === m.projectAId || x.projectId === m.projectBId))).toBe(false);
@@ -68,11 +62,10 @@ describe("evaluation invariants", () => {
     expect(nc.crossRegion.B4).toBe(0);
   });
 
-  it("documented-interface recall is reported with its circularity: without the shared-site rule it matches the center rule", () => {
+  it("documented-interface recall reports the shared-site rule's circularity", () => {
     const r = e.interfaces.recall;
     expect(r.B4.all.of).toBe(e.interfaces.inUniverse);
     expect(r.B2.all.hit).toBeLessThanOrEqual(r.B4.all.hit);
-    // every interface the full engine keeps beyond the center rule comes from the shared-facility rule it reads from the same filings
     const a3b = e.ablations.find((a) => a.id === "A3b")!;
     expect(a3b.recall.all.hit).toBeLessThanOrEqual(r.B4.all.hit);
     expect(e.interfaces.detail.filter((x) => x.ours && !x.flaggedBy.includes("B2")).every((x) => ["shared-site", "shared-endpoint"].includes(x.ours!.method))).toBe(true);

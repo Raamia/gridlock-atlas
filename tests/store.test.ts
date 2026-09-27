@@ -53,9 +53,9 @@ describe("store: compare and reveal", () => {
     await st().compare({ quiet: true });
     st().select(TOP);
     st().set({ closeupOpen: true });
-    await st().compare({ quiet: true, thresholdMiles: 5 });
+    await st().compare({ quiet: true, thresholdMiles: 3 });
     expect(st()).toMatchObject({ selectedMatchId: null, inspectorOpen: false, closeupOpen: false });
-    expect(st().notice).toMatchObject({ kind: "dropped-pair", text: "The pair isn't flagged at 5 mi" });
+    expect(st().notice).toMatchObject({ kind: "dropped-pair", text: "The pair isn't flagged at 3 mi" });
     await st().compare({ quiet: true, thresholdMiles: 25 });
     expect(st().notice).toBeNull();
   });

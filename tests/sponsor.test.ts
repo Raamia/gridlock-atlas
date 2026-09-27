@@ -65,7 +65,7 @@ describe("sponsor-format overlap CSV", () => {
     expect(headOf(text)).not.toContain("sponsor_rule");
   });
 
-  it("keeps only pairs whose centers are under 25 mi, closest first, numbered OVL_1… in that order", () => {
+  it("keeps only pairs whose closest points are under 25 mi, nearest first, numbered OVL_1… in that order", () => {
     expect(rows.length).toBe(southeast.filter(withinSponsorRule).length);
     expect(rows.length).toBeGreaterThan(40);
     const miles = rows.map((r) => Number(r.distance_mi));
@@ -73,7 +73,7 @@ describe("sponsor-format overlap CSV", () => {
     expect([...miles].sort((a, b) => a - b)).toEqual(miles);
     expect(rows.map((r) => r.overlap_id)).toEqual(rows.map((_, i) => `OVL_${i + 1}`));
     expect(new Set(rows.map((r) => r.pair_id)).size).toBe(rows.length);
-    for (const r of rows) expect(r.distance_mi).toBe(southeast.find((m) => m.id === r.pair_id)!.geoDetail.center!.miles.toFixed(2));
+    for (const r of rows) expect(r.distance_mi).toBe(southeast.find((m) => m.id === r.pair_id)!.geoDetail.closest!.miles.toFixed(2));
   });
 
   it("stays on the sponsor's 25 mi rule when the review radius is wider", () => {
@@ -99,10 +99,10 @@ describe("extended overlap CSV (every flagged pair)", () => {
   });
 
   it("says why each pair beyond the rule was flagged", () => {
-    expect(byPair.get("dpc-alma-blair__xcel-wwtc")?.beyond_rule_reason).toMatch(/^shared facility (stated in a source|implied by several sources) \(centers \d+\.\d mi apart\)$/);
-    expect(byPair.get("desc-6888__gpc-effingham-500")?.beyond_rule_reason).toBe("county-level location only (no project center)");
+    expect(byPair.get("dpc-alma-blair__xcel-wwtc")?.beyond_rule_reason).toBe("");
+    expect(byPair.get("desc-6888__gpc-effingham-500")?.beyond_rule_reason).toBe("county-level location only (no measurable project geometry)");
     const far = rows.filter((r) => r.geo_method === "measured" && r.sponsor_rule === "no");
-    for (const r of far) expect(r.beyond_rule_reason).toMatch(/^location uncertainty: centers \d+\.\d mi apart, near edge \d+\.\d mi$/);
+    for (const r of far) expect(r.beyond_rule_reason).toMatch(/^location uncertainty: closest points \d+\.\d mi apart, near edge \d+\.\d mi$/);
   });
 });
 
@@ -176,7 +176,7 @@ describe("the starter file's six rows in today's plans", () => {
       expect(r.status).toBe("hidden");
       expect(r.reasons!.join(" ")).toMatch(/McIntosh - Purrysburg/);
     }
-    expect(r.miles).toBeCloseTo(4.23, 2);
+    expect(r.miles).toBeCloseTo(3.03, 2);
   });
 
   it("marks DESC projects missing from the current list as no longer listed, citing where they were last listed", () => {

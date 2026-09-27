@@ -186,7 +186,7 @@ export function MethodDrawer() {
       [out.filter((m) => m.geoDetail.method === "shared-site" || m.geoDetail.method === "shared-endpoint").length, "shared facility"],
       [out.filter((m) => m.geoDetail.method === "measured" && m.geo === "possible").length, "location uncertainty"],
       [out.filter((m) => m.geoDetail.method === "measured" && m.geo === "confirmed").length, `the ${run.thresholdMiles} mi review radius`],
-      [out.filter((m) => !m.geoDetail.center).length, "county-level"],
+      [out.filter((m) => !m.geoDetail.closest).length, "county-level"],
     ];
     return {
       where,
@@ -211,8 +211,9 @@ export function MethodDrawer() {
           not confirmed”, with TIME at most “possible” and {PAST_DUE_PENALTY} points off its rank.
         </Rule>
         <Rule k="Place first">
-          Sperry&apos;s rule: a pair counts when the project centers are under {SPONSOR_RADIUS_MILES} mi apart. Each center is the midpoint of the project&apos;s two named sub-points (or
-          its one located point), exactly as in the guide.
+          The challenge rule measures the closest points on each project&apos;s work geometry and flags pairs under {SPONSOR_RADIUS_MILES} mi (about 40 km). Published GIS routes are
+          measured directly; digitized routes are labeled estimates. When no route is published, material line work uses the straight segment between named terminals as an estimate,
+          while substation and equipment work remains a set of work-site points.
           {rule && (
             <>
               {" "}
@@ -220,11 +221,10 @@ export function MethodDrawer() {
               {rule.possible > 0 && ` (${rule.possible} only “possible” because a location is approximate)`}.
             </>
           )}{" "}
-          Only these go into the sponsor-format overlap CSV, numbered OVL_1… by distance as in the starter file. With location uncertainty,{" "}
+          These go into the overlap CSV, numbered OVL_1… by closest distance. With location uncertainty,{" "}
           <Code>d_low = max(0, d − e_A − e_B)</Code>, <Code>d_high = d + e_A + e_B</Code>: confirmed if <Code>d_high ≤ 25</Code>, possible if only <Code>d_low ≤ 25</Code>. Beyond
-          Sperry&apos;s rule we also flag, with the reason stated in the “all flagged pairs” export: a shared facility stated in a source (or implied by several, flagged as such) or
-          terminals geocoded to the same substation, whatever the line length; uncertainty that reaches inside the radius; county-level evidence (never better than “possible”)
-          {rule && rule.beyond > 0 && ` — ${rule.beyond} here: ${rule.beyondText}`}. Schematic route traces are never measured.
+          the measured rule, uncertainty or county-level evidence may remain a “possible” lead{rule && rule.beyond > 0 && ` — ${rule.beyond} here: ${rule.beyondText}`}.
+          The tiers are touching/crossing, under 1.6 km (shared land), under 8 km (site logistics), and under 40 km (crews/equipment).
         </Rule>
         <Rule k="Then time">
           Construction windows are compared for every source combination (confirmed when <Code>max(S_latest) ≤ min(E_earliest)</Code>). No window is invented from an in-service
@@ -241,10 +241,9 @@ export function MethodDrawer() {
           utilities are uncoordinated.
         </Rule>
         <Rule k="Rank">
-          Explainable ordering, not a probability: shared facility or closer centers first (up to 60 pts), then schedule (construction-window overlap 30; overlapping published
+          Explainable ordering, not a probability: shared facility or closer approach first (up to 60 pts), then schedule (construction-window overlap 30; overlapping published
           schedules 28–30; possible overlap or in-service gap within {IN_SERVICE_HORIZON_DAYS / 365} years, up to 30), then evidence completeness (up to 10); lower-confidence
-          locations lose 5 and a passed planned date loses {PAST_DUE_PENALTY}. A pair flagged only by a shared facility while its centers are beyond the radius ranks after every
-          within-radius needs-review pair.
+          locations lose 5 and a passed planned date loses {PAST_DUE_PENALTY}.
         </Rule>
       </ul>
 
@@ -764,8 +763,8 @@ function LocationWorkflow({ region, where }: { region: string; where: string }) 
             ` Of the starter file's sub-points without coordinates, we located ${found.map((b) => `${b.found!.label}${b.found!.lowerConfidence ? " (lower-confidence)" : ""}`).join(" and ") || "none"}${missing.length ? `; ${missing.map((b) => b.name.replace(/ Sub$/, "")).join(", ")} ${missing.length === 1 ? "is" : "are"} not located` : ""}.`}
         </Rule>
         <Rule k="3 · Measure">
-          Center = midpoint of the two points (the starter file&apos;s <Code>IF(ISBLANK…)</Code> formula), haversine distance between centers, and days between in-service dates;
-          the worked example above checks both tables.
+          Closest approach drives the live queue and overlap table. Center = midpoint of two points remains a secondary legacy readout so the starter file&apos;s{" "}
+          <Code>IF(ISBLANK…)</Code> formula and six-row benchmark can still be reproduced. Days between in-service dates remain the lighter timing signal.
         </Rule>
       </ul>
       <div className="mt-3 rounded-lg bg-bg-2 px-3 py-2 text-[11.5px] leading-snug text-text-1 ring-1 ring-line">

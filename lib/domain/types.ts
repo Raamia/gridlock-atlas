@@ -300,7 +300,25 @@ export type ReviewStatus = "needs-review" | "known-coordination" | "possible";
 
 export interface GeoDetail {
   method: "shared-site" | "shared-endpoint" | "measured" | "coarse" | "none";
-  /** Sponsor metric: haversine distance between project center points. */
+  /** Current challenge metric: shortest distance between the projects' mapped work geometries. */
+  closest?: {
+    miles: number;
+    lowMiles: number;
+    highMiles: number;
+    /** Nearest point on project A and project B, respectively. */
+    a?: [number, number];
+    b?: [number, number];
+    basisA: "official-route" | "digitized-route" | "terminal-segment" | "work-sites";
+    basisB: "official-route" | "digitized-route" | "terminal-segment" | "work-sites";
+    /** True when the nearest point depends on a digitized or inferred line path. */
+    approximate: boolean;
+    lowConfidence: boolean;
+    localityOnly: boolean;
+    anyLocality: boolean;
+    touching: boolean;
+    tier: "touching-crossing" | "shared-land" | "site-logistics" | "crews-equipment" | "outside";
+  };
+  /** Legacy starter-workbook metric, retained only for benchmark/replay compatibility. */
   center?: {
     miles: number;
     lowMiles: number;
@@ -390,7 +408,7 @@ export interface Match {
   relevance: "high" | "medium" | "low";
   priority: number;
   priorityReasons: string[];
-  /** Flagged only because of a shared facility while the centers are beyond the review radius: ranked after every within-radius needs-review pair. */
+  /** Legacy audit flag retained for older snapshots; shared facilities now have a zero-mile closest approach. */
   beyondRadius?: boolean;
   /** Projects whose planned in-service date has passed without a source confirming completion (kept, ranked lower, TIME at most possible). */
   pastDue?: PastDueProject[];

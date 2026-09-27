@@ -35,21 +35,21 @@ function parseCsv(text: string): Record<string, string>[] {
 }
 
 describe("queue rank (lib/rank.ts)", () => {
-  it("puts desc-6888 × gpc-20065 at #1 of Savannah River's Needs review", () => {
-    const m = run.matches.find((x) => x.id === "desc-6888__gpc-20065")!;
+  it("puts the closest-point leader at #1 of Savannah River's Needs review", () => {
+    const m = run.matches.find((x) => x.id === "desc-06367-d-g__gpc-20065")!;
     expect(m.reviewStatus).toBe("needs-review");
     expect(queueRank(run, "southeast").get(m.id)).toBe(1);
     expect(rankOf(run, "southeast", m.id)).toBe(1);
     expect(rankLabel(1)).toBe("01");
   });
 
-  it("puts Sperry's OVL_3 pair at #2 of Savannah River's Needs review", () => {
+  it("puts Sperry's OVL_3 pair at #1 of Savannah River's Needs review", () => {
     const ovl3 = sponsorReplay(run, SNAPSHOT).find((r) => r.id === "OVL_3")!;
     expect(ovl3.status).toBe("in-queue");
     expect(ovl3.tab).toBe("needs-review");
-    expect(queueRank(run, "southeast").get(ovl3.matchId!)).toBe(2);
+    expect(queueRank(run, "southeast").get(ovl3.matchId!)).toBe(1);
     // the same number Method shows ("In our queue: #N")
-    expect(ovl3.rank).toBe(2);
+    expect(ovl3.rank).toBe(1);
   });
 
   it("equals the CSV queue_rank column for every row of every region's flagged-pairs export", () => {
@@ -91,10 +91,10 @@ describe("queue rank (lib/rank.ts)", () => {
   });
 
   it("counts tabs per region and picks the first non-empty tab", () => {
-    expect(tabTotals(run, "southeast")).toEqual({ "needs-review": 95, "known-coordination": 0, possible: 28 });
-    expect(tabTotals(run, "upper-midwest")).toEqual({ "needs-review": 2, "known-coordination": 7, possible: 0 });
+    expect(tabTotals(run, "southeast")).toEqual({ "needs-review": 70, "known-coordination": 0, possible: 67 });
+    expect(tabTotals(run, "upper-midwest")).toEqual({ "needs-review": 2, "known-coordination": 7, possible: 2 });
     expect(tabTotals(run, "southern-plains")).toEqual({ "needs-review": 0, "known-coordination": 1, possible: 0 });
-    expect(tabTotal(run, "southeast", "conflicts")).toBe(74);
+    expect(tabTotal(run, "southeast", "conflicts")).toBe(77);
     expect(firstNonEmptyTab(run, "southeast")).toBe("needs-review");
     expect(firstNonEmptyTab(run, "southern-plains")).toBe("known-coordination");
     expect(firstNonEmptyTab(run, "all")).toBe("needs-review");
@@ -102,6 +102,6 @@ describe("queue rank (lib/rank.ts)", () => {
 
   it("gives no rank to a pair outside the region", () => {
     expect(rankOf(run, "upper-midwest", "desc-6888__gpc-20065")).toBeUndefined();
-    expect(rankOf(run, "all", "desc-6888__gpc-20065")).toBe(1);
+    expect(rankOf(run, "all", "desc-6888__gpc-20065")).toBe(7);
   });
 });

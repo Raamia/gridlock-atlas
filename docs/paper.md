@@ -1,10 +1,10 @@
 # GridLock Atlas: Evidence-Grounded Matching of Public Utility Construction Plans
 
-*GridLock Atlas team, ShellHacks 2026, Sperry Tech GridLock Challenge. Snapshot `snap-2026-09-26-339ecf7b` (26 September 2026), engine `gridlock-engine/1.2.0`. Every number below is produced by a command in Appendix A.*
+*GridLock Atlas team, ShellHacks 2026, Sperry Tech GridLock Challenge. Snapshot `snap-2026-09-26-339ecf7b` (26 September 2026), engine `gridlock-engine/1.3.0`. Every number below is produced by a command in Appendix A.*
 
 ## Abstract
 
-Neighboring electric utilities publish their future transmission work in separate documents, so nobody sees where the plans meet. GridLock Atlas ingests public plans, measures every cross-utility pair of projects under the sponsor's rule (project centers under 25 miles apart, the primary signal), weighs published timing (the secondary signal), and ranks the result as review leads. Every fact on screen is tied to a short verbatim excerpt and page. On a frozen snapshot of 103 public sources (1,786 excerpts, all re-found in their cached source by script) the engine measures 7,929 candidate pairs and flags 133 (1.7%). We evaluate without human labels. The sponsor's worked example is reproduced exactly (6/6 overlap rows, 10/10 project rows, no extra pairs). A literal "close *or* at the same time" rule would flag 4,622 pairs (58.3%). The 25-mile center rule alone keeps 0 of 13 documented cross-utility interfaces; the engine keeps 10 only because it reads the filings' own shared-facility statements, a circular result that we measure with ablations and state openly. GPT-5.5 independently re-read 283 plan pages: 2,578 of its 2,579 quoted fields are verbatim on the page, and it agrees with our parser on 98.5% of the values both give. We make no claim about savings or planner effectiveness.
+Neighboring electric utilities publish future transmission work in separate documents, obscuring where their projects meet. GridLock Atlas ingests public plans, measures the closest points between cross-utility project geometries, weighs published timing, and ranks the result as review leads. Official routes, digitized routes, terminal-segment estimates, and work-site points retain distinct provenance. On a frozen snapshot of 103 public sources, the engine evaluates 7,929 candidate pairs and flags 149 (1.9%); a literal "close *or* at the same time" rule flags 4,631 (58.4%). The supplied center-based workbook remains a legacy benchmark and is reproduced exactly (6/6 overlap rows and 10/10 project rows), but its center metric does not control live flags. The engine keeps 10 of 13 documented interfaces; this relies on shared-facility statements from the same filings and is therefore reported as circular rather than as precision. GPT-5.5 independently re-read 283 plan pages: 2,578 of 2,579 quoted fields are verbatim, with 98.5% agreement where both systems return a value.
 
 ## 1. Introduction
 
@@ -15,7 +15,7 @@ The policy context is FERC Order No. 1920 (89 FR 49280). "This final order is ef
 Contributions:
 
 - **C1, provenance first.** A pipeline in which every displayed fact carries a verbatim excerpt and page from a cached public document, re-found by script at build time and again by the audit.
-- **C2, honest matching.** The sponsor's center rule applied literally, extended with location uncertainty, source-stated shared facilities and a published-schedule time basis. Three statuses keep uncertainty visible: *known coordination*, *needs review* (the sources are silent, never "uncoordinated") and *possible*.
+- **C2, geometry-aware matching.** Closest-point measurement across routes, estimated terminal segments, and work sites, with explicit provenance, uncertainty, and four operational distance tiers.
 - **C3, evaluation without labels.** Exact reproduction of the sponsor's tables, baselines with denominators, negative controls, radius sweeps and ablations, all from `npm run eval`.
 - **C4, a model cross-check that never becomes a fact.** A GPT-5.5 re-read of 283 plan pages, scored as agreement with the deterministic parser.
 - **C5, cited impact channels.** Separate, labeled, never-summed scenarios for the bonus cost/impact estimate.
@@ -34,13 +34,13 @@ The snapshot holds 219 projects from 19 utilities, 103 cited public sources and 
 
 **CEII.** Only public editions are used. SERTP's 2025 regional plan is its non-CEII edition ("as it does not include Critical Energy Infrastructure Information (CEII) materials", p. 3). Georgia Power's plan is the "PUBLIC DISCLOSURE" file, whose costs read "Estimated Cost – GPC REDACTED" (p. 314); they stay redacted. A live check finds 0 of 1,786 stored excerpts quoting CEII-marked text.
 
-**Locations.** Terminals are matched to OpenStreetMap power features and Nominatim, as the sponsor's location guide suggests, then checked against the plan's wording. In the Savannah River region the points behind project centers are 252 named facilities confirmed, 27 named but lower-confidence and 49 town-level. Lower-confidence and town-level points cost ranking points, and a center that rests only on town-level points is never better than "possible".
+**Locations.** Terminals are matched to OpenStreetMap power features and Nominatim, as the sponsor's location guide suggests, then checked against the plan's wording. In the Savannah River region the located points include 252 named facilities confirmed, 27 named but lower-confidence and 49 town-level. Lower-confidence points cost ranking points, and a match that rests only on town-level locations is never better than "possible".
 
 **Plan status.** Two projects that a source calls complete are archived as negative controls. Forty-eight plans whose planned in-service date has passed with no source confirming completion are kept and flagged, never silently dropped.
 
 ## 3. Method
 
-**Place (primary).** A project's center is the midpoint of its two named terminals (one located point is the center), the starter file's formula. Distance is haversine between centers. A pair meets Sperry's rule when centers are under 25 mi apart; only these pairs enter the sponsor-format overlap table, numbered OVL_1… by distance. Location error becomes bounds, `d_low = max(0, d − e_A − e_B)` and `d_high = d + e_A + e_B`: confirmed when `d_high ≤ R`, possible when only `d_low ≤ R`. Beyond the rule the engine also keeps three kinds of review leads, each exported with its reason: a shared facility stated in a source (or implied by several), or terminals geocoded to the same facility (within 0.6 mi and carrying the same distinctive name, or one geocode); uncertainty that reaches inside the radius; and county-only evidence (at most "possible"). Differently named facilities are never merged, however close (McIntosh and West McIntosh are 0.46 mi apart). Schematic route traces are never measured.
+**Place (primary).** Each project becomes a geometry with provenance. Published GIS routes are used directly. Routes digitized from official maps are measured but labeled approximate. Material line work without a route uses the straight segment between named terminals; only an interior projection is approximate, while an endpoint remains a located point. Substation and equipment work remains at scoped work-site points. The engine computes point-to-point, point-to-line, or line-to-line closest approach and detects crossings. Distance uncertainty yields `d_low = max(0, d − e_A − e_B)` and `d_high = d + e_A + e_B`; an inferred or digitized interior supports at most a *possible* match until its alignment is confirmed. Operational tiers are touching/crossing, under 1.6 km (shared land), under 8 km (site logistics), and under 40 km (crews/equipment). A source-stated shared facility is a zero-mile contact. The starter workbook's midpoint center remains a secondary readout solely for reproducibility.
 
 **Time (secondary).** Construction windows are compared for every combination of sources and are confirmed when `max(S_latest) ≤ min(E_earliest)`. No window is invented from an in-service date: a start plus a need date is kept as bounds with the field work undated, and DESC's yearly budget gives only a coarse window, so both support at most "possible". Published *schedules* are compared separately: Georgia Power's Start Date, which its plan defines as the "schedule for implementation (start date)" (Ten-Year Plan p. 174), or DESC's first evidenced spending, through the current in-service date. When two schedules overlap for certain for at least 30 days, TIME is confirmed on a *schedule basis*. The app always adds "field-work dates are not published" and never calls this a construction overlap. A plan whose in-service date has passed caps TIME at "possible". The gap between in-service dates in days, the sponsor's secondary signal, informs ranking.
 
@@ -80,23 +80,23 @@ All 6 rows match (±0.01 mi, to the day), with 0 extra pairs at every radius fro
 | B1 | same county + same in-service year | 12 (0.2%) | 8 | 4 |
 | B1w | same county + overlapping window years | 22 (0.3%) | 12 | 8 |
 | B2 | Sperry's rule alone: exact centers < 25 mi | 111 (1.4%) | 111 | 0 |
-| B3 | close OR on a similar schedule (literal reading of "either … or") | 4,622 (58.3%) | 4,563 | 13 |
+| B3 | close OR on a similar schedule (literal reading of "either … or") | 4,631 (58.4%) | 4,571 | 13 |
 | B5 | B2 AND time possible or confirmed | 50 (0.6%) | 50 | 0 |
 | B6 | same facility name in both plan texts | 24 (0.3%) | 15 | 8 |
-| **B4** | **GridLock engine** | **133 (1.7%)** | **123** | **10** |
+| **B4** | **GridLock engine** | **149 (1.9%)** | **137** | **10** |
 
 - **B2 ⊆ B4.** None of the 111 sponsor-rule pairs is missing from the engine's queue, at every radius from 5 to 100 mi. The engine adds 22 leads: 10 shared facilities, 6 county-level possibles and 6 where location uncertainty reaches inside the radius.
 - **Why a county join fails here.** The Savannah River is the state line. Of the 111 DESC × GPC pairs under 25 mi, only 23 share a county, and in 90 the DESC project lies entirely in South Carolina counties. Across all 7,830 DESC × GPC pairs, 25 share any county.
 - **Why a name join fails.** It needs no coordinates, but it joins different facilities that share a name (12 of its pairs are over 50 mi apart) and misses neighbors whose facilities have different names.
 - **Why OR fails.** The time leg alone fires on 4,553 pairs, so the literal OR reading contradicts the sponsor's expectation that most pairs do not overlap. The same challenge text also makes geography primary, and the engine follows that reading.
 
-Engine queue at 25 mi: 97 needs review, 8 known coordination, 28 possible. Badges: 79 GEO, 26 BOTH, 28 POSSIBLE. TIME is confirmed on 33 pairs (all on a schedule basis), possible 31, unknown 26, no-match 43. The in-service gap is known for 122 of 133 pairs. By region: Savannah River 123, Upper Midwest 9, Southern Plains 1. All 133 flagged pairs have every cited excerpt verified.
+Engine queue at 25 mi: 72 needs review, 8 known coordination, 69 possible. Badges: 61 GEO, 19 BOTH, 69 POSSIBLE. TIME is confirmed on 36 pairs, possible on 35, unknown on 29, and no-match on 49. The in-service gap is known for 135 of 149 pairs. By region: Savannah River 137, Upper Midwest 11, Southern Plains 1. All 149 flagged pairs have every cited excerpt verified.
 
 ### 5.3 Documented interfaces, and why the result is circular
 
 "Documented interfaces" are relations that the snapshot's public filings state or imply: shared sites, interconnections, shared initiatives or known coordination. There are 22; 9 have a shared owner (internal by design), leaving **13 cross-utility pairs in U**: 9 physical, 2 joint, 2 portfolio. Three rest on an inferred relation, and **none is in the Savannah River region.** The engine keeps 10/13 (9/9 physical); the center rule alone keeps 0/13, because documented interfaces are long lines that meet end to end, so their centers are 25.8–122.3 mi apart. The three misses have no shared site. One is a same-initiative link (Xcel's Minnesota segments and Alma–Blair are both parts of MISO LRTP Project 4); our relation record notes, as a reading of the route descriptions, that those segments do not physically meet Alma–Blair. The other two are portfolio links: Grid Forward's planning analysis assumes Alma–Blair in service (application p. 47), and the PSC found Grid Forward beneficial "both individually and in conjunction with" the Western Wisconsin project (final decision p. 19).
 
-This is circular by construction. The shared-site rule reads the same relations used as positives. Ablation A3a (stated shared sites removed) keeps 3/13, all through same-facility geocodes. A3b (the whole shared-site rule removed) keeps 0/13. The honest claim is a design justification: *a center-distance rule alone misses every documented interface; the engine keeps them only because it reads the filings' statements of shared facilities.* It is not an accuracy estimate.
+This check is partly circular because the shared-site rule reads some of the same relations used as positives. The legacy center rule keeps 0/13, while ablation A3a (source-stated shared sites removed) and A3b (all shared-site logic removed) each retain 9/13 through closest-point geometry and other evidence. The full engine retains 10/13. The honest claim is narrow: closest-point geometry recovers most long lines that physically meet even when their centers are far apart, while one additional control depends on a sourced shared-facility statement. This is not an accuracy estimate.
 
 ### 5.4 Negative controls
 
@@ -105,32 +105,32 @@ This is circular by construction. The shared-site rule reads the same relations 
 | Pairs with a project a source calls complete (archived) | 14 | 1 | 0 |
 | Pairs whose exact centers are > 50 mi apart | 7,674 | 4,414 | 5, all source-documented shared facilities |
 | Cross-region pairs (for example Georgia × Wisconsin) | 3,614 | 1,837 on time alone | 0 |
-| Pairs with a past-due plan (48 projects) | 2,942 | 1,391 | 28 flagged, every one marked past due; 0 TIME confirmed; 0 BOTH |
+| Pairs with a past-due plan (48 projects) | 2,942 | 1,391 | 30 flagged, every one marked past due; 0 TIME confirmed; 0 BOTH |
 
 ### 5.5 Radius sensitivity
 
 | R (mi) | 5 | 10 | 15 | 20 | **25** | 30 | 40 | 50 | 75 | 100 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Flagged | 27 | 51 | 67 | 95 | **133** | 155 | 190 | 223 | 495 | 1,101 |
+| Flagged | 40 | 64 | 84 | 118 | **149** | 175 | 215 | 283 | 578 | 1,209 |
 | B2 (center rule) | 7 | 33 | 45 | 70 | **111** | 131 | 175 | 201 | 424 | 1,023 |
 | Interfaces B4 / B2 (of 13) | 10 / 0 | 10 / 0 | 10 / 0 | 10 / 0 | **10 / 0** | 10 / 1 | 10 / 5 | 10 / 5 | 11 / 8 | 13 / 11 |
 | Top lead's Savannah rank | – | 2 | 1 | 1 | **1** | 1 | 1 | 1 | 1 | 1 |
 | 25-mi top 10 kept | 1 | 4 | 6 | 9 | **10** | 9 | 9 | 9 | 8 | 8 |
 
-The top lead is 6.7 mi apart, so it drops out at 5 mi. At 10 mi a 4.2-mi McIntosh pair outranks it. From 15 to 100 mi it is #1. The center rule needs 100 mi and 1,023 pairs to keep 11 of the 13 interfaces.
+The top needs-review lead has a 4.25-mi closest approach and remains first from 10 to 100 mi. At 5 mi it ranks second because the tighter radius changes the queue. The legacy center baseline needs 100 mi and 1,023 pairs to keep 11 of the 13 interfaces.
 
 ### 5.6 Ablations (snapshot transforms; engine code unchanged)
 
 | Variant | Flagged | NR / known / possible | BOTH | Interfaces | Top lead |
 | --- | --- | --- | --- | --- | --- |
-| A0 full engine | 133 | 97 / 8 / 28 | 26 | 10/13 | #1 |
-| A1 no location uncertainty | 125 | 100 / 8 / 17 | 26 | 10/13 | #1 |
-| A2 no town-level cap | 133 | 106 / 8 / 19 | 30 | 10/13 | #1 |
-| A3a no source-stated shared sites | 126 | 96 / 2 / 28 | 26 | 3/13 | #1 |
-| A3b no shared-site rule | 123 | 95 / 0 / 28 | 26 | 0/13 | #1 |
-| A4 A1 + A2 + A3b | 115 | 111 / 0 / 4 | 30 | 0/13 | #1 |
-| A5 no schedule basis | 133 | 97 / 8 / 28 | 0 | 10/13 | #1 |
-| A6 drop past-due plans (engine 1.1 rule) | 105 | 75 / 8 / 22 | 26 | 10/13 | #1 |
+| A0 full engine | 149 | 72 / 8 / 69 | 19 | 10/13 | #1 |
+| A1 no location uncertainty | 132 | 72 / 8 / 52 | 19 | 10/13 | #1 |
+| A2 no town-level cap | 149 | 92 / 8 / 49 | 25 | 10/13 | #1 |
+| A3a no source-stated shared sites | 148 | 71 / 7 / 70 | 19 | 9/13 | #1 |
+| A3b no shared-site rule | 148 | 68 / 7 / 73 | 19 | 9/13 | #1 |
+| A4 A1 + A2 + A3b | 131 | 100 / 7 / 24 | 28 | 9/13 | #1 |
+| A5 no schedule basis | 149 | 72 / 8 / 69 | 0 | 10/13 | #1 |
+| A6 drop past-due plans (engine 1.1 rule) | 119 | 52 / 8 / 59 | 19 | 10/13 | #1 |
 
 Each safeguard has a visible job. Without location uncertainty, 8 flagged pairs disappear and 3 possible pairs are overclaimed as needs review. The town-level cap stops 9 pairs from being overclaimed (with it removed, 4 of them become BOTH). The shared-site rule accounts for every known-coordination case. The schedule basis supplies every BOTH badge. Keeping past-due plans restores 28 pairs, including Sperry's OVL_2. No safeguard moves the top lead. Not run, because each needs an engine code change: the priority weights, the 0.6-mi same-site tolerance, the 30-day schedule minimum, the 1,460-day horizon and the beyond-radius floor.
 
@@ -148,15 +148,17 @@ Each safeguard has a visible job. Without location uncertainty, 8 flagged pairs 
 
 ## 6. Case studies
 
-**(a) The top Savannah River lead.** DESC's "Okatie – McIntosh 115kV Tie: Add Series Reactor" (SCRTP 2026–2030 p. 41), with a new Deerfield switching station, pairs with Georgia Power's Goshen–McIntosh 115 kV rebuild. Priority is 92, the centers are 6.71 mi apart, GEO is confirmed and TIME is possible. The rebuilt section ends short of McIntosh: "Rebuild the Goshen (Savannah) - Georgia Pacific (Rincon) section, approximately 6.7 miles" (Ten-Year Plan p. 314), and Georgia Pacific is 1.7 mi from McIntosh. DESC plans in-service "12/31/2028" (p. 41); SERTP 2026 gives Georgia Power's in-service year as 2028 (p. 53), replacing the plan's "Need Date 06/01/2027" (p. 314), which is kept as a preserved conflict. TIME stays *possible*: DESC's schedule starts with 2027 spending, so the two schedules overlap for certain by only 1 day, under the 30-day minimum. A conductor disagreement is also kept side by side: the Ten-Year Plan says 795 ACSR Drake, both SERTP plans say 1351 ACSS.
+**(a) The top Savannah River lead.** DESC's Jasper–Okatie 230 kV #2 and Georgia Power's Goshen–McIntosh rebuild have a 4.25-mi closest approach, placing them in the site-logistics tier. Both closest points are named terminals, so the distance does not depend on an inferred line interior. Their published schedules overlap for 18 months (June 2025–December 2026), while the interface clearly labels that field-work dates are not published.
 
-**(b) A confirmed schedule overlap: Sperry's OVL_3 today.** DESC's Jasper–Okatie 230 kV #2 × the same Goshen–McIntosh rebuild is #2 in the queue (P89, 8.13 mi, BOTH). The app reads: "Published schedules overlap (start → in-service) for 18 months (Jun 2025–Dec 2026); field-work dates are not published." DESC's date has moved across its sources: "12/31/25" (2024–2028 list p. 23), "5/31/2026" (2025–2029 list p. 18) and "12/01/2026" (2026–2030 list p. 12). The SC PSC docket agrees: "DESC now estimates the commercial operation date for the facilities to be December 1, 2026." (letter of 7 March 2025, p. 2), and "DESC has revised its initial construction estimate from approximately $54 million to approximately $98 million." (p. 2). In all, 9 of the top 12 Savannah pairs are BOTH on a schedule basis. Without the schedule basis (A5) there are none.
+**(b) A confirmed schedule overlap: Sperry's OVL_3 today.** The same pair is #1 in the queue (P94, 4.25-mi closest approach, BOTH). The app reads: "Published schedules overlap (start → in-service) for 18 months (Jun 2025–Dec 2026); field-work dates are not published." DESC's date moved from "12/31/25" to "5/31/2026" and then "12/01/2026" across three plan editions. The SC PSC docket agrees with the current date and records the estimate changing from approximately $54 million to approximately $98 million. Without the schedule basis (A5), no pair receives a BOTH badge.
 
-**(c) Tremval North, known coordination.** The Wisconsin PSC's final decision on Alma–Blair (docket 1515-CE-103) states that Dairyland's 345 kV line would connect "to the new 345 kV Tremval Nouth Substation that was approved in docket 5-CE-158" (the typo is in the source, p. 13), the station approved for Xcel's WWTC. The centers are ≈37 mi apart, beyond the radius, so the pair is kept only for the stated shared facility, filed under Known coordination and ranked after every within-radius lead. The Upper Midwest has 7 known-coordination pairs and 2 needs-review pairs, all of them shared facilities beyond the radius.
+**(c) Tremval North, known coordination.** The Wisconsin PSC's final decision states that Dairyland's 345 kV line would connect to the new Tremval North station approved for Xcel's WWTC. The project centers are about 37 mi apart, but the projects physically meet: closest approach is therefore a source-supported zero-mile contact, filed under Known coordination rather than presented as a new opportunity.
 
-**(d) Sperry's example on today's plans.** Starter projects are matched to plan records by title and in-service date. OVL_3 is #2 in the queue (8.13 mi, ≥396 days on current dates). OVL_2 is #20 (4.23 mi, 183 days). It is kept although Georgia Power's McIntosh–Purrysburg reactors passed their planned date (June 1, 2026), because no source confirms completion; it was dropped by engine 1.1 (A6). DESC 6810 A and 6809 E (OVL_1, OVL_4) were last listed in the 2024–2028 list (pp. 31, 14). DESC 6808 S (OVL_5, OVL_6) was last listed in the 2025–2029 list (p. 8). A text search of the later lists finds none of these Project IDs. The app calls them "no longer listed", never "completed".
+**(d) Sperry's example on today's plans.** OVL_3 is #1 in the queue (4.25-mi closest approach, at least 396 days on current dates). OVL_2 is #13 (3.03 mi, 183 days). It remains visible although Georgia Power's planned date has passed because no source confirms completion. Four other starter rows involve DESC projects absent from current lists; the app calls them "no longer listed", never "completed".
 
 **(e) A third utility.** Duke Energy's Carolinas plan is cached and would add DESC's own ties. For example, the CTPC 2025–2035 plan lists "W220124 – Newberry 115 kV Line (Bush River-DESC), Upgrade" (p. 154), and DESC's list has "Rebuild the existing Saluda Hydro – Bush River #1 and #2 Tie Lines to SPDC 1272." (p. 15). Duke is **not** in this snapshot, and no number above includes it.
+
+**Evidence retained from the earlier center-ranked lead.** Changing the ranking does not remove its source record. DESC calls it “Okatie – McIntosh 115kV Tie: Add Series Reactor” and gives “12/31/2028.” Georgia Power scopes its rebuild to the “Goshen (Savannah) - Georgia Pacific (Rincon) section, approximately 6.7 miles” and prints “Need Date 06/01/2027.” For the current OVL_3 side, the PSC states: “DESC now estimates the commercial operation date for the facilities to be December 1, 2026.” The Wisconsin control states that Dairyland connects “to the new 345 kV Tremval Nouth Substation that was approved in docket 5-CE-158.” These excerpts remain auditable even though closest-point ranking changes which pair appears first.
 
 ## 7. Impact channels (bonus)
 
@@ -184,17 +186,17 @@ The estimate is split into channels. Each has a formula, a cited unit cost with 
 
 ## 9. Conclusion
 
-A literal, auditable reading of the sponsor's rule, extended only where the filings themselves give a reason, turns 7,929 candidate pairs into 133 cited review leads, reproduces the sponsor's worked example exactly, and says what it cannot know. The next step is planner labels in the existing reviewer mode, which would turn this protocol into a real precision estimate.
+A provenance-aware closest-point method turns 7,929 candidate pairs into 149 cited review leads, reproduces the sponsor's legacy workbook exactly, and says what it cannot know. The next step is planner labels in the existing reviewer mode, which would turn this protocol into a real precision estimate.
 
 ## Appendix A. Reproduce
 
 ```bash
 npm install
 npm run check                      # tsc, eslint, vitest (incl. sponsor tables, eval invariants, this paper's numbers and quotes), audit
-npm run audit                      # 219 projects, 103 sources, 1786/1786 excerpts verbatim; 7929 pairs → 133
+npm run audit                      # 219 projects, 103 sources, 1786/1786 excerpts verbatim; 7929 pairs → 149
 npm run eval                       # data/eval/eval.{json,md}: baselines, controls, sweep, ablations
 npm run extract:eval -- score      # data/eval/extraction-eval.{json,md} from the 283 stored runs (no API call)
 python3 scripts/ingest/find_excerpt.py <sourceId> --page <p> "<excerpt>"   # re-find any quote above
 ```
 
-Versions: snapshot `snap-2026-09-26-339ecf7b` (26 September 2026), engine `gridlock-engine/1.2.0`, extraction prompt `gridlock-extract/1.1` (sha256 `9810cb893eca…`). County polygons for B1 come from the US Census `cb_2023_us_county_20m` file (hash recorded in `data/eval/counties.json`). Baseline definitions are in `scripts/evaluate.ts`.
+Versions: snapshot `snap-2026-09-26-339ecf7b` (26 September 2026), engine `gridlock-engine/1.3.0`, extraction prompt `gridlock-extract/1.1` (sha256 `9810cb893eca…`). County polygons for B1 come from the US Census `cb_2023_us_county_20m` file (hash recorded in `data/eval/counties.json`). Baseline definitions are in `scripts/evaluate.ts`.

@@ -245,7 +245,7 @@ function addDataLayers(map: mapboxgl.Map, basemap: Basemap) {
     ...slot,
   });
 
-  // every flagged pair: amber link between project centers (drawn under the project geometry)
+  // every flagged pair: amber link between closest mapped points (drawn under project geometry)
   map.addLayer({
     id: "gl-overlaps-glow",
     type: "line",
@@ -722,16 +722,15 @@ export default function MapStage() {
         if (m) {
           const pa = IDX.project(m.projectAId);
           const pb = IDX.project(m.projectBId);
-          const c = m.geoDetail.center;
+          const c = m.geoDetail.closest;
           const thr = m.geoDetail.thresholdMiles;
-          // flagged for a shared facility, not for distance: name the facility, never a bare "105 mi apart"
           const byFacility =
             m.geoDetail.method === "shared-site" ||
             m.geoDetail.method === "shared-endpoint";
           const place = byFacility
-            ? `${geoShort(m).title}${c && c.miles > thr ? ` (centers ${formatMilesNear(c.miles, thr)} apart)` : ""}`
+            ? geoShort(m).title
             : c
-              ? `${formatMilesNear(c.miles, thr)} apart`
+              ? `${formatMilesNear(c.miles, thr)} closest approach${c.approximate ? " (estimated)" : ""}`
               : geoShort(m).text;
           showCard(
             `<div class="glass glass-solid rounded-lg px-3 py-2 text-[12px] leading-snug" style="max-width:280px">
@@ -937,7 +936,8 @@ export default function MapStage() {
         optional,
       });
     };
-    const c = m.geoDetail.center;
+    const closest = m.geoDetail.closest;
+    const c = closest?.a && closest.b ? { a: closest.a, b: closest.b } : undefined;
     const site = sharedSite(m);
     if (site) {
       const caption = site.stated
@@ -995,7 +995,7 @@ export default function MapStage() {
       [m.projectAId, "a"],
       [m.projectBId, "b"],
     ] as const) {
-      // label each project at its center point (the sponsor's distance anchor): the northern one above
+      // Label each project at the closest point used by the challenge metric.
       const p = IDX.project(id);
       const at = c ? (role === "a" ? c.a : c.b) : anchorOf(p);
       if (!at) continue;

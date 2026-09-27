@@ -2,7 +2,7 @@
  "meta": {
   "snapshot": "snap-2026-09-26-339ecf7b",
   "snapshotDate": "2026-09-26",
-  "engine": "gridlock-engine/1.2.0",
+  "engine": "gridlock-engine/1.3.0",
   "radiusMiles": 25,
   "focusRegion": "southeast",
   "projects": 219,
@@ -102,8 +102,8 @@
     "id": "OVL_2",
     "status": "in-queue",
     "tab": "needs-review",
-    "rank": 20,
-    "miles": 4.23,
+    "rank": 13,
+    "miles": 3.03,
     "days": 183,
     "pastDue": true,
     "related": null
@@ -112,8 +112,8 @@
     "id": "OVL_3",
     "status": "in-queue",
     "tab": "needs-review",
-    "rank": 2,
-    "miles": 8.13,
+    "rank": 1,
+    "miles": 4.25,
     "days": 396,
     "pastDue": false,
     "related": null
@@ -154,163 +154,163 @@
   "universePairs": 7929,
   "descGpcPairs": 7830,
   "flagged": {
-   "k": 133,
+   "k": 149,
    "n": 7929,
-   "pct": 1.7
+   "pct": 1.9
   },
   "descGpcFlagged": {
-   "k": 123,
+   "k": 137,
    "n": 7830,
-   "pct": 1.6
+   "pct": 1.7
   },
   "byStatus": {
-   "needs-review": 97,
+   "needs-review": 72,
    "known-coordination": 8,
-   "possible": 28
+   "possible": 69
   },
   "byRegion": {
-   "southeast": 123,
-   "upper-midwest": 9,
+   "upper-midwest": 11,
+   "southeast": 137,
    "southern-plains": 1
   },
   "byGeo": {
-   "confirmed": 105,
-   "possible": 28
+   "confirmed": 80,
+   "possible": 69
   },
   "byGeoMethod": {
-   "measured": 115,
+   "shared-site": 10,
+   "measured": 131,
    "shared-endpoint": 2,
-   "coarse": 6,
-   "shared-site": 10
+   "coarse": 6
   },
   "byTime": {
-   "possible": 31,
-   "confirmed": 33,
-   "unknown": 26,
-   "no-match": 43
+   "possible": 35,
+   "confirmed": 36,
+   "unknown": 29,
+   "no-match": 49
   },
-  "timeBasisSchedule": 33,
+  "timeBasisSchedule": 36,
   "byBadge": {
-   "GEO": 79,
-   "BOTH": 26,
-   "POSSIBLE": 28
+   "GEO": 61,
+   "BOTH": 19,
+   "POSSIBLE": 69
   },
-  "withinSponsorRule": 111,
-  "beyondRadius": 10,
-  "pastDueFlagged": 28,
+  "withinSponsorRule": 128,
+  "beyondRadius": 0,
+  "pastDueFlagged": 30,
   "inServiceGap": {
-   "known": 122,
+   "known": 135,
    "zeroAtStatedPrecision": 8,
-   "within365": 33
+   "within365": 34
   },
-  "allEvidenceVerified": 133,
+  "allEvidenceVerified": 149,
   "needsReviewTop10": [
    {
     "rank": 1,
-    "id": "desc-6888__gpc-20065",
-    "priority": 92,
-    "geo": "confirmed",
-    "time": "possible",
-    "badge": "GEO",
-    "basis": null,
-    "miles": 6.71,
-    "gapDays": 0,
-    "pastDue": false
-   },
-   {
-    "rank": 2,
     "id": "desc-06367-d-g__gpc-20065",
-    "priority": 89,
+    "priority": 94,
     "geo": "confirmed",
     "time": "confirmed",
     "badge": "BOTH",
     "basis": "schedule",
-    "miles": 8.13,
+    "miles": 4.25,
     "gapDays": 396,
     "pastDue": false
    },
    {
-    "rank": 3,
-    "id": "desc-0139-m-n__gpc-20065",
-    "priority": 87,
+    "rank": 2,
+    "id": "desc-6809-m-p48__gpc-20793",
+    "priority": 92,
     "geo": "confirmed",
     "time": "confirmed",
     "badge": "BOTH",
     "basis": "schedule",
-    "miles": 10.27,
-    "gapDays": 366,
+    "miles": 5.27,
+    "gapDays": 1248,
+    "pastDue": false
+   },
+   {
+    "rank": 3,
+    "id": "desc-6809-t__gpc-20793",
+    "priority": 90,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 6.75,
+    "gapDays": 1248,
     "pastDue": false
    },
    {
     "rank": 4,
-    "id": "desc-6888__gpc-20989",
-    "priority": 87,
+    "id": "desc-0139-m-n__gpc-20065",
+    "priority": 88,
     "geo": "confirmed",
-    "time": "possible",
-    "badge": "GEO",
-    "basis": null,
-    "miles": 11.17,
-    "gapDays": 0,
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 9.13,
+    "gapDays": 366,
     "pastDue": false
    },
    {
     "rank": 5,
+    "id": "desc-06367-d-g__gpc-20785",
+    "priority": 86,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 11.58,
+    "gapDays": 182,
+    "pastDue": false
+   },
+   {
+    "rank": 6,
+    "id": "desc-6367-d__gpc-20065",
+    "priority": 86,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 7.02,
+    "gapDays": 396,
+    "pastDue": false
+   },
+   {
+    "rank": 7,
+    "id": "desc-6367-d__gpc-20989",
+    "priority": 86,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 6.84,
+    "gapDays": 396,
+    "pastDue": false
+   },
+   {
+    "rank": 8,
+    "id": "desc-06367-d-g__gpc-20989",
+    "priority": 85,
+    "geo": "confirmed",
+    "time": "confirmed",
+    "badge": "BOTH",
+    "basis": "schedule",
+    "miles": 11.58,
+    "gapDays": 396,
+    "pastDue": false
+   },
+   {
+    "rank": 9,
     "id": "desc-6888__sertp26-mcintosh-relays",
     "priority": 85,
     "geo": "confirmed",
     "time": "unknown",
     "badge": "GEO",
     "basis": null,
-    "miles": 4.23,
+    "miles": 0,
     "gapDays": 0,
-    "pastDue": false
-   },
-   {
-    "rank": 6,
-    "id": "desc-06367-d-g__gpc-20785",
-    "priority": 84,
-    "geo": "confirmed",
-    "time": "confirmed",
-    "badge": "BOTH",
-    "basis": "schedule",
-    "miles": 13.09,
-    "gapDays": 182,
-    "pastDue": false
-   },
-   {
-    "rank": 7,
-    "id": "desc-06367-d-g__gpc-20989",
-    "priority": 84,
-    "geo": "confirmed",
-    "time": "confirmed",
-    "badge": "BOTH",
-    "basis": "schedule",
-    "miles": 12.28,
-    "gapDays": 396,
-    "pastDue": false
-   },
-   {
-    "rank": 8,
-    "id": "desc-6367-d__gpc-20065",
-    "priority": 84,
-    "geo": "confirmed",
-    "time": "confirmed",
-    "badge": "BOTH",
-    "basis": "schedule",
-    "miles": 8,
-    "gapDays": 396,
-    "pastDue": false
-   },
-   {
-    "rank": 9,
-    "id": "desc-0139-m-n__gpc-20785",
-    "priority": 83,
-    "geo": "confirmed",
-    "time": "confirmed",
-    "badge": "BOTH",
-    "basis": "schedule",
-    "miles": 13.8,
-    "gapDays": 152,
     "pastDue": false
    },
    {
@@ -344,7 +344,7 @@
   },
   {
    "id": "B2",
-   "name": "sponsor rule alone: exact centers < 25 mi",
+   "name": "legacy starter-file baseline: exact centers < 25 mi",
    "flagged": 111,
    "pctOfUniverse": 1.4,
    "descGpc": 111
@@ -352,9 +352,9 @@
   {
    "id": "B3",
    "name": "either place or time (literal OR)",
-   "flagged": 4622,
-   "pctOfUniverse": 58.3,
-   "descGpc": 4563
+   "flagged": 4631,
+   "pctOfUniverse": 58.4,
+   "descGpc": 4571
   },
   {
    "id": "B3time",
@@ -387,9 +387,9 @@
   {
    "id": "B4",
    "name": "GridLock engine",
-   "flagged": 133,
-   "pctOfUniverse": 1.7,
-   "descGpc": 123
+   "flagged": 149,
+   "pctOfUniverse": 1.9,
+   "descGpc": 137
   }
  ],
  "overlap": {
@@ -413,7 +413,7 @@
    "B5": 7,
    "B5c": 6,
    "B6": 6,
-   "B4": 18
+   "B4": 19
   },
   "B2": {
    "B1": 8,
@@ -430,12 +430,12 @@
    "B1": 12,
    "B1w": 21,
    "B2": 111,
-   "B3": 4622,
+   "B3": 4631,
    "B3time": 4553,
    "B5": 50,
    "B5c": 42,
    "B6": 18,
-   "B4": 133
+   "B4": 149
   },
   "B3time": {
    "B1": 10,
@@ -446,7 +446,7 @@
    "B5": 50,
    "B5c": 42,
    "B6": 10,
-   "B4": 64
+   "B4": 71
   },
   "B5": {
    "B1": 6,
@@ -483,23 +483,119 @@
   },
   "B4": {
    "B1": 12,
-   "B1w": 18,
+   "B1w": 19,
    "B2": 111,
-   "B3": 133,
-   "B3time": 64,
+   "B3": 149,
+   "B3time": 71,
    "B5": 50,
    "B5c": 42,
    "B6": 15,
-   "B4": 133
+   "B4": 149
   }
  },
  "b4notB2": {
   "summary": {
-   "location uncertainty (possible)": 6,
-   "county-level (possible)": 6,
-   "shared facility": 10
+   "shared facility": 10,
+   "location uncertainty (possible)": 22,
+   "county-level (possible)": 6
   },
   "pairs": [
+   {
+    "id": "atc-wwtc-jump-river__xcel-wwtc",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "dpc-glh-maribell__xcel-g2b-north-rochester-marion",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "grid-forward-atc__grid-forward-nspw",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "dpc-alma-blair__xcel-wwtc",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "sps-potter-beckham-tx__transource-potter-beckham-ok",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "grid-forward-atc__transource-beci",
+    "status": "needs-review",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "dpc-alma-blair__grid-forward-nspw",
+    "status": "needs-review",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6809-t__gpc-14222",
+    "status": "needs-review",
+    "geo": "confirmed",
+    "method": "measured",
+    "miles": 22.08,
+    "beyondRadius": false
+   },
+   {
+    "id": "atc-columbia-beci-work__transource-beci",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "atc-sugar-creek-beci-work__transource-beci",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6809-m-p48__gpc-14222",
+    "status": "needs-review",
+    "geo": "confirmed",
+    "method": "measured",
+    "miles": 23.03,
+    "beyondRadius": false
+   },
+   {
+    "id": "dpc-genoa-bell-center-765-beci-related__transource-beci",
+    "status": "known-coordination",
+    "geo": "confirmed",
+    "method": "shared-site",
+    "miles": 0,
+    "beyondRadius": false
+   },
    {
     "id": "desc-0139-m-n__gpc-19966",
     "status": "possible",
@@ -513,7 +609,23 @@
     "status": "possible",
     "geo": "possible",
     "method": "measured",
-    "miles": 25.09,
+    "miles": 24.56,
+    "beyondRadius": false
+   },
+   {
+    "id": "dpc-glh-maribell__transource-beci",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 0,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6809-g__gpc-21116",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 25.14,
     "beyondRadius": false
    },
    {
@@ -549,92 +661,84 @@
     "beyondRadius": false
    },
    {
+    "id": "desc-6381__gpc-callaway-thomson-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 28.08,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6809-m-p48__gpc-callaway-thomson-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 18.52,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6809-t__gpc-callaway-thomson-500",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 18.66,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6852__gpc-17993",
+    "status": "needs-review",
+    "geo": "confirmed",
+    "method": "measured",
+    "miles": 16.71,
+    "beyondRadius": false
+   },
+   {
     "id": "desc-7956b__gpc-callaway-thomson-500",
     "status": "possible",
     "geo": "possible",
     "method": "measured",
-    "miles": 32.18,
+    "miles": 29.96,
     "beyondRadius": false
    },
    {
-    "id": "atc-wwtc-jump-river__xcel-wwtc",
-    "status": "known-coordination",
-    "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 25.81,
-    "beyondRadius": true
+    "id": "desc-6238-h__sertp26-calvert-west-mcintosh",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 30.11,
+    "beyondRadius": false
    },
    {
-    "id": "dpc-alma-blair__xcel-wwtc",
-    "status": "known-coordination",
-    "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 37.29,
-    "beyondRadius": true
+    "id": "desc-6359__sertp26-calvert-west-mcintosh",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 30.11,
+    "beyondRadius": false
    },
    {
-    "id": "dpc-glh-maribell__xcel-g2b-north-rochester-marion",
-    "status": "known-coordination",
-    "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 55.84,
-    "beyondRadius": true
-   },
-   {
-    "id": "grid-forward-atc__grid-forward-nspw",
-    "status": "known-coordination",
-    "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 53.52,
-    "beyondRadius": true
-   },
-   {
-    "id": "sps-potter-beckham-tx__transource-potter-beckham-ok",
-    "status": "known-coordination",
-    "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 122.29,
-    "beyondRadius": true
-   },
-   {
-    "id": "grid-forward-atc__transource-beci",
+    "id": "desc-6809-m-p48__gpc-20326",
     "status": "needs-review",
     "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 79.91,
-    "beyondRadius": true
+    "method": "measured",
+    "miles": 20.76,
+    "beyondRadius": false
    },
    {
-    "id": "dpc-alma-blair__grid-forward-nspw",
+    "id": "desc-6808-l__sertp26-calvert-west-mcintosh",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 27.51,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6809-m-p48__gpc-16007",
     "status": "needs-review",
     "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 32.36,
-    "beyondRadius": true
-   },
-   {
-    "id": "atc-columbia-beci-work__transource-beci",
-    "status": "known-coordination",
-    "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 34.71,
-    "beyondRadius": true
-   },
-   {
-    "id": "atc-sugar-creek-beci-work__transource-beci",
-    "status": "known-coordination",
-    "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 34.8,
-    "beyondRadius": true
-   },
-   {
-    "id": "dpc-genoa-bell-center-765-beci-related__transource-beci",
-    "status": "known-coordination",
-    "geo": "confirmed",
-    "method": "shared-site",
-    "miles": 105.24,
-    "beyondRadius": true
+    "method": "measured",
+    "miles": 22.85,
+    "beyondRadius": false
    },
    {
     "id": "desc-06367-d-g__gpc-effingham-500",
@@ -661,19 +765,43 @@
     "beyondRadius": false
    },
    {
+    "id": "desc-6854-c__gpc-17993",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 26.65,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6854-c__gpc-20793",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 26.65,
+    "beyondRadius": false
+   },
+   {
+    "id": "desc-6854-c__gpc-20794",
+    "status": "possible",
+    "geo": "possible",
+    "method": "measured",
+    "miles": 26.65,
+    "beyondRadius": false
+   },
+   {
     "id": "desc-7956b__gpc-17993",
     "status": "possible",
     "geo": "possible",
     "method": "measured",
-    "miles": 25.78,
+    "miles": 20.33,
     "beyondRadius": false
    },
    {
-    "id": "desc-6809-m-p48__gpc-20326",
+    "id": "dpc-glh-maribell__xcel-mmrt-wilmarth-north-rochester",
     "status": "possible",
     "geo": "possible",
     "method": "measured",
-    "miles": 25.56,
+    "miles": 24.71,
     "beyondRadius": false
    }
   ]
@@ -1141,7 +1269,7 @@
     "B1": 0,
     "B1w": 0,
     "B2": 0,
-    "B3": 1,
+    "B3": 3,
     "B5": 0
    },
    "B4": 0
@@ -1150,59 +1278,28 @@
    "what": "pairs with a plan whose in-service date passed without a completion source: kept (engine 1.2), TIME at most possible, −15 points",
    "projects": 48,
    "pairs": 2942,
-   "B4flagged": 28,
+   "B4flagged": 30,
    "B4timeConfirmed": 0,
    "B4badgeBoth": 0,
    "B4missingFlag": 0,
-   "B3flagged": 1391
+   "B3flagged": 1393
   },
   "far": {
-   "what": "pairs whose exact centers are more than 50 mi apart",
-   "pairs": 7674,
+   "what": "pairs whose measured closest points are more than 50 mi apart",
+   "pairs": 7611,
    "flaggedBy": {
-    "B1": 3,
-    "B1w": 6,
+    "B1": 0,
+    "B1w": 0,
     "B2": 0,
-    "B3": 4414,
-    "B3time": 4413,
+    "B3": 4381,
+    "B3time": 4381,
     "B5": 0,
     "B5c": 0,
-    "B6": 12,
-    "B4": 5
+    "B6": 9,
+    "B4": 0
    },
    "B4notSharedFacility": 0,
-   "B4detail": [
-    {
-     "id": "dpc-glh-maribell__xcel-g2b-north-rochester-marion",
-     "method": "shared-site",
-     "miles": 55.84,
-     "status": "known-coordination"
-    },
-    {
-     "id": "grid-forward-atc__grid-forward-nspw",
-     "method": "shared-site",
-     "miles": 53.52,
-     "status": "known-coordination"
-    },
-    {
-     "id": "sps-potter-beckham-tx__transource-potter-beckham-ok",
-     "method": "shared-site",
-     "miles": 122.29,
-     "status": "known-coordination"
-    },
-    {
-     "id": "grid-forward-atc__transource-beci",
-     "method": "shared-site",
-     "miles": 79.91,
-     "status": "needs-review"
-    },
-    {
-     "id": "dpc-genoa-bell-center-765-beci-related__transource-beci",
-     "method": "shared-site",
-     "miles": 105.24,
-     "status": "known-coordination"
-    }
-   ]
+   "B4detail": []
   },
   "crossRegion": {
    "what": "pairs from different regions (e.g. Georgia × Wisconsin)",
@@ -1259,12 +1356,12 @@
  "sweep": [
   {
    "R": 5,
-   "flagged": 27,
-   "needs-review": 6,
+   "flagged": 40,
+   "needs-review": 12,
    "known-coordination": 8,
-   "possible": 13,
-   "descGpc": 17,
-   "both": 0,
+   "possible": 20,
+   "descGpc": 29,
+   "both": 1,
    "B2": 7,
    "B5": 1,
    "B2notInB4": 0,
@@ -1276,18 +1373,18 @@
     "hit": 0,
     "of": 13
    },
-   "top10KeptFrom25": 1,
-   "topLeadRank": null,
+   "top10KeptFrom25": 2,
+   "topLeadRank": 2,
    "needsReviewTop1": "desc-6888__sertp26-mcintosh-relays"
   },
   {
    "R": 10,
-   "flagged": 51,
-   "needs-review": 25,
+   "flagged": 64,
+   "needs-review": 28,
    "known-coordination": 8,
-   "possible": 18,
-   "descGpc": 41,
-   "both": 2,
+   "possible": 28,
+   "descGpc": 53,
+   "both": 6,
    "B2": 33,
    "B5": 11,
    "B2notInB4": 0,
@@ -1299,18 +1396,18 @@
     "hit": 0,
     "of": 13
    },
-   "top10KeptFrom25": 4,
-   "topLeadRank": 2,
-   "needsReviewTop1": "desc-6888__sertp26-mcintosh-relays"
+   "top10KeptFrom25": 7,
+   "topLeadRank": 1,
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   },
   {
    "R": 15,
-   "flagged": 67,
-   "needs-review": 38,
+   "flagged": 84,
+   "needs-review": 37,
    "known-coordination": 8,
-   "possible": 21,
-   "descGpc": 57,
-   "both": 9,
+   "possible": 39,
+   "descGpc": 73,
+   "both": 10,
    "B2": 45,
    "B5": 20,
    "B2notInB4": 0,
@@ -1322,18 +1419,18 @@
     "hit": 0,
     "of": 13
    },
-   "top10KeptFrom25": 6,
+   "top10KeptFrom25": 9,
    "topLeadRank": 1,
-   "needsReviewTop1": "desc-6888__gpc-20065"
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   },
   {
    "R": 20,
-   "flagged": 95,
-   "needs-review": 59,
+   "flagged": 118,
+   "needs-review": 55,
    "known-coordination": 8,
-   "possible": 28,
-   "descGpc": 85,
-   "both": 17,
+   "possible": 55,
+   "descGpc": 106,
+   "both": 12,
    "B2": 70,
    "B5": 33,
    "B2notInB4": 0,
@@ -1345,18 +1442,18 @@
     "hit": 0,
     "of": 13
    },
-   "top10KeptFrom25": 9,
+   "top10KeptFrom25": 10,
    "topLeadRank": 1,
-   "needsReviewTop1": "desc-6888__gpc-20065"
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   },
   {
    "R": 25,
-   "flagged": 133,
-   "needs-review": 97,
+   "flagged": 149,
+   "needs-review": 72,
    "known-coordination": 8,
-   "possible": 28,
-   "descGpc": 123,
-   "both": 26,
+   "possible": 69,
+   "descGpc": 137,
+   "both": 19,
    "B2": 111,
    "B5": 50,
    "B2notInB4": 0,
@@ -1370,16 +1467,16 @@
    },
    "top10KeptFrom25": 10,
    "topLeadRank": 1,
-   "needsReviewTop1": "desc-6888__gpc-20065"
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   },
   {
    "R": 30,
-   "flagged": 155,
-   "needs-review": 114,
+   "flagged": 175,
+   "needs-review": 82,
    "known-coordination": 8,
-   "possible": 33,
-   "descGpc": 145,
-   "both": 29,
+   "possible": 85,
+   "descGpc": 162,
+   "both": 21,
    "B2": 131,
    "B5": 63,
    "B2notInB4": 0,
@@ -1391,23 +1488,23 @@
     "hit": 1,
     "of": 13
    },
-   "top10KeptFrom25": 9,
+   "top10KeptFrom25": 10,
    "topLeadRank": 1,
-   "needsReviewTop1": "desc-6888__gpc-20065"
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   },
   {
    "R": 40,
-   "flagged": 190,
-   "needs-review": 142,
-   "known-coordination": 8,
-   "possible": 40,
-   "descGpc": 179,
-   "both": 33,
+   "flagged": 215,
+   "needs-review": 122,
+   "known-coordination": 9,
+   "possible": 84,
+   "descGpc": 197,
+   "both": 36,
    "B2": 175,
    "B5": 84,
    "B2notInB4": 0,
    "recallB4": {
-    "hit": 10,
+    "hit": 13,
     "of": 13
    },
    "recallB2": {
@@ -1416,21 +1513,21 @@
    },
    "top10KeptFrom25": 9,
    "topLeadRank": 1,
-   "needsReviewTop1": "desc-6888__gpc-20065"
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   },
   {
    "R": 50,
-   "flagged": 223,
-   "needs-review": 168,
-   "known-coordination": 8,
-   "possible": 47,
-   "descGpc": 211,
-   "both": 43,
+   "flagged": 283,
+   "needs-review": 169,
+   "known-coordination": 9,
+   "possible": 105,
+   "descGpc": 263,
+   "both": 44,
    "B2": 201,
    "B5": 98,
    "B2notInB4": 0,
    "recallB4": {
-    "hit": 10,
+    "hit": 13,
     "of": 13
    },
    "recallB2": {
@@ -1439,42 +1536,42 @@
    },
    "top10KeptFrom25": 9,
    "topLeadRank": 1,
-   "needsReviewTop1": "desc-6888__gpc-20065"
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   },
   {
    "R": 75,
-   "flagged": 495,
-   "needs-review": 363,
-   "known-coordination": 8,
-   "possible": 124,
-   "descGpc": 476,
-   "both": 92,
+   "flagged": 578,
+   "needs-review": 350,
+   "known-coordination": 9,
+   "possible": 219,
+   "descGpc": 541,
+   "both": 97,
    "B2": 424,
    "B5": 200,
-   "B2notInB4": 0,
+   "B2notInB4": 5,
    "recallB4": {
-    "hit": 11,
+    "hit": 13,
     "of": 13
    },
    "recallB2": {
     "hit": 8,
     "of": 13
    },
-   "top10KeptFrom25": 8,
+   "top10KeptFrom25": 7,
    "topLeadRank": 1,
-   "needsReviewTop1": "desc-6888__gpc-20065"
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   },
   {
    "R": 100,
-   "flagged": 1101,
-   "needs-review": 863,
+   "flagged": 1209,
+   "needs-review": 827,
    "known-coordination": 9,
-   "possible": 229,
-   "descGpc": 1070,
-   "both": 228,
+   "possible": 373,
+   "descGpc": 1163,
+   "both": 227,
    "B2": 1023,
    "B5": 474,
-   "B2notInB4": 0,
+   "B2notInB4": 10,
    "recallB4": {
     "hit": 13,
     "of": 13
@@ -1483,9 +1580,9 @@
     "hit": 11,
     "of": 13
    },
-   "top10KeptFrom25": 8,
+   "top10KeptFrom25": 7,
    "topLeadRank": 1,
-   "needsReviewTop1": "desc-6888__gpc-20065"
+   "needsReviewTop1": "desc-06367-d-g__gpc-20065"
   }
  ],
  "ablations": [
@@ -1493,14 +1590,14 @@
    "id": "A0",
    "name": "full engine",
    "how": "no change",
-   "flagged": 133,
+   "flagged": 149,
    "pairsEvaluated": 7929,
-   "geoConfirmed": 105,
-   "geoPossible": 28,
-   "needs-review": 97,
+   "geoConfirmed": 80,
+   "geoPossible": 69,
+   "needs-review": 72,
    "known-coordination": 8,
-   "possible": 28,
-   "both": 26,
+   "possible": 69,
+   "both": 19,
    "lost": 0,
    "gained": 0,
    "statusChanged": [],
@@ -1524,27 +1621,23 @@
    },
    "top10KeptFrom25": 10,
    "topLeadRank": 1,
-   "sponsorOvl3Rank": 2
+   "sponsorOvl3Rank": 1
   },
   {
    "id": "A1",
    "name": "no location uncertainty",
    "how": "every place's uncertaintyMeters set to 0 (d_low = d_high = d)",
-   "flagged": 125,
+   "flagged": 132,
    "pairsEvaluated": 7929,
-   "geoConfirmed": 108,
-   "geoPossible": 17,
-   "needs-review": 100,
+   "geoConfirmed": 80,
+   "geoPossible": 52,
+   "needs-review": 72,
    "known-coordination": 8,
-   "possible": 17,
-   "both": 26,
-   "lost": 8,
+   "possible": 52,
+   "both": 19,
+   "lost": 17,
    "gained": 0,
-   "statusChanged": [
-    "desc-6888__gpc-20787: possible → needs-review",
-    "desc-06367-d-g__gpc-19523: possible → needs-review",
-    "desc-6888__gpc-17075: possible → needs-review"
-   ],
+   "statusChanged": [],
    "recall": {
     "all": {
      "hit": 10,
@@ -1565,31 +1658,42 @@
    },
    "top10KeptFrom25": 10,
    "topLeadRank": 1,
-   "sponsorOvl3Rank": 2
+   "sponsorOvl3Rank": 1
   },
   {
    "id": "A2",
    "name": "no locality cap",
    "how": "town-level places re-labeled official-gis: still located, no longer capped at possible (this also drops their −5 lower-confidence points)",
-   "flagged": 133,
+   "flagged": 149,
    "pairsEvaluated": 7929,
-   "geoConfirmed": 114,
-   "geoPossible": 19,
-   "needs-review": 106,
+   "geoConfirmed": 100,
+   "geoPossible": 49,
+   "needs-review": 92,
    "known-coordination": 8,
-   "possible": 19,
-   "both": 30,
+   "possible": 49,
+   "both": 25,
    "lost": 0,
    "gained": 0,
    "statusChanged": [
+    "dpc-glh-maribell__transource-beci: possible → needs-review",
+    "desc-6888__gpc-20065: possible → needs-review",
     "desc-6854-c__gpc-21116: possible → needs-review",
     "desc-7956b__gpc-21116: possible → needs-review",
-    "desc-6381__gpc-21116: possible → needs-review",
+    "desc-6888__gpc-20989: possible → needs-review",
     "desc-6367-d__gpc-19966: possible → needs-review",
+    "desc-6888__sertp26-calvert-west-mcintosh: possible → needs-review",
+    "desc-6888__sertp26-west-mcintosh-autobank: possible → needs-review",
+    "desc-6888__sertp26-west-mcintosh-breakers: possible → needs-review",
+    "desc-6381__gpc-21116: possible → needs-review",
+    "desc-6888__gpc-20783: possible → needs-review",
+    "desc-6888__gpc-21023: possible → needs-review",
     "desc-6381__gpc-16007: possible → needs-review",
+    "desc-6888__gpc-20785: possible → needs-review",
+    "desc-6381__gpc-17993: possible → needs-review",
     "desc-6381__gpc-20793: possible → needs-review",
     "desc-6381__gpc-20794: possible → needs-review",
     "desc-7956b__gpc-16007: possible → needs-review",
+    "desc-6888__gpc-20784: possible → needs-review",
     "desc-6854-c__gpc-16007: possible → needs-review"
    ],
    "recall": {
@@ -1610,36 +1714,38 @@
      "of": 2
     }
    },
-   "top10KeptFrom25": 9,
+   "top10KeptFrom25": 8,
    "topLeadRank": 1,
-   "sponsorOvl3Rank": 2
+   "sponsorOvl3Rank": 1
   },
   {
    "id": "A3a",
    "name": "no source-stated shared sites",
    "how": "shared-site/interconnects relations re-labeled other; same-initiative relations lose their site (known-coordination status logic untouched)",
-   "flagged": 126,
+   "flagged": 148,
    "pairsEvaluated": 7929,
-   "geoConfirmed": 98,
-   "geoPossible": 28,
-   "needs-review": 96,
-   "known-coordination": 2,
-   "possible": 28,
-   "both": 26,
-   "lost": 7,
+   "geoConfirmed": 75,
+   "geoPossible": 73,
+   "needs-review": 71,
+   "known-coordination": 7,
+   "possible": 70,
+   "both": 19,
+   "lost": 1,
    "gained": 0,
-   "statusChanged": [],
+   "statusChanged": [
+    "dpc-alma-blair__grid-forward-nspw: needs-review → possible"
+   ],
    "recall": {
     "all": {
-     "hit": 3,
+     "hit": 9,
      "of": 13
     },
     "physical": {
-     "hit": 3,
+     "hit": 8,
      "of": 9
     },
     "joint": {
-     "hit": 0,
+     "hit": 1,
      "of": 2
     },
     "portfolio": {
@@ -1649,88 +1755,39 @@
    },
    "top10KeptFrom25": 10,
    "topLeadRank": 1,
-   "sponsorOvl3Rank": 2
+   "sponsorOvl3Rank": 1
   },
   {
    "id": "A3b",
    "name": "no shared-site rule at all",
    "how": "A3a, and named facilities re-labeled official-gis so no terminals are equated by name (centers unchanged)",
-   "flagged": 123,
+   "flagged": 148,
    "pairsEvaluated": 7929,
-   "geoConfirmed": 95,
-   "geoPossible": 28,
-   "needs-review": 95,
-   "known-coordination": 0,
-   "possible": 28,
-   "both": 26,
-   "lost": 10,
-   "gained": 0,
-   "statusChanged": [],
-   "recall": {
-    "all": {
-     "hit": 0,
-     "of": 13
-    },
-    "physical": {
-     "hit": 0,
-     "of": 9
-    },
-    "joint": {
-     "hit": 0,
-     "of": 2
-    },
-    "portfolio": {
-     "hit": 0,
-     "of": 2
-    }
-   },
-   "top10KeptFrom25": 9,
-   "topLeadRank": 1,
-   "sponsorOvl3Rank": 2
-  },
-  {
-   "id": "A4",
-   "name": "A1 + A2 + A3b (naive center rule with uncertainty ignored)",
-   "how": "all three transforms",
-   "flagged": 115,
-   "pairsEvaluated": 7929,
-   "geoConfirmed": 111,
-   "geoPossible": 4,
-   "needs-review": 111,
-   "known-coordination": 0,
-   "possible": 4,
-   "both": 30,
-   "lost": 18,
+   "geoConfirmed": 72,
+   "geoPossible": 76,
+   "needs-review": 68,
+   "known-coordination": 7,
+   "possible": 73,
+   "both": 19,
+   "lost": 1,
    "gained": 0,
    "statusChanged": [
-    "desc-6854-c__gpc-21116: possible → needs-review",
-    "desc-7956b__gpc-21116: possible → needs-review",
-    "desc-6381__gpc-21116: possible → needs-review",
-    "desc-6367-d__gpc-19966: possible → needs-review",
-    "desc-6381__gpc-16007: possible → needs-review",
-    "desc-6888__gpc-20787: possible → needs-review",
-    "desc-06367-d-g__gpc-19523: possible → needs-review",
-    "desc-6381__gpc-20793: possible → needs-review",
-    "desc-6381__gpc-20794: possible → needs-review",
-    "desc-7956b__gpc-16007: possible → needs-review",
-    "desc-6381__gpc-17993: possible → needs-review",
-    "desc-7956b__gpc-20793: possible → needs-review",
-    "desc-7956b__gpc-20794: possible → needs-review",
-    "desc-6888__gpc-19966: possible → needs-review",
-    "desc-6854-c__gpc-16007: possible → needs-review",
-    "desc-6888__gpc-17075: possible → needs-review"
+    "grid-forward-atc__transource-beci: needs-review → possible",
+    "dpc-alma-blair__grid-forward-nspw: needs-review → possible",
+    "desc-6888__sertp26-mcintosh-relays: needs-review → possible",
+    "desc-6888__gpc-20277: needs-review → possible"
    ],
    "recall": {
     "all": {
-     "hit": 0,
+     "hit": 9,
      "of": 13
     },
     "physical": {
-     "hit": 0,
+     "hit": 8,
      "of": 9
     },
     "joint": {
-     "hit": 0,
+     "hit": 1,
      "of": 2
     },
     "portfolio": {
@@ -1740,19 +1797,89 @@
    },
    "top10KeptFrom25": 9,
    "topLeadRank": 1,
-   "sponsorOvl3Rank": 2
+   "sponsorOvl3Rank": 1
+  },
+  {
+   "id": "A4",
+   "name": "A1 + A2 + A3b (closest-point rule with uncertainty ignored)",
+   "how": "all three transforms",
+   "flagged": 131,
+   "pairsEvaluated": 7929,
+   "geoConfirmed": 105,
+   "geoPossible": 26,
+   "needs-review": 100,
+   "known-coordination": 7,
+   "possible": 24,
+   "both": 28,
+   "lost": 18,
+   "gained": 0,
+   "statusChanged": [
+    "dpc-glh-maribell__transource-beci: possible → needs-review",
+    "desc-6888__gpc-20065: possible → needs-review",
+    "desc-6854-c__gpc-21116: possible → needs-review",
+    "desc-7956b__gpc-21116: possible → needs-review",
+    "desc-6888__gpc-20989: possible → needs-review",
+    "desc-6367-d__gpc-19966: possible → needs-review",
+    "desc-6888__sertp26-calvert-west-mcintosh: possible → needs-review",
+    "desc-6888__sertp26-west-mcintosh-autobank: possible → needs-review",
+    "desc-6888__sertp26-west-mcintosh-breakers: possible → needs-review",
+    "desc-6381__gpc-21116: possible → needs-review",
+    "desc-6888__gpc-20783: possible → needs-review",
+    "desc-6888__gpc-21023: possible → needs-review",
+    "desc-6381__gpc-16007: possible → needs-review",
+    "desc-6888__gpc-21006: possible → needs-review",
+    "desc-06367-d-g__gpc-19966: possible → needs-review",
+    "desc-6888__gpc-20407: possible → needs-review",
+    "desc-6888__gpc-20785: possible → needs-review",
+    "desc-6381__gpc-17993: possible → needs-review",
+    "desc-6381__gpc-20793: possible → needs-review",
+    "desc-6381__gpc-20794: possible → needs-review",
+    "desc-7956b__gpc-16007: possible → needs-review",
+    "desc-7956b__gpc-17993: possible → needs-review",
+    "desc-7956b__gpc-20793: possible → needs-review",
+    "desc-7956b__gpc-20794: possible → needs-review",
+    "grid-forward-atc__transource-beci: needs-review → possible",
+    "desc-6888__gpc-20784: possible → needs-review",
+    "dpc-alma-blair__grid-forward-nspw: needs-review → possible",
+    "desc-6888__gpc-20796: possible → needs-review",
+    "desc-6888__sertp26-meldrim-auto: possible → needs-review",
+    "desc-6854-c__gpc-16007: possible → needs-review",
+    "desc-6888__gpc-20066: possible → needs-review",
+    "desc-6888__gpc-20067: possible → needs-review"
+   ],
+   "recall": {
+    "all": {
+     "hit": 9,
+     "of": 13
+    },
+    "physical": {
+     "hit": 8,
+     "of": 9
+    },
+    "joint": {
+     "hit": 1,
+     "of": 2
+    },
+    "portfolio": {
+     "hit": 0,
+     "of": 2
+    }
+   },
+   "top10KeptFrom25": 8,
+   "topLeadRank": 1,
+   "sponsorOvl3Rank": 1
   },
   {
    "id": "A5",
    "name": "no schedule basis",
    "how": "published schedules (start → in-service) removed: TIME from construction windows only",
-   "flagged": 133,
+   "flagged": 149,
    "pairsEvaluated": 7929,
-   "geoConfirmed": 105,
-   "geoPossible": 28,
-   "needs-review": 97,
+   "geoConfirmed": 80,
+   "geoPossible": 69,
+   "needs-review": 72,
    "known-coordination": 8,
-   "possible": 28,
+   "possible": 69,
    "both": 0,
    "lost": 0,
    "gained": 0,
@@ -1777,21 +1904,21 @@
    },
    "top10KeptFrom25": 9,
    "topLeadRank": 1,
-   "sponsorOvl3Rank": 2
+   "sponsorOvl3Rank": 1
   },
   {
    "id": "A6",
    "name": "drop past-due plans (engine 1.1 rule)",
    "how": "projects whose planned date passed without a completion source are excluded before pairing",
-   "flagged": 105,
+   "flagged": 119,
    "pairsEvaluated": 4987,
-   "geoConfirmed": 83,
-   "geoPossible": 22,
-   "needs-review": 75,
+   "geoConfirmed": 60,
+   "geoPossible": 59,
+   "needs-review": 52,
    "known-coordination": 8,
-   "possible": 22,
-   "both": 26,
-   "lost": 28,
+   "possible": 59,
+   "both": 19,
+   "lost": 30,
    "gained": 0,
    "statusChanged": [],
    "recall": {
@@ -1814,12 +1941,12 @@
    },
    "top10KeptFrom25": 10,
    "topLeadRank": 1,
-   "sponsorOvl3Rank": 2
+   "sponsorOvl3Rank": 1
   }
  ],
  "notRun": [
   "Priority weights (place ≤ 60, time ≤ 30, evidence ≤ 10, −5 lower confidence, −15 past due): constants inside evaluatePair",
   "Same-site tolerance (SAME_SITE_MILES = 0.6) and the 30-day minimum schedule overlap: module constants",
-  "In-service-gap ranking horizon (1,460 days) and the beyond-radius ranking floor"
+  "In-service-gap ranking horizon (1,460 days)"
  ]
 }
